@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <script src="lands_data.js"></script>
         <script src="script.js"></script>
         <link rel="stylesheet" href="style.css">
     </head>
@@ -108,8 +109,8 @@
                     <div class="form-group">
                         <label for="play_after_last_turn">Игра После Последнего Хода</label>
                         <select id="play_after_last_turn" name="play_after_last_turn">
-                            <option value="disabled">Нет</option>
-                            <option value="enabled">Да</option>
+                            <option value="false">Нет</option>
+                            <option value="true">Да</option>
                         </select>
                     </div>
 
@@ -132,9 +133,9 @@
                     <div class="form-group">
                         <label for="bots_behavior">Поведение Ботов</label>
                         <select id="bots_behavior" name="bots_behavior">
-                            <option value="bots_peaceful">Мирные</option>
-                            <option value="bots_standard">Стандартные</option>
-                            <option value="bots_aggressive">Агрессивные</option>
+                            <option value="peaceful">Мирные</option>
+                            <option value="standard">Стандартные</option>
+                            <option value="aggressive">Агрессивные</option>
                         </select>
                     </div>
 

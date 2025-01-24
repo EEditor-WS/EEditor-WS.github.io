@@ -5,10 +5,69 @@ let isJsonFile = false;
 let previewContent = null;
 let fileInfo = null;
 
+// Глобальная переменная для хранения данных из lands.json
+let markedCountries = new Set();
+
+// Функция для инициализации данных о странах
+function initLandsData() {
+    // Используем глобальную переменную landsData из lands_data.js
+    if (typeof landsData !== 'undefined' && landsData.lands) {
+        markedCountries = new Set(landsData.lands.map(land => land.key));
+    } else {
+        console.error('Данные о странах не найдены');
+    }
+}
+
+// Функция для загрузки lands.json
+function loadLandsJson() {
+    // Пробуем загрузить из localStorage
+    const savedData = localStorage.getItem('landsData');
+    if (savedData) {
+        try {
+            const landsData = JSON.parse(savedData);
+            markedCountries = new Set(landsData.lands.map(land => land.key));
+            return;
+        } catch (e) {
+            console.error('Ошибка при загрузке данных из localStorage:', e);
+        }
+    }
+
+    // Если в localStorage нет данных, создаем скрытый input для загрузки файла
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+    input.style.display = 'none';
+    document.body.appendChild(input);
+
+    input.onchange = function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const landsData = JSON.parse(e.target.result);
+                    markedCountries = new Set(landsData.lands.map(land => land.key));
+                    // Сохраняем в localStorage
+                    localStorage.setItem('landsData', e.target.result);
+                } catch (error) {
+                    console.error('Ошибка при чтении lands.json:', error);
+                }
+            };
+            reader.readAsText(file);
+        }
+        document.body.removeChild(input);
+    };
+
+    input.click();
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // Инициализация глобальных переменных
     previewContent = document.getElementById('preview-content');
     fileInfo = document.getElementById('file-info');
+
+    // Инициализируем данные о странах
+    initLandsData();
 
     // Получаем все кнопки навигации
     const navButtons = document.querySelectorAll('.nav-button');
@@ -282,7 +341,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Очищаем текущий список
         countriesList.innerHTML = '';
 
-        // Подсчитываем количество провинций для каждой страны
+        // Подсчитываем количество провинций
         const provincesCount = {};
         if (lands.provinces) {
             for (const province of lands.provinces) {
@@ -292,16 +351,68 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Создаем массив стран и сортируем его по имени
-        const countries = Object.entries(lands)
+        // Создаем отсортированный массив стран
+        const countriesArray = Object.entries(lands)
             .filter(([id]) => id !== 'provinces')
-            .sort(([, a], [, b]) => a.name.localeCompare(b.name));
+            .map(([id, country]) => ({
+                id,
+                name: country.name,
+                color: country.color,
+                provinces: provincesCount[id] || 0,
+                capital: country.capital_name || '',
+                ...country
+            }))
+            .sort((a, b) => {
+                // Специальная обработка для undeveloped_land - всегда в конце
+                if (a.id === 'undeveloped_land') return 1;
+                if (b.id === 'undeveloped_land') return -1;
+                
+                let comparison = 0;
+                
+                switch (this.sortColumn) {
+                    case 'name':
+                        comparison = a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+                        break;
+                    case 'id':
+                        // Специальная обработка для civilization_N
+                        const aMatch = a.id.match(/^civilization_(\d+)$/);
+                        const bMatch = b.id.match(/^civilization_(\d+)$/);
+                        if (aMatch && bMatch) {
+                            // Если оба ID в формате civilization_N, сравниваем числа
+                            comparison = parseInt(aMatch[1]) - parseInt(bMatch[1]);
+                        } else if (aMatch) {
+                            // Если только первый ID в формате civilization_N, он идет первым
+                            comparison = -1;
+                        } else if (bMatch) {
+                            // Если только второй ID в формате civilization_N, он идет первым
+                            comparison = 1;
+                        } else {
+                            // Для всех остальных случаев используем обычное сравнение
+                            comparison = a.id.toLowerCase().localeCompare(b.id.toLowerCase());
+                        }
+                        break;
+                    case 'provinces':
+                        comparison = a.provinces - b.provinces;
+                        break;
+                    case 'capital':
+                        comparison = (a.capital || '').toLowerCase().localeCompare((b.capital || '').toLowerCase());
+                        break;
+                    case 'color':
+                        // Сортировка по сумме RGB компонентов
+                        const sumA = (a.color || [0,0,0]).slice(0,3).reduce((sum, c) => sum + c, 0);
+                        const sumB = (b.color || [0,0,0]).slice(0,3).reduce((sum, c) => sum + c, 0);
+                        comparison = sumA - sumB;
+                        break;
+                }
+                
+                return this.sortDirection === 'asc' ? comparison : -comparison;
+            });
 
         // Добавляем страны в список
-        for (const [id, country] of countries) {
+        for (const country of countriesArray) {
             const row = document.createElement('tr');
             row.style.cursor = 'pointer';
-            row.onclick = () => editCountry(id);
+            row.onclick = () => editCountry(country.id);
             
             // Цвет
             const colorCell = document.createElement('td');
@@ -312,19 +423,30 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Название
             const nameCell = document.createElement('td');
-            nameCell.textContent = country.name;
+            const nameSpan = document.createElement('span');
+            nameSpan.textContent = country.name;
+            nameCell.appendChild(nameSpan);
+
+            // Добавляем иконку, если страна есть в landsData
+            const isInLandsData = landsData.lands.some(land => land.key === country.id);
+            if (isInLandsData) {
+                const markImg = document.createElement('img');
+                markImg.src = 'mark.svg';
+                markImg.className = 'country-mark';
+                nameCell.appendChild(markImg);
+            }
             
             // Системное название (ID)
             const sysNameCell = document.createElement('td');
-            sysNameCell.textContent = id;
+            sysNameCell.textContent = country.id;
             
             // Количество провинций
             const provincesCell = document.createElement('td');
-            provincesCell.textContent = provincesCount[id] || 0;
+            provincesCell.textContent = provincesCount[country.id] || 0;
             
             // Столица
             const capitalCell = document.createElement('td');
-            capitalCell.textContent = country.capital_name;
+            capitalCell.textContent = country.capital_name || '';
 
             // Добавляем ячейки в строку
             row.appendChild(colorCell);
@@ -602,6 +724,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+
+    // Загружаем данные при старте
+    loadLandsJson();
+
+    // Инициализируем менеджер стран
+    window.countryManager = new CountryManager();
 });
 
 function changeApplicationLanguage(lang) {
@@ -647,6 +775,10 @@ class CountryManager {
         this.maxStackSize = 50;
         this.isEditing = false;
         
+        // Добавляем параметры сортировки
+        this.sortColumn = 'name'; // По умолчанию сортируем по имени
+        this.sortDirection = 'asc'; // По умолчанию по возрастанию
+        
         // Сохраняем ссылки на важные элементы
         this.previewContent = document.getElementById('preview-content');
         this.fileInfo = document.getElementById('file-info');
@@ -670,6 +802,131 @@ class CountryManager {
         
         // Инициализация модального окна
         this.initModal();
+        
+        // Инициализация сортировки
+        this.initSortHandlers();
+    }
+
+    // Добавляем новый метод для инициализации обработчиков сортировки
+    initSortHandlers() {
+        const headers = document.querySelectorAll('.countries-table th');
+        headers.forEach((header, index) => {
+            header.addEventListener('click', () => {
+                // Определяем колонку для сортировки
+                const columns = ['color', 'name', 'id', 'provinces', 'capital'];
+                const column = columns[index];
+                
+                // Если кликнули на ту же колонку, меняем направление сортировки
+                if (this.sortColumn === column) {
+                    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+                } else {
+                    this.sortColumn = column;
+                    this.sortDirection = 'asc';
+                }
+                
+                // Обновляем классы заголовков
+                headers.forEach(h => {
+                    h.classList.remove('sort-asc', 'sort-desc');
+                });
+                header.classList.add(`sort-${this.sortDirection}`);
+                
+                // Обновляем список с новой сортировкой
+                this.updateCountriesList();
+            });
+        });
+    }
+
+    // Модифицируем метод updateCountriesList
+    updateCountriesList() {
+        const countriesList = document.getElementById('countries-list');
+        if (!countriesList || !this.jsonData?.lands) return;
+
+        // Очищаем список
+        countriesList.innerHTML = '';
+
+        // Подсчитываем количество провинций
+        const provincesCount = {};
+        if (this.jsonData.provinces) {
+            for (const province of this.jsonData.provinces) {
+                if (province.owner) {
+                    provincesCount[province.owner] = (provincesCount[province.owner] || 0) + 1;
+                }
+            }
+        }
+
+        // Создаем отсортированный массив стран
+        const countriesArray = Object.entries(this.jsonData.lands)
+            .filter(([id]) => id !== 'provinces')
+            .map(([id, country]) => ({
+                id,
+                name: country.name,
+                color: country.color,
+                provinces: provincesCount[id] || 0,
+                capital: country.capital_name || '',
+                ...country
+            }))
+            .sort((a, b) => {
+                // Специальная обработка для undeveloped_land - всегда в конце
+                if (a.id === 'undeveloped_land') return 1;
+                if (b.id === 'undeveloped_land') return -1;
+                
+                let comparison = 0;
+                
+                switch (this.sortColumn) {
+                    case 'name':
+                        comparison = a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+                        break;
+                    case 'id':
+                        // Специальная обработка для civilization_N
+                        const aMatch = a.id.match(/^civilization_(\d+)$/);
+                        const bMatch = b.id.match(/^civilization_(\d+)$/);
+                        if (aMatch && bMatch) {
+                            // Если оба ID в формате civilization_N, сравниваем числа
+                            comparison = parseInt(aMatch[1]) - parseInt(bMatch[1]);
+                        } else if (aMatch) {
+                            // Если только первый ID в формате civilization_N, он идет первым
+                            comparison = -1;
+                        } else if (bMatch) {
+                            // Если только второй ID в формате civilization_N, он идет первым
+                            comparison = 1;
+                        } else {
+                            // Для всех остальных случаев используем обычное сравнение
+                            comparison = a.id.toLowerCase().localeCompare(b.id.toLowerCase());
+                        }
+                        break;
+                    case 'provinces':
+                        comparison = a.provinces - b.provinces;
+                        break;
+                    case 'capital':
+                        comparison = (a.capital || '').toLowerCase().localeCompare((b.capital || '').toLowerCase());
+                        break;
+                    case 'color':
+                        // Сортировка по сумме RGB компонентов
+                        const sumA = (a.color || [0,0,0]).slice(0,3).reduce((sum, c) => sum + c, 0);
+                        const sumB = (b.color || [0,0,0]).slice(0,3).reduce((sum, c) => sum + c, 0);
+                        comparison = sumA - sumB;
+                        break;
+                }
+                
+                return this.sortDirection === 'asc' ? comparison : -comparison;
+            });
+
+        // Добавляем страны в список
+        for (const country of countriesArray) {
+            const row = document.createElement('tr');
+            row.style.cursor = 'pointer';
+            row.onclick = () => this.openCountry(country.id);
+
+            row.innerHTML = `
+                <td><div class="country-color" style="background-color: ${this.colorToRgb(country.color)}"></div></td>
+                <td>${country.name}</td>
+                <td>${country.id}</td>
+                <td>${country.provinces}</td>
+                <td>${country.capital_name}</td>
+            `;
+
+            countriesList.appendChild(row);
+        }
     }
 
     initEventListeners() {
@@ -780,11 +1037,11 @@ class CountryManager {
 
     generateUniqueId() {
         const existingIds = Object.keys(this.jsonData.lands);
-        let id = 1;
-        while (existingIds.includes(String(id))) {
-            id++;
+        let n = 1;
+        while (existingIds.includes(`civilization_${n}`)) {
+            n++;
         }
-        return String(id);
+        return `civilization_${n}`;
     }
 
     copyCurrentCountry() {
@@ -821,8 +1078,26 @@ class CountryManager {
         const country = this.jsonData.lands[countryId];
 
         // Заполняем основные поля
+        const nameHeader = document.getElementById('country-name-header');
+        if (nameHeader) {
+            nameHeader.innerHTML = ''; // Очищаем содержимое
+            
+            // Добавляем название
+            const nameSpan = document.createElement('span');
+            nameSpan.textContent = country.name;
+            nameHeader.appendChild(nameSpan);
+
+            // Проверяем, нужна ли галочка
+            const isInLandsData = landsData.lands.some(land => land.key === countryId);
+            if (isInLandsData) {
+                const markImg = document.createElement('img');
+                markImg.src = 'mark.svg';
+                markImg.className = 'country-mark';
+                nameHeader.appendChild(markImg);
+            }
+        }
+
         this.setFormValues({
-            'country-name-header': country.name,
             'country-name': country.name,
             'country-capital': country.capital_name || '',
             'country-capital-id': country.capital || '',
@@ -964,7 +1239,7 @@ class CountryManager {
             <div class="relation-controls">
                 <button type="button" class="relation-edit">✎</button>
                 <button type="button" class="array-item-delete">×</button>
-            </div>
+            }
         `;
 
         container.appendChild(itemDiv);
@@ -1243,45 +1518,6 @@ class CountryManager {
         this.updateCountriesList();
     }
 
-    updateCountriesList() {
-        const countriesList = document.getElementById('countries-list');
-        if (!countriesList || !this.jsonData?.lands) return;
-
-        countriesList.innerHTML = '';
-
-        // Подсчитываем количество провинций
-        const provincesCount = {};
-        if (this.jsonData.provinces) {
-            for (const province of this.jsonData.provinces) {
-                if (province.owner) {
-                    provincesCount[province.owner] = (provincesCount[province.owner] || 0) + 1;
-                }
-            }
-        }
-
-        // Создаем массив стран и сортируем его по имени
-        const countries = Object.entries(this.jsonData.lands)
-            .filter(([id]) => id !== 'provinces')
-            .sort(([, a], [, b]) => a.name.localeCompare(b.name));
-
-        // Добавляем страны в список
-        for (const [id, country] of countries) {
-            const row = document.createElement('tr');
-            row.style.cursor = 'pointer';
-            row.onclick = () => this.openCountry(id);
-
-            row.innerHTML = `
-                <td><div class="country-color" style="background-color: ${this.colorToRgb(country.color)}"></div></td>
-                <td>${country.name}</td>
-                <td>${id}</td>
-                <td>${provincesCount[id] || 0}</td>
-                <td>${country.capital_name || ''}</td>
-            `;
-
-            countriesList.appendChild(row);
-        }
-    }
-
     colorToRgb(colorArray) {
         if (!Array.isArray(colorArray) || colorArray.length < 3) {
             return 'rgb(128, 128, 128)';
@@ -1358,9 +1594,4 @@ class CountryManager {
         }
     }
 }
-
-// Создаем экземпляр менеджера стран при загрузке страницы
-document.addEventListener('DOMContentLoaded', () => {
-    window.countryManager = new CountryManager();
-});
 
