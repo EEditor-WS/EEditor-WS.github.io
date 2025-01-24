@@ -5,6 +5,9 @@ let isJsonFile = false;
 let previewContent = null;
 let fileInfo = null;
 
+// Проверка поддержки File System Access API
+const supportsFileSystemAccess = 'showOpenFilePicker' in window && 'showSaveFilePicker' in window;
+
 // Глобальная переменная для хранения данных из lands.json
 let markedCountries = new Set();
 
@@ -484,11 +487,67 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Функция для сохранения изменений
     async function saveChanges() {
-        if (!fileHandle) {
+        if (supportsFileSystemAccess) {
+            // Используем File System Access API
+            if (!fileHandle) {
+                try {
+                    fileHandle = await window.showSaveFilePicker({
+                        suggestedName: currentFile.name,
+                        types: [{
+                            description: 'JSON Files',
+                            accept: {
+                                'application/json': ['.json']
+                            }
+                        }]
+                    });
+                } catch (err) {
+                    if (err.name === 'AbortError') return;
+                    console.error('Ошибка при получении доступа к файлу:', err);
+                    if (fileInfo) {
+                        fileInfo.textContent = 'Ошибка при получении доступа к файлу';
+                    }
+                    return;
+                }
+            }
+
             try {
-                // Запрашиваем доступ к файловой системе
-                fileHandle = await window.showSaveFilePicker({
-                    suggestedName: currentFile.name,
+                const writable = await fileHandle.createWritable();
+                await writable.write(previewContent.value);
+                await writable.close();
+                
+                if (fileInfo) {
+                    fileInfo.textContent = `Файл ${currentFile.name} сохранен`;
+                }
+            } catch (error) {
+                console.error('Ошибка при сохранении файла:', error);
+                if (fileInfo) {
+                    fileInfo.textContent = 'Ошибка при сохранении файла';
+                }
+            }
+        } else {
+            // Используем стандартный механизм скачивания файла
+            const blob = new Blob([previewContent.value], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = currentFile.name || 'file.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            if (fileInfo) {
+                fileInfo.textContent = `Файл ${currentFile.name} скачан`;
+            }
+        }
+    }
+
+    // Функция для открытия файла
+    async function openFile() {
+        if (supportsFileSystemAccess) {
+            // Используем File System Access API
+            try {
+                [fileHandle] = await window.showOpenFilePicker({
                     types: [{
                         description: 'JSON Files',
                         accept: {
@@ -496,93 +555,68 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     }]
                 });
+                currentFile = await fileHandle.getFile();
             } catch (err) {
-                if (err.name === 'AbortError') {
-                    return; // Пользователь отменил выбор
-                }
-                console.error('Ошибка при получении доступа к файлу:', err);
+                if (err.name === 'AbortError') return;
+                console.error('Ошибка при открытии файла:', err);
                 if (fileInfo) {
-                    fileInfo.textContent = 'Ошибка при получении доступа к файлу';
+                    fileInfo.textContent = 'Ошибка при открытии файла';
                 }
                 return;
             }
-        }
+        } else {
+            // Используем стандартный input для загрузки файла
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.style.display = 'none';
+            document.body.appendChild(input);
 
-        try {
-            // Создаем поток для записи
-            const writable = await fileHandle.createWritable();
-            // Записываем содержимое
-            await writable.write(previewContent.value);
-            // Закрываем поток
-            await writable.close();
-            
-            if (fileInfo) {
-                fileInfo.textContent = `Файл ${currentFile.name} сохранен`;
-            }
-        } catch (error) {
-            console.error('Ошибка при сохранении файла:', error);
-            if (fileInfo) {
-                fileInfo.textContent = 'Ошибка при сохранении файла';
-            }
-        }
-    }
-
-    // Функция для открытия файла
-    async function openFile() {
-        try {
-            // Запрашиваем доступ к файлу
-            [fileHandle] = await window.showOpenFilePicker({
-                types: [{
-                    description: 'JSON Files',
-                    accept: {
-                        'application/json': ['.json']
-                    }
-                }]
-            });
-            
-            // Получаем файл
-            currentFile = await fileHandle.getFile();
-            
-            // Читаем содержимое
-            const text = await currentFile.text();
-            
-            // Обновляем интерфейс
-            if (previewContent) {
-                previewContent.value = text;
-            }
-            if (previewFilename) {
-                previewFilename.textContent = currentFile.name;
-            }
-            if (fileInfo) {
-                fileInfo.textContent = `Файл: ${currentFile.name}`;
-            }
-            
-            // Проверяем JSON
-            isJsonFile = currentFile.name.toLowerCase().endsWith('.json');
-            if (isJsonFile) {
-                try {
-                    const jsonData = JSON.parse(text);
-                    fillFormFromJson(jsonData);
-                    
-                    // Инициализируем менеджер стран
-                    if (window.countryManager) {
-                        window.countryManager.jsonData = jsonData;
-                        window.countryManager.updateCountriesList();
-                    }
-                } catch (error) {
-                    console.error('Ошибка при парсинге JSON:', error);
-                    if (fileInfo) {
-                        fileInfo.textContent = 'Ошибка при парсинге JSON';
-                    }
+            input.onchange = async function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    currentFile = file;
+                    document.body.removeChild(input);
+                } else {
+                    return;
                 }
-            }
-        } catch (err) {
-            if (err.name === 'AbortError') {
-                return; // Пользователь отменил выбор
-            }
-            console.error('Ошибка при открытии файла:', err);
-            if (fileInfo) {
-                fileInfo.textContent = 'Ошибка при открытии файла';
+            };
+
+            input.click();
+            await new Promise(resolve => input.onchange = resolve);
+        }
+
+        // Читаем содержимое файла
+        const text = await currentFile.text();
+
+        // Обновляем интерфейс
+        if (previewContent) {
+            previewContent.value = text;
+        }
+        if (previewFilename) {
+            previewFilename.textContent = currentFile.name;
+        }
+        if (fileInfo) {
+            fileInfo.textContent = `Файл: ${currentFile.name}`;
+        }
+
+        // Проверяем JSON
+        isJsonFile = currentFile.name.toLowerCase().endsWith('.json');
+        if (isJsonFile) {
+            try {
+                const jsonData = JSON.parse(text);
+                fillFormFromJson(jsonData);
+
+                // Инициализируем менеджер стран
+                if (window.countryManager) {
+                    window.countryManager.jsonData = jsonData;
+                    window.countryManager.updateCountriesList();
+                }
+            } catch (error) {
+                console.error('Ошибка при парсинге JSON:', error);
+                if (fileInfo) {
+                    fileInfo.textContent = 'Ошибка при парсинге JSON';
+                }
             }
         }
     }
@@ -619,17 +653,22 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
         dropZone.classList.remove('dragover');
 
-        // Получаем перетащенные файлы
         const items = [...e.dataTransfer.items];
         for (const item of items) {
             if (item.kind === 'file') {
-                const handle = await item.getAsFileSystemHandle();
-                if (handle.kind === 'file') {
-                    fileHandle = handle;
-                    currentFile = await fileHandle.getFile();
+                if (supportsFileSystemAccess) {
+                    const handle = await item.getAsFileSystemHandle();
+                    if (handle.kind === 'file') {
+                        fileHandle = handle;
+                        currentFile = await fileHandle.getFile();
+                    }
+                } else {
+                    currentFile = item.getAsFile();
+                }
+
+                if (currentFile) {
                     const text = await currentFile.text();
-                    
-                    // Обновляем интерфейс
+
                     if (previewContent) {
                         previewContent.value = text;
                     }
@@ -639,15 +678,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (fileInfo) {
                         fileInfo.textContent = `Файл: ${currentFile.name}`;
                     }
-                    
-                    // Проверяем JSON
+
                     isJsonFile = currentFile.name.toLowerCase().endsWith('.json');
                     if (isJsonFile) {
                         try {
                             const jsonData = JSON.parse(text);
                             fillFormFromJson(jsonData);
-                            
-                            // Инициализируем менеджер стран
+
                             if (window.countryManager) {
                                 window.countryManager.jsonData = jsonData;
                                 window.countryManager.updateCountriesList();
@@ -1594,4 +1631,3 @@ class CountryManager {
         }
     }
 }
-
