@@ -1,0 +1,71 @@
+{
+    "map_hash": 1663913141,
+    "resources_spawn": "standard",
+    "sandbox": "disabled",
+    "technologies_are_opened": "disabled",
+    "technology_lvl": 3,
+    "name": "World War I",
+    "year": 1916,
+    "id": "wwi",
+    "last_turn": 100,
+    "month": 1,
+    "play_after_last_turn": false,
+    "custom_events": [],
+    "player_land": "civilization_5",
+    "num_of_provinces": 293,
+    "turn": 0,
+    "bots_behavior": "standard",
+    "difficulty": "standard",
+    "fog_of_war": "standard",
+    "min_game_version": 1,
+    "water_color": [
+        55,
+        112,
+        129
+    ],
+    "no_initial_diplomacy": "enabled",
+    "no_nuclear_weapon": "disabled",
+    "lands": {
+        "civilization_22": {
+            "pacts": [],
+            "sanctions": [],
+            "vassals": [],
+            "name": "Russian Empire",
+            "color": [
+                60.435,
+                82.926,
+                92.565,
+                255
+            ],
+            "reforms": [
+                {
+                    "requirements": {
+                        "provinces": [],
+                        "political": "Communism"
+                    },
+                    "name": "Soviet Union",
+                    "color": [
+                        139.995,
+                        89.505,
+                        89.505,
+                        255
+                    ]
+                }
+            ],
+            "capital": 117,
+            "allies": [],
+            "capital_name": "Saint Petersburg",
+            "defeated": false,
+            "enemies": [],
+            "guaranteed": [],
+            "guaranteed_by": []
+        }
+    },
+    "provinces": [
+        {
+            "population_limit": 62769.775390625,
+            "water": true,
+            "owner": "civilization_22"
+        }
+    ]
+}

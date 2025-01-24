@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>EEditor Warnament Scenario</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <script src="script.js"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <nav class="nav-header">
+            <button class="nav-button active" data-page="main">Редактор</button>
+            <button class="nav-button" data-page="countries">Страны</button>
+            <button class="nav-button" data-page="events">События</button>
+            <div class="nav-actions">
+                <button id="force-save" class="action-button save-button">Сохранить</button>
+                <div class="language-switcher">
+                    <button id="currentLang" class="lang-button">English</button>
+                    <div id="langDropdown" class="lang-dropdown">
+                        <a href="#" data-lang="en">English</a>
+                        <a href="#" data-lang="ru">Русский</a>
+                        <a href="#" data-lang="uk">Українська</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div id="main" class="page pmain active">
+            <div class="file-upload-container">
+                <div id="drop-zone" class="drop-zone">
+                    <p>Перетащите файл сюда или</p>
+                    <input type="file" id="file-input" class="file-input">
+                    <label for="file-input" class="file-input-label">Выберите файл</label>
+                </div>
+                <div id="prewi">
+                    <div id="file-info"></div>
+                    <div class="file-preview">
+                        <div class="preview-header">
+                            <span id="preview-filename">Предпросмотр файла</span>
+                        </div>
+                        <textarea id="preview-content" class="preview-content"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div id="data" class="data">
+                <form id="settings-form" class="settings-form" autocomplete="off">
+                    <div class="form-group">
+                        <label for="map_hash">Хэш Карты</label>
+                        <input type="number" id="map_hash" name="map_hash">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="resources_spawn">Спаун Ресурсов</label>
+                        <select id="resources_spawn" name="resources_spawn">
+                            <option value="low">Мало</option>
+                            <option value="standard">Стандартно</option>
+                            <option value="few">Много</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sandbox">Sandbox</label>
+                        <select id="sandbox" name="sandbox">
+                            <option value="disabled">Нет</option>
+                            <option value="enabled">Да</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="technologies_are_opened">Открыты Все Технологии</label>
+                        <select id="technologies_are_opened" name="technologies_are_opened">
+                            <option value="disabled">Нет</option>
+                            <option value="enabled">Да</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="technology_lvl">Уровень Технологий</label>
+                        <input type="number" id="technology_lvl" name="technology_lvl">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">Название</label>
+                        <input type="text" id="name" name="name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="year">Год</label>
+                        <input type="number" id="year" name="year">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id">ID</label>
+                        <input type="text" id="id" name="id">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="last_turn">Последний Ход</label>
+                        <input type="number" id="last_turn" name="last_turn">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="month">Месяц</label>
+                        <input type="number" id="month" name="month" min="1" max="12">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="play_after_last_turn">Игра После Последнего Хода</label>
+                        <select id="play_after_last_turn" name="play_after_last_turn">
+                            <option value="disabled">Нет</option>
+                            <option value="enabled">Да</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="player_land">Страна Игрока</label>
+                        <select id="player_land" name="player_land">
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="num_of_provinces">Количество Провинций</label>
+                        <input type="number" id="num_of_provinces" name="num_of_provinces">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="turn">Turn</label>
+                        <input type="number" id="turn" name="turn">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bots_behavior">Поведение Ботов</label>
+                        <select id="bots_behavior" name="bots_behavior">
+                            <option value="bots_peaceful">Мирные</option>
+                            <option value="bots_standard">Стандартные</option>
+                            <option value="bots_aggressive">Агрессивные</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="difficulty">Сложность</label>
+                        <select id="difficulty" name="difficulty">
+                            <option value="easy">Easy</option>
+                            <option value="standard">Standard</option>
+                            <option value="hard">Hard</option>
+                            <option value="impossible">Impossible</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fog_of_war">Туман Войны</label>
+                        <select id="fog_of_war" name="fog_of_war">
+                            <option value="standard">Standard</option>
+                            <option value="disabled">Disabled</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="min_game_version">Минимальная Версия Игры</label>
+                        <input type="number" id="min_game_version" name="min_game_version">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="water_color">Цвет Воды</label>
+                        <div class="color-inputs">
+                            <input type="number" id="water_color_r" name="water_color_r" min="0" max="255" class="color-input">
+                            <input type="number" id="water_color_g" name="water_color_g" min="0" max="255" class="color-input">
+                            <input type="number" id="water_color_b" name="water_color_b" min="0" max="255" class="color-input">
+                            <div class="color-preview" id="water_color_preview"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="no_initial_diplomacy">Без Стартовой Дипломатии</label>
+                        <select id="no_initial_diplomacy" name="no_initial_diplomacy">
+                            <option value="enabled">Enabled</option>
+                            <option value="disabled">Disabled</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="no_nuclear_weapon">Без Ядерного Оружия</label>
+                        <select id="no_nuclear_weapon" name="no_nuclear_weapon">
+                            <option value="disabled">Disabled</option>
+                            <option value="enabled">Enabled</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="countries" class="page pcountries">
+            <div class="countries-container">
+                <div class="header">
+                    <h2>Страны</h2>
+                    <button id="add-country" class="action-button">Добавить страну</button>
+                </div>
+                <table class="countries-table">
+                    <thead>
+                        <tr>
+                            <th>Цвет</th>
+                            <th>Название</th>
+                            <th>Системное название</th>
+                            <th>Количество провинций</th>
+                            <th>Столица</th>
+                        </tr>
+                    </thead>
+                    <tbody id="countries-list">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="country-edit" class="page pcountry-edit">
+            <div class="country-edit-container">
+                <div class="country-header">
+                    <h2> <span id="country-name-header"></span></h2>
+                    <div class="country-actions">
+                        <button id="country-reforms" class="action-button reforms">Реформы</button>
+                        <button id="copy-country" class="action-button">Копировать</button>
+                        <button id="delete-country" class="action-button delete">Удалить</button>
+                    </div>
+                </div>
+                <form id="country-form" class="country-form">
+                    <div class="form-group">
+                        <label for="country-name">Название</label>
+                        <input type="text" id="country-name" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="country-color">Цвет</label>
+                        <div class="color-inputs">
+                            <input type="number" id="country-color-r" name="color_r" min="0" max="255" step="0.001" class="color-input">
+                            <input type="number" id="country-color-g" name="color_g" min="0" max="255" step="0.001" class="color-input">
+                            <input type="number" id="country-color-b" name="color_b" min="0" max="255" step="0.001" class="color-input">
+                            <div class="color-preview" id="country-color-preview"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="country-capital">Название столицы</label>
+                        <input type="text" id="country-capital" name="capital_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="country-capital-id">ID столицы</label>
+                        <input type="number" id="country-capital-id" name="capital">
+                    </div>
+                    <div class="form-group">
+                        <label for="country-defeated">Побеждена</label>
+                        <select id="country-defeated" name="defeated">
+                            <option value="false">Нет</option>
+                            <option value="true">Да</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="country-political">Политический строй</label>
+                        <select id="country-political" name="political">
+                            <option value="">Нет</option>
+                            <option value="Democracy">Демократия</option>
+                            <option value="Communism">Коммунизм</option>
+                            <option value="Monarchy">Монархия</option>
+                            <option value="Theocracy">Теократия</option>
+                            <option value="Fascism">Фашизм</option>
+                            <option value="Trade Republic">Торговая республика</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Союзники</label>
+                        <div class="array-list" id="country-allies">
+                            <div class="array-item">
+                                <input type="text" class="array-item-input" placeholder="Введите id страны">
+                                <button class="array-item-delete" id="delete-test">×</button>
+                            </div>
+                        </div>
+                        <button type="button" class="add-country-button" data-target="allies">Добавить страну</button>
+                    </div>
+                    <div class="form-group">
+                        <label>Враги</label>
+                        <div class="array-list" id="country-enemies"></div>
+                        <button type="button" class="add-country-button" data-target="enemies">Добавить страну</button>
+                    </div>
+                    <div class="form-group">
+                        <label>Гарантии независимости</label>
+                        <div class="array-list" id="country-guaranteed"></div>
+                        <button type="button" class="add-country-button" data-target="guaranteed">Добавить страну</button>
+                    </div>
+                    <div class="form-group">
+                        <label>Гарантии от</label>
+                        <div class="array-list" id="country-guaranteed-by"></div>
+                        <button type="button" class="add-country-button" data-target="guaranteed-by">Добавить страну</button>
+                    </div>
+                    <div class="form-group">
+                        <label>Пакты</label>
+                        <div class="array-list" id="country-pacts"></div>
+                        <button type="button" class="add-country-button" data-target="pacts">Добавить страну</button>
+                    </div>
+                    <div class="form-group">
+                        <label>Санкции</label>
+                        <div class="array-list" id="country-sanctions"></div>
+                        <button type="button" class="add-country-button" data-target="sanctions">Добавить страну</button>
+                    </div>
+                    <div class="form-group">
+                        <label>Вассалы</label>
+                        <div class="array-list" id="country-vassals"></div>
+                        <button type="button" class="add-country-button" data-target="vassals">Добавить страну</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="events" class="page pevents">
+            <h2>Страница событий</h2>
+        </div>
+
+        <!-- Модальное окно для выбора страны -->
+        <div id="country-select-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Выберите страну</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <select id="country-select" class="country-select">
+                        <option value="">Выберите страну...</option>
+                    </select>
+                    <div class="turn-input">
+                        <label for="country-turn">Ход:</label>
+                        <input type="number" id="country-turn" value="0" min="0">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="add-selected-country" class="action-button">Добавить</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
