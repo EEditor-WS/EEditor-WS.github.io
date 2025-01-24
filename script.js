@@ -292,10 +292,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Добавляем страны
-        for (const [id, country] of Object.entries(lands)) {
-            if (id === 'provinces') continue; // Пропускаем массив provinces
+        // Создаем массив стран и сортируем его по имени
+        const countries = Object.entries(lands)
+            .filter(([id]) => id !== 'provinces')
+            .sort(([, a], [, b]) => a.name.localeCompare(b.name));
 
+        // Добавляем страны в список
+        for (const [id, country] of countries) {
             const row = document.createElement('tr');
             row.style.cursor = 'pointer';
             row.onclick = () => editCountry(id);
@@ -1256,10 +1259,13 @@ class CountryManager {
             }
         }
 
-        // Добавляем страны в список
-        for (const [id, country] of Object.entries(this.jsonData.lands)) {
-            if (id === 'provinces') continue;
+        // Создаем массив стран и сортируем его по имени
+        const countries = Object.entries(this.jsonData.lands)
+            .filter(([id]) => id !== 'provinces')
+            .sort(([, a], [, b]) => a.name.localeCompare(b.name));
 
+        // Добавляем страны в список
+        for (const [id, country] of countries) {
             const row = document.createElement('tr');
             row.style.cursor = 'pointer';
             row.onclick = () => this.openCountry(id);
