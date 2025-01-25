@@ -262,7 +262,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 'player_land': { type: 'select', id: 'player_land' },
 
                 // Специальные значения
-                'water_color': { type: 'color', id: 'water_color' }
+                'water_color': { type: 'water_color', id: 'water_color' }
             };
 
             // Обрабатываем каждое поле согласно маппингу
@@ -294,7 +294,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     case 'text':
                         element.value = value;
                         break;
-                    case 'color':
+                    case 'water_color':
                         if (Array.isArray(value) && value.length >= 3) {
                             // Округляем значения цветов
                             const r = Math.round(parseFloat(value[0]) || 0);
@@ -315,9 +315,6 @@ document.addEventListener('DOMContentLoaded', function() {
                             if (colorPreview) {
                                 colorPreview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
                             }
-                            
-                            // Обновляем скрытое поле с цветом
-                            element.value = [r, g, b].join(',');
                         }
                         break;
                 }
