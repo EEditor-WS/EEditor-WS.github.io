@@ -184,20 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Обновляем значения из формы
             for (const [key, value] of Object.entries(formData)) {
                 if (value !== '') {
-                    if (key === 'water_color') {
-                        // Обработка цвета воды
-                        const r = Math.round(parseFloat(document.getElementById('water_color_r').value) || 0);
-                        const g = Math.round(parseFloat(document.getElementById('water_color_g').value) || 0);
-                        const b = Math.round(parseFloat(document.getElementById('water_color_b').value) || 0);
-                        
-                        // Обновляем предпросмотр
-                        const colorPreview = document.getElementById('water_color_preview');
-                        if (colorPreview) {
-                            colorPreview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-                        }
-                        
-                        jsonData.water_color = [r, g, b, 255];
-                    } else if (key === 'map_hash' || key === 'technology_lvl' || 
+                    if (key === 'map_hash' || key === 'technology_lvl' || 
                         key === 'year' || key === 'last_turn' || 
                         key === 'month' || key === 'turn' || 
                         key === 'num_of_provinces' || key === 'min_game_version') {
@@ -262,10 +249,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Текстовые значения
                 'name': { type: 'text', id: 'name' },
                 'id': { type: 'text', id: 'id' },
-                'player_land': { type: 'select', id: 'player_land' },
-
-                // Специальные значения
-                'water_color': { type: 'water_color', id: 'water_color' }
+                'player_land': { type: 'select', id: 'player_land' }
             };
 
             // Обрабатываем каждое поле согласно маппингу
@@ -289,7 +273,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                         break;
                     case 'enabled-disabled':
-                        element.value = value; // Оставляем оригинальное значение
+                        element.value = value;
                         break;
                     case 'pure-boolean':
                         element.value = value ? 'true' : 'false';
@@ -297,29 +281,22 @@ document.addEventListener('DOMContentLoaded', function() {
                     case 'text':
                         element.value = value;
                         break;
-                    case 'water_color':
-                        if (Array.isArray(value) && value.length >= 3) {
-                            // Округляем значения цветов
-                            const r = Math.round(parseFloat(value[0]) || 0);
-                            const g = Math.round(parseFloat(value[1]) || 0);
-                            const b = Math.round(parseFloat(value[2]) || 0);
-                            
-                            // Устанавливаем значения в поля ввода
-                            const rInput = document.getElementById('water_color_r');
-                            const gInput = document.getElementById('water_color_g');
-                            const bInput = document.getElementById('water_color_b');
-                            
-                            if (rInput) rInput.value = r;
-                            if (gInput) gInput.value = g;
-                            if (bInput) bInput.value = b;
-                            
-                            // Обновляем предпросмотр
-                            const colorPreview = document.getElementById('water_color_preview');
-                            if (colorPreview) {
-                                colorPreview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-                            }
-                        }
-                        break;
+                }
+            }
+
+            // Обработка цвета воды отдельно
+            if (Array.isArray(jsonData.water_color) && jsonData.water_color.length >= 3) {
+                const [r, g, b] = jsonData.water_color;
+                
+                // Устанавливаем значения в поля ввода
+                document.getElementById('water_color_r').value = r;
+                document.getElementById('water_color_g').value = g;
+                document.getElementById('water_color_b').value = b;
+                
+                // Обновляем предпросмотр
+                const colorPreview = document.getElementById('water_color_preview');
+                if (colorPreview) {
+                    colorPreview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
                 }
             }
 
@@ -697,29 +674,40 @@ document.addEventListener('DOMContentLoaded', function() {
     );
 
     waterColorInputs.forEach(input => {
+        if (!input) return;
+        
         input.addEventListener('input', () => {
-            if (!isJsonFile) return;
+            if (!isJsonFile || !previewContent) return;
 
-            const r = Math.round(parseFloat(waterColorInputs[0].value) || 0);
-            const g = Math.round(parseFloat(waterColorInputs[1].value) || 0);
-            const b = Math.round(parseFloat(waterColorInputs[2].value) || 0);
+            try {
+                const jsonData = JSON.parse(previewContent.value);
+                
+                // Получаем значения RGB
+                const r = Math.round(parseFloat(waterColorInputs[0].value) || 0);
+                const g = Math.round(parseFloat(waterColorInputs[1].value) || 0);
+                const b = Math.round(parseFloat(waterColorInputs[2].value) || 0);
 
-            // Обновляем предпросмотр цвета
-            const colorPreview = document.getElementById('water_color_preview');
-            if (colorPreview) {
-                colorPreview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+                // Обновляем предпросмотр цвета
+                const colorPreview = document.getElementById('water_color_preview');
+                if (colorPreview) {
+                    colorPreview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+                }
+
+                // Обновляем значение в JSON
+                jsonData.water_color = [r, g, b, 255];
+                
+                // Обновляем содержимое редактора
+                previewContent.value = JSON.stringify(jsonData, null, 4);
+                
+                if (fileInfo) {
+                    fileInfo.textContent = 'Изменения не сохранены';
+                }
+            } catch (error) {
+                console.error('Ошибка при обновлении цвета воды:', error);
+                if (fileInfo) {
+                    fileInfo.textContent = 'Ошибка при обновлении цвета воды';
+                }
             }
-
-            // Обновляем значение в форме
-            const waterColorInput = document.getElementById('water_color');
-            if (waterColorInput) {
-                waterColorInput.value = [r, g, b].join(',');
-            }
-
-            // Обновляем JSON
-            const formData = new FormData(settingsForm);
-            const data = Object.fromEntries(formData.entries());
-            updateJsonEditor(data);
         });
     });
 

@@ -2250,13 +2250,13 @@
     "player_land": "civilization_7",
     "no_nuclear_weapon": "disabled",
     "water_color": [
-        55,
-        112,
-        129
+        200,
+        0,
+        0
     ],
     "year": 1914,
     "turn": 0,
-    "technology_lvl": 4,
+    "technology_lvl": 5,
     "technologies_are_opened": "disabled",
     "sandbox": "disabled",
     "resources_spawn": "standard",
@@ -3472,5 +3472,8 @@
             "population_limit": 41817.626953125,
             "owner": "civilization_1"
         }
-    ]
+    ],
+    "water_color_r": "200",
+    "water_color_g": "0",
+    "water_color_b": "0"
 }

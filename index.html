@@ -47,48 +47,8 @@
             <div id="data" class="data">
                 <form id="settings-form" class="settings-form" autocomplete="off">
                     <div class="form-group">
-                        <label for="map_hash">Хэш Карты</label>
-                        <input type="number" id="map_hash" name="map_hash">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="resources_spawn">Спаун Ресурсов</label>
-                        <select id="resources_spawn" name="resources_spawn">
-                            <option value="low">Мало</option>
-                            <option value="standard">Стандартно</option>
-                            <option value="few">Много</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="sandbox">Sandbox</label>
-                        <select id="sandbox" name="sandbox">
-                            <option value="disabled">Нет</option>
-                            <option value="enabled">Да</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="technologies_are_opened">Открыты Все Технологии</label>
-                        <select id="technologies_are_opened" name="technologies_are_opened">
-                            <option value="disabled">Нет</option>
-                            <option value="enabled">Да</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="technology_lvl">Уровень Технологий</label>
-                        <input type="number" id="technology_lvl" name="technology_lvl">
-                    </div>
-
-                    <div class="form-group">
                         <label for="name">Название</label>
                         <input type="text" id="name" name="name">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="year">Год</label>
-                        <input type="number" id="year" name="year">
                     </div>
 
                     <div class="form-group">
@@ -102,6 +62,11 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="year">Год</label>
+                        <input type="number" id="year" name="year">
+                    </div>
+
+                    <div class="form-group">
                         <label for="month">Месяц</label>
                         <input type="number" id="month" name="month" min="1" max="12">
                     </div>
@@ -109,25 +74,41 @@
                     <div class="form-group">
                         <label for="play_after_last_turn">Игра После Последнего Хода</label>
                         <select id="play_after_last_turn" name="play_after_last_turn">
-                            <option value="false">Нет</option>
                             <option value="true">Да</option>
+                            <option value="false">Нет</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="player_land">Страна Игрока</label>
-                        <select id="player_land" name="player_land">
+                        <label for="technology_lvl">Уровень Технологий</label>
+                        <input type="number" id="technology_lvl" name="technology_lvl">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="technologies_are_opened">Открыты Все Технологии</label>
+                        <select id="technologies_are_opened" name="technologies_are_opened">
+                            <option value="disabled">Нет</option>
+                            <option value="enabled">Да</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="num_of_provinces">Количество Провинций</label>
-                        <input type="number" id="num_of_provinces" name="num_of_provinces">
+                        <label for="resources_spawn">Спаун Ресурсов</label>
+                        <select id="resources_spawn" name="resources_spawn">
+                            <option value="low">Мало</option>
+                            <option value="standard">Стандартно</option>
+                            <option value="few">Много</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="turn">Turn</label>
-                        <input type="number" id="turn" name="turn">
+                        <label for="difficulty">Сложность</label>
+                        <select id="difficulty" name="difficulty">
+                            <option value="easy">Легко</option>
+                            <option value="standard">Нормально</option>
+                            <option value="hard">Сложно</option>
+                            <option value="impossible">Невозможно</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
@@ -140,26 +121,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="difficulty">Сложность</label>
-                        <select id="difficulty" name="difficulty">
-                            <option value="easy">Easy</option>
-                            <option value="standard">Standard</option>
-                            <option value="hard">Hard</option>
-                            <option value="impossible">Impossible</option>
+                        <label for="no_initial_diplomacy">Без Стартовой Дипломатии</label>
+                        <select id="no_initial_diplomacy" name="no_initial_diplomacy">
+                            <option value="enabled">Да</option>
+                            <option value="disabled">Нет</option>
                         </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="fog_of_war">Туман Войны</label>
-                        <select id="fog_of_war" name="fog_of_war">
-                            <option value="standard">Standard</option>
-                            <option value="disabled">Disabled</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="min_game_version">Минимальная Версия Игры</label>
-                        <input type="number" id="min_game_version" name="min_game_version">
                     </div>
 
                     <div class="form-group">
@@ -173,19 +139,52 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="no_initial_diplomacy">Без Стартовой Дипломатии</label>
-                        <select id="no_initial_diplomacy" name="no_initial_diplomacy">
-                            <option value="enabled">Enabled</option>
-                            <option value="disabled">Disabled</option>
+                        <label for="no_nuclear_weapon">Без Ядерного Оружия</label>
+                        <select id="no_nuclear_weapon" name="no_nuclear_weapon">
+                            <option value="enabled">Да</option>
+                            <option value="disabled">Нет</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="no_nuclear_weapon">Без Ядерного Оружия</label>
-                        <select id="no_nuclear_weapon" name="no_nuclear_weapon">
-                            <option value="disabled">Disabled</option>
-                            <option value="enabled">Enabled</option>
+                        <label for="sandbox">Sandbox</label>
+                        <select id="sandbox" name="sandbox">
+                            <option value="enabled">Да</option>
+                            <option value="disabled">Нет</option>
                         </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="turn">Turn</label>
+                        <input type="number" id="turn" name="turn">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="player_land">Страна Игрока</label>
+                        <select id="player_land" name="player_land">
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fog_of_war">Туман Войны</label>
+                        <select id="fog_of_war" name="fog_of_war">
+                            <option value="standard">Стандартный</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="map_hash">Хэш Карты</label>
+                        <input type="number" id="map_hash" name="map_hash">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="num_of_provinces">Количество Провинций</label>
+                        <input type="number" id="num_of_provinces" name="num_of_provinces">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="min_game_version">Минимальная Версия Игры</label>
+                        <input type="number" id="min_game_version" name="min_game_version">
                     </div>
                 </form>
             </div>
