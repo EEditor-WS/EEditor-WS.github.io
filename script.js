@@ -5,6 +5,9 @@ let isJsonFile = false;
 let previewContent = null;
 let fileInfo = null;
 
+// Проверяем поддержку File System Access API
+const hasFileSystemAccess = 'showOpenFilePicker' in window;
+
 // Глобальная переменная для хранения данных из lands.json
 let markedCountries = new Set();
 
@@ -32,7 +35,7 @@ function loadLandsJson() {
         }
     }
 
-    // Если в localStorage нет данных, создаем скрытый input для загрузки файла
+    // Создаем скрытый input для загрузки файла
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = '.json';
@@ -62,9 +65,6 @@ function loadLandsJson() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Проверяем поддержку File System Access API
-    const hasFileSystemAccess = 'showOpenFilePicker' in window;
-
     // Инициализация глобальных переменных
     previewContent = document.getElementById('preview-content');
     fileInfo = document.getElementById('file-info');
@@ -546,8 +546,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Функция для открытия файла
     async function openFile() {
-        if (hasFileSystemAccess) {
-            try {
+        try {
+            if (hasFileSystemAccess) {
                 // Запрашиваем доступ к файлу
                 [fileHandle] = await window.showOpenFilePicker({
                     types: [{
@@ -566,31 +566,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Обновляем интерфейс
                 handleFileContent(currentFile.name, text);
-            } catch (err) {
-                if (err.name === 'AbortError') {
-                    return; // Пользователь отменил выбор
-                }
-                console.error('Ошибка при открытии файла:', err);
-                if (fileInfo) {
-                    fileInfo.textContent = 'Ошибка при открытии файла';
-                }
+            } else {
+                // Для браузеров без поддержки File System Access API
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = '.json';
+                
+                input.onchange = async function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        currentFile = file;
+                        const text = await file.text();
+                        handleFileContent(file.name, text);
+                    }
+                };
+                
+                input.click();
             }
-        } else {
-            // Для браузеров без поддержки File System Access API
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = '.json';
-            
-            input.onchange = async function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    currentFile = file;
-                    const text = await file.text();
-                    handleFileContent(file.name, text);
-                }
-            };
-            
-            input.click();
+        } catch (err) {
+            console.error('Ошибка при открытии файла:', err);
+            if (fileInfo) {
+                fileInfo.textContent = 'Ошибка при открытии файла';
+            }
         }
     }
 
@@ -660,12 +657,28 @@ document.addEventListener('DOMContentLoaded', function() {
         dropZone.classList.remove('dragover');
 
         // Получаем перетащенные файлы
-        const files = e.dataTransfer.files;
-        if (files.length > 0) {
-            const file = files[0];
-            currentFile = file;
-            const text = await file.text();
-            handleFileContent(file.name, text);
+        if (hasFileSystemAccess) {
+            const items = [...e.dataTransfer.items];
+            for (const item of items) {
+                if (item.kind === 'file') {
+                    const handle = await item.getAsFileSystemHandle();
+                    if (handle.kind === 'file') {
+                        fileHandle = handle;
+                        currentFile = await fileHandle.getFile();
+                        const text = await currentFile.text();
+                        handleFileContent(currentFile.name, text);
+                        break;
+                    }
+                }
+            }
+        } else {
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                const file = files[0];
+                currentFile = file;
+                const text = await file.text();
+                handleFileContent(file.name, text);
+            }
         }
     });
 
