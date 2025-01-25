@@ -331,7 +331,13 @@
                     "name": "Russian Republic"
                 }
             ],
-            "pacts": []
+            "pacts": {
+                "civilization_6": {
+                    "turn": 0,
+                    "duration": 2,
+                    "initiator": true
+                }
+            }
         },
         "civilization_20": {
             "guaranteed_by": [],
@@ -902,10 +908,14 @@
             "pacts": []
         },
         "civilization_3": {
-            "guaranteed_by": [],
-            "guaranteed": [],
-            "enemies": [],
-            "allies": [],
+            "guaranteed_by": {},
+            "guaranteed": {},
+            "enemies": {},
+            "allies": {
+                "civilization": {
+                    "turn": 0
+                }
+            },
             "defeated": false,
             "capital_name": "Tirana",
             "color": [
@@ -916,12 +926,12 @@
             ],
             "name": "Albania",
             "capital": 85,
-            "vassals": [],
+            "vassals": {},
             "sanctions": {
                 "civilization": {
                     "turn": 0,
-                    "initiator": true,
-                    "duration": 15
+                    "duration": 15,
+                    "initiator": true
                 }
             },
             "reforms": [
@@ -980,13 +990,19 @@
                     "name": "Kingdom of Albania"
                 }
             ],
-            "pacts": []
+            "pacts": {},
+            "political": ""
         },
         "civilization": {
             "guaranteed_by": [],
             "guaranteed": [],
             "enemies": [],
-            "allies": [],
+            "allies": {
+                "civilization_3": {
+                    "turn": 0,
+                    "initiator": true
+                }
+            },
             "defeated": false,
             "capital_name": "Cetinje",
             "color": [
@@ -1132,10 +1148,10 @@
             "pacts": []
         },
         "civilization_6": {
-            "guaranteed_by": [],
-            "guaranteed": [],
-            "enemies": [],
-            "allies": [],
+            "guaranteed_by": {},
+            "guaranteed": {},
+            "enemies": {},
+            "allies": {},
             "defeated": false,
             "capital_name": "Brussel",
             "color": [
@@ -1146,8 +1162,8 @@
             ],
             "name": "Belgium",
             "capital": 50,
-            "vassals": [],
-            "sanctions": [],
+            "vassals": {},
+            "sanctions": {},
             "reforms": [
                 {
                     "requirements": {
@@ -1179,8 +1195,8 @@
                     "name": "Belgian Republic"
                 }
             ],
-            "vassal_of": "civilization_15",
-            "pacts": []
+            "pacts": {},
+            "political": ""
         },
         "civilization_21": {
             "guaranteed_by": [],
@@ -1434,10 +1450,10 @@
             "pacts": []
         },
         "civilization_17": {
-            "guaranteed_by": [],
-            "guaranteed": [],
-            "enemies": [],
-            "allies": [],
+            "guaranteed_by": {},
+            "guaranteed": {},
+            "enemies": {},
+            "allies": {},
             "defeated": false,
             "capital_name": "Stockholm",
             "color": [
@@ -1448,8 +1464,8 @@
             ],
             "name": "Sweden",
             "capital": 213,
-            "vassals": [],
-            "sanctions": [],
+            "vassals": {},
+            "sanctions": {},
             "reforms": [
                 {
                     "requirements": {
@@ -1528,7 +1544,7 @@
                     "name": "Sweden-Norway"
                 }
             ],
-            "pacts": []
+            "pacts": {}
         },
         "civilization_28": {
             "guaranteed_by": [],
@@ -2047,10 +2063,10 @@
             }
         },
         "civilization_15": {
-            "guaranteed_by": [],
-            "guaranteed": [],
-            "enemies": [],
-            "allies": [],
+            "guaranteed_by": {},
+            "guaranteed": {},
+            "enemies": {},
+            "allies": {},
             "defeated": false,
             "capital_name": "Madrid",
             "color": [
@@ -2061,12 +2077,8 @@
             ],
             "name": "Spain",
             "capital": 7,
-            "vassals": {
-                "civilization_6": {
-                    "turn": 0
-                }
-            },
-            "sanctions": [],
+            "vassals": {},
+            "sanctions": {},
             "reforms": [
                 {
                     "requirements": {
@@ -2131,7 +2143,8 @@
                     "name": "Spanish Empire"
                 }
             ],
-            "pacts": []
+            "pacts": {},
+            "political": ""
         },
         "civilization_7": {
             "guaranteed_by": [],
