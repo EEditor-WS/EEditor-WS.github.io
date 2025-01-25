@@ -287,16 +287,16 @@ document.addEventListener('DOMContentLoaded', function() {
             // Обработка цвета воды отдельно
             if (Array.isArray(jsonData.water_color) && jsonData.water_color.length >= 3) {
                 const [r, g, b] = jsonData.water_color;
-                
-                // Устанавливаем значения в поля ввода
+                            
+                            // Устанавливаем значения в поля ввода
                 document.getElementById('water_color_r').value = r;
                 document.getElementById('water_color_g').value = g;
                 document.getElementById('water_color_b').value = b;
-                
-                // Обновляем предпросмотр
-                const colorPreview = document.getElementById('water_color_preview');
-                if (colorPreview) {
-                    colorPreview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+                            
+                            // Обновляем предпросмотр
+                            const colorPreview = document.getElementById('water_color_preview');
+                            if (colorPreview) {
+                                colorPreview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
                 }
             }
 
@@ -462,45 +462,45 @@ document.addEventListener('DOMContentLoaded', function() {
     // Функция для сохранения изменений
     async function saveChanges() {
         if (hasFileSystemAccess) {
-            if (!fileHandle) {
-                try {
-                    // Запрашиваем доступ к файловой системе
-                    fileHandle = await window.showSaveFilePicker({
-                        suggestedName: currentFile?.name || 'scenario.json',
-                        types: [{
-                            description: 'JSON Files',
-                            accept: {
-                                'application/json': ['.json']
-                            }
-                        }]
-                    });
-                } catch (err) {
-                    if (err.name === 'AbortError') {
-                        return; // Пользователь отменил выбор
-                    }
-                    console.error('Ошибка при получении доступа к файлу:', err);
-                    if (fileInfo) {
-                        fileInfo.textContent = 'Ошибка при получении доступа к файлу';
-                    }
-                    return;
-                }
-            }
-
+        if (!fileHandle) {
             try {
-                // Создаем поток для записи
-                const writable = await fileHandle.createWritable();
-                // Записываем содержимое
-                await writable.write(previewContent.value);
-                // Закрываем поток
-                await writable.close();
-                
-                if (fileInfo) {
-                    fileInfo.textContent = `Файл ${currentFile.name} сохранен`;
+                // Запрашиваем доступ к файловой системе
+                fileHandle = await window.showSaveFilePicker({
+                        suggestedName: currentFile?.name || 'scenario.json',
+                    types: [{
+                        description: 'JSON Files',
+                        accept: {
+                            'application/json': ['.json']
+                        }
+                    }]
+                });
+            } catch (err) {
+                if (err.name === 'AbortError') {
+                    return; // Пользователь отменил выбор
                 }
-            } catch (error) {
-                console.error('Ошибка при сохранении файла:', error);
+                console.error('Ошибка при получении доступа к файлу:', err);
                 if (fileInfo) {
-                    fileInfo.textContent = 'Ошибка при сохранении файла';
+                    fileInfo.textContent = 'Ошибка при получении доступа к файлу';
+                }
+                return;
+            }
+        }
+
+        try {
+            // Создаем поток для записи
+            const writable = await fileHandle.createWritable();
+            // Записываем содержимое
+            await writable.write(previewContent.value);
+            // Закрываем поток
+            await writable.close();
+            
+            if (fileInfo) {
+                fileInfo.textContent = `Файл ${currentFile.name} сохранен`;
+            }
+        } catch (error) {
+            console.error('Ошибка при сохранении файла:', error);
+            if (fileInfo) {
+                fileInfo.textContent = 'Ошибка при сохранении файла';
                 }
             }
         } else {
@@ -525,23 +525,23 @@ document.addEventListener('DOMContentLoaded', function() {
     async function openFile() {
         try {
             if (hasFileSystemAccess) {
-                // Запрашиваем доступ к файлу
-                [fileHandle] = await window.showOpenFilePicker({
-                    types: [{
-                        description: 'JSON Files',
-                        accept: {
-                            'application/json': ['.json']
-                        }
-                    }]
-                });
-                
-                // Получаем файл
-                currentFile = await fileHandle.getFile();
-                
-                // Читаем содержимое
-                const text = await currentFile.text();
-                
-                // Обновляем интерфейс
+            // Запрашиваем доступ к файлу
+            [fileHandle] = await window.showOpenFilePicker({
+                types: [{
+                    description: 'JSON Files',
+                    accept: {
+                        'application/json': ['.json']
+                    }
+                }]
+            });
+            
+            // Получаем файл
+            currentFile = await fileHandle.getFile();
+            
+            // Читаем содержимое
+            const text = await currentFile.text();
+            
+            // Обновляем интерфейс
                 handleFileContent(currentFile.name, text);
             } else {
                 // Для браузеров без поддержки File System Access API
@@ -570,33 +570,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Функция для обработки содержимого файла
     function handleFileContent(fileName, content) {
-        if (previewContent) {
+            if (previewContent) {
             previewContent.value = content;
-        }
-        if (previewFilename) {
+            }
+            if (previewFilename) {
             previewFilename.textContent = fileName;
-        }
-        if (fileInfo) {
+            }
+            if (fileInfo) {
             fileInfo.textContent = `Файл: ${fileName}`;
-        }
-        
-        // Проверяем JSON
+            }
+            
+            // Проверяем JSON
         isJsonFile = fileName.toLowerCase().endsWith('.json');
-        if (isJsonFile) {
-            try {
+            if (isJsonFile) {
+                try {
                 const jsonData = JSON.parse(content);
-                fillFormFromJson(jsonData);
-                
-                // Инициализируем менеджер стран
-                if (window.countryManager) {
-                    window.countryManager.jsonData = jsonData;
-                    window.countryManager.updateCountriesList();
-                }
-            } catch (error) {
-                console.error('Ошибка при парсинге JSON:', error);
-                if (fileInfo) {
-                    fileInfo.textContent = 'Ошибка при парсинге JSON';
-                }
+                    fillFormFromJson(jsonData);
+                    
+                    // Инициализируем менеджер стран
+                    if (window.countryManager) {
+                        window.countryManager.jsonData = jsonData;
+                        window.countryManager.updateCountriesList();
+                    }
+                } catch (error) {
+                    console.error('Ошибка при парсинге JSON:', error);
+                    if (fileInfo) {
+                        fileInfo.textContent = 'Ошибка при парсинге JSON';
+                    }
             }
         }
     }
@@ -635,14 +635,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Получаем перетащенные файлы
         if (hasFileSystemAccess) {
-            const items = [...e.dataTransfer.items];
-            for (const item of items) {
-                if (item.kind === 'file') {
-                    const handle = await item.getAsFileSystemHandle();
-                    if (handle.kind === 'file') {
-                        fileHandle = handle;
-                        currentFile = await fileHandle.getFile();
-                        const text = await currentFile.text();
+        const items = [...e.dataTransfer.items];
+        for (const item of items) {
+            if (item.kind === 'file') {
+                const handle = await item.getAsFileSystemHandle();
+                if (handle.kind === 'file') {
+                    fileHandle = handle;
+                    currentFile = await fileHandle.getFile();
+                    const text = await currentFile.text();
                         handleFileContent(currentFile.name, text);
                         break;
                     }
@@ -683,15 +683,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 const jsonData = JSON.parse(previewContent.value);
                 
                 // Получаем значения RGB
-                const r = Math.round(parseFloat(waterColorInputs[0].value) || 0);
-                const g = Math.round(parseFloat(waterColorInputs[1].value) || 0);
-                const b = Math.round(parseFloat(waterColorInputs[2].value) || 0);
+            const r = Math.round(parseFloat(waterColorInputs[0].value) || 0);
+            const g = Math.round(parseFloat(waterColorInputs[1].value) || 0);
+            const b = Math.round(parseFloat(waterColorInputs[2].value) || 0);
 
-                // Обновляем предпросмотр цвета
-                const colorPreview = document.getElementById('water_color_preview');
-                if (colorPreview) {
-                    colorPreview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-                }
+            // Обновляем предпросмотр цвета
+            const colorPreview = document.getElementById('water_color_preview');
+            if (colorPreview) {
+                colorPreview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+            }
 
                 // Обновляем значение в JSON
                 jsonData.water_color = [r, g, b, 255];
@@ -735,6 +735,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Инициализируем менеджер стран
     window.countryManager = new CountryManager();
+
+    // Обработчик для кнопки удаления несуществующих владельцев
+    document.getElementById('remove-invalid-owners')?.addEventListener('click', () => {
+        if (!window.countryManager) return;
+        window.countryManager.removeInvalidOwners();
+    });
 });
 
 function changeApplicationLanguage(lang) {
@@ -1067,7 +1073,9 @@ class CountryManager {
     deleteCurrentCountry() {
         if (!this.currentCountry || !this.jsonData?.lands[this.currentCountry]) return;
 
-        if (confirm('Вы уверены, что хотите удалить эту страну?')) {
+        // confirm('Вы уверены, что хотите удалить эту страну?')
+
+        if (true) {
             this.pushToUndoStack();
             delete this.jsonData.lands[this.currentCountry];
             this.updateCountriesList();
@@ -1596,6 +1604,50 @@ class CountryManager {
         this.updateJsonAndUI();
         if (this.currentCountry) {
             this.openCountry(this.currentCountry);
+        }
+    }
+
+    removeInvalidOwners() {
+        if (!this.jsonData?.provinces || !this.jsonData?.lands) return;
+
+        this.pushToUndoStack();
+
+        let replacedCount = 0;
+        let addedCount = 0;
+        const validOwners = new Set(Object.keys(this.jsonData.lands));
+
+        // Проходим по всем провинциям
+        this.jsonData.provinces.forEach(province => {
+            if (province.owner && !validOwners.has(province.owner)) {
+                // Заменяем недействительного владельца
+                province.owner = 'undeveloped_land';
+                replacedCount++;
+            } else if (!province.owner && !province.is_water) {
+                // Добавляем владельца для сухопутных провинций без владельца
+                province.owner = 'undeveloped_land';
+                addedCount++;
+            }
+        });
+
+        if (replacedCount > 0 || addedCount > 0) {
+            // Обновляем JSON и интерфейс
+            this.updateJsonAndUI();
+            
+            // Показываем сообщение о результате
+            if (this.fileInfo) {
+                let message = [];
+                if (replacedCount > 0) {
+                    message.push(`заменено ${replacedCount} несуществующих владельцев`);
+                }
+                if (addedCount > 0) {
+                    message.push(`добавлен владелец для ${addedCount} провинций`);
+                }
+                this.fileInfo.textContent = `Результат: ${message.join(', ')}`;
+            }
+        } else {
+            if (this.fileInfo) {
+                this.fileInfo.textContent = 'Изменений не требуется';
+            }
         }
     }
 }

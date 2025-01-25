@@ -1014,3 +1014,9 @@ body {
 .lang-dropdown a:hover {
     background-color: #2a2a2a;
 }
+
+.header-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
