@@ -1,6 +1,7 @@
 .events-container {
     padding: 20px;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .events-container .header {
@@ -8,6 +9,8 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .events-container .header h2 {
@@ -15,12 +18,13 @@
 }
 
 .events-table {
-    width: 100%;
+    width: calc(100% - 2px); /* учитываем border */
     border-collapse: collapse;
     background-color: #242424;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 }
 
 .events-table th,
@@ -95,4 +99,211 @@
 .event-actions {
     display: flex;
     gap: 10px;
+}
+
+.event-form-container {
+    display: flex;
+    gap: 30px;
+    min-height: min-content;
+    padding-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.event-main-settings {
+    flex: 0 0 calc(70% - 15px);
+    background: #242424;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #1f1f1f;
+    overflow: auto;
+    box-sizing: border-box;
+}
+
+.event-answers {
+    flex: 0 0 calc(30% - 15px);
+    background: #242424;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #1f1f1f;
+    overflow: auto;
+    box-sizing: border-box;
+}
+
+.event-answers-item {
+    width: calc(100% - 2px);
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+.event-answers .answer-block {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+    padding: 15px;
+    background: #2a2a2a;
+    border-radius: 6px;
+    border: 1px solid #1f1f1f;
+}
+
+.event-answers input,
+.event-answers textarea,
+.event-answers select,
+.event-answers button {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.event-answers .answer-block:last-child {
+    margin-bottom: 0;
+}
+
+.event-answers h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #e0e0e0;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.event-form {
+    flex: 1;
+    overflow: auto;
+    padding: 0;
+    width: 100%;
+}
+
+.form-actions {
+    position: sticky;
+    bottom: 0;
+    background: #1a1a1a;
+    padding: 15px;
+    margin-top: 0;
+    border-top: 1px solid #333;
+    z-index: 10;
+}
+
+@media (max-width: 1200px) {
+    .event-form-container {
+        flex-direction: column;
+    }
+
+    .event-main-settings,
+    .event-answers {
+        flex: none;
+        width: 100%;
+    }
+}
+
+.event-edit {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    padding: 20px;
+    width: 100%;
+}
+
+.event-edit h2 {
+    margin: 0 0 20px 0;
+}
+
+/* Убираем дублирующиеся стили */
+.event-edit-container,
+.event-header,
+.event-actions {
+    display: none;
+}
+
+.preview-container {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.preview-content {
+    flex: 0 0 calc(70% - 15px);
+    background: #242424;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #1f1f1f;
+    box-sizing: border-box;
+}
+
+.file-info {
+    flex: 0 0 calc(30% - 15px);
+    background: #242424;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #1f1f1f;
+    box-sizing: border-box;
+}
+
+.event-main-input {
+    width: calc(100% - 2px);
+    box-sizing: border-box;
+    padding: 8px 12px;
+    background-color: #2a2a2a;
+    border: 1px solid #1f1f1f;
+    border-radius: 4px;
+    color: #e0e0e0;
+    font-size: 14px;
+}
+
+.event-main-input:focus {
+    outline: none;
+    border-color: #3a80d2;
+}
+
+.event-main-textarea {
+    width: calc(100% - 2px);
+    box-sizing: border-box;
+    padding: 8px 12px;
+    background-color: #2a2a2a;
+    border: 1px solid #1f1f1f;
+    border-radius: 4px;
+    color: #e0e0e0;
+    font-size: 14px;
+    resize: vertical;
+    min-height: 100px;
+}
+
+.event-main-textarea:focus {
+    outline: none;
+    border-color: #3a80d2;
+}
+
+.main-page-input {
+    width: calc(100% - 2px);
+    box-sizing: border-box;
+    padding: 8px 12px;
+    background-color: #2a2a2a;
+    border: 1px solid #1f1f1f;
+    border-radius: 4px;
+    color: #e0e0e0;
+    font-size: 14px;
+}
+
+.main-page-input:focus {
+    outline: none;
+    border-color: #3a80d2;
+}
+
+.main-page-textarea {
+    width: calc(100% - 2px);
+    box-sizing: border-box;
+    padding: 8px 12px;
+    background-color: #2a2a2a;
+    border: 1px solid #1f1f1f;
+    border-radius: 4px;
+    color: #e0e0e0;
+    font-size: 14px;
+    resize: vertical;
+    min-height: 100px;
+}
+
+.main-page-textarea:focus {
+    outline: none;
+    border-color: #3a80d2;
 }

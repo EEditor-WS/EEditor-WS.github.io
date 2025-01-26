@@ -1641,17 +1641,17 @@
             "political": ""
         },
         "civilization_22": {
-            "guaranteed": [],
-            "guaranteed_by": [],
-            "pacts": [],
-            "sanctions": [],
+            "guaranteed": {},
+            "guaranteed_by": {},
+            "pacts": {},
+            "sanctions": {},
             "color": [
                 60.435,
                 82.926,
                 92.565,
                 255
             ],
-            "name": "Russian Empire",
+            "name": "Russian EmpireS",
             "capital": 117,
             "reforms": [
                 {
@@ -1734,11 +1734,12 @@
                     }
                 }
             ],
-            "vassals": [],
-            "allies": [],
+            "vassals": {},
+            "allies": {},
             "capital_name": "Saint Petersburg",
             "defeated": false,
-            "enemies": []
+            "enemies": {},
+            "political": ""
         },
         "undeveloped_land": {
             "guaranteed": [],

@@ -68,7 +68,7 @@ class EventManager {
         headers.forEach((header, index) => {
             header.addEventListener('click', () => {
                 // Определяем колонку для сортировки
-                const columns = ['id', 'title', 'group_name', 'image'];
+                const columns = ['id', 'group_name', 'unique_event_name', 'title'];
                 const column = columns[index];
                 
                 // Если кликнули на ту же колонку, меняем направление сортировки
@@ -104,7 +104,7 @@ class EventManager {
                 id,
                 title: event.title || '',
                 group_name: event.group_name || '',
-                image: event.image || '',
+                unique_event_name: event.unique_event_name || '',
                 ...event
             }))
             .sort((a, b) => {
@@ -120,8 +120,8 @@ class EventManager {
                     case 'group_name':
                         comparison = (a.group_name || '').localeCompare(b.group_name || '');
                         break;
-                    case 'image':
-                        comparison = (a.image || '').localeCompare(b.image || '');
+                    case 'unique_event_name':
+                        comparison = (a.unique_event_name || '').localeCompare(b.unique_event_name || '');
                         break;
                 }
                 
@@ -136,9 +136,9 @@ class EventManager {
 
             row.innerHTML = `
                 <td>${event.id}</td>
-                <td>${event.title || ''}</td>
                 <td>${event.group_name || ''}</td>
-                <td>${event.image || ''}</td>
+                <td>${event.unique_event_name || ''}</td>
+                <td>${event.title || ''}</td>
             `;
 
             eventsList.appendChild(row);
@@ -212,9 +212,10 @@ class EventManager {
         const id = this.generateUniqueId();
         const newEvent = {
             id: id,
+            group_name: 'Новая группа',
+            unique_event_name: `new_event_${id.toLowerCase()}`,
             title: 'Новое событие',
             description: 'Описание события',
-            group_name: '',
             image: 'diplomacy',
             answer1: 'Ответ 1',
             answer2: 'Ответ 2',
@@ -228,7 +229,6 @@ class EventManager {
             delete_after_turns: 1,
             hide_later: false,
             icon: 'diplomacy',
-            unique_event_name: '',
             bonuses: [],
             bonuses1: [],
             bonuses2: [],
@@ -297,10 +297,12 @@ class EventManager {
 
         this.setFormValues({
             'event-id': event.id,
+            'event-group-name': event.group_name || '',
+            'event-unique-name': event.unique_event_name || '',
             'event-title': event.title || '',
             'event-description': event.description || '',
-            'event-group-name': event.group_name || '',
             'event-image': event.image || '',
+            'event-icon': event.icon || '',
             'event-answer1': event.answer1 || '',
             'event-answer2': event.answer2 || '',
             'event-answer3': event.answer3 || '',
@@ -311,9 +313,7 @@ class EventManager {
             'event-answer3-disabled': event.answer3_is_disabled ? 'true' : 'false',
             'event-auto-answer1': event.auto_answer1_if_ignored ? 'true' : 'false',
             'event-delete-turns': event.delete_after_turns || 1,
-            'event-hide-later': event.hide_later ? 'true' : 'false',
-            'event-icon': event.icon || '',
-            'event-unique-name': event.unique_event_name || ''
+            'event-hide-later': event.hide_later ? 'true' : 'false'
         });
 
         // Заполняем бонусы и требования
@@ -423,10 +423,12 @@ class EventManager {
 
             // Обновляем основные данные
             event.id = document.getElementById('event-id').value;
+            event.group_name = document.getElementById('event-group-name').value;
+            event.unique_event_name = document.getElementById('event-unique-name').value;
             event.title = document.getElementById('event-title').value;
             event.description = document.getElementById('event-description').value;
-            event.group_name = document.getElementById('event-group-name').value;
             event.image = document.getElementById('event-image').value;
+            event.icon = document.getElementById('event-icon').value;
             event.answer1 = document.getElementById('event-answer1').value;
             event.answer2 = document.getElementById('event-answer2').value;
             event.answer3 = document.getElementById('event-answer3').value;
@@ -438,8 +440,6 @@ class EventManager {
             event.auto_answer1_if_ignored = document.getElementById('event-auto-answer1').value === 'true';
             event.delete_after_turns = parseInt(document.getElementById('event-delete-turns').value) || 1;
             event.hide_later = document.getElementById('event-hide-later').value === 'true';
-            event.icon = document.getElementById('event-icon').value;
-            event.unique_event_name = document.getElementById('event-unique-name').value;
 
             // Обновляем требования и бонусы
             this.updateRequirementsAndBonuses(event);
