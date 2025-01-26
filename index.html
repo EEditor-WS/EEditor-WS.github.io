@@ -7,7 +7,12 @@
         <link rel="icon" type="image/x-icon" href="favicon.ico">
         <script src="lands_data.js"></script>
         <script src="script.js"></script>
-        <link rel="stylesheet" href="style.css">
+        <script src="js/countries.js"></script>
+        <script src="js/events.js"></script>
+        <script src="js/upload.js"></script>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/countries.css">
+        <link rel="stylesheet" href="css/events.css">
     </head>
     <body>
         <nav class="nav-header">
@@ -308,8 +313,162 @@
             </div>
         </div>
         <div id="events" class="page pevents">
-            <h2>Страница событий</h2>
+            <div class="events-container">
+                <div class="header">
+                    <h2>События</h2>
+                    <div class="header-actions">
+                        <button id="add-event" class="action-button">Добавить событие</button>
+                    </div>
+                </div>
+                <table class="events-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Группа</th>
+                            <th>Название</th>
+                            <th>Заголовок</th>
+                        </tr>
+                    </thead>
+                    <tbody id="events-list">
+                    </tbody>
+                </table>
+            </div>
         </div>
+        <div id="event-edit" class="page">
+            <h2 id="event-name-header">Редактирование события</h2>
+            <form id="event-form" class="event-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="event-image">Картинка события:</label>
+                        <div class="image-select-container">
+                            <select id="event-image" name="event-image">
+                                <!-- Опции будут добавлены через JavaScript -->
+                            </select>
+                            <img id="event-image-preview" src="" alt="Предпросмотр картинки" class="image-preview">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-icon">Иконка события:</label>
+                        <div class="image-select-container">
+                            <select id="event-icon" name="event-icon">
+                                <!-- Опции будут добавлены через JavaScript -->
+                            </select>
+                            <img id="event-icon-preview" src="" alt="Предпросмотр иконки" class="icon-preview">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="event-id">ID:</label>
+                        <input type="text" id="event-id" name="event-id" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-group-name">Группа:</label>
+                        <input type="text" id="event-group-name" name="event-group-name">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="event-unique-name">Уникальное имя:</label>
+                        <input type="text" id="event-unique-name" name="event-unique-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="event-title">Заголовок:</label>
+                        <input type="text" id="event-title" name="event-title">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="event-hide-later">Прятать позже:</label>
+                        <select id="event-hide-later" name="event-hide-later">
+                            <option value="false">Нет</option>
+                            <option value="true">Да</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-delete-turns">Удалить через (ходов):</label>
+                        <input type="number" id="event-delete-turns" name="event-delete-turns" min="1" value="1">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="event-description">Описание события:</label>
+                    <textarea id="event-description" name="event-description" rows="4"></textarea>
+                </div>
+
+                <div class="answers-section">
+                    <div class="answer-block">
+                        <h3>Ответ 1</h3>
+                        <div class="form-group">
+                            <label for="event-answer1">Текст ответа:</label>
+                            <input type="text" id="event-answer1" name="event-answer1">
+                        </div>
+                        <div class="form-group">
+                            <label for="event-description1">Описание результата:</label>
+                            <textarea id="event-description1" name="event-description1" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="event-auto-answer1">Выбирать при игнорировании:</label>
+                            <select id="event-auto-answer1" name="event-auto-answer1">
+                                <option value="false">Нет</option>
+                                <option value="true">Да</option>
+                            </select>
+                        </div>
+                        <button type="button" class="requirements-button" data-answer="1">Требования и бонусы</button>
+                    </div>
+
+                    <div class="answer-block">
+                        <h3>Ответ 2</h3>
+                        <div class="form-group">
+                            <label for="event-answer2-disabled">Включить ответ:</label>
+                            <select id="event-answer2-disabled" name="event-answer2-disabled">
+                                <option value="false">Да</option>
+                                <option value="true">Нет</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="event-answer2">Текст ответа:</label>
+                            <input type="text" id="event-answer2" name="event-answer2">
+                        </div>
+                        <div class="form-group">
+                            <label for="event-description2">Описание результата:</label>
+                            <textarea id="event-description2" name="event-description2" rows="3"></textarea>
+                        </div>
+                        <button type="button" class="requirements-button" data-answer="2">Требования и бонусы</button>
+                    </div>
+
+                    <div class="answer-block">
+                        <h3>Ответ 3</h3>
+                        <div class="form-group">
+                            <label for="event-answer3-disabled">Включить ответ:</label>
+                            <select id="event-answer3-disabled" name="event-answer3-disabled">
+                                <option value="false">Да</option>
+                                <option value="true">Нет</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="event-answer3">Текст ответа:</label>
+                            <input type="text" id="event-answer3" name="event-answer3">
+                        </div>
+                        <div class="form-group">
+                            <label for="event-description3">Описание результата:</label>
+                            <textarea id="event-description3" name="event-description3" rows="3"></textarea>
+                        </div>
+                        <button type="button" class="requirements-button" data-answer="3">Требования и бонусы</button>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="requirements-button" data-answer="main">Общие требования</button>
+                    <button type="button" id="save-event">Сохранить</button>
+                    <button type="button" id="cancel-edit">Отмена</button>
+                </div>
+            </form>
+        </div>
+        
 
         <!-- Модальное окно для выбора страны -->
         <div id="country-select-modal" class="modal">
