@@ -279,6 +279,12 @@
     font-size: 14px;
 }
 
+.event-main-input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #242424;
+}
+
 .event-main-input:focus {
     outline: none;
     border-color: #3a80d2;
@@ -358,4 +364,30 @@
 .requirements-buttons .requirements-button:hover {
     background-color: #333;
     border-color: #3a80d2;
+}
+
+.image-select-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.image-preview {
+    width: 96px;
+    height: 64px;
+    object-fit: contain;
+    background-color: #1f1f1f;
+    border: 1px solid #404040;
+    border-radius: 4px;
+    padding: 2px;
+}
+
+.icon-preview {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    background-color: #1f1f1f;
+    border: 1px solid #404040;
+    border-radius: 4px;
+    padding: 2px;
 }

@@ -62,6 +62,30 @@ class EventManager {
         
         // Инициализация сортировки
         this.initSortHandlers();
+
+        // Добавляем обработчики для предпросмотра изображений
+        const imageSelect = document.getElementById('event-image');
+        const imagePreview = document.getElementById('event-image-preview');
+        const iconSelect = document.getElementById('event-icon');
+        const iconPreview = document.getElementById('event-icon-preview');
+
+        if (imageSelect && imagePreview) {
+            imageSelect.addEventListener('change', () => {
+                const selectedImage = imageSelect.value;
+                imagePreview.src = `event/img/${selectedImage}.png`;
+            });
+            // Инициализируем предпросмотр для текущего значения
+            imagePreview.src = `event/img/${imageSelect.value}.png`;
+        }
+
+        if (iconSelect && iconPreview) {
+            iconSelect.addEventListener('change', () => {
+                const selectedIcon = iconSelect.value;
+                iconPreview.src = `event/ico/${selectedIcon}.png`;
+            });
+            // Инициализируем предпросмотр для текущего значения
+            iconPreview.src = `event/ico/${iconSelect.value}.png`;
+        }
     }
 
     initSortHandlers() {
@@ -213,23 +237,24 @@ class EventManager {
         const newId = this.generateUniqueId();
         const newEvent = {
             id: newId,
-            group_name: 'Новая группа',
-            unique_event_name: `new_event_${newId.toLowerCase()}`,
-            title: 'Новое событие',
-            description: 'Описание события',
-            image: 'diplomacy',
-            answer1: 'Ответ 1',
-            answer2: 'Ответ 2',
-            answer3: 'Ответ 3',
-            description1: 'Описание ответа 1',
-            description2: 'Описание ответа 2',
-            description3: 'Описание ответа 3',
-            answer2_is_disabled: false,
-            answer3_is_disabled: false,
+            group_name: "Group",
+            unique_event_name: `New Event ${newId.toLowerCase()}`,
+            title: "New Event Title",
+            description: "Description",
+            answer1: "Answer 1",
+            answer2: "Answer 2",
+            answer3: "Answer 3",
+            description1: "Description of answer 1",
+            description2: "Description of answer 2",
+            description3: "Description of answer 3",
+            answer2_is_disabled: true,
+            answer3_is_disabled: true,
             auto_answer1_if_ignored: true,
             delete_after_turns: 1,
             hide_later: false,
-            icon: 'diplomacy',
+            image: "diplomacy",
+            icon: "diplomacy",
+            lands: [],
             bonuses: [],
             bonuses1: [],
             bonuses2: [],
