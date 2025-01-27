@@ -206,7 +206,7 @@ class EventManager {
         // Обработчики кнопок требований и бонусов
         document.querySelectorAll('.requirements-button').forEach(button => {
             button.addEventListener('click', () => {
-                const answer = button.getAttribute('data-answer');
+                const answer = button.getAttribute('data-answer') || '';
                 this.openRequirementsEditor(answer);
             });
         });
@@ -521,11 +521,32 @@ class EventManager {
     }
 
     parseItemData(item, isRequirement) {
-        // Этот метод нужно реализовать в зависимости от структуры DOM
-        // Возвращает объект с данными требования или бонуса
-        return isRequirement ? 
-            { type: 'money', action: 'more', value: 10 } : // Пример для требования
-            { type: 'defense', duration: 3, value: 1.2 };  // Пример для бонуса
+        if (isRequirement) {
+            const typeCell = item.cells[0];
+            const subtypeCell = item.cells[1];
+            const actionCell = item.cells[2];
+            const valueCell = item.cells[3];
+            
+            return {
+                type: typeCell.textContent.trim(),
+                action: actionCell.textContent.trim() || undefined,
+                value: valueCell.textContent.split('(')[0].trim(),
+                subtype: subtypeCell.textContent.trim() || undefined
+            };
+        } else {
+            const typeCell = item.cells[0];
+            const subtypeCell = item.cells[1];
+            const valueCell = item.cells[3];
+            
+            const durationMatch = valueCell.textContent.match(/\((\d+) ходов\)/);
+            
+            return {
+                type: typeCell.textContent.trim(),
+                value: valueCell.textContent.split('(')[0].trim(),
+                duration: durationMatch ? parseInt(durationMatch[1]) : 3,
+                subtype: subtypeCell.textContent.trim() || undefined
+            };
+        }
     }
 
     updateJsonInPreview() {
@@ -617,8 +638,411 @@ class EventManager {
     }
 
     openRequirementsEditor(answer) {
-        // TODO: Реализовать открытие редактора требований и бонусов
-        console.log(`Открываем редактор требований для ответа ${answer}`);
+        const modal = document.getElementById('requirements-editor-modal');
+        const title = document.getElementById('requirements-editor-title');
+        const list = document.getElementById('requirements-items');
+        const editor = document.getElementById('requirement-editor');
+        const addButton = document.getElementById('add-requirement');
+        const closeButton = modal.querySelector('.close-modal');
+        const saveButton = document.getElementById('save-requirement');
+        const cancelButton = document.getElementById('cancel-requirement');
+        const typeSelect = document.getElementById('requirement-type');
+
+        // Определяем тип редактора (требования или бонусы)
+        const isBonus = answer.includes('bonus');
+        this.isEditingBonus = isBonus;
+        const listType = isBonus ? 'bonuses' : 'requirements';
+        title.textContent = isBonus ? 'Редактор бонусов' : 'Редактор требований';
+
+        // Получаем список требований/бонусов
+        const items = this.jsonData.custom_events[this.currentEvent][listType + (answer.includes('-') ? answer.split('-')[0] : '')] || [];
+
+        // Обновляем список типов в зависимости от режима
+        typeSelect.innerHTML = '';
+        if (isBonus) {
+            // Для бонусов показываем только бонусы
+            const bonusOptions = [
+                { value: 'defense', label: 'Изменить защиту' },
+                { value: 'attack', label: 'Изменить атаку' },
+                { value: 'building_cost', label: 'Изменить стоимость строительства' },
+                { value: 'discontent', label: 'Изменить недовольство' },
+                { value: 'population_income', label: 'Изменить доход населения' },
+                { value: 'add_random_culture_population', label: 'Добавить население' },
+                { value: 'prestige', label: 'Изменить престиж' },
+                { value: 'science', label: 'Изменить науку' },
+                { value: 'money', label: 'Изменить деньги' },
+                { value: 'add_oil', label: 'Добавить нефть' },
+                { value: 'add_cruiser', label: 'Добавить крейсер' },
+                { value: 'add_battleship', label: 'Добавить линкор' },
+                { value: 'add_tank', label: 'Добавить танк' },
+                { value: 'add_shock_infantry', label: 'Добавить ударную пехоту' },
+                { value: 'add_infantry', label: 'Добавить пехоту' },
+                { value: 'army_losses', label: 'Потери армии' },
+                { value: 'relation_ideology_change', label: 'Изменить отношения с идеологией' },
+                { value: 'relation_change', label: 'Изменить отношения' },
+                { value: 'diplomacy_lift_sanctions', label: 'Снять санкции' },
+                { value: 'diplomacy_sanctions', label: 'Наложить санкции' },
+                { value: 'diplomacy_pact', label: 'Заключить пакт' },
+                { value: 'diplomacy_alliance', label: 'Заключить альянс' },
+                { value: 'diplomacy_peace', label: 'Заключить мир' },
+                { value: 'diplomacy_war', label: 'Объявить войну' },
+                { value: 'resurrect_country', label: 'Восстановить страну' },
+                { value: 'annex_country', label: 'Аннексировать страну' }
+            ];
+            typeSelect.innerHTML = bonusOptions.map(opt => 
+                `<option value="${opt.value}">${opt.label}</option>`
+            ).join('');
+        } else {
+            // Для требований показываем только требования
+            const requirementOptions = [
+                { value: 'year', label: 'Год' },
+                { value: 'month', label: 'Месяц' },
+                { value: 'turn', label: 'Ход' },
+                { value: 'land_id', label: 'ID страны' },
+                { value: 'land_name', label: 'Название страны' },
+                { value: 'near_water', label: 'Близость к воде' },
+                { value: 'has_pact', label: 'Имеет пакт' },
+                { value: 'has_sanctions', label: 'Имеет санкции' },
+                { value: 'has_war', label: 'В состоянии войны' },
+                { value: 'enemy_near_capital', label: 'Враг у столицы' },
+                { value: 'lost_capital', label: 'Потеряна столица' },
+                { value: 'is_defeated', label: 'Побеждена' },
+                { value: 'land_power', label: 'Сила страны' },
+                { value: 'independent_land', label: 'Независимая страна' },
+                { value: 'no_enemy', label: 'Нет врагов' },
+                { value: 'random_value', label: 'Случайное значение' },
+                { value: 'count_of_tasks', label: 'Количество заданий' },
+                { value: 'num_of_provinces', label: 'Количество провинций' },
+                { value: 'tax', label: 'Налог' },
+                { value: 'money', label: 'Деньги' },
+                { value: 'discontent', label: 'Недовольство' },
+                { value: 'building_exists', label: 'Есть здание' },
+                { value: 'political_institution', label: 'Политический институт' }
+            ];
+            typeSelect.innerHTML = requirementOptions.map(opt => 
+                `<option value="${opt.value}">${opt.label}</option>`
+            ).join('');
+        }
+
+        // Функция для обновления списка
+        const updateList = () => {
+            list.innerHTML = '';
+            items.forEach((item, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.type}</td>
+                    <td>${item.subtype || ''}</td>
+                    <td>${item.action || ''}</td>
+                    <td>${item.value}${item.duration ? ` (${item.duration} ходов)` : ''}</td>
+                    <td>
+                        <div class="requirement-actions">
+                            <button type="button" class="edit" data-index="${index}">✎</button>
+                            <button type="button" class="delete" data-index="${index}">×</button>
+                        </div>
+                    </td>
+                `;
+                list.appendChild(row);
+            });
+        };
+
+        // Функция для обновления доступных действий в зависимости от типа
+        const updateActions = () => {
+            const actionSelect = document.getElementById('requirement-action');
+            const selectedType = typeSelect.value;
+            const actions = [];
+
+            if (isBonus) {
+                // Для бонусов не используем действия
+                actionSelect.parentElement.style.display = 'none';
+            } else {
+                actionSelect.parentElement.style.display = 'block';
+                // Получаем доступные действия из temporarily.txt
+                if (['month', 'num_of_provinces', 'year', 'turn', 'random_value', 'count_of_tasks', 'tax', 'discontent', 'money', 'land_power'].includes(selectedType)) {
+                    actions.push('more', 'equal', 'less');
+                } else if (['near_water', 'has_pact', 'has_sanctions', 'has_war', 'independent_land', 'land_name', 'building_exists', 'land_id', 'political_institution', 'enemy_near_capital', 'is_defeated', 'lost_capital'].includes(selectedType)) {
+                    actions.push('equal', 'not_equal');
+                } else if (['no_enemy'].includes(selectedType)) {
+                    actions.push('equal');
+                }
+            }
+
+            actionSelect.innerHTML = actions.map(action => `
+                <option value="${action}">${
+                    action === 'more' ? 'Больше' :
+                    action === 'equal' ? 'Равно' :
+                    action === 'not_equal' ? 'Не равно' :
+                    action === 'less' ? 'Меньше' : action
+                }</option>
+            `).join('');
+        };
+
+        // Функция для обновления поля значения в зависимости от типа
+        const updateValueField = () => {
+            const valueContainer = document.getElementById('requirement-value-container');
+            const subtypeGroup = document.querySelector('[for="requirement-subtype"]').parentElement;
+            const selectedType = typeSelect.value;
+
+            // Очищаем контейнер
+            valueContainer.innerHTML = '';
+
+            if (isBonus) {
+                // Обработка бонусов на основе типа
+                if (['resurrect_country', 'annex_country'].includes(selectedType)) {
+                    // Для бонусов, где нужно выбрать страну
+                    const select = document.createElement('select');
+                    select.id = 'requirement-value';
+                    select.className = 'main-page-input';
+                    const countries = Object.entries(this.jsonData.lands || {}).map(([id, country]) => ({
+                        id,
+                        name: country.name
+                    }));
+                    select.innerHTML = countries.map(country => 
+                        `<option value="${country.id}">${country.name}</option>`
+                    ).join('');
+                    valueContainer.appendChild(select);
+                    subtypeGroup.style.display = 'none';
+                } else if (['diplomacy_lift_sanctions', 'diplomacy_sanctions', 'diplomacy_pact', 'diplomacy_alliance', 'diplomacy_peace', 'diplomacy_war'].includes(selectedType)) {
+                    // Для дипломатических действий со странами
+                    const select = document.createElement('select');
+                    select.id = 'requirement-value';
+                    select.className = 'main-page-input';
+                    const countries = Object.entries(this.jsonData.lands || {}).map(([id, country]) => ({
+                        id,
+                        name: country.name
+                    }));
+                    select.innerHTML = countries.map(country => 
+                        `<option value="${country.id}">${country.name}</option>`
+                    ).join('');
+                    valueContainer.appendChild(select);
+                    subtypeGroup.style.display = 'none';
+                } else if (['relation_ideology_change'].includes(selectedType)) {
+                    // Для изменения идеологии
+                    subtypeGroup.style.display = 'block';
+                    const subtypeInput = document.getElementById('requirement-subtype');
+                    // Создаем выпадающий список для идеологий
+                    const ideologySelect = document.createElement('select');
+                    ideologySelect.id = 'requirement-subtype';
+                    ideologySelect.className = 'main-page-input';
+                    const ideologies = [
+                        'democracy',
+                        'monarchy',
+                        'communism',
+                        'fascism',
+                        'theocracy',
+                        'paganism',
+                        'trade_republic'
+                    ];
+                    ideologySelect.innerHTML = ideologies.map(ideology => 
+                        `<option value="${ideology}">${ideology}</option>`
+                    ).join('');
+                    // Заменяем текстовое поле на выпадающий список
+                    subtypeInput.parentNode.replaceChild(ideologySelect, subtypeInput);
+
+                    const input = document.createElement('input');
+                    input.type = 'number';
+                    input.id = 'requirement-value';
+                    input.className = 'main-page-input';
+                    input.placeholder = 'Введите число';
+                    valueContainer.appendChild(input);
+                } else if (['relation_change'].includes(selectedType)) {
+                    // Для изменения отношений
+                    subtypeGroup.style.display = 'block';
+                    const subtypeInput = document.getElementById('requirement-subtype');
+                    // Создаем выпадающий список для стран
+                    const countrySelect = document.createElement('select');
+                    countrySelect.id = 'requirement-subtype';
+                    countrySelect.className = 'main-page-input';
+                    const countries = Object.entries(this.jsonData.lands || {}).map(([id, country]) => ({
+                        id,
+                        name: country.name
+                    }));
+                    countrySelect.innerHTML = countries.map(country => 
+                        `<option value="${country.id}">${country.name}</option>`
+                    ).join('');
+                    // Заменяем текстовое поле на выпадающий список
+                    subtypeInput.parentNode.replaceChild(countrySelect, subtypeInput);
+
+                    const input = document.createElement('input');
+                    input.type = 'number';
+                    input.id = 'requirement-value';
+                    input.className = 'main-page-input';
+                    input.placeholder = 'Введите процент';
+                    valueContainer.appendChild(input);
+                } else if (['defense', 'attack', 'population_income', 'building_cost'].includes(selectedType)) {
+                    // Для процентных значений
+                    subtypeGroup.style.display = 'none';
+                    const input = document.createElement('input');
+                    input.type = 'number';
+                    input.id = 'requirement-value';
+                    input.className = 'main-page-input';
+                    input.placeholder = 'Введите процент';
+                    valueContainer.appendChild(input);
+                } else if (['add_oil', 'add_cruiser', 'add_random_culture_population', 'add_shock_infantry', 'discontent', 'add_tank', 'army_losses', 'prestige', 'add_battleship', 'add_infantry', 'science', 'money'].includes(selectedType)) {
+                    // Для числовых значений
+                    subtypeGroup.style.display = 'none';
+                    const input = document.createElement('input');
+                    input.type = 'number';
+                    input.id = 'requirement-value';
+                    input.className = 'main-page-input';
+                    input.placeholder = 'Введите число';
+                    valueContainer.appendChild(input);
+                }
+            } else {
+                // Для требований оставляем существующую логику
+                if (['near_water', 'independent_land', 'no_enemy', 'enemy_near_capital', 'lost_capital'].includes(selectedType)) {
+                    valueContainer.innerHTML = `
+                        <select id="requirement-value" class="main-page-input">
+                            <option value="да">Да</option>
+                            <option value="нет">Нет</option>
+                        </select>
+                    `;
+                    subtypeGroup.style.display = 'none';
+                } else if (['political_institution'].includes(selectedType)) {
+                    // Для политических институтов
+                    const select = document.createElement('select');
+                    select.id = 'requirement-value';
+                    select.className = 'main-page-input';
+                    const institutions = [
+                        'democracy',
+                        'monarchy',
+                        'communism',
+                        'fascism',
+                        'theocracy',
+                        'paganism',
+                        'trade_republic'
+                    ];
+                    select.innerHTML = institutions.map(inst => 
+                        `<option value="${inst}">${inst}</option>`
+                    ).join('');
+                    valueContainer.appendChild(select);
+                    subtypeGroup.style.display = 'none'; // Скрываем поле subtype
+                } else if (['has_pact', 'has_sanctions', 'has_war', 'land_id', 'is_defeated'].includes(selectedType)) {
+                    const select = document.createElement('select');
+                    select.id = 'requirement-value';
+                    select.className = 'main-page-input';
+                    const countries = Object.entries(this.jsonData.lands || {}).map(([id, country]) => ({
+                        id,
+                        name: country.name
+                    }));
+                    select.innerHTML = countries.map(country => 
+                        `<option value="${country.id}">${country.name}</option>`
+                    ).join('');
+                    valueContainer.appendChild(select);
+                    subtypeGroup.style.display = 'none';
+                } else if (['land_name'].includes(selectedType)) {
+                    const select = document.createElement('select');
+                    select.id = 'requirement-value';
+                    select.className = 'main-page-input';
+                    const countries = Object.entries(this.jsonData.lands || {}).map(([id, country]) => ({
+                        id,
+                        name: country.name
+                    }));
+                    select.innerHTML = countries.map(country => 
+                        `<option value="${country.name}">${country.name}</option>`
+                    ).join('');
+                    valueContainer.appendChild(select);
+                    subtypeGroup.style.display = 'none';
+                } else {
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.id = 'requirement-value';
+                    input.className = 'main-page-input';
+                    input.placeholder = 
+                        ['month', 'num_of_provinces', 'year', 'turn', 'random_value', 'count_of_tasks', 'tax', 'discontent', 'money', 'land_power'].includes(selectedType) ? 'Введите число' :
+                        ['building_exists'].includes(selectedType) ? 'Введите название здания' :
+                        ['political_institution'].includes(selectedType) ? 'Введите название института' : 'Введите значение';
+                    valueContainer.appendChild(input);
+                    subtypeGroup.style.display = selectedType === 'building_exists' || selectedType === 'political_institution' ? 'block' : 'none';
+                }
+            }
+        };
+
+        // Обработчики событий
+        typeSelect.addEventListener('change', () => {
+            updateActions();
+            updateValueField();
+        });
+
+        addButton.onclick = () => {
+            editor.style.display = 'block';
+            document.getElementById('requirement-type').value = '';
+            document.getElementById('requirement-action').value = '';
+            document.getElementById('requirement-subtype').value = '';
+            updateActions();
+            updateValueField();
+        };
+
+        list.onclick = (e) => {
+            const button = e.target.closest('button');
+            if (!button) return;
+
+            const index = parseInt(button.dataset.index);
+            if (button.classList.contains('edit')) {
+                const item = items[index];
+                editor.style.display = 'block';
+                document.getElementById('requirement-type').value = item.type;
+                document.getElementById('requirement-action').value = item.action || '';
+                document.getElementById('requirement-subtype').value = item.subtype || '';
+                updateActions();
+                updateValueField();
+                // Устанавливаем значение после создания поля
+                const valueElement = document.getElementById('requirement-value');
+                if (valueElement) {
+                    valueElement.value = item.value;
+                }
+                editor.dataset.editIndex = index;
+            } else if (button.classList.contains('delete')) {
+                items.splice(index, 1);
+                updateList();
+                this.saveChanges();
+            }
+        };
+
+        saveButton.onclick = () => {
+            const type = document.getElementById('requirement-type').value;
+            const action = isBonus ? '' : document.getElementById('requirement-action').value;
+            const subtype = document.getElementById('requirement-subtype').value;
+            const value = document.getElementById('requirement-value').value;
+
+            const item = {
+                type,
+                action: isBonus ? undefined : action,
+                subtype: subtype || undefined,
+                value
+            };
+
+            if (isBonus) {
+                item.duration = 3; // Заглушка для бонусов
+            }
+
+            const editIndex = editor.dataset.editIndex;
+            if (editIndex !== undefined) {
+                items[editIndex] = item;
+                delete editor.dataset.editIndex;
+            } else {
+                items.push(item);
+            }
+
+            editor.style.display = 'none';
+            updateList();
+            this.saveChanges();
+        };
+
+        cancelButton.onclick = () => {
+            editor.style.display = 'none';
+            delete editor.dataset.editIndex;
+        };
+
+        closeButton.onclick = () => {
+            modal.classList.remove('active');
+        };
+
+        // Инициализация
+        updateList();
+        updateActions();
+        updateValueField();
+        editor.style.display = 'none';
+        modal.classList.add('active');
     }
 
     loadAvailableImages() {

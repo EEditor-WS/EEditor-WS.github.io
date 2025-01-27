@@ -210,7 +210,7 @@
 .form-actions {
     position: sticky;
     bottom: 0;
-    background: #1a1a1a;
+    background: #242424;
     padding: 15px;
     margin-top: 0;
     border-top: 1px solid #333;
@@ -390,4 +390,138 @@
     border: 1px solid #404040;
     border-radius: 4px;
     padding: 2px;
+}
+
+/* Стили для редактора требований и бонусов */
+.requirements-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.requirements-table th,
+.requirements-table td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+}
+
+.requirements-table th {
+    background-color: #2a2a2a;
+    font-weight: 500;
+    color: #e0e0e0;
+}
+
+.requirements-table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.requirements-table tbody tr:hover {
+    background-color: #2a2a2a;
+}
+
+.requirements-table .action-button {
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+.requirement-editor {
+    background-color: #2a2a2a;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.requirement-editor .form-group {
+    margin-bottom: 15px;
+}
+
+.requirement-editor label {
+    display: block;
+    margin-bottom: 5px;
+    color: #e0e0e0;
+}
+
+.requirement-editor select,
+.requirement-editor input {
+    width: 100%;
+    padding: 8px 12px;
+    background-color: #242424;
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: #e0e0e0;
+}
+
+.requirement-editor select:focus,
+.requirement-editor input:focus {
+    outline: none;
+    border-color: #3a80d2;
+}
+
+.requirement-editor .form-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+#add-requirement {
+    margin-top: 20px;
+}
+
+.requirements-list {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.requirements-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.requirements-list::-webkit-scrollbar-track {
+    background: #242424;
+}
+
+.requirements-list::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+.requirements-list::-webkit-scrollbar-thumb:hover {
+    background: #404040;
+}
+
+.requirement-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.requirement-actions button {
+    padding: 4px 8px;
+    background: none;
+    border: none;
+    color: #e0e0e0;
+    cursor: pointer;
+    font-size: 16px;
+    transition: color 0.2s;
+}
+
+.requirement-actions button:hover {
+    color: #3a80d2;
+}
+
+.requirement-actions button.delete:hover {
+    color: #e74c3c;
+}
+
+#requirements-editor-modal .modal-content {
+    max-width: 800px;
+    width: 90%;
+}
+
+#requirements-editor-modal .modal-body {
+    padding: 20px;
+    max-height: 80vh;
+    overflow-y: auto;
 }

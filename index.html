@@ -444,8 +444,7 @@
                         </div>
 
                         <div class="requirements-buttons">
-                            <button type="button" class="requirements-button" data-answer="main-req">Общие требования</button>
-                            <button type="button" class="requirements-button" data-answer="main-bonus">Общие бонусы</button>
+                            <button type="button" class="requirements-button" data-answer="mainreq">Общие требования</button>
                         </div>
                     </div>
 
@@ -543,6 +542,62 @@
                 </div>
                 <div class="modal-footer">
                     <button id="add-selected-country" class="action-button">Добавить</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно для редактора требований и бонусов -->
+        <div id="requirements-editor-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="requirements-editor-title">Редактор требований</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div id="requirements-list" class="requirements-list">
+                        <table class="requirements-table">
+                            <thead>
+                                <tr>
+                                    <th>Тип</th>
+                                    <th>Подтип</th>
+                                    <th>Действие</th>
+                                    <th>Значение</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="requirements-items">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="requirement-editor" class="requirement-editor" style="display: none;">
+                        <div class="form-group">
+                            <label for="requirement-type">Тип:</label>
+                            <select id="requirement-type" class="main-page-input">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="requirement-action">Действие:</label>
+                            <select id="requirement-action" class="main-page-input">
+                                <option value="more">Больше</option>
+                                <option value="equal">Равно</option>
+                                <option value="not_equal">Не равно</option>
+                                <option value="less">Меньше</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="requirement-subtype">Подтип:</label>
+                            <input type="text" id="requirement-subtype" class="main-page-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="requirement-value">Значение:</label>
+                            <div id="requirement-value-container"></div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" id="save-requirement" class="action-button">Сохранить</button>
+                            <button type="button" id="cancel-requirement" class="action-button">Отмена</button>
+                        </div>
+                    </div>
+                    <button type="button" id="add-requirement" class="action-button">Добавить</button>
                 </div>
             </div>
         </div>
