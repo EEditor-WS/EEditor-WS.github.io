@@ -168,7 +168,24 @@ class CountryManager {
         // Обработчики действий со страной
         document.getElementById('copy-country')?.addEventListener('click', () => this.copyCurrentCountry());
         document.getElementById('delete-country')?.addEventListener('click', () => this.deleteCurrentCountry());
-        document.getElementById('country-reforms')?.addEventListener('click', () => this.openReforms());
+        document.getElementById('country-reforms')?.addEventListener('click', () => {
+            console.log('Нажата кнопка реформ');
+            console.log('Текущая страна:', this.currentCountry);
+            console.log('Менеджер реформ:', window.reformManager);
+            
+            if (!this.currentCountry) {
+                console.error('Не выбрана страна');
+                return;
+            }
+            
+            if (!window.reformManager) {
+                console.error('Менеджер реформ не инициализирован');
+                return;
+            }
+
+                window.reformManager.jsonData = this.jsonData;
+                window.reformManager.openReforms(this.currentCountry);
+        });
 
         // Обработчики формы редактирования
         const form = document.getElementById('country-form');

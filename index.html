@@ -9,10 +9,12 @@
         <script src="script.js"></script>
         <script src="js/countries.js"></script>
         <script src="js/events.js"></script>
+        <script src="js/reforms.js"></script>
         <script src="js/upload.js"></script>
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/countries.css">
         <link rel="stylesheet" href="css/events.css">
+        <link rel="stylesheet" href="css/reforms.css">
     </head>
     <body>
         <nav class="nav-header">
@@ -599,6 +601,83 @@
                     </div>
                     <button type="button" id="add-requirement" class="action-button">Добавить</button>
                 </div>
+            </div>
+        </div>
+
+        <div id="reforms" class="page preforms">
+            <div class="reforms-container">
+                <div class="reforms-header">
+                    <h2>Реформы <span id="reforms-country-name"></span></h2>
+                    <div class="reforms-actions">
+                        <button id="add-reform" class="action-button">Добавить реформу</button>
+                        <button id="paste-reform" class="action-button">Вставить</button>
+                    </div>
+                </div>
+                <table class="reforms-table">
+                    <thead>
+                        <tr>
+                            <th>Цвет</th>
+                            <th>Название</th>
+                            <th>Требуемая идеология</th>
+                            <th>Количество провинций</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reforms-list">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="reform-edit" class="page">
+            <div class="reform-edit-container">
+                <div class="reform-header">
+                    <div class="reform-title">
+                        <button id="back-to-reforms" class="action-button back">Назад</button>
+                        <h2>Редактирование реформы</h2>
+                    </div>
+                    <div class="reform-actions">
+                        <button id="copy-reform" class="action-button">Копировать</button>
+                        <button id="copy-reform-buffer" class="action-button">Копировать в буфер</button>
+                        <button id="load-reform-sync" class="action-button">Загрузить для синхронизации</button>
+                        <button id="delete-reform" class="action-button delete">Удалить</button>
+                    </div>
+                </div>
+                <form id="reform-form">
+                    <div class="form-group">
+                        <label for="reform-name">Название</label>
+                        <input type="text" id="reform-name" class="main-page-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Цвет</label>
+                        <div class="color-inputs">
+                            <div class="color-input">
+                                <label for="reform-color-r">R</label>
+                                <input type="number" id="reform-color-r" class="main-page-input" min="0" max="255" required>
+                            </div>
+                            <div class="color-input">
+                                <label for="reform-color-g">G</label>
+                                <input type="number" id="reform-color-g" class="main-page-input" min="0" max="255" required>
+                            </div>
+                            <div class="color-input">
+                                <label for="reform-color-b">B</label>
+                                <input type="number" id="reform-color-b" class="main-page-input" min="0" max="255" required>
+                            </div>
+                            <div id="reform-color-preview" class="color-preview"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="reform-ideology">Требуемая идеология</label>
+                        <select id="reform-ideology" class="main-page-input" required>
+                            <option value="democracy">Демократия</option>
+                            <option value="monarchy">Монархия</option>
+                            <option value="communism">Коммунизм</option>
+                            <option value="fascism">Фашизм</option>
+                            <option value="theocracy">Теократия</option>
+                            <option value="paganism">Язычество</option>
+                            <option value="trade_republic">Торговая республика</option>
+                        </select>
+                    </div>
+                </form>
             </div>
         </div>
     </body>
