@@ -1742,18 +1742,19 @@
             "political": ""
         },
         "undeveloped_land": {
-            "guaranteed": [],
-            "guaranteed_by": [],
-            "pacts": [],
-            "sanctions": [],
+            "guaranteed": {},
+            "guaranteed_by": {},
+            "pacts": {},
+            "sanctions": {},
             "color": [
                 96,
                 96,
-                96
+                96,
+                255
             ],
             "name": "undeveloped_land",
-            "vassals": [],
-            "allies": [],
+            "vassals": {},
+            "allies": {},
             "capital_name": "",
             "defeated": false,
             "enemies": {
@@ -1761,16 +1762,18 @@
                     "turn": 0
                 },
                 "civilization_15": {
-                    "initiator": true,
-                    "turn": 0
+                    "turn": 0,
+                    "initiator": true
                 }
-            }
+            },
+            "capital": 0,
+            "political": ""
         },
         "civilization_17": {
-            "guaranteed": [],
-            "guaranteed_by": [],
-            "pacts": [],
-            "sanctions": [],
+            "guaranteed": {},
+            "guaranteed_by": {},
+            "pacts": {},
+            "sanctions": {},
             "color": [
                 52.785,
                 100.215,
@@ -1857,11 +1860,11 @@
                     }
                 }
             ],
-            "vassals": [],
-            "allies": [],
+            "vassals": {},
+            "allies": {},
             "capital_name": "Stockholm",
             "defeated": false,
-            "enemies": []
+            "enemies": {}
         }
     },
     "player_land": "civilization_9",

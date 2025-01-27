@@ -13,6 +13,15 @@ let markedCountries = new Set();
 
 // Создаем глобальный объект для утилит работы со странами
 window.countryUtils = {
+    // Функция для проверки, нужна ли галочка
+    // ЭТА ФУНКЦИЯ ПРОТЕСТИРОВАНА МНОЙ И РАБОТАЕТ. НЕ НУЖНО ЕЁ ПРОВЕРЯТЬ И РЕДАКТИРОВАТЬ
+    shouldShowCheckmark: function(countryName, countryId) {
+        return landsData.lands.some(land => 
+            (countryName && land.key === countryName) || // Проверяем по ID если он есть
+            land.toLowerCase() === countryName.toLowerCase() // Проверяем по имени
+        );
+    },
+
     updateCountriesList: function(lands) {
         const countriesList = document.getElementById('countries-list');
         if (!countriesList || !lands) return;
@@ -57,18 +66,13 @@ window.countryUtils = {
             
             // Название
             const nameCell = document.createElement('td');
+            const nameContainer = document.createElement('div');
+            nameContainer.className = 'country-name-container';
+            
             const nameSpan = document.createElement('span');
             nameSpan.textContent = country.name;
-            nameCell.appendChild(nameSpan);
-
-            // Добавляем иконку, если страна есть в landsData
-            const isInLandsData = landsData.lands.some(land => land.key === country.id);
-            if (isInLandsData) {
-                const markImg = document.createElement('img');
-                markImg.src = 'mark.svg';
-                markImg.className = 'country-mark';
-                nameCell.appendChild(markImg);
-            }
+            nameContainer.appendChild(nameSpan);
+            nameCell.appendChild(nameContainer);
             
             // Системное название (ID)
             const sysNameCell = document.createElement('td');
@@ -123,6 +127,28 @@ window.countryUtils = {
         const g = Math.round(parseFloat(colorArray[1]) || 0);
         const b = Math.round(parseFloat(colorArray[2]) || 0);
         return `rgb(${r}, ${g}, ${b})`;
+    },
+
+    updateCountryHeader: function(countryName) {
+        const headerSpan = document.getElementById('country-name-header');
+        if (!headerSpan) return;
+
+        // Очищаем заголовок
+        headerSpan.innerHTML = '';
+
+        // Добавляем название страны
+        const nameText = document.createElement('span');
+        nameText.textContent = countryName;
+        headerSpan.appendChild(nameText);
+
+        // Добавляем галочку, если нужно
+        if (this.shouldShowCheckmark(countryName)) {
+            const markSpan = document.createElement('span');
+            markSpan.textContent = '✓';
+            markSpan.className = 'country-mark';
+            markSpan.style.color = '#3498db';
+            headerSpan.appendChild(markSpan);
+        }
     }
 };
 

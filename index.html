@@ -323,7 +323,13 @@
         </div>
         <div id="event-edit" class="page pevent-edit">
             <div class="event-edit">
-            <h2 id="event-name-header">Редактирование события</h2>
+                <div class="country-header">
+                    <h2><span id="event-name-header">Редактирование события</span></h2>
+                    <div class="country-actions">
+                        <button class="event-action-button copy" onclick="window.eventManager.copyCurrentEvent()">Копировать</button>
+                        <button class="event-action-button delete" onclick="window.eventManager.deleteCurrentEvent()">Удалить</button>
+                    </div>
+                </div>
             <form id="event-form" class="event-form">
                 <div class="event-form-container">
                     <div class="event-main-settings">
@@ -389,7 +395,10 @@
                             <textarea id="event-description" name="event-description" class="event-main-textarea main-page-textarea"></textarea>
                         </div>
 
-                        <button type="button" class="requirements-button" data-answer="main">Общие требования</button>
+                        <div class="requirements-buttons">
+                            <button type="button" class="requirements-button" data-answer="main-req">Общие требования</button>
+                            <button type="button" class="requirements-button" data-answer="main-bonus">Общие бонусы</button>
+                        </div>
                     </div>
 
                     <div class="event-answers">
@@ -410,7 +419,10 @@
                                     <option value="true">Да</option>
                                 </select>
                             </div>
-                            <button type="button" class="requirements-button" data-answer="1">Требования и бонусы</button>
+                            <div class="requirements-buttons">
+                                <button type="button" class="requirements-button" data-answer="1-req">Требования</button>
+                                <button type="button" class="requirements-button" data-answer="1-bonus">Бонусы</button>
+                            </div>
                         </div>
 
                         <div class="answer-block">
@@ -430,7 +442,10 @@
                                 <label for="event-description2">Описание результата:</label>
                                 <textarea id="event-description2" name="event-description2" rows="3" class="event-answers-item main-page-textarea"></textarea>
                             </div>
-                            <button type="button" class="requirements-button" data-answer="2">Требования и бонусы</button>
+                            <div class="requirements-buttons">
+                                <button type="button" class="requirements-button" data-answer="2-req">Требования</button>
+                                <button type="button" class="requirements-button" data-answer="2-bonus">Бонусы</button>
+                            </div>
                         </div>
 
                         <div class="answer-block">
@@ -450,7 +465,10 @@
                                 <label for="event-description3">Описание результата:</label>
                                 <textarea id="event-description3" name="event-description3" rows="3" class="event-answers-item main-page-textarea"></textarea>
                             </div>
-                            <button type="button" class="requirements-button" data-answer="3">Требования и бонусы</button>
+                            <div class="requirements-buttons">
+                                <button type="button" class="requirements-button" data-answer="3-req">Требования</button>
+                                <button type="button" class="requirements-button" data-answer="3-bonus">Бонусы</button>
+                            </div>
                         </div>
                     </div>
                 </div>

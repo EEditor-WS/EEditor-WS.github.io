@@ -30,7 +30,8 @@ class EventManager {
             const initialData = JSON.parse(this.previewContent.value);
             this.setJsonData(initialData);
         } catch (error) {
-            console.error('Не удалось загрузить начальные данные:', error);
+            console.warn('Не удалось загрузить начальные данные:', error);
+            console.warn("Если эта ошибка появилась до загрузки файла, то это нормально, просто нет данных для отображения");
         }
         
         // Подписываемся на изменения в preview-content
@@ -209,11 +210,11 @@ class EventManager {
             this.jsonData.custom_events = {};
         }
 
-        const id = this.generateUniqueId();
+        const newId = this.generateUniqueId();
         const newEvent = {
-            id: id,
+            id: newId,
             group_name: 'Новая группа',
-            unique_event_name: `new_event_${id.toLowerCase()}`,
+            unique_event_name: `new_event_${newId.toLowerCase()}`,
             title: 'Новое событие',
             description: 'Описание события',
             image: 'diplomacy',
@@ -240,22 +241,31 @@ class EventManager {
         };
 
         this.pushToUndoStack();
-        this.jsonData.custom_events[id] = newEvent;
+        this.jsonData.custom_events[newId] = newEvent;
         this.updateJsonInPreview();
         this.updateEventsList();
-        this.openEvent(id);
+        this.openEvent(newId);
     }
 
     generateUniqueId() {
-        if (!this.jsonData?.custom_events) {
+        if (!this.jsonData || !this.jsonData.custom_events) {
             return 'E1';
         }
-        const existingIds = Object.keys(this.jsonData.custom_events);
-        let n = 1;
-        while (existingIds.includes(`E${n}`)) {
-            n++;
+
+        // Получаем все существующие ID
+        const existingIds = Object.keys(this.jsonData.custom_events)
+            .filter(id => id.startsWith('E'))
+            .map(id => parseInt(id.substring(1)))
+            .filter(num => !isNaN(num));
+
+        // Если нет существующих ID, возвращаем E1
+        if (existingIds.length === 0) {
+            return 'E1';
         }
-        return `E${n}`;
+
+        // Находим максимальный номер и увеличиваем его на 1
+        const maxId = Math.max(...existingIds);
+        return `E${maxId + 1}`;
     }
 
     copyCurrentEvent() {
@@ -265,12 +275,18 @@ class EventManager {
         const currentEvent = this.jsonData.custom_events[this.currentEvent];
         
         this.pushToUndoStack();
-        this.jsonData.custom_events[newId] = JSON.parse(JSON.stringify(currentEvent));
-        this.jsonData.custom_events[newId].title += ' (копия)';
         
-        this.updateJsonInPreview();
+        // Создаем глубокую копию события
+        this.jsonData.custom_events[newId] = JSON.parse(JSON.stringify(currentEvent));
+        
+        // Обновляем id и заголовок копии
+        this.jsonData.custom_events[newId].id = newId;
+        this.jsonData.custom_events[newId].title += ' (копия)';
+        this.jsonData.custom_events[newId].unique_event_name = `${currentEvent.unique_event_name}_copy`;
+        
         this.updateEventsList();
         this.openEvent(newId);
+        this.saveChanges();
     }
 
     deleteCurrentEvent() {

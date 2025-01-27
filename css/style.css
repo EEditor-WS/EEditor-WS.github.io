@@ -247,16 +247,14 @@ body {
 }
 
 .preview-content {
-    flex: 1;
     margin: 0;
     overflow: auto;
     width: 100%;
     min-height: 200px;
-    max-height: 500px;
     padding: 15px;
     background-color: #2a2a2a;
     color: #e0e0e0;
-    border: 1px solid #404040;
+    border: 1px solid #1f1f1f;
     border-radius: 5px;
     font-family: 'Consolas', 'Monaco', monospace;
     font-size: 14px;
@@ -265,6 +263,11 @@ body {
     outline: none;
     white-space: pre;
     tab-size: 4;
+    box-sizing: border-box;
+}
+
+.preview-content:focus {
+    border-color: #3a80d2;
 }
 
 .preview-footer {
@@ -301,7 +304,6 @@ body {
 }
 
 .main-preview .preview-content {
-    flex-grow: 1;
     height: 0;
     overflow-y: auto;
 }
@@ -428,11 +430,27 @@ body {
     background-color: #2a2a2a;
 }
 
+.country-name-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+/* Оставляем .country-mark только для заголовка при редактировании */
 .country-mark {
-    width: 16px;
-    height: 16px;
-    vertical-align: middle;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 16px;
+    color: #3498db;
     margin-left: 8px;
+}
+
+/* Запасной вариант, если изображение не загрузится */
+.country-mark:not([src]) {
+    color: #3498db;
+    font-weight: bold;
+    text-align: center;
+    line-height: 16px;
 }
 
 .array-list {
@@ -950,7 +968,7 @@ body {
 .form-group textarea {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #404040;
     border-radius: 4px;
     font-size: 14px;
 }
@@ -1081,4 +1099,9 @@ body {
 .form-group textarea:focus {
     outline: none;
     border-color: #4a90e2;
+}
+
+.with-checkmark {
+    color: #3498db;
+    font-weight: 500;
 }

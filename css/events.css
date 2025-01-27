@@ -91,14 +91,48 @@
 
 .event-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.event-header h2 {
+    margin: 0;
+    flex: 1;
 }
 
 .event-actions {
     display: flex;
     gap: 10px;
+}
+
+.event-action-button {
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid #1f1f1f;
+}
+
+.event-action-button.copy {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+}
+
+.event-action-button.copy:hover {
+    background-color: #333;
+    border-color: #3a80d2;
+}
+
+.event-action-button.delete {
+    background-color: #e74c3c;
+    color: white;
+    border-color: #c0392b;
+}
+
+.event-action-button.delete:hover {
+    background-color: #c0392b;
 }
 
 .event-form-container {
@@ -222,22 +256,16 @@
     box-sizing: border-box;
 }
 
-.preview-content {
+.pevents .preview-content,
+.pevent-edit .preview-content {
     flex: 0 0 calc(70% - 15px);
     background: #242424;
-    padding: 20px;
-    border-radius: 8px;
-    border: 1px solid #1f1f1f;
-    box-sizing: border-box;
 }
 
-.file-info {
+.pevents .file-info,
+.pevent-edit .file-info {
     flex: 0 0 calc(30% - 15px);
     background: #242424;
-    padding: 20px;
-    border-radius: 8px;
-    border: 1px solid #1f1f1f;
-    box-sizing: border-box;
 }
 
 .event-main-input {
@@ -305,5 +333,29 @@
 
 .main-page-textarea:focus {
     outline: none;
+    border-color: #3a80d2;
+}
+
+.requirements-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.requirements-buttons .requirements-button {
+    flex: 1;
+    padding: 8px 12px;
+    background-color: #2a2a2a;
+    border: 1px solid #1f1f1f;
+    border-radius: 4px;
+    color: #e0e0e0;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.requirements-buttons .requirements-button:hover {
+    background-color: #333;
     border-color: #3a80d2;
 }

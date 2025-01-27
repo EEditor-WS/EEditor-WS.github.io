@@ -306,29 +306,14 @@ class CountryManager {
     }
 
     openCountry(countryId) {
-        if (!this.jsonData?.lands[countryId]) return;
+        if (!this.jsonData?.lands?.[countryId]) return;
 
         this.currentCountry = countryId;
         const country = this.jsonData.lands[countryId];
 
-        // Заполняем основные поля
-        const nameHeader = document.getElementById('country-name-header');
-        if (nameHeader) {
-            nameHeader.innerHTML = ''; // Очищаем содержимое
-            
-            // Добавляем название
-            const nameSpan = document.createElement('span');
-            nameSpan.textContent = country.name;
-            nameHeader.appendChild(nameSpan);
-
-            // Проверяем, нужна ли галочка
-            const isInLandsData = landsData.lands.some(land => land.key === countryId);
-            if (isInLandsData) {
-                const markImg = document.createElement('img');
-                markImg.src = 'mark.svg';
-                markImg.className = 'country-mark';
-                nameHeader.appendChild(markImg);
-            }
+        // Обновляем заголовок с галочкой
+        if (window.countryUtils && typeof window.countryUtils.updateCountryHeader === 'function') {
+            window.countryUtils.updateCountryHeader(country.name);
         }
 
         this.setFormValues({
