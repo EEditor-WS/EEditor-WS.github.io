@@ -14,6 +14,8 @@
         <link rel="icon" type="image/x-icon" href="favicon.ico">
         <script src="lands_data.js"></script>
         <script src="script.js"></script>
+        <script src="js/language.js"></script>
+        <script src="js/translator.js"></script>
         <script src="js/countries.js"></script>
         <script src="js/events.js"></script>
         <script src="js/reforms.js"></script>
@@ -33,7 +35,7 @@
             </script>
         <!-- End Google tag (gtag.js) -->
     </head>
-    <body>
+    <body class="dark dark-theme">
         <!-- Google Tag Manager (noscript) -->
             <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7C5DLXM"
             height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -220,20 +222,20 @@
         <div id="countries" class="page pcountries">
             <div class="countries-container">
                 <div class="header">
-                    <h2>Страны</h2>
+                    <h2 data-translate="countries">Страны</h2>
                     <div class="header-actions">
-                        <button id="remove-invalid-owners" class="action-button">Удалить пустых владельцев</button>
-                        <button id="add-country" class="action-button">Добавить страну</button>
+                        <button id="remove-invalid-owners" class="action-button" data-translate="remove_invalid_owners">Удалить пустых владельцев</button>
+                        <button id="add-country" class="action-button" data-translate="add_country">Добавить страну</button>
                     </div>
                 </div>
                 <table class="countries-table">
                     <thead>
                         <tr>
-                            <th>Цвет</th>
-                            <th>Название</th>
-                            <th>Системное название</th>
-                            <th>Количество провинций</th>
-                            <th>Столица</th>
+                            <th data-translate="color">Цвет</th>
+                            <th data-translate="name">Название</th>
+                            <th data-translate="system_name">Системное название</th>
+                            <th data-translate="provinces_count">Количество провинций</th>
+                            <th data-translate="capital">Столица</th>
                         </tr>
                     </thead>
                     <tbody id="countries-list">
@@ -244,80 +246,86 @@
         <div id="country-edit" class="page pcountry-edit">
             <div class="country-edit-container">
                 <div class="country-header">
-                    <h2> <span id="country-name-header"></span></h2>
+                    <h2><span id="country-name-header"></span></h2>
                     <div class="country-actions">
-                        <button id="country-reforms" class="action-button reforms">Реформы</button>
-                        <button id="copy-country" class="action-button">Копировать</button>
-                        <button id="delete-country" class="action-button delete">Удалить</button>
+                        <button id="country-reforms" class="action-button reforms" data-translate="reforms">Реформы</button>
+                        <button id="copy-country" class="action-button" data-translate="copy">Копировать</button>
+                        <button id="delete-country" class="action-button delete" data-translate="delete">Удалить</button>
                     </div>
                 </div>
                 <form id="country-form" class="country-form">
                     <div class="form-group">
-                        <label for="country-name">Название</label>
+                        <label for="country-name" data-translate="name">Название</label>
                         <input type="text" id="country-name" name="name" class="main-page-input">
                     </div>
                     <div class="form-group">
-                        <label for="country-color">Цвет</label>
+                        <label for="country-color" data-translate="color">Цвет</label>
                         <div class="color-inputs">
-                            <input type="number" id="country-color-r" name="color_r" min="0" max="255" step="0.001" class="color-input main-page-input">
-                            <input type="number" id="country-color-g" name="color_g" min="0" max="255" step="0.001" class="color-input main-page-input">
-                            <input type="number" id="country-color-b" name="color_b" min="0" max="255" step="0.001" class="color-input main-page-input">
+                            <input type="number" id="country-color-r" name="color_r" min="0" max="255" step="0.001" class="color-input main-page-input" data-translate="color_r" title="R">
+                            <input type="number" id="country-color-g" name="color_g" min="0" max="255" step="0.001" class="color-input main-page-input" data-translate="color_g" title="G">
+                            <input type="number" id="country-color-b" name="color_b" min="0" max="255" step="0.001" class="color-input main-page-input" data-translate="color_b" title="B">
                             <div class="color-preview" id="country-color-preview"></div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="country-capital">Название столицы</label>
+                        <label for="country-capital" data-translate="capital_name">Название столицы</label>
                         <input type="text" id="country-capital" name="capital_name" class="main-page-input">
                     </div>
                     <div class="form-group">
-                        <label for="country-capital-id">ID столицы</label>
+                        <label for="country-capital-id" data-translate="capital_id">ID столицы</label>
                         <input type="number" id="country-capital-id" name="capital" class="main-page-input" min="0">
                     </div>
                     <div class="form-group">
-                        <label for="country-defeated">Побеждена</label>
+                        <label for="country-defeated" data-translate="defeated">Побеждена</label>
                         <select id="country-defeated" name="defeated" class="main-page-input">
-                            <option value="false">Нет</option>
-                            <option value="true">Да</option>
+                            <option value="false" data-translate="no">Нет</option>
+                            <option value="true" data-translate="yes">Да</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="country-political">Политический строй</label>
-                        <input type="text" id="country-political" name="political" class="main-page-input">
+                        <label for="country-political" data-translate="political_system">Политический строй</label>
+                        <select id="country-political" name="political" class="main-page-input">
+                            <option value="Democracy" data-translate="democracy">Демократия</option>
+                            <option value="Monarchy" data-translate="monarchy">Монархия</option>
+                            <option value="Communism" data-translate="communism">Коммунизм</option>
+                            <option value="Fascism" data-translate="fascism">Фашизм</option>
+                            <option value="Anarchy" data-translate="anarchy">Анархия</option>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label>Союзники</label>
+                        <label data-translate="allies">Союзники</label>
                         <div class="array-list" id="country-allies" class="main-page-input"></div>
-                        <button type="button" class="add-country-button main-page-input" data-target="allies">Добавить страну</button>
+                        <button type="button" class="add-country-button main-page-input" data-target="allies" data-translate="add_country">Добавить страну</button>
                     </div>
                     <div class="form-group">
-                        <label>Враги</label>
+                        <label data-translate="enemies">Враги</label>
                         <div class="array-list" id="country-enemies" class="main-page-input"></div>
-                        <button type="button" class="add-country-button main-page-input" data-target="enemies">Добавить страну</button>
+                        <button type="button" class="add-country-button main-page-input" data-target="enemies" data-translate="add_country">Добавить страну</button>
                     </div>
                     <div class="form-group">
-                        <label>Гарантии независимости</label>
+                        <label data-translate="independence_guarantees">Гарантии независимости</label>
                         <div class="array-list" id="country-guaranteed" class="main-page-input"></div>
-                        <button type="button" class="add-country-button main-page-input" data-target="guaranteed">Добавить страну</button>
+                        <button type="button" class="add-country-button main-page-input" data-target="guaranteed" data-translate="add_country">Добавить страну</button>
                     </div>
                     <div class="form-group">
-                        <label>Гарантии от</label>
+                        <label data-translate="guaranteed_by">Гарантии от</label>
                         <div class="array-list" id="country-guaranteed-by" class="main-page-input"></div>
-                        <button type="button" class="add-country-button main-page-input" data-target="guaranteed-by">Добавить страну</button>
+                        <button type="button" class="add-country-button main-page-input" data-target="guaranteed-by" data-translate="add_country">Добавить страну</button>
                     </div>
                     <div class="form-group">
-                        <label>Пакты</label>
+                        <label data-translate="pacts">Пакты</label>
                         <div class="array-list" id="country-pacts" class="main-page-input"></div>
-                        <button type="button" class="add-country-button main-page-input" data-target="pacts">Добавить страну</button>
+                        <button type="button" class="add-country-button main-page-input" data-target="pacts" data-translate="add_country">Добавить страну</button>
                     </div>
                     <div class="form-group">
-                        <label>Санкции</label>
+                        <label data-translate="sanctions">Санкции</label>
                         <div class="array-list" id="country-sanctions" class="main-page-input"></div>
-                        <button type="button" class="add-country-button main-page-input" data-target="sanctions">Добавить страну</button>
+                        <button type="button" class="add-country-button main-page-input" data-target="sanctions" data-translate="add_country">Добавить страну</button>
                     </div>
                     <div class="form-group">
-                        <label>Вассалы</label>
+                        <label data-translate="vassals">Вассалы</label>
                         <div class="array-list" id="country-vassals" class="main-page-input"></div>
-                        <button type="button" class="add-country-button main-page-input" data-target="vassals">Добавить страну</button>
+                        <button type="button" class="add-country-button main-page-input" data-target="vassals" data-translate="add_country">Добавить страну</button>
                     </div>
                 </form>
             </div>
@@ -349,8 +357,8 @@
                 <div class="country-header">
                     <h2><span id="event-name-header">Редактирование события</span></h2>
                     <div class="country-actions">
-                        <button class="event-action-button copy" onclick="window.eventManager.copyCurrentEvent()">Копировать</button>
-                        <button class="event-action-button delete" onclick="window.eventManager.deleteCurrentEvent()">Удалить</button>
+                        <button class="event-action-button copy" onclick="window.eventManager.copyCurrentEvent()" data-translate="copy">Копировать</button>
+                        <button class="event-action-button delete" onclick="window.eventManager.deleteCurrentEvent()" data-translate="delete">Удалить</button>
                     </div>
                 </div>
             <form id="event-form" class="event-form">
@@ -395,30 +403,14 @@
                                 <div class="image-select-container">
                                     <select id="event-icon" name="event-icon" class="event-main-input">
                                         <option value="diplomacy">diplomacy</option>
-                                        <option value="communism">communism</option>
-                                        <option value="paganism">paganism</option>
-                                        <option value="nuclear">nuclear</option>
-                                        <option value="paranoia">paranoia</option>
-                                        <option value="trade_republic">trade_republic</option>
-                                        <option value="monarchy">monarchy</option>
-                                        <option value="theocracy">theocracy</option>
-                                        <option value="burnt_letter">burnt_letter</option>
-                                        <option value="fascism">fascism</option>
-                                        <option value="battleship2">battleship2</option>
-                                        <option value="democracy">democracy</option>
-                                        <option value="theocracy_soldiers">theocracy_soldiers</option>
-                                        <option value="border">border</option>
-                                        <option value="wunderwaffe">wunderwaffe</option>
-                                        <option value="technology">technology</option>
-                                        <option value="empty_square">empty_square</option>
                                         <option value="political">political</option>
-                                        <option value="battleship">battleship</option>
-                                        <option value="factory">factory</option>
-                                        <option value="fire_in_building">fire_in_building</option>
-                                        <option value="officers_station">officers_station</option>
-                                        <option value="barn">barn</option>
-                                        <option value="deserter">deserter</option>
-                                        <option value="capital_is_down">capital_is_down</option>
+                                        <option value="industry">industry</option>
+                                        <option value="border">border</option>
+                                        <option value="check">check</option>
+                                        <option value="trade">trade</option>
+                                        <option value="losses">losses</option>
+                                        <option value="discontent">discontent</option>
+                                        <option value="technology">technology</option>
                                     </select>
                                     <img id="event-icon-preview" src="" alt="Предпросмотр иконки" class="icon-preview">
                                 </div>
@@ -467,7 +459,7 @@
                         </div>
 
                         <div class="requirements-buttons">
-                            <button type="button" class="requirements-button" data-answer="mainreq">Общие требования</button>
+                            <button type="button" class="requirements-button" data-answer="mainreq" data-translate="common_requirements">Общие требования</button>
                         </div>
                     </div>
 
@@ -490,8 +482,8 @@
                                 </select>
                             </div>
                             <div class="requirements-buttons">
-                                <button type="button" class="requirements-button" data-answer="1-req">Требования</button>
-                                <button type="button" class="requirements-button" data-answer="1-bonus">Бонусы</button>
+                                <button type="button" class="requirements-button" data-answer="1-req" data-translate="requirements">Требования</button>
+                                <button type="button" class="requirements-button" data-answer="1-bonus" data-translate="bonuses">Бонусы</button>
                             </div>
                         </div>
 
@@ -513,8 +505,8 @@
                                 <textarea id="event-description2" name="event-description2" rows="3" class="event-answers-item main-page-textarea"></textarea>
                             </div>
                             <div class="requirements-buttons">
-                                <button type="button" class="requirements-button" data-answer="2-req">Требования</button>
-                                <button type="button" class="requirements-button" data-answer="2-bonus">Бонусы</button>
+                                <button type="button" class="requirements-button" data-answer="2-req" data-translate="requirements">Требования</button>
+                                <button type="button" class="requirements-button" data-answer="2-bonus" data-translate="bonuses">Бонусы</button>
                             </div>
                         </div>
 
@@ -536,8 +528,8 @@
                                 <textarea id="event-description3" name="event-description3" rows="3" class="event-answers-item main-page-textarea"></textarea>
                             </div>
                             <div class="requirements-buttons">
-                                <button type="button" class="requirements-button" data-answer="3-req">Требования</button>
-                                <button type="button" class="requirements-button" data-answer="3-bonus">Бонусы</button>
+                                <button type="button" class="requirements-button" data-answer="3-req" data-translate="requirements">Требования</button>
+                                <button type="button" class="requirements-button" data-answer="3-bonus" data-translate="bonuses">Бонусы</button>
                             </div>
                         </div>
                     </div>
@@ -551,20 +543,20 @@
         <div id="country-select-modal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3>Выберите страну</h3>
+                    <h3 data-translate="choose_country">Выберите страну</h3>
                     <button class="close-modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <select id="country-select" class="country-select main-page-input">
-                        <option value="">Выберите страну...</option>
+                        <option data-translate="choose_country..." value="">Выберите страну...</option>
                     </select>
                     <div class="turn-input">
-                        <label for="country-turn">Ход:</label>
+                        <label for="country-turn" data-translate="turn:">Ход:</label>
                         <input type="number" id="country-turn" value="0" min="0" class="main-page-input">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button id="add-selected-country" class="action-button">Добавить</button>
+                    <button id="add-selected-country" class="action-button" data-translate="add">Добавить</button>
                 </div>
             </div>
         </div>
@@ -573,7 +565,7 @@
         <div id="requirements-editor-modal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 id="requirements-editor-title">Редактор требований</h3>
+                    <h3 id="requirements-editor-title" data-translate="requirements_editor">Редактор требований</h3>
                     <button class="close-modal">&times;</button>
                 </div>
                 <div class="modal-body">

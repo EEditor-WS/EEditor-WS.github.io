@@ -47,7 +47,7 @@ class ReformManager {
         // Обновляем заголовок
         const nameSpan = document.getElementById('reforms-country-name');
         if (nameSpan) {
-            nameSpan.textContent = country.name;
+            nameSpan.textContent = `${window.translator.translate('reforms_of')} ${country.name}`;
         }
 
         // Обновляем список реформ
@@ -98,7 +98,7 @@ class ReformManager {
         if (!this.currentCountry || !this.jsonData?.lands[this.currentCountry]) return;
 
         const newReform = {
-            name: 'Новая реформа',
+            name: window.translator.translate('new_reform'),
             color: [128, 128, 128, 255],
             requirements: {
                 political: 'Democracy',
@@ -149,7 +149,7 @@ class ReformManager {
         if (!reform) return;
 
         const newReform = JSON.parse(JSON.stringify(reform));
-        newReform.name += ' (копия)';
+        newReform.name += ` ${window.translator.translate('copy_suffix')}`;
         country.reforms.push(newReform);
 
         this.updateReformsList();
@@ -184,7 +184,7 @@ class ReformManager {
     }
 
     loadReformSync() {
-        alert('Эта функция находится в разработке');
+        alert(window.translator.translate('function_in_development'));
     }
 
     deleteReform() {
@@ -260,7 +260,7 @@ class ReformManager {
         // Обновляем информацию о файле
         const fileInfo = document.getElementById('file-info');
         if (fileInfo) {
-            fileInfo.textContent = 'Изменения не сохранены';
+            fileInfo.textContent = window.translator.translate('changes_not_saved');
         }
     }
 

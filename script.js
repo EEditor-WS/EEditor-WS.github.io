@@ -344,12 +344,12 @@ document.addEventListener('DOMContentLoaded', function() {
             // Обновляем содержимое редактора
             previewContent.value = JSON.stringify(jsonData, null, 4);
             if (fileInfo) {
-                fileInfo.textContent = 'Изменения не сохранены';
+                fileInfo.textContent = window.translator.translate('changes_not_saved');
             }
         } catch (error) {
             console.error('Ошибка при обновлении JSON:', error);
             if (fileInfo) {
-                fileInfo.textContent = 'Ошибка при обновлении JSON';
+                fileInfo.textContent = window.translator.translate('file_parse_error');
             }
         }
     }
@@ -480,7 +480,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 console.error('Ошибка при получении доступа к файлу:', err);
                 if (fileInfo) {
-                    fileInfo.textContent = 'Ошибка при получении доступа к файлу';
+                    fileInfo.textContent = window.translator.translate('file_access_error');
                 }
                 return;
             }
@@ -495,31 +495,31 @@ document.addEventListener('DOMContentLoaded', function() {
             await writable.close();
             
             if (fileInfo) {
-                fileInfo.textContent = `Файл ${currentFile.name} сохранен`;
+                fileInfo.textContent = window.translator.translate('file_saved');
             }
         } catch (error) {
             console.error('Ошибка при сохранении файла:', error);
             if (fileInfo) {
-                fileInfo.textContent = 'Ошибка при сохранении файла';
-                }
-            }
-        } else {
-            // Для браузеров без поддержки File System Access API
-            const blob = new Blob([previewContent.value], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = currentFile?.name || 'scenario.json';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            
-            if (fileInfo) {
-                fileInfo.textContent = 'Файл скачан';
+                fileInfo.textContent = window.translator.translate('file_update_error');
             }
         }
+    } else {
+        // Для браузеров без поддержки File System Access API
+        const blob = new Blob([previewContent.value], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = currentFile?.name || 'scenario.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        if (fileInfo) {
+            fileInfo.textContent = window.translator.translate('file_downloaded');
+        }
     }
+}
 
     // Функция для открытия файла
     async function openFile() {
@@ -563,7 +563,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } catch (err) {
             console.error('Ошибка при открытии файла:', err);
             if (fileInfo) {
-                fileInfo.textContent = 'Ошибка при открытии файла';
+                fileInfo.textContent = window.translator.translate('file_access_error');
             }
         }
     }
@@ -598,7 +598,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } catch (error) {
                 console.error('Ошибка при парсинге JSON:', error);
                 if (fileInfo) {
-                    fileInfo.textContent = 'Ошибка при парсинге JSON';
+                    fileInfo.textContent = window.translator.translate('file_parse_error');
                 }
             }
         }
@@ -609,7 +609,7 @@ document.addEventListener('DOMContentLoaded', function() {
     previewContent.addEventListener('input', () => {
         clearTimeout(saveTimeout);
         saveTimeout = setTimeout(() => {
-            fileInfo.textContent = 'Изменения не сохранены';
+            fileInfo.textContent = window.translator.translate('changes_not_saved');
         }, 500);
     });
 
@@ -703,12 +703,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 previewContent.value = JSON.stringify(jsonData, null, 4);
                 
                 if (fileInfo) {
-                    fileInfo.textContent = 'Изменения не сохранены';
+                    fileInfo.textContent = window.translator.translate('changes_not_saved');
                 }
             } catch (error) {
                 console.error('Ошибка при обновлении цвета воды:', error);
                 if (fileInfo) {
-                    fileInfo.textContent = 'Ошибка при обновлении цвета воды';
+                    fileInfo.textContent = window.translator.translate('water_color_update_error');
                 }
             }
         });

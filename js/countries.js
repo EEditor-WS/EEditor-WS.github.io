@@ -260,28 +260,74 @@ class CountryManager {
     }
 
     createNewCountry() {
-        const id = this.generateUniqueId();
-        const newCountry = {
-            name: 'Новая страна',
-            color: [128, 128, 128, 255],
-            capital_name: '',
-            capital: 0,
-            defeated: false,
-            political: '',
-            allies: {},
-            enemies: {},
-            guaranteed: {},
-            guaranteed_by: {},
-            pacts: {},
-            sanctions: {},
-            vassals: {}
-        };
+        const modal = document.createElement('div');
+        modal.className = 'modal active';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 data-translate="new_country">Новая страна</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label data-translate="name">Название</label>
+                        <input type="text" id="new-country-name" class="main-page-input">
+                    </div>
+                    <div class="form-group">
+                        <label data-translate="system_name">Системное название</label>
+                        <input type="text" id="new-country-id" class="main-page-input">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="action-button create-country" data-translate="create">Создать</button>
+                </div>
+            </div>
+        `;
 
-        this.pushToUndoStack();
-        this.jsonData.lands[id] = newCountry;
-        this.updateCountriesList();
-        this.openCountry(id);
-        this.saveChanges();
+        document.body.appendChild(modal);
+
+        const closeModal = () => modal.remove();
+        modal.querySelector('.close-modal').onclick = closeModal;
+
+        modal.querySelector('.create-country').onclick = () => {
+            const name = modal.querySelector('#new-country-name').value.trim();
+            const id = modal.querySelector('#new-country-id').value.trim();
+
+            if (!name || !id) {
+                alert(window.translator.translate('fill_all_fields'));
+                return;
+            }
+
+            if (this.jsonData.lands[id]) {
+                alert(window.translator.translate('country_exists'));
+                return;
+            }
+
+            this.pushToUndoStack();
+
+            // Создаем новую страну
+            this.jsonData.lands[id] = {
+                name: name,
+                color: [128, 128, 128, 255],
+                capital: 0,
+                capital_name: '',
+                defeated: false,
+                political: 'Democracy',
+                allies: {},
+                enemies: {},
+                guaranteed: {},
+                guaranteed_by: {},
+                pacts: {},
+                sanctions: {},
+                vassals: {}
+            };
+
+            // Обновляем список и открываем редактор
+            this.updateCountriesList();
+            this.openCountry(id);
+            this.saveChanges();
+            closeModal();
+        };
     }
 
     generateUniqueId() {
@@ -521,36 +567,37 @@ class CountryManager {
         modal.innerHTML = `
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3>Параметры отношений</h3>
+                    <h3 data-translate="relation_params">Параметры отношений</h3>
                     <button class="close-modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Страна</label>
-                        <select class="param-country">
+                        <label data-translate="select_country">Выберите страну</label>
+                        <select class="param-country main-page-input">
+                            <option value="" data-translate="select_country_placeholder">Выберите страну...</option>
                             ${this.generateCountryOptions()}
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Ход начала</label>
-                        <input type="number" class="param-turn" value="${params.turn || 0}" min="0">
+                        <label data-translate="relation_turn">Ход начала</label>
+                        <input type="number" class="param-turn main-page-input" value="${params.turn || 0}" min="0">
                     </div>
                     <div class="form-group">
-                        <label>Длительность</label>
-                        <input type="number" class="param-duration" value="${params.duration || ''}" min="0">
+                        <label data-translate="relation_duration">Длительность</label>
+                        <input type="number" class="param-duration main-page-input" value="${params.duration || ''}" min="0">
                     </div>
                     ${relationType === 'sanctions' ? `
                     <div class="form-group">
-                        <label>Инициатор</label>
-                        <select class="param-initiator">
-                            <option value="false" ${!params.initiator ? 'selected' : ''}>Нет</option>
-                            <option value="true" ${params.initiator ? 'selected' : ''}>Да</option>
+                        <label data-translate="relation_initiator">Инициатор</label>
+                        <select class="param-initiator main-page-input">
+                            <option value="false" ${!params.initiator ? 'selected' : ''} data-translate="no">Нет</option>
+                            <option value="true" ${params.initiator ? 'selected' : ''} data-translate="yes">Да</option>
                         </select>
                     </div>
                     ` : ''}
                 </div>
                 <div class="modal-footer">
-                    <button class="action-button save-params">Сохранить</button>
+                    <button class="action-button save-params" data-translate="save">Сохранить</button>
                 </div>
             </div>
         `;
@@ -602,12 +649,13 @@ class CountryManager {
     generateCountryOptions() {
         if (!this.jsonData?.lands) return '';
         
-        let options = '';
-        for (const [id, country] of Object.entries(this.jsonData.lands)) {
-            if (id === this.currentCountry) continue; // Исключаем текущую страну
-            options += `<option value="${id}">${country.name} (${id})</option>`;
-        }
-        return options;
+        return Object.entries(this.jsonData.lands)
+            .filter(([id]) => id !== 'provinces' && id !== this.currentCountry)
+            .map(([id, country]) => {
+                const translatedName = window.translator.translate(`country_${id}`) || country.name;
+                return `<option value="${id}" data-translate="country_${id}">${translatedName}</option>`;
+            })
+            .join('');
     }
 
     updateReciprocatedRelation(targetCountryId, relationType, params) {
