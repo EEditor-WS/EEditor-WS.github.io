@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Настройки - EEditor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/base.css">
+    <style>
+        .settings-page {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        .settings-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .settings-header h2 {
+            margin: 0;
+            font-weight: 500;
+            font-size: 24px;
+        }
+
+        .settings-content {
+            background: var(--background-secondary);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .settings-message {
+            text-align: center;
+            font-size: 16px;
+            margin: 40px 0;
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    <div class="settings-page">
+        <div class="settings-header">
+            <button class="action-button" onclick="window.location.href='/'">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </button>
+            <h2>Настройки</h2>
+        </div>
+        <div class="settings-content">
+            <div class="settings-message">
+                Эта функция находится в разработке
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

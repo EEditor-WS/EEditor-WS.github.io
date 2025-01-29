@@ -626,10 +626,7 @@ class CountryManager {
         
         return Object.entries(this.jsonData.lands)
             .filter(([id]) => id !== 'provinces' && id !== this.currentCountry)
-            .map(([id, country]) => {
-                const translatedName = window.translator.translate(`country_${id}`) || country.name;
-                return `<option value="${id}" data-translate="country_${id}">${translatedName}</option>`;
-            })
+            .map(([id, country]) => `<option value="${id}">${country.name} - ${id}</option>`)
             .join('');
     }
 
