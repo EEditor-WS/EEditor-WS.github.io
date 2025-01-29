@@ -198,16 +198,33 @@ class AuthManager {
         console.log('🔄 Обновление интерфейса...');
 
         if (this.currentUser) {
+            console.log('👤 Обновление данных пользователя:', {
+                name: this.currentUser.displayName,
+                avatar: this.currentUser.avatar
+            });
+
             accountName.textContent = this.currentUser.displayName || this.currentUser.username;
             accountId.textContent = `@${this.currentUser.username}`;
             
             if (accountAvatar) {
                 if (this.currentUser.avatar) {
+                    console.log('🖼️ Установка аватарки:', this.currentUser.avatar);
                     accountAvatar.src = this.currentUser.avatar;
                     accountAvatar.style.display = 'block';
+                    accountAvatar.onerror = () => {
+                        console.error('❌ Ошибка загрузки аватарки');
+                        accountAvatar.style.display = 'none';
+                    };
+                    accountAvatar.onload = () => {
+                        console.log('✅ Аватарка успешно загружена');
+                        accountAvatar.style.display = 'block';
+                    };
                 } else {
+                    console.log('ℹ️ Аватарка отсутствует');
                     accountAvatar.style.display = 'none';
                 }
+            } else {
+                console.log('ℹ️ Элемент аватарки не найден на странице');
             }
 
             if (loginItem) loginItem.style.display = 'none';
@@ -221,6 +238,7 @@ class AuthManager {
             
             if (accountAvatar) {
                 accountAvatar.style.display = 'none';
+                accountAvatar.src = '';
             }
 
             if (loginItem) loginItem.style.display = 'flex';
