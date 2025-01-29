@@ -224,6 +224,19 @@ class CountryManager {
 
         // Обработчики цвета
         this.initColorHandlers();
+
+        // Обработчик для кнопки случайного цвета страны
+        document.getElementById('random-country-color').addEventListener('click', function() {
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            
+            document.getElementById('country-color-r').value = r;
+            document.getElementById('country-color-g').value = g;
+            document.getElementById('country-color-b').value = b;
+            
+            updateCountryColorPreview();
+        });
     }
 
     initColorHandlers() {
@@ -301,31 +314,31 @@ class CountryManager {
             if (this.jsonData.lands[id]) {
                 alert(window.translator.translate('country_exists'));
                 return;
-            }
+        }
 
-            this.pushToUndoStack();
+        this.pushToUndoStack();
 
-            // Создаем новую страну
+        // Создаем новую страну
             this.jsonData.lands[id] = {
                 name: name,
-                color: [128, 128, 128, 255],
-                capital: 0,
-                capital_name: '',
-                defeated: false,
-                political: 'Democracy',
-                allies: {},
-                enemies: {},
-                guaranteed: {},
-                guaranteed_by: {},
-                pacts: {},
-                sanctions: {},
-                vassals: {}
-            };
+            color: [128, 128, 128, 255],
+            capital: 0,
+            capital_name: '',
+            defeated: false,
+            political: 'Democracy',
+            allies: {},
+            enemies: {},
+            guaranteed: {},
+            guaranteed_by: {},
+            pacts: {},
+            sanctions: {},
+            vassals: {}
+        };
 
-            // Обновляем список и открываем редактор
-            this.updateCountriesList();
-            this.openCountry(id);
-            this.saveChanges();
+        // Обновляем список и открываем редактор
+        this.updateCountriesList();
+        this.openCountry(id);
+        this.saveChanges();
             closeModal();
         };
     }

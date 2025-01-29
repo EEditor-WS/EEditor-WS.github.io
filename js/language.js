@@ -95,8 +95,8 @@ const translations = {
 
         // Event edit
         "edit_event": "Edit event",
-        "event_image": "Event image",
-        "event_icon": "Event icon",
+        "event_image": "Event Image:",
+        "event_icon": "Event Icon:",
         "event_group_name": "Group",
         "event_unique_name": "System name",
         "event_hide_later": "Hide later",
@@ -115,17 +115,18 @@ const translations = {
         "common_requirements": "Common requirements",
 
         // Requirements editor
-        "requirements_editor": "Requirements editor",
+        "requirements_editor": "Requirements Editor",
+        "bonus_editor": "Bonus Editor",
         "type": "Type",
         "subtype": "Subtype",
         "action": "Action",
         "value": "Value",
-        "add": "Add",
-        "save": "Save",
-        "cancel": "Cancel",
+        "province": "Province",
+        "country": "Country",
+        "resource": "Resource",
         "more": "More",
         "equal": "Equal",
-        "not_equal": "Not equal",
+        "not_equal": "Not Equal",
         "less": "Less",
 
         // Reforms page
@@ -165,7 +166,50 @@ const translations = {
         "country_civilization_13": "Great Britain",
         "country_civilization_21": "France",
         "country_civilization_22": "Russian Empire",
-        "country_undeveloped_land": "Undeveloped Land"
+        "country_undeveloped_land": "Undeveloped Land",
+
+        // File upload section
+        "drag_file_here_or": "Drag file here or",
+        "choose_file": "Choose file",
+        "file_preview": "File preview",
+        "event_id": "ID",
+        "event_group": "Group",
+        "event_unique_name": "System name",
+        "event_title": "Title",
+        "event_hide_later": "Hide later",
+        "event_delete_turns": "Delete after (turns)",
+        "event_description": "Event description",
+        "answer_text": "Answer text",
+        "result_description": "Result description",
+        "auto_select_if_ignored": "Auto-select if ignored",
+        "reforms_of": "Reforms of",
+        "copy_suffix": "copy",
+        "function_in_development": "This function is under development",
+        "many": "Many",
+
+        // Event images and icons
+        "image_preview": "Image preview",
+        "icon_preview": "Icon preview",
+        
+        // Main page settings
+        "file_parse_error": "File parse error",
+        "file_access_error": "File access error",
+        "file_saved": "File saved",
+        "file_downloaded": "File downloaded",
+        "file_update_error": "File update error",
+        "water_color_update_error": "Water color update error",
+
+        // Reform colors
+        "random_color": "R",
+
+        // Answers
+        "answer_1_title": "Answer 1",
+        "answer_2_title": "Answer 2",
+        "answer_3_title": "Answer 3",
+
+        // Account dropdown
+        "profile": "Profile",
+        "logout": "Logout"
     },
     "ru": {
         // Главная страница
@@ -259,8 +303,8 @@ const translations = {
 
         // Редактирование события
         "edit_event": "Редактирование события",
-        "event_image": "Картинка события",
-        "event_icon": "Иконка события",
+        "event_image": "Картинка события:",
+        "event_icon": "Иконка события:",
         "event_group_name": "Группа",
         "event_unique_name": "Системное название",
         "event_hide_later": "Прятать позже",
@@ -276,16 +320,18 @@ const translations = {
         "enable_answer": "Включить ответ",
         "requirements": "Требования",
         "bonuses": "Бонусы",
+        "common_requirements": "Общие требования",
 
-        // Редактор требований
+        // Редактор требований и бонусов
         "requirements_editor": "Редактор требований",
+        "bonus_editor": "Редактор бонусов",
         "type": "Тип",
         "subtype": "Подтип",
         "action": "Действие",
         "value": "Значение",
-        "add": "Добавить",
-        "save": "Сохранить",
-        "cancel": "Отмена",
+        "province": "Провинция",
+        "country": "Страна",
+        "resource": "Ресурс",
         "more": "Больше",
         "equal": "Равно",
         "not_equal": "Не равно",
@@ -328,7 +374,50 @@ const translations = {
         "country_civilization_13": "Великобритания",
         "country_civilization_21": "Франция",
         "country_civilization_22": "Российская Империя",
-        "country_undeveloped_land": "Неразвитые земли"
+        "country_undeveloped_land": "Неразвитые земли",
+
+        // File upload section
+        "drag_file_here_or": "Перетащите файл сюда или",
+        "choose_file": "Выберите файл",
+        "file_preview": "Предпросмотр файла",
+        "event_id": "ID",
+        "event_group": "Группа",
+        "event_unique_name": "Системное название",
+        "event_title": "Заголовок",
+        "event_hide_later": "Прятать позже",
+        "event_delete_turns": "Удалить через (ходов)",
+        "event_description": "Описание события",
+        "answer_text": "Текст ответа",
+        "result_description": "Описание результата",
+        "auto_select_if_ignored": "Выбирать при игнорировании",
+        "reforms_of": "Реформы",
+        "copy_suffix": "копия",
+        "function_in_development": "Эта функция находится в разработке",
+        "many": "Много",
+
+        // Event images and icons
+        "image_preview": "Предпросмотр картинки",
+        "icon_preview": "Предпросмотр иконки",
+        
+        // Main page settings
+        "file_parse_error": "Ошибка чтения файла",
+        "file_access_error": "Ошибка доступа к файлу",
+        "file_saved": "Файл сохранен",
+        "file_downloaded": "Файл скачан",
+        "file_update_error": "Ошибка обновления файла",
+        "water_color_update_error": "Ошибка обновления цвета воды",
+
+        // Reform colors
+        "random_color": "R",
+
+        // Answers
+        "answer_1_title": "Ответ 1",
+        "answer_2_title": "Ответ 2",
+        "answer_3_title": "Ответ 3",
+
+        // Выпадающее меню аккаунта
+        "profile": "Профиль",
+        "logout": "Выйти"
     },
     "uk": {
         // Головна сторінка
@@ -422,8 +511,8 @@ const translations = {
 
         // Редагування події
         "edit_event": "Редагування події",
-        "event_image": "Зображення події",
-        "event_icon": "Іконка події",
+        "event_image": "Зображення події:",
+        "event_icon": "Іконка події:",
         "event_group_name": "Група",
         "event_unique_name": "Системна назва",
         "event_hide_later": "Приховати пізніше",
@@ -439,16 +528,18 @@ const translations = {
         "enable_answer": "Увімкнути відповідь",
         "requirements": "Вимоги",
         "bonuses": "Бонуси",
+        "common_requirements": "Загальні вимоги",
 
-        // Редактор вимог
+        // Редактор вимог та бонусів
         "requirements_editor": "Редактор вимог",
+        "bonus_editor": "Редактор бонусів",
         "type": "Тип",
         "subtype": "Підтип",
         "action": "Дія",
         "value": "Значення",
-        "add": "Додати",
-        "save": "Зберегти",
-        "cancel": "Скасувати",
+        "province": "Провінція",
+        "country": "Країна",
+        "resource": "Ресурс",
         "more": "Більше",
         "equal": "Дорівнює",
         "not_equal": "Не дорівнює",
@@ -491,6 +582,49 @@ const translations = {
         "country_civilization_13": "Велика Британія",
         "country_civilization_21": "Франція",
         "country_civilization_22": "Російська Імперія",
-        "country_undeveloped_land": "Нерозвинені землі"
+        "country_undeveloped_land": "Нерозвинені землі",
+
+        // File upload section
+        "drag_file_here_or": "Перетягніть файл сюди або",
+        "choose_file": "Виберіть файл",
+        "file_preview": "Попередній перегляд файлу",
+        "event_id": "ID",
+        "event_group": "Група",
+        "event_unique_name": "Системна назва",
+        "event_title": "Заголовок",
+        "event_hide_later": "Приховати пізніше",
+        "event_delete_turns": "Видалити через (ходів)",
+        "event_description": "Опис події",
+        "answer_text": "Текст відповіді",
+        "result_description": "Опис результату",
+        "auto_select_if_ignored": "Вибирати при ігноруванні",
+        "reforms_of": "Реформи",
+        "copy_suffix": "копія",
+        "function_in_development": "Ця функція знаходиться в розробці",
+        "many": "Багато",
+
+        // Event images and icons
+        "image_preview": "Попередній перегляд зображення",
+        "icon_preview": "Попередній перегляд іконки",
+        
+        // Main page settings
+        "file_parse_error": "Помилка читання файлу",
+        "file_access_error": "Помилка доступу до файлу",
+        "file_saved": "Файл збережено",
+        "file_downloaded": "Файл завантажено",
+        "file_update_error": "Помилка оновлення файлу",
+        "water_color_update_error": "Помилка оновлення кольору води",
+
+        // Reform colors
+        "random_color": "R",
+
+        // Answers
+        "answer_1_title": "Відповідь 1",
+        "answer_2_title": "Відповідь 2",
+        "answer_3_title": "Відповідь 3",
+
+        // Випадаюче меню облікового запису
+        "profile": "Профіль",
+        "logout": "Вийти"
     }
 }; 

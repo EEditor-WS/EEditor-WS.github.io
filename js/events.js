@@ -1072,3 +1072,96 @@ class EventManager {
 document.addEventListener('DOMContentLoaded', function() {
     window.eventManager = new EventManager();
 });
+
+function createRequirementEditor() {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h2 data-translate="requirements_editor">Редактор требований</h2>
+            <div class="form-group">
+                <label for="requirement-type" data-translate="type">Тип:</label>
+                <select id="requirement-type" class="main-page-input">
+                    <option value="province" data-translate="province">Провинция</option>
+                    <option value="country" data-translate="country">Страна</option>
+                    <option value="resource" data-translate="resource">Ресурс</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="requirement-action" data-translate="action">Действие:</label>
+                <select id="requirement-action" class="main-page-input">
+                    <option value="more" data-translate="more">Больше</option>
+                    <option value="equal" data-translate="equal">Равно</option>
+                    <option value="not_equal" data-translate="not_equal">Не равно</option>
+                    <option value="less" data-translate="less">Меньше</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="requirement-subtype" data-translate="subtype">Подтип:</label>
+                <input type="text" id="requirement-subtype" class="main-page-input">
+            </div>
+            <div class="form-group">
+                <label for="requirement-value" data-translate="value">Значение:</label>
+                <div id="requirement-value-container"></div>
+            </div>
+            <div class="form-actions">
+                <button type="button" id="save-requirement" class="action-button" data-translate="save">Сохранить</button>
+                <button type="button" id="cancel-requirement" class="action-button" data-translate="cancel">Отмена</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    window.translator.updateTranslations(modal);
+    return modal;
+}
+
+function createBonusEditor() {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h2 data-translate="bonus_editor">Редактор бонусов</h2>
+            <div class="form-group">
+                <label for="bonus-type" data-translate="type">Тип:</label>
+                <select id="bonus-type" class="main-page-input">
+                    <option value="province" data-translate="province">Провинция</option>
+                    <option value="country" data-translate="country">Страна</option>
+                    <option value="resource" data-translate="resource">Ресурс</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="bonus-subtype" data-translate="subtype">Подтип:</label>
+                <input type="text" id="bonus-subtype" class="main-page-input">
+            </div>
+            <div class="form-group">
+                <label for="bonus-value" data-translate="value">Значение:</label>
+                <div id="bonus-value-container"></div>
+            </div>
+            <div class="form-actions">
+                <button type="button" id="save-bonus" class="action-button" data-translate="save">Сохранить</button>
+                <button type="button" id="cancel-bonus" class="action-button" data-translate="cancel">Отмена</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    window.translator.updateTranslations(modal);
+    return modal;
+}
+
+// Обновляем обработчик добавления требований
+document.addEventListener('click', function(e) {
+    if (e.target.matches('#add-requirement')) {
+        const modal = createRequirementEditor();
+        // ... existing code ...
+        window.translator.updateTranslations(modal);
+    }
+});
+
+// Обновляем обработчик добавления бонусов
+document.addEventListener('click', function(e) {
+    if (e.target.matches('#add-bonus')) {
+        const modal = createBonusEditor();
+        // ... existing code ...
+        window.translator.updateTranslations(modal);
+    }
+});

@@ -744,6 +744,78 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!window.countryManager) return;
         window.countryManager.removeInvalidOwners();
     });
+
+    // Обработчик для кнопки настроек
+    document.getElementById('settings-button').addEventListener('click', function() {
+        window.location.href = 'settings/index.html';
+    });
+
+    // Обработчик для кнопки языка
+    document.getElementById('currentLangChooser')?.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const dropdown = document.getElementById('langDropdown');
+        const accountDropdown = document.getElementById('accountDropdown');
+        
+        if (accountDropdown) {
+            accountDropdown.classList.remove('active');
+        }
+        
+        dropdown.classList.toggle('active');
+    });
+
+    // Обработчик для кнопки аккаунта
+    document.getElementById('account-button')?.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const dropdown = document.getElementById('accountDropdown');
+        const langDropdown = document.getElementById('langDropdown');
+        
+        if (langDropdown) {
+            langDropdown.classList.remove('active');
+        }
+        
+        dropdown.classList.toggle('active');
+    });
+
+    // Обработчики для пунктов меню аккаунта
+    document.querySelectorAll('.account-item').forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            const action = this.getAttribute('data-action');
+            
+            switch(action) {
+                case 'login':
+                    window.authManager.loginWithDiscord();
+                    break;
+                case 'register':
+                    window.authManager.loginWithDiscord();
+                    break;
+                case 'settings':
+                    console.log('Настройки аккаунта');
+                    break;
+                case 'logout':
+                    window.authManager.logout();
+                    break;
+            }
+            
+            document.getElementById('accountDropdown').classList.remove('active');
+        });
+    });
+
+    // Закрытие выпадающих меню при клике вне них
+    document.addEventListener('click', function(e) {
+        const langDropdown = document.getElementById('langDropdown');
+        const accountDropdown = document.getElementById('accountDropdown');
+        
+        if (!e.target.closest('.language-switcher')) {
+            langDropdown?.classList.remove('active');
+        }
+        
+        if (!e.target.closest('#account-button') && !e.target.closest('#accountDropdown')) {
+            accountDropdown?.classList.remove('active');
+        }
+    });
 });
 
 function changeApplicationLanguage(lang) {

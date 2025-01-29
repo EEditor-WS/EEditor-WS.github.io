@@ -3,43 +3,28 @@ class Translator {
         this.currentLang = 'en';
         this.translations = translations;
         this.initEventListeners();
-        this.loadSavedLanguage();
+        
+        // Загружаем язык после небольшой задержки, чтобы DOM успел загрузиться
+        setTimeout(() => {
+            this.loadSavedLanguage();
+        }, 100);
     }
 
     initEventListeners() {
-        // Обработчики для кнопок выбора языка
         document.querySelectorAll('#langDropdown a').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
+                e.stopPropagation();
                 const lang = e.target.dataset.lang;
                 this.setLanguage(lang);
+                document.getElementById('langDropdown').classList.remove('active');
             });
-        });
-
-        // Обработчик для кнопки текущего языка
-        const currentLangButton = document.getElementById('currentLang');
-        if (currentLangButton) {
-            currentLangButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                const dropdown = document.getElementById('langDropdown');
-                dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-            });
-        }
-
-        // Закрытие выпадающего списка при клике вне него
-        document.addEventListener('click', (e) => {
-            if (!e.target.matches('#currentLang')) {
-                const dropdown = document.getElementById('langDropdown');
-                if (dropdown.style.display === 'block') {
-                    dropdown.style.display = 'none';
-                }
-            }
         });
     }
 
     loadSavedLanguage() {
-        // Загружаем сохранённый язык из localStorage
-        const savedLang = localStorage.getItem('language') || 'en';
+        const body = document.body;
+        const savedLang = body.getAttribute('data-lang') || 'en';
         this.setLanguage(savedLang);
     }
 
@@ -47,12 +32,14 @@ class Translator {
         if (!this.translations[lang]) return;
 
         this.currentLang = lang;
-        localStorage.setItem('language', lang);
-
-        // Обновляем текст кнопки выбора языка
+        
+        // Сохраняем язык в атрибуте body
+        document.body.setAttribute('data-lang', lang);
+        
+        // Обновляем только title кнопки выбора языка
         const currentLangButton = document.getElementById('currentLang');
         if (currentLangButton) {
-            currentLangButton.textContent = this.getLanguageName(lang);
+            currentLangButton.setAttribute('title', this.getLanguageName(lang));
         }
 
         this.updateAllTranslations();

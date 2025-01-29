@@ -20,6 +20,9 @@
         <script src="js/events.js"></script>
         <script src="js/reforms.js"></script>
         <script src="js/upload.js"></script>
+        <script src="js/crypto.js"></script>
+        <script src="js/secrets.js"></script>
+        <script src="js/auth.js"></script>
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/countries.css">
         <link rel="stylesheet" href="css/events.css">
@@ -35,7 +38,7 @@
             </script>
         <!-- End Google tag (gtag.js) -->
     </head>
-    <body class="dark dark-theme">
+    <body class="dark dark-theme" data-lang="en">
         <!-- Google Tag Manager (noscript) -->
             <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7C5DLXM"
             height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -46,12 +49,75 @@
             <button class="nav-button" data-page="events">События</button>
             <div class="nav-actions">
                 <button id="force-save" class="action-button save-button">Сохранить</button>
-                <div class="language-switcher">
-                    <button id="currentLang" class="lang-button">English</button>
-                    <div id="langDropdown" class="lang-dropdown">
-                        <a href="#" data-lang="en">English</a>
-                        <a href="#" data-lang="ru">Русский</a>
-                        <a href="#" data-lang="uk">Українська</a>
+                <div class="nav-icons">
+                    <button id="settings-button" class="icon-button" title="Настройки">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M19.4 15C19.2669 15.3016 19.2272 15.6362 19.286 15.9606C19.3448 16.285 19.4995 16.5843 19.73 16.82L19.79 16.88C19.976 17.0657 20.1235 17.2863 20.2241 17.5291C20.3248 17.7719 20.3766 18.0322 20.3766 18.295C20.3766 18.5578 20.3248 18.8181 20.2241 19.0609C20.1235 19.3037 19.976 19.5243 19.79 19.71C19.6043 19.896 19.3837 20.0435 19.1409 20.1441C18.8981 20.2448 18.6378 20.2966 18.375 20.2966C18.1122 20.2966 17.8519 20.2448 17.6091 20.1441C17.3663 20.0435 17.1457 19.896 16.96 19.71L16.9 19.65C16.6643 19.4195 16.365 19.2648 16.0406 19.206C15.7162 19.1472 15.3816 19.1869 15.08 19.32C14.7842 19.4468 14.532 19.6572 14.3543 19.9255C14.1766 20.1938 14.0813 20.5082 14.08 20.83V21C14.08 21.5304 13.8693 22.0391 13.4942 22.4142C13.1191 22.7893 12.6104 23 12.08 23C11.5496 23 11.0409 22.7893 10.6658 22.4142C10.2907 22.0391 10.08 21.5304 10.08 21V20.91C10.0723 20.579 9.96512 20.258 9.77251 19.9887C9.5799 19.7194 9.31074 19.5143 9 19.4C8.69838 19.2669 8.36381 19.2272 8.03941 19.286C7.71502 19.3448 7.41568 19.4995 7.18 19.73L7.12 19.79C6.93425 19.976 6.71368 20.1235 6.47088 20.2241C6.22808 20.3248 5.96783 20.3766 5.705 20.3766C5.44217 20.3766 5.18192 20.3248 4.93912 20.2241C4.69632 20.1235 4.47575 19.976 4.29 19.79C4.10405 19.6043 3.95653 19.3837 3.85588 19.1409C3.75523 18.8981 3.70343 18.6378 3.70343 18.375C3.70343 18.1122 3.75523 17.8519 3.85588 17.6091C3.95653 17.3663 4.10405 17.1457 4.29 16.96L4.35 16.9C4.58054 16.6643 4.73519 16.365 4.794 16.0406C4.85282 15.7162 4.81312 15.3816 4.68 15.08C4.55324 14.7842 4.34276 14.532 4.07447 14.3543C3.80618 14.1766 3.49179 14.0813 3.17 14.08H3C2.46957 14.08 1.96086 13.8693 1.58579 13.4942C1.21071 13.1191 1 12.6104 1 12.08C1 11.5496 1.21071 11.0409 1.58579 10.6658C1.96086 10.2907 2.46957 10.08 3 10.08H3.09C3.42099 10.0723 3.742 9.96512 4.0113 9.77251C4.28059 9.5799 4.48572 9.31074 4.6 9C4.73312 8.69838 4.77282 8.36381 4.714 8.03941C4.65519 7.71502 4.50054 7.41568 4.27 7.18L4.21 7.12C4.02405 6.93425 3.87653 6.71368 3.77588 6.47088C3.67523 6.22808 3.62343 5.96783 3.62343 5.705C3.62343 5.44217 3.67523 5.18192 3.77588 4.93912C3.87653 4.69632 4.02405 4.47575 4.21 4.29C4.39575 4.10405 4.61632 3.95653 4.85912 3.85588C5.10192 3.75523 5.36217 3.70343 5.625 3.70343C5.88783 3.70343 6.14808 3.75523 6.39088 3.85588C6.63368 3.95653 6.85425 4.10405 7.04 4.29L7.1 4.35C7.33568 4.58054 7.63502 4.73519 7.95941 4.794C8.28381 4.85282 8.61838 4.81312 8.92 4.68H9C9.29577 4.55324 9.54802 4.34276 9.72569 4.07447C9.90337 3.80618 9.99872 3.49179 10 3.17V3C10 2.46957 10.2107 1.96086 10.5858 1.58579C10.9609 1.21071 11.4696 1 12 1C12.5304 1 13.0391 1.21071 13.4142 1.58579C13.7893 1.96086 14 2.46957 14 3V3.09C14.0013 3.41179 14.0966 3.72618 14.2743 3.99447C14.452 4.26276 14.7042 4.47324 15 4.6C15.3016 4.73312 15.6362 4.77282 15.9606 4.714C16.285 4.65519 16.5843 4.50054 16.82 4.27L16.88 4.21C17.0657 4.02405 17.2863 3.87653 17.5291 3.77588C17.7719 3.67523 18.0322 3.62343 18.295 3.62343C18.5578 3.62343 18.8181 3.67523 19.0609 3.77588C19.3037 3.87653 19.5243 4.02405 19.71 4.21C19.896 4.39575 20.0435 4.61632 20.1441 4.85912C20.2448 5.10192 20.2966 5.36217 20.2966 5.625C20.2966 5.88783 20.2448 6.14808 20.1441 6.39088C20.0435 6.63368 19.896 6.85425 19.71 7.04L19.65 7.1C19.4195 7.33568 19.2648 7.63502 19.206 7.95941C19.1472 8.28381 19.1869 8.61838 19.32 8.92V9C19.4468 9.29577 19.6572 9.54802 19.9255 9.72569C20.1938 9.90337 20.5082 9.99872 20.83 10H21C21.5304 10 22.0391 10.2107 22.4142 10.5858C22.7893 10.9609 23 11.4696 23 12C23 12.5304 22.7893 13.0391 22.4142 13.4142C22.0391 13.7893 21.5304 14 21 14H20.91C20.5882 14.0013 20.2738 14.0966 20.0055 14.2743C19.7372 14.452 19.5268 14.7042 19.4 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <div class="language-switcher">
+                        <button id="currentLangChooser" class="icon-button" title="Language">
+                            <span class="lang-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M2 12H22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M12 2C14.5013 4.73835 15.9228 8.29203 16 12C15.9228 15.708 14.5013 19.2616 12 22C9.49872 19.2616 8.07725 15.708 8 12C8.07725 8.29203 9.49872 4.73835 12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                        </button>
+                        <div id="currentLang" class="void"></div>
+                        <div id="langDropdown" class="lang-dropdown">
+                            <a href="#" data-lang="en">English</a>
+                            <a href="#" data-lang="ru">Русский</a>
+                            <a href="#" data-lang="uk">Українська</a>
+                        </div>
+                    </div>
+                    <button id="account-button" class="icon-button" title="Аккаунт">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <div id="accountDropdown" class="account-dropdown">
+                        <div class="account-info">
+                            <div class="account-name">Гость</div>
+                            <div class="account-id">#0000</div>
+                        </div>
+                        <div class="account-divider"></div>
+                        <a href="#" class="account-item" data-action="login">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M10 17L15 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M15 12H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span data-translate="login">Войти</span>
+                        </a>
+                        <a href="#" class="account-item" data-action="register">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16 21V19C16 17.9391 15.5786 16.9217 14.8284 16.1716C14.0783 15.4214 13.0609 15 12 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8.5 11C10.7091 11 12.5 9.20914 12.5 7C12.5 4.79086 10.7091 3 8.5 3C6.29086 3 4.5 4.79086 4.5 7C4.5 9.20914 6.29086 11 8.5 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M20 8V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M23 11H17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span data-translate="register">Регистрация</span>
+                        </a>
+                        <div class="account-divider"></div>
+                        <a href="#" class="account-item" data-action="settings">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M19.4 15C19.2669 15.3016 19.2272 15.6362 19.286 15.9606C19.3448 16.285 19.4995 16.5843 19.73 16.82L19.79 16.88C19.976 17.0657 20.1235 17.2863 20.2241 17.5291C20.3248 17.7719 20.3766 18.0322 20.3766 18.295C20.3766 18.5578 20.3248 18.8181 20.2241 19.0609C20.1235 19.3037 19.976 19.5243 19.79 19.71C19.6043 19.896 19.3837 20.0435 19.1409 20.1441C18.8981 20.2448 18.6378 20.2966 18.375 20.2966C18.1122 20.2966 17.8519 20.2448 17.6091 20.1441C17.3663 20.0435 17.1457 19.896 16.96 19.71L16.9 19.65C16.6643 19.4195 16.365 19.2648 16.0406 19.206C15.7162 19.1472 15.3816 19.1869 15.08 19.32C14.7842 19.4468 14.532 19.6572 14.3543 19.9255C14.1766 20.1938 14.0813 20.5082 14.08 20.83V21C14.08 21.5304 13.8693 22.0391 13.4942 22.4142C13.1191 22.7893 12.6104 23 12.08 23C11.5496 23 11.0409 22.7893 10.6658 22.4142C10.2907 22.0391 10.08 21.5304 10.08 21V20.91C10.0723 20.579 9.96512 20.258 9.77251 19.9887C9.5799 19.7194 9.31074 19.5143 9 19.4C8.69838 19.2669 8.36381 19.2272 8.03941 19.286C7.71502 19.3448 7.41568 19.4995 7.18 19.73L7.12 19.79C6.93425 19.976 6.71368 20.1235 6.47088 20.2241C6.22808 20.3248 5.96783 20.3766 5.705 20.3766C5.44217 20.3766 5.18192 20.3248 4.93912 20.2241C4.69632 20.1235 4.47575 19.976 4.29 19.79C4.10405 19.6043 3.95653 19.3837 3.85588 19.1409C3.75523 18.8981 3.70343 18.6378 3.70343 18.375C3.70343 18.1122 3.75523 17.8519 3.85588 17.6091C3.95653 17.3663 4.10405 17.1457 4.29 16.96L4.35 16.9C4.58054 16.6643 4.73519 16.365 4.794 16.0406C4.85282 15.7162 4.81312 15.3816 4.68 15.08C4.55324 14.7842 4.34276 14.532 4.07447 14.3543C3.80618 14.1766 3.49179 14.0813 3.17 14.08H3C2.46957 14.08 1.96086 13.8693 1.58579 13.4942C1.21071 13.1191 1 12.6104 1 12.08C1 11.5496 1.21071 11.0409 1.58579 10.6658C1.96086 10.2907 2.46957 10.08 3 10.08H3.09C3.42099 10.0723 3.742 9.96512 4.0113 9.77251C4.28059 9.5799 4.48572 9.31074 4.6 9C4.73312 8.69838 4.77282 8.36381 4.714 8.03941C4.65519 7.71502 4.50054 7.41568 4.27 7.18L4.21 7.12C4.02405 6.93425 3.87653 6.71368 3.77588 6.47088C3.67523 6.22808 3.62343 5.96783 3.62343 5.705C3.62343 5.44217 3.67523 5.18192 3.77588 4.93912C3.87653 4.69632 4.02405 4.47575 4.21 4.29C4.39575 4.10405 4.61632 3.95653 4.85912 3.85588C5.10192 3.75523 5.36217 3.70343 5.625 3.70343C5.88783 3.70343 6.14808 3.75523 6.39088 3.85588C6.63368 3.95653 6.85425 4.10405 7.04 4.29L7.1 4.35C7.33568 4.58054 7.63502 4.73519 7.95941 4.794C8.28381 4.85282 8.61838 4.81312 8.92 4.68H9C9.29577 4.55324 9.54802 4.34276 9.72569 4.07447C9.90337 3.80618 9.99872 3.49179 10 3.17V3C10 2.46957 10.2107 1.96086 10.5858 1.58579C10.9609 1.21071 11.4696 1 12 1C12.5304 1 13.0391 1.21071 13.4142 1.58579C13.7893 1.96086 14 2.46957 14 3V3.09C14.0013 3.41179 14.0966 3.72618 14.2743 3.99447C14.452 4.26276 14.7042 4.47324 15 4.6C15.3016 4.73312 15.6362 4.77282 15.9606 4.714C16.285 4.65519 16.5843 4.50054 16.82 4.27L16.88 4.21C17.0657 4.02405 17.2863 3.87653 17.5291 3.77588C17.7719 3.67523 18.0322 3.62343 18.295 3.62343C18.5578 3.62343 18.8181 3.67523 19.0609 3.77588C19.3037 3.87653 19.5243 4.02405 19.71 4.21C19.896 4.39575 20.0435 4.61632 20.1441 4.85912C20.2448 5.10192 20.2966 5.36217 20.2966 5.625C20.2966 5.88783 20.2448 6.14808 20.1441 6.39088C20.0435 6.63368 19.896 6.85425 19.71 7.04L19.65 7.1C19.4195 7.33568 19.2648 7.63502 19.206 7.95941C19.1472 8.28381 19.1869 8.61838 19.32 8.92V9C19.4468 9.29577 19.6572 9.54802 19.9255 9.72569C20.1938 9.90337 20.5082 9.99872 20.83 10H21C21.5304 10 22.0391 10.2107 22.4142 10.5858C22.7893 10.9609 23 11.4696 23 12C23 12.5304 22.7893 13.0391 22.4142 13.4142C22.0391 13.7893 21.5304 14 21 14H20.91C20.5882 14.0013 20.2738 14.0966 20.0055 14.2743C19.7372 14.452 19.5268 14.7042 19.4 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span data-translate="settings">Настройки</span>
+                        </a>
+                        <a href="#" class="account-item" data-action="logout">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M16 17L21 12L16 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M21 12H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span data-translate="logout">Выйти</span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -60,15 +126,15 @@
         <div id="main" class="page pmain active">
             <div class="file-upload-container">
                 <div id="drop-zone" class="drop-zone">
-                    <p>Перетащите файл сюда или</p>
+                    <p data-translate="drag_file_here_or">Перетащите файл сюда или</p>
                     <input type="file" id="file-input" class="file-input">
-                    <label for="file-input" class="file-input-label">Выберите файл</label>
+                    <label for="file-input" class="file-input-label" data-translate="choose_file">Выберите файл</label>
                 </div>
                 <div id="prewi">
                     <div id="file-info"></div>
                     <div class="file-preview">
                         <div class="preview-header">
-                            <span id="preview-filename">Предпросмотр файла</span>
+                            <span id="preview-filename" data-translate="file_preview">Предпросмотр файла</span>
                         </div>
                         <textarea id="preview-content" class="preview-content"></textarea>
                     </div>
@@ -77,89 +143,89 @@
             <div id="data" class="data">
                 <form id="settings-form" class="settings-form" autocomplete="off">
                     <div class="form-group">
-                        <label for="name">Название</label>
+                        <label for="name" data-translate="title">Название</label>
                         <input type="text" id="name" name="name" class="main-page-input">
                     </div>
 
                     <div class="form-group">
-                        <label for="id">ID</label>
+                        <label for="id" data-translate="id">ID</label>
                         <input type="text" id="id" name="id" class="main-page-input">
                     </div>
 
                     <div class="form-group">
-                        <label for="last_turn">Последний Ход</label>
+                        <label for="last_turn" data-translate="last_turn">Последний Ход</label>
                         <input type="number" id="last_turn" name="last_turn" class="main-page-input">
                     </div>
 
                     <div class="form-group">
-                        <label for="year">Год</label>
+                        <label for="year" data-translate="year">Год</label>
                         <input type="number" id="year" name="year" class="main-page-input">
                     </div>
 
                     <div class="form-group">
-                        <label for="month">Месяц</label>
+                        <label for="month" data-translate="month">Месяц</label>
                         <input type="number" id="month" name="month" min="1" max="12" class="main-page-input">
                     </div>
 
                     <div class="form-group">
-                        <label for="play_after_last_turn">Игра После Последнего Хода</label>
+                        <label for="play_after_last_turn" data-translate="play_after_last_turn">Игра После Последнего Хода</label>
                         <select id="play_after_last_turn" name="play_after_last_turn" class="main-page-input">
-                            <option value="true">Да</option>
-                            <option value="false">Нет</option>
+                            <option value="true" data-translate="yes">Да</option>
+                            <option value="false" data-translate="no">Нет</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="technology_lvl">Уровень Технологий</label>
+                        <label for="technology_lvl" data-translate="technology_lvl">Уровень Технологий</label>
                         <input type="number" id="technology_lvl" name="technology_lvl" class="main-page-input">
                     </div>
 
                     <div class="form-group">
-                        <label for="technologies_are_opened">Открыты Все Технологии</label>
+                        <label for="technologies_are_opened" data-translate="technologies_are_opened">Открыты Все Технологии</label>
                         <select id="technologies_are_opened" name="technologies_are_opened" class="main-page-input">
-                            <option value="disabled">Нет</option>
-                            <option value="enabled">Да</option>
+                            <option value="disabled" data-translate="no">Нет</option>
+                            <option value="enabled" data-translate="yes">Да</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="resources_spawn">Спаун Ресурсов</label>
+                        <label for="resources_spawn" data-translate="resources_spawn">Спаун Ресурсов</label>
                         <select id="resources_spawn" name="resources_spawn" class="main-page-input">
-                            <option value="low">Мало</option>
-                            <option value="standard">Стандартно</option>
-                            <option value="few">Много</option>
+                            <option value="low" data-translate="low">Мало</option>
+                            <option value="standard" data-translate="standard">Стандартно</option>
+                            <option value="many" data-translate="many">Много</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="difficulty">Сложность</label>
+                        <label for="difficulty" data-translate="difficulty">Сложность</label>
                         <select id="difficulty" name="difficulty" class="main-page-input">
-                            <option value="easy">Легко</option>
-                            <option value="standard">Нормально</option>
-                            <option value="hard">Сложно</option>
-                            <option value="impossible">Невозможно</option>
+                            <option value="easy" data-translate="easy">Легко</option>
+                            <option value="standard" data-translate="standard">Нормально</option>
+                            <option value="hard" data-translate="hard">Сложно</option>
+                            <option value="impossible" data-translate="impossible">Невозможно</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="bots_behavior">Поведение Ботов</label>
+                        <label for="bots_behavior" data-translate="bots_behavior">Поведение Ботов</label>
                         <select id="bots_behavior" name="bots_behavior" class="main-page-input">
-                            <option value="peaceful">Мирные</option>
-                            <option value="standard">Стандартные</option>
-                            <option value="aggressive">Агрессивные</option>
+                            <option value="peaceful" data-translate="peaceful">Мирные</option>
+                            <option value="standard" data-translate="standard">Стандартные</option>
+                            <option value="aggressive" data-translate="aggressive">Агрессивные</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="no_initial_diplomacy">Без Стартовой Дипломатии</label>
+                        <label for="no_initial_diplomacy" data-translate="no_initial_diplomacy">Без Стартовой Дипломатии</label>
                         <select id="no_initial_diplomacy" name="no_initial_diplomacy" class="main-page-input">
-                            <option value="enabled">Да</option>
-                            <option value="disabled">Нет</option>
+                            <option value="enabled" data-translate="yes">Да</option>
+                            <option value="disabled" data-translate="no">Нет</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="water_color">Цвет Воды</label>
+                        <label for="water_color" data-translate="water_color">Цвет Воды</label>
                         <div class="color-inputs">
                             <input type="number" id="water_color_r" name="water_color_r" min="0" max="255" class="color-input">
                             <input type="number" id="water_color_g" name="water_color_g" min="0" max="255" class="color-input">
@@ -169,51 +235,51 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="no_nuclear_weapon">Без Ядерного Оружия</label>
+                        <label for="no_nuclear_weapon" data-translate="no_nuclear_weapon">Без Ядерного Оружия</label>
                         <select id="no_nuclear_weapon" name="no_nuclear_weapon" class="main-page-input">
-                            <option value="enabled">Да</option>
-                            <option value="disabled">Нет</option>
+                            <option value="enabled" data-translate="yes">Да</option>
+                            <option value="disabled" data-translate="no">Нет</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="sandbox">Sandbox</label>
+                        <label for="sandbox" data-translate="sandbox">Sandbox</label>
                         <select id="sandbox" name="sandbox" class="main-page-input">
-                            <option value="enabled">Да</option>
-                            <option value="disabled">Нет</option>
+                            <option value="enabled" data-translate="yes">Да</option>
+                            <option value="disabled" data-translate="no">Нет</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="turn">Turn</label>
+                        <label for="turn" data-translate="turn">Turn</label>
                         <input type="number" id="turn" name="turn" class="main-page-input">
                     </div>
 
                     <div class="form-group">
-                        <label for="player_land">Страна Игрока</label>
+                        <label for="player_land" data-translate="player_land">Страна Игрока</label>
                         <select id="player_land" name="player_land" class="main-page-input">
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="fog_of_war">Туман Войны</label>
+                        <label for="fog_of_war" data-translate="fog_of_war">Туман Войны</label>
                         <select id="fog_of_war" name="fog_of_war" class="main-page-input">
-                            <option value="standard">Стандартный</option>
+                            <option value="standard" data-translate="standard">Стандартный</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="map_hash">Хэш Карты</label>
+                        <label for="map_hash" data-translate="map_hash">Хэш Карты</label>
                         <input type="number" id="map_hash" name="map_hash" class="main-page-input">
                     </div>
 
                     <div class="form-group">
-                        <label for="num_of_provinces">Количество Провинций</label>
+                        <label for="num_of_provinces" data-translate="num_of_provinces">Количество Провинций</label>
                         <input type="number" id="num_of_provinces" name="num_of_provinces" class="main-page-input">
                     </div>
 
                     <div class="form-group">
-                        <label for="min_game_version">Минимальная Версия Игры</label>
+                        <label for="min_game_version" data-translate="min_game_version">Минимальная Версия Игры</label>
                         <input type="number" id="min_game_version" name="min_game_version" class="main-page-input">
                     </div>
                 </form>
@@ -264,6 +330,7 @@
                             <input type="number" id="country-color-r" name="color_r" min="0" max="255" step="0.001" class="color-input main-page-input" data-translate="color_r" title="R">
                             <input type="number" id="country-color-g" name="color_g" min="0" max="255" step="0.001" class="color-input main-page-input" data-translate="color_g" title="G">
                             <input type="number" id="country-color-b" name="color_b" min="0" max="255" step="0.001" class="color-input main-page-input" data-translate="color_b" title="B">
+                            <button type="button" id="random-country-color" class="action-button" data-translate="random_color" title="Random Color">R</button>
                             <div class="color-preview" id="country-color-preview"></div>
                         </div>
                     </div>
@@ -366,7 +433,7 @@
                     <div class="event-main-settings">
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="event-image">Картинка события:</label>
+                                <label for="event-image" data-translate="event_image">Картинка события:</label>
                                 <div class="image-select-container">
                                     <select id="event-image" name="event-image" class="event-main-input">
                                         <option value="diplomacy">diplomacy</option>
@@ -395,11 +462,11 @@
                                         <option value="deserter">deserter</option>
                                         <option value="capital_is_down">capital_is_down</option>
                                     </select>
-                                    <img id="event-image-preview" src="" alt="Предпросмотр картинки" class="image-preview">
+                                    <img id="event-image-preview" src="" alt="Предпросмотр картинки" class="image-preview" data-translate="image_preview">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="event-icon">Иконка события:</label>
+                                <label for="event-icon" data-translate="event_icon">Иконка события:</label>
                                 <div class="image-select-container">
                                     <select id="event-icon" name="event-icon" class="event-main-input">
                                         <option value="diplomacy">diplomacy</option>
@@ -412,49 +479,49 @@
                                         <option value="discontent">discontent</option>
                                         <option value="technology">technology</option>
                                     </select>
-                                    <img id="event-icon-preview" src="" alt="Предпросмотр иконки" class="icon-preview">
+                                    <img id="event-icon-preview" src="" alt="Предпросмотр иконки" class="icon-preview" data-translate="icon_preview">
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="event-id">ID:</label>
+                                <label for="event-id" data-translate="event_id">ID:</label>
                                 <input type="text" id="event-id" name="event-id" readonly class="event-main-input main-page-input">
                             </div>
                             <div class="form-group">
-                                <label for="event-group-name">Группа:</label>
+                                <label for="event-group-name" data-translate="event_group">Группа:</label>
                                 <input type="text" id="event-group-name" name="event-group-name" class="event-main-input main-page-input">
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="event-unique-name">Системное название:</label>
+                                <label for="event-unique-name" data-translate="event_unique_name">Системное название:</label>
                                 <input type="text" id="event-unique-name" name="event-unique-name" class="event-main-input main-page-input">
                             </div>
                             <div class="form-group">
-                                <label for="event-title">Заголовок:</label>
+                                <label for="event-title" data-translate="event_title">Заголовок:</label>
                                 <input type="text" id="event-title" name="event-title" class="event-main-input main-page-input">
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="event-hide-later">Прятать позже:</label>
+                                <label for="event-hide-later" data-translate="event_hide_later">Прятать позже:</label>
                                 <select id="event-hide-later" name="event-hide-later" class="event-main-input main-page-input">
-                                    <option value="false">Нет</option>
-                                    <option value="true">Да</option>
+                                    <option value="false" data-translate="no">Нет</option>
+                                    <option value="true" data-translate="yes">Да</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="event-delete-turns">Удалить через (ходов):</label>
+                                <label for="event-delete-turns" data-translate="event_delete_turns">Удалить через (ходов):</label>
                                 <input type="number" id="event-delete-turns" name="event-delete-turns" min="1" value="1" class="event-main-input main-page-input">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="event-description">Описание события:</label>
+                            <label for="event-description" data-translate="event_description">Описание события:</label>
                             <textarea id="event-description" name="event-description" class="event-main-textarea main-page-textarea"></textarea>
                         </div>
 
@@ -465,20 +532,20 @@
 
                     <div class="event-answers">
                         <div class="answer-block">
-                            <h3>Ответ 1</h3>
+                            <h3 data-translate="answer_1_title">Ответ 1</h3>
                             <div class="form-group">
-                                <label for="event-answer1">Текст ответа:</label>
+                                <label for="event-answer1" data-translate="answer_text">Текст ответа:</label>
                                 <input type="text" id="event-answer1" name="event-answer1" class="event-answers-item main-page-input">
                             </div>
                             <div class="form-group">
-                                <label for="event-description1">Описание результата:</label>
+                                <label for="event-description1" data-translate="result_description">Описание результата:</label>
                                 <textarea id="event-description1" name="event-description1" rows="3" class="event-answers-item main-page-textarea"></textarea>
                             </div>
                             <div class="form-group">
-                                <label for="event-auto-answer1">Выбирать при игнорировании:</label>
+                                <label for="event-auto-answer1" data-translate="auto_select_if_ignored">Выбирать при игнорировании:</label>
                                 <select id="event-auto-answer1" name="event-auto-answer1" class="event-answers-item main-page-input">
-                                    <option value="false">Нет</option>
-                                    <option value="true">Да</option>
+                                    <option value="false" data-translate="no">Нет</option>
+                                    <option value="true" data-translate="yes">Да</option>
                                 </select>
                             </div>
                             <div class="requirements-buttons">
@@ -488,12 +555,12 @@
                         </div>
 
                         <div class="answer-block">
-                            <h3>Ответ 2</h3>
+                            <h3 data-translate="answer_2_title">Ответ 2</h3>
                             <div class="form-group">
-                                <label for="event-answer2-disabled">Включить ответ:</label>
+                                <label for="event-answer2-disabled" data-translate="enable_answer">Включить ответ:</label>
                                 <select id="event-answer2-disabled" name="event-answer2-disabled" class="event-answers-item main-page-input">
-                                    <option value="false">Да</option>
-                                    <option value="true">Нет</option>
+                                    <option value="false" data-translate="yes">Да</option>
+                                    <option value="true" data-translate="no">Нет</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -511,20 +578,20 @@
                         </div>
 
                         <div class="answer-block">
-                            <h3>Ответ 3</h3>
+                            <h3 data-translate="answer_3_title">Ответ 3</h3>
                             <div class="form-group">
-                                <label for="event-answer3-disabled">Включить ответ:</label>
+                                <label for="event-answer3-disabled" data-translate="enable_answer">Включить ответ:</label>
                                 <select id="event-answer3-disabled" name="event-answer3-disabled" class="event-answers-item main-page-input">
-                                    <option value="false">Да</option>
-                                    <option value="true">Нет</option>
+                                    <option value="false" data-translate="yes">Да</option>
+                                    <option value="true" data-translate="no">Нет</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="event-answer3">Текст ответа:</label>
+                                <label for="event-answer3" data-translate="answer_text">Текст ответа:</label>
                                 <input type="text" id="event-answer3" name="event-answer3" class="event-answers-item main-page-input">
                             </div>
                             <div class="form-group">
-                                <label for="event-description3">Описание результата:</label>
+                                <label for="event-description3" data-translate="result_description">Описание результата:</label>
                                 <textarea id="event-description3" name="event-description3" rows="3" class="event-answers-item main-page-textarea"></textarea>
                             </div>
                             <div class="requirements-buttons">
@@ -646,7 +713,7 @@
                 <div class="reform-header">
                     <div class="reform-title">
                         <button id="back-to-reforms" class="action-button back">Назад</button>
-                        <h2>Редактирование реформы</h2>
+                        <h2 data-translate="edit_reform">Редактирование реформы</h2>
                     </div>
                     <div class="reform-actions">
                         <button id="copy-reform" class="action-button">Копировать</button>
@@ -657,36 +724,37 @@
                 </div>
                 <form id="reform-form">
                     <div class="form-group">
-                        <label for="reform-name">Название</label>
+                        <label for="reform-name" data-translate="name">Название</label>
                         <input type="text" id="reform-name" class="main-page-input" required>
                     </div>
                     <div class="form-group">
                         <label>Цвет</label>
                         <div class="color-inputs">
                             <div class="color-input">
-                                <label for="reform-color-r">R</label>
+                                <label for="reform-color-r" data-translate="color_r">R</label>
                                 <input type="number" id="reform-color-r" class="main-page-input" min="0" max="255" required>
                             </div>
                             <div class="color-input">
-                                <label for="reform-color-g">G</label>
+                                <label for="reform-color-g" data-translate="color_g">G</label>
                                 <input type="number" id="reform-color-g" class="main-page-input" min="0" max="255" required>
                             </div>
                             <div class="color-input">
-                                <label for="reform-color-b">B</label>
+                                <label for="reform-color-b" data-translate="color_b">B</label>
                                 <input type="number" id="reform-color-b" class="main-page-input" min="0" max="255" required>
                             </div>
+                            <button type="button" id="random-reform-color" class="action-button" data-translate="random_color" title="Random Color">R</button>
                             <div id="reform-color-preview" class="color-preview"></div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="reform-ideology">Требуемая идеология</label>
+                        <label for="reform-ideology" data-translate="required_ideology">Требуемая идеология</label>
                         <select id="reform-ideology" class="main-page-input" required>
-                            <option value="Democracy">Democracy</option>
-                            <option value="Monarchy">Monarchy</option>
-                            <option value="Communism">Communism</option>
-                            <option value="Fascism">Fascism</option>
-                            <option value="Theocracy">Theocracy</option>
-                            <option value="Trade Republic">Trade Republic</option>
+                            <option value="Democracy" data-translate="democracy">Democracy</option>
+                            <option value="Monarchy" data-translate="monarchy">Monarchy</option>
+                            <option value="Communism" data-translate="communism">Communism</option>
+                            <option value="Fascism" data-translate="fascism">Fascism</option>
+                            <option value="Theocracy" data-translate="theocracy">Theocracy</option>
+                            <option value="Trade Republic" data-translate="trade_republic">Trade Republic</option>
                         </select>
                     </div>
                 </form>

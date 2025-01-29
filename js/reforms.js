@@ -36,6 +36,9 @@ class ReformManager {
         headers.forEach((header, index) => {
             header.addEventListener('click', () => this.sortReforms(index));
         });
+
+        // Обработчик для кнопки случайного цвета реформы
+        document.getElementById('random-reform-color').addEventListener('click', () => this.randomReformColor());
     }
 
     openReforms(countryId) {
@@ -321,6 +324,18 @@ class ReformManager {
 
         this.updateReformsList();
         this.saveChanges();
+    }
+
+    randomReformColor() {
+        const r = Math.floor(Math.random() * 256);
+        const g = Math.floor(Math.random() * 256);
+        const b = Math.floor(Math.random() * 256);
+        
+        document.getElementById('reform-color-r').value = r;
+        document.getElementById('reform-color-g').value = g;
+        document.getElementById('reform-color-b').value = b;
+        
+        this.updateReformColorPreview();
     }
 }
 

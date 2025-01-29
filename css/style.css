@@ -10,7 +10,6 @@ body {
     display: flex;
     flex-direction: row-reverse;
     width: 100%;
-    min-height: 100vh;
     gap: 0;
     padding: 20px;
     box-sizing: border-box;
@@ -357,6 +356,8 @@ body {
 
 .language-switcher {
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .nav-button {
@@ -1104,4 +1105,237 @@ body {
 .with-checkmark {
     color: #3498db;
     font-weight: 500;
+}
+
+.nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 16px;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    color: var(--text-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+    width: 32px;
+    height: 32px;
+    position: relative;
+}
+
+.icon-button:hover {
+    background-color: var(--hover-color);
+}
+
+.icon-button svg {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.language-switcher {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+#currentLang {
+    min-width: 32px;
+    min-height: 32px;
+    padding: 0;
+    overflow: hidden;
+}
+
+#currentLang::after {
+    display: none;
+}
+
+.lang-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 0;
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    min-width: 120px;
+}
+
+.lang-dropdown.active {
+    display: block;
+}
+
+.lang-dropdown a {
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: background-color 0.2s;
+}
+
+.lang-dropdown a:hover {
+    background-color: var(--hover-color);
+}
+
+.account-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 0;
+    background-color: #242424;
+    border: 1px solid #404040;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    min-width: 200px;
+    z-index: 1000;
+    padding: 8px 0;
+}
+
+.account-dropdown.active {
+    display: block;
+}
+
+.account-info {
+    padding: 12px 16px;
+    border-bottom: 1px solid #404040;
+    margin-bottom: 8px;
+}
+
+.account-name {
+    font-weight: 500;
+    font-size: 14px;
+    color: #e0e0e0;
+}
+
+.account-id {
+    font-size: 12px;
+    color: #888;
+    margin-top: 4px;
+}
+
+.account-divider {
+    height: 1px;
+    background-color: #404040;
+    margin: 8px 0;
+}
+
+.account-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 16px;
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.account-item:hover {
+    background-color: #2a2a2a;
+}
+
+.account-item svg {
+    flex-shrink: 0;
+    color: #888;
+}
+
+.account-item:hover svg {
+    color: #e0e0e0;
+}
+
+#account-button {
+    position: relative;
+}
+
+.void {
+    display: none;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    visibility: hidden;
+}
+
+:root {
+    --text-color: #333;
+    --background-color: #fff;
+    --border-color: #ddd;
+    --hover-color: rgba(0, 0, 0, 0.05);
+}
+
+.dark-theme {
+    --text-color: #fff;
+    --background-color: #1e1e1e;
+    --border-color: #333;
+    --hover-color: rgba(255, 255, 255, 0.1);
+}
+
+.lang-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.lang-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+#currentLang {
+    min-width: 32px;
+    min-height: 32px;
+    padding: 0;
+    overflow: hidden;
+}
+
+#currentLang::after {
+    display: none;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    color: var(--text-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+    width: 32px;
+    height: 32px;
+    position: relative;
+}
+
+.void {
+    display: none;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    visibility: hidden;
 }
