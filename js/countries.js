@@ -273,54 +273,18 @@ class CountryManager {
     }
 
     createNewCountry() {
-        const modal = document.createElement('div');
-        modal.className = 'modal active';
-        modal.innerHTML = `
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 data-translate="new_country">Новая страна</h3>
-                    <button class="close-modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label data-translate="name">Название</label>
-                        <input type="text" id="new-country-name" class="main-page-input">
-                    </div>
-                    <div class="form-group">
-                        <label data-translate="system_name">Системное название</label>
-                        <input type="text" id="new-country-id" class="main-page-input">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="action-button create-country" data-translate="create">Создать</button>
-                </div>
-            </div>
-        `;
-
-        document.body.appendChild(modal);
-
-        const closeModal = () => modal.remove();
-        modal.querySelector('.close-modal').onclick = closeModal;
-
-        modal.querySelector('.create-country').onclick = () => {
-            const name = modal.querySelector('#new-country-name').value.trim();
-            const id = modal.querySelector('#new-country-id').value.trim();
-
-            if (!name || !id) {
-                alert(window.translator.translate('fill_all_fields'));
-                return;
-            }
-
-            if (this.jsonData.lands[id]) {
-                alert(window.translator.translate('country_exists'));
-                return;
-        }
-
         this.pushToUndoStack();
 
+        // Находим наименьший незанятый ID
+        let nextNumber = 1;
+        while (this.jsonData.lands[`civilization_${nextNumber}`]) {
+            nextNumber++;
+        }
+        const newId = `civilization_${nextNumber}`;
+
         // Создаем новую страну
-            this.jsonData.lands[id] = {
-                name: name,
+        this.jsonData.lands[newId] = {
+            name: 'New country',
             color: [128, 128, 128, 255],
             capital: 0,
             capital_name: '',
@@ -337,10 +301,8 @@ class CountryManager {
 
         // Обновляем список и открываем редактор
         this.updateCountriesList();
-        this.openCountry(id);
+        this.openCountry(newId);
         this.saveChanges();
-            closeModal();
-        };
     }
 
     generateUniqueId() {
