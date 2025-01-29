@@ -2,35 +2,54 @@ class CryptoManager {
     constructor() {
         this.encoder = new TextEncoder();
         this.decoder = new TextDecoder();
+        this.loadOrGenerateKey();
+    }
+
+    loadOrGenerateKey() {
+        const savedKey = localStorage.getItem('cryptoKey');
+        if (savedKey) {
+            console.log('🔑 Загружен существующий ключ шифрования');
+            this.encryptionKey = savedKey;
+        } else {
+            this.encryptionKey = this.generateRandomPassword();
+            localStorage.setItem('cryptoKey', this.encryptionKey);
+            console.log('🔑 Создан новый ключ шифрования');
+        }
     }
 
     // Генерация ключа шифрования из строки
     async generateKey(password) {
-        const keyMaterial = await crypto.subtle.importKey(
-            'raw',
-            this.encoder.encode(password),
-            { name: 'PBKDF2' },
-            false,
-            ['deriveBits', 'deriveKey']
-        );
+        try {
+            const keyMaterial = await crypto.subtle.importKey(
+                'raw',
+                this.encoder.encode(password),
+                { name: 'PBKDF2' },
+                false,
+                ['deriveBits', 'deriveKey']
+            );
 
-        return crypto.subtle.deriveKey(
-            {
-                name: 'PBKDF2',
-                salt: this.encoder.encode('EEditor-Salt'),
-                iterations: 100000,
-                hash: 'SHA-256'
-            },
-            keyMaterial,
-            { name: 'AES-GCM', length: 256 },
-            true,
-            ['encrypt', 'decrypt']
-        );
+            return crypto.subtle.deriveKey(
+                {
+                    name: 'PBKDF2',
+                    salt: this.encoder.encode('EEditor-Salt'),
+                    iterations: 100000,
+                    hash: 'SHA-256'
+                },
+                keyMaterial,
+                { name: 'AES-GCM', length: 256 },
+                true,
+                ['encrypt', 'decrypt']
+            );
+        } catch (error) {
+            console.error('❌ Ошибка генерации ключа:', error);
+            throw error;
+        }
     }
 
     // Шифрование данных
-    async encrypt(data, password) {
+    async encrypt(data, password = this.encryptionKey) {
         try {
+            console.log('🔐 Начало шифрования данных...');
             const key = await this.generateKey(password);
             const iv = crypto.getRandomValues(new Uint8Array(12));
             const encryptedContent = await crypto.subtle.encrypt(
@@ -47,16 +66,19 @@ class CryptoManager {
             resultArray.set(iv);
             resultArray.set(encryptedArray, iv.length);
 
-            return btoa(String.fromCharCode.apply(null, resultArray));
+            const result = btoa(String.fromCharCode.apply(null, resultArray));
+            console.log('✅ Данные успешно зашифрованы');
+            return result;
         } catch (error) {
-            console.error('Ошибка шифрования:', error);
-            return null;
+            console.error('❌ Ошибка шифрования:', error);
+            throw error;
         }
     }
 
     // Расшифровка данных
-    async decrypt(encryptedData, password) {
+    async decrypt(encryptedData, password = this.encryptionKey) {
         try {
+            console.log('🔓 Начало расшифровки данных...');
             const key = await this.generateKey(password);
             const encryptedArray = Uint8Array.from(atob(encryptedData), c => c.charCodeAt(0));
             
@@ -72,9 +94,11 @@ class CryptoManager {
                 data
             );
 
-            return JSON.parse(this.decoder.decode(decryptedContent));
+            const result = JSON.parse(this.decoder.decode(decryptedContent));
+            console.log('✅ Данные успешно расшифрованы');
+            return result;
         } catch (error) {
-            console.error('Ошибка расшифровки:', error);
+            console.error('❌ Ошибка расшифровки:', error);
             return null;
         }
     }

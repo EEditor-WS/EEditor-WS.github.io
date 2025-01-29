@@ -8,7 +8,6 @@ class AuthManager {
     constructor() {
         console.log('🔄 Инициализация AuthManager...');
         this.currentUser = null;
-        this.encryptionKey = window.cryptoManager.generateRandomPassword();
         this.loadUserData();
     }
 
@@ -38,31 +37,31 @@ class AuthManager {
             const encryptedData = this.getCookie(COOKIE_NAME);
             if (encryptedData) {
                 console.log('🍪 Найдены данные в Cookie');
-                this.currentUser = await window.cryptoManager.decrypt(encryptedData, this.encryptionKey);
-                console.log('✅ Данные из Cookie успешно расшифрованы');
-            }
-
-            // Если нет в Cookie, пробуем из localStorage
-            if (!this.currentUser) {
-                console.log('🔍 Поиск данных в localStorage...');
-                const localData = localStorage.getItem('userData');
-                if (localData) {
-                    console.log('💾 Найдены данные в localStorage');
-                    this.currentUser = await window.cryptoManager.decrypt(localData, this.encryptionKey);
-                    console.log('✅ Данные из localStorage успешно расшифрованы');
+                this.currentUser = await window.cryptoManager.decrypt(encryptedData);
+                if (this.currentUser) {
+                    console.log('✅ Данные из Cookie успешно расшифрованы');
+                    this.updateUI();
+                    return;
                 }
             }
 
-            if (this.currentUser) {
-                console.log('👤 Данные пользователя загружены:', {
-                    id: this.currentUser.id,
-                    username: this.currentUser.username,
-                    displayName: this.currentUser.displayName
-                });
-                this.updateUI();
-            } else {
-                console.log('ℹ️ Пользователь не авторизован');
+            // Если нет в Cookie, пробуем из localStorage
+            console.log('🔍 Поиск данных в localStorage...');
+            const localData = localStorage.getItem('userData');
+            if (localData) {
+                console.log('💾 Найдены данные в localStorage');
+                this.currentUser = await window.cryptoManager.decrypt(localData);
+                if (this.currentUser) {
+                    console.log('✅ Данные из localStorage успешно расшифрованы');
+                    // Восстанавливаем Cookie из localStorage
+                    this.setCookie(COOKIE_NAME, localData, COOKIE_EXPIRES_DAYS);
+                    this.updateUI();
+                    return;
+                }
             }
+
+            console.log('ℹ️ Пользователь не авторизован');
+            this.updateUI();
         } catch (error) {
             console.error('❌ Ошибка при загрузке данных пользователя:', error);
             this.logout();
@@ -71,7 +70,7 @@ class AuthManager {
 
     async saveUserData(userData) {
         try {
-            const encryptedData = await window.cryptoManager.encrypt(userData, this.encryptionKey);
+            const encryptedData = await window.cryptoManager.encrypt(userData);
             
             // Сохраняем в Cookie
             this.setCookie(COOKIE_NAME, encryptedData, COOKIE_EXPIRES_DAYS);
@@ -88,7 +87,7 @@ class AuthManager {
 
     async saveUserToGithub(userData) {
         const filename = `users/${userData.id}.json`;
-        const encryptedData = await window.cryptoManager.encrypt(userData, this.encryptionKey);
+        const encryptedData = await window.cryptoManager.encrypt(userData);
         
         try {
             const githubToken = await getGithubToken();
@@ -149,7 +148,7 @@ class AuthManager {
                     username: data.username,
                     displayName: data.global_name || data.username,
                     avatar: `https://cdn.discord.com/avatars/${data.id}/${data.avatar}.png`,
-                    accessToken: await window.cryptoManager.encrypt(accessToken, this.encryptionKey)
+                    accessToken: await window.cryptoManager.encrypt(accessToken)
                 };
 
                 await this.saveUserToGithub(userData);
@@ -167,10 +166,8 @@ class AuthManager {
         localStorage.removeItem('userData');
         console.log('💾 Данные удалены из localStorage');
         this.currentUser = null;
-        this.encryptionKey = window.cryptoManager.generateRandomPassword();
-        console.log('🔑 Ключ шифрования сброшен');
-        this.updateUI();
         console.log('✅ Выход выполнен успешно');
+        this.updateUI();
     }
 
     updateUI() {
