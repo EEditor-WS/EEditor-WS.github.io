@@ -34,26 +34,40 @@ class AuthCallback {
             }
 
             console.log('🔑 Токен GitHub получен успешно');
+            console.log('🔍 Проверка существующего файла...');
 
             // Сначала проверяем, существует ли файл
+            let sha = null;
             try {
                 const checkResponse = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${filename}`, {
                     headers: {
-                        'Authorization': `token ${githubToken}`,
-                        'Accept': 'application/vnd.github.v3+json'
+                        'Authorization': `Bearer ${githubToken}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'X-GitHub-Api-Version': '2022-11-28'
                     }
                 });
 
-                let sha = null;
                 if (checkResponse.ok) {
                     const fileData = await checkResponse.json();
                     sha = fileData.sha;
                     console.log('📄 Найден существующий файл, SHA:', sha);
+                } else if (checkResponse.status !== 404) {
+                    const errorText = await checkResponse.text();
+                    console.error('❌ Ошибка проверки файла:', errorText);
+                    throw new Error(`GitHub API error: ${checkResponse.status} ${errorText}`);
                 }
 
                 // Подготавливаем данные для сохранения
-                const encryptedData = await window.cryptoManager.encrypt(userData, this.encryptionKey);
-                const content = btoa(unescape(encodeURIComponent(JSON.stringify(userData))));
+                console.log('📝 Подготовка данных...');
+                const dataToSave = {
+                    id: userData.id,
+                    username: userData.username,
+                    displayName: userData.displayName,
+                    avatar: userData.avatar,
+                    lastUpdate: new Date().toISOString()
+                };
+
+                const content = btoa(unescape(encodeURIComponent(JSON.stringify(dataToSave, null, 2))));
 
                 const body = {
                     message: `Update user data for ${userData.username}`,
@@ -61,7 +75,6 @@ class AuthCallback {
                     branch: 'main'
                 };
 
-                // Если файл существует, добавляем его SHA
                 if (sha) {
                     body.sha = sha;
                 }
@@ -70,9 +83,10 @@ class AuthCallback {
                 const response = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${filename}`, {
                     method: 'PUT',
                     headers: {
-                        'Authorization': `token ${githubToken}`,
+                        'Authorization': `Bearer ${githubToken}`,
                         'Accept': 'application/vnd.github.v3+json',
                         'Content-Type': 'application/json',
+                        'X-GitHub-Api-Version': '2022-11-28'
                     },
                     body: JSON.stringify(body)
                 });
@@ -84,6 +98,7 @@ class AuthCallback {
                 }
 
                 console.log('✅ Данные успешно сохранены в GitHub');
+                return true;
             } catch (apiError) {
                 console.error('❌ Ошибка при работе с GitHub API:', apiError);
                 throw apiError;

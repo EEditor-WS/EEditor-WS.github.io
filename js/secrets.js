@@ -24,23 +24,30 @@ async function getGithubToken() {
             SECRETS.gh_t5
         ];
         
-        // Собираем токен из частей
-        const encodedToken = parts.map(part => {
+        // Собираем токен из частей и декодируем
+        let token = '';
+        for (const part of parts) {
             try {
-                return atob(part);
+                token += atob(part);
             } catch (e) {
                 console.error('❌ Ошибка декодирования части токена:', e);
-                return '';
+                return null;
             }
-        }).join('');
+        }
         
-        if (!encodedToken) {
+        if (!token) {
             console.error('❌ Не удалось собрать токен');
             return null;
         }
 
+        // Проверяем формат токена
+        if (!token.startsWith('github_pat_')) {
+            console.error('❌ Неверный формат токена');
+            return null;
+        }
+
         console.log('✅ Токен GitHub успешно собран');
-        return encodedToken;
+        return token;
     } catch (error) {
         console.error('❌ Ошибка при получении токена:', error);
         return null;
