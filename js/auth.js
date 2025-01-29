@@ -201,6 +201,8 @@ class AuthManager {
         const accountName = document.querySelector('.account-name');
         const accountId = document.querySelector('.account-id');
         const accountAvatar = document.querySelector('.account-avatar');
+        const accountButtonAvatar = document.querySelector('.account-button-avatar');
+        const accountButtonIcon = document.querySelector('.account-button-icon');
         const loginItem = document.querySelector('[data-action="login"]');
         const registerItem = document.querySelector('[data-action="register"]');
         const logoutItem = document.querySelector('[data-action="logout"]');
@@ -222,20 +224,20 @@ class AuthManager {
             accountName.textContent = this.currentUser.displayName || this.currentUser.username;
             accountId.textContent = `@${this.currentUser.username}`;
             
+            // Обновляем аватарку в выпадающем меню
             if (accountAvatar) {
                 if (this.currentUser.avatar) {
-                    console.log('🖼️ Установка аватарки:', this.currentUser.avatar);
-                    // Сначала скрываем старую аватарку
+                    console.log('🖼️ Установка аватарки в меню:', this.currentUser.avatar);
                     accountAvatar.style.display = 'none';
-                    // Устанавливаем новый src
                     accountAvatar.src = this.currentUser.avatar;
-                    // Добавляем обработчики
                     accountAvatar.onerror = () => {
-                        console.error('❌ Ошибка загрузки аватарки');
+                        console.error('❌ Ошибка загрузки аватарки в меню');
                         accountAvatar.style.display = 'none';
+                        if (accountButtonIcon) accountButtonIcon.style.display = 'block';
+                        if (accountButtonAvatar) accountButtonAvatar.style.display = 'none';
                     };
                     accountAvatar.onload = () => {
-                        console.log('✅ Аватарка успешно загружена');
+                        console.log('✅ Аватарка в меню успешно загружена');
                         accountAvatar.style.display = 'block';
                     };
                 } else {
@@ -243,8 +245,29 @@ class AuthManager {
                     accountAvatar.style.display = 'none';
                     accountAvatar.src = '';
                 }
-            } else {
-                console.log('ℹ️ Элемент аватарки не найден на странице');
+            }
+
+            // Обновляем аватарку в кнопке
+            if (accountButtonAvatar && accountButtonIcon) {
+                if (this.currentUser.avatar) {
+                    console.log('🖼️ Установка аватарки в кнопке:', this.currentUser.avatar);
+                    accountButtonAvatar.style.display = 'none';
+                    accountButtonAvatar.src = this.currentUser.avatar;
+                    accountButtonAvatar.onerror = () => {
+                        console.error('❌ Ошибка загрузки аватарки в кнопке');
+                        accountButtonIcon.style.display = 'block';
+                        accountButtonAvatar.style.display = 'none';
+                    };
+                    accountButtonAvatar.onload = () => {
+                        console.log('✅ Аватарка в кнопке успешно загружена');
+                        accountButtonIcon.style.display = 'none';
+                        accountButtonAvatar.style.display = 'block';
+                    };
+                } else {
+                    accountButtonIcon.style.display = 'block';
+                    accountButtonAvatar.style.display = 'none';
+                    accountButtonAvatar.src = '';
+                }
             }
 
             if (loginItem) loginItem.style.display = 'none';
@@ -256,9 +279,17 @@ class AuthManager {
             accountName.textContent = 'Гость';
             accountId.textContent = '#0000';
             
+            // Скрываем аватарку в выпадающем меню
             if (accountAvatar) {
                 accountAvatar.style.display = 'none';
                 accountAvatar.src = '';
+            }
+
+            // Возвращаем иконку в кнопке
+            if (accountButtonAvatar && accountButtonIcon) {
+                accountButtonIcon.style.display = 'block';
+                accountButtonAvatar.style.display = 'none';
+                accountButtonAvatar.src = '';
             }
 
             if (loginItem) loginItem.style.display = 'flex';
