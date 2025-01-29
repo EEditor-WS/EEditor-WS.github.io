@@ -1,35 +1,72 @@
 const DISCORD_CLIENT_ID = '1333948751919972434'; // Замените на ваш Client ID
 const DISCORD_REDIRECT_URI = window.location.origin + '/auth/discord/callback';
 const GITHUB_REPO = 'EE-Apps/ws-eeditor.accounts';
+const COOKIE_NAME = 'ee_auth';
+const COOKIE_EXPIRES_DAYS = 30;
 
 class AuthManager {
     constructor() {
         this.currentUser = null;
         this.encryptionKey = window.cryptoManager.generateRandomPassword();
-        this.loadUserFromLocalStorage();
+        this.loadUserData();
     }
 
-    async loadUserFromLocalStorage() {
-        const encryptedData = localStorage.getItem('userData');
-        if (encryptedData) {
-            try {
+    setCookie(name, value, days) {
+        const expires = new Date();
+        expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+        document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/;SameSite=Strict`;
+    }
+
+    getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        return null;
+    }
+
+    deleteCookie(name) {
+        document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+    }
+
+    async loadUserData() {
+        try {
+            // Пробуем загрузить из Cookie
+            const encryptedData = this.getCookie(COOKIE_NAME);
+            if (encryptedData) {
                 this.currentUser = await window.cryptoManager.decrypt(encryptedData, this.encryptionKey);
-                this.updateUI();
-            } catch (error) {
-                console.error('Ошибка при расшифровке данных пользователя:', error);
-                this.logout();
             }
+
+            // Если нет в Cookie, пробуем из localStorage
+            if (!this.currentUser) {
+                const localData = localStorage.getItem('userData');
+                if (localData) {
+                    this.currentUser = await window.cryptoManager.decrypt(localData, this.encryptionKey);
+                }
+            }
+
+            if (this.currentUser) {
+                this.updateUI();
+            }
+        } catch (error) {
+            console.error('Ошибка при загрузке данных пользователя:', error);
+            this.logout();
         }
     }
 
-    async saveUserToLocalStorage(userData) {
+    async saveUserData(userData) {
         try {
             const encryptedData = await window.cryptoManager.encrypt(userData, this.encryptionKey);
+            
+            // Сохраняем в Cookie
+            this.setCookie(COOKIE_NAME, encryptedData, COOKIE_EXPIRES_DAYS);
+            
+            // Сохраняем в localStorage как резервную копию
             localStorage.setItem('userData', encryptedData);
+            
             this.currentUser = userData;
             this.updateUI();
         } catch (error) {
-            console.error('Ошибка при шифровании данных пользователя:', error);
+            console.error('Ошибка при сохранении данных пользователя:', error);
         }
     }
 
@@ -99,7 +136,7 @@ class AuthManager {
                 };
 
                 await this.saveUserToGithub(userData);
-                await this.saveUserToLocalStorage(userData);
+                await this.saveUserData(userData);
                 window.location.href = '/';
             } catch (error) {
                 console.error('Ошибка при авторизации через Discord:', error);
@@ -108,6 +145,7 @@ class AuthManager {
     }
 
     logout() {
+        this.deleteCookie(COOKIE_NAME);
         localStorage.removeItem('userData');
         this.currentUser = null;
         this.encryptionKey = window.cryptoManager.generateRandomPassword();
@@ -117,6 +155,7 @@ class AuthManager {
     updateUI() {
         const accountName = document.querySelector('.account-name');
         const accountId = document.querySelector('.account-id');
+        const accountAvatar = document.querySelector('.account-avatar');
         const loginItem = document.querySelector('[data-action="login"]');
         const registerItem = document.querySelector('[data-action="register"]');
         const logoutItem = document.querySelector('[data-action="logout"]');
@@ -124,12 +163,20 @@ class AuthManager {
         if (this.currentUser) {
             accountName.textContent = this.currentUser.displayName;
             accountId.textContent = `@${this.currentUser.username}`;
+            if (accountAvatar) {
+                accountAvatar.src = this.currentUser.avatar;
+                accountAvatar.style.display = 'block';
+            }
             loginItem.style.display = 'none';
             registerItem.style.display = 'none';
             logoutItem.style.display = 'flex';
         } else {
             accountName.textContent = 'Гость';
             accountId.textContent = '#0000';
+            if (accountAvatar) {
+                accountAvatar.src = '';
+                accountAvatar.style.display = 'none';
+            }
             loginItem.style.display = 'flex';
             registerItem.style.display = 'flex';
             logoutItem.style.display = 'none';
