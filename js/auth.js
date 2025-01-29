@@ -139,36 +139,52 @@ class AuthManager {
     }
 
     async handleDiscordCallback() {
+        console.log('🔄 Обработка callback Discord...');
         const fragment = new URLSearchParams(window.location.hash.slice(1));
         const accessToken = fragment.get('access_token');
+        const error = fragment.get('error');
+        const errorDescription = fragment.get('error_description');
 
-        if (accessToken) {
-            try {
-                const response = await fetch('https://discord.com/api/users/@me', {
-                    headers: {
-                        'Authorization': `Bearer ${accessToken}`
-                    }
-                });
+        if (error) {
+            console.error('❌ Ошибка авторизации Discord:', errorDescription);
+            return;
+        }
 
-                if (!response.ok) {
-                    throw new Error('Failed to fetch user data');
+        if (!accessToken) {
+            console.error('❌ Токен доступа не найден');
+            return;
+        }
+
+        try {
+            console.log('🔑 Получен токен доступа, запрашиваем данные пользователя...');
+            const response = await fetch('https://discord.com/api/users/@me', {
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`
                 }
+            });
 
-                const data = await response.json();
-                const userData = {
-                    id: data.id,
-                    username: data.username,
-                    displayName: data.global_name || data.username,
-                    avatar: `https://cdn.discord.com/avatars/${data.id}/${data.avatar}.png`,
-                    accessToken: await window.cryptoManager.encrypt(accessToken)
-                };
-
-                await this.saveUserToGithub(userData);
-                await this.saveUserData(userData);
-                window.location.href = '/';
-            } catch (error) {
-                console.error('Ошибка при авторизации через Discord:', error);
+            if (!response.ok) {
+                throw new Error(`Ошибка получения данных: ${response.status}`);
             }
+
+            const data = await response.json();
+            console.log('👤 Получены данные пользователя Discord:', data);
+
+            const userData = {
+                id: data.id,
+                username: data.username,
+                displayName: data.global_name || data.username,
+                avatar: data.avatar ? `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png` : null
+            };
+
+            // Сохраняем данные
+            localStorage.setItem('userData', JSON.stringify(userData));
+            console.log('✅ Данные пользователя сохранены:', userData);
+
+            // Перенаправляем на главную
+            window.location.href = '/';
+        } catch (error) {
+            console.error('❌ Ошибка при получении данных пользователя:', error);
         }
     }
 
@@ -209,8 +225,11 @@ class AuthManager {
             if (accountAvatar) {
                 if (this.currentUser.avatar) {
                     console.log('🖼️ Установка аватарки:', this.currentUser.avatar);
+                    // Сначала скрываем старую аватарку
+                    accountAvatar.style.display = 'none';
+                    // Устанавливаем новый src
                     accountAvatar.src = this.currentUser.avatar;
-                    accountAvatar.style.display = 'block';
+                    // Добавляем обработчики
                     accountAvatar.onerror = () => {
                         console.error('❌ Ошибка загрузки аватарки');
                         accountAvatar.style.display = 'none';
@@ -222,6 +241,7 @@ class AuthManager {
                 } else {
                     console.log('ℹ️ Аватарка отсутствует');
                     accountAvatar.style.display = 'none';
+                    accountAvatar.src = '';
                 }
             } else {
                 console.log('ℹ️ Элемент аватарки не найден на странице');
