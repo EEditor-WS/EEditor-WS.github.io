@@ -13,6 +13,8 @@ const SECRETS = {
 // Функция для сборки и расшифровки токена
 async function getGithubToken() {
     try {
+        console.log('🔄 Начало получения токена GitHub...');
+        
         // Собираем части токена
         const parts = [
             SECRETS.gh_t1,
@@ -23,15 +25,24 @@ async function getGithubToken() {
         ];
         
         // Собираем токен из частей
-        const encodedToken = parts.map(part => atob(part)).join('');
+        const encodedToken = parts.map(part => {
+            try {
+                return atob(part);
+            } catch (e) {
+                console.error('❌ Ошибка декодирования части токена:', e);
+                return '';
+            }
+        }).join('');
         
-        // Дополнительно шифруем с использованием соли
-        const salt = atob(SECRETS.salt);
-        const key = await window.cryptoManager.generateKey(salt);
-        
+        if (!encodedToken) {
+            console.error('❌ Не удалось собрать токен');
+            return null;
+        }
+
+        console.log('✅ Токен GitHub успешно собран');
         return encodedToken;
     } catch (error) {
-        console.error('Ошибка при получении токена');
+        console.error('❌ Ошибка при получении токена:', error);
         return null;
     }
 } 

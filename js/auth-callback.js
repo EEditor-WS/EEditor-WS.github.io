@@ -25,7 +25,6 @@ class AuthCallback {
     async saveToGithub(userData) {
         console.log('🌐 Начало сохранения в GitHub...');
         const filename = `users/${userData.id}.json`;
-        const encryptedData = await window.cryptoManager.encrypt(userData, this.encryptionKey);
         
         try {
             const githubToken = await getGithubToken();
@@ -36,25 +35,59 @@ class AuthCallback {
 
             console.log('🔑 Токен GitHub получен успешно');
 
-            const response = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${filename}`, {
-                method: 'PUT',
-                headers: {
-                    'Authorization': `Bearer ${githubToken}`,
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    message: `Update user data for ${userData.username}`,
-                    content: btoa(encryptedData),
-                    branch: 'main'
-                })
-            });
-            
-            if (!response.ok) {
-                console.error('❌ Ошибка сохранения в GitHub:', await response.text());
-                throw new Error('Failed to save user data to GitHub');
-            }
+            // Сначала проверяем, существует ли файл
+            try {
+                const checkResponse = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${filename}`, {
+                    headers: {
+                        'Authorization': `token ${githubToken}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
 
-            console.log('✅ Данные успешно сохранены в GitHub');
+                let sha = null;
+                if (checkResponse.ok) {
+                    const fileData = await checkResponse.json();
+                    sha = fileData.sha;
+                    console.log('📄 Найден существующий файл, SHA:', sha);
+                }
+
+                // Подготавливаем данные для сохранения
+                const encryptedData = await window.cryptoManager.encrypt(userData, this.encryptionKey);
+                const content = btoa(unescape(encodeURIComponent(JSON.stringify(userData))));
+
+                const body = {
+                    message: `Update user data for ${userData.username}`,
+                    content: content,
+                    branch: 'main'
+                };
+
+                // Если файл существует, добавляем его SHA
+                if (sha) {
+                    body.sha = sha;
+                }
+
+                console.log('📤 Отправка данных в GitHub...');
+                const response = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${filename}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${githubToken}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(body)
+                });
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('❌ Ошибка сохранения в GitHub:', errorText);
+                    throw new Error(`GitHub API error: ${response.status} ${errorText}`);
+                }
+
+                console.log('✅ Данные успешно сохранены в GitHub');
+            } catch (apiError) {
+                console.error('❌ Ошибка при работе с GitHub API:', apiError);
+                throw apiError;
+            }
         } catch (error) {
             console.error('❌ Ошибка сохранения в GitHub:', error);
             throw error;
