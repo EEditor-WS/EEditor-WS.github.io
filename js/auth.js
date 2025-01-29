@@ -43,6 +43,17 @@ class AuthManager {
     init() {
         console.log('🔄 Инициализация интерфейса...');
         
+        // Восстанавливаем сохраненный язык или устанавливаем русский по умолчанию
+        const savedLang = localStorage.getItem('selectedLanguage') || 'ru';
+        console.log('🌐 Восстановление сохраненного языка:', savedLang);
+        document.body.setAttribute('data-lang', savedLang);
+        
+        // Обновляем текст текущего языка
+        const currentLang = document.getElementById('currentLang');
+        if (currentLang) {
+            currentLang.textContent = this.getLanguageName(savedLang);
+        }
+        
         // Проверяем, есть ли элементы интерфейса на странице
         const hasInterface = document.querySelector('.account-name') !== null;
         
@@ -62,14 +73,50 @@ class AuthManager {
             // Обновляем переводы при смене языка
             document.addEventListener('languageChanged', (event) => {
                 console.log('🌐 Смена языка:', event.detail.language);
-                this.updateUI();
+                // Сохраняем выбранный язык
+                localStorage.setItem('selectedLanguage', event.detail.language);
+                this.updateTranslations(event.detail.language);
             });
+
+            // Обновляем переводы при инициализации
+            this.updateTranslations(savedLang);
         } else {
             console.log('ℹ️ Элементы интерфейса не найдены на этой странице');
         }
 
         // Загружаем данные пользователя в любом случае
         this.loadUserData();
+    }
+
+    updateTranslations(lang) {
+        console.log('🌐 Обновление переводов для языка:', lang);
+        
+        // Обновляем текст кнопок
+        const elements = {
+            login: document.querySelector('[data-action="login"] [data-translate="login"]'),
+            register: document.querySelector('[data-action="register"] [data-translate="register"]'),
+            settings: document.querySelector('[data-action="settings"] [data-translate="settings"]'),
+            logout: document.querySelector('[data-action="logout"] [data-translate="logout"]'),
+            guest: document.querySelector('.account-name[data-translate="guest"]')
+        };
+
+        // Обновляем тексты, если элементы найдены
+        for (const [key, element] of Object.entries(elements)) {
+            if (element && this.translations[lang] && this.translations[lang][key]) {
+                element.textContent = this.translations[lang][key];
+            }
+        }
+
+        console.log('✅ Переводы обновлены');
+    }
+
+    getLanguageName(lang) {
+        const names = {
+            en: 'English',
+            ru: 'Русский',
+            uk: 'Українська'
+        };
+        return names[lang] || 'English';
     }
 
     setCookie(name, value, days) {
@@ -203,7 +250,8 @@ class AuthManager {
                 id: data.id,
                 username: data.username,
                 displayName: data.global_name || data.username,
-                avatar: data.avatar ? `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png` : null
+                avatar: data.avatar ? `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png` : null,
+                lastLogin: new Date().toISOString()
             };
 
             // Сохраняем данные
@@ -242,11 +290,9 @@ class AuthManager {
             return;
         }
 
-        console.log('🔄 Обновление интерфейса...');
-
         // Получаем текущий язык
         const currentLang = document.body.getAttribute('data-lang') || 'ru';
-        console.log('🌐 Текущий язык:', currentLang);
+        console.log('🔄 Обновление интерфейса для языка:', currentLang);
 
         if (this.currentUser) {
             console.log('👤 Обновление данных пользователя:', {
@@ -254,6 +300,7 @@ class AuthManager {
                 avatar: this.currentUser.avatar
             });
 
+            // Не используем перевод для имени пользователя
             accountName.textContent = this.currentUser.displayName || this.currentUser.username;
             accountId.textContent = `@${this.currentUser.username}`;
             
@@ -312,9 +359,8 @@ class AuthManager {
                     logoutText.textContent = this.translations[currentLang].logout;
                 }
             }
-            
-            console.log('✅ Интерфейс обновлен для авторизованного пользователя');
         } else {
+            // Используем перевод только для гостя
             accountName.textContent = this.translations[currentLang].guest;
             accountId.textContent = '#0000';
             
@@ -346,8 +392,6 @@ class AuthManager {
                 }
             }
             if (logoutItem) logoutItem.style.display = 'none';
-            
-            console.log('✅ Интерфейс обновлен для гостя');
         }
 
         // Обновляем текст настроек
@@ -358,6 +402,9 @@ class AuthManager {
                 settingsText.textContent = this.translations[currentLang].settings;
             }
         }
+        
+        // Обновляем все переводы
+        this.updateTranslations(currentLang);
         
         console.log('✅ Интерфейс обновлен');
     }
