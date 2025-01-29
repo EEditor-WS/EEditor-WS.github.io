@@ -1,6 +1,5 @@
 const DISCORD_CLIENT_ID = '1333948751919972434';
 const DISCORD_REDIRECT_URI = window.location.origin + '/auth/discord/callback';
-const GITHUB_REPO = 'EE-Apps/ws-eeditor.accounts';
 const COOKIE_NAME = 'ee_auth';
 const COOKIE_EXPIRES_DAYS = 30;
 
@@ -22,93 +21,6 @@ class AuthCallback {
         console.log('💾 Данные сохранены в localStorage');
     }
 
-    async saveToGithub(userData) {
-        console.log('🌐 Начало сохранения в GitHub...');
-        const filename = `users/${userData.id}.json`;
-        
-        try {
-            const githubToken = await getGithubToken();
-            if (!githubToken) {
-                console.error('❌ Не удалось получить токен GitHub');
-                throw new Error('Не удалось получить токен GitHub');
-            }
-
-            console.log('🔑 Токен GitHub получен успешно');
-            console.log('🔍 Проверка существующего файла...');
-
-            // Сначала проверяем, существует ли файл
-            let sha = null;
-            try {
-                const checkResponse = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${filename}`, {
-                    headers: {
-                        'Authorization': `Bearer ${githubToken}`,
-                        'Accept': 'application/vnd.github.v3+json',
-                        'X-GitHub-Api-Version': '2022-11-28'
-                    }
-                });
-
-                if (checkResponse.ok) {
-                    const fileData = await checkResponse.json();
-                    sha = fileData.sha;
-                    console.log('📄 Найден существующий файл, SHA:', sha);
-                } else if (checkResponse.status !== 404) {
-                    const errorText = await checkResponse.text();
-                    console.error('❌ Ошибка проверки файла:', errorText);
-                    throw new Error(`GitHub API error: ${checkResponse.status} ${errorText}`);
-                }
-
-                // Подготавливаем данные для сохранения
-                console.log('📝 Подготовка данных...');
-                const dataToSave = {
-                    id: userData.id,
-                    username: userData.username,
-                    displayName: userData.displayName,
-                    avatar: userData.avatar,
-                    lastUpdate: new Date().toISOString()
-                };
-
-                const content = btoa(unescape(encodeURIComponent(JSON.stringify(dataToSave, null, 2))));
-
-                const body = {
-                    message: `Update user data for ${userData.username}`,
-                    content: content,
-                    branch: 'main'
-                };
-
-                if (sha) {
-                    body.sha = sha;
-                }
-
-                console.log('📤 Отправка данных в GitHub...');
-                const response = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${filename}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': `Bearer ${githubToken}`,
-                        'Accept': 'application/vnd.github.v3+json',
-                        'Content-Type': 'application/json',
-                        'X-GitHub-Api-Version': '2022-11-28'
-                    },
-                    body: JSON.stringify(body)
-                });
-                
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    console.error('❌ Ошибка сохранения в GitHub:', errorText);
-                    throw new Error(`GitHub API error: ${response.status} ${errorText}`);
-                }
-
-                console.log('✅ Данные успешно сохранены в GitHub');
-                return true;
-            } catch (apiError) {
-                console.error('❌ Ошибка при работе с GitHub API:', apiError);
-                throw apiError;
-            }
-        } catch (error) {
-            console.error('❌ Ошибка сохранения в GitHub:', error);
-            throw error;
-        }
-    }
-
     async saveUserData(userData) {
         console.log('🔄 Начало сохранения данных пользователя...');
         try {
@@ -120,9 +32,6 @@ class AuthCallback {
             
             // Сохраняем в localStorage
             await this.saveToLocalStorage(encryptedData);
-            
-            // Сохраняем в GitHub
-            await this.saveToGithub(userData);
 
             console.log('✅ Все данные успешно сохранены');
             return true;
@@ -163,11 +72,12 @@ class AuthCallback {
                     username: data.username,
                     displayName: data.global_name || data.username,
                     avatar: `https://cdn.discord.com/avatars/${data.id}/${data.avatar}.png`,
-                    accessToken: await window.cryptoManager.encrypt(accessToken, this.encryptionKey)
+                    accessToken: await window.cryptoManager.encrypt(accessToken, this.encryptionKey),
+                    lastUpdate: new Date().toISOString()
                 };
 
                 if (await this.saveUserData(userData)) {
-                    console.log('✅ Авторизация успешно завершена');
+                    console.log('✅ Авторизация успешно завершена, перенаправление на главную страницу...');
                     window.location.href = '/';
                 } else {
                     console.error('❌ Ошибка сохранения данных');
