@@ -215,7 +215,23 @@ const translations = {
         "guest": "Guest",
         "login": "Login with Discord",
         "register": "Register",
-        "settings": "Settings"
+        "settings": "Settings",
+
+        // Button tooltips
+        "remove_invalid_owners_tooltip": "Remove Invalid Owners\nRemoves countries that have no provinces on the map",
+        "add_country_tooltip": "Add Country\nCreate a new country with default settings",
+        "copy_tooltip": "Copy\nCreate a duplicate of the current item",
+        "delete_tooltip": "Delete\nPermanently remove this item",
+        "add_reform_tooltip": "Add Reform\nCreate a new reform for the current country",
+        "paste_tooltip": "Paste\nAdd a reform from the buffer",
+        "back_tooltip": "Back\nReturn to the previous page",
+        "copy_buffer_tooltip": "Copy to Buffer\nCopy the current reform to buffer for pasting",
+        "load_sync_tooltip": "Load for Sync\nLoad reform data for synchronization",
+        "add_event_tooltip": "Add Event\nCreate a new event",
+        "add_requirement_tooltip": "Add\nAdd a new requirement or bonus",
+        "save_tooltip": "Save\nSave current changes",
+        "cancel_tooltip": "Cancel\nDiscard changes and close",
+        "reforms_tooltip": "Reforms\nManage country reforms"
     },
     "ru": {
         // Главная страница
@@ -429,7 +445,23 @@ const translations = {
         "guest": "Гость",
         "login": "Войти через Discord",
         "register": "Регистрация",
-        "settings": "Настройки"
+        "settings": "Настройки",
+
+        // Button tooltips
+        "remove_invalid_owners_tooltip": "Удалить пустых владельцев\nУдаляет страны, не имеющие провинций на карте",
+        "add_country_tooltip": "Добавить страну\nСоздать новую страну с настройками по умолчанию",
+        "copy_tooltip": "Копировать\nСоздать дубликат текущего элемента",
+        "delete_tooltip": "Удалить\nБезвозвратно удалить этот элемент",
+        "add_reform_tooltip": "Добавить реформу\nСоздать новую реформу для текущей страны",
+        "paste_tooltip": "Вставить\nДобавить реформу из буфера",
+        "back_tooltip": "Назад\nВернуться на предыдущую страницу",
+        "copy_buffer_tooltip": "Копировать в буфер\nСкопировать текущую реформу в буфер для вставки",
+        "load_sync_tooltip": "Загрузить для синхронизации\nЗагрузить данные реформы для синхронизации",
+        "add_event_tooltip": "Добавить событие\nСоздать новое событие",
+        "add_requirement_tooltip": "Добавить\nДобавить новое требование или бонус",
+        "save_tooltip": "Сохранить\nСохранить текущие изменения",
+        "cancel_tooltip": "Отмена\nОтменить изменения и закрыть",
+        "reforms_tooltip": "Реформы\nУправление реформами страны"
     },
     "uk": {
         // Головна сторінка
@@ -643,6 +675,22 @@ const translations = {
         "guest": "Гість",
         "login": "Увійти через Discord",
         "register": "Реєстрація",
-        "settings": "Налаштування"
+        "settings": "Налаштування",
+
+        // Button tooltips
+        "remove_invalid_owners_tooltip": "Видалити порожніх власників\nВидаляє країни, що не мають провінцій на карті",
+        "add_country_tooltip": "Додати країну\nСтворити нову країну з налаштуваннями за замовчуванням",
+        "copy_tooltip": "Копіювати\nСтворити дублікат поточного елемента",
+        "delete_tooltip": "Видалити\nБезповоротно видалити цей елемент",
+        "add_reform_tooltip": "Додати реформу\nСтворити нову реформу для поточної країни",
+        "paste_tooltip": "Вставити\nДодати реформу з буфера",
+        "back_tooltip": "Назад\nПовернутися на попередню сторінку",
+        "copy_buffer_tooltip": "Копіювати в буфер\nСкопіювати поточну реформу в буфер для вставки",
+        "load_sync_tooltip": "Завантажити для синхронізації\nЗавантажити дані реформи для синхронізації",
+        "add_event_tooltip": "Додати подію\nСтворити нову подію",
+        "add_requirement_tooltip": "Додати\nДодати нову вимогу або бонус",
+        "save_tooltip": "Зберегти\nЗберегти поточні зміни",
+        "cancel_tooltip": "Скасувати\nСкасувати зміни та закрити",
+        "reforms_tooltip": "Реформи\nУправління реформами країни"
     }
 }; 
