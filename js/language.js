@@ -209,7 +209,13 @@ const translations = {
 
         // Account dropdown
         "profile": "Profile",
-        "logout": "Logout"
+        "logout": "Logout",
+
+        // Account menu
+        "guest": "Guest",
+        "login": "Login with Discord",
+        "register": "Register",
+        "settings": "Settings"
     },
     "ru": {
         // Главная страница
@@ -237,7 +243,7 @@ const translations = {
         "no_initial_diplomacy": "Без Стартовой Дипломатии",
         "water_color": "Цвет Воды",
         "no_nuclear_weapon": "Без Ядерного Оружия",
-        "sandbox": "Sandbox",
+        "sandbox": "Песочница",
         "turn": "Ход",
         "player_land": "Страна Игрока",
         "fog_of_war": "Туман Войны",
@@ -247,7 +253,7 @@ const translations = {
 
         // Значения выпадающих списков
         "easy": "Легко",
-        "standard": "Стандартно",
+        "standard": "Нормально",
         "hard": "Сложно",
         "impossible": "Невозможно",
         "peaceful": "Мирные",
@@ -282,9 +288,9 @@ const translations = {
         "pacts": "Пакты",
         "sanctions": "Санкции",
         "vassals": "Вассалы",
-        "color_r": "R",
-        "color_g": "G",
-        "color_b": "B",
+        "color_r": "К",
+        "color_g": "З",
+        "color_b": "С",
 
         // Country edit
         "edit_country": "Редактирование страны",
@@ -417,7 +423,13 @@ const translations = {
 
         // Выпадающее меню аккаунта
         "profile": "Профиль",
-        "logout": "Выйти"
+        "logout": "Выйти",
+
+        // Account menu
+        "guest": "Гость",
+        "login": "Войти через Discord",
+        "register": "Регистрация",
+        "settings": "Настройки"
     },
     "uk": {
         // Головна сторінка
@@ -442,10 +454,10 @@ const translations = {
         "resources_spawn": "Спаун Ресурсів",
         "difficulty": "Складність",
         "bots_behavior": "Поведінка Ботів",
-        "no_initial_diplomacy": "Без Стартової Дипломатії",
+        "no_initial_diplomacy": "Без Початкової Дипломатії",
         "water_color": "Колір Води",
         "no_nuclear_weapon": "Без Ядерної Зброї",
-        "sandbox": "Sandbox",
+        "sandbox": "Пісочниця",
         "turn": "Хід",
         "player_land": "Країна Гравця",
         "fog_of_war": "Туман Війни",
@@ -455,7 +467,7 @@ const translations = {
 
         // Значення випадаючих списків
         "easy": "Легко",
-        "standard": "Стандартно",
+        "standard": "Нормально",
         "hard": "Складно",
         "impossible": "Неможливо",
         "peaceful": "Мирні",
@@ -490,9 +502,9 @@ const translations = {
         "pacts": "Пакти",
         "sanctions": "Санкції",
         "vassals": "Васали",
-        "color_r": "R",
-        "color_g": "G",
-        "color_b": "B",
+        "color_r": "Ч",
+        "color_g": "З",
+        "color_b": "С",
 
         // Редагування країни
         "edit_country": "Редагування країни",
@@ -625,6 +637,12 @@ const translations = {
 
         // Випадаюче меню облікового запису
         "profile": "Профіль",
-        "logout": "Вийти"
+        "logout": "Вийти",
+
+        // Account menu
+        "guest": "Гість",
+        "login": "Увійти через Discord",
+        "register": "Реєстрація",
+        "settings": "Налаштування"
     }
 }; 
