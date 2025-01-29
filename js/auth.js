@@ -34,14 +34,16 @@ class AuthManager {
         console.log('🔄 Загрузка данных пользователя...');
         try {
             // Пробуем загрузить из Cookie
-            const encryptedData = this.getCookie(COOKIE_NAME);
-            if (encryptedData) {
+            const cookieData = this.getCookie(COOKIE_NAME);
+            if (cookieData) {
                 console.log('🍪 Найдены данные в Cookie');
-                this.currentUser = await window.cryptoManager.decrypt(encryptedData);
-                if (this.currentUser) {
-                    console.log('✅ Данные из Cookie успешно расшифрованы');
+                try {
+                    this.currentUser = JSON.parse(cookieData);
+                    console.log('✅ Данные из Cookie успешно загружены');
                     this.updateUI();
                     return;
+                } catch (e) {
+                    console.error('❌ Ошибка парсинга Cookie:', e);
                 }
             }
 
@@ -50,13 +52,15 @@ class AuthManager {
             const localData = localStorage.getItem('userData');
             if (localData) {
                 console.log('💾 Найдены данные в localStorage');
-                this.currentUser = await window.cryptoManager.decrypt(localData);
-                if (this.currentUser) {
-                    console.log('✅ Данные из localStorage успешно расшифрованы');
+                try {
+                    this.currentUser = JSON.parse(localData);
+                    console.log('✅ Данные из localStorage успешно загружены');
                     // Восстанавливаем Cookie из localStorage
                     this.setCookie(COOKIE_NAME, localData, COOKIE_EXPIRES_DAYS);
                     this.updateUI();
                     return;
+                } catch (e) {
+                    console.error('❌ Ошибка парсинга localStorage:', e);
                 }
             }
 
