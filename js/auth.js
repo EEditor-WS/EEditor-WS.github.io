@@ -8,23 +8,38 @@ class AuthManager {
     constructor() {
         console.log('🔄 Инициализация AuthManager...');
         this.currentUser = null;
-        this.init();
+        
+        // Ждем загрузку DOM перед инициализацией
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => this.init());
+        } else {
+            this.init();
+        }
     }
 
     init() {
-        // Привязываем обработчики событий
-        const loginButton = document.querySelector('[data-action="login"]');
-        const logoutButton = document.querySelector('[data-action="logout"]');
+        console.log('🔄 Инициализация интерфейса...');
         
-        if (loginButton) {
-            loginButton.addEventListener('click', () => this.loginWithDiscord());
-        }
+        // Проверяем, есть ли элементы интерфейса на странице
+        const hasInterface = document.querySelector('.account-name') !== null;
         
-        if (logoutButton) {
-            logoutButton.addEventListener('click', () => this.logout());
+        if (hasInterface) {
+            // Привязываем обработчики событий
+            const loginButton = document.querySelector('[data-action="login"]');
+            const logoutButton = document.querySelector('[data-action="logout"]');
+            
+            if (loginButton) {
+                loginButton.addEventListener('click', () => this.loginWithDiscord());
+            }
+            
+            if (logoutButton) {
+                logoutButton.addEventListener('click', () => this.logout());
+            }
+        } else {
+            console.log('ℹ️ Элементы интерфейса не найдены на этой странице');
         }
 
-        // Загружаем данные пользователя
+        // Загружаем данные пользователя в любом случае
         this.loadUserData();
     }
 
@@ -166,7 +181,7 @@ class AuthManager {
     }
 
     updateUI() {
-        console.log('🔄 Обновление интерфейса...');
+        // Проверяем, есть ли элементы интерфейса на странице
         const accountName = document.querySelector('.account-name');
         const accountId = document.querySelector('.account-id');
         const accountAvatar = document.querySelector('.account-avatar');
@@ -174,10 +189,13 @@ class AuthManager {
         const registerItem = document.querySelector('[data-action="register"]');
         const logoutItem = document.querySelector('[data-action="logout"]');
 
+        // Если нет основных элементов интерфейса, просто выходим
         if (!accountName || !accountId) {
-            console.warn('⚠️ Элементы интерфейса не найдены');
+            console.log('ℹ️ Элементы интерфейса отсутствуют на этой странице');
             return;
         }
+
+        console.log('🔄 Обновление интерфейса...');
 
         if (this.currentUser) {
             accountName.textContent = this.currentUser.displayName || this.currentUser.username;
