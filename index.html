@@ -84,7 +84,7 @@
                         <div class="account-info">
                             <img class="account-avatar" src="" alt="Avatar" style="width: 32px; height: 32px; border-radius: 50%; margin-right: 8px; display: none;">
                             <div>
-                                <div class="account-name">Гость</div>
+                                <div class="account-name" data-translate="guest">Гость</div>
                                 <div class="account-id">#0000</div>
                             </div>
                         </div>
@@ -95,7 +95,7 @@
                                 <path d="M10 17L15 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M15 12H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            <span data-translate="login">Войти</span>
+                            <span data-translate="login">Войти через Discord</span>
                         </a>
                         <a href="#" class="account-item" data-action="register">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -229,16 +229,6 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="water_color" data-translate="water_color">Цвет Воды</label>
-                        <div class="color-inputs">
-                            <input type="number" id="water_color_r" name="water_color_r" min="0" max="255" class="color-input">
-                            <input type="number" id="water_color_g" name="water_color_g" min="0" max="255" class="color-input">
-                            <input type="number" id="water_color_b" name="water_color_b" min="0" max="255" class="color-input">
-                            <div class="color-preview" id="water_color_preview"></div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
                         <label for="no_nuclear_weapon" data-translate="no_nuclear_weapon">Без Ядерного Оружия</label>
                         <select id="no_nuclear_weapon" name="no_nuclear_weapon" class="main-page-input">
                             <option value="enabled" data-translate="yes">Да</option>
@@ -257,34 +247,6 @@
                     <div class="form-group">
                         <label for="turn" data-translate="turn">Turn</label>
                         <input type="number" id="turn" name="turn" class="main-page-input">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="player_land" data-translate="player_land">Страна Игрока</label>
-                        <select id="player_land" name="player_land" class="main-page-input">
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="fog_of_war" data-translate="fog_of_war">Туман Войны</label>
-                        <select id="fog_of_war" name="fog_of_war" class="main-page-input">
-                            <option value="standard" data-translate="standard">Стандартный</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="map_hash" data-translate="map_hash">Хэш Карты</label>
-                        <input type="number" id="map_hash" name="map_hash" class="main-page-input">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="num_of_provinces" data-translate="num_of_provinces">Количество Провинций</label>
-                        <input type="number" id="num_of_provinces" name="num_of_provinces" class="main-page-input">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="min_game_version" data-translate="min_game_version">Минимальная Версия Игры</label>
-                        <input type="number" id="min_game_version" name="min_game_version" class="main-page-input">
                     </div>
                 </form>
             </div>

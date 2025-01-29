@@ -8,6 +8,29 @@ class AuthManager {
     constructor() {
         console.log('🔄 Инициализация AuthManager...');
         this.currentUser = null;
+        this.translations = {
+            en: {
+                guest: 'Guest',
+                login: 'Login with Discord',
+                register: 'Register',
+                settings: 'Settings',
+                logout: 'Logout'
+            },
+            ru: {
+                guest: 'Гость',
+                login: 'Войти через Discord',
+                register: 'Регистрация',
+                settings: 'Настройки',
+                logout: 'Выйти'
+            },
+            uk: {
+                guest: 'Гість',
+                login: 'Увійти через Discord',
+                register: 'Реєстрація',
+                settings: 'Налаштування',
+                logout: 'Вийти'
+            }
+        };
         
         // Ждем загрузку DOM перед инициализацией
         if (document.readyState === 'loading') {
@@ -35,6 +58,12 @@ class AuthManager {
             if (logoutButton) {
                 logoutButton.addEventListener('click', () => this.logout());
             }
+
+            // Обновляем переводы при смене языка
+            document.addEventListener('languageChanged', (event) => {
+                console.log('🌐 Смена языка:', event.detail.language);
+                this.updateUI();
+            });
         } else {
             console.log('ℹ️ Элементы интерфейса не найдены на этой странице');
         }
@@ -215,6 +244,10 @@ class AuthManager {
 
         console.log('🔄 Обновление интерфейса...');
 
+        // Получаем текущий язык
+        const currentLang = document.body.getAttribute('data-lang') || 'ru';
+        console.log('🌐 Текущий язык:', currentLang);
+
         if (this.currentUser) {
             console.log('👤 Обновление данных пользователя:', {
                 name: this.currentUser.displayName,
@@ -272,11 +305,17 @@ class AuthManager {
 
             if (loginItem) loginItem.style.display = 'none';
             if (registerItem) registerItem.style.display = 'none';
-            if (logoutItem) logoutItem.style.display = 'flex';
+            if (logoutItem) {
+                logoutItem.style.display = 'flex';
+                const logoutText = logoutItem.querySelector('[data-translate="logout"]');
+                if (logoutText) {
+                    logoutText.textContent = this.translations[currentLang].logout;
+                }
+            }
             
             console.log('✅ Интерфейс обновлен для авторизованного пользователя');
         } else {
-            accountName.textContent = 'Гость';
+            accountName.textContent = this.translations[currentLang].guest;
             accountId.textContent = '#0000';
             
             // Скрываем аватарку в выпадающем меню
@@ -292,12 +331,35 @@ class AuthManager {
                 accountButtonAvatar.src = '';
             }
 
-            if (loginItem) loginItem.style.display = 'flex';
-            if (registerItem) registerItem.style.display = 'flex';
+            if (loginItem) {
+                loginItem.style.display = 'flex';
+                const loginText = loginItem.querySelector('[data-translate="login"]');
+                if (loginText) {
+                    loginText.textContent = this.translations[currentLang].login;
+                }
+            }
+            if (registerItem) {
+                registerItem.style.display = 'flex';
+                const registerText = registerItem.querySelector('[data-translate="register"]');
+                if (registerText) {
+                    registerText.textContent = this.translations[currentLang].register;
+                }
+            }
             if (logoutItem) logoutItem.style.display = 'none';
             
             console.log('✅ Интерфейс обновлен для гостя');
         }
+
+        // Обновляем текст настроек
+        const settingsItem = document.querySelector('[data-action="settings"]');
+        if (settingsItem) {
+            const settingsText = settingsItem.querySelector('[data-translate="settings"]');
+            if (settingsText) {
+                settingsText.textContent = this.translations[currentLang].settings;
+            }
+        }
+        
+        console.log('✅ Интерфейс обновлен');
     }
 }
 
