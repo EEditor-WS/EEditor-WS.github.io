@@ -1,4 +1,4 @@
-const DISCORD_CLIENT_ID = '1333948751919972434'; // Замените на ваш Client ID
+const DISCORD_CLIENT_ID = '1333948751919972434';
 const DISCORD_REDIRECT_URI = window.location.origin + '/auth/discord/callback';
 const GITHUB_REPO = 'EE-Apps/ws-eeditor.accounts';
 const COOKIE_NAME = 'ee_auth';
@@ -8,6 +8,23 @@ class AuthManager {
     constructor() {
         console.log('🔄 Инициализация AuthManager...');
         this.currentUser = null;
+        this.init();
+    }
+
+    init() {
+        // Привязываем обработчики событий
+        const loginButton = document.querySelector('[data-action="login"]');
+        const logoutButton = document.querySelector('[data-action="logout"]');
+        
+        if (loginButton) {
+            loginButton.addEventListener('click', () => this.loginWithDiscord());
+        }
+        
+        if (logoutButton) {
+            logoutButton.addEventListener('click', () => this.logout());
+        }
+
+        // Загружаем данные пользователя
         this.loadUserData();
     }
 
@@ -30,42 +47,18 @@ class AuthManager {
         console.log('🗑️ Cookie удалены');
     }
 
-    async loadUserData() {
+    loadUserData() {
         console.log('🔄 Загрузка данных пользователя...');
         try {
-            // Пробуем загрузить из Cookie
-            const cookieData = this.getCookie(COOKIE_NAME);
-            if (cookieData) {
-                console.log('🍪 Найдены данные в Cookie');
-                try {
-                    this.currentUser = JSON.parse(cookieData);
-                    console.log('✅ Данные из Cookie успешно загружены');
-                    this.updateUI();
-                    return;
-                } catch (e) {
-                    console.error('❌ Ошибка парсинга Cookie:', e);
-                }
+            const userData = localStorage.getItem('userData');
+            if (userData) {
+                this.currentUser = JSON.parse(userData);
+                console.log('✅ Данные пользователя загружены:', this.currentUser);
+                this.updateUI();
+            } else {
+                console.log('ℹ️ Пользователь не авторизован');
+                this.updateUI();
             }
-
-            // Если нет в Cookie, пробуем из localStorage
-            console.log('🔍 Поиск данных в localStorage...');
-            const localData = localStorage.getItem('userData');
-            if (localData) {
-                console.log('💾 Найдены данные в localStorage');
-                try {
-                    this.currentUser = JSON.parse(localData);
-                    console.log('✅ Данные из localStorage успешно загружены');
-                    // Восстанавливаем Cookie из localStorage
-                    this.setCookie(COOKIE_NAME, localData, COOKIE_EXPIRES_DAYS);
-                    this.updateUI();
-                    return;
-                } catch (e) {
-                    console.error('❌ Ошибка парсинга localStorage:', e);
-                }
-            }
-
-            console.log('ℹ️ Пользователь не авторизован');
-            this.updateUI();
         } catch (error) {
             console.error('❌ Ошибка при загрузке данных пользователя:', error);
             this.logout();
@@ -166,9 +159,7 @@ class AuthManager {
 
     logout() {
         console.log('🔄 Выход из аккаунта...');
-        this.deleteCookie(COOKIE_NAME);
         localStorage.removeItem('userData');
-        console.log('💾 Данные удалены из localStorage');
         this.currentUser = null;
         console.log('✅ Выход выполнен успешно');
         this.updateUI();
@@ -183,32 +174,47 @@ class AuthManager {
         const registerItem = document.querySelector('[data-action="register"]');
         const logoutItem = document.querySelector('[data-action="logout"]');
 
+        if (!accountName || !accountId) {
+            console.warn('⚠️ Элементы интерфейса не найдены');
+            return;
+        }
+
         if (this.currentUser) {
-            accountName.textContent = this.currentUser.displayName;
+            accountName.textContent = this.currentUser.displayName || this.currentUser.username;
             accountId.textContent = `@${this.currentUser.username}`;
+            
             if (accountAvatar) {
-                accountAvatar.src = this.currentUser.avatar;
-                accountAvatar.style.display = 'block';
+                if (this.currentUser.avatar) {
+                    accountAvatar.src = this.currentUser.avatar;
+                    accountAvatar.style.display = 'block';
+                } else {
+                    accountAvatar.style.display = 'none';
+                }
             }
-            loginItem.style.display = 'none';
-            registerItem.style.display = 'none';
-            logoutItem.style.display = 'flex';
+
+            if (loginItem) loginItem.style.display = 'none';
+            if (registerItem) registerItem.style.display = 'none';
+            if (logoutItem) logoutItem.style.display = 'flex';
+            
             console.log('✅ Интерфейс обновлен для авторизованного пользователя');
         } else {
             accountName.textContent = 'Гость';
             accountId.textContent = '#0000';
+            
             if (accountAvatar) {
-                accountAvatar.src = '';
                 accountAvatar.style.display = 'none';
             }
-            loginItem.style.display = 'flex';
-            registerItem.style.display = 'flex';
-            logoutItem.style.display = 'none';
+
+            if (loginItem) loginItem.style.display = 'flex';
+            if (registerItem) registerItem.style.display = 'flex';
+            if (logoutItem) logoutItem.style.display = 'none';
+            
             console.log('✅ Интерфейс обновлен для гостя');
         }
     }
 }
 
+// Создаем глобальный экземпляр
 window.authManager = new AuthManager();
 
 // Проверяем, находимся ли мы на странице callback

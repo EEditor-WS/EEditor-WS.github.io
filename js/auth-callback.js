@@ -9,18 +9,46 @@ class AuthCallback {
         this.handleCallback();
     }
 
+    showError(message) {
+        console.error('❌', message);
+        const loader = document.querySelector('.loader');
+        if (loader) {
+            loader.style.display = 'none';
+        }
+
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error';
+        errorDiv.textContent = message;
+        document.body.appendChild(errorDiv);
+
+        // Перенаправляем на главную через 3 секунды
+        setTimeout(() => {
+            window.location.href = '/';
+        }, 3000);
+    }
+
     async handleCallback() {
         console.log('🔄 Обработка callback...');
         try {
+            // Получаем токен из URL
             const fragment = new URLSearchParams(window.location.hash.slice(1));
             const accessToken = fragment.get('access_token');
+            const error = fragment.get('error');
+            const errorDescription = fragment.get('error_description');
 
+            // Проверяем наличие ошибок в URL
+            if (error) {
+                throw new Error(errorDescription || 'Ошибка авторизации Discord');
+            }
+
+            // Проверяем наличие токена
             if (!accessToken) {
                 throw new Error('Токен доступа не найден в URL');
             }
 
             console.log('🔑 Токен доступа получен');
 
+            // Получаем данные пользователя из Discord
             const response = await fetch('https://discord.com/api/users/@me', {
                 headers: {
                     Authorization: `Bearer ${accessToken}`
@@ -28,38 +56,29 @@ class AuthCallback {
             });
 
             if (!response.ok) {
-                throw new Error('Ошибка при получении данных пользователя');
+                throw new Error(`Ошибка получения данных пользователя: ${response.status}`);
             }
 
             const data = await response.json();
             console.log('👤 Получены данные пользователя:', data);
 
+            // Формируем данные пользователя
             const userData = {
                 id: data.id,
                 username: data.username,
                 displayName: data.global_name || data.username,
-                avatar: data.avatar ? `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png` : null
+                avatar: data.avatar ? `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png` : null,
+                lastLogin: new Date().toISOString()
             };
 
-            console.log('💾 Сохранение данных пользователя...');
-            
-            // Сохраняем в localStorage
-            const userDataString = JSON.stringify(userData);
-            localStorage.setItem('userData', userDataString);
-            console.log('✅ Данные сохранены в localStorage');
+            // Сохраняем данные
+            localStorage.setItem('userData', JSON.stringify(userData));
+            console.log('✅ Данные пользователя сохранены');
 
-            // Сохраняем в Cookie
-            if (window.authManager) {
-                window.authManager.setCookie('ee_auth', userDataString, 30);
-                console.log('✅ Данные сохранены в Cookie');
-            }
-
-            console.log('✅ Данные пользователя успешно сохранены');
+            // Перенаправляем на главную
             window.location.href = '/';
         } catch (error) {
-            console.error('❌ Ошибка при обработке callback:', error);
-            alert('Произошла ошибка при авторизации. Пожалуйста, попробуйте снова.');
-            window.location.href = '/';
+            this.showError(error.message || 'Произошла ошибка при авторизации');
         }
     }
 }
