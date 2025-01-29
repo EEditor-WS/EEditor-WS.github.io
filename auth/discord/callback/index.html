@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/js/crypto.js"></script>
     <script src="/js/secrets.js"></script>
-    <script src="/js/auth.js"></script>
+    <script src="/js/auth-callback.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -33,6 +33,14 @@
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+        .error {
+            background-color: #ff4444;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
         }
     </style>
 </head>

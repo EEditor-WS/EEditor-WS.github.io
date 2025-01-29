@@ -6,6 +6,7 @@ const COOKIE_EXPIRES_DAYS = 30;
 
 class AuthManager {
     constructor() {
+        console.log('🔄 Инициализация AuthManager...');
         this.currentUser = null;
         this.encryptionKey = window.cryptoManager.generateRandomPassword();
         this.loadUserData();
@@ -15,6 +16,7 @@ class AuthManager {
         const expires = new Date();
         expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
         document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/;SameSite=Strict`;
+        console.log('🍪 Cookie обновлены');
     }
 
     getCookie(name) {
@@ -26,29 +28,43 @@ class AuthManager {
 
     deleteCookie(name) {
         document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+        console.log('🗑️ Cookie удалены');
     }
 
     async loadUserData() {
+        console.log('🔄 Загрузка данных пользователя...');
         try {
             // Пробуем загрузить из Cookie
             const encryptedData = this.getCookie(COOKIE_NAME);
             if (encryptedData) {
+                console.log('🍪 Найдены данные в Cookie');
                 this.currentUser = await window.cryptoManager.decrypt(encryptedData, this.encryptionKey);
+                console.log('✅ Данные из Cookie успешно расшифрованы');
             }
 
             // Если нет в Cookie, пробуем из localStorage
             if (!this.currentUser) {
+                console.log('🔍 Поиск данных в localStorage...');
                 const localData = localStorage.getItem('userData');
                 if (localData) {
+                    console.log('💾 Найдены данные в localStorage');
                     this.currentUser = await window.cryptoManager.decrypt(localData, this.encryptionKey);
+                    console.log('✅ Данные из localStorage успешно расшифрованы');
                 }
             }
 
             if (this.currentUser) {
+                console.log('👤 Данные пользователя загружены:', {
+                    id: this.currentUser.id,
+                    username: this.currentUser.username,
+                    displayName: this.currentUser.displayName
+                });
                 this.updateUI();
+            } else {
+                console.log('ℹ️ Пользователь не авторизован');
             }
         } catch (error) {
-            console.error('Ошибка при загрузке данных пользователя:', error);
+            console.error('❌ Ошибка при загрузке данных пользователя:', error);
             this.logout();
         }
     }
@@ -100,6 +116,7 @@ class AuthManager {
     }
 
     loginWithDiscord() {
+        console.log('🔄 Начало авторизации через Discord...');
         const params = new URLSearchParams({
             client_id: DISCORD_CLIENT_ID,
             redirect_uri: DISCORD_REDIRECT_URI,
@@ -145,14 +162,19 @@ class AuthManager {
     }
 
     logout() {
+        console.log('🔄 Выход из аккаунта...');
         this.deleteCookie(COOKIE_NAME);
         localStorage.removeItem('userData');
+        console.log('💾 Данные удалены из localStorage');
         this.currentUser = null;
         this.encryptionKey = window.cryptoManager.generateRandomPassword();
+        console.log('🔑 Ключ шифрования сброшен');
         this.updateUI();
+        console.log('✅ Выход выполнен успешно');
     }
 
     updateUI() {
+        console.log('🔄 Обновление интерфейса...');
         const accountName = document.querySelector('.account-name');
         const accountId = document.querySelector('.account-id');
         const accountAvatar = document.querySelector('.account-avatar');
@@ -170,6 +192,7 @@ class AuthManager {
             loginItem.style.display = 'none';
             registerItem.style.display = 'none';
             logoutItem.style.display = 'flex';
+            console.log('✅ Интерфейс обновлен для авторизованного пользователя');
         } else {
             accountName.textContent = 'Гость';
             accountId.textContent = '#0000';
@@ -180,6 +203,7 @@ class AuthManager {
             loginItem.style.display = 'flex';
             registerItem.style.display = 'flex';
             logoutItem.style.display = 'none';
+            console.log('✅ Интерфейс обновлен для гостя');
         }
     }
 }
