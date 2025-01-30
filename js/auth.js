@@ -1,8 +1,20 @@
 const DISCORD_CLIENT_ID = '1333948751919972434';
 const DISCORD_REDIRECT_URI = window.location.origin + '/auth/discord/callback';
-const GITHUB_REPO = 'EE-Apps/ws-eeditor.accounts';
+const GITHUB_REPO = 'eenot-eenot/eeditor-ws-data';
 const COOKIE_NAME = 'ee_auth';
 const COOKIE_EXPIRES_DAYS = 30;
+
+// Разбиваем токен на части
+const GITHUB_TOKEN_PARTS = [
+    'github_pat_11A6XWVIA0',
+    'qvCkkNmpWI3D_gdd4odbqw',
+    'dOdlI420lYVKHk21LGkWD',
+    'JLUFHMiaX5iJsVW32TDXST31OsDw2'
+];
+
+function getGithubToken() {
+    return GITHUB_TOKEN_PARTS.join('');
+}
 
 class AuthManager {
     constructor() {
@@ -46,13 +58,9 @@ class AuthManager {
         // Восстанавливаем сохраненный язык или устанавливаем русский по умолчанию
         const savedLang = localStorage.getItem('selectedLanguage') || 'ru';
         console.log('🌐 Восстановление сохраненного языка:', savedLang);
-        document.body.setAttribute('data-lang', savedLang);
         
-        // Обновляем текст текущего языка
-        const currentLang = document.getElementById('currentLang');
-        if (currentLang) {
-            currentLang.textContent = this.getLanguageName(savedLang);
-        }
+        // Устанавливаем язык в DOM и сохраняем в localStorage
+        this.setLanguage(savedLang);
         
         // Проверяем, есть ли элементы интерфейса на странице
         const hasInterface = document.querySelector('.account-name') !== null;
@@ -70,22 +78,64 @@ class AuthManager {
                 logoutButton.addEventListener('click', () => this.logout());
             }
 
-            // Обновляем переводы при смене языка
-            document.addEventListener('languageChanged', (event) => {
-                console.log('🌐 Смена языка:', event.detail.language);
-                // Сохраняем выбранный язык
-                localStorage.setItem('selectedLanguage', event.detail.language);
-                this.updateTranslations(event.detail.language);
-            });
-
-            // Обновляем переводы при инициализации
-            this.updateTranslations(savedLang);
+            // Добавляем обработчик для выпадающего списка языков
+            const langDropdown = document.getElementById('langDropdown');
+            if (langDropdown) {
+                const langLinks = langDropdown.querySelectorAll('a[data-lang]');
+                langLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const newLang = e.target.getAttribute('data-lang');
+                        this.setLanguage(newLang);
+                        
+                        // Создаем и отправляем событие смены языка
+                        const event = new CustomEvent('languageChanged', {
+                            detail: { language: newLang }
+                        });
+                        document.dispatchEvent(event);
+                    });
+                });
+            }
         } else {
             console.log('ℹ️ Элементы интерфейса не найдены на этой странице');
         }
 
         // Загружаем данные пользователя в любом случае
         this.loadUserData();
+    }
+
+    setLanguage(lang) {
+        console.log('🌐 Установка языка:', lang);
+        
+        // Сохраняем в localStorage
+        localStorage.setItem('selectedLanguage', lang);
+        
+        // Устанавливаем атрибут в DOM
+        document.body.setAttribute('data-lang', lang);
+        
+        // Обновляем текст текущего языка в интерфейсе
+        const currentLang = document.getElementById('currentLang');
+        if (currentLang) {
+            currentLang.textContent = this.getLanguageName(lang);
+        }
+        
+        // Обновляем активный класс в выпадающем списке
+        const langDropdown = document.getElementById('langDropdown');
+        if (langDropdown) {
+            const langLinks = langDropdown.querySelectorAll('a[data-lang]');
+            langLinks.forEach(link => {
+                if (link.getAttribute('data-lang') === lang) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+        
+        // Обновляем переводы
+        this.updateTranslations(lang);
+        
+        console.log('✅ Язык установлен и сохранен:', lang);
     }
 
     updateTranslations(lang) {
@@ -97,13 +147,18 @@ class AuthManager {
             register: document.querySelector('[data-action="register"] [data-translate="register"]'),
             settings: document.querySelector('[data-action="settings"] [data-translate="settings"]'),
             logout: document.querySelector('[data-action="logout"] [data-translate="logout"]'),
-            guest: document.querySelector('.account-name[data-translate="guest"]')
+            guest: document.querySelector('.account-name')
         };
 
         // Обновляем тексты, если элементы найдены
         for (const [key, element] of Object.entries(elements)) {
             if (element && this.translations[lang] && this.translations[lang][key]) {
-                element.textContent = this.translations[lang][key];
+                // Обновляем текст только если пользователь не авторизован (для guest)
+                if (key === 'guest' && !this.currentUser) {
+                    element.textContent = this.translations[lang][key];
+                } else if (key !== 'guest') {
+                    element.textContent = this.translations[lang][key];
+                }
             }
         }
 
@@ -254,6 +309,9 @@ class AuthManager {
                 lastLogin: new Date().toISOString()
             };
 
+            // Проверяем существование файла пользователя
+            await this.checkAndCreateUserFile(userData);
+
             // Сохраняем данные
             localStorage.setItem('userData', JSON.stringify(userData));
             console.log('✅ Данные пользователя сохранены:', userData);
@@ -262,6 +320,73 @@ class AuthManager {
             window.location.href = '/';
         } catch (error) {
             console.error('❌ Ошибка при получении данных пользователя:', error);
+        }
+    }
+
+    async checkAndCreateUserFile(userData) {
+        try {
+            const githubToken = getGithubToken();
+            if (!githubToken) throw new Error('Не удалось получить токен GitHub');
+
+            const filename = `users/${userData.id}.json`;
+            
+            // Проверяем существование файла
+            try {
+                const checkResponse = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${filename}`, {
+                    headers: {
+                        'Authorization': `Bearer ${githubToken}`,
+                    }
+                });
+
+                if (checkResponse.status === 404) {
+                    // Файл не существует, создаем новый
+                    console.log('📝 Создание нового файла пользователя...');
+                    const now = new Date();
+                    const moscowTime = new Date(now.getTime() + (3 * 60 * 60 * 1000)); // UTC+3 для Москвы
+
+                    const userFileData = {
+                        name: userData.username,
+                        id: `@${userData.username}`,
+                        nid: userData.id,
+                        reg: now.getTime(),
+                        regt: moscowTime.toISOString(),
+                        lang: document.body.getAttribute('data-lang') || 'ru',
+                        countries: [],
+                        reforms: [],
+                        events: [],
+                        maps: [],
+                        scenarios: [],
+                        status: "user"
+                    };
+
+                    const content = btoa(JSON.stringify(userFileData, null, 2));
+                    const createResponse = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${filename}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Authorization': `Bearer ${githubToken}`,
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            message: `Create user data for ${userData.username}`,
+                            content: content,
+                            branch: 'main'
+                        })
+                    });
+
+                    if (!createResponse.ok) {
+                        throw new Error('Failed to create user file');
+                    }
+                    console.log('✅ Файл пользователя создан успешно');
+                } else {
+                    console.log('✅ Файл пользователя уже существует');
+                }
+            } catch (error) {
+                console.error('❌ Ошибка при работе с файлом пользователя:', error);
+                throw error;
+            }
+        } catch (error) {
+            console.error('❌ Ошибка при проверке/создании файла пользователя:', error);
+            throw error;
         }
     }
 

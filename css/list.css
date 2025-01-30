@@ -19,14 +19,14 @@
 }
 
 /* Заголовок списка */
-.header {
+.list-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 8px;
 }
 
-.header h2 {
+.list-header h2 {
     margin: 0;
     font-size: 24px;
     font-weight: 600;
@@ -42,37 +42,59 @@
 .list-table {
     width: 100%;
     border-collapse: collapse;
-    background: var(--background-primary);
-    border-radius: 8px;
+    background-color: #242424;
+    border-radius: 10px;
     overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.list-table thead {
-    background: var(--background-tertiary);
+.list-table th,
+.list-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #333;
 }
 
 .list-table th {
-    padding: 12px 16px;
-    text-align: left;
-    font-weight: 600;
-    color: var(--text-secondary);
+    background-color: #2a2a2a;
+    font-weight: 500;
+    color: #e0e0e0;
     font-size: 14px;
-    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    padding-right: 20px;
+}
+
+.list-table th:after {
+    content: '⇕';
+    position: absolute;
+    right: 5px;
+    opacity: 0.3;
+}
+
+.list-table th.sort-asc:after {
+    content: '↑';
+    opacity: 1;
+}
+
+.list-table th.sort-desc:after {
+    content: '↓';
+    opacity: 1;
 }
 
 .list-table td {
-    padding: 12px 16px;
-    color: var(--text-primary);
-    border-bottom: 1px solid var(--border-color);
     font-size: 14px;
+    color: #e0e0e0;
+}
+
+.list-table tbody tr {
+    transition: background-color 0.2s ease;
+    cursor: pointer;
 }
 
 .list-table tbody tr:hover {
-    background: var(--background-hover);
-}
-
-.list-table tbody tr:last-child td {
-    border-bottom: none;
+    background-color: #2a2a2a;
 }
 
 /* Информационная панель */
@@ -116,7 +138,7 @@
         padding: 12px;
     }
 
-    .header h2,
+    .list-header h2,
     .info-header h2 {
         font-size: 20px;
     }
@@ -138,7 +160,7 @@
         padding: 8px;
     }
 
-    .header h2,
+    .list-header h2,
     .info-header h2 {
         font-size: 18px;
     }

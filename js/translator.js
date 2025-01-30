@@ -23,8 +23,8 @@ class Translator {
     }
 
     loadSavedLanguage() {
-        // Пытаемся загрузить язык из localStorage
-        const savedLang = localStorage.getItem('selectedLanguage') || 'ru';
+        const body = document.body;
+        const savedLang = body.getAttribute('data-lang') || 'en';
         this.setLanguage(savedLang);
     }
 
@@ -33,23 +33,14 @@ class Translator {
 
         this.currentLang = lang;
         
-        // Сохраняем язык в localStorage
-        localStorage.setItem('selectedLanguage', lang);
-        
         // Сохраняем язык в атрибуте body
         document.body.setAttribute('data-lang', lang);
         
         // Обновляем только title кнопки выбора языка
         const currentLangButton = document.getElementById('currentLang');
         if (currentLangButton) {
-            currentLangButton.textContent = this.getLanguageName(lang);
+            currentLangButton.setAttribute('title', this.getLanguageName(lang));
         }
-
-        // Создаем и отправляем событие смены языка
-        const event = new CustomEvent('languageChanged', {
-            detail: { language: lang }
-        });
-        document.dispatchEvent(event);
 
         this.updateAllTranslations();
     }
@@ -69,7 +60,7 @@ class Translator {
 
     updateAllTranslations() {
         // Обновляем все элементы с атрибутом data-translate
-        document.querySelectorAll('[data-translate]:not(.action-button)').forEach(element => {
+        document.querySelectorAll('[data-translate]').forEach(element => {
             const key = element.dataset.translate;
             if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
                 if (element.placeholder) {
@@ -94,15 +85,6 @@ class Translator {
 
         // Обновляем формы
         this.updateForms();
-
-        // Обновляем подсказки для кнопок
-        document.querySelectorAll('[data-tooltip-key]').forEach(element => {
-            const key = element.dataset.tooltipKey;
-            const translation = this.translate(key);
-            if (translation !== key) {
-                element.setAttribute('data-tooltip', translation);
-            }
-        });
     }
 
     updateNavButtons() {
@@ -215,19 +197,6 @@ class Translator {
             title.textContent = this.translate('countries_title');
         }
 
-        // Кнопки действий
-        /* const actionButtons = {
-            'remove-invalid-owners': 'remove_invalid_owners',
-            'add-country': 'add_country'
-        }; */
-
-        for (const [buttonId, translationKey] of Object.entries(actionButtons)) {
-            const button = document.getElementById(buttonId);
-            if (button) {
-                button.textContent = this.translate(translationKey);
-            }
-        }
-
         // Заголовки таблицы
         const tableHeaders = {
             0: 'color',
@@ -328,24 +297,6 @@ class Translator {
         const title = document.querySelector('#reforms h2');
         if (title) {
             title.textContent = this.translate('reforms_title');
-        }
-
-        // Кнопки действий
-        const actionButtons = {
-            'add-reform': 'add_reform',
-            'paste-reform': 'paste',
-            'back-to-reforms': 'back',
-            'copy-reform': 'copy',
-            'copy-reform-buffer': 'copy_to_buffer',
-            'load-reform-sync': 'load_for_sync',
-            'delete-reform': 'delete'
-        };
-
-        for (const [buttonId, translationKey] of Object.entries(actionButtons)) {
-            const button = document.getElementById(buttonId);
-            if (button) {
-                button.textContent = this.translate(translationKey);
-            }
         }
 
         // Заголовки таблицы

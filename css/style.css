@@ -286,10 +286,6 @@ body {
     cursor: pointer;
     font-size: 14px;
     transition: background-color 0.2s;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    position: relative;
 }
 
 .action-button:hover {
@@ -1386,36 +1382,100 @@ body {
     color: #999999;
 }
 
-.action-button svg {
-    width: 16px;
-    height: 16px;
-}
-
-.action-button[data-tooltip] {
+/* Кнопки с иконками */
+.icon-action-button {
+    width: 36px;
+    height: 36px;
+    padding: 6px;
+    border: none;
+    border-radius: 4px;
+    background: var(--button-primary);
+    color: var(--text-on-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
 }
 
-.action-button[data-tooltip]::before {
-    content: attr(data-tooltip);
+.icon-action-button svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+}
+
+.icon-action-button:hover {
+    background: var(--button-primary-hover);
+    transform: translateY(-1px);
+}
+
+.icon-action-button.delete {
+    background: var(--button-danger);
+}
+
+.icon-action-button.delete:hover {
+    background: var(--button-danger-hover);
+}
+
+.icon-action-button.copy {
+    background: var(--button-secondary);
+}
+
+.icon-action-button.copy:hover {
+    background: var(--button-secondary-hover);
+}
+
+.icon-action-button.paste {
+    background: var(--button-success);
+}
+
+.icon-action-button.paste:hover {
+    background: var(--button-success-hover);
+}
+
+.icon-action-button.back {
+    background: var(--button-secondary);
+}
+
+.icon-action-button.back:hover {
+    background: var(--button-secondary-hover);
+}
+
+/* Тултипы для кнопок с иконками */
+.icon-action-button[title] {
+    position: relative;
+}
+
+.icon-action-button[title]:hover:after {
+    content: attr(title);
     position: absolute;
     bottom: 100%;
     left: 50%;
     transform: translateX(-50%);
-    padding: 8px 12px;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
+    padding: 4px 8px;
+    background: var(--tooltip-background);
+    color: var(--tooltip-text);
     font-size: 12px;
-    white-space: pre-line;
     border-radius: 4px;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.2s;
+    white-space: nowrap;
+    margin-bottom: 8px;
     z-index: 1000;
-    width: max-content;
-    max-width: 200px;
-    text-align: left;
+    pointer-events: none;
 }
 
-.action-button[data-tooltip]:hover::before {
-    opacity: 1;
+.icon-action-button[title]:hover:before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: var(--tooltip-background);
+    margin-bottom: -4px;
+    pointer-events: none;
 }

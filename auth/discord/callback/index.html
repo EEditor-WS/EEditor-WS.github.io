@@ -1,47 +1,43 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <title>Авторизация через Discord</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Авторизация через Discord - EEditor</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../../css/base.css">
-    <link rel="stylesheet" href="../../../css/head.css">
-    <script src="../../../js/head.js"></script>
-    <script src="../../../js/auth-callback.js"></script>
+    <script src="/js/auth-callback.js"></script>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
         .loader {
-            border: 4px solid var(--border-color);
+            border: 4px solid #f3f3f3;
             border-top: 4px solid #3498db;
             border-radius: 50%;
             width: 50px;
             height: 50px;
             animation: spin 1s linear infinite;
         }
-
-        .callback-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
-
         .error {
-            background-color: #e74c3c;
-            color: var(--text-primary);
+            background-color: #ff4444;
+            color: white;
             padding: 20px;
             border-radius: 8px;
             margin-top: 20px;
             text-align: center;
-            max-width: 400px;
         }
     </style>
 </head>
-<body class="dark-theme">
-    <div class="callback-container">
-        <div class="loader"></div>
-    </div>
+<body>
+    <div class="loader"></div>
 </body>
 </html> 
