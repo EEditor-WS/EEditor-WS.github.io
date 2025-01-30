@@ -221,12 +221,6 @@ class Translator {
             title.textContent = this.translate('events_title');
         }
 
-        // Кнопка добавления события
-        const addButton = document.getElementById('add-event');
-        if (addButton) {
-            addButton.textContent = this.translate('add_event');
-        }
-
         // Заголовки таблицы
         const tableHeaders = {
             0: 'event_id',

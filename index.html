@@ -160,8 +160,7 @@
                         </a>
                     </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
 
         <div id="main" class="page pmain active">
             <div class="file-upload-container">
@@ -184,12 +183,12 @@
                 <form id="settings-form" class="settings-form" autocomplete="off">
                     <div class="form-group">
                         <label for="name" data-translate="title">Название</label>
-                        <input type="text" id="name" name="name" class="main-page-input">
+                        <input type="text" id="name" name="name" class="main-page-input" autocomplete="off">
                     </div>
 
                     <div class="form-group">
                         <label for="id" data-translate="id">ID</label>
-                        <input type="text" id="id" name="id" class="main-page-input">
+                        <input type="text" id="id" name="id" class="main-page-input" autocomplete="off">
                     </div>
 
                     <div class="form-group">
@@ -305,14 +304,14 @@
                         </button>
                     </div>
                 </div>
-                <table class="list-table">
+                <table class="countries-table">
                     <thead>
                         <tr>
-                            <th data-translate="color">Цвет</th>
-                            <th data-translate="name">Название</th>
-                            <th data-translate="system_name">Системное название</th>
-                            <th data-translate="provinces_count">Количество провинций</th>
-                            <th data-translate="capital">Столица</th>
+                            <th data-sort="color" data-translate="color">Цвет</th>
+                            <th data-sort="name" data-translate="name">Название</th>
+                            <th data-sort="system_name" data-translate="system_name">Системное название</th>
+                            <th data-sort="provinces_count" data-translate="provinces_count">Количество провинций</th>
+                            <th data-sort="capital" data-translate="capital">Столица</th>
                         </tr>
                     </thead>
                     <tbody id="countries-list">
@@ -324,7 +323,7 @@
             <div class="country-edit-container">
                 <div class="country-header">
                     <h2><span id="country-name-header"></span></h2>
-                    <div class="country-actions">
+                    <div class="info-actions">
                         <button id="country-reforms" class="icon-action-button" title="Реформы">
                             <svg viewBox="0 0 24 24">
                                 <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9"/>
@@ -346,7 +345,7 @@
                 <form id="country-form" class="country-form">
                     <div class="form-group">
                         <label for="country-name" data-translate="name">Название</label>
-                        <input type="text" id="country-name" name="name" class="main-page-input">
+                        <input type="text" id="country-name" name="name" class="main-page-input" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label for="country-color" data-translate="color">Цвет</label>
@@ -360,7 +359,7 @@
                     </div>
                     <div class="form-group">
                         <label for="country-capital" data-translate="capital_name">Название столицы</label>
-                        <input type="text" id="country-capital" name="capital_name" class="main-page-input">
+                        <input type="text" id="country-capital" name="capital_name" class="main-page-input" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label for="country-capital-id" data-translate="capital_id">ID столицы</label>
@@ -376,6 +375,7 @@
                     <div class="form-group">
                         <label for="country-political" data-translate="political_system">Политический строй</label>
                         <select id="country-political" name="political" class="main-page-input">
+                            <option value="" data-translate="">None</option>
                             <option value="Democracy" data-translate="democracy">Демократия</option>
                             <option value="Monarchy" data-translate="monarchy">Монархия</option>
                             <option value="Communism" data-translate="communism">Коммунизм</option>
@@ -386,45 +386,80 @@
                     <div class="form-group">
                         <label data-translate="allies">Союзники</label>
                         <div class="array-list" id="country-allies" class="main-page-input"></div>
-                        <button type="button" class="add-country-button main-page-input" data-target="allies" data-translate="add_country">Добавить страну</button>
+                        <button type="button" class="add-country-button " data-target="allies" title="Добавить страну">
+                            <svg viewBox="0 0 24 24">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </button>
                     </div>
                     <div class="form-group">
                         <label data-translate="enemies">Враги</label>
                         <div class="array-list" id="country-enemies" class="main-page-input"></div>
-                        <button type="button" class="add-country-button main-page-input" data-target="enemies" data-translate="add_country">Добавить страну</button>
+                        <button type="button" class="add-country-button" data-target="enemies" title="Добавить страну">
+                            <svg viewBox="0 0 24 24">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </button>
                     </div>
                     <div class="form-group">
                         <label data-translate="independence_guarantees">Гарантии независимости</label>
                         <div class="array-list" id="country-guaranteed" class="main-page-input"></div>
-                        <button type="button" class="add-country-button main-page-input" data-target="guaranteed" data-translate="add_country">Добавить страну</button>
+                        <button type="button" class="add-country-button" data-target="guaranteed" title="Добавить страну">
+                            <svg viewBox="0 0 24 24">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </button>
                     </div>
                     <div class="form-group">
                         <label data-translate="guaranteed_by">Гарантии от</label>
                         <div class="array-list" id="country-guaranteed-by" class="main-page-input"></div>
-                        <button type="button" class="add-country-button main-page-input" data-target="guaranteed-by" data-translate="add_country">Добавить страну</button>
+                        <button type="button" class="add-country-button" data-target="guaranteed-by" title="Добавить страну">
+                            <svg viewBox="0 0 24 24">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </button>
                     </div>
                     <div class="form-group">
                         <label data-translate="pacts">Пакты</label>
                         <div class="array-list" id="country-pacts" class="main-page-input"></div>
-                        <button type="button" class="add-country-button main-page-input" data-target="pacts" data-translate="add_country">Добавить страну</button>
+                        <button type="button" class="add-country-button" data-target="pacts" title="Добавить страну">
+                            <svg viewBox="0 0 24 24">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </button>
                     </div>
                     <div class="form-group">
                         <label data-translate="sanctions">Санкции</label>
                         <div class="array-list" id="country-sanctions" class="main-page-input"></div>
-                        <button type="button" class="add-country-button main-page-input" data-target="sanctions" data-translate="add_country">Добавить страну</button>
+                        <button type="button" class="add-country-button" data-target="sanctions" title="Добавить страну">
+                            <svg viewBox="0 0 24 24">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </button>
                     </div>
                     <div class="form-group">
                         <label data-translate="vassals">Вассалы</label>
                         <div class="array-list" id="country-vassals" class="main-page-input"></div>
-                        <button type="button" class="add-country-button main-page-input" data-target="vassals" data-translate="add_country">Добавить страну</button>
+                        <button type="button" class="add-country-button" data-target="vassals" title="Добавить страну">
+                            <svg viewBox="0 0 24 24">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
         <div id="events" class="page pevents">
             <div class="list-container">
-                <div class="header">
-                    <h2>События</h2>
+                <div class="list-header">
+                    <h2 data-translate="events">События</h2>
                     <div class="header-actions">
                         <button id="add-event" class="icon-action-button" title="Добавить событие">
                             <svg viewBox="0 0 24 24">
@@ -434,13 +469,13 @@
                         </button>
                     </div>
                 </div>
-                <table class="list-table">
+                <table class="events-table">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Группа</th>
-                            <th>Название</th>
-                            <th>Заголовок</th>
+                            <th data-sort="id">ID</th>
+                            <th data-sort="group">Группа</th>
+                            <th data-sort="name">Название</th>
+                            <th data-sort="title">Заголовок</th>
                         </tr>
                     </thead>
                     <tbody id="events-list">
@@ -452,7 +487,7 @@
             <div class="event-edit">
                 <div class="info-header">
                     <h2><span id="event-name-header">Редактирование события</span></h2>
-                    <div class="event-actions">
+                    <div class="info-actions">
                         <button class="icon-action-button copy" onclick="window.eventManager.copyCurrentEvent()" title="Копировать">
                             <svg viewBox="0 0 24 24">
                                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -529,18 +564,18 @@
                             </div>
                             <div class="form-group">
                                 <label for="event-group-name" data-translate="event_group">Группа:</label>
-                                <input type="text" id="event-group-name" name="event-group-name" class="event-main-input main-page-input">
+                                <input type="text" id="event-group-name" name="event-group-name" class="event-main-input main-page-input" autocomplete="off">
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="event-unique-name" data-translate="event_unique_name">Системное название:</label>
-                                <input type="text" id="event-unique-name" name="event-unique-name" class="event-main-input main-page-input">
+                                <input type="text" id="event-unique-name" name="event-unique-name" class="event-main-input main-page-input" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="event-title" data-translate="event_title">Заголовок:</label>
-                                <input type="text" id="event-title" name="event-title" class="event-main-input main-page-input">
+                                <input type="text" id="event-title" name="event-title" class="event-main-input main-page-input" autocomplete="off">
                             </div>
                         </div>
 
@@ -573,7 +608,7 @@
                             <h3 data-translate="answer_1_title">Ответ 1</h3>
                             <div class="form-group">
                                 <label for="event-answer1" data-translate="answer_text">Текст ответа:</label>
-                                <input type="text" id="event-answer1" name="event-answer1" class="event-answers-item main-page-input">
+                                <input type="text" id="event-answer1" name="event-answer1" class="event-answers-item main-page-input" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="event-description1" data-translate="result_description">Описание результата:</label>
@@ -603,7 +638,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="event-answer2">Текст ответа:</label>
-                                <input type="text" id="event-answer2" name="event-answer2" class="event-answers-item main-page-input">
+                                <input type="text" id="event-answer2" name="event-answer2" class="event-answers-item main-page-input" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="event-description2">Описание результата:</label>
@@ -626,7 +661,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="event-answer3" data-translate="answer_text">Текст ответа:</label>
-                                <input type="text" id="event-answer3" name="event-answer3" class="event-answers-item main-page-input">
+                                <input type="text" id="event-answer3" name="event-answer3" class="event-answers-item main-page-input" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="event-description3" data-translate="result_description">Описание результата:</label>
@@ -706,13 +741,13 @@
                         </div>
                         <div class="form-group">
                             <label for="requirement-subtype">Подтип:</label>
-                            <input type="text" id="requirement-subtype" class="main-page-input">
+                            <input type="text" id="requirement-subtype" class="main-page-input" autocomplete="off">
                         </div>
                         <div class="form-group">
                             <label for="requirement-value">Значение:</label>
                             <div id="requirement-value-container"></div>
                         </div>
-                        <div class="form-actions">
+                        <div class="info-actions">
                             <button type="button" id="save-requirement" class="action-button">Сохранить</button>
                             <button type="button" id="cancel-requirement" class="action-button">Отмена</button>
                         </div>
@@ -744,10 +779,10 @@
                 <table class="reforms-table">
                     <thead>
                         <tr>
-                            <th>Цвет</th>
-                            <th>Название</th>
-                            <th>Требуемая идеология</th>
-                            <th>Количество провинций</th>
+                            <th data-sort="color">Цвет</th>
+                            <th data-sort="name">Название</th>
+                            <th data-sort="ideology">Требуемая идеология</th>
+                            <th data-sort="provinces">Количество провинций</th>
                         </tr>
                     </thead>
                     <tbody id="reforms-list">
@@ -768,7 +803,7 @@
                         </button>
                         <h2>Редактирование реформы</h2>
                     </div>
-                    <div class="reform-actions">
+                    <div class="info-actions">
                         <button id="copy-reform" class="icon-action-button copy" title="Копировать">
                             <svg viewBox="0 0 24 24">
                                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -800,7 +835,7 @@
                 <form id="reform-form">
                     <div class="form-group">
                         <label for="reform-name" data-translate="name">Название</label>
-                        <input type="text" id="reform-name" class="main-page-input" required>
+                        <input type="text" id="reform-name" class="main-page-input" required autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label>Цвет</label>

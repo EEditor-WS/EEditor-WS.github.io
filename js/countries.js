@@ -169,10 +169,6 @@ class CountryManager {
         document.getElementById('copy-country')?.addEventListener('click', () => this.copyCurrentCountry());
         document.getElementById('delete-country')?.addEventListener('click', () => this.deleteCurrentCountry());
         document.getElementById('country-reforms')?.addEventListener('click', () => {
-            console.log('Нажата кнопка реформ');
-            console.log('Текущая страна:', this.currentCountry);
-            console.log('Менеджер реформ:', window.reformManager);
-            
             if (!this.currentCountry) {
                 console.error('Не выбрана страна');
                 return;
@@ -183,8 +179,8 @@ class CountryManager {
                 return;
             }
 
-                window.reformManager.jsonData = this.jsonData;
-                window.reformManager.openReforms(this.currentCountry);
+            window.reformManager.jsonData = this.jsonData;
+            window.reformManager.openReforms(this.currentCountry);
         });
 
         // Обработчики формы редактирования
@@ -196,18 +192,10 @@ class CountryManager {
 
         // Обработчики отношений
         document.querySelectorAll('.add-country-button').forEach(button => {
-            console.log('Найдена кнопка добавления:', button);
             const target = button.getAttribute('data-target');
-            console.log('target:', target);
             
             if (target) {
-                // Получаем тип отношений из ID контейнера
-                const relation = target.replace('country-', '');
-                button.setAttribute('data-relation', relation);
-                console.log('Установлен data-relation:', relation);
-                
                 button.addEventListener('click', (e) => {
-                    console.log('Клик по кнопке добавления');
                     this.handleAddRelation(e);
                 });
             }
@@ -226,7 +214,7 @@ class CountryManager {
         this.initColorHandlers();
 
         // Обработчик для кнопки случайного цвета страны
-        document.getElementById('random-country-color').addEventListener('click', function() {
+        document.getElementById('random-country-color')?.addEventListener('click', function() {
             const r = Math.floor(Math.random() * 256);
             const g = Math.floor(Math.random() * 256);
             const b = Math.floor(Math.random() * 256);
@@ -273,59 +261,19 @@ class CountryManager {
     }
 
     createNewCountry() {
-        const modal = document.createElement('div');
-        modal.className = 'modal active';
-        modal.innerHTML = `
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 data-translate="new_country">Новая страна</h3>
-                    <button class="close-modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label data-translate="name">Название</label>
-                        <input type="text" id="new-country-name" class="main-page-input">
-                    </div>
-                    <div class="form-group">
-                        <label data-translate="system_name">Системное название</label>
-                        <input type="text" id="new-country-id" class="main-page-input">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="action-button create-country" data-translate="create">Создать</button>
-                </div>
-            </div>
-        `;
-
-        document.body.appendChild(modal);
-
-        const closeModal = () => modal.remove();
-        modal.querySelector('.close-modal').onclick = closeModal;
-
-        modal.querySelector('.create-country').onclick = () => {
-            const name = modal.querySelector('#new-country-name').value.trim();
-            const id = modal.querySelector('#new-country-id').value.trim();
-
-            if (!name || !id) {
-                alert(window.translator.translate('fill_all_fields'));
-                return;
-            }
-
-            if (this.jsonData.lands[id]) {
-                alert(window.translator.translate('country_exists'));
-                return;
-        }
-
         this.pushToUndoStack();
 
-        // Создаем новую страну
-            this.jsonData.lands[id] = {
-                name: name,
+        // Генерируем уникальный ID
+        const newId = this.generateUniqueId();
+
+        // Создаем новую страну с дефолтными значениями
+        this.jsonData.lands[newId] = {
+            name: "New country",
             color: [128, 128, 128, 255],
             capital: 0,
             capital_name: '',
             defeated: false,
-            political: 'Democracy',
+            political: '',
             allies: {},
             enemies: {},
             guaranteed: {},
@@ -337,10 +285,8 @@ class CountryManager {
 
         // Обновляем список и открываем редактор
         this.updateCountriesList();
-        this.openCountry(id);
+        this.openCountry(newId);
         this.saveChanges();
-            closeModal();
-        };
     }
 
     generateUniqueId() {
@@ -495,17 +441,15 @@ class CountryManager {
     }
 
     handleAddRelation(e) {
-        console.log('handleAddRelation вызван', e.target);
-        const button = e.target;
+        // Находим ближайшую кнопку, если клик был по SVG или line
+        const button = e.target.closest('.add-country-button');
+        if (!button) return;
+
         const target = button.getAttribute('data-target');
-        console.log('target:', target);
         
         // Добавляем префикс country- к ID контейнера
         const containerId = `country-${target}`;
-        console.log('containerId:', containerId);
-        
         const container = document.getElementById(containerId);
-        console.log('container:', container);
         
         if (!container) {
             console.error('Не найден контейнер для добавления отношений:', containerId);
@@ -534,11 +478,10 @@ class CountryManager {
             <div class="relation-controls">
                 <button type="button" class="relation-edit">✎</button>
                 <button type="button" class="array-item-delete">×</button>
-            }
+            </div>
         `;
 
         container.appendChild(itemDiv);
-        console.log('Элемент добавлен');
 
         // Сразу показываем модальное окно для редактирования
         this.showRelationParamsModal({ target: itemDiv.querySelector('.relation-edit') });
@@ -665,8 +608,7 @@ class CountryManager {
         return Object.entries(this.jsonData.lands)
             .filter(([id]) => id !== 'provinces' && id !== this.currentCountry)
             .map(([id, country]) => {
-                const translatedName = window.translator.translate(`country_${id}`) || country.name;
-                return `<option value="${id}" data-translate="country_${id}">${translatedName}</option>`;
+                return `<option value="${id}">${country.name} - ${id}</option>`;
             })
             .join('');
     }
@@ -759,6 +701,9 @@ class CountryManager {
 
             // Обновляем JSON и интерфейс
             this.updateJsonAndUI();
+
+            // Обновляем все выпадающие списки стран
+            this.updateAllCountryDropdowns();
         } finally {
             this.isEditing = false;
         }
@@ -933,6 +878,26 @@ class CountryManager {
                 this.fileInfo.textContent = 'Изменений не требуется';
             }
         }
+    }
+
+    updateAllCountryDropdowns() {
+        // Обновляем все модальные окна выбора страны
+        const countrySelects = document.querySelectorAll('.country-select');
+        countrySelects.forEach(select => {
+            const currentValue = select.value;
+            select.innerHTML = `<option value="" data-translate="choose_country...">Выберите страну...</option>${this.generateCountryOptions()}`;
+            select.value = currentValue;
+        });
+
+        // Обновляем все существующие поля отношений
+        document.querySelectorAll('.array-item-input').forEach(input => {
+            const currentValue = input.value;
+            const countryData = this.jsonData.lands[currentValue];
+            if (countryData) {
+                const countryName = countryData.name;
+                input.setAttribute('title', `${countryName} - ${currentValue}`);
+            }
+        });
     }
 }
 
