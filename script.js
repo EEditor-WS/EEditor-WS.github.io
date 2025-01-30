@@ -745,9 +745,14 @@ document.addEventListener('DOMContentLoaded', function() {
         window.countryManager.removeInvalidOwners();
     });
 
-    // Обработчик для кнопки настроек
-    document.getElementById('settings-button').addEventListener('click', function() {
-        window.location.href = 'settings/index.html';
+    // Обработчик для клика вне дропдаунов
+    document.addEventListener('click', function(e) {
+        const accountDropdown = document.getElementById('accountDropdown');
+        const accountButton = document.getElementById('account-button');
+        
+        if (accountDropdown && !accountButton.contains(e.target)) {
+            accountDropdown.classList.remove('active');
+        }
     });
 
     // Обработчик для кнопки языка
@@ -778,43 +783,24 @@ document.addEventListener('DOMContentLoaded', function() {
         dropdown.classList.toggle('active');
     });
 
-    // Обработчики для пунктов меню аккаунта
-    document.querySelectorAll('.account-item').forEach(item => {
-        item.addEventListener('click', function(e) {
-            e.preventDefault();
-            const action = this.getAttribute('data-action');
-            
-            switch(action) {
-                case 'login':
-                    window.authManager.loginWithDiscord();
-                    break;
-                case 'register':
-                    window.authManager.loginWithDiscord();
-                    break;
-                case 'settings':
-                    console.log('Настройки аккаунта');
-                    break;
-                case 'logout':
-                    window.authManager.logout();
-                    break;
-            }
-            
-            document.getElementById('accountDropdown').classList.remove('active');
-        });
+    // Обработчик для кнопки настроек
+    document.getElementById('settings-button')?.addEventListener('click', function() {
+        window.location.href = 'page/settings.html';
     });
 
-    // Закрытие выпадающих меню при клике вне них
-    document.addEventListener('click', function(e) {
-        const langDropdown = document.getElementById('langDropdown');
-        const accountDropdown = document.getElementById('accountDropdown');
-        
-        if (!e.target.closest('.language-switcher')) {
-            langDropdown?.classList.remove('active');
-        }
-        
-        if (!e.target.closest('#account-button') && !e.target.closest('#accountDropdown')) {
-            accountDropdown?.classList.remove('active');
-        }
+    // Обработчик для навигационных кнопок
+    document.querySelectorAll('.nav-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const pageId = this.dataset.page;
+            
+            // Убираем активный класс со всех кнопок и страниц
+            document.querySelectorAll('.nav-button').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            
+            // Добавляем активный класс текущей кнопке и странице
+            this.classList.add('active');
+            document.getElementById(pageId)?.classList.add('active');
+        });
     });
 });
 
