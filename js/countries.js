@@ -225,6 +225,9 @@ class CountryManager {
             
             updateCountryColorPreview();
         });
+
+        // Кнопка возврата к списку стран
+        document.getElementById('back-to-countries-list')?.addEventListener('click', () => this.backToCountriesList());
     }
 
     initColorHandlers() {
@@ -507,14 +510,14 @@ class CountryManager {
     }
 
     showRelationParamsModal(e) {
-        const item = e.target.closest('.array-list-item');
-        const input = item?.querySelector('input');
-        if (!input) return;
+        const button = e.target;
+        const itemDiv = button.closest('.array-list-item');
+        const input = itemDiv.querySelector('.array-item-input');
+        const relationType = itemDiv.closest('.array-list').id.replace('country-', '');
 
-        const relationType = item.closest('.array-list').id.replace('country-', '').replace('-', '_');
         const params = {
-            turn: input.getAttribute('data-turn'),
-            duration: input.getAttribute('data-duration'),
+            turn: parseInt(input.getAttribute('data-turn')) || 0,
+            duration: input.getAttribute('data-duration') || '',
             initiator: input.getAttribute('data-initiator') === 'true'
         };
 
@@ -553,7 +556,21 @@ class CountryManager {
                     ` : ''}
                 </div>
                 <div class="modal-footer">
-                    <button class="action-button save-params" data-translate="save">Сохранить</button>
+                    <button class="action-button save-params">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                            <polyline points="17 21 17 13 7 13 7 21"/>
+                            <polyline points="7 3 7 8 15 8"/>
+                        </svg>
+                        <span data-translate="save">Сохранить</span>
+                    </button>
+                    <button class="action-button cancel-params">
+                        <svg viewBox="0 0 24 24">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                        <span data-translate="cancel">Отмена</span>
+                    </button>
                 </div>
             </div>
         `;
@@ -583,7 +600,7 @@ class CountryManager {
             if (duration) input.setAttribute('data-duration', duration);
             if (initiator !== undefined) input.setAttribute('data-initiator', initiator);
 
-            const paramsDiv = item.querySelector('.relation-params');
+            const paramsDiv = itemDiv.querySelector('.relation-params');
             paramsDiv.innerHTML = this.formatRelationParams({
                 turn: parseInt(turn),
                 duration: duration ? parseInt(duration) : undefined,
@@ -659,13 +676,13 @@ class CountryManager {
     formatRelationParams(params) {
         let html = '';
         if (params.turn !== undefined) {
-            html += `<span class="relation-turn">Ход: ${params.turn}</span>`;
+            html += `<span class="relation-turn" data-translate="relation_turn_short">Ход</span>: ${params.turn}`;
         }
         if (params.duration !== undefined) {
-            html += `<span class="relation-duration">Длительность: ${params.duration}</span>`;
+            html += `<span class="relation-duration" data-translate="relation_duration_short">Длительность</span>: ${params.duration}`;
         }
         if (params.initiator !== undefined) {
-            html += `<span class="relation-initiator">Инициатор: ${params.initiator ? 'Да' : 'Нет'}</span>`;
+            html += `<span class="relation-initiator" data-translate="relation_initiator_short">Инициатор</span>: ${params.initiator ? window.translator.translate('yes') : window.translator.translate('no')}`;
         }
         return html;
     }
@@ -898,6 +915,12 @@ class CountryManager {
                 input.setAttribute('title', `${countryName} - ${currentValue}`);
             }
         });
+    }
+
+    backToCountriesList() {
+        // Переключаемся на страницу списка стран
+        document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+        document.getElementById('countries').classList.add('active');
     }
 }
 

@@ -96,3 +96,9 @@
     display: flex;
     gap: 10px;
 }
+
+.country-title {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}

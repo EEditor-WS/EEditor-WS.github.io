@@ -114,6 +114,10 @@ const translations = {
         "bonuses": "Bonuses",
         "common_requirements": "Common requirements",
 
+        "save": "Save",
+        "cancel": "Cancel",
+        "add": "Add",
+
         // Requirements editor
         "requirements_editor": "Requirements Editor",
         "bonus_editor": "Bonus Editor",
@@ -161,6 +165,9 @@ const translations = {
         "relation_turn": "Start Turn",
         "relation_duration": "Duration",
         "relation_initiator": "Initiator",
+        "relation_turn_short": "Turn",
+        "relation_duration_short": "Duration",
+        "relation_initiator_short": "Initiator",
 
         // Country names
         "country_civilization_13": "Great Britain",
@@ -322,6 +329,10 @@ const translations = {
         "bonuses": "Бонусы",
         "common_requirements": "Общие требования",
 
+        "save": "Сохранить",
+        "cancel": "Отмена",
+        "add": "Добавить",
+
         // Редактор требований и бонусов
         "requirements_editor": "Редактор требований",
         "bonus_editor": "Редактор бонусов",
@@ -369,6 +380,9 @@ const translations = {
         "relation_turn": "Ход начала",
         "relation_duration": "Длительность",
         "relation_initiator": "Инициатор",
+        "relation_turn_short": "Ход",
+        "relation_duration_short": "Длительность",
+        "relation_initiator_short": "Инициатор",
 
         // Названия стран
         "country_civilization_13": "Великобритания",
@@ -530,6 +544,10 @@ const translations = {
         "bonuses": "Бонуси",
         "common_requirements": "Загальні вимоги",
 
+        "save": "Зберегти",
+        "cancel": "Відміна",
+        "add": "Додати",
+
         // Редактор вимог та бонусів
         "requirements_editor": "Редактор вимог",
         "bonus_editor": "Редактор бонусів",
@@ -577,6 +595,9 @@ const translations = {
         "relation_turn": "Хід початку",
         "relation_duration": "Тривалість",
         "relation_initiator": "Ініціатор",
+        "relation_turn_short": "Хід",
+        "relation_duration_short": "Тривалість",
+        "relation_initiator_short": "Ініціатор",
 
         // Назви країн
         "country_civilization_13": "Велика Британія",

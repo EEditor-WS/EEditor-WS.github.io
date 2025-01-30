@@ -637,10 +637,90 @@ body {
 }
 
 .modal-footer {
-    padding: 15px 20px;
-    border-top: 1px solid #333;
     display: flex;
     justify-content: flex-end;
+    gap: 8px;
+    padding: 15px 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.modal-footer .action-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.modal-footer .action-button svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+}
+
+#save-relation {
+    background: var(--button-success);
+    color: var(--text-on-primary);
+}
+
+#save-relation:hover {
+    background: var(--button-success-hover);
+    transform: translateY(-1px);
+}
+
+#cancel-relation {
+    background: var(--button-secondary);
+    color: var(--text-on-primary);
+}
+
+#cancel-relation:hover {
+    background: var(--button-secondary-hover);
+    transform: translateY(-1px);
+}
+
+.relation-edit-modal .modal-content {
+    max-width: 400px;
+}
+
+.relation-edit-modal .form-group {
+    margin-bottom: 16px;
+}
+
+.relation-edit-modal .form-group:last-child {
+    margin-bottom: 0;
+}
+
+.relation-edit-modal label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-color);
+    font-size: 14px;
+}
+
+.relation-edit-modal input,
+.relation-edit-modal select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--background-secondary);
+    color: var(--text-color);
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+}
+
+.relation-edit-modal input:focus,
+.relation-edit-modal select:focus {
+    border-color: var(--primary-color);
+    outline: none;
 }
 
 .country-select {
@@ -922,14 +1002,14 @@ body {
 .lang-dropdown {
     display: none;
     position: absolute;
-    top: 100%;
+    top: calc(100% + 4px);
     right: 0;
-    background-color: #242424;
-    border: 1px solid #404040;
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
     border-radius: 4px;
-    margin-top: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     z-index: 1000;
+    min-width: 120px;
 }
 
 .lang-dropdown.show {
@@ -1474,35 +1554,48 @@ body {
 }
 
 /* Тултипы для кнопок с иконками */
-.icon-action-button[title] {
+.tooltip-container {
     position: relative;
+    display: inline-block;
 }
 
-.icon-action-button[title]:hover:after {
-    content: attr(title);
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
+.tooltip {
+    visibility: hidden;
+    position: fixed;
+    background-color: var(--background-secondary);
+    color: var(--text-color);
+    text-align: center;
     padding: 4px 8px;
-    background: var(--tooltip-background);
-    color: var(--tooltip-text);
-    font-size: 12px;
     border-radius: 4px;
+    font-size: 12px;
     white-space: nowrap;
-    margin-bottom: 8px;
-    z-index: 1000;
     pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+    z-index: 999999;
 }
 
-.icon-action-button[title]:hover:before {
-    content: '';
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 6px solid transparent;
-    border-top-color: var(--tooltip-background);
-    margin-bottom: -4px;
-    pointer-events: none;
+.icon-action-button:hover + .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.save-params {
+    background: var(--button-success);
+    color: var(--text-on-primary);
+}
+
+.save-params:hover {
+    background: var(--button-success-hover);
+    transform: translateY(-1px);
+}
+
+.cancel-params {
+    background: var(--button-secondary);
+    color: var(--text-on-primary);
+}
+
+.cancel-params:hover {
+    background: var(--button-secondary-hover);
+    transform: translateY(-1px);
 }

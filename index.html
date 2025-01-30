@@ -291,17 +291,23 @@
                 <div class="list-header">
                     <h2 data-translate="countries">Страны</h2>
                     <div class="header-actions">
-                        <button id="remove-invalid-owners" class="icon-action-button" title="Удалить пустых владельцев">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
-                            </svg>
-                        </button>
-                        <button id="add-country" class="icon-action-button" title="Добавить страну">
-                            <svg viewBox="0 0 24 24">
-                                <line x1="12" y1="5" x2="12" y2="19"></line>
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                            </svg>
-                        </button>
+                        <div class="tooltip-container">
+                            <button id="remove-invalid-owners" class="icon-action-button">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                </svg>
+                            </button>
+                            <div class="tooltip">Удалить пустых владельцев</div>
+                        </div>
+                        <div class="tooltip-container">
+                            <button id="add-country" class="icon-action-button">
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </button>
+                            <div class="tooltip">Добавить страну</div>
+                        </div>
                     </div>
                 </div>
                 <table class="countries-table">
@@ -322,24 +328,44 @@
         <div id="country-edit" class="page pcountry-edit">
             <div class="country-edit-container">
                 <div class="country-header">
-                    <h2><span id="country-name-header"></span></h2>
+                    <div class="country-title">
+                        <div class="tooltip-container">
+                            <button id="back-to-countries-list" class="icon-action-button back">
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                                    <polyline points="12 19 5 12 12 5"></polyline>
+                                </svg>
+                            </button>
+                            <div class="tooltip" data-translate="back">Назад</div>
+                        </div>
+                        <h2><span id="country-name-header"></span></h2>
+                    </div>
                     <div class="info-actions">
-                        <button id="country-reforms" class="icon-action-button" title="Реформы">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9"/>
-                            </svg>
-                        </button>
-                        <button id="copy-country" class="icon-action-button copy" title="Копировать">
-                            <svg viewBox="0 0 24 24">
-                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-                            </svg>
-                        </button>
-                        <button id="delete-country" class="icon-action-button delete" title="Удалить">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
-                            </svg>
-                        </button>
+                        <div class="tooltip-container">
+                            <button id="country-reforms" class="icon-action-button">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9"/>
+                                </svg>
+                            </button>
+                            <div class="tooltip">Реформы</div>
+                        </div>
+                        <div class="tooltip-container">
+                            <button id="copy-country" class="icon-action-button copy">
+                                <svg viewBox="0 0 24 24">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                                </svg>
+                            </button>
+                            <div class="tooltip">Копировать</div>
+                        </div>
+                        <div class="tooltip-container">
+                            <button id="delete-country" class="icon-action-button delete">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                </svg>
+                            </button>
+                            <div class="tooltip">Удалить</div>
+                        </div>
                     </div>
                 </div>
                 <form id="country-form" class="country-form">
@@ -461,12 +487,15 @@
                 <div class="list-header">
                     <h2 data-translate="events">События</h2>
                     <div class="header-actions">
-                        <button id="add-event" class="icon-action-button" title="Добавить событие">
-                            <svg viewBox="0 0 24 24">
-                                <line x1="12" y1="5" x2="12" y2="19"></line>
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                            </svg>
-                        </button>
+                        <div class="tooltip-container">
+                            <button id="add-event" class="icon-action-button">
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </button>
+                            <div class="tooltip">Добавить событие</div>
+                        </div>
                     </div>
                 </div>
                 <table class="events-table">
@@ -486,19 +515,36 @@
         <div id="event-edit" class="page pevent-edit">
             <div class="event-edit">
                 <div class="info-header">
-                    <h2><span id="event-name-header">Редактирование события</span></h2>
+                    <div class="event-title">
+                        <div class="tooltip-container">
+                            <button id="back-to-events-list" class="icon-action-button back">
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                                    <polyline points="12 19 5 12 12 5"></polyline>
+                                </svg>
+                            </button>
+                            <div class="tooltip" data-translate="back">Назад</div>
+                        </div>
+                        <h2><span id="event-name-header">Редактирование события</span></h2>
+                    </div>
                     <div class="info-actions">
-                        <button class="icon-action-button copy" onclick="window.eventManager.copyCurrentEvent()" title="Копировать">
-                            <svg viewBox="0 0 24 24">
-                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-                            </svg>
-                        </button>
-                        <button class="icon-action-button delete" onclick="window.eventManager.deleteCurrentEvent()" title="Удалить">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
-                            </svg>
-                        </button>
+                        <div class="tooltip-container">
+                            <button class="icon-action-button copy" onclick="window.eventManager.copyCurrentEvent()">
+                                <svg viewBox="0 0 24 24">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                                </svg>
+                            </button>
+                            <div class="tooltip">Копировать</div>
+                        </div>
+                        <div class="tooltip-container">
+                            <button class="icon-action-button delete" onclick="window.eventManager.deleteCurrentEvent()">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                </svg>
+                            </button>
+                            <div class="tooltip">Удалить</div>
+                        </div>
                     </div>
                 </div>
             <form id="event-form" class="event-form">
@@ -696,7 +742,13 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button id="add-selected-country" class="action-button" data-translate="add">Добавить</button>
+                    <button id="add-selected-country" class="action-button">
+                        <svg viewBox="0 0 24 24">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        <span data-translate="add">Добавить</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -748,11 +800,30 @@
                             <div id="requirement-value-container"></div>
                         </div>
                         <div class="info-actions">
-                            <button type="button" id="save-requirement" class="action-button">Сохранить</button>
-                            <button type="button" id="cancel-requirement" class="action-button">Отмена</button>
+                            <button type="button" id="save-requirement" class="action-button">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                                    <polyline points="17 21 17 13 7 13 7 21"/>
+                                    <polyline points="7 3 7 8 15 8"/>
+                                </svg>
+                                <span data-translate="save">Сохранить</span>
+                            </button>
+                            <button type="button" id="cancel-requirement" class="action-button">
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                                <span data-translate="cancel">Отмена</span>
+                            </button>
                         </div>
                     </div>
-                    <button type="button" id="add-requirement" class="action-button">Добавить</button>
+                    <button type="button" id="add-requirement" class="action-button">
+                        <svg viewBox="0 0 24 24">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        <span data-translate="add">Добавить</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -760,20 +831,37 @@
         <div id="reforms" class="page preforms">
             <div class="list-container">
                 <div class="list-header">
-                    <h2>Реформы <span id="reforms-country-name"></span></h2>
+                    <div class="reform-title">
+                        <div class="tooltip-container">
+                            <button id="back-to-countries" class="icon-action-button back">
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                                    <polyline points="12 19 5 12 12 5"></polyline>
+                                </svg>
+                            </button>
+                            <div class="tooltip" data-translate="back">Назад</div>
+                        </div>
+                        <h2>Реформы <span id="reforms-country-name"></span></h2>
+                    </div>
                     <div class="header-actions">
-                        <button id="add-reform" class="icon-action-button" title="Добавить реформу">
-                            <svg viewBox="0 0 24 24">
-                                <line x1="12" y1="5" x2="12" y2="19"></line>
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                            </svg>
-                        </button>
-                        <button id="paste-reform" class="icon-action-button paste" title="Вставить">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
-                                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
-                            </svg>
-                        </button>
+                        <div class="tooltip-container">
+                            <button id="add-reform" class="icon-action-button">
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </button>
+                            <div class="tooltip">Добавить реформу</div>
+                        </div>
+                        <div class="tooltip-container">
+                            <button id="paste-reform" class="icon-action-button paste">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+                                </svg>
+                            </button>
+                            <div class="tooltip">Вставить</div>
+                        </div>
                     </div>
                 </div>
                 <table class="reforms-table">
@@ -795,41 +883,56 @@
             <div class="reform-edit-container">
                 <div class="reform-header">
                     <div class="reform-title">
-                        <button id="back-to-reforms" class="icon-action-button back" title="Назад">
-                            <svg viewBox="0 0 24 24">
-                                <line x1="19" y1="12" x2="5" y2="12"></line>
-                                <polyline points="12 19 5 12 12 5"></polyline>
-                            </svg>
-                        </button>
+                        <div class="tooltip-container">
+                            <button id="back-to-reforms" class="icon-action-button back">
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                                    <polyline points="12 19 5 12 12 5"></polyline>
+                                </svg>
+                            </button>
+                            <div class="tooltip">Назад</div>
+                        </div>
                         <h2>Редактирование реформы</h2>
                     </div>
                     <div class="info-actions">
-                        <button id="copy-reform" class="icon-action-button copy" title="Копировать">
-                            <svg viewBox="0 0 24 24">
-                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-                            </svg>
-                        </button>
-                        <button id="copy-reform-buffer" class="icon-action-button copy" title="Копировать в буфер">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
-                                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
-                                <line x1="12" y1="11" x2="12" y2="17"/>
-                                <line x1="9" y1="14" x2="15" y2="14"/>
-                            </svg>
-                        </button>
-                        <button id="load-reform-sync" class="icon-action-button" title="Загрузить для синхронизации">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                                <polyline points="7 10 12 15 17 10"/>
-                                <line x1="12" y1="15" x2="12" y2="3"/>
-                            </svg>
-                        </button>
-                        <button id="delete-reform" class="icon-action-button delete" title="Удалить">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
-                            </svg>
-                        </button>
+                        <div class="tooltip-container">
+                            <button id="copy-reform" class="icon-action-button copy">
+                                <svg viewBox="0 0 24 24">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                                </svg>
+                            </button>
+                            <div class="tooltip">Копировать</div>
+                        </div>
+                        <div class="tooltip-container">
+                            <button id="copy-reform-buffer" class="icon-action-button copy">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+                                    <line x1="12" y1="11" x2="12" y2="17"/>
+                                    <line x1="9" y1="14" x2="15" y2="14"/>
+                                </svg>
+                            </button>
+                            <div class="tooltip">Копировать в буфер</div>
+                        </div>
+                        <div class="tooltip-container">
+                            <button id="load-reform-sync" class="icon-action-button">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="7 10 12 15 17 10"/>
+                                    <line x1="12" y1="15" x2="12" y2="3"/>
+                                </svg>
+                            </button>
+                            <div class="tooltip">Загрузить для синхронизации</div>
+                        </div>
+                        <div class="tooltip-container">
+                            <button id="delete-reform" class="icon-action-button delete">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                </svg>
+                            </button>
+                            <div class="tooltip">Удалить</div>
+                        </div>
                     </div>
                 </div>
                 <form id="reform-form">

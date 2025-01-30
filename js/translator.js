@@ -402,19 +402,6 @@ class Translator {
                     }
                 });
             }
-
-            const buttons = {
-                'save-requirement': 'save',
-                'cancel-requirement': 'cancel',
-                'add-requirement': 'add'
-            };
-
-            for (const [buttonId, translationKey] of Object.entries(buttons)) {
-                const button = document.getElementById(buttonId);
-                if (button) {
-                    button.textContent = this.translate(translationKey);
-                }
-            }
         }
     }
 

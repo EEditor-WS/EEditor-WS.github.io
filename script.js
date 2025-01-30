@@ -816,6 +816,18 @@ document.addEventListener('DOMContentLoaded', function() {
             accountDropdown?.classList.remove('active');
         }
     });
+
+    // Инициализация тултипов
+    document.querySelectorAll('.icon-action-button').forEach(button => {
+        const tooltip = button.nextElementSibling;
+        if (!tooltip || !tooltip.classList.contains('tooltip')) return;
+
+        button.addEventListener('mouseenter', (e) => {
+            const rect = button.getBoundingClientRect();
+            tooltip.style.left = rect.left + (rect.width / 2) - (tooltip.offsetWidth / 2) + 'px';
+            tooltip.style.top = rect.bottom + 10 + 'px';
+        });
+    });
 });
 
 function changeApplicationLanguage(lang) {

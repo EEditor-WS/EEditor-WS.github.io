@@ -525,3 +525,9 @@
     max-height: 80vh;
     overflow-y: auto;
 }
+
+.event-title {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}

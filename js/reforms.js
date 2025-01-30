@@ -15,6 +15,7 @@ class ReformManager {
         // Кнопки на странице списка реформ
         document.getElementById('add-reform')?.addEventListener('click', () => this.createNewReform());
         document.getElementById('paste-reform')?.addEventListener('click', () => this.pasteReform());
+        document.getElementById('back-to-countries')?.addEventListener('click', () => this.backToCountry());
 
         // Кнопки на странице редактирования
         document.getElementById('back-to-reforms')?.addEventListener('click', () => this.switchToReformsList());
@@ -336,6 +337,14 @@ class ReformManager {
         document.getElementById('reform-color-b').value = b;
         
         this.updateReformColorPreview();
+    }
+
+    backToCountry() {
+        if (!this.currentCountry || !this.jsonData?.lands[this.currentCountry]) return;
+        
+        // Переключаемся на страницу редактирования страны
+        document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+        document.getElementById('country-edit').classList.add('active');
     }
 }
 

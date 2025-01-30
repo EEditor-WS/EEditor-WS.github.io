@@ -219,6 +219,9 @@ class EventManager {
         document.getElementById('cancel-edit')?.addEventListener('click', () => {
             this.switchToEventsList();
         });
+
+        // Кнопка возврата к списку событий
+        document.getElementById('back-to-events-list')?.addEventListener('click', () => this.backToEventsList());
     }
 
     createNewEvent() {
@@ -1065,6 +1068,12 @@ class EventManager {
                 `<option value="${icon}">${icon}</option>`
             ).join('');
         }
+    }
+
+    backToEventsList() {
+        // Переключаемся на страницу списка событий
+        document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+        document.getElementById('events').classList.add('active');
     }
 }
 
