@@ -548,7 +548,7 @@ const translations = {
         "countries": "Країни",
         "events": "Події",
         "save": "Зберегти",
-        "drag_file_here": "Перетягніть файл сюди або",
+        "drag_file_here": "Перетагніть файл сюди або",
         "choose_file": "Виберіть файл",
         "file_preview": "Попередній перегляд файлу",
         "changes_not_saved": "Зміни не збережені",
@@ -612,7 +612,7 @@ const translations = {
         "guaranteed_by": "Гарантії від",
         "pacts": "Пакти",
         "sanctions": "Санкції",
-        "vassals": "Васали",
+        "vassals": "Васалы",
         "color_r": "R",
         "color_g": "G",
         "color_b": "B",
@@ -694,7 +694,7 @@ const translations = {
         "diplomacy_pact": "Укласти пакт",
         "diplomacy_alliance": "Укласти альянс",
         "diplomacy_peace": "Укласти мир",
-        "diplomacy_war": "Оголосити війну",
+        "diplomacy_war": "Оголосити вайну",
         "resurrect_country": "Відновити країну",
         "annex_country": "Анексувати країну",
 
@@ -764,12 +764,12 @@ const translations = {
         "icon_preview": "Попередній перегляд іконки",
         
         // Main page settings
-        "file_parse_error": "Помилка читання файлу",
-        "file_access_error": "Помилка доступу до файлу",
-        "file_saved": "Файл збережено",
-        "file_downloaded": "Файл завантажено",
-        "file_update_error": "Помилка оновлення файлу",
-        "water_color_update_error": "Помилка оновлення кольору води",
+        "file_parse_error": "Помилка чтения файла",
+        "file_access_error": "Помилка доступу до файла",
+        "file_saved": "Файл захаваны",
+        "file_downloaded": "Файл спампаваны",
+        "file_update_error": "Помилка абнаўлення файла",
+        "water_color_update_error": "Помилка абнаўлення колеру вады",
 
         // Reform colors
         "random_color": "R",
@@ -823,53 +823,53 @@ const translations = {
         "file_preview": "Папярэдні прагляд файла",
         "changes_not_saved": "Змены не захаваны",
 
-        // Форма налад
+        // Налады гульні
         "title": "Назва",
         "id": "ID",
-        "last_turn": "Апошні Ход",
+        "last_turn": "Апошні ход",
         "year": "Год",
         "month": "Месяц",
-        "play_after_last_turn": "Гульня Пасля Апошняга Ходу",
-        "technology_lvl": "Узровень Тэхналогій",
-        "technologies_are_opened": "Адкрыты Усе Тэхналогіі",
-        "resources_spawn": "Спаўн Рэсурсаў",
+        "play_after_last_turn": "Гульня пасля апошняга ходу",
+        "technology_lvl": "Узровень тэхналогій",
+        "technologies_are_opened": "Адкрыты ўсе тэхналогіі",
+        "resources_spawn": "Спаўн рэсурсаў",
         "difficulty": "Складанасць",
-        "bots_behavior": "Паводзіны Ботаў",
-        "no_initial_diplomacy": "Без Пачатковай Дыпламатыі",
+        "bots_behavior": "Паводзіны ботаў",
+        "no_initial_diplomacy": "Без пачатковай дыпламатыі",
         "water_color": "Цвет Воды",
-        "no_nuclear_weapon": "Без Ядзернай Зброі",
+        "no_nuclear_weapon": "Без ядзернай зброі",
         "sandbox": "Пясочніца",
         "turn": "Ход",
-        "player_land": "Страна Ігрока",
-        "fog_of_war": "Туман Войны",
-        "map_hash": "Хэш Карты",
-        "num_of_provinces": "Количество Провинций",
-        "min_game_version": "Минимальная Версія Гри",
+        "player_land": "Краіна гульца",
+        "fog_of_war": "Туман вайны",
+        "map_hash": "Хэш карты",
+        "min_game_version": "Мінімальная версія гульні",
 
-        // Значэнні выпадальных спісаў
-        "easy": "Лёгка",
-        "standard": "Стандартна",
-        "hard": "Складана",
-        "impossible": "Немагчыма",
-        "peaceful": "Мірныя",
-        "aggressive": "Агрэсіўныя",
-        "low": "Мала",
-        "few": "Много",
-        "enabled": "Так",
-        "disabled": "Не",
+        // Падзеі
+        "event_image": "Малюнак падзеі",
+        "event_icon": "Значок падзеі",
+        "event_group": "Група падзей",
+        "event_name": "Назва падзеі",
+        "event_title": "Загаловак падзеі",
+        "event_description": "Апісанне падзеі",
+        "event_hide_later": "Схаваць пазней",
+        "event_delete_turns": "Выдаліць праз (хадоў)",
+        "answer_text": "Тэкст адказу",
+        "result_description": "Апісанне выніку",
+        "auto_select_if_ignored": "Выбіраць пры ігнараванні",
+        "enable_answer": "Уключыць адказ",
 
-        // Рэдактар патрабаванняў
+        // Патрабаванні і бонусы
         "requirements_editor": "Рэдактар патрабаванняў",
         "bonus_editor": "Рэдактар бонусаў",
         "type": "Тып",
         "subtype": "Падтып",
         "action": "Дзеянне",
         "value": "Значэнне",
-        "enter_number": "Увядзіце лік",
-        "enter_percent": "Увядзіце працэнт",
-        "enter_value": "Увядзіце значэнне",
-        "enter_building_name": "Увядзіце назву будынка",
-        "enter_institution_name": "Увядзіце назву інстытута",
+        "more": "Больш",
+        "equal": "Роўна",
+        "not_equal": "Не роўна",
+        "less": "Менш",
 
         // Тыпы патрабаванняў
         "defense": "Змяніць абарону",
@@ -896,20 +896,8 @@ const translations = {
         "diplomacy_alliance": "Заключыць альянс",
         "diplomacy_peace": "Заключыць мір",
         "diplomacy_war": "Аб'явіць вайну",
-        "resurrect_country": "Елді қалпына келтіру",
-        "annex_country": "Елді қосып алу",
-
-        // Әрекеттер
-        "more": "Больш",
-        "equal": "Роўна",
-        "not_equal": "Не роўна",
-        "less": "Менш",
-
-        // Назвы краін
-        "country_civilization_13": "Вялікабрытанія",
-        "country_civilization_21": "Францыя",
-        "country_civilization_22": "Расійская Імперыя",
-        "country_undeveloped_land": "Неразвітыя землі"
+        "resurrect_country": "Аднавіць краіну",
+        "annex_country": "Анексаваць краіну"
     },
     "kk": {
         // Басты бет
@@ -922,7 +910,7 @@ const translations = {
         "file_preview": "Файлды алдын ала қарау",
         "changes_not_saved": "Өзгерістер сақталмады",
 
-        // Параметрлер формасы
+        // Ойын параметрлері
         "title": "Атауы",
         "id": "ID",
         "last_turn": "Соңғы жүріс",
@@ -935,33 +923,40 @@ const translations = {
         "difficulty": "Қиындық",
         "bots_behavior": "Боттардың мінез-құлқы",
         "no_initial_diplomacy": "Бастапқы дипломатиясыз",
+        "water_color": "Су түсі",
         "no_nuclear_weapon": "Ядролық қарусыз",
         "sandbox": "Құмсалғыш",
+        "turn": "Жүріс",
+        "player_land": "Ойыншы елі",
+        "fog_of_war": "Соғыс тұманы",
+        "map_hash": "Карта хэші",
+        "min_game_version": "Минималды ойын нұсқасы",
 
-        // Тізім мәндері
-        "easy": "Оңай",
-        "standard": "Стандартты",
-        "hard": "Қиын",
-        "impossible": "Мүмкін емес",
-        "peaceful": "Бейбіт",
-        "aggressive": "Агрессивті",
-        "low": "Аз",
-        "many": "Көп",
-        "enabled": "Иә",
-        "disabled": "Жоқ",
+        // Оқиғалар
+        "event_image": "Оқиға суреті",
+        "event_icon": "Оқиға белгішесі",
+        "event_group": "Оқиға тобы",
+        "event_name": "Оқиға атауы",
+        "event_title": "Оқиға тақырыбы",
+        "event_description": "Оқиға сипаттамасы",
+        "event_hide_later": "Кейін жасыру",
+        "event_delete_turns": "Жою (жүрістер)",
+        "answer_text": "Жауап мәтіні",
+        "result_description": "Нәтиже сипаттамасы",
+        "auto_select_if_ignored": "Елемегенде таңдау",
+        "enable_answer": "Жауапты қосу",
 
-        // Талаптар редакторы
+        // Талаптар және бонустар
         "requirements_editor": "Талаптар редакторы",
         "bonus_editor": "Бонустар редакторы",
         "type": "Түрі",
         "subtype": "Қосымша түрі",
         "action": "Әрекет",
         "value": "Мән",
-        "enter_number": "Санды енгізіңіз",
-        "enter_percent": "Пайызды енгізіңіз",
-        "enter_value": "Мәнді енгізіңіз",
-        "enter_building_name": "Ғимарат атауын енгізіңіз",
-        "enter_institution_name": "Мекеме атауын енгізіңіз",
+        "more": "Көп",
+        "equal": "Тең",
+        "not_equal": "Тең емес",
+        "less": "Аз",
 
         // Талаптар түрлері
         "defense": "Қорғанысты өзгерту",
@@ -989,18 +984,6 @@ const translations = {
         "diplomacy_peace": "Бейбітшілік орнату",
         "diplomacy_war": "Соғыс жариялау",
         "resurrect_country": "Елді қалпына келтіру",
-        "annex_country": "Елді қосып алу",
-
-        // Әрекеттер
-        "more": "Көп",
-        "equal": "Тең",
-        "not_equal": "Тең емес",
-        "less": "Аз",
-
-        // Ел атаулары
-        "country_civilization_13": "Ұлыбритания",
-        "country_civilization_21": "Франция",
-        "country_civilization_22": "Ресей Империясы",
-        "country_undeveloped_land": "Дамымаған жерлер"
+        "annex_country": "Елді қосып алу"
     }
 }; 
