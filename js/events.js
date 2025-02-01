@@ -1,59 +1,68 @@
 class EventManager {
     constructor() {
-        this.currentEvent = null;
-        this.jsonData = null;
-        this.undoStack = [];
-        this.redoStack = [];
-        this.maxStackSize = 50;
-        this.isEditing = false;
-        
-        // Добавляем параметры сортировки
-        this.sortColumn = 'id'; // По умолчанию сортируем по ID
-        this.sortDirection = 'asc'; // По умолчанию по возрастанию
-        
-        // Сохраняем ссылки на важные элементы
-        this.previewContent = document.getElementById('preview-content');
-        this.fileInfo = document.getElementById('file-info');
-        
-        // Проверяем наличие необходимых элементов
-        if (!this.previewContent) {
-            console.error('Не найден элемент preview-content');
-            return;
-        }
-        if (!this.fileInfo) {
-            console.error('Не найден элемент file-info');
-            return;
-        }
-        
-        // Пытаемся загрузить начальные данные из preview-content
         try {
-            const initialData = JSON.parse(this.previewContent.value);
-            this.setJsonData(initialData);
-        } catch (error) {
-            console.warn('Не удалось загрузить начальные данные:', error);
-            console.warn("Если эта ошибка появилась до загрузки файла, то это нормально, просто нет данных для отображения");
-        }
-        
-        // Подписываемся на изменения в preview-content
-        this.previewContent.addEventListener('input', () => {
-            if (this.isEditing) return; // Игнорируем событие, если мы сами его вызвали
-            try {
-                const jsonData = JSON.parse(this.previewContent.value);
-                this.setJsonData(jsonData);
-            } catch (error) {
-                console.error('Ошибка при парсинге JSON:', error);
+            this.currentEvent = null;
+            this.jsonData = null;
+            this.undoStack = [];
+            this.redoStack = [];
+            this.maxStackSize = 50;
+            this.isEditing = false;
+            
+            // Добавляем параметры сортировки
+            this.sortColumn = 'id'; // По умолчанию сортируем по ID
+            this.sortDirection = 'asc'; // По умолчанию по возрастанию
+            
+            // Сохраняем ссылки на важные элементы
+            this.previewContent = document.getElementById('preview-content');
+            this.fileInfo = document.getElementById('file-info');
+            
+            // Проверяем наличие необходимых элементов
+            if (!this.previewContent) {
+                throw new Error('Не найден элемент preview-content');
             }
-        });
-        
-        this.init();
+            if (!this.fileInfo) {
+                throw new Error('Не найден элемент file-info');
+            }
+            
+            // Пытаемся загрузить начальные данные из preview-content
+            try {
+                const initialData = JSON.parse(this.previewContent.value);
+                this.setJsonData(initialData);
+            } catch (error) {
+                console.warn('Не удалось загрузить начальные данные:', error);
+                console.warn("Если эта ошибка появилась до загрузки файла, то это нормально, просто нет данных для отображения");
+            }
+            
+            // Подписываемся на изменения в preview-content
+            this.previewContent.addEventListener('input', () => {
+                if (this.isEditing) return; // Игнорируем событие, если мы сами его вызвали
+                try {
+                    const jsonData = JSON.parse(this.previewContent.value);
+                    this.setJsonData(jsonData);
+                } catch (error) {
+                    console.error('Ошибка при парсинге JSON:', error);
+                    this.fileInfo.textContent = window.translator.translate('file_parse_error');
+                }
+            });
+            
+            this.init();
+        } catch (error) {
+            console.error('Ошибка при инициализации EventManager:', error);
+            throw error;
+        }
     }
 
     setJsonData(jsonData) {
-        this.jsonData = jsonData;
-        if (!this.jsonData.custom_events) {
-            this.jsonData.custom_events = {};
+        try {
+            this.jsonData = jsonData;
+            if (!this.jsonData.custom_events) {
+                this.jsonData.custom_events = {};
+            }
+            this.updateEventsList();
+        } catch (error) {
+            console.error('Ошибка при установке JSON данных:', error);
+            this.fileInfo.textContent = window.translator.translate('data_update_error');
         }
-        this.updateEventsList();
     }
 
     init() {
@@ -459,11 +468,27 @@ class EventManager {
     }
 
     saveChanges() {
-        if (!this.currentEvent || !this.jsonData?.custom_events?.[this.currentEvent]) return;
+        if (!this.currentEvent || !this.jsonData?.custom_events?.[this.currentEvent]) {
+            console.warn('Нет текущего события или данных для сохранения');
+            return;
+        }
 
         this.isEditing = true;
         try {
             const event = this.jsonData.custom_events[this.currentEvent];
+
+            // Проверяем наличие всех необходимых элементов формы
+            const requiredElements = [
+                'event-id', 'event-group-name', 'event-unique-name', 'event-title',
+                'event-description', 'event-image', 'event-icon'
+            ];
+
+            for (const elementId of requiredElements) {
+                const element = document.getElementById(elementId);
+                if (!element) {
+                    throw new Error(`Не найден элемент формы: ${elementId}`);
+                }
+            }
 
             // Обновляем основные данные
             event.id = document.getElementById('event-id').value;
@@ -473,20 +498,14 @@ class EventManager {
             event.description = document.getElementById('event-description').value;
             event.image = document.getElementById('event-image').value;
             event.icon = document.getElementById('event-icon').value;
-            event.answer1 = document.getElementById('event-answer1').value;
-            event.answer2 = document.getElementById('event-answer2').value;
-            event.answer3 = document.getElementById('event-answer3').value;
-            event.description1 = document.getElementById('event-description1').value;
-            event.description2 = document.getElementById('event-description2').value;
-            event.description3 = document.getElementById('event-description3').value;
-            event.answer2_is_disabled = document.getElementById('event-answer2-disabled').value === 'true';
-            event.answer3_is_disabled = document.getElementById('event-answer3-disabled').value === 'true';
-            event.auto_answer1_if_ignored = document.getElementById('event-auto-answer1').value === 'true';
-            event.delete_after_turns = parseInt(document.getElementById('event-delete-turns').value) || 1;
-            event.hide_later = document.getElementById('event-hide-later').value === 'true';
 
-            // Обновляем требования и бонусы
-            this.updateRequirementsAndBonuses(event);
+            // Валидация обязательных полей
+            if (!event.id || !event.unique_event_name) {
+                throw new Error('ID и системное название события обязательны');
+            }
+
+            // Обновляем ответы
+            this.updateEventAnswers(event);
 
             // Обновляем JSON и интерфейс
             this.updateJsonInPreview();
@@ -498,8 +517,33 @@ class EventManager {
             }
 
             this.updateEventsList();
+            
+            // Показываем сообщение об успешном сохранении
+            this.fileInfo.textContent = window.translator.translate('changes_saved');
+        } catch (error) {
+            console.error('Ошибка при сохранении изменений:', error);
+            this.fileInfo.textContent = window.translator.translate('save_error');
         } finally {
             this.isEditing = false;
+        }
+    }
+
+    updateEventAnswers(event) {
+        try {
+            event.answer1 = document.getElementById('event-answer1').value;
+            event.answer2 = document.getElementById('event-answer2').value;
+            event.answer3 = document.getElementById('event-answer3').value;
+            event.description1 = document.getElementById('event-description1').value;
+            event.description2 = document.getElementById('event-description2').value;
+            event.description3 = document.getElementById('event-description3').value;
+            event.answer2_is_disabled = document.getElementById('event-answer2-disabled').value === 'true';
+            event.answer3_is_disabled = document.getElementById('event-answer3-disabled').value === 'true';
+            event.auto_answer1_if_ignored = document.getElementById('event-auto-answer1').value === 'true';
+            event.delete_after_turns = parseInt(document.getElementById('event-delete-turns').value) || 1;
+            event.hide_later = document.getElementById('event-hide-later').value === 'true';
+        } catch (error) {
+            console.error('Ошибка при обновлении ответов события:', error);
+            throw error;
         }
     }
 
@@ -1114,8 +1158,8 @@ function createRequirementEditor() {
                 <div id="requirement-value-container"></div>
             </div>
             <div class="form-actions">
-                <button type="button" id="save-requirement" class="action-button" data-translate="save">Сохранить</button>
-                <button type="button" id="cancel-requirement" class="action-button" data-translate="cancel">Отмена</button>
+                <button type="button" id="save-requirement" class="icon-action-button save" data-translate="save">Сохранить</button>
+                <button type="button" id="cancel-requirement" class="icon-action-button delete" data-translate="cancel">Отмена</button>
             </div>
         </div>
     `;

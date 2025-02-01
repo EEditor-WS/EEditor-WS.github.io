@@ -71,7 +71,13 @@ class CountryManager {
     // Модифицируем метод updateCountriesList
     updateCountriesList() {
         const countriesList = document.getElementById('countries-list');
-        if (!countriesList || !this.jsonData?.lands) return;
+        if (!countriesList) return;
+
+        // Если jsonData не существует или нет списка стран, очищаем список и выходим
+        if (!this.jsonData?.lands) {
+            countriesList.innerHTML = '';
+            return;
+        }
 
         // Очищаем список
         countriesList.innerHTML = '';
@@ -109,22 +115,7 @@ class CountryManager {
                         comparison = a.name.toLowerCase().localeCompare(b.name.toLowerCase());
                         break;
                     case 'id':
-                        // Специальная обработка для civilization_N
-                        const aMatch = a.id.match(/^civilization_(\d+)$/);
-                        const bMatch = b.id.match(/^civilization_(\d+)$/);
-                        if (aMatch && bMatch) {
-                            // Если оба ID в формате civilization_N, сравниваем числа
-                            comparison = parseInt(aMatch[1]) - parseInt(bMatch[1]);
-                        } else if (aMatch) {
-                            // Если только первый ID в формате civilization_N, он идет первым
-                            comparison = -1;
-                        } else if (bMatch) {
-                            // Если только второй ID в формате civilization_N, он идет первым
-                            comparison = 1;
-                        } else {
-                            // Для всех остальных случаев используем обычное сравнение
-                            comparison = a.id.toLowerCase().localeCompare(b.id.toLowerCase());
-                        }
+                        comparison = a.id.toLowerCase().localeCompare(b.id.toLowerCase());
                         break;
                     case 'provinces':
                         comparison = a.provinces - b.provinces;
@@ -214,7 +205,7 @@ class CountryManager {
         this.initColorHandlers();
 
         // Обработчик для кнопки случайного цвета страны
-        document.getElementById('random-country-color')?.addEventListener('click', function() {
+        document.getElementById('random-country-color')?.addEventListener('click', () => {
             const r = Math.floor(Math.random() * 256);
             const g = Math.floor(Math.random() * 256);
             const b = Math.floor(Math.random() * 256);
@@ -223,7 +214,11 @@ class CountryManager {
             document.getElementById('country-color-g').value = g;
             document.getElementById('country-color-b').value = b;
             
-            updateCountryColorPreview();
+            const preview = document.getElementById('country-color-preview');
+            if (preview) {
+                preview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+            }
+            this.saveChanges();
         });
 
         // Кнопка возврата к списку стран
@@ -264,6 +259,14 @@ class CountryManager {
     }
 
     createNewCountry() {
+        // Если jsonData не существует, создаем новый объект
+        if (!this.jsonData) {
+            this.jsonData = {
+                lands: {},
+                provinces: []
+            };
+        }
+
         this.pushToUndoStack();
 
         // Генерируем уникальный ID
@@ -293,6 +296,8 @@ class CountryManager {
     }
 
     generateUniqueId() {
+        if (!this.jsonData?.lands) return 'civilization_1';
+        
         const existingIds = Object.keys(this.jsonData.lands);
         let n = 1;
         while (existingIds.includes(`civilization_${n}`)) {
@@ -331,7 +336,16 @@ class CountryManager {
     }
 
     openCountry(countryId) {
-        if (!this.jsonData?.lands?.[countryId]) return;
+        // Проверяем наличие jsonData и создаем его при необходимости
+        if (!this.jsonData) {
+            this.jsonData = {
+                lands: {},
+                provinces: []
+            };
+        }
+
+        // Проверяем наличие страны
+        if (!this.jsonData.lands?.[countryId]) return;
 
         this.currentCountry = countryId;
         const country = this.jsonData.lands[countryId];

@@ -98,7 +98,7 @@
 }
 
 /* Информационная панель */
-.list-info-container {
+.info-container {
     background: var(--background-secondary);
     border-radius: 8px;
     padding: 16px;
@@ -134,7 +134,7 @@
     }
 
     .list-container,
-    .list-info-container {
+    .info-container {
         padding: 12px;
     }
 
@@ -156,7 +156,7 @@
     }
 
     .list-container,
-    .list-info-container {
+    .info-container {
         padding: 8px;
     }
 
@@ -170,4 +170,25 @@
         padding: 6px 8px;
         font-size: 12px;
     }
+}
+
+.info-title {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+
+.info-container {
+    padding: 20px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
 }

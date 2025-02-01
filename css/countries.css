@@ -15,12 +15,7 @@
 }
 
 .countries-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #242424;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    composes: common-table;
 }
 
 .countries-table th,
@@ -92,13 +87,15 @@
     margin-bottom: 30px;
 }
 
-.country-actions {
-    display: flex;
-    gap: 10px;
-}
-
-.country-title {
+/* Обновляем стили для маленьких кнопок в таблице */
+.array-item-delete,
+.array-item-edit {
+    padding: 4px;
+    width: 24px;
+    height: 24px;
     display: flex;
     align-items: center;
-    gap: 16px;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s ease;
 }

@@ -105,7 +105,7 @@ class ReformManager {
             name: window.translator.translate('new_reform'),
             color: [128, 128, 128, 255],
             requirements: {
-                political: 'Democracy',
+                political: '',
                 provinces: []
             }
         };
@@ -131,7 +131,7 @@ class ReformManager {
 
         // Заполняем форму
         document.getElementById('reform-name').value = reform.name;
-        document.getElementById('reform-ideology').value = reform.requirements?.political || 'Democracy';
+        document.getElementById('reform-ideology').value = reform.requirements?.political || '';
 
         // Устанавливаем цвет
         if (Array.isArray(reform.color) && reform.color.length >= 3) {

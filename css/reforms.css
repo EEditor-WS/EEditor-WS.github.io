@@ -92,25 +92,33 @@
     align-items: center;
     margin-bottom: 30px;
 }
-.reforms-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-}
-
-.reform-actions {
-    display: flex;
-    gap: 10px;
-}
-
-/* Удаляем стили для кнопок в строках, так как они больше не нужны */
-.reform-row-actions {
-    display: none;
-}
 
 .reform-title {
     display: flex;
     align-items: center;
     gap: 16px;
+}
+
+/* Удаляем старые стили для кнопок */
+.reform-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Стили для кнопок в реформах */
+.reform-button {
+    composes: icon-action-button;
+}
+
+/* Стили для маленьких кнопок в таблице реформ */
+.reform-item-delete,
+.reform-item-edit {
+    padding: 4px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s ease;
 }

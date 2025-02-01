@@ -461,6 +461,7 @@ body {
     min-height: 50px;
     max-height: 150px;
     overflow-y: auto;
+    position: relative;
 }
 
 .array-list:empty::after {
@@ -555,25 +556,25 @@ body {
     width: 32px;
     height: 32px;
     padding: 0;
+    background-color: rgba(46, 204, 113, 0.1);
+    color: #2ecc71;
     border: none;
-    border-radius: 50%;
-    background: var(--button-primary);
-    color: var(--text-on-primary);
+    border-radius: 6px;
     cursor: pointer;
+    transition: all 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease;
 }
 
 .add-country-button:hover {
-    background: var(--button-primary-hover);
+    background-color: rgba(46, 204, 113, 0.2);
     transform: translateY(-1px);
 }
 
 .add-country-button svg {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     stroke: currentColor;
     stroke-width: 2;
     stroke-linecap: round;
@@ -1082,10 +1083,10 @@ body {
 .image-preview {
     width: 200px;
     height: 120px;
-    object-fit: contain;
+    object-fit: cover;
     border: 1px solid #ccc;
     border-radius: 4px;
-    background: #f5f5f5;
+    background: #333333;
 }
 
 .icon-preview {
@@ -1094,7 +1095,7 @@ body {
     object-fit: contain;
     border: 1px solid #ccc;
     border-radius: 4px;
-    background: #f5f5f5;
+    background: #333333;
 }
 
 .answers-section {
@@ -1104,8 +1105,8 @@ body {
 }
 
 .answer-block {
-    background: #f9f9f9;
-    border: 1px solid #ddd;
+    background: #2a2a2a;
+    border: 1px solid #404040;
     border-radius: 8px;
     padding: 15px;
     margin-bottom: 20px;
@@ -1114,7 +1115,11 @@ body {
 .answer-block h3 {
     margin-top: 0;
     margin-bottom: 15px;
-    color: #333;
+    color: #e0e0e0;
+    font-size: 16px;
+    font-weight: 500;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #404040;
 }
 
 .requirements-button {
@@ -1171,13 +1176,17 @@ body {
 /* Стили для отключенных ответов */
 .answer-block[data-disabled="true"] {
     opacity: 0.7;
+}
+
+.answer-block[data-disabled="true"] input:not([id$="-disabled"]),
+.answer-block[data-disabled="true"] textarea:not([id$="-disabled"]),
+.answer-block[data-disabled="true"] button:not([id$="-disabled"]) {
     pointer-events: none;
 }
 
-.answer-block[data-disabled="true"] input,
-.answer-block[data-disabled="true"] textarea,
-.answer-block[data-disabled="true"] button {
-    pointer-events: none;
+.answer-block[data-disabled="true"] select[id$="-disabled"] {
+    opacity: 1;
+    pointer-events: all;
 }
 
 .form-group textarea {
@@ -1210,23 +1219,7 @@ body {
 }
 
 .icon-button {
-    background: none;
-    border: none;
-    padding: 4px;
-    cursor: pointer;
-    color: var(--text-color);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s;
-    width: 32px;
-    height: 32px;
-    position: relative;
-}
-
-.icon-button:hover {
-    background-color: var(--hover-color);
+    display: none !important;
 }
 
 .icon-button svg {
@@ -1419,19 +1412,7 @@ body {
 }
 
 .icon-button {
-    background: none;
-    border: none;
-    padding: 4px;
-    cursor: pointer;
-    color: var(--text-color);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s;
-    width: 32px;
-    height: 32px;
-    position: relative;
+    display: none !important;
 }
 
 .void {
@@ -1491,24 +1472,21 @@ body {
 
 /* Кнопки с иконками */
 .icon-action-button {
-    width: 36px;
-    height: 36px;
-    padding: 6px;
+    width: 32px;
+    height: 32px;
     border: none;
-    border-radius: 4px;
-    background: var(--button-primary);
-    color: var(--text-on-primary);
+    border-radius: 6px;
     cursor: pointer;
-    transition: all 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.2s ease;
     position: relative;
 }
 
 .icon-action-button svg {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     stroke: currentColor;
     stroke-width: 2;
     stroke-linecap: round;
@@ -1516,44 +1494,17 @@ body {
     fill: none;
 }
 
+/* Общие стили для всех кнопок-иконок при наведении */
 .icon-action-button:hover {
-    background: var(--button-primary-hover);
     transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.icon-action-button.delete {
-    background: var(--button-danger);
+/* Стили для кнопок в модальных окнах */
+.modal .icon-action-button {
+    background-color: transparent;
 }
 
-.icon-action-button.delete:hover {
-    background: var(--button-danger-hover);
-}
-
-.icon-action-button.copy {
-    background: var(--button-secondary);
-}
-
-.icon-action-button.copy:hover {
-    background: var(--button-secondary-hover);
-}
-
-.icon-action-button.paste {
-    background: var(--button-success);
-}
-
-.icon-action-button.paste:hover {
-    background: var(--button-success-hover);
-}
-
-.icon-action-button.back {
-    background: var(--button-secondary);
-}
-
-.icon-action-button.back:hover {
-    background: var(--button-secondary-hover);
-}
-
-/* Тултипы для кнопок с иконками */
 .tooltip-container {
     position: relative;
     display: inline-block;
@@ -1598,4 +1549,162 @@ body {
 .cancel-params:hover {
     background: var(--button-secondary-hover);
     transform: translateY(-1px);
+}
+
+/* Стили для кнопок-иконок в шапке */
+.nav-icons .icon-action-button {
+    background-color: transparent !important;
+    color: var(--text-color);
+}
+
+.nav-icons .icon-action-button:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Стили для основных кнопок навигации */
+.nav-button {
+    background-color: rgba(52, 152, 219, 0.1);
+    color: #3498db;
+}
+
+.nav-button:hover {
+    background-color: rgba(52, 152, 219, 0.2);
+}
+
+.nav-button.active {
+    background-color: rgba(52, 152, 219, 0.2);
+    color: #3498db;
+}
+
+/* Стили для кнопок действий */
+.icon-action-button {
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    position: relative;
+    background-color: var(--background-secondary);
+}
+
+/* Действия добавления */
+.icon-action-button[id*="add"],
+.icon-action-button.add {
+    background-color: rgba(46, 204, 113, 0.1);
+    color: #2ecc71;
+}
+
+.icon-action-button[id*="add"]:hover,
+.icon-action-button.add:hover {
+    background-color: rgba(46, 204, 113, 0.2);
+}
+
+/* Действия удаления */
+.icon-action-button[id*="delete"],
+.icon-action-button[id*="remove"],
+.icon-action-button.delete {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+}
+
+.icon-action-button[id*="delete"]:hover,
+.icon-action-button[id*="remove"]:hover,
+.icon-action-button.delete:hover {
+    background-color: rgba(231, 76, 60, 0.2);
+}
+
+/* Действия копирования */
+.icon-action-button[id*="copy"],
+.icon-action-button.copy {
+    background-color: rgba(52, 152, 219, 0.1);
+    color: #3498db;
+}
+
+.icon-action-button[id*="copy"]:hover,
+.icon-action-button.copy:hover {
+    background-color: rgba(52, 152, 219, 0.2);
+}
+
+/* Действия вставки */
+.icon-action-button[id*="paste"],
+.icon-action-button.paste {
+    background-color: rgba(155, 89, 182, 0.1);
+    color: #9b59b6;
+}
+
+.icon-action-button[id*="paste"]:hover,
+.icon-action-button.paste:hover {
+    background-color: rgba(155, 89, 182, 0.2);
+}
+
+/* Действия назад */
+.icon-action-button[id*="back"],
+.icon-action-button.back {
+    background-color: rgba(149, 165, 166, 0.1);
+    color: #95a5a6;
+}
+
+.icon-action-button[id*="back"]:hover,
+.icon-action-button.back:hover {
+    background-color: rgba(149, 165, 166, 0.2);
+}
+
+/* Действия сохранения */
+.icon-action-button[id*="save"],
+.icon-action-button.save {
+    background-color: rgba(241, 196, 15, 0.1);
+    color: #f1c40f;
+}
+
+.icon-action-button[id*="save"]:hover,
+.icon-action-button.save:hover {
+    background-color: rgba(241, 196, 15, 0.2);
+}
+
+/* Действия настроек */
+.icon-action-button[id*="settings"],
+.icon-action-button.settings {
+    background-color: transparent;
+    color: var(--text-color);
+}
+
+/* Действия синхронизации */
+.icon-action-button[id*="sync"],
+.icon-action-button.sync {
+    background-color: rgba(230, 126, 34, 0.1);
+    color: #e67e22;
+}
+
+.icon-action-button[id*="sync"]:hover,
+.icon-action-button.sync:hover {
+    background-color: rgba(230, 126, 34, 0.2);
+}
+
+/* Действия с аккаунтом */
+.icon-action-button[id*="account"],
+.icon-action-button.account {
+    background-color: transparent;
+    color: var(--text-color);
+}
+
+/* Действия с языком */
+.icon-action-button[id*="lang"],
+.icon-action-button.lang {
+    background-color: transparent;
+    color: var(--text-color);
+}
+
+/* Общие стили для всех кнопок-иконок при наведении */
+.icon-action-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Стили для кнопок в модальных окнах */
+.modal .icon-action-button {
+    background-color: transparent;
 }
