@@ -540,31 +540,31 @@ class CountryManager {
         modal.innerHTML = `
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 data-translate="relation_params">Параметры отношений</h3>
+                    <h3>${window.translator.translate('relation_params')}</h3>
                     <button class="close-modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label data-translate="select_country">Выберите страну</label>
+                        <label>${window.translator.translate('select_country')}</label>
                         <select class="param-country main-page-input">
-                            <option value="" data-translate="select_country_placeholder">Выберите страну...</option>
+                            <option value="">${window.translator.translate('select_country_placeholder')}</option>
                             ${this.generateCountryOptions()}
                         </select>
                     </div>
                     <div class="form-group">
-                        <label data-translate="relation_turn">Ход начала</label>
+                        <label>${window.translator.translate('relation_turn')}</label>
                         <input type="number" class="param-turn main-page-input" value="${params.turn || 0}" min="0">
                     </div>
                     <div class="form-group">
-                        <label data-translate="relation_duration">Длительность</label>
+                        <label>${window.translator.translate('relation_duration')}</label>
                         <input type="number" class="param-duration main-page-input" value="${params.duration || ''}" min="0">
                     </div>
                     ${relationType === 'sanctions' ? `
                     <div class="form-group">
-                        <label data-translate="relation_initiator">Инициатор</label>
+                        <label>${window.translator.translate('relation_initiator')}</label>
                         <select class="param-initiator main-page-input">
-                            <option value="false" ${!params.initiator ? 'selected' : ''} data-translate="no">Нет</option>
-                            <option value="true" ${params.initiator ? 'selected' : ''} data-translate="yes">Да</option>
+                            <option value="false" ${!params.initiator ? 'selected' : ''}>${window.translator.translate('no')}</option>
+                            <option value="true" ${params.initiator ? 'selected' : ''}>${window.translator.translate('yes')}</option>
                         </select>
                     </div>
                     ` : ''}
@@ -576,14 +576,14 @@ class CountryManager {
                             <polyline points="17 21 17 13 7 13 7 21"/>
                             <polyline points="7 3 7 8 15 8"/>
                         </svg>
-                        <span data-translate="save">Сохранить</span>
+                        <span>${window.translator.translate('save')}</span>
                     </button>
                     <button class="action-button cancel-params">
                         <svg viewBox="0 0 24 24">
                             <line x1="18" y1="6" x2="6" y2="18"></line>
                             <line x1="6" y1="6" x2="18" y2="18"></line>
                         </svg>
-                        <span data-translate="cancel">Отмена</span>
+                        <span>${window.translator.translate('cancel')}</span>
                     </button>
                 </div>
             </div>

@@ -129,6 +129,12 @@ class ReformManager {
 
         this.currentReform = index;
 
+        // Обновляем заголовок
+        const title = document.querySelector('#reform-edit h2');
+        if (title) {
+            title.textContent = window.translator.translate('edit_reform') + ': ' + reform.name;
+        }
+
         // Заполняем форму
         document.getElementById('reform-name').value = reform.name;
         document.getElementById('reform-ideology').value = reform.requirements?.political || '';

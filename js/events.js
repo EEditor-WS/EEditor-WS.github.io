@@ -699,7 +699,7 @@ class EventManager {
         const isBonus = answer.includes('bonus');
         this.isEditingBonus = isBonus;
         const listType = isBonus ? 'bonuses' : 'requirements';
-        title.textContent = isBonus ? 'Редактор бонусов' : 'Редактор требований';
+        title.textContent = isBonus ? window.translator.translate('bonus_editor') : window.translator.translate('requirements_editor');
 
         // Получаем список требований/бонусов
         const items = this.jsonData.custom_events[this.currentEvent][listType + (answer.includes('-') ? answer.split('-')[0] : '')] || [];
@@ -709,32 +709,32 @@ class EventManager {
         if (isBonus) {
             // Для бонусов показываем только бонусы
             const bonusOptions = [
-                { value: 'defense', label: 'Изменить защиту' },
-                { value: 'attack', label: 'Изменить атаку' },
-                { value: 'building_cost', label: 'Изменить стоимость строительства' },
-                { value: 'discontent', label: 'Изменить недовольство' },
-                { value: 'population_income', label: 'Изменить доход населения' },
-                { value: 'add_random_culture_population', label: 'Добавить население' },
-                { value: 'prestige', label: 'Изменить престиж' },
-                { value: 'science', label: 'Изменить науку' },
-                { value: 'money', label: 'Изменить деньги' },
-                { value: 'add_oil', label: 'Добавить нефть' },
-                { value: 'add_cruiser', label: 'Добавить крейсер' },
-                { value: 'add_battleship', label: 'Добавить линкор' },
-                { value: 'add_tank', label: 'Добавить танк' },
-                { value: 'add_shock_infantry', label: 'Добавить ударную пехоту' },
-                { value: 'add_infantry', label: 'Добавить пехоту' },
-                { value: 'army_losses', label: 'Потери армии' },
-                { value: 'relation_ideology_change', label: 'Изменить отношения с идеологией' },
-                { value: 'relation_change', label: 'Изменить отношения' },
-                { value: 'diplomacy_lift_sanctions', label: 'Снять санкции' },
-                { value: 'diplomacy_sanctions', label: 'Наложить санкции' },
-                { value: 'diplomacy_pact', label: 'Заключить пакт' },
-                { value: 'diplomacy_alliance', label: 'Заключить альянс' },
-                { value: 'diplomacy_peace', label: 'Заключить мир' },
-                { value: 'diplomacy_war', label: 'Объявить войну' },
-                { value: 'resurrect_country', label: 'Восстановить страну' },
-                { value: 'annex_country', label: 'Аннексировать страну' }
+                { value: 'defense', label: window.translator.translate('defense') },
+                { value: 'attack', label: window.translator.translate('attack') },
+                { value: 'building_cost', label: window.translator.translate('building_cost') },
+                { value: 'discontent', label: window.translator.translate('discontent') },
+                { value: 'population_income', label: window.translator.translate('population_income') },
+                { value: 'add_random_culture_population', label: window.translator.translate('add_random_culture_population') },
+                { value: 'prestige', label: window.translator.translate('prestige') },
+                { value: 'science', label: window.translator.translate('science') },
+                { value: 'money', label: window.translator.translate('money') },
+                { value: 'add_oil', label: window.translator.translate('add_oil') },
+                { value: 'add_cruiser', label: window.translator.translate('add_cruiser') },
+                { value: 'add_battleship', label: window.translator.translate('add_battleship') },
+                { value: 'add_tank', label: window.translator.translate('add_tank') },
+                { value: 'add_shock_infantry', label: window.translator.translate('add_shock_infantry') },
+                { value: 'add_infantry', label: window.translator.translate('add_infantry') },
+                { value: 'army_losses', label: window.translator.translate('army_losses') },
+                { value: 'relation_ideology_change', label: window.translator.translate('relation_ideology_change') },
+                { value: 'relation_change', label: window.translator.translate('relation_change') },
+                { value: 'diplomacy_lift_sanctions', label: window.translator.translate('diplomacy_lift_sanctions') },
+                { value: 'diplomacy_sanctions', label: window.translator.translate('diplomacy_sanctions') },
+                { value: 'diplomacy_pact', label: window.translator.translate('diplomacy_pact') },
+                { value: 'diplomacy_alliance', label: window.translator.translate('diplomacy_alliance') },
+                { value: 'diplomacy_peace', label: window.translator.translate('diplomacy_peace') },
+                { value: 'diplomacy_war', label: window.translator.translate('diplomacy_war') },
+                { value: 'resurrect_country', label: window.translator.translate('resurrect_country') },
+                { value: 'annex_country', label: window.translator.translate('annex_country') }
             ];
             typeSelect.innerHTML = bonusOptions.map(opt => 
                 `<option value="${opt.value}">${opt.label}</option>`
@@ -742,29 +742,29 @@ class EventManager {
         } else {
             // Для требований показываем только требования
             const requirementOptions = [
-                { value: 'year', label: 'Год' },
-                { value: 'month', label: 'Месяц' },
-                { value: 'turn', label: 'Ход' },
-                { value: 'land_id', label: 'ID страны' },
-                { value: 'land_name', label: 'Название страны' },
-                { value: 'near_water', label: 'Близость к воде' },
-                { value: 'has_pact', label: 'Имеет пакт' },
-                { value: 'has_sanctions', label: 'Имеет санкции' },
-                { value: 'has_war', label: 'В состоянии войны' },
-                { value: 'enemy_near_capital', label: 'Враг у столицы' },
-                { value: 'lost_capital', label: 'Потеряна столица' },
-                { value: 'is_defeated', label: 'Побеждена' },
-                { value: 'land_power', label: 'Сила страны' },
-                { value: 'independent_land', label: 'Независимая страна' },
-                { value: 'no_enemy', label: 'Нет врагов' },
-                { value: 'random_value', label: 'Случайное значение' },
-                { value: 'count_of_tasks', label: 'Количество заданий' },
-                { value: 'num_of_provinces', label: 'Количество провинций' },
-                { value: 'tax', label: 'Налог' },
-                { value: 'money', label: 'Деньги' },
-                { value: 'discontent', label: 'Недовольство' },
-                { value: 'building_exists', label: 'Есть здание' },
-                { value: 'political_institution', label: 'Политический институт' }
+                { value: 'year', label: window.translator.translate('year') },
+                { value: 'month', label: window.translator.translate('month') },
+                { value: 'turn', label: window.translator.translate('turn') },
+                { value: 'land_id', label: window.translator.translate('land_id') },
+                { value: 'land_name', label: window.translator.translate('land_name') },
+                { value: 'near_water', label: window.translator.translate('near_water') },
+                { value: 'has_pact', label: window.translator.translate('has_pact') },
+                { value: 'has_sanctions', label: window.translator.translate('has_sanctions') },
+                { value: 'has_war', label: window.translator.translate('has_war') },
+                { value: 'enemy_near_capital', label: window.translator.translate('enemy_near_capital') },
+                { value: 'lost_capital', label: window.translator.translate('lost_capital') },
+                { value: 'is_defeated', label: window.translator.translate('is_defeated') },
+                { value: 'land_power', label: window.translator.translate('land_power') },
+                { value: 'independent_land', label: window.translator.translate('independent_land') },
+                { value: 'no_enemy', label: window.translator.translate('no_enemy') },
+                { value: 'random_value', label: window.translator.translate('random_value') },
+                { value: 'count_of_tasks', label: window.translator.translate('count_of_tasks') },
+                { value: 'num_of_provinces', label: window.translator.translate('num_of_provinces') },
+                { value: 'tax', label: window.translator.translate('tax') },
+                { value: 'money', label: window.translator.translate('money') },
+                { value: 'discontent', label: window.translator.translate('discontent') },
+                { value: 'building_exists', label: window.translator.translate('building_exists') },
+                { value: 'political_institution', label: window.translator.translate('political_institution') }
             ];
             typeSelect.innerHTML = requirementOptions.map(opt => 
                 `<option value="${opt.value}">${opt.label}</option>`
@@ -815,10 +815,10 @@ class EventManager {
 
             actionSelect.innerHTML = actions.map(action => `
                 <option value="${action}">${
-                    action === 'more' ? 'Больше' :
-                    action === 'equal' ? 'Равно' :
-                    action === 'not_equal' ? 'Не равно' :
-                    action === 'less' ? 'Меньше' : action
+                    action === 'more' ? window.translator.translate('more') :
+                    action === 'equal' ? window.translator.translate('equal') :
+                    action === 'not_equal' ? window.translator.translate('not_equal') :
+                    action === 'less' ? window.translator.translate('less') : action
                 }</option>
             `).join('');
         };
@@ -871,13 +871,13 @@ class EventManager {
                     ideologySelect.id = 'requirement-subtype';
                     ideologySelect.className = 'main-page-input';
                     const ideologies = [
-                        'democracy',
-                        'monarchy',
-                        'communism',
-                        'fascism',
-                        'theocracy',
-                        'paganism',
-                        'trade_republic'
+                        window.translator.translate('democracy'),
+                        window.translator.translate('monarchy'),
+                        window.translator.translate('communism'),
+                        window.translator.translate('fascism'),
+                        window.translator.translate('theocracy'),
+                        window.translator.translate('paganism'),
+                        window.translator.translate('trade_republic')
                     ];
                     ideologySelect.innerHTML = ideologies.map(ideology => 
                         `<option value="${ideology}">${ideology}</option>`
@@ -889,7 +889,7 @@ class EventManager {
                     input.type = 'number';
                     input.id = 'requirement-value';
                     input.className = 'main-page-input';
-                    input.placeholder = 'Введите число';
+                    input.placeholder = window.translator.translate('enter_number');
                     valueContainer.appendChild(input);
                 } else if (['relation_change'].includes(selectedType)) {
                     // Для изменения отношений
@@ -913,7 +913,7 @@ class EventManager {
                     input.type = 'number';
                     input.id = 'requirement-value';
                     input.className = 'main-page-input';
-                    input.placeholder = 'Введите процент';
+                    input.placeholder = window.translator.translate('enter_percent');
                     valueContainer.appendChild(input);
                 } else if (['defense', 'attack', 'population_income', 'building_cost'].includes(selectedType)) {
                     // Для процентных значений
@@ -922,7 +922,7 @@ class EventManager {
                     input.type = 'number';
                     input.id = 'requirement-value';
                     input.className = 'main-page-input';
-                    input.placeholder = 'Введите процент';
+                    input.placeholder = window.translator.translate('enter_percent');
                     valueContainer.appendChild(input);
                 } else if (['add_oil', 'add_cruiser', 'add_random_culture_population', 'add_shock_infantry', 'discontent', 'add_tank', 'army_losses', 'prestige', 'add_battleship', 'add_infantry', 'science', 'money'].includes(selectedType)) {
                     // Для числовых значений
@@ -931,7 +931,7 @@ class EventManager {
                     input.type = 'number';
                     input.id = 'requirement-value';
                     input.className = 'main-page-input';
-                    input.placeholder = 'Введите число';
+                    input.placeholder = window.translator.translate('enter_number');
                     valueContainer.appendChild(input);
                 }
             } else {
@@ -939,8 +939,8 @@ class EventManager {
                 if (['near_water', 'independent_land', 'no_enemy', 'enemy_near_capital', 'lost_capital'].includes(selectedType)) {
                     valueContainer.innerHTML = `
                         <select id="requirement-value" class="main-page-input">
-                            <option value="да">Да</option>
-                            <option value="нет">Нет</option>
+                            <option value="да">${window.translator.translate('yes')}</option>
+                            <option value="нет">${window.translator.translate('no')}</option>
                         </select>
                     `;
                     subtypeGroup.style.display = 'none';
@@ -950,13 +950,13 @@ class EventManager {
                     select.id = 'requirement-value';
                     select.className = 'main-page-input';
                     const institutions = [
-                        'democracy',
-                        'monarchy',
-                        'communism',
-                        'fascism',
-                        'theocracy',
-                        'paganism',
-                        'trade_republic'
+                        window.translator.translate('democracy'),
+                        window.translator.translate('monarchy'),
+                        window.translator.translate('communism'),
+                        window.translator.translate('fascism'),
+                        window.translator.translate('theocracy'),
+                        window.translator.translate('paganism'),
+                        window.translator.translate('trade_republic')
                     ];
                     select.innerHTML = institutions.map(inst => 
                         `<option value="${inst}">${inst}</option>`
@@ -995,9 +995,9 @@ class EventManager {
                     input.id = 'requirement-value';
                     input.className = 'main-page-input';
                     input.placeholder = 
-                        ['month', 'num_of_provinces', 'year', 'turn', 'random_value', 'count_of_tasks', 'tax', 'discontent', 'money', 'land_power'].includes(selectedType) ? 'Введите число' :
-                        ['building_exists'].includes(selectedType) ? 'Введите название здания' :
-                        ['political_institution'].includes(selectedType) ? 'Введите название института' : 'Введите значение';
+                        ['month', 'num_of_provinces', 'year', 'turn', 'random_value', 'count_of_tasks', 'tax', 'discontent', 'money', 'land_power'].includes(selectedType) ? window.translator.translate('enter_number') :
+                        ['building_exists'].includes(selectedType) ? window.translator.translate('enter_building_name') :
+                        ['political_institution'].includes(selectedType) ? window.translator.translate('enter_institution_name') : window.translator.translate('enter_value');
                     valueContainer.appendChild(input);
                     subtypeGroup.style.display = selectedType === 'building_exists' || selectedType === 'political_institution' ? 'block' : 'none';
                 }
@@ -1130,38 +1130,6 @@ function createRequirementEditor() {
     const modal = document.createElement('div');
     modal.className = 'modal';
     modal.innerHTML = `
-        <div class="modal-content">
-            <h2 data-translate="requirements_editor">Редактор требований</h2>
-            <div class="form-group">
-                <label for="requirement-type" data-translate="type">Тип:</label>
-                <select id="requirement-type" class="main-page-input">
-                    <option value="province" data-translate="province">Провинция</option>
-                    <option value="country" data-translate="country">Страна</option>
-                    <option value="resource" data-translate="resource">Ресурс</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="requirement-action" data-translate="action">Действие:</label>
-                <select id="requirement-action" class="main-page-input">
-                    <option value="more" data-translate="more">Больше</option>
-                    <option value="equal" data-translate="equal">Равно</option>
-                    <option value="not_equal" data-translate="not_equal">Не равно</option>
-                    <option value="less" data-translate="less">Меньше</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="requirement-subtype" data-translate="subtype">Подтип:</label>
-                <input type="text" id="requirement-subtype" class="main-page-input">
-            </div>
-            <div class="form-group">
-                <label for="requirement-value" data-translate="value">Значение:</label>
-                <div id="requirement-value-container"></div>
-            </div>
-            <div class="form-actions">
-                <button type="button" id="save-requirement" class="icon-action-button save" data-translate="save">Сохранить</button>
-                <button type="button" id="cancel-requirement" class="icon-action-button delete" data-translate="cancel">Отмена</button>
-            </div>
-        </div>
     `;
     document.body.appendChild(modal);
     window.translator.updateTranslations(modal);

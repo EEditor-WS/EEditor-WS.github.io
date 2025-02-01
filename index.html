@@ -51,11 +51,19 @@
             }
 
             .lang-dropdown a {
-                display: block;
+                display: flex;
+                align-items: center;
                 padding: 8px 16px;
                 color: var(--text-color);
                 text-decoration: none;
                 white-space: nowrap;
+                gap: 8px;
+            }
+
+            .lang-flag {
+                width: 24px;
+                height: 16px;
+                flex-shrink: 0;
             }
 
             .lang-dropdown a:hover {
@@ -102,9 +110,26 @@
                         </button>
                         <div id="currentLang" class="void"></div>
                         <div id="langDropdown" class="lang-dropdown">
-                            <a href="#" data-lang="en">English</a>
-                            <a href="#" data-lang="ru">Русский</a>
-                            <a href="#" data-lang="uk">Українська</a>
+                            <a href="#" data-lang="en">
+                                <img src="img/lang/en.svg" class="lang-flag" alt="English">
+                                English
+                            </a>
+                            <a href="#" data-lang="ru">
+                                <img src="img/lang/ru.svg" class="lang-flag" alt="Русский">
+                                Русский
+                            </a>
+                            <a href="#" data-lang="uk">
+                                <img src="img/lang/uk.svg" class="lang-flag" alt="Українська">
+                                Українська
+                            </a>
+                            <a href="#" data-lang="be">
+                                <img src="img/lang/be.svg" class="lang-flag" alt="Беларуская">
+                                Беларуская (часткова)
+                            </a>
+                            <a href="#" data-lang="kk">
+                                <img src="img/lang/kk.svg" class="lang-flag" alt="Қазақша">
+                                Қазақша (ішінара)
+                            </a>
                         </div>
                     </div>
                     <button id="account-button" class="icon-action-button account" title="Аккаунт">
@@ -755,7 +780,7 @@
         <div id="requirements-editor-modal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 id="requirements-editor-title" data-translate="requirements_editor">Редактор требований</h3>
+                    <h3 id="requirements-editor-title" data-translate="requirements_editor"></h3>
                     <button class="close-modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -763,10 +788,10 @@
                         <table class="list-table">
                             <thead>
                                 <tr>
-                                    <th>Тип</th>
-                                    <th>Подтип</th>
-                                    <th>Действие</th>
-                                    <th>Значение</th>
+                                    <th data-translate="type"></th>
+                                    <th data-translate="subtype"></th>
+                                    <th data-translate="action"></th>
+                                    <th data-translate="value"></th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -776,25 +801,25 @@
                     </div>
                     <div id="requirement-editor" class="requirement-editor" style="display: none;">
                         <div class="form-group">
-                            <label for="requirement-type">Тип:</label>
+                            <label for="requirement-type" data-translate="type"></label>
                             <select id="requirement-type" class="main-page-input">
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="requirement-action">Действие:</label>
+                            <label for="requirement-action" data-translate="action"></label>
                             <select id="requirement-action" class="main-page-input">
-                                <option value="more">Больше</option>
-                                <option value="equal">Равно</option>
-                                <option value="not_equal">Не равно</option>
-                                <option value="less">Меньше</option>
+                                <option value="more" data-translate="more"></option>
+                                <option value="equal" data-translate="equal"></option>
+                                <option value="not_equal" data-translate="not_equal"></option>
+                                <option value="less" data-translate="less"></option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="requirement-subtype">Подтип:</label>
+                            <label for="requirement-subtype" data-translate="subtype"></label>
                             <input type="text" id="requirement-subtype" class="main-page-input" autocomplete="off">
                         </div>
                         <div class="form-group">
-                            <label for="requirement-value">Значение:</label>
+                            <label for="requirement-value" data-translate="value"></label>
                             <div id="requirement-value-container"></div>
                         </div>
                         <div class="info-actions">
@@ -862,10 +887,10 @@
                 <table class="list-table">
                     <thead>
                         <tr>
-                            <th data-sort="color">Цвет</th>
-                            <th data-sort="name">Название</th>
-                            <th data-sort="ideology">Требуемая идеология</th>
-                            <th data-sort="provinces">Количество провинций</th>
+                            <th data-sort="color" data-translate="color">Цвет</th>
+                            <th data-sort="name" data-translate="name">Название</th>
+                            <th data-sort="ideology" data-translate="required_ideology">Требуемая идеология</th>
+                            <th data-sort="provinces" data-translate="provinces_count">Количество провинций</th>
                         </tr>
                     </thead>
                     <tbody id="reforms-list">
@@ -936,7 +961,7 @@
                         <input type="text" id="reform-name" class="main-page-input" required autocomplete="off">
                     </div>
                     <div class="form-group">
-                        <label>Цвет</label>
+                        <label data-translate="color">Цвет</label>
                         <div class="color-inputs">
                             <div class="color-input">
                                 <label for="reform-color-r" data-translate="color_r">R</label>
