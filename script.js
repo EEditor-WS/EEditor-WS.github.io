@@ -358,6 +358,9 @@ document.addEventListener('DOMContentLoaded', function() {
     function fillFormFromJson(jsonData) {
         try {
             // Очищаем все поля формы перед заполнением
+            const settingsForm = document.getElementById('settings-form');
+            if (!settingsForm) return;
+            
             settingsForm.reset();
 
             // Заполняем поля формы
@@ -399,7 +402,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (value === undefined) continue;
 
                 const element = document.getElementById(config.id);
-                if (!element) continue;
+                if (!element) {
+                    console.warn(`Элемент с id '${config.id}' не найден`);
+                    continue;
+                }
 
                 switch (config.type) {
                     case 'number':
@@ -432,16 +438,18 @@ document.addEventListener('DOMContentLoaded', function() {
             // Обработка цвета воды отдельно
             if (Array.isArray(jsonData.water_color) && jsonData.water_color.length >= 3) {
                 const [r, g, b] = jsonData.water_color;
-                            
-                            // Устанавливаем значения в поля ввода
-                document.getElementById('water_color_r').value = r;
-                document.getElementById('water_color_g').value = g;
-                document.getElementById('water_color_b').value = b;
-                            
-                            // Обновляем предпросмотр
-                            const colorPreview = document.getElementById('water_color_preview');
-                            if (colorPreview) {
-                                colorPreview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+                
+                const rInput = document.getElementById('water_color_r');
+                const gInput = document.getElementById('water_color_g');
+                const bInput = document.getElementById('water_color_b');
+                const preview = document.getElementById('water_color_preview');
+
+                if (rInput) rInput.value = r;
+                if (gInput) gInput.value = g;
+                if (bInput) bInput.value = b;
+                
+                if (preview) {
+                    preview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
                 }
             }
 
@@ -456,6 +464,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         } catch (error) {
             console.error('Ошибка при заполнении формы:', error);
+            throw error;
         }
     }
 

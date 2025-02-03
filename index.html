@@ -17,6 +17,7 @@
         <script src="script.js"></script>
         <script src="js/language.js"></script>
         <script src="js/translator.js"></script>
+        <script src="js/hello.js"></script>
         <script src="js/countries.js"></script>
         <script src="js/events.js"></script>
         <script src="js/reforms.js"></script>
@@ -325,6 +326,14 @@
                     <h2 data-translate="countries">Страны</h2>
                     <div class="header-actions">
                         <div class="tooltip-container">
+                            <button id="clear-filters" class="icon-action-button clear" title="Сбросить все фильтры">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"/>
+                                </svg>
+                            </button>
+                            <div class="tooltip">Сбросить все фильтры</div>
+                        </div>
+                        <div class="tooltip-container">
                             <button id="remove-invalid-owners" class="icon-action-button delete" title="Удалить пустых владельцев">
                                 <svg viewBox="0 0 24 24">
                                     <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
@@ -346,11 +355,66 @@
                 <table class="list-table">
                     <thead>
                         <tr>
-                            <th data-sort="color" data-translate="color">Цвет</th>
-                            <th data-sort="name" data-translate="name">Название</th>
-                            <th data-sort="system_name" data-translate="system_name">Системное название</th>
-                            <th data-sort="provinces_count" data-translate="provinces_count">Количество провинций</th>
-                            <th data-sort="capital" data-translate="capital">Столица</th>
+                            <th data-sort="color">
+                                <div class="th-content">
+                                    <div class="th-title">
+                                        <span data-translate="color">Цвет</span>
+                                        <button class="th-filter" title="Фильтр по цвету">
+                                            <svg viewBox="0 0 24 24" width="14" height="14">
+                                                <path d="M3 4h18l-7 8v8l-4-2v-6z" fill="none" stroke="currentColor" stroke-width="2"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </th>
+                            <th data-sort="name">
+                                <div class="th-content">
+                                    <div class="th-title">
+                                        <span data-translate="name">Название</span>
+                                        <button class="th-filter" title="Фильтр по названию">
+                                            <svg viewBox="0 0 24 24" width="14" height="14">
+                                                <path d="M3 4h18l-7 8v8l-4-2v-6z" fill="none" stroke="currentColor" stroke-width="2"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </th>
+                            <th data-sort="system_name">
+                                <div class="th-content">
+                                    <div class="th-title">
+                                        <span data-translate="system_name">Системное название</span>
+                                        <button class="th-filter" title="Фильтр по системному названию">
+                                            <svg viewBox="0 0 24 24" width="14" height="14">
+                                                <path d="M3 4h18l-7 8v8l-4-2v-6z" fill="none" stroke="currentColor" stroke-width="2"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </th>
+                            <th data-sort="provinces_count">
+                                <div class="th-content">
+                                    <div class="th-title">
+                                        <span data-translate="provinces_count">Количество провинций</span>
+                                        <button class="th-filter" title="Фильтр по количеству провинций">
+                                            <svg viewBox="0 0 24 24" width="14" height="14">
+                                                <path d="M3 4h18l-7 8v8l-4-2v-6z" fill="none" stroke="currentColor" stroke-width="2"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </th>
+                            <th data-sort="capital">
+                                <div class="th-content">
+                                    <div class="th-title">
+                                        <span data-translate="capital">Столица</span>
+                                        <button class="th-filter" title="Фильтр по столице">
+                                            <svg viewBox="0 0 24 24" width="14" height="14">
+                                                <path d="M3 4h18l-7 8v8l-4-2v-6z" fill="none" stroke="currentColor" stroke-width="2"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </th>
                         </tr>
                     </thead>
                     <tbody id="countries-list">
@@ -521,6 +585,14 @@
                     <h2 data-translate="events">События</h2>
                     <div class="header-actions">
                         <div class="tooltip-container">
+                            <button id="clear-events-filters" class="icon-action-button clear" title="Сбросить все фильтры">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"/>
+                                </svg>
+                            </button>
+                            <div class="tooltip">Сбросить все фильтры</div>
+                        </div>
+                        <div class="tooltip-container">
                             <button id="add-event" class="icon-action-button add" title="Добавить событие">
                                 <svg viewBox="0 0 24 24">
                                     <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -534,10 +606,54 @@
                 <table class="list-table">
                     <thead>
                         <tr>
-                            <th data-sort="id">ID</th>
-                            <th data-sort="group">Группа</th>
-                            <th data-sort="name">Название</th>
-                            <th data-sort="title">Заголовок</th>
+                            <th data-sort="id">
+                                <div class="th-content">
+                                    <div class="th-title">
+                                        <span data-translate="id">ID</span>
+                                        <button class="th-filter" title="Фильтр по ID">
+                                            <svg viewBox="0 0 24 24" width="14" height="14">
+                                                <path d="M3 4h18l-7 8v8l-4-2v-6z" fill="none" stroke="currentColor" stroke-width="2"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </th>
+                            <th data-sort="group">
+                                <div class="th-content">
+                                    <div class="th-title">
+                                        <span data-translate="event_group">Группа</span>
+                                        <button class="th-filter" title="Фильтр по группе">
+                                            <svg viewBox="0 0 24 24" width="14" height="14">
+                                                <path d="M3 4h18l-7 8v8l-4-2v-6z" fill="none" stroke="currentColor" stroke-width="2"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </th>
+                            <th data-sort="name">
+                                <div class="th-content">
+                                    <div class="th-title">
+                                        <span data-translate="name">Название</span>
+                                        <button class="th-filter" title="Фильтр по названию">
+                                            <svg viewBox="0 0 24 24" width="14" height="14">
+                                                <path d="M3 4h18l-7 8v8l-4-2v-6z" fill="none" stroke="currentColor" stroke-width="2"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </th>
+                            <th data-sort="title">
+                                <div class="th-content">
+                                    <div class="th-title">
+                                        <span data-translate="title">Заголовок</span>
+                                        <button class="th-filter" title="Фильтр по заголовку">
+                                            <svg viewBox="0 0 24 24" width="14" height="14">
+                                                <path d="M3 4h18l-7 8v8l-4-2v-6z" fill="none" stroke="currentColor" stroke-width="2"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </th>
                         </tr>
                     </thead>
                     <tbody id="events-list">
@@ -816,6 +932,10 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="requirement-duration" data-translate="duration"></label>
+                            <input type="text" id="requirement-duration" class="main-page-input" autocomplete="off">
+                        </div>
+                        <div class="form-group">
                             <label for="requirement-action" data-translate="action"></label>
                             <select id="requirement-action" class="main-page-input">
                                 <option value="more" data-translate="more"></option>
@@ -1002,6 +1122,66 @@
                         </select>
                     </div>
                 </form>
+            </div>
+        </div>
+
+        <!-- Модальное окно фильтра -->
+        <div id="filter-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="filter-modal-title" data-translate="filter">Фильтр</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="filter-form">
+                        <div class="form-group">
+                            <label for="filter-operator" data-translate="filter_operator">Оператор:</label>
+                            <select id="filter-operator" class="main-page-input">
+                                <!-- Опции добавляются динамически -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="filter-value" data-translate="filter_value">Значение:</label>
+                            <div id="filter-value-container">
+                                <!-- Поле ввода добавляется динамически -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="clear-filter" class="action-button secondary" data-translate="filter_clear">Сбросить</button>
+                    <button id="apply-filter" class="action-button" data-translate="filter_apply">Применить</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно фильтра событий -->
+        <div id="events-filter-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" data-translate="filter">Фильтр</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="filter-form">
+                        <div class="form-group">
+                            <label for="events-filter-operator" data-translate="filter_operator">Оператор:</label>
+                            <select id="events-filter-operator" class="main-page-input">
+                                <!-- Опции добавляются динамически -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="events-filter-value" data-translate="filter_value">Значение:</label>
+                            <div id="events-filter-value-container">
+                                <!-- Поле ввода добавляется динамически -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="events-filter-clear" class="action-button secondary" data-translate="filter_clear">Сбросить</button>
+                    <button id="events-filter-apply" class="action-button" data-translate="filter_apply">Применить</button>
+                </div>
             </div>
         </div>
     </body>

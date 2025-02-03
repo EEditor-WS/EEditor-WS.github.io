@@ -1,0 +1,124 @@
+.reforms-container {
+    padding: 20px;
+    width: 100%;
+}
+
+.reforms-container .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.reforms-container .header h2 {
+    margin: 0;
+}
+
+.reforms-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #242424;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.reforms-table th,
+.reforms-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+}
+
+.reforms-table th {
+    background-color: #2a2a2a;
+    font-weight: 500;
+    color: #e0e0e0;
+    font-size: 14px;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    padding-right: 20px;
+}
+
+.reforms-table th:after {
+    content: '⇕';
+    position: absolute;
+    right: 5px;
+    opacity: 0.3;
+}
+
+.reforms-table th.sort-asc:after {
+    content: '↑';
+    opacity: 1;
+}
+
+.reforms-table th.sort-desc:after {
+    content: '↓';
+    opacity: 1;
+}
+
+.reforms-table td {
+    font-size: 14px;
+    color: #e0e0e0;
+}
+
+.reforms-table tbody tr {
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.reforms-table tbody tr:hover {
+    background-color: #2a2a2a;
+}
+
+.reform-color {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    border: 1px solid #404040;
+}
+
+.reform-edit-container {
+    padding: 20px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.reform-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.reform-title {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Удаляем старые стили для кнопок */
+.reform-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Стили для кнопок в реформах */
+.reform-button {
+    composes: icon-action-button;
+}
+
+/* Стили для маленьких кнопок в таблице реформ */
+.reform-item-delete,
+.reform-item-edit {
+    padding: 4px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}

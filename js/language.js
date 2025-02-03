@@ -270,7 +270,37 @@ const translations = {
         "more": "More",
         "equal": "Equal",
         "not_equal": "Not equal",
-        "less": "Less"
+        "less": "Less",
+
+        // Filters
+        "filter": "Filter",
+        "filter_equals": "Equals",
+        "filter_not_equals": "Not equals",
+        "filter_greater": "Greater than",
+        "filter_less": "Less than",
+        "filter_greater_equals": "Greater than or equal",
+        "filter_less_equals": "Less than or equal",
+        "filter_contains": "Contains",
+        "filter_color_value": "Select color",
+        "filter_number_value": "Enter number",
+        "filter_text_value": "Enter text",
+        "filter_apply": "Apply",
+        "filter_clear": "Clear",
+        "filter_clear_all": "Clear all filters",
+        "filter_operator": "Operator",
+        "filter_value": "Value",
+        "duration": "Duration (turns)",
+
+        // New bonuses
+        "accelerated_recruit_cost": "Accelerated Recruit Cost",
+        "maintaining_army_cost_multiplier": "Army Maintenance Cost Multiplier",
+        "population_increase": "Population Growth",
+        "recruit_cost": "Recruit Cost",
+        "change_country": "Change Country",
+        "add_culture_population": "Add Culture Population",
+        "cooldown": "Cooldown",
+        "enter_percent": "Enter percent",
+        "enter_number": "Enter number"
     },
     "ru": {
         // Главная страница
@@ -284,7 +314,7 @@ const translations = {
         "changes_not_saved": "Изменения не сохранены",
 
         // Форма настроек
-        "title": "Название",
+        "title": "Заголовок",
         "id": "ID",
         "last_turn": "Последний Ход",
         "year": "Год",
@@ -540,7 +570,37 @@ const translations = {
         "more": "Больше",
         "equal": "Равно",
         "not_equal": "Не равно",
-        "less": "Меньше"
+        "less": "Меньше",
+
+        // Filters
+        "filter": "Фильтр",
+        "filter_equals": "Равно",
+        "filter_not_equals": "Не равно",
+        "filter_greater": "Больше",
+        "filter_less": "Меньше",
+        "filter_greater_equals": "Больше или равно",
+        "filter_less_equals": "Меньше или равно",
+        "filter_contains": "Содержит",
+        "filter_color_value": "Выберите цвет",
+        "filter_number_value": "Введите число",
+        "filter_text_value": "Введите текст",
+        "filter_apply": "Применить",
+        "filter_clear": "Сбросить",
+        "filter_clear_all": "Сбросить все фильтры",
+        "filter_operator": "Оператор",
+        "filter_value": "Значение",
+        "duration": "Длительность (ходов)",
+
+        // New bonuses
+        "accelerated_recruit_cost": "Ускоренная стоимость найма",
+        "maintaining_army_cost_multiplier": "Множитель стоимости содержания армии",
+        "population_increase": "Прирост населения",
+        "recruit_cost": "Стоимость найма",
+        "change_country": "Сменить страну",
+        "add_culture_population": "Добавить население культуры",
+        "cooldown": "Кулдаун",
+        "enter_percent": "Введите процент",
+        "enter_number": "Введите число"
     },
     "uk": {
         // Головна сторінка
@@ -566,7 +626,7 @@ const translations = {
         "difficulty": "Складність",
         "bots_behavior": "Поведінка Ботів",
         "no_initial_diplomacy": "Без Стартової Дипломатії",
-        "water_color": "Колір Води",
+        "water_color": "Колір Воді",
         "no_nuclear_weapon": "Без Ядерної Зброї",
         "sandbox": "Sandbox",
         "turn": "Хід",
@@ -810,7 +870,37 @@ const translations = {
         "more": "Більше",
         "equal": "Дорівнює",
         "not_equal": "Не дорівнює",
-        "less": "Менше"
+        "less": "Менше",
+
+        // Filters
+        "filter": "Фільтр",
+        "filter_equals": "Дорівнює",
+        "filter_not_equals": "Не дорівнює",
+        "filter_greater": "Більше",
+        "filter_less": "Менше",
+        "filter_greater_equals": "Більше або дорівнює",
+        "filter_less_equals": "Менше або дорівнює",
+        "filter_contains": "Містить",
+        "filter_color_value": "Виберіть колір",
+        "filter_number_value": "Введіть число",
+        "filter_text_value": "Введіть текст",
+        "filter_apply": "Застосувати",
+        "filter_clear": "Скинути",
+        "filter_clear_all": "Скинути всі фільтри",
+        "filter_operator": "Оператор",
+        "filter_value": "Значення",
+        "duration": "Тривалість (ходів)",
+
+        // New bonuses
+        "accelerated_recruit_cost": "Прискорена вартість найму",
+        "maintaining_army_cost_multiplier": "Множник вартості утримання армії",
+        "population_increase": "Приріст населення",
+        "recruit_cost": "Вартість найму",
+        "change_country": "Змінити країну",
+        "add_culture_population": "Додати населення культури",
+        "cooldown": "Кулдаун",
+        "enter_percent": "Введіть відсоток",
+        "enter_number": "Введіть число"
     },
     "be": {
         // Галоўная старонка
@@ -897,7 +987,8 @@ const translations = {
         "diplomacy_peace": "Заключыць мір",
         "diplomacy_war": "Аб'явіць вайну",
         "resurrect_country": "Аднавіць краіну",
-        "annex_country": "Анексаваць краіну"
+        "annex_country": "Анексаваць краіну",
+        "duration": "Длительность (ходов)"
     },
     "kk": {
         // Басты бет
@@ -921,7 +1012,7 @@ const translations = {
         "technologies_are_opened": "Барлық технологиялар ашық",
         "resources_spawn": "Ресурстардың пайда болуы",
         "difficulty": "Қиындық",
-        "bots_behavior": "Боттардың мінез-құлқы",
+        "bots_behavior": "Боттардың міneз-құлқы",
         "no_initial_diplomacy": "Бастапқы дипломатиясыз",
         "water_color": "Су түсі",
         "no_nuclear_weapon": "Ядролық қарусыз",
@@ -984,6 +1075,7 @@ const translations = {
         "diplomacy_peace": "Бейбітшілік орнату",
         "diplomacy_war": "Соғыс жариялау",
         "resurrect_country": "Елді қалпына келтіру",
-        "annex_country": "Елді қосып алу"
+        "annex_country": "Елді қосып алу",
+        "duration": "Длительность (ходов)"
     }
 }; 

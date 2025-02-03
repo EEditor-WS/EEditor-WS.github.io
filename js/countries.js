@@ -7,9 +7,18 @@ class CountryManager {
         this.maxStackSize = 50;
         this.isEditing = false;
         
-        // Добавляем параметры сортировки
-        this.sortColumn = 'name'; // По умолчанию сортируем по имени
-        this.sortDirection = 'asc'; // По умолчанию по возрастанию
+        // Добавляем параметры сортировки и фильтрации
+        this.sortColumn = 'name';
+        this.sortDirection = 'asc';
+        this.filters = {
+            color: { operator: null, value: null },
+            name: { operator: null, value: '' },
+            system_name: { operator: null, value: '' },
+            provinces_count: { operator: null, value: '' },
+            capital: { operator: null, value: '' }
+        };
+        
+        this.currentFilterColumn = null;
         
         // Сохраняем ссылки на важные элементы
         this.previewContent = document.getElementById('preview-content');
@@ -41,28 +50,16 @@ class CountryManager {
 
     // Добавляем новый метод для инициализации обработчиков сортировки
     initSortHandlers() {
-        const headers = document.querySelectorAll('.countries-table th');
-        headers.forEach((header, index) => {
+        const headers = document.querySelectorAll('#countries .list-table th[data-sort]');
+        headers.forEach(header => {
             header.addEventListener('click', () => {
-                // Определяем колонку для сортировки
-                const columns = ['color', 'name', 'id', 'provinces', 'capital'];
-                const column = columns[index];
-                
-                // Если кликнули на ту же колонку, меняем направление сортировки
+                const column = header.getAttribute('data-sort');
                 if (this.sortColumn === column) {
                     this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
                 } else {
                     this.sortColumn = column;
                     this.sortDirection = 'asc';
                 }
-                
-                // Обновляем классы заголовков
-                headers.forEach(h => {
-                    h.classList.remove('sort-asc', 'sort-desc');
-                });
-                header.classList.add(`sort-${this.sortDirection}`);
-                
-                // Обновляем список с новой сортировкой
                 this.updateCountriesList();
             });
         });
@@ -70,17 +67,12 @@ class CountryManager {
 
     // Модифицируем метод updateCountriesList
     updateCountriesList() {
-        const countriesList = document.getElementById('countries-list');
-        if (!countriesList) return;
+        if (!this.jsonData?.lands) return;
 
-        // Если jsonData не существует или нет списка стран, очищаем список и выходим
-        if (!this.jsonData?.lands) {
-            countriesList.innerHTML = '';
-            return;
-        }
+        const tbody = document.getElementById('countries-list');
+        if (!tbody) return;
 
-        // Очищаем список
-        countriesList.innerHTML = '';
+        tbody.innerHTML = '';
 
         // Подсчитываем количество провинций
         const provincesCount = {};
@@ -92,64 +84,170 @@ class CountryManager {
             }
         }
 
-        // Создаем отсортированный массив стран
-        const countriesArray = Object.entries(this.jsonData.lands)
+        // Создаем массив стран для сортировки и фильтрации
+        let countries = Object.entries(this.jsonData.lands)
             .filter(([id]) => id !== 'provinces')
             .map(([id, country]) => ({
                 id,
-                name: country.name,
-                color: country.color,
+                name: country.name || '',
+                color: country.color || [128, 128, 128],
                 provinces: provincesCount[id] || 0,
-                capital: country.capital_name || '',
+                capital_name: country.capital_name || '',
                 ...country
-            }))
-            .sort((a, b) => {
-                // Специальная обработка для undeveloped_land - всегда в конце
-                if (a.id === 'undeveloped_land') return 1;
-                if (b.id === 'undeveloped_land') return -1;
-                
-                let comparison = 0;
-                
-                switch (this.sortColumn) {
-                    case 'name':
-                        comparison = a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+            }));
+
+        // Применяем фильтры
+        countries = countries.filter(country => {
+            for (const [column, filter] of Object.entries(this.filters)) {
+                if (!filter.operator || !filter.value) continue;
+
+                let value = country[column];
+                if (column === 'color') {
+                    const [r, g, b] = country.color;
+                    value = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+                } else if (column === 'system_name') {
+                    // Для числовых операций извлекаем число из ID
+                    if (['greater', 'less', 'greater_equals', 'less_equals'].includes(filter.operator)) {
+                        const civilizationNumber = this.extractCivilizationNumber(country.id);
+                        if (civilizationNumber === null) return false;
+                        value = civilizationNumber;
+                    } else {
+                        value = country.id;
+                    }
+                }
+
+                switch (filter.operator) {
+                    case 'contains':
+                        if (!String(value).toLowerCase().includes(filter.value.toLowerCase())) return false;
                         break;
-                    case 'id':
-                        comparison = a.id.toLowerCase().localeCompare(b.id.toLowerCase());
+                    case 'equals':
+                        if (String(value).toLowerCase() !== filter.value.toLowerCase()) return false;
                         break;
-                    case 'provinces':
-                        comparison = a.provinces - b.provinces;
+                    case 'not_equals':
+                        if (String(value).toLowerCase() === filter.value.toLowerCase()) return false;
                         break;
-                    case 'capital':
-                        comparison = (a.capital || '').toLowerCase().localeCompare((b.capital || '').toLowerCase());
+                    case 'greater':
+                        if (parseFloat(value) <= parseFloat(filter.value)) return false;
                         break;
-                    case 'color':
-                        // Сортировка по сумме RGB компонентов
-                        const sumA = (a.color || [0,0,0]).slice(0,3).reduce((sum, c) => sum + c, 0);
-                        const sumB = (b.color || [0,0,0]).slice(0,3).reduce((sum, c) => sum + c, 0);
-                        comparison = sumA - sumB;
+                    case 'less':
+                        if (parseFloat(value) >= parseFloat(filter.value)) return false;
+                        break;
+                    case 'greater_equals':
+                        if (parseFloat(value) < parseFloat(filter.value)) return false;
+                        break;
+                    case 'less_equals':
+                        if (parseFloat(value) > parseFloat(filter.value)) return false;
                         break;
                 }
+            }
+            return true;
+        });
+
+        // Сортируем страны если указана колонка сортировки
+        if (this.sortColumn) {
+            countries.sort((a, b) => {
+                let valueA, valueB;
                 
-                return this.sortDirection === 'asc' ? comparison : -comparison;
+                switch (this.sortColumn) {
+                    case 'color':
+                        valueA = a.color ? a.color[0] + a.color[1] + a.color[2] : 0;
+                        valueB = b.color ? b.color[0] + b.color[1] + b.color[2] : 0;
+                        break;
+                    case 'name':
+                        valueA = a.name || '';
+                        valueB = b.name || '';
+                        break;
+                    case 'system_name':
+                        valueA = a.id || '';
+                        valueB = b.id || '';
+                        break;
+                    case 'provinces_count':
+                        valueA = a.provinces || 0;
+                        valueB = b.provinces || 0;
+                        break;
+                    case 'capital':
+                        valueA = a.capital_name || '';
+                        valueB = b.capital_name || '';
+                        break;
+                    default:
+                        return 0;
+                }
+
+                if (typeof valueA === 'string') {
+                    return this.sortDirection === 'asc' 
+                        ? valueA.localeCompare(valueB)
+                        : valueB.localeCompare(valueA);
+                } else {
+                    return this.sortDirection === 'asc'
+                        ? valueA - valueB
+                        : valueB - valueA;
+                }
+            });
+        }
+
+        // Обновляем классы заголовков для индикации сортировки
+        const headers = document.querySelectorAll('#countries .list-table th[data-sort]');
+        headers.forEach(header => {
+            header.classList.remove('sort-asc', 'sort-desc');
+            if (header.getAttribute('data-sort') === this.sortColumn) {
+                header.classList.add(`sort-${this.sortDirection}`);
+            }
             });
 
         // Добавляем страны в список
-        for (const country of countriesArray) {
+        countries.forEach(country => {
             const row = document.createElement('tr');
             row.style.cursor = 'pointer';
             row.onclick = () => this.openCountry(country.id);
 
-            row.innerHTML = `
-                <td><div class="country-color" style="background-color: ${this.colorToRgb(country.color)}"></div></td>
-                <td>${country.name}</td>
-                <td>${country.id}</td>
-                <td>${country.provinces}</td>
-                <td>${country.capital_name}</td>
-            `;
+            // Цвет
+            const colorCell = document.createElement('td');
+            const colorDiv = document.createElement('div');
+            colorDiv.className = 'country-color';
+            colorDiv.style.backgroundColor = this.colorToRgb(country.color);
+            colorCell.appendChild(colorDiv);
+            
+            // Название
+            const nameCell = document.createElement('td');
+            const nameContainer = document.createElement('div');
+            nameContainer.className = 'country-name-container';
+            
+            const nameSpan = document.createElement('span');
+            nameSpan.textContent = country.name;
+            nameContainer.appendChild(nameSpan);
+            
+            // Добавляем галочку, если нужно
+            if (window.countryUtils.shouldShowCheckmark(country.name, country.id)) {
+                const markSpan = document.createElement('span');
+                markSpan.textContent = '✓';
+                markSpan.className = 'country-mark';
+                markSpan.style.color = '#3498db';
+                nameContainer.appendChild(markSpan);
+            }
+            
+            nameCell.appendChild(nameContainer);
+            
+            // Системное название (ID)
+            const sysNameCell = document.createElement('td');
+            sysNameCell.textContent = country.id;
+            
+            // Количество провинций
+            const provincesCell = document.createElement('td');
+            provincesCell.textContent = country.provinces;
+            
+            // Столица
+            const capitalCell = document.createElement('td');
+            capitalCell.textContent = country.capital_name;
 
-            countriesList.appendChild(row);
-        }
+            // Добавляем ячейки в строку
+            row.appendChild(colorCell);
+            row.appendChild(nameCell);
+            row.appendChild(sysNameCell);
+            row.appendChild(provincesCell);
+            row.appendChild(capitalCell);
+
+            tbody.appendChild(row);
+        });
     }
 
     initEventListeners() {
@@ -223,6 +321,39 @@ class CountryManager {
 
         // Кнопка возврата к списку стран
         document.getElementById('back-to-countries-list')?.addEventListener('click', () => this.backToCountriesList());
+
+        // Обработчики фильтров
+        document.querySelectorAll('.th-filter').forEach(button => {
+            const column = button.closest('th').getAttribute('data-sort');
+            button.addEventListener('click', () => this.showFilterModal(column));
+        });
+
+        // Обработчик кнопки сброса всех фильтров
+        document.getElementById('clear-filters')?.addEventListener('click', () => {
+            this.clearAllFilters();
+        });
+
+        // Обработчики модального окна фильтра
+        const filterModal = document.getElementById('filter-modal');
+        if (filterModal) {
+            filterModal.querySelector('.close-modal')?.addEventListener('click', () => {
+                filterModal.classList.remove('active');
+            });
+
+            document.getElementById('apply-filter')?.addEventListener('click', () => {
+                this.applyFilter();
+                filterModal.classList.remove('active');
+            });
+
+            document.getElementById('clear-filter')?.addEventListener('click', () => {
+                this.clearFilter(this.currentFilterColumn);
+                filterModal.classList.remove('active');
+            });
+
+            document.getElementById('filter-operator')?.addEventListener('change', () => {
+                this.updateFilterValueInput();
+            });
+        }
     }
 
     initColorHandlers() {
@@ -935,6 +1066,197 @@ class CountryManager {
         // Переключаемся на страницу списка стран
         document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
         document.getElementById('countries').classList.add('active');
+    }
+
+    showFilterModal(column) {
+        this.currentFilterColumn = column;
+        const modal = document.getElementById('filter-modal');
+        const title = document.getElementById('filter-modal-title');
+        const operator = document.getElementById('filter-operator');
+        
+        if (!modal || !title || !operator) {
+            console.error('Не найдены необходимые элементы модального окна');
+            return;
+        }
+        
+        // Настраиваем заголовок с переводом
+        const columnTitle = window.translator.translate(column);
+        title.textContent = `${window.translator.translate('filter')}: ${columnTitle}`;
+        
+        // Настраиваем доступные операторы в зависимости от типа колонки
+        this.setupOperators(column);
+        
+        // Восстанавливаем текущие настройки фильтра
+        const filter = this.filters[column];
+        if (filter.operator) {
+            operator.value = filter.operator;
+        } else {
+            operator.selectedIndex = 0;
+        }
+        
+        // Обновляем поле ввода значения
+        this.updateFilterValueInput();
+        
+        // Показываем модальное окно
+        modal.classList.add('active');
+        
+        // Добавляем обработчик клавиши Escape
+        const handleEscape = (e) => {
+            if (e.key === 'Escape') {
+                modal.classList.remove('active');
+                document.removeEventListener('keydown', handleEscape);
+            }
+        };
+        document.addEventListener('keydown', handleEscape);
+    }
+
+    setupOperators(column) {
+        const operator = document.getElementById('filter-operator');
+        if (!operator) return;
+
+        // Очищаем текущие опции
+        operator.innerHTML = '';
+
+        // Добавляем нужные опции в зависимости от типа колонки
+        const options = [];
+        
+        switch (column) {
+            case 'color':
+                options.push(
+                    { value: 'equals', text: 'filter_equals' },
+                    { value: 'not_equals', text: 'filter_not_equals' }
+                );
+                break;
+            case 'provinces_count':
+            case 'system_name':
+                options.push(
+                    { value: 'equals', text: 'filter_equals' },
+                    { value: 'not_equals', text: 'filter_not_equals' },
+                    { value: 'greater', text: 'filter_greater' },
+                    { value: 'less', text: 'filter_less' },
+                    { value: 'greater_equals', text: 'filter_greater_equals' },
+                    { value: 'less_equals', text: 'filter_less_equals' },
+                    { value: 'contains', text: 'filter_contains' }
+                );
+                break;
+            default:
+                options.push(
+                    { value: 'contains', text: 'filter_contains' },
+                    { value: 'equals', text: 'filter_equals' },
+                    { value: 'not_equals', text: 'filter_not_equals' }
+                );
+        }
+
+        // Добавляем опции в select с переводом
+        options.forEach(opt => {
+            const option = document.createElement('option');
+            option.value = opt.value;
+            option.textContent = window.translator.translate(opt.text);
+            operator.appendChild(option);
+        });
+
+        // Выбираем первую опцию
+        if (operator.options.length > 0) {
+            operator.selectedIndex = 0;
+        }
+    }
+
+    updateFilterValueInput() {
+        const container = document.getElementById('filter-value-container');
+        const operator = document.getElementById('filter-operator').value;
+        const column = this.currentFilterColumn;
+        const currentValue = this.filters[column].value;
+        
+        container.innerHTML = '';
+        
+        let input;
+        switch (column) {
+            case 'color':
+                input = document.createElement('input');
+                input.type = 'color';
+                input.id = 'filter-value';
+                input.value = currentValue || '#000000';
+                input.title = window.translator.translate('filter_color_value');
+                break;
+            case 'provinces_count':
+                input = document.createElement('input');
+                input.type = 'number';
+                input.id = 'filter-value';
+                input.min = '0';
+                input.value = currentValue || '';
+                input.placeholder = window.translator.translate('filter_number_value');
+                break;
+            default:
+                input = document.createElement('input');
+                input.type = 'text';
+                input.id = 'filter-value';
+                input.value = currentValue || '';
+                input.placeholder = window.translator.translate('filter_text_value');
+        }
+        
+        input.className = 'main-page-input';
+        container.appendChild(input);
+    }
+
+    applyFilter() {
+        const column = this.currentFilterColumn;
+        const operator = document.getElementById('filter-operator').value;
+        const value = document.getElementById('filter-value').value;
+        
+        this.filters[column] = { operator, value };
+        
+        // Добавляем индикатор активного фильтра
+        const filterButton = document.querySelector(`th[data-sort="${column}"] .th-filter`);
+        if (value) {
+            filterButton.classList.add('active');
+            if (!filterButton.querySelector('.filter-badge')) {
+                const badge = document.createElement('div');
+                badge.className = 'filter-badge';
+                filterButton.appendChild(badge);
+            }
+        } else {
+            filterButton.classList.remove('active');
+            filterButton.querySelector('.filter-badge')?.remove();
+        }
+        
+        this.updateCountriesList();
+    }
+
+    clearFilter(column) {
+        this.filters[column] = { operator: null, value: null };
+        const filterButton = document.querySelector(`th[data-sort="${column}"] .th-filter`);
+        filterButton.classList.remove('active');
+        filterButton.querySelector('.filter-badge')?.remove();
+        this.updateCountriesList();
+    }
+
+    clearAllFilters() {
+        Object.keys(this.filters).forEach(column => {
+            this.filters[column] = { operator: null, value: null };
+            const filterButton = document.querySelector(`th[data-sort="${column}"] .th-filter`);
+            if (filterButton) {
+                filterButton.classList.remove('active');
+                filterButton.querySelector('.filter-badge')?.remove();
+            }
+        });
+        this.updateCountriesList();
+    }
+
+    getColumnTitle(column) {
+        const titles = {
+            color: 'Цвет',
+            name: 'Название',
+            system_name: 'Системное название',
+            provinces_count: 'Количество провинций',
+            capital: 'Столица'
+        };
+        return titles[column] || column;
+    }
+
+    // Вспомогательная функция для извлечения числа из ID страны
+    extractCivilizationNumber(id) {
+        const match = id.match(/civilization_(\d+)/);
+        return match ? parseInt(match[1]) : null;
     }
 }
 
