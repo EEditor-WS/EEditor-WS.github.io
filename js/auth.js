@@ -20,29 +20,6 @@ class AuthManager {
     constructor() {
         console.log('🔄 Инициализация AuthManager...');
         this.currentUser = null;
-        this.translations = {
-            en: {
-                guest: 'Guest',
-                login: 'Login with Discord',
-                register: 'Register',
-                settings: 'Settings',
-                logout: 'Logout'
-            },
-            ru: {
-                guest: 'Гость',
-                login: 'Войти через Discord',
-                register: 'Регистрация',
-                settings: 'Настройки',
-                logout: 'Выйти'
-            },
-            uk: {
-                guest: 'Гість',
-                login: 'Увійти через Discord',
-                register: 'Реєстрація',
-                settings: 'Налаштування',
-                logout: 'Вийти'
-            }
-        };
         
         // Ждем загрузку DOM перед инициализацией
         if (document.readyState === 'loading') {
@@ -159,17 +136,19 @@ class AuthManager {
             register: document.querySelector('[data-action="register"] [data-translate="register"]'),
             settings: document.querySelector('[data-action="settings"] [data-translate="settings"]'),
             logout: document.querySelector('[data-action="logout"] [data-translate="logout"]'),
-            guest: document.querySelector('.account-name')
+            guest: document.querySelector('.account-name'),
+            discord: document.querySelector('[data-action="discord"] [data-translate="discord"]'),
+            stable_version: document.querySelector('[data-action="stable"] [data-translate="stable_version"]')
         };
 
         // Обновляем тексты, если элементы найдены
         for (const [key, element] of Object.entries(elements)) {
-            if (element && this.translations[lang] && this.translations[lang][key]) {
+            if (element && window.translations[lang] && window.translations[lang][key]) {
                 // Обновляем текст только если пользователь не авторизован (для guest)
                 if (key === 'guest' && !this.currentUser) {
-                    element.textContent = this.translations[lang][key];
+                    element.textContent = window.translations[lang][key];
                 } else if (key !== 'guest') {
-                    element.textContent = this.translations[lang][key];
+                    element.textContent = window.translations[lang][key];
                 }
             }
         }
@@ -493,12 +472,12 @@ class AuthManager {
                 logoutItem.style.display = 'flex';
                 const logoutText = logoutItem.querySelector('[data-translate="logout"]');
                 if (logoutText) {
-                    logoutText.textContent = this.translations[currentLang].logout;
+                    logoutText.textContent = window.translations[currentLang].logout;
                 }
             }
         } else {
             // Используем перевод только для гостя
-            accountName.textContent = this.translations[currentLang].guest;
+            accountName.textContent = window.translations[currentLang].guest;
             accountId.textContent = '#0000';
             
             // Скрываем аватарку в выпадающем меню
@@ -518,14 +497,14 @@ class AuthManager {
                 loginItem.style.display = 'flex';
                 const loginText = loginItem.querySelector('[data-translate="login"]');
                 if (loginText) {
-                    loginText.textContent = this.translations[currentLang].login;
+                    loginText.textContent = window.translations[currentLang].login;
                 }
             }
             if (registerItem) {
                 registerItem.style.display = 'flex';
                 const registerText = registerItem.querySelector('[data-translate="register"]');
                 if (registerText) {
-                    registerText.textContent = this.translations[currentLang].register;
+                    registerText.textContent = window.translations[currentLang].register;
                 }
             }
             if (logoutItem) logoutItem.style.display = 'none';
@@ -536,7 +515,7 @@ class AuthManager {
         if (settingsItem) {
             const settingsText = settingsItem.querySelector('[data-translate="settings"]');
             if (settingsText) {
-                settingsText.textContent = this.translations[currentLang].settings;
+                settingsText.textContent = window.translations[currentLang].settings;
             }
         }
         

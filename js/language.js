@@ -1,5 +1,14 @@
 const translations = {
     "en": {
+        // Account menu
+        "guest": "Guest",
+        "login": "Login with Discord",
+        "register": "Register",
+        "settings": "Settings",
+        "logout": "Logout",
+        "discord": "Discord Server",
+        "stable_version": "Stable Version",
+
         // Main page
         "editor": "Editor",
         "countries": "Countries",
@@ -303,6 +312,15 @@ const translations = {
         "enter_number": "Enter number"
     },
     "ru": {
+        // Меню аккаунта
+        "guest": "Гость",
+        "login": "Войти через Discord",
+        "register": "Регистрация",
+        "settings": "Настройки",
+        "logout": "Выйти",
+        "discord": "Discord сервер",
+        "stable_version": "Стабильная версия",
+
         // Главная страница
         "editor": "Редактор",
         "countries": "Страны",
@@ -603,6 +621,15 @@ const translations = {
         "enter_number": "Введите число"
     },
     "uk": {
+        // Меню облікового запису
+        "guest": "Гість",
+        "login": "Увійти через Discord",
+        "register": "Реєстрація",
+        "settings": "Налаштування",
+        "logout": "Вийти",
+        "discord": "Discord сервер",
+        "stable_version": "Стабільна версія",
+
         // Головна сторінка
         "editor": "Редактор",
         "countries": "Країни",
@@ -633,7 +660,6 @@ const translations = {
         "player_land": "Країна Гравця",
         "fog_of_war": "Туман Війни",
         "map_hash": "Хеш Карти",
-        "num_of_provinces": "Кількість Провінцій",
         "min_game_version": "Мінімальна Версія Гри",
 
         // Значення випадаючих списків
@@ -889,7 +915,7 @@ const translations = {
         "filter_clear_all": "Скинути всі фільтри",
         "filter_operator": "Оператор",
         "filter_value": "Значення",
-        "duration": "Тривалість (ходів)",
+        "duration": "Тривалість (ходов)",
 
         // New bonuses
         "accelerated_recruit_cost": "Прискорена вартість найму",
