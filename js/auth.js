@@ -96,6 +96,18 @@ class AuthManager {
                     });
                 });
             }
+
+            // Обработчик для кнопки Discord
+            document.querySelector('.account-item[data-action="discord"]').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.open('https://discord.gg/s5JgHChaQE', '_blank');
+            });
+
+            // Обработчик для кнопки стабильной версии
+            document.querySelector('.account-item[data-action="stable"]').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.open('stable/index.html', '_blank');
+            });
         } else {
             console.log('ℹ️ Элементы интерфейса не найдены на этой странице');
         }
