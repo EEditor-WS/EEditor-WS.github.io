@@ -23,14 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Обработчик для кнопки настроек
-    const settingsButton = document.getElementById('settings-button');
-    if (settingsButton) {
-        settingsButton.addEventListener('click', () => {
-            window.location.href = '/settings';
-        });
-    }
-
     // Обработчики для языкового переключателя
     const langChooser = document.getElementById('currentLangChooser');
     const langDropdown = document.getElementById('langDropdown');
@@ -63,34 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
             e.stopPropagation();
             accountDropdown.classList.toggle('active');
             langDropdown.classList.remove('active');
-        });
-
-        // Обработчики для действий аккаунта
-        const accountActions = accountDropdown.querySelectorAll('[data-action]');
-        accountActions.forEach(action => {
-            action.addEventListener('click', (e) => {
-                e.preventDefault();
-                const actionType = action.getAttribute('data-action');
-                
-                switch (actionType) {
-                    case 'login':
-                        window.location.href = '/auth/discord';
-                        break;
-                    case 'register':
-                        window.location.href = '/auth/discord';
-                        break;
-                    case 'settings':
-                        window.location.href = '/settings';
-                        break;
-                    case 'logout':
-                        // Здесь должна быть логика выхода
-                        localStorage.removeItem('token');
-                        window.location.reload();
-                        break;
-                }
-                
-                accountDropdown.classList.remove('active');
-            });
         });
     }
 
