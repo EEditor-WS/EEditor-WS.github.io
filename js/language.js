@@ -82,6 +82,8 @@ const translations = {
         "color_r": "R",
         "color_g": "G",
         "color_b": "B",
+        "group": "Group",
+        "group_name": "Group",
 
         // Country edit
         "edit_country": "Edit country",
@@ -395,6 +397,8 @@ const translations = {
         "color_r": "R",
         "color_g": "G",
         "color_b": "B",
+        "group": "Группа",
+        "group_name": "Группа",
 
         // Country edit
         "edit_country": "Редактирование страны",
@@ -604,8 +608,8 @@ const translations = {
         "filter_number_value": "Введите число",
         "filter_text_value": "Введите текст",
         "filter_apply": "Применить",
-        "filter_clear": "Сбросить",
-        "filter_clear_all": "Сбросить все фильтры",
+        "filter_clear": "Скинуть",
+        "filter_clear_all": "Скинуть все фильтры",
         "filter_operator": "Оператор",
         "filter_value": "Значение",
         "duration": "Длительность (ходов)",
@@ -704,6 +708,8 @@ const translations = {
         "color_r": "R",
         "color_g": "G",
         "color_b": "B",
+        "group": "Група",
+        "group_name": "Група",
 
         // Редагування країни
         "edit_country": "Редагування країни",
