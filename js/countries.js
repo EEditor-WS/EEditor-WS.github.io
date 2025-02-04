@@ -15,7 +15,8 @@ class CountryManager {
             name: { operator: null, value: '' },
             system_name: { operator: null, value: '' },
             provinces_count: { operator: null, value: '' },
-            capital: { operator: null, value: '' }
+            capital: { operator: null, value: '' },
+            groups: []
         };
         
         this.currentFilterColumn = null;
@@ -90,6 +91,7 @@ class CountryManager {
             .map(([id, country]) => ({
                 id,
                 name: country.name || '',
+                group: country.group || '',
                 color: country.color || [128, 128, 128],
                 provinces: provincesCount[id] || 0,
                 capital_name: country.capital_name || '',
@@ -98,7 +100,9 @@ class CountryManager {
 
         // Применяем фильтры
         countries = countries.filter(country => {
+            // Проверяем стандартные фильтры
             for (const [column, filter] of Object.entries(this.filters)) {
+                if (column === 'groups') continue; // Пропускаем фильтр групп
                 if (!filter.operator || !filter.value) continue;
 
                 let value = country[column];
@@ -106,7 +110,6 @@ class CountryManager {
                     const [r, g, b] = country.color;
                     value = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
                 } else if (column === 'system_name') {
-                    // Для числовых операций извлекаем число из ID
                     if (['greater', 'less', 'greater_equals', 'less_equals'].includes(filter.operator)) {
                         const civilizationNumber = this.extractCivilizationNumber(country.id);
                         if (civilizationNumber === null) return false;
@@ -140,6 +143,14 @@ class CountryManager {
                         break;
                 }
             }
+
+            // Отдельно проверяем фильтр групп
+            if (this.filters.groups.length > 0) {
+                if (!country.group || !this.filters.groups.includes(country.group)) {
+                    return false;
+                }
+            }
+
             return true;
         });
 
@@ -169,6 +180,10 @@ class CountryManager {
                         valueA = a.capital_name || '';
                         valueB = b.capital_name || '';
                         break;
+                    case 'group':
+                        valueA = a.group || '';
+                        valueB = b.group || '';
+                        break;
                     default:
                         return 0;
                 }
@@ -196,57 +211,39 @@ class CountryManager {
 
         // Добавляем страны в список
         countries.forEach(country => {
-            const row = document.createElement('tr');
-            row.style.cursor = 'pointer';
-            row.onclick = () => this.openCountry(country.id);
+            const tr = document.createElement('tr');
+            tr.style.cursor = 'pointer';
+            tr.onclick = () => this.openCountry(country.id);
 
-            // Цвет
             const colorCell = document.createElement('td');
             const colorDiv = document.createElement('div');
             colorDiv.className = 'country-color';
             colorDiv.style.backgroundColor = this.colorToRgb(country.color);
             colorCell.appendChild(colorDiv);
-            
-            // Название
+
             const nameCell = document.createElement('td');
-            const nameContainer = document.createElement('div');
-            nameContainer.className = 'country-name-container';
-            
-            const nameSpan = document.createElement('span');
-            nameSpan.textContent = country.name;
-            nameContainer.appendChild(nameSpan);
-            
-            // Добавляем галочку, если нужно
-            if (window.countryUtils.shouldShowCheckmark(country.name, country.id)) {
-                const markSpan = document.createElement('span');
-                markSpan.textContent = '✓';
-                markSpan.className = 'country-mark';
-                markSpan.style.color = '#3498db';
-                nameContainer.appendChild(markSpan);
-            }
-            
-            nameCell.appendChild(nameContainer);
-            
-            // Системное название (ID)
+            nameCell.textContent = country.name;
+
             const sysNameCell = document.createElement('td');
             sysNameCell.textContent = country.id;
-            
-            // Количество провинций
+
+            const groupCell = document.createElement('td');
+            groupCell.textContent = country.group;
+
             const provincesCell = document.createElement('td');
             provincesCell.textContent = country.provinces;
-            
-            // Столица
+
             const capitalCell = document.createElement('td');
             capitalCell.textContent = country.capital_name;
 
-            // Добавляем ячейки в строку
-            row.appendChild(colorCell);
-            row.appendChild(nameCell);
-            row.appendChild(sysNameCell);
-            row.appendChild(provincesCell);
-            row.appendChild(capitalCell);
+            tr.appendChild(colorCell);
+            tr.appendChild(nameCell);
+            tr.appendChild(sysNameCell);
+            tr.appendChild(groupCell);
+            tr.appendChild(provincesCell);
+            tr.appendChild(capitalCell);
 
-            tbody.appendChild(row);
+            tbody.appendChild(tr);
         });
     }
 
@@ -324,8 +321,23 @@ class CountryManager {
 
         // Обработчики фильтров
         document.querySelectorAll('.th-filter').forEach(button => {
-            const column = button.closest('th').getAttribute('data-sort');
-            button.addEventListener('click', () => this.showFilterModal(column));
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const column = button.closest('th').getAttribute('data-sort');
+                
+                // Закрываем все модальные окна
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.classList.remove('active');
+                });
+
+                // Показываем соответствующее модальное окно
+                if (column === 'group') {
+                    this.showGroupFilterModal();
+                } else {
+                    this.currentFilterColumn = column;
+                    this.showFilterModal(column);
+                }
+            });
         });
 
         // Обработчик кнопки сброса всех фильтров
@@ -354,6 +366,11 @@ class CountryManager {
                 this.updateFilterValueInput();
             });
         }
+
+        // Обработчик кнопки обновления списка
+        document.getElementById('refresh-countries')?.addEventListener('click', () => {
+            this.updateCountriesList();
+        });
     }
 
     initColorHandlers() {
@@ -423,7 +440,17 @@ class CountryManager {
         // Обновляем список и открываем редактор
         this.updateCountriesList();
         this.openCountry(newId);
-        this.saveChanges();
+
+        // Обновляем содержимое в редакторе и сохраняем в файл
+        if (window.previewContent) {
+            const jsonString = JSON.stringify(this.jsonData, null, 4);
+            window.previewContent.value = jsonString;
+            
+            // Сохраняем изменения в файл
+            if (typeof window.saveChanges === 'function') {
+                window.saveChanges();
+            }
+        }
     }
 
     generateUniqueId() {
@@ -453,16 +480,38 @@ class CountryManager {
     }
 
     deleteCurrentCountry() {
-        if (!this.currentCountry || !this.jsonData?.lands[this.currentCountry]) return;
+        if (!this.currentCountry || !this.jsonData?.lands[this.currentCountry]) {
+            console.error('Нет текущей страны для удаления');
+            return;
+        }
 
-        // confirm('Вы уверены, что хотите удалить эту страну?')
+        if (!confirm(window.translator.translate('confirm_delete_country'))) {
+            return;
+        }
 
-        if (true) {
-            this.pushToUndoStack();
-            delete this.jsonData.lands[this.currentCountry];
-            this.updateCountriesList();
-            this.switchToCountriesList();
-            this.saveChanges();
+        this.pushToUndoStack();
+
+        // Удаляем страну
+        delete this.jsonData.lands[this.currentCountry];
+
+        // Очищаем текущую страну
+        this.currentCountry = null;
+
+        // Обновляем список
+        this.updateCountriesList();
+
+        // Возвращаемся к списку стран
+        this.backToCountriesList();
+
+        // Обновляем содержимое в редакторе и сохраняем в файл
+        if (window.previewContent) {
+            const jsonString = JSON.stringify(this.jsonData, null, 4);
+            window.previewContent.value = jsonString;
+            
+            // Сохраняем изменения в файл
+            if (typeof window.saveChanges === 'function') {
+                window.saveChanges();
+            }
         }
     }
 
@@ -488,6 +537,7 @@ class CountryManager {
 
         this.setFormValues({
             'country-name': country.name,
+            'country-group': country.group || '',
             'country-capital': country.capital_name || '',
             'country-capital-id': country.capital || '',
             'country-defeated': country.defeated ? 'true' : 'false',
@@ -847,6 +897,7 @@ class CountryManager {
 
             // Обновляем основные данные
             country.name = document.getElementById('country-name').value;
+            country.group = document.getElementById('country-group').value;
             country.capital_name = document.getElementById('country-capital').value;
             country.capital = parseInt(document.getElementById('country-capital-id').value) || 0;
             country.defeated = document.getElementById('country-defeated').value === 'true';
@@ -866,6 +917,17 @@ class CountryManager {
 
             // Обновляем все выпадающие списки стран
             this.updateAllCountryDropdowns();
+
+            // Обновляем содержимое в редакторе и сохраняем в файл
+            if (window.previewContent) {
+                const jsonString = JSON.stringify(this.jsonData, null, 4);
+                window.previewContent.value = jsonString;
+                
+                // Сохраняем изменения в файл
+                if (typeof window.saveChanges === 'function') {
+                    window.saveChanges();
+                }
+            }
         } finally {
             this.isEditing = false;
         }
@@ -1069,19 +1131,23 @@ class CountryManager {
     }
 
     showFilterModal(column) {
-        this.currentFilterColumn = column;
         const modal = document.getElementById('filter-modal');
-        const title = document.getElementById('filter-modal-title');
+        if (!modal) {
+            console.error('Модальное окно фильтра не найдено');
+            return;
+        }
+
+        const title = modal.querySelector('.modal-title');
         const operator = document.getElementById('filter-operator');
         
-        if (!modal || !title || !operator) {
+        if (!title || !operator) {
             console.error('Не найдены необходимые элементы модального окна');
             return;
         }
         
         // Настраиваем заголовок с переводом
-        const columnTitle = window.translator.translate(column);
-        title.textContent = `${window.translator.translate('filter')}: ${columnTitle}`;
+        const columnTitle = this.getColumnTitle(column);
+        title.textContent = `${this.getColumnTitle('filter')}: ${columnTitle}`;
         
         // Настраиваем доступные операторы в зависимости от типа колонки
         this.setupOperators(column);
@@ -1099,15 +1165,6 @@ class CountryManager {
         
         // Показываем модальное окно
         modal.classList.add('active');
-        
-        // Добавляем обработчик клавиши Escape
-        const handleEscape = (e) => {
-            if (e.key === 'Escape') {
-                modal.classList.remove('active');
-                document.removeEventListener('keydown', handleEscape);
-            }
-        };
-        document.addEventListener('keydown', handleEscape);
     }
 
     setupOperators(column) {
@@ -1151,14 +1208,9 @@ class CountryManager {
         options.forEach(opt => {
             const option = document.createElement('option');
             option.value = opt.value;
-            option.textContent = window.translator.translate(opt.text);
+            option.textContent = this.getColumnTitle(opt.text);
             operator.appendChild(option);
         });
-
-        // Выбираем первую опцию
-        if (operator.options.length > 0) {
-            operator.selectedIndex = 0;
-        }
     }
 
     updateFilterValueInput() {
@@ -1176,7 +1228,7 @@ class CountryManager {
                 input.type = 'color';
                 input.id = 'filter-value';
                 input.value = currentValue || '#000000';
-                input.title = window.translator.translate('filter_color_value');
+                input.title = this.getColumnTitle('filter_color_value');
                 break;
             case 'provinces_count':
                 input = document.createElement('input');
@@ -1184,14 +1236,14 @@ class CountryManager {
                 input.id = 'filter-value';
                 input.min = '0';
                 input.value = currentValue || '';
-                input.placeholder = window.translator.translate('filter_number_value');
+                input.placeholder = this.getColumnTitle('filter_number_value');
                 break;
             default:
                 input = document.createElement('input');
                 input.type = 'text';
                 input.id = 'filter-value';
                 input.value = currentValue || '';
-                input.placeholder = window.translator.translate('filter_text_value');
+                input.placeholder = this.getColumnTitle('filter_text_value');
         }
         
         input.className = 'main-page-input';
@@ -1232,31 +1284,139 @@ class CountryManager {
 
     clearAllFilters() {
         Object.keys(this.filters).forEach(column => {
-            this.filters[column] = { operator: null, value: null };
-            const filterButton = document.querySelector(`th[data-sort="${column}"] .th-filter`);
-            if (filterButton) {
-                filterButton.classList.remove('active');
-                filterButton.querySelector('.filter-badge')?.remove();
+            if (column === 'groups') {
+                this.filters.groups = [];
+            } else {
+                this.filters[column] = { operator: null, value: null };
             }
         });
+        
+        // Очищаем индикаторы фильтров
+        document.querySelectorAll('.th-filter').forEach(button => {
+            button.classList.remove('active');
+            button.querySelector('.filter-badge')?.remove();
+        });
+
         this.updateCountriesList();
     }
 
     getColumnTitle(column) {
         const titles = {
-            color: 'Цвет',
-            name: 'Название',
-            system_name: 'Системное название',
-            provinces_count: 'Количество провинций',
-            capital: 'Столица'
+            color: 'color',
+            name: 'name',
+            system_name: 'system_name',
+            provinces_count: 'provinces_count',
+            capital: 'capital',
+            group: 'group'
         };
-        return titles[column] || column;
+        return window.translator.translate(titles[column] || column);
     }
 
     // Вспомогательная функция для извлечения числа из ID страны
     extractCivilizationNumber(id) {
         const match = id.match(/civilization_(\d+)/);
         return match ? parseInt(match[1]) : null;
+    }
+
+    showGroupFilterModal() {
+        console.log('Открытие модального окна фильтра групп стран');
+        const modal = document.getElementById('countries-groups-filter-modal');
+        if (!modal) {
+            console.error('Модальное окно фильтра групп не найдено');
+            return;
+        }
+
+        const groupsList = document.getElementById('countries-groups-filter-list');
+        if (!groupsList) {
+            console.error('Список групп не найден');
+            return;
+        }
+
+        // Получаем все уникальные группы
+        const groups = new Set();
+        if (!this.jsonData?.lands) {
+            console.warn('Нет данных о странах');
+            return;
+        }
+
+        Object.values(this.jsonData.lands).forEach(country => {
+            if (country.group) {
+                groups.add(country.group);
+            }
+        });
+
+        console.log('Найдено групп:', groups.size);
+
+        // Сортируем группы по алфавиту
+        const sortedGroups = Array.from(groups).sort();
+
+        // Создаем чекбоксы для каждой группы
+        let html = `
+            <div class="group-checkbox-item">
+                <input type="checkbox" id="country-group-empty" value=""
+                       ${this.filters.groups.includes('') ? 'checked' : ''}>
+                <label for="country-group-empty" data-translate="empty_group">[Пусто]</label>
+            </div>
+        `;
+
+        html += sortedGroups.map(group => {
+            const isChecked = this.filters.groups.includes(group);
+            console.log(`Группа ${group}, выбрана: ${isChecked}`);
+            return `
+                <div class="group-checkbox-item">
+                    <input type="checkbox" id="country-group-${group}" value="${group}"
+                           ${isChecked ? 'checked' : ''}>
+                    <label for="country-group-${group}">${group}</label>
+                </div>
+            `;
+        }).join('');
+
+        groupsList.innerHTML = html;
+
+        // Обновляем заголовок модального окна
+        const title = modal.querySelector('.modal-title');
+        if (title) {
+            title.setAttribute('data-translate', 'filter_groups');
+            title.textContent = this.getColumnTitle('filter_groups');
+        }
+
+        // Обработчики кнопок
+        const applyButton = modal.querySelector('#countries-groups-filter-apply');
+        const clearButton = modal.querySelector('#countries-groups-filter-clear');
+        const closeButton = modal.querySelector('.close-modal');
+
+        // Удаляем старые обработчики
+        const newApplyButton = applyButton.cloneNode(true);
+        const newClearButton = clearButton.cloneNode(true);
+        const newCloseButton = closeButton.cloneNode(true);
+
+        applyButton.parentNode.replaceChild(newApplyButton, applyButton);
+        clearButton.parentNode.replaceChild(newClearButton, clearButton);
+        closeButton.parentNode.replaceChild(newCloseButton, closeButton);
+
+        // Добавляем новые обработчики
+        newApplyButton.addEventListener('click', () => {
+            const checkedGroups = Array.from(groupsList.querySelectorAll('input[type="checkbox"]:checked'))
+                .map(checkbox => checkbox.value);
+            
+            console.log('Выбранные группы:', checkedGroups);
+            this.filters.groups = checkedGroups;
+            this.updateCountriesList();
+            modal.classList.remove('active');
+        });
+
+        newClearButton.addEventListener('click', () => {
+            this.filters.groups = [];
+            this.updateCountriesList();
+            modal.classList.remove('active');
+        });
+
+        newCloseButton.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        // Показываем модальное окно
+        modal.classList.add('active');
     }
 }
 

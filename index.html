@@ -343,10 +343,18 @@
                         <div class="tooltip-container">
                             <button id="clear-filters" class="icon-action-button clear" title="Сбросить все фильтры">
                                 <svg viewBox="0 0 24 24">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"/>
+                                    <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
                                 </svg>
                             </button>
                             <div class="tooltip">Сбросить все фильтры</div>
+                        </div>
+                        <div class="tooltip-container">
+                            <button id="refresh-countries" class="icon-action-button refresh" title="Обновить список">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M21 2v6h-6M3 12a9 9 0 0 1 15-6.7L21 8M3 22v-6h6M21 12a9 9 0 0 1-15 6.7L3 16" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </button>
+                            <div class="tooltip">Обновить список</div>
                         </div>
                         <div class="tooltip-container">
                             <button id="remove-invalid-owners" class="icon-action-button delete" title="Удалить пустых владельцев">
@@ -399,6 +407,18 @@
                                     <div class="th-title">
                                         <span data-translate="system_name">Системное название</span>
                                         <button class="th-filter" title="Фильтр по системному названию">
+                                            <svg viewBox="0 0 24 24" width="14" height="14">
+                                                <path d="M3 4h18l-7 8v8l-4-2v-6z" fill="none" stroke="currentColor" stroke-width="2"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </th>
+                            <th data-sort="group">
+                                <div class="th-content">
+                                    <div class="th-title">
+                                        <span data-translate="group">Группа</span>
+                                        <button class="th-filter" title="Фильтр по группам">
                                             <svg viewBox="0 0 24 24" width="14" height="14">
                                                 <path d="M3 4h18l-7 8v8l-4-2v-6z" fill="none" stroke="currentColor" stroke-width="2"/>
                                             </svg>
@@ -520,6 +540,12 @@
                             <option value="Fascism" data-translate="fascism">Фашизм</option>
                             <option value="trade_republic" data-translate="trade_republic">Торговый республика</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="country-group" data-translate="group">Группа:</label>
+                        <input type="text" id="country-group" class="main-page-input" placeholder="Введите название группы" data-translate-placeholder="group_placeholder">
+                    </div>
+                    <div class="form-group">
                     </div>
                     <div class="form-group">
                         <label data-translate="allies">Союзники</label>
@@ -1144,7 +1170,7 @@
         <div id="filter-modal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 id="filter-modal-title" data-translate="filter">Фильтр</h3>
+                    <h3 class="modal-title" data-translate="filter">Фильтр</h3>
                     <button class="close-modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -1196,6 +1222,48 @@
                 <div class="modal-footer">
                     <button id="events-filter-clear" class="action-button secondary" data-translate="filter_clear">Сбросить</button>
                     <button id="events-filter-apply" class="action-button" data-translate="filter_apply">Применить</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно для фильтра групп -->
+        <div id="groups-filter-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" data-translate="filter_groups">Фильтр по группам</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="filter-form">
+                        <div class="groups-list" id="groups-filter-list">
+                            <!-- Чекбоксы будут добавлены динамически -->
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="groups-filter-clear" class="action-button secondary" data-translate="filter_clear">Сбросить</button>
+                    <button id="groups-filter-apply" class="action-button" data-translate="filter_apply">Применить</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно для фильтра групп стран -->
+        <div id="countries-groups-filter-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" data-translate="filter_groups">Фильтр по группам</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="filter-form">
+                        <div class="groups-list" id="countries-groups-filter-list">
+                            <!-- Чекбоксы будут добавлены динамически -->
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="countries-groups-filter-clear" class="action-button secondary" data-translate="filter_clear">Сбросить</button>
+                    <button id="countries-groups-filter-apply" class="action-button" data-translate="filter_apply">Применить</button>
                 </div>
             </div>
         </div>

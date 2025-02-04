@@ -309,7 +309,8 @@ const translations = {
         "add_culture_population": "Add Culture Population",
         "cooldown": "Cooldown",
         "enter_percent": "Enter percent",
-        "enter_number": "Enter number"
+        "enter_number": "Enter number",
+        "filter_groups": "Filter by Groups"
     },
     "ru": {
         // Меню аккаунта
@@ -618,7 +619,8 @@ const translations = {
         "add_culture_population": "Добавить население культуры",
         "cooldown": "Кулдаун",
         "enter_percent": "Введите процент",
-        "enter_number": "Введите число"
+        "enter_number": "Введите число",
+        "filter_groups": "Фильтр по группам"
     },
     "uk": {
         // Меню облікового запису
@@ -923,10 +925,11 @@ const translations = {
         "population_increase": "Приріст населення",
         "recruit_cost": "Вартість найму",
         "change_country": "Змінити країну",
-        "add_culture_population": "Додати населення культури",
+        "add_culture_population": "Додати населення культуры",
         "cooldown": "Кулдаун",
         "enter_percent": "Введіть відсоток",
-        "enter_number": "Введіть число"
+        "enter_number": "Введіть число",
+        "filter_groups": "Фільтр за групами"
     },
     "be": {
         // Галоўная старонка

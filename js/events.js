@@ -133,24 +133,10 @@ class EventManager {
             }));
 
         // Применяем фильтры
-        if (Object.keys(this.filters).length > 0) {
-            events = events.filter(event => {
-                return Object.entries(this.filters).every(([column, filter]) => {
-                    const value = String(event[column] || '').toLowerCase();
-                    const filterValue = String(filter.value).toLowerCase();
-
-                    switch (filter.operator) {
-                        case 'equals':
-                            return value === filterValue;
-                        case 'not_equals':
-                            return value !== filterValue;
-                        case 'contains':
-                            return value.includes(filterValue);
-                        default:
-                            return true;
-                    }
-                });
-            });
+        if (this.filters.groups) {
+            events = events.filter(event => 
+                this.filters.groups.includes(event.group)
+            );
         }
 
         // Сортировка
@@ -173,7 +159,7 @@ class EventManager {
             if (column === this.sortColumn) {
                 header.classList.add(`sort-${this.sortDirection}`);
             }
-            if (this.filters[column]) {
+            if (column === 'group' && this.filters.groups) {
                 header.classList.add('filtered');
             }
         });
@@ -263,10 +249,18 @@ class EventManager {
             button.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const column = button.closest('th').getAttribute('data-sort');
-                // Убираем класс active у общего модального окна фильтра
-                document.getElementById('filter-modal')?.classList.remove('active');
-                // Показываем только модальное окно фильтра событий
-                this.showFilterModal(column);
+                
+                // Закрываем все модальные окна
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.classList.remove('active');
+                });
+
+                // Показываем соответствующее модальное окно
+                if (column === 'group') {
+                    this.showGroupFilterModal();
+                } else {
+                    this.showFilterModal(column);
+                }
             });
         });
 
@@ -1319,6 +1313,106 @@ class EventManager {
         document.getElementById('events').classList.add('active');
     }
 
+    showGroupFilterModal() {
+        console.log('Открытие модального окна фильтра групп');
+        const modal = document.getElementById('groups-filter-modal');
+        if (!modal) {
+            console.error('Модальное окно фильтра групп не найдено');
+            return;
+        }
+
+        const groupsList = document.getElementById('groups-filter-list');
+        if (!groupsList) {
+            console.error('Список групп не найден');
+            return;
+        }
+
+        // Получаем все уникальные группы
+        const groups = new Set();
+        if (!this.jsonData?.custom_events) {
+            console.warn('Нет данных о событиях');
+            return;
+        }
+
+        Object.values(this.jsonData.custom_events).forEach(event => {
+            if (event.group_name) {
+                groups.add(event.group_name);
+            }
+        });
+
+        console.log('Найдено групп:', groups.size);
+
+        // Сортируем группы по алфавиту
+        const sortedGroups = Array.from(groups).sort();
+
+        // Создаем чекбоксы для каждой группы
+        groupsList.innerHTML = sortedGroups.map(group => {
+            const isChecked = this.filters.groups?.includes(group);
+            console.log(`Группа ${group}, выбрана: ${isChecked}`);
+            return `
+                <div class="group-checkbox-item">
+                    <input type="checkbox" id="group-${group}" value="${group}"
+                           ${isChecked ? 'checked' : ''}>
+                    <label for="group-${group}">${group}</label>
+                </div>
+            `;
+        }).join('');
+
+        // Обработчики кнопок
+        const applyButton = modal.querySelector('#groups-filter-apply');
+        const clearButton = modal.querySelector('#groups-filter-clear');
+        const closeButton = modal.querySelector('.close-modal');
+
+        // Удаляем старые обработчики
+        const newApplyButton = applyButton.cloneNode(true);
+        const newClearButton = clearButton.cloneNode(true);
+        const newCloseButton = closeButton.cloneNode(true);
+
+        applyButton.parentNode.replaceChild(newApplyButton, applyButton);
+        clearButton.parentNode.replaceChild(newClearButton, clearButton);
+        closeButton.parentNode.replaceChild(newCloseButton, closeButton);
+
+        // Добавляем новые обработчики
+        newApplyButton.addEventListener('click', () => {
+            const checkedGroups = Array.from(groupsList.querySelectorAll('input[type="checkbox"]:checked'))
+                .map(checkbox => checkbox.value);
+            
+            console.log('Выбранные группы:', checkedGroups);
+            
+            if (checkedGroups.length > 0) {
+                this.filters.groups = checkedGroups;
+            } else {
+                delete this.filters.groups;
+            }
+            
+            console.log('Обновленные фильтры:', this.filters);
+            this.updateEventsList();
+            modal.classList.remove('active');
+        });
+
+        newClearButton.addEventListener('click', () => {
+            delete this.filters.groups;
+            this.updateEventsList();
+            modal.classList.remove('active');
+        });
+
+        newCloseButton.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        // Добавляем обработчик клавиши Escape
+        const handleEscape = (e) => {
+            if (e.key === 'Escape') {
+                modal.classList.remove('active');
+                document.removeEventListener('keydown', handleEscape);
+            }
+        };
+        document.addEventListener('keydown', handleEscape);
+
+        // Показываем модальное окно
+        modal.classList.add('active');
+    }
+
     showFilterModal(column) {
         const modal = document.getElementById('events-filter-modal');
         const title = modal.querySelector('.modal-title');
@@ -1347,11 +1441,12 @@ class EventManager {
             document.getElementById('events-filter-value').value = this.filters[column].value;
         }
 
-        // Удаляем старые обработчики, создавая клоны элементов
+        // Обработчики кнопок
         const applyButton = modal.querySelector('#events-filter-apply');
         const clearButton = modal.querySelector('#events-filter-clear');
         const closeButton = modal.querySelector('.close-modal');
 
+        // Удаляем старые обработчики
         const newApplyButton = applyButton.cloneNode(true);
         const newClearButton = clearButton.cloneNode(true);
         const newCloseButton = closeButton.cloneNode(true);
@@ -1360,7 +1455,7 @@ class EventManager {
         clearButton.parentNode.replaceChild(newClearButton, clearButton);
         closeButton.parentNode.replaceChild(newCloseButton, closeButton);
 
-        // Обработчики кнопок
+        // Добавляем новые обработчики
         newApplyButton.addEventListener('click', () => {
             const operator = operatorSelect.value;
             const value = document.getElementById('events-filter-value').value;
