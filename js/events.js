@@ -813,8 +813,8 @@ class EventManager {
                 { value: 'money', label: window.translator.translate('money') },
                 { value: 'discontent', label: window.translator.translate('discontent') },
                 { value: 'building_exists', label: window.translator.translate('building_exists') },
-                { value: 'political_institution', label: window.translator.translate('political_institution') },
-                { value: 'cooldown', label: window.translator.translate('cooldown') }
+                { value: 'political_institution', label: window.translator.translate('political_institution') } /*,
+                { value: 'cooldown', label: window.translator.translate('cooldown') } */
             ];
             typeSelect.innerHTML = requirementOptions.map(opt => 
                 `<option value="${opt.value}">${opt.label}</option>`
