@@ -756,7 +756,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Обработчик для кнопки настроек
     document.getElementById('settings-button').addEventListener('click', function() {
-        window.location.href = 'page/settings.html';
+        window.location.href = 'page/settings.html?return=main';
     });
 
     // Обработчик для кнопки языка

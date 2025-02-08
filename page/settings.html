@@ -10,12 +10,43 @@
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/settings.css">
     <link rel="stylesheet" href="../css/head.css">
-    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../img/ico/ico.svg">
     <script src="../js/language.js"></script>
     <script src="../js/translator.js"></script>
     <script src="../js/auth.js"></script>
     <script src="../js/settings.js"></script>
     <script src="../js/head.js"></script>
+    <script>
+        // Функция для получения параметров из URL
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            const results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Обработчик кнопки "Назад"
+        function backButton()  {
+            const returnPage = getUrlParameter('return');
+            if (returnPage) {
+                // Проверяем, является ли возвращаемая страница допустимой
+                const validPages = ['docs', 'editor', 'events', 'countries'];
+                /* if (validPages.includes(returnPage)) {
+                    window.location.href = `page/${returnPage}.html`;
+                } else {
+                    window.location.href = '../index.html';
+                } */
+
+                if (returnPage == 'main') {
+                    window.location.href = '../index.html';
+                } else {
+                    window.location.href = `${returnPage}.html`;
+                }
+            } else {
+                window.location.href = '../index.html';
+            }
+        }
+    </script>
     <style>
         .settings-page {
             padding: 20px;
@@ -131,9 +162,10 @@
                 </div>
             </div>
         </nav>
+    </div>
     <div class="settings-page">
         <div class="settings-header">
-            <button class="action-button" onclick="window.location.href='/'">
+            <button class="action-button" onclick="backButton()">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="19" y1="12" x2="5" y2="12"></line>
                     <polyline points="12 19 5 12 12 5"></polyline>

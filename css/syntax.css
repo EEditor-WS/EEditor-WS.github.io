@@ -1,0 +1,64 @@
+/* Стили для кода и предпросмотра */
+.code-preview {
+    background: var(--code-background);
+    border-radius: 6px;
+    padding: 16px;
+    margin: 16px 0;
+    overflow-x: auto;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Подсветка синтаксиса */
+.syntax-keyword { color: #c678dd; }
+.syntax-string { color: #98c379; }
+.syntax-number { color: #d19a66; }
+.syntax-comment { color: #5c6370; font-style: italic; }
+.syntax-operator { color: #56b6c2; }
+.syntax-function { color: #61afef; }
+.syntax-variable { color: #e06c75; }
+.syntax-property { color: #e5c07b; }
+.syntax-punctuation { color: #abb2bf; }
+
+/* Стили для JSON */
+.json-key { color: #e06c75; }
+.json-value { color: #98c379; }
+.json-string { color: #98c379; }
+.json-number { color: #d19a66; }
+.json-boolean { color: #56b6c2; }
+.json-null { color: #56b6c2; }
+
+/* Стили для строк с номерами */
+.line-numbers {
+    counter-reset: line;
+    padding-left: 3.5em;
+    border-left: 1px solid var(--border-color);
+}
+
+.line-numbers > span {
+    counter-increment: line;
+    display: block;
+    position: relative;
+}
+
+.line-numbers > span::before {
+    content: counter(line);
+    position: absolute;
+    left: -3em;
+    width: 2.5em;
+    text-align: right;
+    color: var(--text-secondary);
+    font-size: 0.9em;
+}
+
+/* Стили для активной строки */
+.line-highlight {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Стили для поиска */
+.search-highlight {
+    background-color: rgba(255, 255, 0, 0.2);
+    border-radius: 2px;
+} 
