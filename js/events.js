@@ -268,6 +268,39 @@ class EventManager {
         document.getElementById('clear-events-filters')?.addEventListener('click', () => {
             this.clearAllFilters();
         });
+
+        // Обработчики событий формы
+        document.getElementById('event-id').addEventListener('input', function(e) {
+            const newId = e.target.value;
+            const currentEvent = window.eventManager.currentEvent;
+            
+            if (currentEvent) {
+                const jsonData = window.eventManager.jsonData;
+                if (jsonData && jsonData.custom_events) {
+                    const oldKey = currentEvent;
+                    const eventData = jsonData.custom_events[oldKey];
+                    
+                    if (eventData) {
+                        // Обновляем ID внутри объекта события
+                        eventData.id = newId;
+                        
+                        // Создаем новый объект с обновленным ключом
+                        jsonData.custom_events[newId] = eventData;
+                        
+                        // Удаляем старый ключ
+                        if (oldKey !== newId) {
+                            delete jsonData.custom_events[oldKey];
+                        }
+                        
+                        // Обновляем currentEvent в менеджере
+                        window.eventManager.currentEvent = newId;
+                        
+                        // Обновляем JSON в превью
+                        window.eventManager.updateJsonInPreview();
+                    }
+                }
+            }
+        });
     }
 
     createNewEvent() {

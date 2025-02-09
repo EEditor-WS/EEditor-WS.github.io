@@ -565,7 +565,45 @@ const translations = {
                 // Настройки
         "settings_title": "Настройки",
         "settings_back": "Назад",
-        "settings_in_development": "Эта функция находится в стадии разработки"
+        "settings_in_development": "Эта функция находится в стадии разработки",
+
+        // Event images and icons
+        "diplomacy": "Diplomacy",
+        "democracy": "Democracy",
+        "communism": "Communism",
+        "monarchy": "Monarchy",
+        "theocracy": "Theocracy",
+        "trade_republic": "Trade Republic",
+        "nuclear": "Nuclear",
+        "battleship2": "Battleship II",
+        "paganism": "Paganism",
+        "theocracy_soldiers": "Theocracy Soldiers",
+        "border": "Border",
+        "wunderwaffe": "Wunderwaffe",
+        "empty_square": "Empty Square",
+        "battleship": "Battleship",
+        "officers_station": "Officers Station",
+        "deserter": "Deserter",
+        "capital_is_down": "Capital is Down",
+        "burnt_letter": "Burnt Letter",
+        "technology": "Technology",
+        "factory": "Factory",
+        "political": "Political",
+        "barn": "Barn",
+        "fire_in_building": "Fire in Building",
+        "paranoia": "Paranoia",
+
+        // Event icons
+        "industry": "Industry",
+        "check": "Check",
+        "trade": "Trade",
+        "losses": "Losses",
+        "discontent": "Discontent",
+
+        // Image groups
+        "ideology": "Ideology",
+        "military": "Military",
+        "civil": "Civil"
     },
     "ru": {
         // Документация
@@ -987,7 +1025,45 @@ const translations = {
         // Settings
         "settings_title": "Настройки",
         "settings_back": "Назад",
-        "settings_in_development": "Эта функция находится в разработке"
+        "settings_in_development": "Эта функция находится в разработке",
+
+        // Изображения событий
+        "diplomacy": "Дипломатия",
+        "democracy": "Демократия",
+        "communism": "Коммунизм",
+        "monarchy": "Монархия",
+        "theocracy": "Теократия",
+        "trade_republic": "Торговая республика",
+        "nuclear": "Ядерное оружие",
+        "battleship2": "Линкор 2",
+        "paganism": "Язычество",
+        "theocracy_soldiers": "Солдаты теократии",
+        "border": "Граница",
+        "wunderwaffe": "Чудо-оружие",
+        "empty_square": "Пустая площадь",
+        "battleship": "Линкор",
+        "officers_station": "Офицерская станция",
+        "deserter": "Дезертир",
+        "capital_is_down": "Столица пала",
+        "burnt_letter": "Сожженное письмо",
+        "technology": "Технологии",
+        "factory": "Фабрика",
+        "political": "Политика",
+        "barn": "Амбар",
+        "fire_in_building": "Пожар в здании",
+        "paranoia": "Паранойя",
+
+        // Иконки событий
+        "industry": "Промышленность",
+        "check": "Проверка",
+        "trade": "Торговля",
+        "losses": "Потери",
+        "discontent": "Недовольство",
+
+        // Группы изображений
+        "ideology": "Идеология",
+        "military": "Военные",
+        "civil": "Гражданские"
     },
     "uk": {
         // Документація
@@ -1406,7 +1482,45 @@ const translations = {
         // Settings
         "settings_title": "Налаштування",
         "settings_back": "Назад",
-        "settings_in_development": "Ця функція знаходиться в розробці"
+        "settings_in_development": "Ця функція знаходиться в розробці",
+
+        // Зображення подій
+        "diplomacy": "Дипломатія",
+        "democracy": "Демократія",
+        "communism": "Комунізм",
+        "monarchy": "Монархія",
+        "theocracy": "Теократія",
+        "trade_republic": "Торгова республіка",
+        "nuclear": "Ядерна зброя",
+        "battleship2": "Лінкор 2",
+        "paganism": "Язичництво",
+        "theocracy_soldiers": "Солдати теократії",
+        "border": "Граница",
+        "wunderwaffe": "Чудо-оружие",
+        "empty_square": "Пуста площа",
+        "battleship": "Лінкор",
+        "officers_station": "Офіцерська станція",
+        "deserter": "Дезертир",
+        "capital_is_down": "Столиця впала",
+        "burnt_letter": "Спалений лист",
+        "technology": "Технології",
+        "factory": "Фабрика",
+        "political": "Політика",
+        "barn": "Комора",
+        "fire_in_building": "Пожежа в будівлі",
+        "paranoia": "Параноя",
+
+        // Іконки подій
+        "industry": "Промисловість",
+        "check": "Перевірка",
+        "trade": "Торгівля",
+        "losses": "Втрати",
+        "discontent": "Невдоволення",
+
+        // Групи зображень
+        "ideology": "Ідеологія",
+        "military": "Військові",
+        "civil": "Цивільні"
     },
     "be": {
         // Галоўная старонка
