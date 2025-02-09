@@ -500,122 +500,126 @@
                         </div>
                     </div>
                 </div>
-                <form id="country-form" class="country-form">
-                    <div class="form-group">
-                        <label for="country-name" data-translate="name">Название</label>
-                        <input type="text" id="country-name" name="name" class="main-page-input" autocomplete="off">
-                    </div>
-                    <div class="form-group">
-                        <label for="country-color" data-translate="color">Цвет</label>
-                        <div class="color-inputs">
-                            <input type="number" id="country-color-r" name="color_r" min="0" max="255" step="0.001" class="color-input main-page-input" data-translate="color_r" title="R">
-                            <input type="number" id="country-color-g" name="color_g" min="0" max="255" step="0.001" class="color-input main-page-input" data-translate="color_g" title="G">
-                            <input type="number" id="country-color-b" name="color_b" min="0" max="255" step="0.001" class="color-input main-page-input" data-translate="color_b" title="B">
-                            <button type="button" id="random-country-color" class="icon-action-button back" title="Random Color">R</button>
-                            <div class="color-preview" id="country-color-preview"></div>
+                <form id="country-form" class="">
+                    <div class="background-data country-form">
+                        <div class="form-group">
+                            <label for="country-name" data-translate="name">Название</label>
+                            <input type="text" id="country-name" name="name" class="main-page-input" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="country-color" data-translate="color">Цвет</label>
+                            <div class="color-inputs">
+                                <input type="number" id="country-color-r" name="color_r" min="0" max="255" step="0.001" class="color-input main-page-input" data-translate="color_r" title="R">
+                                <input type="number" id="country-color-g" name="color_g" min="0" max="255" step="0.001" class="color-input main-page-input" data-translate="color_g" title="G">
+                                <input type="number" id="country-color-b" name="color_b" min="0" max="255" step="0.001" class="color-input main-page-input" data-translate="color_b" title="B">
+                                <button type="button" id="random-country-color" class="icon-action-button back" title="Random Color">R</button>
+                                <div class="color-preview" id="country-color-preview"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="country-capital" data-translate="capital_name">Название столицы</label>
+                            <input type="text" id="country-capital" name="capital_name" class="main-page-input" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="country-capital-id" data-translate="capital_id">ID столицы</label>
+                            <input type="number" id="country-capital-id" name="capital" class="main-page-input" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="country-defeated" data-translate="defeated">Побеждена</label>
+                            <select id="country-defeated" name="defeated" class="main-page-input">
+                                <option value="false" data-translate="no">Нет</option>
+                                <option value="true" data-translate="yes">Да</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="country-political" data-translate="political_system">Политический строй</label>
+                            <select id="country-political" name="political" class="main-page-input">
+                                <option value="" data-translate="">None</option>
+                                <option value="Democracy" data-translate="democracy">Демократия</option>
+                                <option value="Monarchy" data-translate="monarchy">Монархия</option>
+                                <option value="Communism" data-translate="communism">Коммунизм</option>
+                                <option value="Fascism" data-translate="fascism">Фашизм</option>
+                                <option value="trade_republic" data-translate="trade_republic">Торговый республика</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="country-group" data-translate="event_group">Группа:</label>
+                            <input type="text" id="country-group" class="main-page-input">
+                        </div>
+                        <div class="form-group">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="country-capital" data-translate="capital_name">Название столицы</label>
-                        <input type="text" id="country-capital" name="capital_name" class="main-page-input" autocomplete="off">
-                    </div>
-                    <div class="form-group">
-                        <label for="country-capital-id" data-translate="capital_id">ID столицы</label>
-                        <input type="number" id="country-capital-id" name="capital" class="main-page-input" min="0">
-                    </div>
-                    <div class="form-group">
-                        <label for="country-defeated" data-translate="defeated">Побеждена</label>
-                        <select id="country-defeated" name="defeated" class="main-page-input">
-                            <option value="false" data-translate="no">Нет</option>
-                            <option value="true" data-translate="yes">Да</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="country-political" data-translate="political_system">Политический строй</label>
-                        <select id="country-political" name="political" class="main-page-input">
-                            <option value="" data-translate="">None</option>
-                            <option value="Democracy" data-translate="democracy">Демократия</option>
-                            <option value="Monarchy" data-translate="monarchy">Монархия</option>
-                            <option value="Communism" data-translate="communism">Коммунизм</option>
-                            <option value="Fascism" data-translate="fascism">Фашизм</option>
-                            <option value="trade_republic" data-translate="trade_republic">Торговый республика</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="country-group" data-translate="event_group">Группа:</label>
-                        <input type="text" id="country-group" class="main-page-input">
-                    </div>
-                    <div class="form-group">
-                    </div>
-                    <div class="form-group">
-                        <label data-translate="allies">Союзники</label>
-                        <div class="array-list" id="country-allies" class="main-page-input"></div>
-                        <button type="button" class="add-country-button " data-target="allies" title="Добавить страну">
-                            <svg viewBox="0 0 24 24">
-                                <line x1="12" y1="5" x2="12" y2="19"></line>
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="form-group">
-                        <label data-translate="enemies">Враги</label>
-                        <div class="array-list" id="country-enemies" class="main-page-input"></div>
-                        <button type="button" class="add-country-button" data-target="enemies" title="Добавить страну">
-                            <svg viewBox="0 0 24 24">
-                                <line x1="12" y1="5" x2="12" y2="19"></line>
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="form-group">
-                        <label data-translate="independence_guarantees">Гарантии независимости</label>
-                        <div class="array-list" id="country-guaranteed" class="main-page-input"></div>
-                        <button type="button" class="add-country-button" data-target="guaranteed" title="Добавить страну">
-                            <svg viewBox="0 0 24 24">
-                                <line x1="12" y1="5" x2="12" y2="19"></line>
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="form-group">
-                        <label data-translate="guaranteed_by">Гарантии от</label>
-                        <div class="array-list" id="country-guaranteed-by" class="main-page-input"></div>
-                        <button type="button" class="add-country-button" data-target="guaranteed-by" title="Добавить страну">
-                            <svg viewBox="0 0 24 24">
-                                <line x1="12" y1="5" x2="12" y2="19"></line>
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="form-group">
-                        <label data-translate="pacts">Пакты</label>
-                        <div class="array-list" id="country-pacts" class="main-page-input"></div>
-                        <button type="button" class="add-country-button" data-target="pacts" title="Добавить страну">
-                            <svg viewBox="0 0 24 24">
-                                <line x1="12" y1="5" x2="12" y2="19"></line>
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="form-group">
-                        <label data-translate="sanctions">Санкции</label>
-                        <div class="array-list" id="country-sanctions" class="main-page-input"></div>
-                        <button type="button" class="add-country-button" data-target="sanctions" title="Добавить страну">
-                            <svg viewBox="0 0 24 24">
-                                <line x1="12" y1="5" x2="12" y2="19"></line>
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="form-group">
-                        <label data-translate="vassals">Вассалы</label>
-                        <div class="array-list" id="country-vassals" class="main-page-input"></div>
-                        <button type="button" class="add-country-button" data-target="vassals" title="Добавить страну">
-                            <svg viewBox="0 0 24 24">
-                                <line x1="12" y1="5" x2="12" y2="19"></line>
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                            </svg>
-                        </button>
+                    <div class="country-form">
+                        <div class="form-group">
+                            <label data-translate="allies">Союзники</label>
+                            <div class="array-list" id="country-allies" class="main-page-input"></div>
+                            <button type="button" class="add-country-button " data-target="allies" title="Добавить страну">
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <label data-translate="enemies">Враги</label>
+                            <div class="array-list" id="country-enemies" class="main-page-input"></div>
+                            <button type="button" class="add-country-button" data-target="enemies" title="Добавить страну">
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <label data-translate="independence_guarantees">Гарантии независимости</label>
+                            <div class="array-list" id="country-guaranteed" class="main-page-input"></div>
+                            <button type="button" class="add-country-button" data-target="guaranteed" title="Добавить страну">
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <label data-translate="guaranteed_by">Гарантии от</label>
+                            <div class="array-list" id="country-guaranteed-by" class="main-page-input"></div>
+                            <button type="button" class="add-country-button" data-target="guaranteed-by" title="Добавить страну">
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <label data-translate="pacts">Пакты</label>
+                            <div class="array-list" id="country-pacts" class="main-page-input"></div>
+                            <button type="button" class="add-country-button" data-target="pacts" title="Добавить страну">
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <label data-translate="sanctions">Санкции</label>
+                            <div class="array-list" id="country-sanctions" class="main-page-input"></div>
+                            <button type="button" class="add-country-button" data-target="sanctions" title="Добавить страну">
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <label data-translate="vassals">Вассалы</label>
+                            <div class="array-list" id="country-vassals" class="main-page-input"></div>
+                            <button type="button" class="add-country-button" data-target="vassals" title="Добавить страну">
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -1131,7 +1135,7 @@
                         </div>
                     </div>
                 </div>
-                <form id="reform-form">
+                <form id="reform-form" class="background-data form-group">
                     <div class="form-group">
                         <label for="reform-name" data-translate="name">Название</label>
                         <input type="text" id="reform-name" class="main-page-input" required autocomplete="off">
@@ -1151,7 +1155,7 @@
                                 <label for="reform-color-b" data-translate="color_b">B</label>
                                 <input type="number" id="reform-color-b" class="main-page-input" min="0" max="255" required>
                             </div>
-                            <button type="button" id="random-reform-color" class="icon-action-button back" data-translate="random_color">R</button>
+                            <button type="button" id="random-reform-color" class="icon-action-button back">R</button>
                             <div id="reform-color-preview" class="color-preview"></div>
                         </div>
                     </div>

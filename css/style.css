@@ -956,27 +956,6 @@ body {
     background-color: #c0392b;
 }
 
-.country-form {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    padding: 20px;
-}
-
-.country-header {
-    grid-column: 1 / -1;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-}
-
-.country-edit-container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
 .lang-button {
     background: none;
     border: 1px solid #404040;

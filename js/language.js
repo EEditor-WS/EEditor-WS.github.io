@@ -813,6 +813,10 @@ const translations = {
         "copy": "Копировать",
         "delete": "Удалить",
         "add_country_button": "Добавить страну",
+        "required_ideology": "Требуемая идеология",
+        "reforms_title": "Реформы",
+        "edit_reform": "Редактирование реформы",
+        "None": "Ничего",
 
         // Страница событий
         "events_title": "События",
@@ -849,15 +853,15 @@ const translations = {
 
         // Редактор требований
         "requirements_editor": "Редактор требований",
-        "bonus_editor": "Редактор бонусаў",
-        "type": "Тып",
-        "subtype": "Падтып",
-        "action": "Әрекет",
-        "value": "Мән",
-        "more": "Больш",
-        "equal": "Тең",
-        "not_equal": "Тең емес",
-        "less": "Аз",
+        "bonus_editor": "Редактор бонусов",
+        "type": "Тип",
+        "subtype": "Подтип",
+        "action": "Действие",
+        "value": "Значение",
+        "more": "Больше",
+        "equal": "Равно",
+        "not_equal": "Не равно",
+        "less": "Меньше",
 
         // Типы требований
         "defense": "Изменить захист",
