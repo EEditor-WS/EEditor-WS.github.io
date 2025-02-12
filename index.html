@@ -500,126 +500,122 @@
                         </div>
                     </div>
                 </div>
-                <form id="country-form" class="">
-                    <div class="background-data country-form">
-                        <div class="form-group">
-                            <label for="country-name" data-translate="name">Название</label>
-                            <input type="text" id="country-name" name="name" class="main-page-input" autocomplete="off">
-                        </div>
-                        <div class="form-group">
-                            <label for="country-color" data-translate="color">Цвет</label>
-                            <div class="color-inputs">
-                                <input type="number" id="country-color-r" name="color_r" min="0" max="255" step="0.001" class="color-input main-page-input" data-translate="color_r" title="R">
-                                <input type="number" id="country-color-g" name="color_g" min="0" max="255" step="0.001" class="color-input main-page-input" data-translate="color_g" title="G">
-                                <input type="number" id="country-color-b" name="color_b" min="0" max="255" step="0.001" class="color-input main-page-input" data-translate="color_b" title="B">
-                                <button type="button" id="random-country-color" class="icon-action-button back" title="Random Color">R</button>
-                                <div class="color-preview" id="country-color-preview"></div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="country-capital" data-translate="capital_name">Название столицы</label>
-                            <input type="text" id="country-capital" name="capital_name" class="main-page-input" autocomplete="off">
-                        </div>
-                        <div class="form-group">
-                            <label for="country-capital-id" data-translate="capital_id">ID столицы</label>
-                            <input type="number" id="country-capital-id" name="capital" class="main-page-input" min="0">
-                        </div>
-                        <div class="form-group">
-                            <label for="country-defeated" data-translate="defeated">Побеждена</label>
-                            <select id="country-defeated" name="defeated" class="main-page-input">
-                                <option value="false" data-translate="no">Нет</option>
-                                <option value="true" data-translate="yes">Да</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="country-political" data-translate="political_system">Политический строй</label>
-                            <select id="country-political" name="political" class="main-page-input">
-                                <option value="" data-translate="">None</option>
-                                <option value="Democracy" data-translate="democracy">Демократия</option>
-                                <option value="Monarchy" data-translate="monarchy">Монархия</option>
-                                <option value="Communism" data-translate="communism">Коммунизм</option>
-                                <option value="Fascism" data-translate="fascism">Фашизм</option>
-                                <option value="trade_republic" data-translate="trade_republic">Торговый республика</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="country-group" data-translate="event_group">Группа:</label>
-                            <input type="text" id="country-group" class="main-page-input">
-                        </div>
-                        <div class="form-group">
+                <form id="country-form" class="country-form">
+                    <div class="form-group">
+                        <label for="country-name" data-translate="name">Название</label>
+                        <input type="text" id="country-name" name="name" class="main-page-input" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="country-color" data-translate="color">Цвет</label>
+                        <div class="color-inputs">
+                            <input type="number" id="country-color-r" name="color_r" min="0" max="255" step="0.001" class="color-input main-page-input" data-translate="color_r" title="R">
+                            <input type="number" id="country-color-g" name="color_g" min="0" max="255" step="0.001" class="color-input main-page-input" data-translate="color_g" title="G">
+                            <input type="number" id="country-color-b" name="color_b" min="0" max="255" step="0.001" class="color-input main-page-input" data-translate="color_b" title="B">
+                            <button type="button" id="random-country-color" class="icon-action-button back" title="Random Color">R</button>
+                            <div class="color-preview" id="country-color-preview"></div>
                         </div>
                     </div>
-                    <div class="country-form">
-                        <div class="form-group">
-                            <label data-translate="allies">Союзники</label>
-                            <div class="array-list" id="country-allies" class="main-page-input"></div>
-                            <button type="button" class="add-country-button " data-target="allies" title="Добавить страну">
-                                <svg viewBox="0 0 24 24">
-                                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="form-group">
-                            <label data-translate="enemies">Враги</label>
-                            <div class="array-list" id="country-enemies" class="main-page-input"></div>
-                            <button type="button" class="add-country-button" data-target="enemies" title="Добавить страну">
-                                <svg viewBox="0 0 24 24">
-                                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="form-group">
-                            <label data-translate="independence_guarantees">Гарантии независимости</label>
-                            <div class="array-list" id="country-guaranteed" class="main-page-input"></div>
-                            <button type="button" class="add-country-button" data-target="guaranteed" title="Добавить страну">
-                                <svg viewBox="0 0 24 24">
-                                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="form-group">
-                            <label data-translate="guaranteed_by">Гарантии от</label>
-                            <div class="array-list" id="country-guaranteed-by" class="main-page-input"></div>
-                            <button type="button" class="add-country-button" data-target="guaranteed-by" title="Добавить страну">
-                                <svg viewBox="0 0 24 24">
-                                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="form-group">
-                            <label data-translate="pacts">Пакты</label>
-                            <div class="array-list" id="country-pacts" class="main-page-input"></div>
-                            <button type="button" class="add-country-button" data-target="pacts" title="Добавить страну">
-                                <svg viewBox="0 0 24 24">
-                                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="form-group">
-                            <label data-translate="sanctions">Санкции</label>
-                            <div class="array-list" id="country-sanctions" class="main-page-input"></div>
-                            <button type="button" class="add-country-button" data-target="sanctions" title="Добавить страну">
-                                <svg viewBox="0 0 24 24">
-                                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="form-group">
-                            <label data-translate="vassals">Вассалы</label>
-                            <div class="array-list" id="country-vassals" class="main-page-input"></div>
-                            <button type="button" class="add-country-button" data-target="vassals" title="Добавить страну">
-                                <svg viewBox="0 0 24 24">
-                                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                                </svg>
-                            </button>
-                        </div>
+                    <div class="form-group">
+                        <label for="country-capital" data-translate="capital_name">Название столицы</label>
+                        <input type="text" id="country-capital" name="capital_name" class="main-page-input" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="country-capital-id" data-translate="capital_id">ID столицы</label>
+                        <input type="number" id="country-capital-id" name="capital" class="main-page-input" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="country-defeated" data-translate="defeated">Побеждена</label>
+                        <select id="country-defeated" name="defeated" class="main-page-input">
+                            <option value="false" data-translate="no">Нет</option>
+                            <option value="true" data-translate="yes">Да</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="country-political" data-translate="political_system">Политический строй</label>
+                        <select id="country-political" name="political" class="main-page-input">
+                            <option value="" data-translate="">None</option>
+                            <option value="Democracy" data-translate="democracy">Демократия</option>
+                            <option value="Monarchy" data-translate="monarchy">Монархия</option>
+                            <option value="Communism" data-translate="communism">Коммунизм</option>
+                            <option value="Fascism" data-translate="fascism">Фашизм</option>
+                            <option value="trade_republic" data-translate="trade_republic">Торговый республика</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="country-group" data-translate="event_group">Группа:</label>
+                        <input type="text" id="country-group" class="main-page-input">
+                    </div>
+                    <div class="form-group">
+                    </div>
+                    <div class="form-group">
+                        <label data-translate="allies">Союзники</label>
+                        <div class="array-list" id="country-allies" class="main-page-input"></div>
+                        <button type="button" class="add-country-button " data-target="allies" title="Добавить страну">
+                            <svg viewBox="0 0 24 24">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <label data-translate="enemies">Враги</label>
+                        <div class="array-list" id="country-enemies" class="main-page-input"></div>
+                        <button type="button" class="add-country-button" data-target="enemies" title="Добавить страну">
+                            <svg viewBox="0 0 24 24">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <label data-translate="independence_guarantees">Гарантии независимости</label>
+                        <div class="array-list" id="country-guaranteed" class="main-page-input"></div>
+                        <button type="button" class="add-country-button" data-target="guaranteed" title="Добавить страну">
+                            <svg viewBox="0 0 24 24">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <label data-translate="guaranteed_by">Гарантии от</label>
+                        <div class="array-list" id="country-guaranteed-by" class="main-page-input"></div>
+                        <button type="button" class="add-country-button" data-target="guaranteed-by" title="Добавить страну">
+                            <svg viewBox="0 0 24 24">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <label data-translate="pacts">Пакты</label>
+                        <div class="array-list" id="country-pacts" class="main-page-input"></div>
+                        <button type="button" class="add-country-button" data-target="pacts" title="Добавить страну">
+                            <svg viewBox="0 0 24 24">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <label data-translate="sanctions">Санкции</label>
+                        <div class="array-list" id="country-sanctions" class="main-page-input"></div>
+                        <button type="button" class="add-country-button" data-target="sanctions" title="Добавить страну">
+                            <svg viewBox="0 0 24 24">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <label data-translate="vassals">Вассалы</label>
+                        <div class="array-list" id="country-vassals" class="main-page-input"></div>
+                        <button type="button" class="add-country-button" data-target="vassals" title="Добавить страну">
+                            <svg viewBox="0 0 24 24">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </button>
                     </div>
                 </form>
             </div>
@@ -749,36 +745,31 @@
                                 <label for="event-image" data-translate="event_image">Картинка события:</label>
                                 <div class="image-select-container">
                                     <select id="event-image" name="event-image" class="event-main-input">
-                                        <option value="diplomacy" data-translate="diplomacy">diplomacy</option>
-                                        <optgroup label="Ideology">
-                                            <option value="democracy" data-translate="democracy">democracy</option>
-                                            <option value="communism" data-translate="communism">communism</option>
-                                            <option value="monarchy" data-translate="monarchy">monarchy</option>
-                                            <option value="theocracy" data-translate="theocracy">theocracy</option>
-                                            <option value="trade_republic" data-translate="trade_republic">trade_republic</option>
-                                        </optgroup>
-                                        <optgroup label="Military">
-                                            <option value="nuclear" data-translate="nuclear">nuclear</option>
-                                            <option value="battleship2" data-translate="battleship2">battleship2</option>
-                                            <option value="paganism" data-translate="paganism">paganism</option>
-                                            <option value="theocracy_soldiers" data-translate="theocracy_soldiers">theocracy_soldiers</option>
-                                            <option value="border" data-translate="border">border</option>
-                                            <option value="wunderwaffe" data-translate="wunderwaffe">wunderwaffe</option>
-                                            <option value="empty_square" data-translate="empty_square">empty_square</option>
-                                            <option value="battleship" data-translate="battleship">battleship</option>
-                                            <option value="officers_station" data-translate="officers_station">officers_station</option>
-                                            <option value="deserter" data-translate="deserter">deserter</option>
-                                            <option value="capital_is_down" data-translate="capital_is_down">capital_is_down</option>
-                                        </optgroup>
-                                        <optgroup label="Civil">
-                                            <option value="burnt_letter" data-translate="burnt_letter">burnt_letter</option>
-                                            <option value="technology" data-translate="technology">technology</option>
-                                            <option value="factory" data-translate="factory">factory</option>
-                                            <option value="political" data-translate="political">political</option>
-                                            <option value="barn" data-translate="barn">barn</option>
-                                            <option value="fire_in_building" data-translate="fire_in_building">fire_in_building</option>
-                                            <option value="paranoia" data-translate="paranoia">paranoia</option>
-                                        </optgroup>
+                                        <option value="diplomacy">diplomacy</option>
+                                        <option value="communism">communism</option>
+                                        <option value="paganism">paganism</option>
+                                        <option value="nuclear">nuclear</option>
+                                        <option value="paranoia">paranoia</option>
+                                        <option value="trade_republic">trade_republic</option>
+                                        <option value="monarchy">monarchy</option>
+                                        <option value="theocracy">theocracy</option>
+                                        <option value="burnt_letter">burnt_letter</option>
+                                        <option value="fascism">fascism</option>
+                                        <option value="battleship2">battleship2</option>
+                                        <option value="democracy">democracy</option>
+                                        <option value="theocracy_soldiers">theocracy_soldiers</option>
+                                        <option value="border">border</option>
+                                        <option value="wunderwaffe">wunderwaffe</option>
+                                        <option value="technology">technology</option>
+                                        <option value="empty_square">empty_square</option>
+                                        <option value="political">political</option>
+                                        <option value="battleship">battleship</option>
+                                        <option value="factory">factory</option>
+                                        <option value="fire_in_building">fire_in_building</option>
+                                        <option value="officers_station">officers_station</option>
+                                        <option value="barn">barn</option>
+                                        <option value="deserter">deserter</option>
+                                        <option value="capital_is_down">capital_is_down</option>
                                     </select>
                                     <img id="event-image-preview" src="" alt="Предпросмотр картинки" class="image-preview" data-translate="image_preview">
                                 </div>
@@ -787,15 +778,15 @@
                                 <label for="event-icon" data-translate="event_icon">Иконка события:</label>
                                 <div class="image-select-container">
                                     <select id="event-icon" name="event-icon" class="event-main-input">
-                                        <option value="diplomacy" data-translate="diplomacy">diplomacy</option>
-                                        <option value="political" data-translate="political">political</option>
-                                        <option value="industry" data-translate="industry">industry</option>
-                                        <option value="border" data-translate="border">border</option>
-                                        <option value="check" data-translate="check">check</option>
-                                        <option value="trade" data-translate="trade">trade</option>
-                                        <option value="losses" data-translate="losses">losses</option>
-                                        <option value="discontent" data-translate="discontent">discontent</option>
-                                        <option value="technology" data-translate="technology">technology</option>
+                                        <option value="diplomacy">diplomacy</option>
+                                        <option value="political">political</option>
+                                        <option value="industry">industry</option>
+                                        <option value="border">border</option>
+                                        <option value="check">check</option>
+                                        <option value="trade">trade</option>
+                                        <option value="losses">losses</option>
+                                        <option value="discontent">discontent</option>
+                                        <option value="technology">technology</option>
                                     </select>
                                     <img id="event-icon-preview" src="" alt="Предпросмотр иконки" class="icon-preview" data-translate="icon_preview">
                                 </div>
@@ -805,7 +796,7 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="event-id" data-translate="event_id">ID:</label>
-                                <input type="text" id="event-id" name="event-id" class="event-main-input main-page-input">
+                                <input type="text" id="event-id" name="event-id" readonly class="event-main-input main-page-input">
                             </div>
                             <div class="form-group">
                                 <label for="event-group-name" data-translate="event_group">Группа:</label>
@@ -1135,7 +1126,7 @@
                         </div>
                     </div>
                 </div>
-                <form id="reform-form" class="background-data form-group">
+                <form id="reform-form">
                     <div class="form-group">
                         <label for="reform-name" data-translate="name">Название</label>
                         <input type="text" id="reform-name" class="main-page-input" required autocomplete="off">

@@ -109,14 +109,6 @@ class CountryManager {
                 if (column === 'color') {
                     const [r, g, b] = country.color;
                     value = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
-                } else if (column === 'system_name') {
-                    if (['greater', 'less', 'greater_equals', 'less_equals'].includes(filter.operator)) {
-                        const civilizationNumber = this.extractCivilizationNumber(country.id);
-                        if (civilizationNumber === null) return false;
-                        value = civilizationNumber;
-                    } else {
-                        value = country.id;
-                    }
                 }
 
                 switch (filter.operator) {
@@ -128,18 +120,6 @@ class CountryManager {
                         break;
                     case 'not_equals':
                         if (String(value).toLowerCase() === filter.value.toLowerCase()) return false;
-                        break;
-                    case 'greater':
-                        if (parseFloat(value) <= parseFloat(filter.value)) return false;
-                        break;
-                    case 'less':
-                        if (parseFloat(value) >= parseFloat(filter.value)) return false;
-                        break;
-                    case 'greater_equals':
-                        if (parseFloat(value) < parseFloat(filter.value)) return false;
-                        break;
-                    case 'less_equals':
-                        if (parseFloat(value) > parseFloat(filter.value)) return false;
                         break;
                 }
             }
@@ -200,21 +180,102 @@ class CountryManager {
             });
         }
 
-        // Обновляем классы заголовков для индикации сортировки
-        const headers = document.querySelectorAll('#countries .list-table th[data-sort]');
-        headers.forEach(header => {
-            header.classList.remove('sort-asc', 'sort-desc');
-            if (header.getAttribute('data-sort') === this.sortColumn) {
-                header.classList.add(`sort-${this.sortDirection}`);
-            }
-            });
-
-        // Добавляем страны в список
+        // Создаем строки таблицы
         countries.forEach(country => {
             const tr = document.createElement('tr');
+            tr.setAttribute('data-country-id', country.id);
             tr.style.cursor = 'pointer';
-            tr.onclick = () => this.openCountry(country.id);
+            tr.onclick = (e) => {
+                if (!e.target.closest('.context-menu')) {
+                    this.openCountry(country.id);
+                }
+            };
+            tr.oncontextmenu = (e) => {
+                e.preventDefault();
+                const countryId = tr.getAttribute('data-country-id');
+                if (!countryId) return;
 
+                // Удаляем старое меню, если оно есть
+                const oldMenu = document.querySelector('.context-menu');
+                if (oldMenu) {
+                    document.body.removeChild(oldMenu);
+                }
+
+                // Создаем новое контекстное меню
+                const contextMenu = document.createElement('div');
+                contextMenu.className = 'context-menu';
+                
+                // Получаем размеры окна
+                const windowWidth = window.innerWidth;
+                const windowHeight = window.innerHeight;
+
+                // Добавляем пункты меню
+                contextMenu.innerHTML = `
+                    <div class="context-menu-item" id="duplicate-country-context">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span>${window.translator.translate('duplicate')}</span>
+                    </div>
+                    <div class="context-menu-item delete" id="delete-country-context">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 6h18"></path>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>
+                        <span>${window.translator.translate('delete')}</span>
+                    </div>
+                `;
+
+                document.body.appendChild(contextMenu);
+
+                // Получаем размеры меню
+                const menuRect = contextMenu.getBoundingClientRect();
+                
+                // Позиционируем меню
+                let x = e.clientX;
+                let y = e.clientY;
+
+                // Проверяем правую границу
+                if (x + menuRect.width > windowWidth) {
+                    x = windowWidth - menuRect.width;
+                }
+                
+                // Проверяем нижнюю границу
+                if (y + menuRect.height > windowHeight) {
+                    y = windowHeight - menuRect.height;
+                }
+
+                // Устанавливаем позицию меню
+                contextMenu.style.position = 'fixed';
+                contextMenu.style.left = x + 'px';
+                contextMenu.style.top = y + 'px';
+
+                // Добавляем обработчики для пунктов меню
+                document.getElementById('duplicate-country-context')?.addEventListener('click', () => {
+                    this.copyCurrentCountry(countryId);
+                    document.body.removeChild(contextMenu);
+                });
+
+                document.getElementById('delete-country-context')?.addEventListener('click', () => {
+                    this.deleteCurrentCountry(countryId);
+                    document.body.removeChild(contextMenu);
+                });
+
+                // Закрываем меню при клике вне его
+                const closeMenu = (e) => {
+                    if (!contextMenu.contains(e.target)) {
+                        document.body.removeChild(contextMenu);
+                        document.removeEventListener('click', closeMenu);
+                        document.removeEventListener('contextmenu', closeMenu);
+                    }
+                };
+
+                document.addEventListener('click', closeMenu);
+                document.addEventListener('contextmenu', closeMenu);
+            };
+
+            // Создаем ячейки таблицы
             const colorCell = document.createElement('td');
             const colorDiv = document.createElement('div');
             colorDiv.className = 'country-color';
@@ -244,6 +305,15 @@ class CountryManager {
             tr.appendChild(capitalCell);
 
             tbody.appendChild(tr);
+        });
+
+        // Обновляем классы заголовков для индикации сортировки
+        const headers = document.querySelectorAll('#countries .list-table th[data-sort]');
+        headers.forEach(header => {
+            header.classList.remove('sort-asc', 'sort-desc');
+            if (header.getAttribute('data-sort') === this.sortColumn) {
+                header.classList.add(`sort-${this.sortDirection}`);
+            }
         });
     }
 
@@ -371,6 +441,99 @@ class CountryManager {
         document.getElementById('refresh-countries')?.addEventListener('click', () => {
             this.updateCountriesList();
         });
+
+        // Добавляем обработчик контекстного меню для таблицы стран
+        const tbody = document.querySelector('.countries-table tbody');
+        if (tbody) {
+            tbody.addEventListener('contextmenu', (e) => {
+                const tr = e.target.closest('tr');
+                if (!tr) return;
+
+                e.preventDefault();
+                
+                const countryId = tr.getAttribute('data-country-id');
+                if (!countryId) return;
+
+                // Удаляем старое меню, если оно есть
+                const oldMenu = document.querySelector('.context-menu');
+                if (oldMenu) {
+                    document.body.removeChild(oldMenu);
+                }
+
+                // Создаем новое контекстное меню
+                const contextMenu = document.createElement('div');
+                contextMenu.className = 'context-menu';
+                
+                // Получаем размеры окна
+                const windowWidth = window.innerWidth;
+                const windowHeight = window.innerHeight;
+
+                // Добавляем пункты меню
+                contextMenu.innerHTML = `
+                    <div class="context-menu-item" id="duplicate-country-context">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span>${window.translator.translate('duplicate')}</span>
+                    </div>
+                    <div class="context-menu-item delete" id="delete-country-context">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 6h18"></path>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>
+                        <span>${window.translator.translate('delete')}</span>
+                    </div>
+                `;
+
+                document.body.appendChild(contextMenu);
+
+                // Получаем размеры меню
+                const menuRect = contextMenu.getBoundingClientRect();
+                
+                // Позиционируем меню
+                let x = e.clientX;
+                let y = e.clientY;
+
+                // Проверяем правую границу
+                if (x + menuRect.width > windowWidth) {
+                    x = windowWidth - menuRect.width;
+                }
+                
+                // Проверяем нижнюю границу
+                if (y + menuRect.height > windowHeight) {
+                    y = windowHeight - menuRect.height;
+                }
+
+                // Устанавливаем позицию меню
+                contextMenu.style.position = 'fixed';
+                contextMenu.style.left = x + 'px';
+                contextMenu.style.top = y + 'px';
+
+                // Добавляем обработчики для пунктов меню
+                document.getElementById('duplicate-country-context')?.addEventListener('click', () => {
+                    this.copyCurrentCountry(countryId);
+                    document.body.removeChild(contextMenu);
+                });
+
+                document.getElementById('delete-country-context')?.addEventListener('click', () => {
+                    this.deleteCurrentCountry(countryId);
+                    document.body.removeChild(contextMenu);
+                });
+
+                // Закрываем меню при клике вне его
+                const closeMenu = (e) => {
+                    if (!contextMenu.contains(e.target)) {
+                        document.body.removeChild(contextMenu);
+                        document.removeEventListener('click', closeMenu);
+                        document.removeEventListener('contextmenu', closeMenu);
+                    }
+                };
+
+                document.addEventListener('click', closeMenu);
+                document.addEventListener('contextmenu', closeMenu);
+            });
+        }
     }
 
     initColorHandlers() {
@@ -442,15 +605,17 @@ class CountryManager {
         this.openCountry(newId);
 
         // Обновляем содержимое в редакторе и сохраняем в файл
-        if (window.previewContent) {
+        if (this.previewContent) {
+            console.log('Обновляем содержимое в редакторе и сохраняем в файл');
             const jsonString = JSON.stringify(this.jsonData, null, 4);
-            window.previewContent.value = jsonString;
+            this.previewContent.value = jsonString;
             
             // Сохраняем изменения в файл
             if (typeof window.saveChanges === 'function') {
                 window.saveChanges();
             }
         }
+        console.log(this.previewContent);
     }
 
     generateUniqueId() {
@@ -464,11 +629,11 @@ class CountryManager {
         return `civilization_${n}`;
     }
 
-    copyCurrentCountry() {
-        if (!this.currentCountry || !this.jsonData?.lands[this.currentCountry]) return;
+    copyCurrentCountry(countryId) {
+        if (!countryId || !this.jsonData?.lands[countryId]) return;
 
         const newId = this.generateUniqueId();
-        const currentCountry = this.jsonData.lands[this.currentCountry];
+        const currentCountry = this.jsonData.lands[countryId];
         
         this.pushToUndoStack();
         this.jsonData.lands[newId] = JSON.parse(JSON.stringify(currentCountry));
@@ -476,12 +641,19 @@ class CountryManager {
         
         this.updateCountriesList();
         this.openCountry(newId);
-        this.saveChanges();
+
+        // Обновляем JSON в превью и сохраняем
+        if (this.previewContent) {
+            this.previewContent.value = JSON.stringify(this.jsonData, null, 4);
+            if (typeof window.saveChanges === 'function') {
+                window.saveChanges();
+            }
+        }
     }
 
-    deleteCurrentCountry() {
-        if (!this.currentCountry || !this.jsonData?.lands[this.currentCountry]) {
-            console.error('Нет текущей страны для удаления');
+    deleteCurrentCountry(countryId) {
+        if (!countryId || !this.jsonData?.lands[countryId]) {
+            console.error('Нет страны для удаления');
             return;
         }
 
@@ -492,23 +664,14 @@ class CountryManager {
         this.pushToUndoStack();
 
         // Удаляем страну
-        delete this.jsonData.lands[this.currentCountry];
-
-        // Очищаем текущую страну
-        this.currentCountry = null;
+        delete this.jsonData.lands[countryId];
 
         // Обновляем список
         this.updateCountriesList();
 
-        // Возвращаемся к списку стран
-        this.backToCountriesList();
-
-        // Обновляем содержимое в редакторе и сохраняем в файл
-        if (window.previewContent) {
-            const jsonString = JSON.stringify(this.jsonData, null, 4);
-            window.previewContent.value = jsonString;
-            
-            // Сохраняем изменения в файл
+        // Обновляем JSON в превью и сохраняем
+        if (this.previewContent) {
+            this.previewContent.value = JSON.stringify(this.jsonData, null, 4);
             if (typeof window.saveChanges === 'function') {
                 window.saveChanges();
             }
@@ -988,9 +1151,9 @@ class CountryManager {
         if (!Array.isArray(colorArray) || colorArray.length < 3) {
             return 'rgb(128, 128, 128)';
         }
-        const r = Math.round(parseFloat(colorArray[0]) || 0);
-        const g = Math.round(parseFloat(colorArray[1]) || 0);
-        const b = Math.round(parseFloat(colorArray[2]) || 0);
+        const r = Math.min(255, Math.max(0, Math.round(parseFloat(colorArray[0]) || 0)));
+        const g = Math.min(255, Math.max(0, Math.round(parseFloat(colorArray[1]) || 0)));
+        const b = Math.min(255, Math.max(0, Math.round(parseFloat(colorArray[2]) || 0)));
         return `rgb(${r}, ${g}, ${b})`;
     }
 

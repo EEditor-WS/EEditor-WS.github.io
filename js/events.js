@@ -268,39 +268,6 @@ class EventManager {
         document.getElementById('clear-events-filters')?.addEventListener('click', () => {
             this.clearAllFilters();
         });
-
-        // Обработчики событий формы
-        document.getElementById('event-id').addEventListener('input', function(e) {
-            const newId = e.target.value;
-            const currentEvent = window.eventManager.currentEvent;
-            
-            if (currentEvent) {
-                const jsonData = window.eventManager.jsonData;
-                if (jsonData && jsonData.custom_events) {
-                    const oldKey = currentEvent;
-                    const eventData = jsonData.custom_events[oldKey];
-                    
-                    if (eventData) {
-                        // Обновляем ID внутри объекта события
-                        eventData.id = newId;
-                        
-                        // Создаем новый объект с обновленным ключом
-                        jsonData.custom_events[newId] = eventData;
-                        
-                        // Удаляем старый ключ
-                        if (oldKey !== newId) {
-                            delete jsonData.custom_events[oldKey];
-                        }
-                        
-                        // Обновляем currentEvent в менеджере
-                        window.eventManager.currentEvent = newId;
-                        
-                        // Обновляем JSON в превью
-                        window.eventManager.updateJsonInPreview();
-                    }
-                }
-            }
-        });
     }
 
     createNewEvent() {
@@ -856,11 +823,18 @@ class EventManager {
                 const config = isBonus ? window.reqbonConfig?.bonuses?.[item.type] : null;
                 const showDuration = isBonus && config?.hasDuration;
                 
+                // Форматируем значение в зависимости от типа
+                const booleanTypes = ['near_water', 'independent_land', 'no_enemy', 'enemy_near_capital', 'lost_capital'];
+                let displayValue = item.value;
+                if (booleanTypes.includes(item.type)) {
+                    displayValue = item.value ? window.translator.translate('yes') : window.translator.translate('no');
+                }
+                
                 row.innerHTML = `
                     <td>${item.type}</td>
                     <td>${item.subtype || ''}</td>
-                    <td>${isBonus ? (showDuration ? `${item.duration || 3} ходов` : '') : (item.action || '')}</td>
-                    <td>${item.value}</td>
+                    <td>${isBonus ? (item.duration ? `${item.duration} ходов` : '') : (item.action || '')}</td>
+                    <td>${displayValue}</td>
                     <td>
                         <div class="requirement-actions">
                             <button type="button" class="edit" data-index="${index}">✎</button>
@@ -1154,8 +1128,8 @@ class EventManager {
                 if (['near_water', 'independent_land', 'no_enemy', 'enemy_near_capital', 'lost_capital'].includes(selectedType)) {
                     valueContainer.innerHTML = `
                         <select id="requirement-value" class="main-page-input">
-                            <option value="да">${window.translator.translate('yes')}</option>
-                            <option value="нет">${window.translator.translate('no')}</option>
+                            <option value='true'>${window.translator.translate('yes')}</option>
+                            <option value='false'>${window.translator.translate('no')}</option>
                         </select>
                     `;
                     subtypeGroup.style.display = 'none';
@@ -1267,17 +1241,48 @@ class EventManager {
             const type = document.getElementById('requirement-type').value;
             const action = isBonus ? '' : document.getElementById('requirement-action').value;
             const subtype = document.getElementById('requirement-subtype').value;
-            const value = document.getElementById('requirement-value').value;
+            let value = document.getElementById('requirement-value').value;
+            let duration;
             
             // Проверяем конфигурацию бонуса для длительности
             const config = isBonus ? window.reqbonConfig?.bonuses?.[type] : null;
-            const duration = (isBonus && config?.hasDuration) ? 
-                parseInt(document.getElementById('requirement-duration').value) || config.defaultDuration || 3 : 
-                undefined;
+            
+            if (isBonus) {
+                const durationElement = document.getElementById('requirement-duration');
+                if (durationElement) {
+                    let durationValue = durationElement.value;
+                    // Удаляем кавычки и пробелы с начала и конца
+                    durationValue = durationValue.replace(/^["']|["']$/g, '').trim();
+                    // Преобразуем в число
+                    duration = parseInt(durationValue) || config?.defaultDuration || 3;
+                }
+            }
 
             if (!type || !value || (isBonus && config?.hasDuration && !duration)) {
                 console.warn('Не все обязательные поля заполнены');
                 return;
+            }
+
+            // Проверяем и обрабатываем числовые значения
+            const numericTypes = ['month', 'num_of_provinces', 'year', 'turn', 'random_value', 
+                'count_of_tasks', 'tax', 'discontent', 'money', 'land_power', 'defense', 
+                'attack', 'population_income', 'building_cost', 'add_oil', 'add_cruiser', 
+                'add_random_culture_population', 'add_shock_infantry', 'add_tank', 
+                'army_losses', 'prestige', 'add_battleship', 'add_infantry', 'science'];
+
+            // Проверяем и обрабатываем булевы значения
+            const booleanTypes = ['near_water', 'independent_land', 'no_enemy', 'enemy_near_capital', 'lost_capital'];
+
+            if (numericTypes.includes(type)) {
+                // Удаляем кавычки и пробелы с начала и конца
+                value = value.replace(/^["']|["']$/g, '').trim();
+                // Проверяем, является ли значение числом
+                if (!isNaN(value)) {
+                    value = Number(value);
+                }
+            } else if (booleanTypes.includes(type)) {
+                // Для булевых значений преобразуем строку в булево значение
+                value = value === 'true';
             }
 
             const item = {
@@ -1285,7 +1290,7 @@ class EventManager {
                 action: isBonus ? undefined : action,
                 subtype: subtype || undefined,
                 value,
-                duration: (isBonus && config?.hasDuration) ? duration : undefined
+                duration: isBonus ? duration : undefined
             };
 
             const editIndex = editor.dataset.editIndex;
@@ -1464,7 +1469,7 @@ class EventManager {
 
         // Создаем поле ввода
         valueContainer.innerHTML = `
-            <input type="text" id="events-filter-value" class="main-page-input" 
+            <input type="number" id="events-filter-value" class="main-page-input" 
                    placeholder="${window.translator.translate('filter_text_value')}">
         `;
 
@@ -1561,27 +1566,6 @@ function createBonusEditor() {
     modal.className = 'modal';
     modal.innerHTML = `
         <div class="modal-content">
-            <h2 data-translate="bonus_editor">Редактор бонусов</h2>
-            <div class="form-group">
-                <label for="bonus-type" data-translate="type">Тип:</label>
-                <select id="bonus-type" class="main-page-input">
-                    <option value="province" data-translate="province">Провинция</option>
-                    <option value="country" data-translate="country">Страна</option>
-                    <option value="resource" data-translate="resource">Ресурс</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="bonus-subtype" data-translate="subtype">Подтип:</label>
-                <input type="text" id="bonus-subtype" class="main-page-input">
-            </div>
-            <div class="form-group">
-                <label for="bonus-value" data-translate="value">Значение:</label>
-                <div id="bonus-value-container"></div>
-            </div>
-            <div class="form-actions">
-                <button type="button" id="save-bonus" class="action-button" data-translate="save">Сохранить</button>
-                <button type="button" id="cancel-bonus" class="action-button" data-translate="cancel">Отмена</button>
-            </div>
         </div>
     `;
     document.body.appendChild(modal);

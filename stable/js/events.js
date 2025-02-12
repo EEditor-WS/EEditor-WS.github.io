@@ -7,6 +7,7 @@ class EventManager {
             this.redoStack = [];
             this.maxStackSize = 50;
             this.isEditing = false;
+            this.filters = {};  // Добавляем инициализацию фильтров
             
             // Добавляем параметры сортировки
             this.sortColumn = 'id'; // По умолчанию сортируем по ID
@@ -121,41 +122,28 @@ class EventManager {
 
         tbody.innerHTML = '';
 
-        // Создаем копию массива событий для сортировки
+        // Создаем массив событий для сортировки и фильтрации
         let events = Object.entries(this.jsonData.custom_events)
             .map(([id, event]) => ({
                 id,
+                group: event.group_name || '',
+                name: event.unique_event_name || '',
                 title: event.title || '',
-                group_name: event.group_name || '',
-                unique_event_name: event.unique_event_name || '',
                 ...event
             }));
 
-        // Сортируем события если указана колонка сортировки
+        // Применяем фильтры
+        if (this.filters.groups) {
+            events = events.filter(event => 
+                this.filters.groups.includes(event.group)
+            );
+        }
+
+        // Сортировка
         if (this.sortColumn) {
             events.sort((a, b) => {
-                let valueA, valueB;
-
-                switch (this.sortColumn) {
-                    case 'id':
-                        valueA = a.id || '';
-                        valueB = b.id || '';
-                        break;
-                    case 'group_name':
-                        valueA = a.group_name || '';
-                        valueB = b.group_name || '';
-                        break;
-                    case 'unique_event_name':
-                        valueA = a.unique_event_name || '';
-                        valueB = b.unique_event_name || '';
-                        break;
-                    case 'title':
-                        valueA = a.title || '';
-                        valueB = b.title || '';
-                        break;
-                    default:
-                        return 0;
-                }
+                let valueA = a[this.sortColumn] || '';
+                let valueB = b[this.sortColumn] || '';
 
                 return this.sortDirection === 'asc' 
                     ? String(valueA).localeCompare(String(valueB))
@@ -163,16 +151,21 @@ class EventManager {
             });
         }
 
-        // Обновляем классы заголовков для индикации сортировки
+        // Обновляем индикаторы сортировки и фильтрации
         const headers = document.querySelectorAll('#events .list-table th[data-sort]');
         headers.forEach(header => {
-            header.classList.remove('sort-asc', 'sort-desc');
-            if (header.getAttribute('data-sort') === this.sortColumn) {
+            const column = header.getAttribute('data-sort');
+            header.classList.remove('sort-asc', 'sort-desc', 'filtered');
+            if (column === this.sortColumn) {
                 header.classList.add(`sort-${this.sortDirection}`);
+            }
+            if (column === 'group' && this.filters.groups) {
+                header.classList.add('filtered');
             }
         });
 
-        events.forEach((event, index) => {
+        // Отображаем события
+        events.forEach(event => {
             const tr = document.createElement('tr');
             tr.style.cursor = 'pointer';
             tr.addEventListener('click', () => this.openEvent(event.id));
@@ -181,13 +174,13 @@ class EventManager {
             idCell.textContent = event.id;
 
             const groupCell = document.createElement('td');
-            groupCell.textContent = event.group_name || '';
+            groupCell.textContent = event.group;
 
             const nameCell = document.createElement('td');
-            nameCell.textContent = event.unique_event_name || '';
+            nameCell.textContent = event.name;
 
             const titleCell = document.createElement('td');
-            titleCell.textContent = event.title || '';
+            titleCell.textContent = event.title;
 
             tr.appendChild(idCell);
             tr.appendChild(groupCell);
@@ -250,6 +243,64 @@ class EventManager {
 
         // Кнопка возврата к списку событий
         document.getElementById('back-to-events-list')?.addEventListener('click', () => this.backToEventsList());
+
+        // Обработчики фильтров
+        document.querySelectorAll('#events .th-filter').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const column = button.closest('th').getAttribute('data-sort');
+                
+                // Закрываем все модальные окна
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.classList.remove('active');
+                });
+
+                // Показываем соответствующее модальное окно
+                if (column === 'group') {
+                    this.showGroupFilterModal();
+                } else {
+                    this.showFilterModal(column);
+                }
+            });
+        });
+
+        // Кнопка очистки всех фильтров
+        document.getElementById('clear-events-filters')?.addEventListener('click', () => {
+            this.clearAllFilters();
+        });
+
+        // Обработчики событий формы
+        document.getElementById('event-id').addEventListener('input', function(e) {
+            const newId = e.target.value;
+            const currentEvent = window.eventManager.currentEvent;
+            
+            if (currentEvent) {
+                const jsonData = window.eventManager.jsonData;
+                if (jsonData && jsonData.custom_events) {
+                    const oldKey = currentEvent;
+                    const eventData = jsonData.custom_events[oldKey];
+                    
+                    if (eventData) {
+                        // Обновляем ID внутри объекта события
+                        eventData.id = newId;
+                        
+                        // Создаем новый объект с обновленным ключом
+                        jsonData.custom_events[newId] = eventData;
+                        
+                        // Удаляем старый ключ
+                        if (oldKey !== newId) {
+                            delete jsonData.custom_events[oldKey];
+                        }
+                        
+                        // Обновляем currentEvent в менеджере
+                        window.eventManager.currentEvent = newId;
+                        
+                        // Обновляем JSON в превью
+                        window.eventManager.updateJsonInPreview();
+                    }
+                }
+            }
+        });
     }
 
     createNewEvent() {
@@ -268,16 +319,16 @@ class EventManager {
         const newId = this.generateUniqueId();
         const newEvent = {
             id: newId,
-            group_name: "Group",
-            unique_event_name: `New Event ${newId.toLowerCase()}`,
+            group_name: "",
+            unique_event_name: `Event ${newId.toLowerCase()}`,
             title: "New Event Title",
-            description: "Description",
-            answer1: "Answer 1",
-            answer2: "Answer 2",
-            answer3: "Answer 3",
-            description1: "Description of answer 1",
-            description2: "Description of answer 2",
-            description3: "Description of answer 3",
+            description: "",
+            answer1: "ignore",
+            answer2: "",
+            answer3: "",
+            description1: "",
+            description2: "",
+            description3: "",
             answer2_is_disabled: true,
             answer3_is_disabled: true,
             auto_answer1_if_ignored: true,
@@ -753,7 +804,13 @@ class EventManager {
                 { value: 'diplomacy_peace', label: window.translator.translate('diplomacy_peace') },
                 { value: 'diplomacy_war', label: window.translator.translate('diplomacy_war') },
                 { value: 'resurrect_country', label: window.translator.translate('resurrect_country') },
-                { value: 'annex_country', label: window.translator.translate('annex_country') }
+                { value: 'annex_country', label: window.translator.translate('annex_country') },
+                { value: 'accelerated_recruit_cost', label: window.translator.translate('accelerated_recruit_cost') },
+                { value: 'maintaining_army_cost_multiplier', label: window.translator.translate('maintaining_army_cost_multiplier') },
+                { value: 'population_increase', label: window.translator.translate('population_increase') },
+                { value: 'recruit_cost', label: window.translator.translate('recruit_cost') },
+                { value: 'change_country', label: window.translator.translate('change_country') },
+                { value: 'add_culture_population', label: window.translator.translate('add_culture_population') }
             ];
             typeSelect.innerHTML = bonusOptions.map(opt => 
                 `<option value="${opt.value}">${opt.label}</option>`
@@ -783,7 +840,8 @@ class EventManager {
                 { value: 'money', label: window.translator.translate('money') },
                 { value: 'discontent', label: window.translator.translate('discontent') },
                 { value: 'building_exists', label: window.translator.translate('building_exists') },
-                { value: 'political_institution', label: window.translator.translate('political_institution') }
+                { value: 'political_institution', label: window.translator.translate('political_institution') } /*,
+                { value: 'cooldown', label: window.translator.translate('cooldown') } */
             ];
             typeSelect.innerHTML = requirementOptions.map(opt => 
                 `<option value="${opt.value}">${opt.label}</option>`
@@ -795,11 +853,14 @@ class EventManager {
             list.innerHTML = '';
             items.forEach((item, index) => {
                 const row = document.createElement('tr');
+                const config = isBonus ? window.reqbonConfig?.bonuses?.[item.type] : null;
+                const showDuration = isBonus && config?.hasDuration;
+                
                 row.innerHTML = `
                     <td>${item.type}</td>
                     <td>${item.subtype || ''}</td>
-                    <td>${item.action || ''}</td>
-                    <td>${item.value}${item.duration ? ` (${item.duration} ходов)` : ''}</td>
+                    <td>${isBonus ? (showDuration ? `${item.duration || 3} ходов` : '') : (item.action || '')}</td>
+                    <td>${item.value}</td>
                     <td>
                         <div class="requirement-actions">
                             <button type="button" class="edit" data-index="${index}">✎</button>
@@ -814,19 +875,72 @@ class EventManager {
         // Функция для обновления доступных действий в зависимости от типа
         const updateActions = () => {
             const actionSelect = document.getElementById('requirement-action');
+            const durationInput = document.getElementById('requirement-duration');
             const selectedType = typeSelect.value;
             const actions = [];
 
             if (isBonus) {
-                // Для бонусов не используем действия
+                // Для бонусов скрываем действия
                 actionSelect.parentElement.style.display = 'none';
+                
+                // Проверяем конфигурацию бонуса для отображения длительности
+                const config = window.reqbonConfig?.bonuses?.[selectedType];
+                if (durationInput && config) {
+                    durationInput.parentElement.style.display = config.hasDuration ? 'block' : 'none';
+                    if (config.hasDuration) {
+                        durationInput.value = config.defaultDuration || 3;
+                    }
+                }
             } else {
+                // Для требований показываем действия и скрываем длительность
                 actionSelect.parentElement.style.display = 'block';
-                // Получаем доступные действия из temporarily.txt
+                if (durationInput) {
+                    durationInput.parentElement.style.display = 'none';
+                }
+                
+                // Получаем доступные действия из конфигурации
                 if (['month', 'num_of_provinces', 'year', 'turn', 'random_value', 'count_of_tasks', 'tax', 'discontent', 'money', 'land_power'].includes(selectedType)) {
                     actions.push('more', 'equal', 'less');
                 } else if (['near_water', 'has_pact', 'has_sanctions', 'has_war', 'independent_land', 'land_name', 'building_exists', 'land_id', 'political_institution', 'enemy_near_capital', 'is_defeated', 'lost_capital'].includes(selectedType)) {
                     actions.push('equal', 'not_equal');
+                } else if (['cooldown'].includes(selectedType)) {
+                    actions.push('more', 'less');
+                    
+                    // Создаем выпадающий список событий для подтипа
+                    const subtypeGroup = document.querySelector('[for="requirement-subtype"]').parentElement;
+                    subtypeGroup.style.display = 'block';
+                    
+                    const subtypeInput = document.getElementById('requirement-subtype');
+                    const select = document.createElement('select');
+                    select.id = 'requirement-subtype';
+                    select.className = 'main-page-input';
+                    
+                    // Получаем список всех событий
+                    const events = Object.entries(this.jsonData.custom_events || {}).map(([id, event]) => ({
+                        id,
+                        name: event.unique_event_name || event.title || id
+                    }));
+                    
+                    // Сортируем события по имени
+                    events.sort((a, b) => a.name.localeCompare(b.name));
+                    
+                    // Создаем опции для выпадающего списка
+                    select.innerHTML = events.map(event => 
+                        `<option value="${event.id}">${event.name}</option>`
+                    ).join('');
+                    
+                    // Заменяем текстовое поле на выпадающий список
+                    subtypeInput.parentNode.replaceChild(select, subtypeInput);
+                    
+                    // Создаем числовое поле для значения
+                    const valueContainer = document.getElementById('requirement-value-container');
+                    valueContainer.innerHTML = '';
+                    const input = document.createElement('input');
+                    input.type = 'number';
+                    input.id = 'requirement-value';
+                    input.className = 'main-page-input';
+                    input.placeholder = window.translator.translate('enter_number');
+                    valueContainer.appendChild(input);
                 } else if (['no_enemy'].includes(selectedType)) {
                     actions.push('equal');
                 }
@@ -846,15 +960,79 @@ class EventManager {
         const updateValueField = () => {
             const valueContainer = document.getElementById('requirement-value-container');
             const subtypeGroup = document.querySelector('[for="requirement-subtype"]').parentElement;
-            const selectedType = typeSelect.value;
+            const selectedType = document.getElementById('requirement-type').value;
+            const durationInput = document.getElementById('requirement-duration');
 
             // Очищаем контейнер
             valueContainer.innerHTML = '';
 
-            if (isBonus) {
-                // Обработка бонусов на основе типа
-                if (['resurrect_country', 'annex_country'].includes(selectedType)) {
-                    // Для бонусов, где нужно выбрать страну
+            if (this.isEditingBonus) {
+                // Новые бонусы
+                if (['accelerated_recruit_cost', 'maintaining_army_cost_multiplier', 'population_increase', 'recruit_cost'].includes(selectedType)) {
+                    // Для процентных значений с длительностью
+                    subtypeGroup.style.display = 'none';
+                    const input = document.createElement('input');
+                    input.type = 'number';
+                    input.id = 'requirement-value';
+                    input.className = 'main-page-input';
+                    input.placeholder = window.translator.translate('enter_percent');
+                    valueContainer.appendChild(input);
+
+                    // Показываем поле длительности
+                    if (durationInput) {
+                        durationInput.parentElement.style.display = 'block';
+                    }
+                } else if (selectedType === 'change_country') {
+                    // Для выбора страны без длительности
+                    subtypeGroup.style.display = 'none';
+                    const select = document.createElement('select');
+                    select.id = 'requirement-value';
+                    select.className = 'main-page-input';
+                    const countries = Object.entries(this.jsonData.lands || {}).map(([id, country]) => ({
+                        id,
+                        name: country.name
+                    }));
+                    select.innerHTML = countries.map(country => 
+                        `<option value="${country.id}">${country.name}</option>`
+                    ).join('');
+                    valueContainer.appendChild(select);
+
+                    // Скрываем поле длительности
+                    if (durationInput) {
+                        durationInput.parentElement.style.display = 'none';
+                    }
+                } else if (selectedType === 'add_culture_population') {
+                    // Для добавления населения культуры с подтипом страны
+                    subtypeGroup.style.display = 'block';
+                    const subtypeInput = document.getElementById('requirement-subtype');
+                    // Создаем выпадающий список для стран
+                    const countrySelect = document.createElement('select');
+                    countrySelect.id = 'requirement-subtype';
+                    countrySelect.className = 'main-page-input';
+                    const countries = Object.entries(this.jsonData.lands || {}).map(([id, country]) => ({
+                        id,
+                        name: country.name
+                    }));
+                    countrySelect.innerHTML = countries.map(country => 
+                        `<option value="${country.id}">${country.name}</option>`
+                    ).join('');
+                    // Заменяем текстовое поле на выпадающий список
+                    subtypeInput.parentNode.replaceChild(countrySelect, subtypeInput);
+
+                    // Добавляем поле для числового значения
+                    const input = document.createElement('input');
+                    input.type = 'number';
+                    input.id = 'requirement-value';
+                    input.className = 'main-page-input';
+                    input.placeholder = window.translator.translate('enter_number');
+                    valueContainer.appendChild(input);
+
+                    // Показываем поле длительности
+                    if (durationInput) {
+                        durationInput.parentElement.style.display = 'block';
+                    }
+                } else if (['resurrect_country', 'annex_country'].includes(selectedType)) {
+                    // Существующая логика для старых бонусов
                     const select = document.createElement('select');
                     select.id = 'requirement-value';
                     select.className = 'main-page-input';
@@ -867,6 +1045,9 @@ class EventManager {
                     ).join('');
                     valueContainer.appendChild(select);
                     subtypeGroup.style.display = 'none';
+                    if (durationInput) {
+                        durationInput.parentElement.style.display = 'block';
+                    }
                 } else if (['diplomacy_lift_sanctions', 'diplomacy_sanctions', 'diplomacy_pact', 'diplomacy_alliance', 'diplomacy_peace', 'diplomacy_war'].includes(selectedType)) {
                     // Для дипломатических действий со странами
                     const select = document.createElement('select');
@@ -881,6 +1062,9 @@ class EventManager {
                     ).join('');
                     valueContainer.appendChild(select);
                     subtypeGroup.style.display = 'none';
+                    if (durationInput) {
+                        durationInput.parentElement.style.display = 'block';
+                    }
                 } else if (['relation_ideology_change'].includes(selectedType)) {
                     // Для изменения идеологии
                     subtypeGroup.style.display = 'block';
@@ -910,6 +1094,9 @@ class EventManager {
                     input.className = 'main-page-input';
                     input.placeholder = window.translator.translate('enter_number');
                     valueContainer.appendChild(input);
+                    if (durationInput) {
+                        durationInput.parentElement.style.display = 'block';
+                    }
                 } else if (['relation_change'].includes(selectedType)) {
                     // Для изменения отношений
                     subtypeGroup.style.display = 'block';
@@ -934,6 +1121,9 @@ class EventManager {
                     input.className = 'main-page-input';
                     input.placeholder = window.translator.translate('enter_percent');
                     valueContainer.appendChild(input);
+                    if (durationInput) {
+                        durationInput.parentElement.style.display = 'block';
+                    }
                 } else if (['defense', 'attack', 'population_income', 'building_cost'].includes(selectedType)) {
                     // Для процентных значений
                     subtypeGroup.style.display = 'none';
@@ -943,6 +1133,9 @@ class EventManager {
                     input.className = 'main-page-input';
                     input.placeholder = window.translator.translate('enter_percent');
                     valueContainer.appendChild(input);
+                    if (durationInput) {
+                        durationInput.parentElement.style.display = 'block';
+                    }
                 } else if (['add_oil', 'add_cruiser', 'add_random_culture_population', 'add_shock_infantry', 'discontent', 'add_tank', 'army_losses', 'prestige', 'add_battleship', 'add_infantry', 'science', 'money'].includes(selectedType)) {
                     // Для числовых значений
                     subtypeGroup.style.display = 'none';
@@ -952,6 +1145,9 @@ class EventManager {
                     input.className = 'main-page-input';
                     input.placeholder = window.translator.translate('enter_number');
                     valueContainer.appendChild(input);
+                    if (durationInput) {
+                        durationInput.parentElement.style.display = 'block';
+                    }
                 }
             } else {
                 // Для требований оставляем существующую логику
@@ -1049,6 +1245,9 @@ class EventManager {
                 document.getElementById('requirement-type').value = item.type;
                 document.getElementById('requirement-action').value = item.action || '';
                 document.getElementById('requirement-subtype').value = item.subtype || '';
+                if (isBonus && document.getElementById('requirement-duration')) {
+                    document.getElementById('requirement-duration').value = item.duration || 3;
+                }
                 updateActions();
                 updateValueField();
                 // Устанавливаем значение после создания поля
@@ -1069,17 +1268,25 @@ class EventManager {
             const action = isBonus ? '' : document.getElementById('requirement-action').value;
             const subtype = document.getElementById('requirement-subtype').value;
             const value = document.getElementById('requirement-value').value;
+            
+            // Проверяем конфигурацию бонуса для длительности
+            const config = isBonus ? window.reqbonConfig?.bonuses?.[type] : null;
+            const duration = (isBonus && config?.hasDuration) ? 
+                parseInt(document.getElementById('requirement-duration').value) || config.defaultDuration || 3 : 
+                undefined;
+
+            if (!type || !value || (isBonus && config?.hasDuration && !duration)) {
+                console.warn('Не все обязательные поля заполнены');
+                return;
+            }
 
             const item = {
                 type,
                 action: isBonus ? undefined : action,
                 subtype: subtype || undefined,
-                value
+                value,
+                duration: (isBonus && config?.hasDuration) ? duration : undefined
             };
-
-            if (isBonus) {
-                item.duration = 3; // Заглушка для бонусов
-            }
 
             const editIndex = editor.dataset.editIndex;
             if (editIndex !== undefined) {
@@ -1138,13 +1345,207 @@ class EventManager {
         document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
         document.getElementById('events').classList.add('active');
     }
+
+    showGroupFilterModal() {
+        console.log('Открытие модального окна фильтра групп');
+        const modal = document.getElementById('groups-filter-modal');
+        if (!modal) {
+            console.error('Модальное окно фильтра групп не найдено');
+            return;
+        }
+
+        const groupsList = document.getElementById('groups-filter-list');
+        if (!groupsList) {
+            console.error('Список групп не найден');
+            return;
+        }
+
+        // Получаем все уникальные группы
+        const groups = new Set();
+        if (!this.jsonData?.custom_events) {
+            console.warn('Нет данных о событиях');
+            return;
+        }
+
+        Object.values(this.jsonData.custom_events).forEach(event => {
+            if (event.group_name) {
+                groups.add(event.group_name);
+            }
+        });
+
+        console.log('Найдено групп:', groups.size);
+
+        // Сортируем группы по алфавиту
+        const sortedGroups = Array.from(groups).sort();
+
+        // Создаем чекбоксы для каждой группы
+        groupsList.innerHTML = sortedGroups.map(group => {
+            const isChecked = this.filters.groups?.includes(group);
+            console.log(`Группа ${group}, выбрана: ${isChecked}`);
+            return `
+                <div class="group-checkbox-item">
+                    <input type="checkbox" id="group-${group}" value="${group}"
+                           ${isChecked ? 'checked' : ''}>
+                    <label for="group-${group}">${group}</label>
+                </div>
+            `;
+        }).join('');
+
+        // Обработчики кнопок
+        const applyButton = modal.querySelector('#groups-filter-apply');
+        const clearButton = modal.querySelector('#groups-filter-clear');
+        const closeButton = modal.querySelector('.close-modal');
+
+        // Удаляем старые обработчики
+        const newApplyButton = applyButton.cloneNode(true);
+        const newClearButton = clearButton.cloneNode(true);
+        const newCloseButton = closeButton.cloneNode(true);
+
+        applyButton.parentNode.replaceChild(newApplyButton, applyButton);
+        clearButton.parentNode.replaceChild(newClearButton, clearButton);
+        closeButton.parentNode.replaceChild(newCloseButton, closeButton);
+
+        // Добавляем новые обработчики
+        newApplyButton.addEventListener('click', () => {
+            const checkedGroups = Array.from(groupsList.querySelectorAll('input[type="checkbox"]:checked'))
+                .map(checkbox => checkbox.value);
+            
+            console.log('Выбранные группы:', checkedGroups);
+            
+            if (checkedGroups.length > 0) {
+                this.filters.groups = checkedGroups;
+            } else {
+                delete this.filters.groups;
+            }
+            
+            console.log('Обновленные фильтры:', this.filters);
+            this.updateEventsList();
+            modal.classList.remove('active');
+        });
+
+        newClearButton.addEventListener('click', () => {
+            delete this.filters.groups;
+            this.updateEventsList();
+            modal.classList.remove('active');
+        });
+
+        newCloseButton.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        // Добавляем обработчик клавиши Escape
+        const handleEscape = (e) => {
+            if (e.key === 'Escape') {
+                modal.classList.remove('active');
+                document.removeEventListener('keydown', handleEscape);
+            }
+        };
+        document.addEventListener('keydown', handleEscape);
+
+        // Показываем модальное окно
+        modal.classList.add('active');
+    }
+
+    showFilterModal(column) {
+        const modal = document.getElementById('events-filter-modal');
+        const title = modal.querySelector('.modal-title');
+        const operatorSelect = document.getElementById('events-filter-operator');
+        const valueContainer = document.getElementById('events-filter-value-container');
+
+        // Устанавливаем заголовок
+        title.textContent = `${window.translator.translate('filter')}: ${this.getColumnTitle(column)}`;
+
+        // Настраиваем операторы
+        operatorSelect.innerHTML = `
+            <option value="equals">${window.translator.translate('filter_equals')}</option>
+            <option value="not_equals">${window.translator.translate('filter_not_equals')}</option>
+            <option value="contains">${window.translator.translate('filter_contains')}</option>
+        `;
+
+        // Создаем поле ввода
+        valueContainer.innerHTML = `
+            <input type="text" id="events-filter-value" class="main-page-input" 
+                   placeholder="${window.translator.translate('filter_text_value')}">
+        `;
+
+        // Устанавливаем текущие значения фильтра, если они есть
+        if (this.filters[column]) {
+            operatorSelect.value = this.filters[column].operator;
+            document.getElementById('events-filter-value').value = this.filters[column].value;
+        }
+
+        // Обработчики кнопок
+        const applyButton = modal.querySelector('#events-filter-apply');
+        const clearButton = modal.querySelector('#events-filter-clear');
+        const closeButton = modal.querySelector('.close-modal');
+
+        // Удаляем старые обработчики
+        const newApplyButton = applyButton.cloneNode(true);
+        const newClearButton = clearButton.cloneNode(true);
+        const newCloseButton = closeButton.cloneNode(true);
+
+        applyButton.parentNode.replaceChild(newApplyButton, applyButton);
+        clearButton.parentNode.replaceChild(newClearButton, clearButton);
+        closeButton.parentNode.replaceChild(newCloseButton, closeButton);
+
+        // Добавляем новые обработчики
+        newApplyButton.addEventListener('click', () => {
+            const operator = operatorSelect.value;
+            const value = document.getElementById('events-filter-value').value;
+            
+            if (value) {
+                this.filters[column] = { operator, value };
+            } else {
+                delete this.filters[column];
+            }
+            
+            this.updateEventsList();
+            modal.classList.remove('active');
+        });
+
+        newClearButton.addEventListener('click', () => {
+            delete this.filters[column];
+            this.updateEventsList();
+            modal.classList.remove('active');
+        });
+
+        newCloseButton.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        // Добавляем обработчик клавиши Escape
+        const handleEscape = (e) => {
+            if (e.key === 'Escape') {
+                modal.classList.remove('active');
+                document.removeEventListener('keydown', handleEscape);
+            }
+        };
+        document.addEventListener('keydown', handleEscape);
+
+        // Показываем модальное окно
+        modal.classList.add('active');
+    }
+
+    clearAllFilters() {
+        this.filters = {};
+        this.updateEventsList();
+    }
+
+    getColumnTitle(column) {
+        const titles = {
+            'id': 'event_id',
+            'group': 'event_group',
+            'name': 'event_name',
+            'title': 'event_title'
+        };
+        return window.translator.translate(titles[column] || column);
+    }
 }
 
 // Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
     window.eventManager = new EventManager();
 });
-
 function createRequirementEditor() {
     const modal = document.createElement('div');
     modal.className = 'modal';
@@ -1205,3 +1606,4 @@ document.addEventListener('click', function(e) {
         window.translator.updateTranslations(modal);
     }
 });
+

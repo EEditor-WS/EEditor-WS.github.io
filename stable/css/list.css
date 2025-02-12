@@ -400,3 +400,34 @@
 .action-button.secondary:hover {
     background-color: #888;
 }
+
+
+.country-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.country-header {
+    grid-column: 1 / -1;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.country-edit-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.background-data {
+    flex-grow: 1;
+    background-color: #242424;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}

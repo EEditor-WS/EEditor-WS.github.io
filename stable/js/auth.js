@@ -20,27 +20,42 @@ class AuthManager {
     constructor() {
         console.log('🔄 Инициализация AuthManager...');
         this.currentUser = null;
+        this.accessToken = null;
         this.translations = {
-            en: {
+            'en': {
                 guest: 'Guest',
-                login: 'Login with Discord',
+                login: 'Login',
                 register: 'Register',
-                settings: 'Settings',
-                logout: 'Logout'
+                logout: 'Logout',
+                settings: 'Settings'
             },
-            ru: {
+            'ru': {
                 guest: 'Гость',
-                login: 'Войти через Discord',
+                login: 'Войти',
                 register: 'Регистрация',
-                settings: 'Настройки',
-                logout: 'Выйти'
+                logout: 'Выйти',
+                settings: 'Настройки'
             },
-            uk: {
+            'uk': {
                 guest: 'Гість',
-                login: 'Увійти через Discord',
+                login: 'Увійти',
                 register: 'Реєстрація',
-                settings: 'Налаштування',
-                logout: 'Вийти'
+                logout: 'Вийти',
+                settings: 'Налаштування'
+            },
+            'be': {
+                guest: 'Госць',
+                login: 'Увайсці',
+                register: 'Рэгістрацыя',
+                logout: 'Выйсці',
+                settings: 'Налады'
+            },
+            'kk': {
+                guest: 'Қонақ',
+                login: 'Кіру',
+                register: 'Тіркелу',
+                logout: 'Шығу',
+                settings: 'Параметрлер'
             }
         };
         
@@ -54,6 +69,9 @@ class AuthManager {
 
     init() {
         console.log('🔄 Инициализация интерфейса...');
+        
+        // Загружаем данные пользователя и токен
+        this.loadUserData();
         
         // Восстанавливаем сохраненный язык или устанавливаем русский по умолчанию
         const savedLang = localStorage.getItem('selectedLanguage') || 'ru';
@@ -96,6 +114,18 @@ class AuthManager {
                     });
                 });
             }
+
+            // Обработчик для кнопки Discord
+            document.querySelector('.account-item[data-action="discord"]').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.open('https://discord.gg/s5JgHChaQE', '_blank');
+            });
+
+            // Обработчик для кнопки стабильной версии
+            document.querySelector('.account-item[data-action="stable"]').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.open('stable/index.html', '_blank');
+            });
         } else {
             console.log('ℹ️ Элементы интерфейса не найдены на этой странице');
         }
@@ -139,30 +169,13 @@ class AuthManager {
     }
 
     updateTranslations(lang) {
-        console.log('🌐 Обновление переводов для языка:', lang);
-        
-        // Обновляем текст кнопок
-        const elements = {
-            login: document.querySelector('[data-action="login"] [data-translate="login"]'),
-            register: document.querySelector('[data-action="register"] [data-translate="register"]'),
-            settings: document.querySelector('[data-action="settings"] [data-translate="settings"]'),
-            logout: document.querySelector('[data-action="logout"] [data-translate="logout"]'),
-            guest: document.querySelector('.account-name')
-        };
-
-        // Обновляем тексты, если элементы найдены
-        for (const [key, element] of Object.entries(elements)) {
-            if (element && this.translations[lang] && this.translations[lang][key]) {
-                // Обновляем текст только если пользователь не авторизован (для guest)
-                if (key === 'guest' && !this.currentUser) {
-                    element.textContent = this.translations[lang][key];
-                } else if (key !== 'guest') {
-                    element.textContent = this.translations[lang][key];
-                }
+        const elements = document.querySelectorAll('[data-translate]');
+        elements.forEach(element => {
+            const key = element.getAttribute('data-translate');
+            if (key && this.translations[lang]?.[key]) {
+                element.textContent = this.translations[lang][key];
             }
-        }
-
-        console.log('✅ Переводы обновлены');
+        });
     }
 
     getLanguageName(lang) {
@@ -209,6 +222,7 @@ class AuthManager {
             console.error('❌ Ошибка при загрузке данных пользователя:', error);
             this.logout();
         }
+        this.updateUI();
     }
 
     async saveUserData(userData) {
@@ -276,15 +290,15 @@ class AuthManager {
         const error = fragment.get('error');
         const errorDescription = fragment.get('error_description');
 
-        if (error) {
-            console.error('❌ Ошибка авторизации Discord:', errorDescription);
-            return;
-        }
+            if (error) {
+                console.error('❌ Ошибка авторизации Discord:', errorDescription);
+                return;
+            }
 
-        if (!accessToken) {
-            console.error('❌ Токен доступа не найден');
-            return;
-        }
+            if (!accessToken) {
+                console.error('❌ Токен доступа не найден');
+                return;
+            }
 
         try {
             console.log('🔑 Получен токен доступа, запрашиваем данные пользователя...');
@@ -314,7 +328,10 @@ class AuthManager {
 
             // Сохраняем данные
             localStorage.setItem('userData', JSON.stringify(userData));
-            console.log('✅ Данные пользователя сохранены:', userData);
+            this.currentUser = userData;
+
+            console.log('✅ Авторизация успешно завершена');
+            this.updateUI();
 
             // Перенаправляем на главную
             window.location.href = '/';
@@ -393,13 +410,15 @@ class AuthManager {
     logout() {
         console.log('🔄 Выход из аккаунта...');
         localStorage.removeItem('userData');
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('tokenExpiry');
         this.currentUser = null;
+        this.accessToken = null;
         console.log('✅ Выход выполнен успешно');
         this.updateUI();
     }
 
     updateUI() {
-        // Проверяем, есть ли элементы интерфейса на странице
         const accountName = document.querySelector('.account-name');
         const accountId = document.querySelector('.account-id');
         const accountAvatar = document.querySelector('.account-avatar');
@@ -409,111 +428,78 @@ class AuthManager {
         const registerItem = document.querySelector('[data-action="register"]');
         const logoutItem = document.querySelector('[data-action="logout"]');
 
-        // Если нет основных элементов интерфейса, просто выходим
         if (!accountName || !accountId) {
             console.log('ℹ️ Элементы интерфейса отсутствуют на этой странице');
             return;
         }
 
-        // Получаем текущий язык
         const currentLang = document.body.getAttribute('data-lang') || 'ru';
-        console.log('🔄 Обновление интерфейса для языка:', currentLang);
 
         if (this.currentUser) {
-            console.log('👤 Обновление данных пользователя:', {
-                name: this.currentUser.displayName,
-                avatar: this.currentUser.avatar
-            });
-
-            // Не используем перевод для имени пользователя
+            // Обновляем имя и ID
             accountName.textContent = this.currentUser.displayName || this.currentUser.username;
             accountId.textContent = `@${this.currentUser.username}`;
             
-            // Обновляем аватарку в выпадающем меню
-            if (accountAvatar) {
-                if (this.currentUser.avatar) {
-                    console.log('🖼️ Установка аватарки в меню:', this.currentUser.avatar);
-                    accountAvatar.style.display = 'none';
-                    accountAvatar.src = this.currentUser.avatar;
-                    accountAvatar.onerror = () => {
-                        console.error('❌ Ошибка загрузки аватарки в меню');
-                        accountAvatar.style.display = 'none';
-                        if (accountButtonIcon) accountButtonIcon.style.display = 'block';
-                        if (accountButtonAvatar) accountButtonAvatar.style.display = 'none';
-                    };
-                    accountAvatar.onload = () => {
-                        console.log('✅ Аватарка в меню успешно загружена');
-                        accountAvatar.style.display = 'block';
-                    };
-                } else {
-                    console.log('ℹ️ Аватарка отсутствует');
-                    accountAvatar.style.display = 'none';
-                    accountAvatar.src = '';
-                }
+            // Обновляем аватарку в меню
+            if (accountAvatar && this.currentUser.avatar) {
+                accountAvatar.src = this.currentUser.avatar;
+                accountAvatar.style.display = 'block';
+            } else if (accountAvatar) {
+                accountAvatar.style.display = 'none';
+                accountAvatar.src = '';
             }
 
             // Обновляем аватарку в кнопке
             if (accountButtonAvatar && accountButtonIcon) {
                 if (this.currentUser.avatar) {
-                    console.log('🖼️ Установка аватарки в кнопке:', this.currentUser.avatar);
-                    accountButtonAvatar.style.display = 'none';
                     accountButtonAvatar.src = this.currentUser.avatar;
-                    accountButtonAvatar.onerror = () => {
-                        console.error('❌ Ошибка загрузки аватарки в кнопке');
-                        accountButtonIcon.style.display = 'block';
-                        accountButtonAvatar.style.display = 'none';
-                    };
-                    accountButtonAvatar.onload = () => {
-                        console.log('✅ Аватарка в кнопке успешно загружена');
-                        accountButtonIcon.style.display = 'none';
-                        accountButtonAvatar.style.display = 'block';
-                    };
+                    accountButtonAvatar.style.display = 'block';
+                    accountButtonIcon.style.display = 'none';
                 } else {
                     accountButtonIcon.style.display = 'block';
                     accountButtonAvatar.style.display = 'none';
-                    accountButtonAvatar.src = '';
                 }
             }
 
+            // Показываем/скрываем элементы меню
             if (loginItem) loginItem.style.display = 'none';
             if (registerItem) registerItem.style.display = 'none';
             if (logoutItem) {
                 logoutItem.style.display = 'flex';
                 const logoutText = logoutItem.querySelector('[data-translate="logout"]');
                 if (logoutText) {
-                    logoutText.textContent = this.translations[currentLang].logout;
+                    logoutText.textContent = this.translations[currentLang]?.logout || 'Выйти';
                 }
             }
         } else {
-            // Используем перевод только для гостя
-            accountName.textContent = this.translations[currentLang].guest;
+            // Гостевой режим
+            accountName.textContent = this.translations[currentLang]?.guest || 'Гость';
             accountId.textContent = '#0000';
             
-            // Скрываем аватарку в выпадающем меню
+            // Скрываем аватарки
             if (accountAvatar) {
                 accountAvatar.style.display = 'none';
                 accountAvatar.src = '';
             }
-
-            // Возвращаем иконку в кнопке
             if (accountButtonAvatar && accountButtonIcon) {
                 accountButtonIcon.style.display = 'block';
                 accountButtonAvatar.style.display = 'none';
                 accountButtonAvatar.src = '';
             }
 
+            // Показываем/скрываем элементы меню
             if (loginItem) {
                 loginItem.style.display = 'flex';
                 const loginText = loginItem.querySelector('[data-translate="login"]');
                 if (loginText) {
-                    loginText.textContent = this.translations[currentLang].login;
+                    loginText.textContent = this.translations[currentLang]?.login || 'Войти';
                 }
             }
             if (registerItem) {
                 registerItem.style.display = 'flex';
                 const registerText = registerItem.querySelector('[data-translate="register"]');
                 if (registerText) {
-                    registerText.textContent = this.translations[currentLang].register;
+                    registerText.textContent = this.translations[currentLang]?.register || 'Регистрация';
                 }
             }
             if (logoutItem) logoutItem.style.display = 'none';
@@ -524,14 +510,9 @@ class AuthManager {
         if (settingsItem) {
             const settingsText = settingsItem.querySelector('[data-translate="settings"]');
             if (settingsText) {
-                settingsText.textContent = this.translations[currentLang].settings;
+                settingsText.textContent = this.translations[currentLang]?.settings || 'Настройки';
             }
         }
-        
-        // Обновляем все переводы
-        this.updateTranslations(currentLang);
-        
-        console.log('✅ Интерфейс обновлен');
     }
 }
 

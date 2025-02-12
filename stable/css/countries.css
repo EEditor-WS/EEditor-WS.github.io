@@ -99,3 +99,30 @@
     border-radius: 4px;
     transition: all 0.2s ease;
 }
+
+.icon-action-button.refresh {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+}
+
+.icon-action-button.refresh:hover {
+    background-color: #333;
+    border-color: #3a80d2;
+}
+
+.icon-action-button.refresh svg {
+    animation: none;
+}
+
+.icon-action-button.refresh:active svg {
+    animation: spin 1s linear;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

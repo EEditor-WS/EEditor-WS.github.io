@@ -41,14 +41,15 @@ The website owner reserves the right to modify these terms at any time without n
 
 By clicking "I Accept", you acknowledge that you have read and understood these terms and agree to be bound by them.`,
                 login_title: "Join Our Community",
-                login_message: "Sign in with Discord to unlock additional features:",
+                login_message: "Sign in with Discord to unlock additional features (coming soon):",
                 login_features: [
-                    "Access to the library of countries",
-                    "Access to the library of reforms",
-                    "Access to the library of events",
-                    "Ability to share your creations",
-                    "Sync between devices"
+                    { text: "Access to the library of countries", disabled: true },
+                    { text: "Access to the library of reforms", disabled: true },
+                    { text: "Access to the library of events", disabled: true },
+                    { text: "Ability to share your creations", disabled: true },
+                    { text: "Sync between devices", disabled: true }
                 ],
+                coming_soon: "Coming soon",
                 login_button: "Sign in with Discord",
                 login_skip: "Skip for now",
                 login_note: "You can sign in later at any time"
@@ -93,14 +94,15 @@ By clicking "I Accept", you acknowledge that you have read and understood these 
 
 Нажимая "Принимаю", вы подтверждаете, что прочитали и поняли эти условия и соглашаетесь их соблюдать.`,
                 login_title: "Присоединяйтесь к сообществу",
-                login_message: "Войдите через Discord, чтобы получить дополнительные возможности:",
+                login_message: "Войдите через Discord, чтобы получить дополнительные возможности (скоро):",
                 login_features: [
-                    "Доступ к библиотеке стран",
-                    "Доступ к библиотеке реформ",
-                    "Доступ к библиотеке событий",
-                    "Возможность делиться своими работами",
-                    "Синхронизация между устройствами"
+                    { text: "Доступ к библиотеке стран", disabled: true },
+                    { text: "Доступ к библиотеке реформ", disabled: true },
+                    { text: "Доступ к библиотеке событий", disabled: true },
+                    { text: "Возможность делиться своими работами", disabled: true },
+                    { text: "Синхронизация между устройствами", disabled: true }
                 ],
+                coming_soon: "Скоро будет доступно",
                 login_button: "Войти через Discord",
                 login_skip: "Пропустить",
                 login_note: "Вы сможете войти позже в любое время"
@@ -145,14 +147,15 @@ By clicking "I Accept", you acknowledge that you have read and understood these 
 
 Натискаючи "Приймаю", ви підтверджуєте, що прочитали та зрозуміли ці умови та погоджуєтесь їх дотримуватися.`,
                 login_title: "Приєднуйтесь до спільноти",
-                login_message: "Увійдіть через Discord, щоб отримати додаткові можливості:",
+                login_message: "Увійдіть через Discord, щоб отримати додаткові можливості (скоро):",
                 login_features: [
-                    "Доступ до бібліотеки країн",
-                    "Доступ до бібліотеки реформ",
-                    "Доступ до бібліотеки подій",
-                    "Можливість ділитися своїми роботами",
-                    "Синхронізація між пристроями"
+                    { text: "Доступ до бібліотеки країн", disabled: true },
+                    { text: "Доступ до бібліотеки реформ", disabled: true },
+                    { text: "Доступ до бібліотеки подій", disabled: true },
+                    { text: "Можливість ділитися своїми роботами", disabled: true },
+                    { text: "Синхронізація між пристроями", disabled: true }
                 ],
+                coming_soon: "Скоро буде доступно",
                 login_button: "Увійти через Discord",
                 login_skip: "Пропустити",
                 login_note: "Ви зможете увійти пізніше в будь-який час"
@@ -318,6 +321,17 @@ By clicking "I Accept", you acknowledge that you have read and understood these 
                 font-size: 12px;
                 margin-top: 10px;
             }
+
+            .hello-features li.disabled {
+                color: #888;
+                text-decoration: line-through;
+            }
+            .hello-features li .coming-soon {
+                color: #666;
+                font-size: 0.8em;
+                margin-left: 8px;
+                text-decoration: none;
+            }
         `;
         document.head.appendChild(style);
     }
@@ -425,7 +439,12 @@ By clicking "I Accept", you acknowledge that you have read and understood these 
 
         this.translations[this.currentLang].login_features.forEach(feature => {
             const li = document.createElement('li');
-            li.textContent = feature;
+            if (feature.disabled) {
+                li.className = 'disabled';
+                li.innerHTML = `${feature.text} <span class="coming-soon">(${this.translations[this.currentLang].coming_soon})</span>`;
+            } else {
+                li.textContent = feature.text;
+            }
             featuresList.appendChild(li);
         });
 
