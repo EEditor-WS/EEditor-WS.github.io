@@ -126,7 +126,8 @@ class CountryManager {
 
             // Отдельно проверяем фильтр групп
             if (this.filters.groups.length > 0) {
-                if (!country.group || !this.filters.groups.includes(country.group)) {
+                const countryGroup = country.group || '';
+                if (!this.filters.groups.includes(countryGroup)) {
                     return false;
                 }
             }
