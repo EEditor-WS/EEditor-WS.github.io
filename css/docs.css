@@ -419,4 +419,331 @@
     * {
         transition-duration: 0.01ms !important;
     }
+}
+
+/* Стили для изображений в документации */
+.docs-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 20px 0;
+    display: block;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Контейнер для изображения с подписью */
+.docs-content .image-container {
+    margin: 30px 0;
+    text-align: center;
+}
+
+/* Подпись под изображением */
+.docs-content .image-caption {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+    font-style: italic;
+}
+
+/* Изображения разных размеров */
+.docs-content img.small {
+    max-width: 300px;
+    margin: 20px auto;
+}
+
+.docs-content img.medium {
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.docs-content img.large {
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+/* Обтекание изображений текстом */
+.docs-content img.float-left {
+    float: left;
+    margin: 5px 20px 20px 0;
+    max-width: 300px;
+}
+
+.docs-content img.float-right {
+    float: right;
+    margin: 5px 0 20px 20px;
+    max-width: 300px;
+}
+
+/* Очистка обтекания */
+.docs-content .clear-float {
+    clear: both;
+}
+
+/* Стили для видео в документации */
+.docs-content video {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 20px 0;
+    display: block;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Контейнер для видео с подписью */
+.docs-content .video-container {
+    margin: 30px 0;
+    text-align: center;
+    position: relative;
+    width: 100%;
+}
+
+/* Адаптивный контейнер для iframe видео (YouTube, Vimeo и т.д.) */
+.docs-content .video-container.embed {
+    padding-bottom: 56.25%; /* Соотношение сторон 16:9 */
+    height: 0;
+    overflow: hidden;
+}
+
+.docs-content .video-container.embed iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Подпись под видео */
+.docs-content .video-caption {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+    font-style: italic;
+}
+
+/* Видео разных размеров */
+.docs-content video.small,
+.docs-content .video-container.small {
+    max-width: 300px;
+    margin: 20px auto;
+}
+
+.docs-content video.medium,
+.docs-content .video-container.medium {
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.docs-content video.large,
+.docs-content .video-container.large {
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+/* Элементы управления видео */
+.docs-content video::-webkit-media-controls {
+    background-color: var(--background-secondary);
+    border-radius: 0 0 8px 8px;
+}
+
+.docs-content video::-webkit-media-controls-panel {
+    padding: 0 10px;
+}
+
+/* Адаптивность для видео */
+@media (max-width: 768px) {
+    .docs-content video.small,
+    .docs-content .video-container.small {
+        max-width: 100%;
+    }
+
+    .docs-content video.medium,
+    .docs-content .video-container.medium {
+        max-width: 100%;
+    }
+
+    .docs-content video.large,
+    .docs-content .video-container.large {
+        max-width: 100%;
+    }
+}
+
+/* Контейнер для группы изображений */
+.docs-content .image-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 30px 0;
+    justify-content: center;
+}
+
+/* Колонки изображений */
+.docs-content .image-group.columns-2 .image-container {
+    flex: 0 1 calc(50% - 10px);
+    margin: 0;
+}
+
+.docs-content .image-group.columns-3 .image-container {
+    flex: 0 1 calc(33.333% - 14px);
+    margin: 0;
+}
+
+.docs-content .image-group.columns-4 .image-container {
+    flex: 0 1 calc(25% - 15px);
+    margin: 0;
+}
+
+/* Адаптивность для групп изображений */
+@media (max-width: 1024px) {
+    .docs-content .image-group.columns-4 .image-container {
+        flex: 0 1 calc(33.333% - 14px);
+    }
+}
+
+@media (max-width: 768px) {
+    .docs-content .image-group.columns-3 .image-container,
+    .docs-content .image-group.columns-4 .image-container {
+        flex: 0 1 calc(50% - 10px);
+    }
+}
+
+@media (max-width: 480px) {
+    .docs-content .image-group.columns-2 .image-container,
+    .docs-content .image-group.columns-3 .image-container,
+    .docs-content .image-group.columns-4 .image-container {
+        flex: 0 1 100%;
+    }
+}
+
+/* Горизонтальная последовательность с стрелками */
+.docs-content .image-sequence {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 30px 0;
+    overflow-x: auto;
+    padding: 10px 0;
+}
+
+.docs-content .image-sequence .image-container {
+    flex: 0 0 auto;
+    margin: 0;
+}
+
+.docs-content .image-sequence .sequence-arrow {
+    color: var(--text-secondary);
+    font-size: 24px;
+    flex: 0 0 auto;
+}
+
+/* Сравнение изображений */
+.docs-content .image-comparison {
+    display: flex;
+    gap: 20px;
+    margin: 30px 0;
+    align-items: flex-start;
+}
+
+.docs-content .image-comparison .image-container {
+    flex: 1;
+    margin: 0;
+}
+
+.docs-content .image-comparison .comparison-separator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-secondary);
+    gap: 10px;
+    padding: 20px 0;
+}
+
+.docs-content .image-comparison .comparison-separator::before,
+.docs-content .image-comparison .comparison-separator::after {
+    content: "";
+    width: 1px;
+    height: 20px;
+    background-color: var(--text-secondary);
+}
+
+/* Подписи для групп изображений */
+.docs-content .group-caption {
+    color: var(--text-secondary);
+    font-size: 16px;
+    margin-top: 15px;
+    text-align: center;
+    font-style: italic;
+    width: 100%;
+}
+
+/* Горизонтальный контейнер для изображений */
+.docs-content .images-row {
+    display: flex;
+    gap: 20px;
+    margin: 30px 0;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 10px 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) transparent;
+}
+
+.docs-content .images-row::-webkit-scrollbar {
+    height: 8px;
+}
+
+.docs-content .images-row::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.docs-content .images-row::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb);
+    border-radius: 4px;
+}
+
+.docs-content .images-row::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-thumb-hover);
+}
+
+.docs-content .images-row .image-container {
+    flex: 1 0 0;
+    min-width: 200px;
+    max-width: calc(100% / 3);
+    margin: 0;
+}
+
+.docs-content .images-row.equal-size .image-container {
+    flex: 1;
+}
+
+.docs-content .images-row img {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Адаптивность для горизонтального контейнера */
+@media (max-width: 768px) {
+    .docs-content .images-row {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .docs-content .images-row .image-container {
+        flex: 1 0 calc(50% - 10px);
+        max-width: calc(50% - 10px);
+    }
+}
+
+@media (max-width: 480px) {
+    .docs-content .images-row .image-container {
+        flex: 1 0 100%;
+        max-width: 100%;
+    }
 } 

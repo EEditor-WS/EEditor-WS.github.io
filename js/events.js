@@ -962,13 +962,13 @@ class EventManager {
                     const select = document.createElement('select');
                     select.id = 'requirement-value';
                     select.className = 'main-page-input';
-                    const countries = Object.entries(this.jsonData.lands || {}).map(([id, country]) => ({
-                        id,
-                        name: country.name
-                    }));
-                    select.innerHTML = countries.map(country => 
-                        `<option value="${country.id}">${country.name}</option>`
-                    ).join('');
+                            const countries = Object.entries(this.jsonData.lands || {}).map(([id, country]) => ({
+                                id,
+                                name: country.name
+                            }));
+                            select.innerHTML = countries.map(country => 
+                                `<option value="${country.id}">${country.name}</option>`
+                            ).join('');
                     valueContainer.appendChild(select);
 
                     // Скрываем поле длительности
@@ -994,12 +994,12 @@ class EventManager {
                     subtypeInput.parentNode.replaceChild(countrySelect, subtypeInput);
 
                     // Добавляем поле для числового значения
-                    const input = document.createElement('input');
-                    input.type = 'number';
-                    input.id = 'requirement-value';
-                    input.className = 'main-page-input';
-                    input.placeholder = window.translator.translate('enter_number');
-                    valueContainer.appendChild(input);
+                        const input = document.createElement('input');
+                        input.type = 'number';
+                        input.id = 'requirement-value';
+                        input.className = 'main-page-input';
+                        input.placeholder = window.translator.translate('enter_number');
+                        valueContainer.appendChild(input);
 
                     // Показываем поле длительности
                     if (durationInput) {
@@ -1007,19 +1007,19 @@ class EventManager {
                     }
                 } else if (['resurrect_country', 'annex_country'].includes(selectedType)) {
                     // Существующая логика для старых бонусов
-                    const select = document.createElement('select');
-                    select.id = 'requirement-value';
-                    select.className = 'main-page-input';
-                    const countries = Object.entries(this.jsonData.lands || {}).map(([id, country]) => ({
-                        id,
-                        name: country.name
-                    }));
-                    select.innerHTML = countries.map(country => 
-                        `<option value="${country.id}">${country.name}</option>`
-                    ).join('');
-                    valueContainer.appendChild(select);
+                        const select = document.createElement('select');
+                        select.id = 'requirement-value';
+                        select.className = 'main-page-input';
+                        const countries = Object.entries(this.jsonData.lands || {}).map(([id, country]) => ({
+                            id,
+                            name: country.name
+                        }));
+                        select.innerHTML = countries.map(country => 
+                            `<option value="${country.id}">${country.name}</option>`
+                        ).join('');
+                        valueContainer.appendChild(select);
                     subtypeGroup.style.display = 'none';
-                    if (durationInput) {
+                if (durationInput) {
                         durationInput.parentElement.style.display = 'block';
                     }
                 } else if (['diplomacy_lift_sanctions', 'diplomacy_sanctions', 'diplomacy_pact', 'diplomacy_alliance', 'diplomacy_peace', 'diplomacy_war'].includes(selectedType)) {
@@ -1028,12 +1028,12 @@ class EventManager {
                     select.id = 'requirement-value';
                     select.className = 'main-page-input';
                     const countries = Object.entries(this.jsonData.lands || {}).map(([id, country]) => ({
-                        id,
+                                id,
                         name: country.name
-                    }));
+                            }));
                     select.innerHTML = countries.map(country => 
                         `<option value="${country.id}">${country.name}</option>`
-                    ).join('');
+                            ).join('');
                     valueContainer.appendChild(select);
                     subtypeGroup.style.display = 'none';
                     if (durationInput) {
@@ -1113,12 +1113,12 @@ class EventManager {
                 } else if (['add_oil', 'add_cruiser', 'add_random_culture_population', 'add_shock_infantry', 'discontent', 'add_tank', 'army_losses', 'prestige', 'add_battleship', 'add_infantry', 'science', 'money'].includes(selectedType)) {
                     // Для числовых значений
                     subtypeGroup.style.display = 'none';
-                    const input = document.createElement('input');
-                    input.type = 'number';
-                    input.id = 'requirement-value';
-                    input.className = 'main-page-input';
-                    input.placeholder = window.translator.translate('enter_number');
-                    valueContainer.appendChild(input);
+                        const input = document.createElement('input');
+                        input.type = 'number';
+                        input.id = 'requirement-value';
+                        input.className = 'main-page-input';
+                        input.placeholder = window.translator.translate('enter_number');
+                        valueContainer.appendChild(input);
                     if (durationInput) {
                         durationInput.parentElement.style.display = 'block';
                     }
@@ -1126,12 +1126,12 @@ class EventManager {
             } else {
                 // Для требований оставляем существующую логику
                 if (['near_water', 'independent_land', 'no_enemy', 'enemy_near_capital', 'lost_capital'].includes(selectedType)) {
-                    valueContainer.innerHTML = `
-                        <select id="requirement-value" class="main-page-input">
+                        valueContainer.innerHTML = `
+                            <select id="requirement-value" class="main-page-input">
                             <option value='true'>${window.translator.translate('yes')}</option>
                             <option value='false'>${window.translator.translate('no')}</option>
-                        </select>
-                    `;
+                            </select>
+                        `;
                     subtypeGroup.style.display = 'none';
                 } else if (['political_institution'].includes(selectedType)) {
                     // Для политических институтов
@@ -1153,17 +1153,17 @@ class EventManager {
                     valueContainer.appendChild(select);
                     subtypeGroup.style.display = 'none'; // Скрываем поле subtype
                 } else if (['has_pact', 'has_sanctions', 'has_war', 'land_id', 'is_defeated'].includes(selectedType)) {
-                    const select = document.createElement('select');
-                    select.id = 'requirement-value';
-                    select.className = 'main-page-input';
-                    const countries = Object.entries(this.jsonData.lands || {}).map(([id, country]) => ({
-                        id,
-                        name: country.name
-                    }));
-                    select.innerHTML = countries.map(country => 
-                        `<option value="${country.id}">${country.name}</option>`
-                    ).join('');
-                    valueContainer.appendChild(select);
+                        const select = document.createElement('select');
+                        select.id = 'requirement-value';
+                        select.className = 'main-page-input';
+                        const countries = Object.entries(this.jsonData.lands || {}).map(([id, country]) => ({
+                            id,
+                            name: country.name
+                        }));
+                        select.innerHTML = countries.map(country => 
+                            `<option value="${country.id}">${country.name}</option>`
+                        ).join('');
+                        valueContainer.appendChild(select);
                     subtypeGroup.style.display = 'none';
                 } else if (['land_name'].includes(selectedType)) {
                     const select = document.createElement('select');
@@ -1171,11 +1171,11 @@ class EventManager {
                     select.className = 'main-page-input';
                     const countries = Object.entries(this.jsonData.lands || {}).map(([id, country]) => ({
                         id,
-                        name: country.name
-                    }));
+                            name: country.name
+                        }));
                     select.innerHTML = countries.map(country => 
-                        `<option value="${country.name}">${country.name}</option>`
-                    ).join('');
+                            `<option value="${country.name}">${country.name}</option>`
+                        ).join('');
                     valueContainer.appendChild(select);
                     subtypeGroup.style.display = 'none';
                 } else {

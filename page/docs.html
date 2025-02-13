@@ -32,6 +32,7 @@
         <button class="nav-button" data-page="game-page" data-translate="docs_game">Игра</button>
         <button class="nav-button" data-page="events-page" data-translate="docs_events">События</button>
         <button class="nav-button" data-page="console-page" data-translate="docs_console">Консольные команды</button>
+        <button class="nav-button" data-page="map-editor-page" data-translate="docs_map_editor">Редактор карт</button>
 
         <div class="nav-actions">
             <div class="nav-icons">
@@ -137,6 +138,18 @@
                     <li><a href="#admin-commands" data-translate="docs_console_admin_title">Админка</a></li>
                     <li><a href="#admin-roles" data-translate="docs_console_admin_roles_title">Роли админов</a></li>
                     <li><a href="#scenario-commands" data-translate="docs_console_scenarios_title">Сценарии</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-section" data-section="map-editor-page">
+                <h3 data-translate="docs_map_editor">Редактор карт</h3>
+                <ul>
+                    <li><a href="#map-editor-overview" data-translate="docs_map_editor_overview">Обзор</a></li>
+                    <li><a href="#map-editor-creation" data-translate="docs_map_editor_creation">Создание карты</a></li>
+                    <li><a href="#map-editor-provinces" data-translate="docs_map_editor_provinces">Работа с провинциями</a></li>
+                    <li><a href="#map-editor-water" data-translate="docs_map_editor_water">Водные провинции</a></li>
+                    <li><a href="#map-editor-controls" data-translate="docs_map_editor_controls">Управление</a></li>
+                    <li><a href="#map-editor-testing" data-translate="docs_map_editor_testing">Тестирование</a></li>
                 </ul>
             </div>
         </nav>
@@ -357,9 +370,9 @@
                         <h2 data-translate="docs_console_basic_title">Базовые команды</h2>
                         <p data-translate="docs_console_basic_desc">Основные команды для управления игрой:</p>
                         <ul>
-                            <li><code>/commands</code> - Показать список всех доступных команд</li>
-                            <li><code>/m name_or_id</code> - Отправить личное сообщение игроку</li>
-                            <li><code>/reset_timer</code> - Сбросить таймер игры</li>
+                            <li><code>/commands</code><span data-translate="docs_console_basic_commands"> - Показать список всех доступных команд</span></li>
+                            <li><code>/m name_or_id</code><span data-translate="docs_console_basic_message"> - Отправить личное сообщение игроку</span></li>
+                            <li><code>/reset_timer</code><span data-translate="docs_console_basic_timer"> - Сбросить таймер игры</span></li>
                         </ul>
                     </section>
 
@@ -367,25 +380,25 @@
                         <h2 data-translate="docs_console_cheats_title">Читы и отладка</h2>
                         <p data-translate="docs_console_cheats_desc">Команды для тестирования и отладки (не работают в мультиплеере):</p>
                         <ul>
-                            <li><code>/resource</code> - Получить 9999 всех ресурсов</li>
-                            <li><code>/cheat</code> - Открыть все технологии и получить безлимитные значения</li>
-                            <li><code>/debug_ai</code> - Показать расширенную информацию о ботах в меню провинции</li>
-                            <li><code>/debug_land_names</code> - Показать прямоугольники для отрисовки</li>
-                            <li><code>/draw_borders</code> - Показать/скрыть границы</li>
-                            <li><code>/hide_interface</code> - Скрыть интерфейс на 5 секунд (для скриншотов)</li>
-                            <li><code>/change_country</code> - Сменить страну (выберите провинцию нужной страны)</li>
-                            <li><code>/lost</code> - Показать анимацию поражения</li>
-                            <li><code>/spawn &lt;army_type&gt; &lt;count&gt;</code> - Создать армию в выбранной провинции
+                            <li><code>/resource</code><span data-translate="docs_console_cheat_resources"> - Получить 9999 всех ресурсов</span></li>
+                            <li><code>/cheat</code><span data-translate="docs_console_cheat_all"> - Открыть все технологии и получить безлимитные значения</span></li>
+                            <li><code>/debug_ai</code><span data-translate="docs_console_cheat_debug_ai"> - Показать расширенную информацию о ботах в меню провинции</span></li>
+                            <li><code>/debug_land_names</code><span data-translate="docs_console_cheat_debug_names"> - Показать прямоугольники для отрисовки</span></li>
+                            <li><code>/draw_borders</code><span data-translate="docs_console_cheat_borders"> - Показать/скрыть границы</span></li>
+                            <li><code>/hide_interface</code><span data-translate="docs_console_cheat_interface"> - Скрыть интерфейс на 5 секунд (для скриншотов)</span></li>
+                            <li><code>/change_country</code><span data-translate="docs_console_cheat_country"> - Сменить страну (выберите провинцию нужной страны)</span></li>
+                            <li><code>/lost</code><span data-translate="docs_console_cheat_lost"> - Показать анимацию поражения</span></li>
+                            <li><code>/spawn &lt;army_type&gt; &lt;count&gt;</code><span data-translate="docs_console_cheat_spawn"> - Создать армию в выбранной провинции</span></li>
                                 <ul>
-                                    <li>Типы армий: infantry, tank, cruiser, battleship, aircraft_carrier</li>
-                                    <li>Пример: <code>/spawn battleship 3</code></li>
+                                    <li><span data-translate="docs_console_cheat_army_types">Типы армий</span>: infantry, tank, cruiser, battleship, aircraft_carrier</li>
+                                    <li><span data-translate="docs_console_cheat_example">Пример</span>: <code>/spawn battleship 3</code></li>
                                 </ul>
                             </li>
-                            <li><code>/results_screen</code> - Показать экран результатов как в мультиплеере</li>
-                            <li><code>/nuclear</code> - Показать анимацию ядерного оружия (без урона)</li>
-                            <li><code>/nuclear_land</code> - Показать ядерную анимацию для всех провинций выбранной страны</li>
-                            <li><code>/downed_plane</code> - Показать анимацию сбитого самолета</li>
-                            <li><code>/fog_of_war</code> - Включить/выключить отображение армии и построек других стран</li>
+                            <li><code>/results_screen</code><span data-translate="docs_console_cheat_results"> - Показать экран результатов как в мультиплеере</span></li>
+                            <li><code>/nuclear</code><span data-translate="docs_console_cheat_nuclear"> - Показать анимацию ядерного оружия (без урона)</span></li>
+                            <li><code>/nuclear_land</code><span data-translate="docs_console_cheat_nuclear_land"> - Показать ядерную анимацию для всех провинций выбранной страны</span></li>
+                            <li><code>/downed_plane</code><span data-translate="docs_console_cheat_plane"> - Показать анимацию сбитого самолета</span></li>
+                            <li><code>/fog_of_war</code><span data-translate="docs_console_cheat_fog"> - Включить/выключить отображение армии и построек других стран</span></li>
                         </ul>
                     </section>
 
@@ -393,15 +406,15 @@
                         <h2 data-translate="docs_console_multiplayer_title">Мультиплеер</h2>
                         <p data-translate="docs_console_multiplayer_desc">Команды для управления многопользовательской игрой:</p>
                         <ul>
-                            <li><code>/info</code> [JM+] - Получить информацию об игроке</li>
-                            <li><code>/history</code> [JM+] - Получить историю игрока</li>
-                            <li><code>/kick name_or_id</code> [JM+] - Выгнать игрока</li>
-                            <li><code>/ban name_or_id время причина</code> [JM+] - Забанить игрока</li>
-                            <li><code>/banid id hours reason</code> [JM+] - Забанить игрока по ID</li>
-                            <li><code>/banip name_or_id hours reason</code> [M+] - Забанить игрока по IP</li>
-                            <li><code>/unban id</code> [M+] - Разбанить игрока</li>
-                            <li><code>/mute name_or_id</code> [M+] - Заглушить игрока</li>
-                            <li><code>/unmute name_or_id</code> [M+] - Снять заглушение с игрока</li>
+                            <li><code>/info</code><span data-translate="docs_console_mp_info"> [JM+] - Получить информацию об игроке</span></li>
+                            <li><code>/history</code><span data-translate="docs_console_mp_history"> [JM+] - Получить историю игрока</span></li>
+                            <li><code>/kick name_or_id</code><span data-translate="docs_console_mp_kick"> [JM+] - Выгнать игрока</span></li>
+                            <li><code>/ban name_or_id time reason</code><span data-translate="docs_console_mp_ban"> [JM+] - Забанить игрока</span></li>
+                            <li><code>/banid id hours reason</code><span data-translate="docs_console_mp_banid"> [JM+] - Забанить игрока по ID</span></li>
+                            <li><code>/banip name_or_id hours reason</code><span data-translate="docs_console_mp_banip"> [M+] - Забанить игрока по IP</span></li>
+                            <li><code>/unban id</code><span data-translate="docs_console_mp_unban"> [M+] - Разбанить игрока</span></li>
+                            <li><code>/mute name_or_id</code><span data-translate="docs_console_mp_mute"> [M+] - Заглушить игрока</span></li>
+                            <li><code>/unmute name_or_id</code><span data-translate="docs_console_mp_unmute"> [M+] - Снять заглушение с игрока</span></li>
                         </ul>
                     </section>
 
@@ -409,20 +422,20 @@
                         <h2 data-translate="docs_console_admin_title">Админские команды</h2>
                         <p data-translate="docs_console_admin_desc">Команды для администраторов:</p>
                         <ul>
-                            <li><code>/content</code> - Показать список доступного контента</li>
-                            <li><code>/setdifficulty &lt;сложность&gt;</code> - Установить сложность игры
+                            <li><code>/content</code><span data-translate="docs_console_admin_content"> - Показать список доступного контента</span></li>
+                            <li><code>/setdifficulty &lt;difficulty&gt;</code><span data-translate="docs_console_admin_difficulty"> - Установить сложность игры</span>
                                 <ul>
-                                    <li>Доступные значения: easy, standard, hard, impossible</li>
+                                    <li><span data-translate="docs_console_admin_difficulty_values">Доступные значения</span>: easy, standard, hard, impossible</li>
                                 </ul>
                             </li>
-                            <li><code>/enable_action</code> - Включить определенные действия в игре</li>
-                            <li><code>/disable_action</code> - Выключить определенные действия в игре</li>
-                            <li><code>/over</code> - Завершить текущую игру</li>
-                            <li><code>/new_game id_of_scenario</code> - Начать новую игру с указанным сценарием</li>
-                            <li><code>/delaynext</code> - Отложить следующий ход</li>
-                            <li><code>/forcenext</code> - Принудительно начать следующий ход</li>
-                            <li><code>/set_country name_or_id</code> - Изменить страну игрока</li>
-                            <li><code>/a message</code> - Отправить сообщение администратору</li>
+                            <li><code>/enable_action</code><span data-translate="docs_console_admin_enable"> - Включить определенные действия в игре</span></li>
+                            <li><code>/disable_action</code><span data-translate="docs_console_admin_disable"> - Выключить определенные действия в игре</span></li>
+                            <li><code>/over</code><span data-translate="docs_console_admin_over"> - Завершить текущую игру</span></li>
+                            <li><code>/new_game id_of_scenario</code><span data-translate="docs_console_admin_new"> - Начать новую игру с указанным сценарием</span></li>
+                            <li><code>/delaynext</code><span data-translate="docs_console_admin_delay"> - Отложить следующий ход</span></li>
+                            <li><code>/forcenext</code><span data-translate="docs_console_admin_force"> - Принудительно начать следующий ход</span></li>
+                            <li><code>/set_country name_or_id</code><span data-translate="docs_console_admin_country"> - Изменить страну игрока</span></li>
+                            <li><code>/a message</code><span data-translate="docs_console_admin_message"> - Отправить сообщение администратору</span></li>
                         </ul>
                     </section>
 
@@ -464,21 +477,214 @@
                         <h2 data-translate="docs_console_scenarios_title">Сценарии и моды</h2>
                         <p data-translate="docs_console_scenarios_desc">Команды для работы со сценариями и модификациями:</p>
                         <ul>
-                            <li><code>/export_save</code> - Экспортировать сохранение в scenario.save</li>
-                            <li><code>/import save</code> - Импортировать сохранение из scenario.save</li>
-                            <li><code>/patch_scenario &lt;scenario_name.json&gt;</code> - Адаптировать сценарий к новой версии карты</li>
-                            <li><code>/cinema &lt;scale_change&gt; &lt;duration&gt; &lt;x&gt; &lt;y&gt;</code> - Показать анимацию движения карты
+                            <li><code>/export_save</code><span data-translate="docs_console_scenario_export"> - Экспортировать сохранение в scenario.save</span></li>
+                            <li><code>/import save</code><span data-translate="docs_console_scenario_import"> - Импортировать сохранение из scenario.save</span></li>
+                            <li><code>/patch_scenario &lt;scenario_name.json&gt;</code><span data-translate="docs_console_scenario_patch"> - Адаптировать сценарий к новой версии карты</span></li>
+                            <li><code>/cinema &lt;scale_change&gt; &lt;duration&gt; &lt;x&gt; &lt;y&gt;</code><span data-translate="docs_console_scenario_cinema"> - Показать анимацию движения карты</span>
                                 <ul>
-                                    <li>Пример: <code>/cinema 2 3 -400 500</code></li>
+                                    <li><span data-translate="docs_console_cheat_example">Пример</span>: <code>/cinema 2 3 -400 500</code></li>
                                 </ul>
                             </li>
-                            <li><code>/check_event_req &lt;id&gt;</code> - Проверить требования для события</li>
-                            <li><code>/show_event &lt;id&gt;</code> - Показать событие</li>
+                            <li><code>/check_event_req &lt;id&gt;</code><span data-translate="docs_console_scenario_check"> - Проверить требования для события</span></li>
+                            <li><code>/show_event &lt;id&gt;</code><span data-translate="docs_console_scenario_show"> - Показать событие</span></li>
                         </ul>
                     </section>
             </div>
         </div>
-    </main>
+
+            <div class="page" id="map-editor-page">
+                <div class="page-header">
+                    <h1 data-translate="docs_map_editor">Редактор карт</h1>
+                </div>
+                <div class="docs-content">
+                    <section id="map-editor-overview">
+                        <h2 data-translate="docs_map_editor_overview_title">Обзор</h2>
+                        <p data-translate="docs_map_editor_overview_desc">Редактор карт — это отдельное приложение для создания игровых карт в формате .map для Warnament. Он позволяет создавать и редактировать провинции, настраивать их параметры и тестировать готовые карты.</p>
+                        
+                        <div class="images-row">
+                            <div class="image-container">
+                                <img src="../docs/map-editor/menu.png" alt="Главное меню редактора карт" class="large">
+                                <div class="image-caption" data-translate="docs_map_editor_image_menu">Главное меню редактора карт</div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="map-editor-creation">
+                        <h2 data-translate="docs_map_editor_creation_title">Создание карты</h2>
+                        <p data-translate="docs_map_editor_creation_desc">Процесс создания новой карты состоит из нескольких этапов:</p>
+                        
+                        <div class="images-row">
+                            <div class="image-container">
+                                <img src="../docs/map-editor/editing.png" alt="Интерфейс редактирования карты" class="large">
+                                <div class="image-caption" data-translate="docs_map_editor_image_editing">Интерфейс редактирования карты</div>
+                            </div>
+                        </div>
+
+                        <h3 data-translate="docs_map_editor_preparation_title">Подготовка файлов</h3>
+                        <ol>
+                            <li data-translate="docs_map_editor_step_1">Откройте Редактор карт</li>
+                            <li data-translate="docs_map_editor_step_2">В нижней части окна вы увидите путь к пользовательским файлам</li>
+                            <li data-translate="docs_map_editor_step_3">Поместите необходимые файлы в этот путь:</li>
+                        </ol>
+                        <ul>
+                            <li data-translate="docs_map_editor_file_new">Для создания карты из изображения: поместите файл с названием source.png</li>
+                            <li data-translate="docs_map_editor_file_edit">Для редактирования существующей карты: поместите файл output.map</li>
+                        </ul>
+                        <p data-translate="docs_map_editor_existing_map">Для редактирования существующей карты:</p>
+                        <ul>
+                            <li data-translate="docs_map_editor_open_creator">Зайдите в "Map Creator"</li>
+                            <li data-translate="docs_map_editor_click_import">Нажмите "Импорт"</li>
+                        </ul>
+                    </section>
+
+                    <section id="map-editor-provinces">
+                        <h2 data-translate="docs_map_editor_provinces_title">Работа с провинциями</h2>
+                        
+                        <div class="images-row">
+                            <div class="image-container">
+                                <img src="../docs/map-editor/province.png" alt="Создание первой провинции" class="medium">
+                                <div class="image-caption" data-translate="docs_map_editor_image_province">Создание первой провинции</div>
+                            </div>
+
+                            <div class="image-container">
+                                <img src="../docs/map-editor/second-province.png" alt="Добавление второй провинции" class="medium">
+                                <div class="image-caption" data-translate="docs_map_editor_image_second_province">Добавление второй провинции</div>
+                            </div>
+                        </div>
+
+                        <h3 data-translate="docs_map_editor_province_creation">Создание провинции</h3>
+                        <ol>
+                            <li data-translate="docs_map_editor_province_step_1">Нажмите "New province"</li>
+                            <li data-translate="docs_map_editor_province_step_2">Нажмите "Add vertice"</li>
+                            <li data-translate="docs_map_editor_province_step_3">Создайте контур провинции, расставляя вершины</li>
+                            <li data-translate="docs_map_editor_province_step_4">Убедитесь, что центр провинции (фиолетовый квадрат) находится внутри её границ</li>
+                        </ol>
+
+                        <h3 data-translate="docs_map_editor_enclaves">Работа с анклавами</h3>
+                        <p data-translate="docs_map_editor_enclaves_desc">Анклав — это часть провинции, отделённая от её основной территории.</p>
+                        
+                        <div class="images-row">
+                            <div class="image-container">
+                                <img src="../docs/map-editor/enclave.png" alt="Создание основной части провинции">
+                                <div class="image-caption" data-translate="docs_map_editor_image_enclave">Создание основной части провинции</div>
+                            </div>
+                            <div class="image-container">
+                                <img src="../docs/map-editor/enclave2.png" alt="Добавление первого анклава">
+                                <div class="image-caption" data-translate="docs_map_editor_image_enclave2">Добавление первого анклава</div>
+                            </div>
+                            <div class="image-container">
+                                <img src="../docs/map-editor/enclave3.png" alt="Добавление второго анклава">
+                                <div class="image-caption" data-translate="docs_map_editor_image_enclave3">Добавление второго анклава</div>
+                            </div>
+                        </div>
+
+                        <ol>
+                            <li data-translate="docs_map_editor_enclave_step_1">Создайте основную часть провинции</li>
+                            <li data-translate="docs_map_editor_enclave_step_2">Нажмите кнопку ">>" под текстом "Текущий анклав"</li>
+                            <li data-translate="docs_map_editor_enclave_step_3">Выберите enclave_2 в списке</li>
+                            <li data-translate="docs_map_editor_enclave_step_4">Создайте контур анклава</li>
+                            <li data-translate="docs_map_editor_enclave_step_5">Повторите процесс для каждого дополнительного анклава</li>
+                        </ol>
+                    </section>
+
+                    <section id="map-editor-water">
+                        <h2 data-translate="docs_map_editor_water_title">Водные провинции</h2>
+                        <p data-translate="docs_map_editor_water_desc">Водные провинции создаются так же, как и обычные, но имеют некоторые особенности:</p>
+                        
+                        <div class="images-row">
+                            <div class="image-container">
+                                <img src="../docs/map-editor/water.png" alt="Создание водной провинции" class="medium">
+                                <div class="image-caption" data-translate="docs_map_editor_image_water">Создание водной провинции</div>
+                            </div>
+
+                            <div class="image-container">
+                                <img src="../docs/map-editor/island.png" alt="Добавление острова в водную провинцию" class="medium">
+                                <div class="image-caption" data-translate="docs_map_editor_image_island">Добавление острова в водную провинцию</div>
+                            </div>
+                        </div>
+
+                        <ul>
+                            <li data-translate="docs_map_editor_water_feature_1">Должны соприкасаться с другими провинциями через общие вершины</li>
+                            <li data-translate="docs_map_editor_water_feature_2">Могут содержать острова (как анклавы)</li>
+                            <li data-translate="docs_map_editor_water_feature_3">Рекомендуется использовать "High draw priority" для корректного отображения</li>
+                        </ul>
+                    </section>
+
+                    <section id="map-editor-controls">
+                        <h2 data-translate="docs_map_editor_controls_title">Управление</h2>
+                        
+                        <h3 data-translate="docs_map_editor_province_controls">Работа с провинциями</h3>
+                        <ul>
+                            <li><strong data-translate="docs_map_editor_control_arrows">&lt;&lt; и &gt;&gt;</strong> - <span data-translate="docs_map_editor_control_arrows_desc">Переключение между анклавами</span></li>
+                            <li><strong>New province</strong> - <span data-translate="docs_map_editor_control_new_desc">Создание новой провинции</span></li>
+                            <li><strong>Remove Province</strong> - <span data-translate="docs_map_editor_control_remove_desc">Удаление провинции</span></li>
+                            <li><strong>Select Province</strong> - <span data-translate="docs_map_editor_control_select_desc">Выбор провинции</span></li>
+                            <li><strong>High draw priority</strong> - <span data-translate="docs_map_editor_control_priority_desc">Приоритет отрисовки (для островов/озёр)</span></li>
+                        </ul>
+
+                        <h3 data-translate="docs_map_editor_vertex_controls">Работа с вершинами</h3>
+                        <ul>
+                            <li><strong>Add vertice</strong> - <span data-translate="docs_map_editor_vertex_add_desc">Режим добавления вершин</span></li>
+                            <li><strong>Move vertice</strong> - <span data-translate="docs_map_editor_vertex_move_desc">Перемещение выбранной вершины</span></li>
+                            <li><strong>Remove Vertice</strong> - <span data-translate="docs_map_editor_vertex_remove_desc">Удаление вершины</span></li>
+                            <li><strong>Select vertice</strong> - <span data-translate="docs_map_editor_vertex_select_desc">Выбор вершины</span></li>
+                            <li><strong>Set province center</strong> - <span data-translate="docs_map_editor_vertex_center_desc">Установка центра провинции</span></li>
+                            <li><strong>Autofinish border</strong> - <span data-translate="docs_map_editor_vertex_autofinish_desc">Автоматическое завершение границы</span>
+                                <ul>
+                                    <li data-translate="docs_map_editor_vertex_autofinish_enclave_desc">При добавлении вершины автоматически добавляет путевые точки, если новая точка и две предыдущие находятся в одном анклаве</li>
+                                    <li data-translate="docs_map_editor_vertex_autofinish_shift_desc">При зажатом Shift: добавьте две общие вершины границы между провинциями, затем с зажатым Shift нажмите на последнюю общую точку - редактор автоматически проставит все промежуточные точки</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h3 data-translate="docs_map_editor_hotkeys">Горячие клавиши</h3>
+                        <ul>
+                            <li><strong data-translate="docs_map_editor_hotkey_shift">Shift + ЛКМ</strong> - <span data-translate="docs_map_editor_hotkey_shift_desc">Автозавершение границ</span></li>
+                            <li><strong>H</strong> - <span data-translate="docs_map_editor_hotkey_h_desc">Скрыть/показать вершины</span></li>
+                            <li><strong>J</strong> - <span data-translate="docs_map_editor_hotkey_j_desc">Скрыть/показать полигоны</span></li>
+                        </ul>
+
+                        <h3 data-translate="docs_map_editor_top_panel">Верхняя панель</h3>
+                        <ul>
+                            <li><strong>Import</strong> - <span data-translate="docs_map_editor_panel_import_desc">Импорт файла output.map</span></li>
+                            <li><strong>Export</strong> - <span data-translate="docs_map_editor_panel_export_desc">Экспорт в output.map</span></li>
+                            <li><strong>Show/hide game objects</strong> - <span data-translate="docs_map_editor_panel_objects_desc">Показать/скрыть вершины</span></li>
+                            <li><strong>Show/Hide labels</strong> - <span data-translate="docs_map_editor_panel_labels_desc">Показать/скрыть номера вершин</span></li>
+                            <li><strong>Show/Hide polygons</strong> - <span data-translate="docs_map_editor_panel_polygons_desc">Показать/скрыть линии полигонов</span></li>
+                            <li><strong>Reload source.png</strong> - <span data-translate="docs_map_editor_panel_reload_desc">Перезагрузить фоновое изображение</span></li>
+                            <li><strong>Find province</strong> - <span data-translate="docs_map_editor_panel_find_desc">Поиск провинции</span></li>
+                            <li><strong>Map name</strong> - <span data-translate="docs_map_editor_panel_name_desc">Название карты в игре</span></li>
+                            <li><strong>Size multiplier</strong> - <span data-translate="docs_map_editor_panel_size_desc">Множитель размера иконок (0.1-3)</span></li>
+                        </ul>
+                    </section>
+
+                    <section id="map-editor-testing">
+                        <h2 data-translate="docs_map_editor_testing_title">Тестирование карты</h2>
+                        <p data-translate="docs_map_editor_testing_desc">Существует два способа протестировать созданную карту:</p>
+                        
+                        <div class="images-row">
+                            <div class="image-container">
+                                <img src="../docs/map-editor/map-viewer.png" alt="Просмотр карты в редакторе" class="large">
+                                <div class="image-caption" data-translate="docs_map_editor_image_map_viewer">Просмотр карты в редакторе</div>
+                            </div>
+                        </div>
+
+                        <h3 data-translate="docs_map_editor_testing_editor">В редакторе карт</h3>
+                        <ol>
+                            <li data-translate="docs_map_editor_testing_editor_step_1">Переименуйте файл в output.map</li>
+                            <li data-translate="docs_map_editor_testing_editor_step_2">Откройте режим просмотра карт (Map Viewer)</li>
+                        </ol>
+
+                        <h3 data-translate="docs_map_editor_testing_game">В игре</h3>
+                        <ol>
+                            <li data-translate="docs_map_editor_testing_game_step_1">Переместите файл карты в соответствующую папку игры</li>
+                            <li data-translate="docs_map_editor_testing_game_step_2">Запустите игру</li>
+                            <li data-translate="docs_map_editor_testing_game_step_3">Выберите карту в меню "Новая игра"</li>
+                        </ol>
+                    </section>
+                </div>
+            </div>
+        </main>
     </div>
 
     <!-- Выпадающее меню аккаунта -->
@@ -506,7 +712,7 @@
         <div class="account-divider"></div>
         <a href="#" class="account-item" data-action="discord">
             <svg viewBox="0 0 24 24">
-                <path d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09c-.01-.02-.04-.03-.07-.03c-1.5.26-2.93.71-4.27 1.33c-.01 0-.02.01-.03.02c-2.72 4.07-3.47 8.03-3.1 11.95c0 .02.01.04.03.05c1.8 1.32 3.53 2.12 5.24 2.65c.03.01.06 0 .07-.02c.4-.55.76-1.13 1.07-1.74c.02-.04 0-.08-.04-.09c-.57-.22-1.11-.48-1.64-.78c-.04-.02-.04-.08-.01-.11c.11-.08.22-.17.33-.25c.02-.02.05-.02.07-.01c3.44 1.57 7.15 1.57 10.55 0c.02-.01.05-.01.07.01c.11.09.22.17.33.26c.04.03.04.09-.01.11c-.52.31-1.07.56-1.64.78c-.04.01-.05.06-.04.09c.32.61.68 1.19 1.07 1.74c.03.01.06.02.09.01c1.72-.53 3.45-1.33 5.25-2.65c.02-.01.03-.03.03-.05c.44-4.53-.73-8.46-3.1-11.95c-.01-.01-.02-.02-.04-.02zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.83 2.12-1.89 2.12z"></path>
+                <path d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09c-.01-.02-.04-.03-.07-.03c-1.5.26-2.93.71-4.27 1.33c-.01 0-.02.01-.03.02c-2.72 4.07-3.47 8.03-3.1 11.95c0 .02.01.04.03.05c1.8 1.32 3.53 2.12 5.24 2.65c.03.01.06 0 .07-.02c.4-.55.76-1.13 1.07-1.74c.02-.04 0-.08-.04-.09c-.57-.22-1.11-.48-1.64-.78c-.04-.02-.04-.04-.08-.01-.11c.11-.08.22-.17.33-.25c.02-.02.05-.02.07-.01c3.44 1.57 7.15 1.57 10.55 0c.02-.01.05-.01.07.01c.11.09.22.17.33.26c.04.03.04.09-.01.11c-.52.31-1.07.56-1.64.78c-.04.01-.05.06-.04.09c.32.61.68 1.19 1.07 1.74c.03.01.06.02.09.01c1.72-.53 3.45-1.33 5.25-2.65c.02-.01.03-.03.03-.05c.44-4.53-.73-8.46-3.1-11.95c-.01-.01-.02-.02-.02-.02-.04-.02zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.83 2.12-1.89 2.12z"></path>
             </svg>
             <span data-translate="docs_discord">Discord</span>
         </a>
