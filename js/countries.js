@@ -552,6 +552,12 @@ class CountryManager {
                 this.saveChanges();
             });
         });
+
+        // Добавляем обработчик для кнопки выбора цвета
+        document.getElementById('pick-country-color')?.addEventListener('click', () => this.openColorPicker());
+        
+        // Добавляем обработчик для input color
+        document.getElementById('country-color-picker')?.addEventListener('input', (e) => this.handleColorPick(e));
     }
 
     initModal() {
@@ -1580,6 +1586,56 @@ class CountryManager {
 
         // Показываем модальное окно
         modal.classList.add('active');
+    }
+
+    openColorPicker() {
+        const colorPicker = document.getElementById('country-color-picker');
+        if (colorPicker) {
+            const r = document.getElementById('country-color-r').value;
+            const g = document.getElementById('country-color-g').value;
+            const b = document.getElementById('country-color-b').value;
+            const hexColor = this.rgbToHex(parseInt(r), parseInt(g), parseInt(b));
+            colorPicker.value = hexColor;
+            colorPicker.click();
+        }
+    }
+
+    handleColorPick(e) {
+        const hexColor = e.target.value;
+        const rgb = this.hexToRgb(hexColor);
+        if (rgb) {
+            document.getElementById('country-color-r').value = rgb.r;
+            document.getElementById('country-color-g').value = rgb.g;
+            document.getElementById('country-color-b').value = rgb.b;
+            this.updateCountryColorPreview();
+        }
+    }
+
+    rgbToHex(r, g, b) {
+        return '#' + [r, g, b].map(x => {
+            const hex = x.toString(16);
+            return hex.length === 1 ? '0' + hex : hex;
+        }).join('');
+    }
+
+    hexToRgb(hex) {
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : null;
+    }
+
+    updateCountryColorPreview() {
+        const r = document.getElementById('country-color-r').value;
+        const g = document.getElementById('country-color-g').value;
+        const b = document.getElementById('country-color-b').value;
+        const preview = document.getElementById('country-color-preview');
+        if (preview) {
+            preview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+        }
+        this.saveChanges();
     }
 }
 

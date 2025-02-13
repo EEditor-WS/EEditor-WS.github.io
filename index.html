@@ -508,11 +508,22 @@
                     <div class="form-group">
                         <label for="country-color" data-translate="color">Цвет</label>
                         <div class="color-inputs">
-                            <input type="number" id="country-color-r" name="color_r" min="0" max="255" step="0.001" class="color-input main-page-input" data-translate="color_r" title="R">
-                            <input type="number" id="country-color-g" name="color_g" min="0" max="255" step="0.001" class="color-input main-page-input" data-translate="color_g" title="G">
-                            <input type="number" id="country-color-b" name="color_b" min="0" max="255" step="0.001" class="color-input main-page-input" data-translate="color_b" title="B">
-                            <button type="button" id="random-country-color" class="icon-action-button back" title="Random Color">R</button>
                             <div class="color-preview" id="country-color-preview"></div>
+                            <input type="number" id="country-color-r" min="0" max="255" placeholder="R">
+                            <input type="number" id="country-color-g" min="0" max="255" placeholder="G">
+                            <input type="number" id="country-color-b" min="0" max="255" placeholder="B">
+                            <button id="pick-country-color" class="icon-action-button back" title="Выбрать цвет">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2l4 4-10 10-4-4 10-10z"/>
+                                    <path d="M9 15l-2 5 5-2-3-3z"/>
+                                </svg>
+                            </button>
+                            <input type="color" id="country-color-picker">
+                            <button id="random-country-color" class="icon-action-button back" title="Случайный цвет">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                </svg>
+                            </button>
                         </div>
                     </div>
                     <div class="form-group">
@@ -1132,22 +1143,24 @@
                         <input type="text" id="reform-name" class="main-page-input" required autocomplete="off">
                     </div>
                     <div class="form-group">
-                        <label data-translate="color">Цвет</label>
+                        <label for="reform-color" data-translate="color">Цвет</label>
                         <div class="color-inputs">
-                            <div class="color-input">
-                                <label for="reform-color-r" data-translate="color_r">R</label>
-                                <input type="number" id="reform-color-r" class="main-page-input" min="0" max="255" required>
-                            </div>
-                            <div class="color-input">
-                                <label for="reform-color-g" data-translate="color_g">G</label>
-                                <input type="number" id="reform-color-g" class="main-page-input" min="0" max="255" required>
-                            </div>
-                            <div class="color-input">
-                                <label for="reform-color-b" data-translate="color_b">B</label>
-                                <input type="number" id="reform-color-b" class="main-page-input" min="0" max="255" required>
-                            </div>
-                            <button type="button" id="random-reform-color" class="icon-action-button back">R</button>
                             <div id="reform-color-preview" class="color-preview"></div>
+                            <input type="number" id="reform-color-r" min="0" max="255" placeholder="R">
+                            <input type="number" id="reform-color-g" min="0" max="255" placeholder="G">
+                            <input type="number" id="reform-color-b" min="0" max="255" placeholder="B">
+                            <button id="pick-reform-color" class="icon-action-button back" title="Выбрать цвет">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2l4 4-10 10-4-4 10-10z"/>
+                                    <path d="M9 15l-2 5 5-2-3-3z"/>
+                                </svg>
+                            </button>
+                            <input type="color" id="reform-color-picker">
+                            <button id="random-reform-color" class="icon-action-button back" title="Случайный цвет">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                </svg>
+                            </button>
                         </div>
                     </div>
                     <div class="form-group">
