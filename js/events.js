@@ -115,10 +115,17 @@ class EventManager {
     }
 
     updateEventsList() {
-        if (!this.jsonData?.custom_events) return;
+        console.log('Обновление списка событий...');
+        if (!this.jsonData?.custom_events) {
+            console.warn('Нет данных о событиях');
+            return;
+        }
 
         const tbody = document.getElementById('events-list');
-        if (!tbody) return;
+        if (!tbody) {
+            console.error('Не найден элемент events-list');
+            return;
+        }
 
         tbody.innerHTML = '';
 
@@ -168,6 +175,7 @@ class EventManager {
         events.forEach(event => {
             const tr = document.createElement('tr');
             tr.style.cursor = 'pointer';
+            tr.setAttribute('data-event-id', event.id);
             tr.addEventListener('click', () => this.openEvent(event.id));
 
             const idCell = document.createElement('td');
@@ -189,6 +197,8 @@ class EventManager {
 
             tbody.appendChild(tr);
         });
+
+        console.log('Список событий обновлен');
     }
 
     initEventListeners() {
@@ -206,7 +216,7 @@ class EventManager {
             form.addEventListener('submit', (e) => e.preventDefault());
         }
 
-        // Обработчики изменения изображений
+        // Обработчики изображений
         document.getElementById('event-image')?.addEventListener('change', (e) => {
             this.updateImagePreview(e.target.value);
         });
@@ -241,9 +251,6 @@ class EventManager {
             this.switchToEventsList();
         });
 
-        // Кнопка возврата к списку событий
-        document.getElementById('back-to-events-list')?.addEventListener('click', () => this.backToEventsList());
-
         // Обработчики фильтров
         document.querySelectorAll('#events .th-filter').forEach(button => {
             button.addEventListener('click', (e) => {
@@ -268,6 +275,107 @@ class EventManager {
         document.getElementById('clear-events-filters')?.addEventListener('click', () => {
             this.clearAllFilters();
         });
+
+        // Обработчик для кнопки возврата к списку событий
+        document.getElementById('back-to-events-list')?.addEventListener('click', () => this.backToEventsList());
+
+        // Добавляем обработчик контекстного меню для таблицы событий
+        const tbody = document.getElementById('events-list');
+        if (tbody) {
+            tbody.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const tr = e.target.closest('tr');
+                if (!tr) return;
+
+                const eventId = tr.getAttribute('data-event-id');
+                if (!eventId) return;
+
+                console.log('Открытие контекстного меню для события:', eventId);
+
+                // Удаляем старое меню, если оно есть
+                const oldMenu = document.querySelector('.context-menu');
+                if (oldMenu) {
+                    document.body.removeChild(oldMenu);
+                }
+
+                // Создаем новое контекстное меню
+                const contextMenu = document.createElement('div');
+                contextMenu.className = 'context-menu';
+                
+                // Получаем размеры окна
+                const windowWidth = window.innerWidth;
+                const windowHeight = window.innerHeight;
+
+                // Добавляем пункты меню
+                contextMenu.innerHTML = `
+                    <div class="context-menu-item" id="duplicate-event-context">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span>${window.translator.translate('duplicate')}</span>
+                    </div>
+                    <div class="context-menu-item delete" id="delete-event-context">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 6h18"></path>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>
+                        <span>${window.translator.translate('delete')}</span>
+                    </div>
+                `;
+
+                document.body.appendChild(contextMenu);
+
+                // Получаем размеры меню
+                const menuRect = contextMenu.getBoundingClientRect();
+                
+                // Позиционируем меню
+                let x = e.clientX;
+                let y = e.clientY;
+
+                // Проверяем правую границу
+                if (x + menuRect.width > windowWidth) {
+                    x = windowWidth - menuRect.width;
+                }
+                
+                // Проверяем нижнюю границу
+                if (y + menuRect.height > windowHeight) {
+                    y = windowHeight - menuRect.height;
+                }
+
+                // Устанавливаем позицию меню
+                contextMenu.style.position = 'fixed';
+                contextMenu.style.left = x + 'px';
+                contextMenu.style.top = y + 'px';
+
+                // Добавляем обработчики для пунктов меню
+                document.getElementById('duplicate-event-context')?.addEventListener('click', () => {
+                    console.log('Дублирование события:', eventId);
+                    this.copyCurrentEvent(eventId);
+                    document.body.removeChild(contextMenu);
+                });
+
+                document.getElementById('delete-event-context')?.addEventListener('click', () => {
+                    console.log('Удаление события:', eventId);
+                    this.deleteCurrentEvent(eventId);
+                    document.body.removeChild(contextMenu);
+                });
+
+                // Закрываем меню при клике вне его
+                const closeMenu = (e) => {
+                    if (!contextMenu.contains(e.target)) {
+                        document.body.removeChild(contextMenu);
+                        document.removeEventListener('click', closeMenu);
+                        document.removeEventListener('contextmenu', closeMenu);
+                    }
+                };
+
+                document.addEventListener('click', closeMenu);
+                document.addEventListener('contextmenu', closeMenu);
+            });
+        }
     }
 
     createNewEvent() {
@@ -483,8 +591,18 @@ class EventManager {
         itemDiv.className = 'array-list-item';
 
         const isRequirement = container.id.includes('requirements');
+        
+        // Список бонусов без длительности
+        const bonusesWithoutDuration = [
+            'add_oil', 'add_cruiser', 'add_random_culture_population', 
+            'add_shock_infantry', 'discontent', 'add_tank', 'add_artillery', 'army_losses', 
+            'prestige', 'add_battleship', 'add_infantry', 'science', 'money'
+        ];
+
         const content = isRequirement ? 
             `${item.type} ${item.action || ''} ${item.value}${item.subtype ? ` (${item.subtype})` : ''}` :
+            bonusesWithoutDuration.includes(item.type) ?
+                `${item.type} ${item.value}` :
             `${item.type} ${item.value}${item.duration ? ` на ${item.duration} ходов` : ''}${item.subtype ? ` (${item.subtype})` : ''}`;
 
         itemDiv.innerHTML = `
@@ -759,6 +877,7 @@ class EventManager {
                 { value: 'add_cruiser', label: window.translator.translate('add_cruiser') },
                 { value: 'add_battleship', label: window.translator.translate('add_battleship') },
                 { value: 'add_tank', label: window.translator.translate('add_tank') },
+                { value: 'add_artillery', label: window.translator.translate('add_artillery') },
                 { value: 'add_shock_infantry', label: window.translator.translate('add_shock_infantry') },
                 { value: 'add_infantry', label: window.translator.translate('add_infantry') },
                 { value: 'army_losses', label: window.translator.translate('army_losses') },
@@ -941,6 +1060,13 @@ class EventManager {
             valueContainer.innerHTML = '';
 
             if (this.isEditingBonus) {
+                if (durationInput) {
+                    if (window.reqbonConfig?.bonuses?.[selectedType]?.hasDuration) {
+                        durationInput.parentElement.style.display = 'block';
+                    } else {
+                        durationInput.parentElement.style.display = 'none';
+                    }
+                }
                 // Новые бонусы
                 if (['accelerated_recruit_cost', 'maintaining_army_cost_multiplier', 'population_increase', 'recruit_cost'].includes(selectedType)) {
                     // Для процентных значений с длительностью
@@ -951,11 +1077,6 @@ class EventManager {
                     input.className = 'main-page-input';
                     input.placeholder = window.translator.translate('enter_percent');
                     valueContainer.appendChild(input);
-
-                    // Показываем поле длительности
-                    if (durationInput) {
-                        durationInput.parentElement.style.display = 'block';
-                    }
                 } else if (selectedType === 'change_country') {
                     // Для выбора страны без длительности
                     subtypeGroup.style.display = 'none';
@@ -970,11 +1091,6 @@ class EventManager {
                                 `<option value="${country.id}">${country.name}</option>`
                             ).join('');
                     valueContainer.appendChild(select);
-
-                    // Скрываем поле длительности
-                    if (durationInput) {
-                        durationInput.parentElement.style.display = 'none';
-                    }
                 } else if (selectedType === 'add_culture_population') {
                     // Для добавления населения культуры с подтипом страны
                     subtypeGroup.style.display = 'block';
@@ -989,7 +1105,7 @@ class EventManager {
                     }));
                     countrySelect.innerHTML = countries.map(country => 
                         `<option value="${country.id}">${country.name}</option>`
-                    ).join('');
+                            ).join('');
                     // Заменяем текстовое поле на выпадающий список
                     subtypeInput.parentNode.replaceChild(countrySelect, subtypeInput);
 
@@ -1000,11 +1116,6 @@ class EventManager {
                         input.className = 'main-page-input';
                         input.placeholder = window.translator.translate('enter_number');
                         valueContainer.appendChild(input);
-
-                    // Показываем поле длительности
-                    if (durationInput) {
-                        durationInput.parentElement.style.display = 'block';
-                    }
                 } else if (['resurrect_country', 'annex_country'].includes(selectedType)) {
                     // Существующая логика для старых бонусов
                         const select = document.createElement('select');
@@ -1019,26 +1130,20 @@ class EventManager {
                         ).join('');
                         valueContainer.appendChild(select);
                     subtypeGroup.style.display = 'none';
-                if (durationInput) {
-                        durationInput.parentElement.style.display = 'block';
-                    }
                 } else if (['diplomacy_lift_sanctions', 'diplomacy_sanctions', 'diplomacy_pact', 'diplomacy_alliance', 'diplomacy_peace', 'diplomacy_war'].includes(selectedType)) {
                     // Для дипломатических действий со странами
                     const select = document.createElement('select');
                     select.id = 'requirement-value';
                     select.className = 'main-page-input';
                     const countries = Object.entries(this.jsonData.lands || {}).map(([id, country]) => ({
-                                id,
+                        id,
                         name: country.name
-                            }));
+                    }));
                     select.innerHTML = countries.map(country => 
                         `<option value="${country.id}">${country.name}</option>`
-                            ).join('');
+                    ).join('');
                     valueContainer.appendChild(select);
                     subtypeGroup.style.display = 'none';
-                    if (durationInput) {
-                        durationInput.parentElement.style.display = 'block';
-                    }
                 } else if (['relation_ideology_change'].includes(selectedType)) {
                     // Для изменения идеологии
                     subtypeGroup.style.display = 'block';
@@ -1053,7 +1158,6 @@ class EventManager {
                         window.translator.translate('communism'),
                         window.translator.translate('fascism'),
                         window.translator.translate('theocracy'),
-                        window.translator.translate('paganism'),
                         window.translator.translate('trade_republic')
                     ];
                     ideologySelect.innerHTML = ideologies.map(ideology => 
@@ -1068,9 +1172,6 @@ class EventManager {
                     input.className = 'main-page-input';
                     input.placeholder = window.translator.translate('enter_number');
                     valueContainer.appendChild(input);
-                    if (durationInput) {
-                        durationInput.parentElement.style.display = 'block';
-                    }
                 } else if (['relation_change'].includes(selectedType)) {
                     // Для изменения отношений
                     subtypeGroup.style.display = 'block';
@@ -1085,7 +1186,7 @@ class EventManager {
                     }));
                     countrySelect.innerHTML = countries.map(country => 
                         `<option value="${country.id}">${country.name}</option>`
-                    ).join('');
+                            ).join('');
                     // Заменяем текстовое поле на выпадающий список
                     subtypeInput.parentNode.replaceChild(countrySelect, subtypeInput);
 
@@ -1095,9 +1196,6 @@ class EventManager {
                     input.className = 'main-page-input';
                     input.placeholder = window.translator.translate('enter_percent');
                     valueContainer.appendChild(input);
-                    if (durationInput) {
-                        durationInput.parentElement.style.display = 'block';
-                    }
                 } else if (['defense', 'attack', 'population_income', 'building_cost'].includes(selectedType)) {
                     // Для процентных значений
                     subtypeGroup.style.display = 'none';
@@ -1107,11 +1205,8 @@ class EventManager {
                     input.className = 'main-page-input';
                     input.placeholder = window.translator.translate('enter_percent');
                     valueContainer.appendChild(input);
-                    if (durationInput) {
-                        durationInput.parentElement.style.display = 'block';
-                    }
-                } else if (['add_oil', 'add_cruiser', 'add_random_culture_population', 'add_shock_infantry', 'discontent', 'add_tank', 'army_losses', 'prestige', 'add_battleship', 'add_infantry', 'science', 'money'].includes(selectedType)) {
-                    // Для числовых значений
+                } else if (['add_oil', 'add_cruiser', 'add_random_culture_population', 'add_shock_infantry', 'discontent', 'add_tank', 'add_artillery', 'army_losses', 'prestige', 'add_battleship', 'add_infantry', 'science', 'money'].includes(selectedType)) {
+                    // Для числовых значений без длительности
                     subtypeGroup.style.display = 'none';
                         const input = document.createElement('input');
                         input.type = 'number';
@@ -1119,17 +1214,14 @@ class EventManager {
                         input.className = 'main-page-input';
                         input.placeholder = window.translator.translate('enter_number');
                         valueContainer.appendChild(input);
-                    if (durationInput) {
-                        durationInput.parentElement.style.display = 'block';
-                    }
                 }
             } else {
                 // Для требований оставляем существующую логику
                 if (['near_water', 'independent_land', 'no_enemy', 'enemy_near_capital', 'lost_capital'].includes(selectedType)) {
                         valueContainer.innerHTML = `
                             <select id="requirement-value" class="main-page-input">
-                            <option value='true'>${window.translator.translate('yes')}</option>
-                            <option value='false'>${window.translator.translate('no')}</option>
+                        <option value='true'>${window.translator.translate('yes')}</option>
+                        <option value='false'>${window.translator.translate('no')}</option>
                             </select>
                         `;
                     subtypeGroup.style.display = 'none';
@@ -1267,7 +1359,7 @@ class EventManager {
             const numericTypes = ['month', 'num_of_provinces', 'year', 'turn', 'random_value', 
                 'count_of_tasks', 'tax', 'discontent', 'money', 'land_power', 'defense', 
                 'attack', 'population_income', 'building_cost', 'add_oil', 'add_cruiser', 
-                'add_random_culture_population', 'add_shock_infantry', 'add_tank', 
+                'add_random_culture_population', 'add_shock_infantry', 'add_tank', 'add_artillery',
                 'army_losses', 'prestige', 'add_battleship', 'add_infantry', 'science'];
 
             // Проверяем и обрабатываем булевы значения
@@ -1551,6 +1643,7 @@ class EventManager {
 document.addEventListener('DOMContentLoaded', function() {
     window.eventManager = new EventManager();
 });
+
 function createRequirementEditor() {
     const modal = document.createElement('div');
     modal.className = 'modal';

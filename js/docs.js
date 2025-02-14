@@ -70,22 +70,42 @@ document.addEventListener('DOMContentLoaded', () => {
             const section = link.closest('.nav-section');
             if (!section) return;
 
-            // Убираем активный класс у всех ссылок в текущей секции
+            const listItem = link.closest('li');
+            const sublist = listItem?.querySelector('ul');
+            const href = link.getAttribute('href');
+            
+            // Если это элемент с подкатегориями и клик был на стрелке
+            if (sublist && e.target.closest('.collapse-button')) {
+                listItem.classList.toggle('collapsed');
+                localStorage.setItem(`nav-item-${href}`, listItem.classList.contains('collapsed'));
+                return;
+            }
+
+            // Для всех ссылок (с подкатегориями или без)
             section.querySelectorAll('a').forEach(l => l.classList.remove('active'));
             link.classList.add('active');
 
-            // Получаем якорь и скроллим к нему
-            const anchor = link.getAttribute('href')?.substring(1);
-            if (!anchor) return;
+            if (!href || !href.startsWith('#')) return;
 
             const sectionId = section.getAttribute('data-section');
             if (!sectionId) return;
 
-            const targetElement = document.querySelector(`#${sectionId} .docs-content`);
-            if (!targetElement) return;
+            // Разворачиваем все родительские категории
+            let parent = link.parentElement;
+            while (parent && !parent.classList.contains('nav-section')) {
+                if (parent.tagName === 'LI' && parent.classList.contains('collapsed')) {
+                    parent.classList.remove('collapsed');
+                    const parentLink = parent.querySelector('a');
+                    if (parentLink) {
+                        const parentHref = parentLink.getAttribute('href');
+                        localStorage.setItem(`nav-item-${parentHref}`, 'false');
+                    }
+                }
+                parent = parent.parentElement;
+            }
 
             // Находим заголовок и скроллим к нему
-            const heading = targetElement.querySelector(`#${anchor}`);
+            const heading = document.querySelector(href);
             if (heading) {
                 heading.scrollIntoView({ 
                     behavior: 'smooth',
@@ -93,9 +113,69 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 // Добавляем якорь в URL
-                history.pushState(null, '', `#${anchor}`);
+                history.pushState(null, '', href);
             }
         });
+    });
+
+    // Инициализация сворачивания разделов
+    const sections = document.querySelectorAll('.nav-section');
+    sections.forEach(section => {
+        const title = section.querySelector('.nav-section-title');
+        if (title) {
+            // Восстанавливаем состояние из localStorage
+            const sectionId = section.getAttribute('data-section');
+            const isCollapsed = localStorage.getItem(`section-${sectionId}-collapsed`) === 'true';
+            
+            if (isCollapsed) {
+                section.classList.add('collapsed');
+            }
+
+            // Добавляем обработчик клика на заголовок
+            title.addEventListener('click', (e) => {
+                section.classList.toggle('collapsed');
+                localStorage.setItem(`section-${sectionId}-collapsed`, section.classList.contains('collapsed'));
+            });
+        }
+    });
+
+    // Инициализация состояния подкатегорий
+    document.querySelectorAll('.nav-section li').forEach(item => {
+        const sublist = item.querySelector('ul');
+        const link = item.querySelector('a');
+
+        if (sublist && link) {
+            // Создаем кнопку сворачивания
+            const collapseButton = document.createElement('button');
+            collapseButton.className = 'collapse-button';
+            collapseButton.innerHTML = `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            `;
+            
+            // Добавляем кнопку после ссылки
+            link.parentNode.insertBefore(collapseButton, link.nextSibling);
+
+            // Добавляем класс collapsed по умолчанию
+            item.classList.add('collapsed');
+
+            // Восстанавливаем состояние из localStorage
+            const itemId = link.getAttribute('href');
+            const isCollapsed = localStorage.getItem(`nav-item-${itemId}`) !== 'false';
+            
+            if (!isCollapsed) {
+                item.classList.remove('collapsed');
+            }
+
+            // Обработчик клика по кнопке сворачивания
+            collapseButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                item.classList.toggle('collapsed');
+                localStorage.setItem(`nav-item-${itemId}`, item.classList.contains('collapsed'));
+            });
+        }
     });
 
     // Функция поиска
@@ -207,4 +287,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Обработка изменения хэша в URL
     window.addEventListener('hashchange', handleInitialHash);
+
+    // Функция для раскрытия родительских категорий при переходе по якорю
+    function expandParentCategories(targetElement) {
+        let current = targetElement;
+        while (current && !current.classList.contains('nav-section')) {
+            if (current.tagName === 'LI' && current.classList.contains('collapsed')) {
+                current.classList.remove('collapsed');
+                const link = current.querySelector('a');
+                if (link) {
+                    const itemId = link.getAttribute('href');
+                    localStorage.setItem(`nav-item-${itemId}`, 'false');
+                }
+            }
+            current = current.parentElement;
+        }
+    }
+
+    // Обработка кликов по ссылкам в навигации
+    document.querySelectorAll('.nav-section a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            if (href.startsWith('#')) {
+                const targetElement = document.querySelector(href);
+                if (targetElement) {
+                    expandParentCategories(link.parentElement);
+                }
+            }
+        });
+    });
 });

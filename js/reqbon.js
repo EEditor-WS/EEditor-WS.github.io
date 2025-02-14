@@ -14,11 +14,13 @@ const reqbonConfig = {
         population_increase: { hasDuration: true },
         recruit_cost: { hasDuration: true },
         add_culture_population: { hasDuration: true },
+        discontent: { hasDuration: true },
 
         // Бонусы без длительности
         resurrect_country: { hasDuration: false },
         add_oil: { hasDuration: false },
         add_cruiser: { hasDuration: false },
+        add_artillery: { hasDuration: false },
         diplomacy_lift_sanctions: { hasDuration: false },
         diplomacy_sanctions: { hasDuration: false },
         diplomacy_pact: { hasDuration: false },
@@ -26,7 +28,6 @@ const reqbonConfig = {
         diplomacy_alliance: { hasDuration: false },
         diplomacy_peace: { hasDuration: false },
         add_shock_infantry: { hasDuration: false },
-        discontent: { hasDuration: false },
         annex_country: { hasDuration: false },
         add_tank: { hasDuration: false },
         diplomacy_war: { hasDuration: false },

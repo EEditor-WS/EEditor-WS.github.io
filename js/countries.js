@@ -68,10 +68,17 @@ class CountryManager {
 
     // Модифицируем метод updateCountriesList
     updateCountriesList() {
-        if (!this.jsonData?.lands) return;
+        console.log('Обновление списка стран...');
+        if (!this.jsonData?.lands) {
+            console.warn('Нет данных о странах');
+            return;
+        }
 
         const tbody = document.getElementById('countries-list');
-        if (!tbody) return;
+        if (!tbody) {
+            console.error('Не найден элемент countries-list');
+            return;
+        }
 
         tbody.innerHTML = '';
 
@@ -97,6 +104,8 @@ class CountryManager {
                 capital_name: country.capital_name || '',
                 ...country
             }));
+
+        console.log('Найдено стран:', countries.length);
 
         // Применяем фильтры
         countries = countries.filter(country => {
@@ -186,15 +195,46 @@ class CountryManager {
             const tr = document.createElement('tr');
             tr.setAttribute('data-country-id', country.id);
             tr.style.cursor = 'pointer';
-            tr.onclick = (e) => {
+
+            // Создаем ячейки таблицы
+            const colorCell = document.createElement('td');
+            colorCell.setAttribute('data-country-id', country.id);
+            const colorDiv = document.createElement('div');
+            colorDiv.className = 'country-color';
+            colorDiv.style.backgroundColor = this.colorToRgb(country.color);
+            colorCell.appendChild(colorDiv);
+
+            const nameCell = document.createElement('td');
+            nameCell.setAttribute('data-country-id', country.id);
+            nameCell.textContent = country.name;
+
+            const sysNameCell = document.createElement('td');
+            sysNameCell.setAttribute('data-country-id', country.id);
+            sysNameCell.textContent = country.id;
+
+            const groupCell = document.createElement('td');
+            groupCell.setAttribute('data-country-id', country.id);
+            groupCell.textContent = country.group;
+
+            const provincesCell = document.createElement('td');
+            provincesCell.setAttribute('data-country-id', country.id);
+            provincesCell.textContent = country.provinces;
+
+            const capitalCell = document.createElement('td');
+            capitalCell.setAttribute('data-country-id', country.id);
+            capitalCell.textContent = country.capital_name;
+
+            // Добавляем обработчики событий
+            const handleClick = (e) => {
                 if (!e.target.closest('.context-menu')) {
                     this.openCountry(country.id);
                 }
             };
-            tr.oncontextmenu = (e) => {
+
+            const handleContextMenu = (e) => {
+                console.log('Вызвано контекстное меню для страны:', country.id);
                 e.preventDefault();
-                const countryId = tr.getAttribute('data-country-id');
-                if (!countryId) return;
+                e.stopPropagation();
 
                 // Удаляем старое меню, если оно есть
                 const oldMenu = document.querySelector('.context-menu');
@@ -254,12 +294,14 @@ class CountryManager {
 
                 // Добавляем обработчики для пунктов меню
                 document.getElementById('duplicate-country-context')?.addEventListener('click', () => {
-                    this.copyCurrentCountry(countryId);
+                    console.log('Дублирование страны:', country.id);
+                    this.copyCurrentCountry(country.id);
                     document.body.removeChild(contextMenu);
                 });
 
                 document.getElementById('delete-country-context')?.addEventListener('click', () => {
-                    this.deleteCurrentCountry(countryId);
+                    console.log('Удаление страны:', country.id);
+                    this.deleteCurrentCountry(country.id);
                     document.body.removeChild(contextMenu);
                 });
 
@@ -276,27 +318,11 @@ class CountryManager {
                 document.addEventListener('contextmenu', closeMenu);
             };
 
-            // Создаем ячейки таблицы
-            const colorCell = document.createElement('td');
-            const colorDiv = document.createElement('div');
-            colorDiv.className = 'country-color';
-            colorDiv.style.backgroundColor = this.colorToRgb(country.color);
-            colorCell.appendChild(colorDiv);
-
-            const nameCell = document.createElement('td');
-            nameCell.textContent = country.name;
-
-            const sysNameCell = document.createElement('td');
-            sysNameCell.textContent = country.id;
-
-            const groupCell = document.createElement('td');
-            groupCell.textContent = country.group;
-
-            const provincesCell = document.createElement('td');
-            provincesCell.textContent = country.provinces;
-
-            const capitalCell = document.createElement('td');
-            capitalCell.textContent = country.capital_name;
+            // Добавляем обработчики к каждой ячейке
+            [tr, colorCell, nameCell, sysNameCell, groupCell, provincesCell, capitalCell].forEach(element => {
+                element.addEventListener('click', handleClick);
+                element.addEventListener('contextmenu', handleContextMenu);
+            });
 
             tr.appendChild(colorCell);
             tr.appendChild(nameCell);
@@ -316,6 +342,8 @@ class CountryManager {
                 header.classList.add(`sort-${this.sortDirection}`);
             }
         });
+
+        console.log('Список стран обновлен');
     }
 
     initEventListeners() {
@@ -442,99 +470,6 @@ class CountryManager {
         document.getElementById('refresh-countries')?.addEventListener('click', () => {
             this.updateCountriesList();
         });
-
-        // Добавляем обработчик контекстного меню для таблицы стран
-        const tbody = document.querySelector('.countries-table tbody');
-        if (tbody) {
-            tbody.addEventListener('contextmenu', (e) => {
-                const tr = e.target.closest('tr');
-                if (!tr) return;
-
-                e.preventDefault();
-                
-                const countryId = tr.getAttribute('data-country-id');
-                if (!countryId) return;
-
-                // Удаляем старое меню, если оно есть
-                const oldMenu = document.querySelector('.context-menu');
-                if (oldMenu) {
-                    document.body.removeChild(oldMenu);
-                }
-
-                // Создаем новое контекстное меню
-                const contextMenu = document.createElement('div');
-                contextMenu.className = 'context-menu';
-                
-                // Получаем размеры окна
-                const windowWidth = window.innerWidth;
-                const windowHeight = window.innerHeight;
-
-                // Добавляем пункты меню
-                contextMenu.innerHTML = `
-                    <div class="context-menu-item" id="duplicate-country-context">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                        </svg>
-                        <span>${window.translator.translate('duplicate')}</span>
-                    </div>
-                    <div class="context-menu-item delete" id="delete-country-context">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M3 6h18"></path>
-                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                        </svg>
-                        <span>${window.translator.translate('delete')}</span>
-                    </div>
-                `;
-
-                document.body.appendChild(contextMenu);
-
-                // Получаем размеры меню
-                const menuRect = contextMenu.getBoundingClientRect();
-                
-                // Позиционируем меню
-                let x = e.clientX;
-                let y = e.clientY;
-
-                // Проверяем правую границу
-                if (x + menuRect.width > windowWidth) {
-                    x = windowWidth - menuRect.width;
-                }
-                
-                // Проверяем нижнюю границу
-                if (y + menuRect.height > windowHeight) {
-                    y = windowHeight - menuRect.height;
-                }
-
-                // Устанавливаем позицию меню
-                contextMenu.style.position = 'fixed';
-                contextMenu.style.left = x + 'px';
-                contextMenu.style.top = y + 'px';
-
-                // Добавляем обработчики для пунктов меню
-                document.getElementById('duplicate-country-context')?.addEventListener('click', () => {
-                    this.copyCurrentCountry(countryId);
-                    document.body.removeChild(contextMenu);
-                });
-
-                document.getElementById('delete-country-context')?.addEventListener('click', () => {
-                    this.deleteCurrentCountry(countryId);
-                    document.body.removeChild(contextMenu);
-                });
-
-                // Закрываем меню при клике вне его
-                const closeMenu = (e) => {
-                    if (!contextMenu.contains(e.target)) {
-                        document.body.removeChild(contextMenu);
-                        document.removeEventListener('click', closeMenu);
-                        document.removeEventListener('contextmenu', closeMenu);
-                    }
-                };
-
-                document.addEventListener('click', closeMenu);
-                document.addEventListener('contextmenu', closeMenu);
-            });
-        }
     }
 
     initColorHandlers() {
@@ -711,8 +646,25 @@ class CountryManager {
             'country-capital': country.capital_name || '',
             'country-capital-id': country.capital || '',
             'country-defeated': country.defeated ? 'true' : 'false',
-            'country-political': country.political || ''
+            'country-political': country.political || '',
+            'country-vassalof': country.vassal_of || ''
         });
+
+        // Обработка поля vassal_of
+        const vassalofContainer = document.getElementById('vassalof-container');
+        const vassalofInput = document.getElementById('country-vassalof');
+        
+        if (country.hasOwnProperty('vassal_of') && country.vassal_of) {
+            // Получаем информацию о стране-сюзерене
+            const vassalCountry = this.jsonData.lands[country.vassal_of];
+            if (vassalCountry) {
+                vassalofInput.value = `${vassalCountry.name} - ${country.vassal_of}`;
+            } else {
+                vassalofInput.value = `${country.vassal_of}`;
+            }
+        } else {
+            vassalofInput.value = '';
+        }
 
         // Устанавливаем цвет
         if (Array.isArray(country.color) && country.color.length >= 3) {
@@ -1317,7 +1269,11 @@ class CountryManager {
         
         // Настраиваем заголовок с переводом
         const columnTitle = this.getColumnTitle(column);
-        title.textContent = `${this.getColumnTitle('filter')}: ${columnTitle}`;
+        title.setAttribute('data-translate-params', JSON.stringify({
+            key: 'filter',
+            column: columnTitle
+        }));
+        title.textContent = `${window.translator.translate('filter')}: ${columnTitle}`;
         
         // Настраиваем доступные операторы в зависимости от типа колонки
         this.setupOperators(column);
@@ -1350,27 +1306,27 @@ class CountryManager {
         switch (column) {
             case 'color':
                 options.push(
-                    { value: 'equals', text: 'filter_equals' },
-                    { value: 'not_equals', text: 'filter_not_equals' }
+                    { value: 'equals', key: 'filter_equals' },
+                    { value: 'not_equals', key: 'filter_not_equals' }
                 );
                 break;
             case 'provinces_count':
             case 'system_name':
                 options.push(
-                    { value: 'equals', text: 'filter_equals' },
-                    { value: 'not_equals', text: 'filter_not_equals' },
-                    { value: 'greater', text: 'filter_greater' },
-                    { value: 'less', text: 'filter_less' },
-                    { value: 'greater_equals', text: 'filter_greater_equals' },
-                    { value: 'less_equals', text: 'filter_less_equals' },
-                    { value: 'contains', text: 'filter_contains' }
+                    { value: 'equals', key: 'filter_equals' },
+                    { value: 'not_equals', key: 'filter_not_equals' },
+                    { value: 'greater', key: 'filter_greater' },
+                    { value: 'less', key: 'filter_less' },
+                    { value: 'greater_equals', key: 'filter_greater_equals' },
+                    { value: 'less_equals', key: 'filter_less_equals' },
+                    { value: 'contains', key: 'filter_contains' }
                 );
                 break;
             default:
                 options.push(
-                    { value: 'contains', text: 'filter_contains' },
-                    { value: 'equals', text: 'filter_equals' },
-                    { value: 'not_equals', text: 'filter_not_equals' }
+                    { value: 'contains', key: 'filter_contains' },
+                    { value: 'equals', key: 'filter_equals' },
+                    { value: 'not_equals', key: 'filter_not_equals' }
                 );
         }
 
@@ -1378,7 +1334,8 @@ class CountryManager {
         options.forEach(opt => {
             const option = document.createElement('option');
             option.value = opt.value;
-            option.textContent = this.getColumnTitle(opt.text);
+            option.setAttribute('data-translate', opt.key);
+            option.textContent = window.translator.translate(opt.key);
             operator.appendChild(option);
         });
     }
@@ -1640,132 +1597,9 @@ class CountryManager {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-
-    // Функция для обновления списка стран
-    function updateCountriesList(lands) {
-        const countriesList = document.getElementById('countries-list');
-        if (!countriesList || !lands) return;
-
-        // Очищаем текущий список
-        countriesList.innerHTML = '';
-
-        // Подсчитываем количество провинций
-        const provincesCount = {};
-        if (lands.provinces) {
-            for (const province of lands.provinces) {
-                if (province.owner) {
-                    provincesCount[province.owner] = (provincesCount[province.owner] || 0) + 1;
-                }
-            }
-        }
-
-        // Создаем отсортированный массив стран
-        const countriesArray = Object.entries(lands)
-            .filter(([id]) => id !== 'provinces')
-            .map(([id, country]) => ({
-                id,
-                name: country.name,
-                color: country.color,
-                provinces: provincesCount[id] || 0,
-                capital: country.capital_name || '',
-                ...country
-            }))
-            .sort((a, b) => {
-                // Специальная обработка для undeveloped_land - всегда в конце
-                if (a.id === 'undeveloped_land') return 1;
-                if (b.id === 'undeveloped_land') return -1;
-                
-                let comparison = 0;
-                
-                switch (this.sortColumn) {
-                    case 'name':
-                        comparison = a.name.toLowerCase().localeCompare(b.name.toLowerCase());
-                        break;
-                    case 'id':
-                        // Специальная обработка для civilization_N
-                        const aMatch = a.id.match(/^civilization_(\d+)$/);
-                        const bMatch = b.id.match(/^civilization_(\d+)$/);
-                        if (aMatch && bMatch) {
-                            // Если оба ID в формате civilization_N, сравниваем числа
-                            comparison = parseInt(aMatch[1]) - parseInt(bMatch[1]);
-                        } else if (aMatch) {
-                            // Если только первый ID в формате civilization_N, он идет первым
-                            comparison = -1;
-                        } else if (bMatch) {
-                            // Если только второй ID в формате civilization_N, он идет первым
-                            comparison = 1;
-                        } else {
-                            // Для всех остальных случаев используем обычное сравнение
-                            comparison = a.id.toLowerCase().localeCompare(b.id.toLowerCase());
-                        }
-                        break;
-                    case 'provinces':
-                        comparison = a.provinces - b.provinces;
-                        break;
-                    case 'capital':
-                        comparison = (a.capital || '').toLowerCase().localeCompare((b.capital || '').toLowerCase());
-                        break;
-                    case 'color':
-                        // Сортировка по сумме RGB компонентов
-                        const sumA = (a.color || [0,0,0]).slice(0,3).reduce((sum, c) => sum + c, 0);
-                        const sumB = (b.color || [0,0,0]).slice(0,3).reduce((sum, c) => sum + c, 0);
-                        comparison = sumA - sumB;
-                        break;
-                }
-                
-                return this.sortDirection === 'asc' ? comparison : -comparison;
-            });
-
-        // Добавляем страны в список
-        for (const country of countriesArray) {
-            const row = document.createElement('tr');
-            row.style.cursor = 'pointer';
-            row.onclick = () => editCountry(country.id);
-            
-            // Цвет
-            const colorCell = document.createElement('td');
-            const colorDiv = document.createElement('div');
-            colorDiv.className = 'country-color';
-            colorDiv.style.backgroundColor = colorToRgb(country.color);
-            colorCell.appendChild(colorDiv);
-            
-            // Название
-            const nameCell = document.createElement('td');
-            const nameSpan = document.createElement('span');
-            nameSpan.textContent = country.name;
-            nameCell.appendChild(nameSpan);
-
-            // Добавляем иконку, если страна есть в landsData
-            const isInLandsData = landsData.lands.some(land => land.key === country.id);
-            if (isInLandsData) {
-                const markImg = document.createElement('img');
-                markImg.src = 'mark.svg';
-                markImg.className = 'country-mark';
-                nameCell.appendChild(markImg);
-            }
-            
-            // Системное название (ID)
-            const sysNameCell = document.createElement('td');
-            sysNameCell.textContent = country.id;
-            
-            // Количество провинций
-            const provincesCell = document.createElement('td');
-            provincesCell.textContent = provincesCount[country.id] || 0;
-            
-            // Столица
-            const capitalCell = document.createElement('td');
-            capitalCell.textContent = country.capital_name || '';
-
-            // Добавляем ячейки в строку
-            row.appendChild(colorCell);
-            row.appendChild(nameCell);
-            row.appendChild(sysNameCell);
-            row.appendChild(provincesCell);
-            row.appendChild(capitalCell);
-
-            // Добавляем строку в таблицу
-            countriesList.appendChild(row);
-        }
-    }
-})
+// Создаем глобальный экземпляр менеджера стран после загрузки DOM
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('Инициализация CountryManager...');
+    window.countryManager = new CountryManager();
+    console.log('CountryManager инициализирован:', window.countryManager);
+});

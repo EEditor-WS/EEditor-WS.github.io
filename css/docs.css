@@ -85,20 +85,87 @@
 }
 
 .nav-section li {
+    position: relative;
     margin-bottom: 5px;
 }
 
-.nav-section a {
+.nav-section li > a {
     color: var(--text-secondary);
     text-decoration: none;
     font-size: 14px;
-    display: block;
+    display: flex;
+    align-items: center;
     padding: 8px 12px;
+    padding-right: 32px;
     border-radius: 4px;
     transition: all 0.2s ease;
     line-height: 1.4;
 }
 
+/* Стили для кнопки сворачивания */
+.collapse-button {
+    position: absolute;
+    right: 4px;
+    top: 8px; /* Выравниваем по верхнему краю ссылки */
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+    z-index: 1;
+}
+
+.collapse-button:hover {
+    color: var(--text-primary);
+}
+
+.collapse-button svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.2s ease;
+}
+
+.collapsed > .collapse-button svg {
+    transform: rotate(-90deg);
+}
+
+/* Скрываем подкатегории у свернутых элементов */
+.nav-section li.collapsed > ul {
+    display: none;
+}
+
+/* Анимация при разворачивании */
+@keyframes slideDown {
+    from { 
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.nav-section li:not(.collapsed) > ul {
+    animation: slideDown 0.2s ease;
+}
+
+/* Отступы для подкатегорий */
+.nav-section ul ul {
+    margin-left: 15px !important;
+    margin-top: 5px !important;
+    margin-bottom: 10px !important;
+    border-left: 1px solid var(--border-color);
+    padding-left: 10px !important;
+}
+
+/* Стили для ссылок */
 .nav-section a:hover {
     color: var(--text-primary);
     background: var(--background-secondary);
@@ -113,6 +180,156 @@
     color: var(--accent-color);
     background: rgba(52, 152, 219, 0.1);
     font-weight: 500;
+}
+
+/* Стили для подкатегорий в навигации */
+.nav-section ul ul {
+    margin-left: 15px !important;
+    margin-top: 5px !important;
+    margin-bottom: 10px !important;
+    border-left: 1px solid var(--border-color);
+    padding-left: 10px !important;
+}
+
+.nav-section ul ul li {
+    margin-bottom: 5px;
+}
+
+.nav-section ul ul a {
+    font-size: 13px;
+    padding: 6px 10px;
+}
+
+.nav-section li > a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.nav-section li > a::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: transform 0.2s ease;
+    opacity: 0.5;
+}
+
+.nav-section li > a:only-child::after {
+    display: none;
+}
+
+.nav-section li.collapsed > a::after {
+    transform: rotate(-90deg);
+}
+
+/* Стили для активного состояния */
+.nav-section li > a.active {
+    color: var(--accent-color);
+    background: rgba(52, 152, 219, 0.1);
+}
+
+.nav-section li > a.active::after {
+    opacity: 1;
+    stroke: var(--accent-color);
+}
+
+/* Стили для ховера */
+.nav-section-title:hover {
+    color: var(--accent-color);
+}
+
+.nav-section-title:hover::after {
+    opacity: 1;
+}
+
+.nav-section li > a:hover {
+    color: var(--text-primary);
+    background: var(--background-hover);
+}
+
+.nav-section li > a:hover::after {
+    opacity: 0.8;
+}
+
+/* Стили для стрелок */
+.nav-section-title::after,
+.nav-section li > a::after {
+    cursor: pointer;
+}
+
+/* Стили для сворачиваемых разделов */
+.nav-section-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    user-select: none;
+    padding: 5px 0;
+    margin: 0 0 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    transition: color 0.2s ease;
+    position: relative;
+}
+
+.nav-section-title::after {
+    content: '';
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e0e0e0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: transform 0.2s ease;
+    opacity: 0.7;
+}
+
+.nav-section.collapsed .nav-section-title::after {
+    transform: rotate(-90deg);
+}
+
+.nav-section.collapsed > ul {
+    display: none;
+}
+
+/* Стили для подкатегорий */
+.nav-section li {
+    position: relative;
+}
+
+.nav-section li > a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding-right: 24px;
+}
+
+.nav-section li > a::after {
+    content: '';
+    position: absolute;
+    right: 8px;
+    width: 12px;
+    height: 12px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: transform 0.2s ease;
+    opacity: 0.5;
+}
+
+.nav-section li > a:only-child::after {
+    display: none;
+}
+
+.nav-section li.collapsed > a::after {
+    transform: rotate(-90deg);
+}
+
+.nav-section li.collapsed > ul {
+    display: none;
 }
 
 /* Основной контент */

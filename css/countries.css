@@ -130,12 +130,12 @@
 /* Стили для контекстного меню */
 .context-menu {
     position: fixed;
-    background: var(--background-secondary);
-    border: 1px solid var(--border-color);
+    background: #2a2a2a;
+    border: 1px solid #333;
     border-radius: 8px;
     padding: 4px;
     min-width: 160px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     z-index: 9999;
     opacity: 0;
     transform: scale(0.95);
@@ -154,7 +154,7 @@
     align-items: center;
     gap: 8px;
     padding: 8px 12px;
-    color: var(--text-primary);
+    color: #e0e0e0;
     cursor: pointer;
     border-radius: 4px;
     transition: all 0.2s ease;
@@ -162,7 +162,7 @@
 }
 
 .context-menu-item:hover {
-    background: var(--background-hover);
+    background: #3a3a3a;
 }
 
 .context-menu-item.delete {

@@ -430,3 +430,11 @@ input[type="color"] {
     width: 0;
     height: 0;
 }
+
+.black-back {
+    background: #242424;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #1f1f1f;
+    overflow: auto;
+}

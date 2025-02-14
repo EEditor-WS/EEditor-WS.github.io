@@ -403,6 +403,38 @@ class Translator {
                 });
             }
         }
+
+        // Обновляем модальные окна фильтров
+        const filterModals = document.querySelectorAll('#filter-modal, #events-filter-modal, #groups-filter-modal, #countries-groups-filter-modal');
+        filterModals.forEach(modal => {
+            // Обновляем заголовок
+            const title = modal.querySelector('.modal-title');
+            if (title && title.hasAttribute('data-translate-params')) {
+                const params = JSON.parse(title.getAttribute('data-translate-params'));
+                title.textContent = `${this.translate(params.key)}: ${params.column}`;
+            } else if (title && title.hasAttribute('data-translate')) {
+                title.textContent = this.translate(title.getAttribute('data-translate'));
+            }
+
+            // Обновляем метки
+            modal.querySelectorAll('[data-translate]').forEach(element => {
+                element.textContent = this.translate(element.getAttribute('data-translate'));
+            });
+
+            // Обновляем операторы в select
+            const operatorSelect = modal.querySelector('select');
+            if (operatorSelect) {
+                operatorSelect.querySelectorAll('option[data-translate]').forEach(option => {
+                    option.textContent = this.translate(option.getAttribute('data-translate'));
+                });
+            }
+
+            // Обновляем placeholder для поля ввода
+            const input = modal.querySelector('input[placeholder]');
+            if (input && input.hasAttribute('data-translate-placeholder')) {
+                input.placeholder = this.translate(input.getAttribute('data-translate-placeholder'));
+            }
+        });
     }
 
     updateForms() {

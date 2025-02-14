@@ -98,58 +98,177 @@
         <!-- Боковая навигация -->
         <nav class="docs-nav" aria-label="Навигация по документации">
             <div class="nav-section" data-section="editor-page">
-                <h3 data-translate="docs_editor">EEditor</h3>
+                <h3 class="nav-section-title" data-translate="docs_editor">EEditor</h3>
                 <ul>
-                    <li><a href="#getting-started" data-translate="docs_getting_started">Начало работы</a></li>
-                    <li><a href="#interface" data-translate="docs_interface">Интерфейс</a></li>
-                    <li><a href="#countries" data-translate="docs_countries">Страны</a></li>
-                    <li><a href="#events" data-translate="docs_events">События</a></li>
-                    <li><a href="#reforms" data-translate="docs_reforms">Реформы</a></li>
-                    <li><a href="#console" data-translate="docs_console">Консольные команды</a></li>
+                    <li>
+                        <a href="#getting-started" data-translate="docs_getting_started">Начало работы</a>
+                        <ul>
+                            <li><a href="#installation" data-translate="docs_installation_title">Установка</a></li>
+                            <li><a href="#requirements" data-translate="docs_requirements">Требования</a></li>
+                            <li><a href="#first-steps" data-translate="docs_first_steps">Первые шаги</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#interface" data-translate="docs_interface">Интерфейс</a>
+                        <ul>
+                            <li><a href="#main-window" data-translate="docs_main_window">Главное окно</a></li>
+                            <li><a href="#toolbar" data-translate="docs_toolbar">Панель инструментов</a></li>
+                            <li><a href="#workspace" data-translate="docs_workspace">Рабочая область</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#countries" data-translate="docs_countries">Страны</a>
+                        <ul>
+                            <li><a href="#country-creation" data-translate="docs_countries_create">Создание стран</a></li>
+                            <li><a href="#country-editing" data-translate="docs_countries_edit">Редактирование</a></li>
+                            <li><a href="#country-relations" data-translate="docs_countries_relations">Отношения</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#events" data-translate="docs_events">События</a>
+                        <ul>
+                            <li><a href="#event-basics" data-translate="docs_event_basics">Основы</a></li>
+                            <li><a href="#event-triggers" data-translate="docs_event_triggers">Триггеры</a></li>
+                            <li><a href="#event-actions" data-translate="docs_event_actions">Действия</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#reforms" data-translate="docs_reforms">Реформы</a>
+                        <ul>
+                            <li><a href="#reform-types" data-translate="docs_reforms_types">Типы реформ</a></li>
+                            <li><a href="#reform-effects" data-translate="docs_reforms_effects">Эффекты</a></li>
+                            <li><a href="#reform-requirements" data-translate="docs_reforms_requirements">Требования</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
 
             <div class="nav-section" data-section="game-page">
-                <h3 data-translate="docs_game">Игра</h3>
+                <h3 class="nav-section-title" data-translate="docs_game">Игра</h3>
                 <ul>
-                    <li><a href="#gameplay" data-translate="docs_gameplay">Геймплей</a></li>
-                    <li><a href="#mechanics" data-translate="docs_mechanics">Механики</a></li>
-                    <li><a href="#diplomacy" data-translate="docs_diplomacy">Дипломатия</a></li>
-                    <li><a href="#economy" data-translate="docs_economy">Экономика</a></li>
+                    <li>
+                        <a href="#gameplay" data-translate="docs_gameplay">Геймплей</a>
+                        <ul>
+                            <li><a href="#basic-controls" data-translate="docs_basic_controls">Базовое управление</a></li>
+                            <li><a href="#game-phases" data-translate="docs_game_phases">Фазы игры</a></li>
+                            <li><a href="#victory-conditions" data-translate="docs_victory_conditions">Условия победы</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#mechanics" data-translate="docs_mechanics">Механики</a>
+                        <ul>
+                            <li><a href="#resources" data-translate="docs_resources">Ресурсы</a></li>
+                            <li><a href="#population" data-translate="docs_population">Население</a></li>
+                            <li><a href="#technology" data-translate="docs_technology">Технологии</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#diplomacy" data-translate="docs_diplomacy">Дипломатия</a>
+                        <ul>
+                            <li><a href="#diplomatic-actions" data-translate="docs_diplomatic_actions">Действия</a></li>
+                            <li><a href="#alliances" data-translate="docs_alliances">Союзы</a></li>
+                            <li><a href="#wars" data-translate="docs_wars">Войны</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#economy" data-translate="docs_economy">Экономика</a>
+                        <ul>
+                            <li><a href="#trade" data-translate="docs_trade">Торговля</a></li>
+                            <li><a href="#production" data-translate="docs_production">Производство</a></li>
+                            <li><a href="#development" data-translate="docs_development">Развитие</a></li>
+                        </ul>
+                    </li>
                 </ul>
         </div>
 
             <div class="nav-section" data-section="events-page">
-                <h3 data-translate="docs_events">События</h3>
+                <h3 class="nav-section-title" data-translate="docs_events">События</h3>
                 <ul>
-                    <li><a href="#event-creation" data-translate="docs_event_creation">Создание событий</a></li>
-                    <li><a href="#event-conditions" data-translate="docs_event_conditions">Условия</a></li>
-                    <li><a href="#event-effects" data-translate="docs_event_effects">Эффекты</a></li>
-                    <li><a href="#event-chains" data-translate="docs_event_last">last text</a></li>
+                    <li>
+                        <a href="#event-creation" data-translate="docs_event_creation">Создание событий</a>
+                        <ul>
+                            <li><a href="#event-structure" data-translate="docs_event_structure">Структура</a></li>
+                            <li><a href="#event-options" data-translate="docs_event_options">Варианты</a></li>
+                            <li><a href="#event-localization" data-translate="docs_event_localization">Локализация</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#event-conditions" data-translate="docs_event_conditions">Условия</a>
+                        <ul>
+                            <li><a href="#trigger-types" data-translate="docs_trigger_types">Типы триггеров</a></li>
+                            <li><a href="#condition-logic" data-translate="docs_condition_logic">Логика условий</a></li>
+                            <li><a href="#complex-conditions" data-translate="docs_complex_conditions">Сложные условия</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#event-effects" data-translate="docs_event_effects">Эффекты</a>
+                        <ul>
+                            <li><a href="#effect-types" data-translate="docs_effect_types">Типы эффектов</a></li>
+                            <li><a href="#effect-scope" data-translate="docs_effect_scope">Область действия</a></li>
+                            <li><a href="#effect-duration" data-translate="docs_effect_duration">Длительность</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
 
             <div class="nav-section" data-section="console-page">
-                <h3 data-translate="docs_console">Консольные команды</h3>
+                <h3 class="nav-section-title" data-translate="docs_console">Консольные команды</h3>
                 <ul>
-                    <li><a href="#basic-commands" data-translate="docs_console_basic_title">Базовые команды</a></li>
-                    <li><a href="#cheat-commands" data-translate="docs_console_cheats_title">Читы</a></li>
-                    <li><a href="#multiplayer-commands" data-translate="docs_console_multiplayer_title">Мультиплеер</a></li>
-                    <li><a href="#admin-commands" data-translate="docs_console_admin_title">Админка</a></li>
-                    <li><a href="#admin-roles" data-translate="docs_console_admin_roles_title">Роли админов</a></li>
-                    <li><a href="#scenario-commands" data-translate="docs_console_scenarios_title">Сценарии</a></li>
+                    <li>
+                        <a href="#basic-commands" data-translate="docs_console_basic_title">Базовые команды</a>
+                    </li>
+                    <li>
+                        <a href="#cheat-commands" data-translate="docs_console_cheats_title">Читы и отладка</a>
+                    </li>
+                    <li>
+                        <a href="#multiplayer-commands" data-translate="docs_console_multiplayer_title">Мультиплеер</a>
+                    </li>
+                    <li>
+                        <a href="#admin-commands" data-translate="docs_console_admin_title">Админские команды</a>
+                    </li>
                 </ul>
             </div>
 
             <div class="nav-section" data-section="map-editor-page">
-                <h3 data-translate="docs_map_editor">Редактор карт</h3>
+                <h3 class="nav-section-title" data-translate="docs_map_editor">Редактор карт</h3>
                 <ul>
-                    <li><a href="#map-editor-overview" data-translate="docs_map_editor_overview">Обзор</a></li>
-                    <li><a href="#map-editor-creation" data-translate="docs_map_editor_creation">Создание карты</a></li>
-                    <li><a href="#map-editor-provinces" data-translate="docs_map_editor_provinces">Работа с провинциями</a></li>
-                    <li><a href="#map-editor-water" data-translate="docs_map_editor_water">Водные провинции</a></li>
-                    <li><a href="#map-editor-controls" data-translate="docs_map_editor_controls">Управление</a></li>
-                    <li><a href="#map-editor-testing" data-translate="docs_map_editor_testing">Тестирование</a></li>
+                    <li>
+                        <a href="#map-editor-overview" data-translate="docs_map_editor_overview">Обзор</a>
+                    </li>
+                    <li>
+                        <a href="#map-editor-creation" data-translate="docs_map_editor_creation">Создание карты</a>
+                        <ul>
+                            <li><a href="#files-ready" data-translate="docs_files_ready">Подготовка файлов</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#map-editor-provinces" data-translate="docs_map_editor_provinces">Работа с провинциями</a>
+                        <ul>
+                            <li><a href="#province-creation" data-translate="docs_province_creation">Создание провинций</a></li>
+                            <li><a href="#province-anclaves" data-translate="docs_province_anclaves">Анклавы</a></li>
+                            <li><a href="#province-water" data-translate="docs_province_water">Водные</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#map-editor-controls" data-translate="docs_map_editor_controls">Управление</a>
+                        <ul>
+                            <li><a href="#controls-provinces" data-translate="docs_controls_provinces">Работа с провинциями</a></li>
+                            <li><a href="#controls-vertices" data-translate="docs_controls_vertices">Работа с вершинами</a></li>
+                            <li><a href="#controls-hotkeys" data-translate="docs_controls_hotkeys">Горячие клавиши</a></li>
+                            <li><a href="#controls-top-panel" data-translate="docs_controls_top_panel">Верхняя панель</a></li>
+                            <li><a href="#controls-map-page" data-translate="docs_controls_map_page">Страница карты</a></li>
+                            <li><a href="#controls-draw-page" data-translate="docs_controls_draw_page">Страница рисования</a></li>
+                            <li><a href="#controls-transform-page" data-translate="docs_controls_transformation_page">Страница трансформации</a></li>
+                            <li><a href="#controls-additional-page" data-translate="docs_controls_additional_page">Страница дополнений</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#map-editor-testing" data-translate="docs_map_editor_testing">Тестирование</a>
+                        <ul>
+                            <li><a href="#map-validation-editor" data-translate="docs_map_validation_editor">В редакторе карт</a></li>
+                            <li><a href="#map-validation-game" data-translate="docs_map_validation_game">В игре</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -175,50 +294,173 @@
 
                         <p><em>Всё необходимое будет добавлено позже, а пока ознакомьтесь с этим текстом.</em></p>
                     
+                        <section id="installation">
                     <h3 data-translate="docs_installation_title">Установка</h3>
                     <p data-translate="docs_installation_desc">Для начала работы с EEditor вам потребуется:</p>
                     <ul>
                         <li data-translate="docs_requirement_browser">Современный веб-браузер (Chrome, Firefox, Edge)</li>
                     </ul>
+                        </section>
+
+                        <section id="requirements">
+                            <h3 data-translate="docs_requirements_title">Требования</h3>
+                            <p data-translate="docs_requirements_desc">Минимальные требования:</p>
+                            <ul>
+                                <li>Веб-браузер с поддержкой HTML5</li>
+                                <li>JavaScript включен</li>
+                                <li>Стабильное интернет-соединение</li>
+                            </ul>
+                        </section>
+
+                        <section id="first-steps">
+                            <h3 data-translate="docs_first_steps_title">Первые шаги</h3>
+                            <p data-translate="docs_first_steps_desc">Чтобы начать работу:</p>
+                            <ol>
+                                <li>Откройте EEditor в браузере</li>
+                                <li>Создайте новый сценарий или загрузите существующий</li>
+                                <li>Ознакомьтесь с интерфейсом редактора</li>
+                            </ol>
+                        </section>
                     </section>
 
                     <section id="interface">
                         <h2 data-translate="docs_interface_title">Интерфейс</h2>
                     <p data-translate="docs_interface_desc">Интерфейс EEditor разделен на несколько основных секций:</p>
-                    <ul>
+                        
+                        <section id="main-window">
+                            <h3 data-translate="docs_main_window_title">Главное окно</h3>
+                            <p data-translate="docs_main_window_desc">Главное окно редактора содержит:</p>
+                            <ul>
+                                <li>Панель инструментов</li>
+                                <li>Рабочую область</li>
+                                <li>Боковую панель</li>
+                            </ul>
+                        </section>
+
+                        <section id="toolbar">
+                            <h3 data-translate="docs_toolbar_title">Панель инструментов</h3>
+                            <p data-translate="docs_toolbar_desc">Панель инструментов предоставляет быстрый доступ к основным функциям:</p>
+                            <ul>
+                                <li>Создание и загрузка сценариев</li>
+                                <li>Сохранение изменений</li>
+                                <li>Отмена и повтор действий</li>
+                            </ul>
+                        </section>
+
+                        <section id="workspace">
+                            <h3 data-translate="docs_workspace_title">Рабочая область</h3>
+                            <p data-translate="docs_workspace_desc">Рабочая область - это основное пространство для редактирования:</p>
+                            <ul>
+                                <li>Просмотр и редактирование кода</li>
+                                <li>Визуальные редакторы</li>
+                                <li>Предпросмотр изменений</li>
                     </ul>
+                        </section>
                     </section>
 
                     <section id="countries">
                         <h2 data-translate="docs_countries_title">Страны</h2>
                     <p data-translate="docs_countries_desc">В этом разделе описывается работа со странами в редакторе:</p>
-                        <h3>Основные возможности</h3>
-                        <ul>
-                            <li>Создание новых стран</li>
-                            <li>Редактирование существующих стран</li>
-                            <li>Настройка отношений между странами</li>
-                            <li>Управление территориями и провинциями</li>
-                            <li>Настройка политических систем</li>
+
+                        <section id="country-creation">
+                            <h3 data-translate="docs_countries_create_title">Создание стран</h3>
+                            <p data-translate="docs_countries_create_desc">Процесс создания новой страны:</p>
+                            <ul>
+                                <li>Выбор названия и цвета</li>
+                                <li>Настройка параметров</li>
+                                <li>Определение территорий</li>
+                            </ul>
+                        </section>
+
+                        <section id="country-editing">
+                            <h3 data-translate="docs_countries_edit_title">Редактирование</h3>
+                            <p data-translate="docs_countries_edit_desc">Возможности редактирования существующих стран:</p>
+                            <ul>
+                                <li>Изменение базовых параметров</li>
+                                <li>Управление территориями</li>
+                                <li>Настройка экономики</li>
+                            </ul>
+                        </section>
+
+                        <section id="country-relations">
+                            <h3 data-translate="docs_countries_relations_title">Отношения</h3>
+                            <p data-translate="docs_countries_relations_desc">Управление отношениями между странами:</p>
+                            <ul>
+                                <li>Союзы и альянсы</li>
+                                <li>Торговые отношения</li>
+                                <li>Дипломатические действия</li>
                     </ul>
+                        </section>
                     </section>
 
                     <section id="events">
                         <h2 data-translate="docs_events_title">События</h2>
-                        <p data-translate="docs_events_desc">События - это ключевой элемент сценариев, позволяющий создавать интересные игровые ситуации и влиять на развитие стран.</p>
+                        <p data-translate="docs_events_desc">События - это ключевой элемент сценариев.</p>
 
-                        <h3 data-translate="docs_events_overview_title">Обзор системы событий</h3>
-                        <p data-translate="docs_events_overview_desc">Система событий позволяет:</p>
-                    <ul>
+                        <section id="event-basics">
+                            <h3 data-translate="docs_event_basics_title">Основы</h3>
+                            <p data-translate="docs_event_basics_desc">Базовые концепции работы с событиями:</p>
+                            <ul>
+                                <li>Структура события</li>
+                                <li>Типы событий</li>
+                                <li>Условия срабатывания</li>
+                            </ul>
+                        </section>
+
+                        <section id="event-triggers">
+                            <h3 data-translate="docs_event_triggers_title">Триггеры</h3>
+                            <p data-translate="docs_event_triggers_desc">Настройка условий срабатывания событий:</p>
+                            <ul>
+                                <li>Временные триггеры</li>
+                                <li>Условия стран</li>
+                                <li>Комбинированные условия</li>
                     </ul>
+                        </section>
 
-                        <p data-translate="docs_events_more_info">Подробную информацию о работе с событиями можно найти в разделе "События".</p>
+                        <section id="event-actions">
+                            <h3 data-translate="docs_event_actions_title">Действия</h3>
+                            <p data-translate="docs_event_actions_desc">Возможные действия событий:</p>
+                            <ul>
+                                <li>Изменение параметров</li>
+                                <li>Дипломатические действия</li>
+                                <li>Специальные эффекты</li>
+                            </ul>
+                        </section>
                     </section>
 
                     <section id="reforms">
                         <h2 data-translate="docs_reforms_title">Реформы</h2>
-                    <p data-translate="docs_reforms_desc">Реформы позволяют изменять характеристики стран в процессе игры:</p>
-                    <ul>
+                        <p data-translate="docs_reforms_desc">Реформы позволяют изменять характеристики стран.</p>
+
+                        <section id="reform-types">
+                            <h3 data-translate="docs_reforms_types_title">Типы реформ</h3>
+                            <p data-translate="docs_reforms_types_desc">Основные типы доступных реформ:</p>
+                            <ul>
+                                <li>Политические реформы</li>
+                                <li>Экономические реформы</li>
+                                <li>Социальные реформы</li>
+                            </ul>
+                        </section>
+
+                        <section id="reform-effects">
+                            <h3 data-translate="docs_reforms_effects_title">Эффекты</h3>
+                            <p data-translate="docs_reforms_effects_desc">Влияние реформ на игровой процесс:</p>
+                            <ul>
+                                <li>Изменение параметров</li>
+                                <li>Новые возможности</li>
+                                <li>Ограничения</li>
+                            </ul>
+                        </section>
+
+                        <section id="reform-requirements">
+                            <h3 data-translate="docs_reforms_requirements_title">Требования</h3>
+                            <p data-translate="docs_reforms_requirements_desc">Условия для проведения реформ:</p>
+                            <ul>
+                                <li>Политический строй</li>
+                                <li>Уровень развития</li>
+                                <li>Ресурсы</li>
                     </ul>
+                        </section>
                     </section>
             </div>
         </div>
@@ -231,29 +473,141 @@
                     <section id="gameplay">
                         <h2 data-translate="docs_gameplay_title">Геймплей</h2>
                     <p data-translate="docs_gameplay_desc">Основные аспекты игрового процесса:</p>
-                    <ul>
+                        
+                        <section id="basic-controls">
+                            <h3 data-translate="docs_basic_controls_title">Базовое управление</h3>
+                            <p data-translate="docs_basic_controls_desc">Основные элементы управления игрой:</p>
+                            <ul>
+                                <li>Управление камерой</li>
+                                <li>Выбор провинций</li>
+                                <li>Взаимодействие с меню</li>
+                            </ul>
+                        </section>
+
+                        <section id="game-phases">
+                            <h3 data-translate="docs_game_phases_title">Фазы игры</h3>
+                            <p data-translate="docs_game_phases_desc">Игровой процесс разделен на фазы:</p>
+                            <ul>
+                                <li>Подготовительная фаза</li>
+                                <li>Фаза действий</li>
+                                <li>Фаза подсчета очков</li>
+                            </ul>
+                        </section>
+
+                        <section id="victory-conditions">
+                            <h3 data-translate="docs_victory_conditions_title">Условия победы</h3>
+                            <p data-translate="docs_victory_conditions_desc">Способы достижения победы:</p>
+                            <ul>
+                                <li>Военная победа</li>
+                                <li>Экономическая победа</li>
+                                <li>Дипломатическая победа</li>
                     </ul>
+                        </section>
                     </section>
 
                     <section id="mechanics">
                         <h2 data-translate="docs_mechanics_title">Механики</h2>
                     <p data-translate="docs_mechanics_desc">Базовые игровые механики включают:</p>
-                    <ul>
+                        
+                        <section id="resources">
+                            <h3 data-translate="docs_resources_title">Ресурсы</h3>
+                            <p data-translate="docs_resources_desc">Типы и управление ресурсами:</p>
+                            <ul>
+                                <li>Стратегические ресурсы</li>
+                                <li>Экономические ресурсы</li>
+                                <li>Специальные ресурсы</li>
+                            </ul>
+                        </section>
+
+                        <section id="population">
+                            <h3 data-translate="docs_population_title">Население</h3>
+                            <p data-translate="docs_population_desc">Управление населением:</p>
+                            <ul>
+                                <li>Рост населения</li>
+                                <li>Культурные группы</li>
+                                <li>Миграция</li>
+                            </ul>
+                        </section>
+
+                        <section id="technology">
+                            <h3 data-translate="docs_technology_title">Технологии</h3>
+                            <p data-translate="docs_technology_desc">Развитие технологий:</p>
+                            <ul>
+                                <li>Исследования</li>
+                                <li>Открытия</li>
+                                <li>Инновации</li>
                     </ul>
+                        </section>
                     </section>
 
                     <section id="diplomacy">
                         <h2 data-translate="docs_diplomacy_title">Дипломатия</h2>
                     <p data-translate="docs_diplomacy_desc">Дипломатическая система позволяет:</p>
-                    <ul>
+                        
+                        <section id="diplomatic-actions">
+                            <h3 data-translate="docs_diplomatic_actions_title">Действия</h3>
+                            <p data-translate="docs_diplomatic_actions_desc">Доступные дипломатические действия:</p>
+                            <ul>
+                                <li>Переговоры</li>
+                                <li>Торговые сделки</li>
+                                <li>Ультиматумы</li>
+                            </ul>
+                        </section>
+
+                        <section id="alliances">
+                            <h3 data-translate="docs_alliances_title">Союзы</h3>
+                            <p data-translate="docs_alliances_desc">Система союзов:</p>
+                            <ul>
+                                <li>Создание альянсов</li>
+                                <li>Обязательства</li>
+                                <li>Разрыв отношений</li>
+                            </ul>
+                        </section>
+
+                        <section id="wars">
+                            <h3 data-translate="docs_wars_title">Войны</h3>
+                            <p data-translate="docs_wars_desc">Военные конфликты:</p>
+                            <ul>
+                                <li>Объявление войны</li>
+                                <li>Военные действия</li>
+                                <li>Мирные договоры</li>
                     </ul>
+                        </section>
                     </section>
 
                     <section id="economy">
                         <h2 data-translate="docs_economy_title">Экономика</h2>
                     <p data-translate="docs_economy_desc">Экономическая система включает:</p>
-                    <ul>
+                        
+                        <section id="trade">
+                            <h3 data-translate="docs_trade_title">Торговля</h3>
+                            <p data-translate="docs_trade_desc">Торговая система:</p>
+                            <ul>
+                                <li>Торговые пути</li>
+                                <li>Экспорт и импорт</li>
+                                <li>Тарифы</li>
+                            </ul>
+                        </section>
+
+                        <section id="production">
+                            <h3 data-translate="docs_production_title">Производство</h3>
+                            <p data-translate="docs_production_desc">Система производства:</p>
+                            <ul>
+                                <li>Промышленность</li>
+                                <li>Строительство</li>
+                                <li>Добыча ресурсов</li>
+                            </ul>
+                        </section>
+
+                        <section id="development">
+                            <h3 data-translate="docs_development_title">Развитие</h3>
+                            <p data-translate="docs_development_desc">Развитие территорий:</p>
+                            <ul>
+                                <li>Инфраструктура</li>
+                                <li>Модернизация</li>
+                                <li>Специализация</li>
                     </ul>
+                        </section>
                     </section>
                 </div>
             </div>
@@ -265,85 +619,34 @@
                 <div class="docs-content">
                     <section id="event-creation">
                         <h2 data-translate="docs_event_creation_title">Создание событий</h2>
-                        <p data-translate="docs_event_creation_desc">События - это ключевой элемент сценариев, позволяющий создавать интересные игровые ситуации и влиять на развитие стран.</p>
                         
+                        <section id="event-structure">
                         <h3 data-translate="docs_event_structure_title">Структура события</h3>
                         <p data-translate="docs_event_structure_desc">Каждое событие состоит из следующих элементов:</p>
-                        
-                        <h4 data-translate="docs_event_basic_params_title">Основные параметры</h4>
-                        <ul>
-                            <li data-translate="docs_event_param_id">ID события - уникальный идентификатор события в системе</li>
-                            <li data-translate="docs_event_param_group">Группа событий - категория, к которой относится событие</li>
-                            <li data-translate="docs_event_param_name">Системное название - техническое название события</li>
-                            <li data-translate="docs_event_param_title">Заголовок - название события, которое видит игрок</li>
-                            <li data-translate="docs_event_param_desc">Описание - подробное описание ситуации</li>
-                            <li data-translate="docs_event_param_image">Изображение события - иллюстрация в окне события</li>
-                            <li data-translate="docs_event_param_icon">Иконка события - маленькое изображение для списков</li>
+                            <ul>
+                                <li>Идентификатор события</li>
+                                <li>Название и описание</li>
+                                <li>Условия срабатывания</li>
                         </ul>
+                        </section>
 
-                        <h4 data-translate="docs_event_display_settings_title">Настройки отображения</h4>
-                        <ul>
-                            <li data-translate="docs_event_setting_hide">Скрывать позже - событие исчезнет через определенное время</li>
-                            <li data-translate="docs_event_setting_delete">Удалить через X ходов - автоматическое удаление события</li>
-                            <li data-translate="docs_event_setting_auto">Автоматический выбор - действие при игнорировании события</li>
+                        <section id="event-options">
+                            <h3 data-translate="docs_event_options_title">Варианты событий</h3>
+                            <p data-translate="docs_event_options_desc">Настройка вариантов выбора:</p>
+                            <ul>
+                                <li>Текст вариантов</li>
+                                <li>Эффекты выбора</li>
+                                <li>Условия доступности</li>
                         </ul>
-
-                        <h4 data-translate="docs_event_responses_title">Варианты ответов</h4>
-                        <p data-translate="docs_event_responses_desc">Каждое событие может иметь до трех вариантов ответа:</p>
-                        <ul>
-                            <li data-translate="docs_event_response_text">Текст ответа - что видит игрок в кнопке выбора</li>
-                            <li data-translate="docs_event_response_result">Описание результата - что произойдет при выборе</li>
-                            <li data-translate="docs_event_response_conditions">Условия доступности - при каких условиях доступен</li>
-                            <li data-translate="docs_event_response_effects">Эффекты - какие изменения произойдут при выборе</li>
-                            <li data-translate="docs_event_response_auto">Автовыбор - будет ли выбран автоматически</li>
-                        </ul>
+                        </section>
                     </section>
 
                     <section id="event-conditions">
-                        <h2 data-translate="docs_event_conditions_title">Условия событий</h2>
-                        <p data-translate="docs_event_conditions_desc">События могут иметь различные условия срабатывания:</p>
-                        
-                        <h4 data-translate="docs_event_time_conditions_title">Временные условия</h4>
-                        <ul>
-                            <li data-translate="docs_event_condition_turn">Конкретный ход - событие произойдет в указанный ход</li>
-                            <li data-translate="docs_event_condition_year">Год - событие привязано к определенному году</li>
-                            <li data-translate="docs_event_condition_month">Месяц - событие происходит в конкретный месяц</li>
-                            <li data-translate="docs_event_condition_range">Диапазон времени - событие может произойти в промежутке</li>
-                            <li data-translate="docs_event_condition_periodic">Периодичность - событие повторяется через интервалы</li>
-                    </ul>
-
-                        <h4 data-translate="docs_event_country_conditions_title">Условия страны</h4>
-                        <ul>
-                            <li data-translate="docs_event_condition_politics">Политическая система - требуемый тип правления</li>
-                            <li data-translate="docs_event_condition_provinces">Количество провинций - число территорий</li>
-                            <li data-translate="docs_event_condition_territories">Территории - наличие конкретных провинций</li>
-                            <li data-translate="docs_event_condition_economy">Экономика - уровень развития, ресурсы, доходы</li>
-                            <li data-translate="docs_event_condition_military">Военная мощь - размер армии, типы войск</li>
-                            <li data-translate="docs_event_condition_tech">Технологии - уровень развития технологий</li>
-                        </ul>
+                        <h2 data-translate="docs_event_conditions_title">Условия</h2>
                     </section>
 
                     <section id="event-effects">
-                        <h2 data-translate="docs_event_effects_title">Эффекты событий</h2>
-                        <p data-translate="docs_event_effects_desc">События могут вызывать различные эффекты:</p>
-
-                        <h4 data-translate="docs_event_country_effects_title">Изменения страны</h4>
-                        <ul>
-                            <li data-translate="docs_event_effect_params">Параметры - изменение базовых показателей</li>
-                            <li data-translate="docs_event_effect_territory">Территории - получение или потеря провинций</li>
-                            <li data-translate="docs_event_effect_politics">Политика - смена политической системы</li>
-                            <li data-translate="docs_event_effect_economy">Экономика - изменение экономических показателей</li>
-                            <li data-translate="docs_event_effect_population">Население - влияние на демографию</li>
-                    </ul>
-
-                        <h4 data-translate="docs_event_diplomatic_effects_title">Дипломатические эффекты</h4>
-                        <ul>
-                            <li data-translate="docs_event_effect_war">Объявление войны - начало военных действий</li>
-                            <li data-translate="docs_event_effect_peace">Мирные договоры - заключение мира</li>
-                            <li data-translate="docs_event_effect_alliance">Создание союзов - формирование альянсов</li>
-                            <li data-translate="docs_event_effect_sanctions">Санкции - введение ограничений</li>
-                            <li data-translate="docs_event_effect_relations">Отношения - изменение дипломатических отношений</li>
-                        </ul>
+                        <h2 data-translate="docs_event_effects_title">Эффекты</h2>
                     </section>
 
                     <section id="event-chains">
@@ -520,16 +823,18 @@
                             </div>
                         </div>
 
-                        <h3 data-translate="docs_map_editor_preparation_title">Подготовка файлов</h3>
-                        <ol>
-                            <li data-translate="docs_map_editor_step_1">Откройте Редактор карт</li>
-                            <li data-translate="docs_map_editor_step_2">В нижней части окна вы увидите путь к пользовательским файлам</li>
-                            <li data-translate="docs_map_editor_step_3">Поместите необходимые файлы в этот путь:</li>
-                        </ol>
-                        <ul>
-                            <li data-translate="docs_map_editor_file_new">Для создания карты из изображения: поместите файл с названием source.png</li>
-                            <li data-translate="docs_map_editor_file_edit">Для редактирования существующей карты: поместите файл output.map</li>
-                        </ul>
+                        <section id="files-ready">
+                            <h3 data-translate="docs_map_editor_preparation_title">Подготовка файлов</h3>
+                            <ol>
+                                <li data-translate="docs_map_editor_step_1">Откройте Редактор карт</li>
+                                <li data-translate="docs_map_editor_step_2">В нижней части окна вы увидите путь к пользовательским файлам</li>
+                                <li data-translate="docs_map_editor_step_3">Поместите необходимые файлы в этот путь:</li>
+                            </ol>
+                            <ul>
+                                <li data-translate="docs_map_editor_file_new">Для создания карты из изображения: поместите файл с названием source.png</li>
+                                <li data-translate="docs_map_editor_file_edit">Для редактирования существующей карты: поместите файл output.map</li>
+                            </ul>
+                        </section>
                         <p data-translate="docs_map_editor_existing_map">Для редактирования существующей карты:</p>
                         <ul>
                             <li data-translate="docs_map_editor_open_creator">Зайдите в "Map Creator"</li>
@@ -552,110 +857,163 @@
                             </div>
                         </div>
 
-                        <h3 data-translate="docs_map_editor_province_creation">Создание провинции</h3>
-                        <ol>
-                            <li data-translate="docs_map_editor_province_step_1">Нажмите "New province"</li>
-                            <li data-translate="docs_map_editor_province_step_2">Нажмите "Add vertice"</li>
-                            <li data-translate="docs_map_editor_province_step_3">Создайте контур провинции, расставляя вершины</li>
-                            <li data-translate="docs_map_editor_province_step_4">Убедитесь, что центр провинции (фиолетовый квадрат) находится внутри её границ</li>
-                        </ol>
+                        <section id="province-creation">
+                            <h3 data-translate="docs_map_editor_province_creation">Создание провинции</h3>
+                            <ol>
+                                <li data-translate="docs_map_editor_province_step_1">Нажмите "New province"</li>
+                                <li data-translate="docs_map_editor_province_step_2">Нажмите "Add vertice"</li>
+                                <li data-translate="docs_map_editor_province_step_3">Создайте контур провинции, расставляя вершины</li>
+                                <li data-translate="docs_map_editor_province_step_4">Убедитесь, что центр провинции (фиолетовый квадрат) находится внутри её границ</li>
+                            </ol>
+                        </section>
 
-                        <h3 data-translate="docs_map_editor_enclaves">Работа с анклавами</h3>
-                        <p data-translate="docs_map_editor_enclaves_desc">Анклав — это часть провинции, отделённая от её основной территории.</p>
+                        <section id="province-anclaves">
+                            <h3 data-translate="docs_map_editor_enclaves">Работа с анклавами</h3>
+                            <p data-translate="docs_map_editor_enclaves_desc">Анклав — это часть провинции, отделённая от её основной территории.</p>
+                            
+                            <div class="images-row">
+                                <div class="image-container">
+                                    <img src="../docs/map-editor/enclave.png" alt="Создание основной части провинции">
+                                    <div class="image-caption" data-translate="docs_map_editor_image_enclave">Создание основной части провинции</div>
+                                </div>
+                                <div class="image-container">
+                                    <img src="../docs/map-editor/enclave2.png" alt="Добавление первого анклава">
+                                    <div class="image-caption" data-translate="docs_map_editor_image_enclave2">Добавление первого анклава</div>
+                                </div>
+                                <div class="image-container">
+                                    <img src="../docs/map-editor/enclave3.png" alt="Добавление второго анклава">
+                                    <div class="image-caption" data-translate="docs_map_editor_image_enclave3">Добавление второго анклава</div>
+                                </div>
+                            </div>
+
+                            <ol>
+                                <li data-translate="docs_map_editor_enclave_step_1">Создайте основную часть провинции</li>
+                                <li data-translate="docs_map_editor_enclave_step_2">Нажмите кнопку ">>" под текстом "Текущий анклав"</li>
+                                <li data-translate="docs_map_editor_enclave_step_3">Выберите enclave_2 в списке</li>
+                                <li data-translate="docs_map_editor_enclave_step_4">Создайте контур анклава</li>
+                                <li data-translate="docs_map_editor_enclave_step_5">Повторите процесс для каждого дополнительного анклава</li>
+                            </ol>
+                        </section>
                         
-                        <div class="images-row">
-                            <div class="image-container">
-                                <img src="../docs/map-editor/enclave.png" alt="Создание основной части провинции">
-                                <div class="image-caption" data-translate="docs_map_editor_image_enclave">Создание основной части провинции</div>
-                            </div>
-                            <div class="image-container">
-                                <img src="../docs/map-editor/enclave2.png" alt="Добавление первого анклава">
-                                <div class="image-caption" data-translate="docs_map_editor_image_enclave2">Добавление первого анклава</div>
-                            </div>
-                            <div class="image-container">
-                                <img src="../docs/map-editor/enclave3.png" alt="Добавление второго анклава">
-                                <div class="image-caption" data-translate="docs_map_editor_image_enclave3">Добавление второго анклава</div>
-                            </div>
-                        </div>
+                        <section id="province-water">
+                            <h3 data-translate="docs_map_editor_water_title">Водные провинции</h2>
+                            <p data-translate="docs_map_editor_water_desc">Водные провинции создаются так же, как и обычные, но имеют некоторые особенности:</p>
+                            
+                            <div class="images-row">
+                                <div class="image-container">
+                                    <img src="../docs/map-editor/water.png" alt="Создание водной провинции" class="medium">
+                                    <div class="image-caption" data-translate="docs_map_editor_image_water">Создание водной провинции</div>
+                                </div>
 
-                        <ol>
-                            <li data-translate="docs_map_editor_enclave_step_1">Создайте основную часть провинции</li>
-                            <li data-translate="docs_map_editor_enclave_step_2">Нажмите кнопку ">>" под текстом "Текущий анклав"</li>
-                            <li data-translate="docs_map_editor_enclave_step_3">Выберите enclave_2 в списке</li>
-                            <li data-translate="docs_map_editor_enclave_step_4">Создайте контур анклава</li>
-                            <li data-translate="docs_map_editor_enclave_step_5">Повторите процесс для каждого дополнительного анклава</li>
-                        </ol>
-                    </section>
-
-                    <section id="map-editor-water">
-                        <h2 data-translate="docs_map_editor_water_title">Водные провинции</h2>
-                        <p data-translate="docs_map_editor_water_desc">Водные провинции создаются так же, как и обычные, но имеют некоторые особенности:</p>
-                        
-                        <div class="images-row">
-                            <div class="image-container">
-                                <img src="../docs/map-editor/water.png" alt="Создание водной провинции" class="medium">
-                                <div class="image-caption" data-translate="docs_map_editor_image_water">Создание водной провинции</div>
+                                <div class="image-container">
+                                    <img src="../docs/map-editor/island.png" alt="Добавление острова в водную провинцию" class="medium">
+                                    <div class="image-caption" data-translate="docs_map_editor_image_island">Добавление острова в водную провинцию</div>
+                                </div>
                             </div>
 
-                            <div class="image-container">
-                                <img src="../docs/map-editor/island.png" alt="Добавление острова в водную провинцию" class="medium">
-                                <div class="image-caption" data-translate="docs_map_editor_image_island">Добавление острова в водную провинцию</div>
-                            </div>
-                        </div>
-
-                        <ul>
-                            <li data-translate="docs_map_editor_water_feature_1">Должны соприкасаться с другими провинциями через общие вершины</li>
-                            <li data-translate="docs_map_editor_water_feature_2">Могут содержать острова (как анклавы)</li>
-                            <li data-translate="docs_map_editor_water_feature_3">Рекомендуется использовать "High draw priority" для корректного отображения</li>
-                        </ul>
+                            <ul>
+                                <li data-translate="docs_map_editor_water_feature_1">Должны соприкасаться с другими провинциями через общие вершины</li>
+                                <li data-translate="docs_map_editor_water_feature_2">Могут содержать острова (как анклавы)</li>
+                                <li data-translate="docs_map_editor_water_feature_3">Рекомендуется использовать "High draw priority" для корректного отображения</li>
+                            </ul>
+                        </section>
                     </section>
 
                     <section id="map-editor-controls">
                         <h2 data-translate="docs_map_editor_controls_title">Управление</h2>
                         
-                        <h3 data-translate="docs_map_editor_province_controls">Работа с провинциями</h3>
-                        <ul>
-                            <li><strong data-translate="docs_map_editor_control_arrows">&lt;&lt; и &gt;&gt;</strong> - <span data-translate="docs_map_editor_control_arrows_desc">Переключение между анклавами</span></li>
-                            <li><strong>New province</strong> - <span data-translate="docs_map_editor_control_new_desc">Создание новой провинции</span></li>
-                            <li><strong>Remove Province</strong> - <span data-translate="docs_map_editor_control_remove_desc">Удаление провинции</span></li>
-                            <li><strong>Select Province</strong> - <span data-translate="docs_map_editor_control_select_desc">Выбор провинции</span></li>
-                            <li><strong>High draw priority</strong> - <span data-translate="docs_map_editor_control_priority_desc">Приоритет отрисовки (для островов/озёр)</span></li>
-                        </ul>
+                        <section id="controls-provinces">
+                            <h3 data-translate="docs_map_editor_province_controls">Работа с провинциями</h3>
+                            <ul>
+                                <li><strong data-translate="docs_map_editor_control_arrows">&lt;&lt; и &gt;&gt;</strong> - <span data-translate="docs_map_editor_control_arrows_desc">Переключение между анклавами</span></li>
+                                <li><strong>New province</strong> - <span data-translate="docs_map_editor_control_new_desc">Создание новой провинции</span></li>
+                                <li><strong>Remove Province</strong> - <span data-translate="docs_map_editor_control_remove_desc">Удаление провинции</span></li>
+                                <li><strong>Select Province</strong> - <span data-translate="docs_map_editor_control_select_desc">Выбор провинции</span></li>
+                                <li><strong>High draw priority</strong> - <span data-translate="docs_map_editor_control_priority_desc">Приоритет отрисовки (для островов/озёр)</span></li>
+                            </ul>
+                        </section>
 
-                        <h3 data-translate="docs_map_editor_vertex_controls">Работа с вершинами</h3>
-                        <ul>
-                            <li><strong>Add vertice</strong> - <span data-translate="docs_map_editor_vertex_add_desc">Режим добавления вершин</span></li>
-                            <li><strong>Move vertice</strong> - <span data-translate="docs_map_editor_vertex_move_desc">Перемещение выбранной вершины</span></li>
-                            <li><strong>Remove Vertice</strong> - <span data-translate="docs_map_editor_vertex_remove_desc">Удаление вершины</span></li>
-                            <li><strong>Select vertice</strong> - <span data-translate="docs_map_editor_vertex_select_desc">Выбор вершины</span></li>
-                            <li><strong>Set province center</strong> - <span data-translate="docs_map_editor_vertex_center_desc">Установка центра провинции</span></li>
-                            <li><strong>Autofinish border</strong> - <span data-translate="docs_map_editor_vertex_autofinish_desc">Автоматическое завершение границы</span>
-                                <ul>
-                                    <li data-translate="docs_map_editor_vertex_autofinish_enclave_desc">При добавлении вершины автоматически добавляет путевые точки, если новая точка и две предыдущие находятся в одном анклаве</li>
-                                    <li data-translate="docs_map_editor_vertex_autofinish_shift_desc">При зажатом Shift: добавьте две общие вершины границы между провинциями, затем с зажатым Shift нажмите на последнюю общую точку - редактор автоматически проставит все промежуточные точки</li>
-                                </ul>
-                            </li>
-                        </ul>
+                        <section id="controls-vertices">
+                            <h3 data-translate="docs_map_editor_vertex_controls">Работа с вершинами</h3>
+                            <ul>
+                                <li><strong>Add vertice</strong> - <span data-translate="docs_map_editor_vertex_add_desc">Режим добавления вершин</span></li>
+                                <li><strong>Move vertice</strong> - <span data-translate="docs_map_editor_vertex_move_desc">Перемещение выбранной вершины</span></li>
+                                <li><strong>Remove Vertice</strong> - <span data-translate="docs_map_editor_vertex_remove_desc">Удаление вершины</span></li>
+                                <li><strong>Select vertice</strong> - <span data-translate="docs_map_editor_vertex_select_desc">Выбор вершины</span></li>
+                                <li><strong>Set province center</strong> - <span data-translate="docs_map_editor_vertex_center_desc">Установка центра провинции</span></li>
+                                <li><strong>Autofinish border</strong> - <span data-translate="docs_map_editor_vertex_autofinish_desc">Автоматическое завершение границы</span>
+                                    <ul>
+                                        <li data-translate="docs_map_editor_vertex_autofinish_enclave_desc">При добавлении вершины автоматически добавляет путевые точки, если новая точка и две предыдущие находятся в одном анклаве</li>
+                                        <li data-translate="docs_map_editor_vertex_autofinish_shift_desc">При зажатом Shift: добавьте две общие вершины границы между провинциями, затем с зажатым Shift нажмите на последнюю общую точку - редактор автоматически проставит все промежуточные точки</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </section>
 
-                        <h3 data-translate="docs_map_editor_hotkeys">Горячие клавиши</h3>
-                        <ul>
-                            <li><strong data-translate="docs_map_editor_hotkey_shift">Shift + ЛКМ</strong> - <span data-translate="docs_map_editor_hotkey_shift_desc">Автозавершение границ</span></li>
-                            <li><strong>H</strong> - <span data-translate="docs_map_editor_hotkey_h_desc">Скрыть/показать вершины</span></li>
-                            <li><strong>J</strong> - <span data-translate="docs_map_editor_hotkey_j_desc">Скрыть/показать полигоны</span></li>
-                        </ul>
+                        <section id="controls-hotkeys">
+                            <h3 data-translate="docs_map_editor_hotkeys">Горячие клавиши</h3>
+                            <ul>
+                                <li><strong data-translate="docs_map_editor_hotkey_shift">Shift + ЛКМ</strong> - <span data-translate="docs_map_editor_hotkey_shift_desc">Автозавершение границ</span></li>
+                                <li><strong>H</strong> - <span data-translate="docs_map_editor_hotkey_h_desc">Скрыть/показать вершины</span></li>
+                                <li><strong>J</strong> - <span data-translate="docs_map_editor_hotkey_j_desc">Скрыть/показать полигоны</span></li>
+                            </ul>
+                        </section>
 
-                        <h3 data-translate="docs_map_editor_top_panel">Верхняя панель</h3>
-                        <ul>
-                            <li><strong>Import</strong> - <span data-translate="docs_map_editor_panel_import_desc">Импорт файла output.map</span></li>
-                            <li><strong>Export</strong> - <span data-translate="docs_map_editor_panel_export_desc">Экспорт в output.map</span></li>
-                            <li><strong>Show/hide game objects</strong> - <span data-translate="docs_map_editor_panel_objects_desc">Показать/скрыть вершины</span></li>
-                            <li><strong>Show/Hide labels</strong> - <span data-translate="docs_map_editor_panel_labels_desc">Показать/скрыть номера вершин</span></li>
-                            <li><strong>Show/Hide polygons</strong> - <span data-translate="docs_map_editor_panel_polygons_desc">Показать/скрыть линии полигонов</span></li>
-                            <li><strong>Reload source.png</strong> - <span data-translate="docs_map_editor_panel_reload_desc">Перезагрузить фоновое изображение</span></li>
-                            <li><strong>Find province</strong> - <span data-translate="docs_map_editor_panel_find_desc">Поиск провинции</span></li>
-                            <li><strong>Map name</strong> - <span data-translate="docs_map_editor_panel_name_desc">Название карты в игре</span></li>
-                            <li><strong>Size multiplier</strong> - <span data-translate="docs_map_editor_panel_size_desc">Множитель размера иконок (0.1-3)</span></li>
-                        </ul>
+                        <section id="controls-top-panel">
+                            <h3 data-translate="docs_map_editor_top_panel">Верхняя панель</h3>
+                            <ul>
+                                <li><strong>Find province</strong> - <span data-translate="docs_map_editor_panel_find_desc">Поиск провинции</span></li>
+                                <li><strong>Map</strong> - <span data-translate="docs_map_editor_panel_map">Страница "Map"</span></li>
+                                <li><strong>Provinces</strong> - <span data-translate="docs_map_editor_panel_provinces">Страница "Provinces"</span></li>
+                                <li><strong>Draw</strong> - <span data-translate="docs_map_editor_panel_draw">Страница "Draw"</span></li>
+                                <li><strong>Transform</strong> - <span data-translate="docs_map_editor_panel_transform">Страница "Transform"</span></li>
+                                <li><strong>Additional</strong> - <span data-translate="docs_map_editor_panel_additional">Страница "Additional"</span></li>
+                            </ul>
+                        </section>
+
+                        <section id="controls-map-page">
+                            <h3 data-translate="docs_map_editor_map_page">Страница "Map"</h3>
+                            <ul>
+                                <li><strong>Import</strong> - <span data-translate="docs_map_editor_panel_import_desc">Импорт файла output.map</span></li>
+                                <li><strong>Export</strong> - <span data-translate="docs_map_editor_panel_export_desc">Экспорт в output.map</span></li>
+                                <li><strong>Load backup</strong> - <span data-translate="docs_map_editor_panel_backup_desc">Загрузить резервную копию</span></li>
+                                <li><strong>Map name</strong> - <span data-translate="docs_map_editor_panel_name_desc">Название карты в игре</span></li>
+                                <li><strong>Size multiplier</strong> - <span data-translate="docs_map_editor_panel_size_desc">Множитель размера иконок (0.1-3)</span></li>
+                                <li><strong>Show/hide game objects</strong> - <span data-translate="docs_map_editor_panel_objects_desc">Показать/скрыть вершины</span></li>
+                                <li><strong>Show/hide province centers</strong> - <span data-translate="docs_map_editor_panel_centers_desc">Показать/скрыть центры провинций</span></li>
+                            </ul>
+                        </section>
+
+                        <section id="controls-draw-page">
+                            <h3 data-translate="docs_map_editor_draw_page">Страница "Draw"</h3>
+                            <ul>
+                                <li><strong>Create province</strong> - <span data-translate="docs_map_editor_panel_create_desc">Создать провинцию</span></li>
+                                <li><strong>Smooth</strong> - <span data-translate="docs_map_editor_panel_smooth_desc">Сгладить границу (уменьшить количество вершин). Нужно обвести область или провинцию, чтобы сгладить её границу</span></li>
+                                <li><strong>Simplify</strong> - <span data-translate="docs_map_editor_panel_simplify_desc">Упростить границу (уменьшить количество вершин). Нужно обвести область или провинцию, чтобы упростить её границу</span></li>
+                                <li><strong>Repiar border</strong> - <span data-translate="docs_map_editor_panel_repair_desc">Исправить границу</span></li>
+                            </ul>
+                        </section>
+
+                        <section id="controls-transform-page">
+                            <h3 data-translate="docs_map_editor_transform_page">Страница "Transform"</h3>
+                            <ul>
+                                <li><strong>Reload source.png</strong> - <span data-translate="docs_map_editor_panel_reload_desc">Перезагрузить фоновое изображение</span></li>
+                                <li><strong>Resize map: x</strong> - <span data-translate="docs_map_editor_panel_resizex_desc">Изменить ширину карты</span></li>
+                                <li><strong>Resize map: y</strong> - <span data-translate="docs_map_editor_panel_resizey_desc">Изменить высоту карты</span></li>
+                                <li><strong>Scale the image too</strong> - <span data-translate="docs_map_editor_panel_scale_desc">Изменить масштаб изображения, при изменении масштаба карты</span></li>
+                                <li><strong>Resize the image too</strong> - <span data-translate="docs_map_editor_panel_resize_desc">Изменить размер карты, согласно введённым выше значениям</span></li>
+                                <li><strong>Move verticls: x</strong> - <span data-translate="docs_map_editor_panel_movex_desc">Переместить вершины по оси X</span></li>
+                                <li><strong>Move verticls: y</strong> - <span data-translate="docs_map_editor_panel_movey_desc">Переместить вершины по оси Y</span></li>
+                                <li><strong>Move</strong> - <span data-translate="docs_map_editor_panel_move_desc">Переместить вершины, согласно введённым выше значениям</span></li>
+                            </ul>
+                        </section>
+
+                        <section id="controls-additional-page">
+                            <h3 data-translate="docs_map_editor_additional_page">Страница "Additional"</h3>
+                            <ul>
+                                <li><strong>Optimization</strong> - <span data-translate="docs_map_editor_panel_optimization_desc">Можно отключить части карты, которые не видны на фоновом изображении</span></li>
+                            </ul>
+                        </section>
                     </section>
 
                     <section id="map-editor-testing">
@@ -669,22 +1027,26 @@
                             </div>
                         </div>
 
-                        <h3 data-translate="docs_map_editor_testing_editor">В редакторе карт</h3>
-                        <ol>
-                            <li data-translate="docs_map_editor_testing_editor_step_1">Переименуйте файл в output.map</li>
-                            <li data-translate="docs_map_editor_testing_editor_step_2">Откройте режим просмотра карт (Map Viewer)</li>
-                        </ol>
+                        <section id="map-validation-editor">
+                            <h3 data-translate="docs_map_editor_testing_editor">В редакторе карт</h3>
+                            <ol>
+                                <li data-translate="docs_map_editor_testing_editor_step_1">Переименуйте файл в output.map</li>
+                                <li data-translate="docs_map_editor_testing_editor_step_2">Откройте режим просмотра карт (Map Viewer)</li>
+                            </ol>
+                        </section>
 
-                        <h3 data-translate="docs_map_editor_testing_game">В игре</h3>
-                        <ol>
-                            <li data-translate="docs_map_editor_testing_game_step_1">Переместите файл карты в соответствующую папку игры</li>
-                            <li data-translate="docs_map_editor_testing_game_step_2">Запустите игру</li>
-                            <li data-translate="docs_map_editor_testing_game_step_3">Выберите карту в меню "Новая игра"</li>
-                        </ol>
+                        <section id="map-validation-game">
+                            <h3 data-translate="docs_map_editor_testing_game">В игре</h3>
+                            <ol>
+                                <li data-translate="docs_map_editor_testing_game_step_1">Переместите файл карты в соответствующую папку игры</li>
+                                <li data-translate="docs_map_editor_testing_game_step_2">Запустите игру</li>
+                                <li data-translate="docs_map_editor_testing_game_step_3">Выберите карту в меню "Новая игра"</li>
+                            </ol>
+                        </section>
                     </section>
-                </div>
             </div>
-        </main>
+        </div>
+    </main>
     </div>
 
     <!-- Выпадающее меню аккаунта -->

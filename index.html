@@ -22,6 +22,7 @@
         <script src="js/events.js"></script>
         <script src="js/reforms.js"></script>
         <script src="js/auth.js"></script>
+        <script src="js/reqbon.js"></script>
         <link rel="stylesheet" href="css/countries.css">
         <link rel="stylesheet" href="css/events.css">
         <link rel="stylesheet" href="css/reforms.css">
@@ -500,64 +501,69 @@
                         </div>
                     </div>
                 </div>
-                <form id="country-form" class="country-form">
-                    <div class="form-group">
-                        <label for="country-name" data-translate="name">Название</label>
-                        <input type="text" id="country-name" name="name" class="main-page-input" autocomplete="off">
-                    </div>
-                    <div class="form-group">
-                        <label for="country-color" data-translate="color">Цвет</label>
-                        <div class="color-inputs">
-                            <div class="color-preview" id="country-color-preview"></div>
-                            <input type="number" id="country-color-r" min="0" max="255" placeholder="R">
-                            <input type="number" id="country-color-g" min="0" max="255" placeholder="G">
-                            <input type="number" id="country-color-b" min="0" max="255" placeholder="B">
-                            <button id="pick-country-color" class="icon-action-button back" title="Выбрать цвет">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M12 2l4 4-10 10-4-4 10-10z"/>
-                                    <path d="M9 15l-2 5 5-2-3-3z"/>
-                                </svg>
-                            </button>
-                            <input type="color" id="country-color-picker">
-                            <button id="random-country-color" class="icon-action-button back" title="Случайный цвет">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                                </svg>
-                            </button>
+                <form id="country-form" class="">
+                    <div class="black-back country-form">
+                        <div class="form-group">
+                            <label for="country-name" data-translate="name">Название</label>
+                            <input type="text" id="country-name" name="name" class="main-page-input" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="country-color" data-translate="color">Цвет</label>
+                            <div class="color-inputs">
+                                <div class="color-preview" id="country-color-preview"></div>
+                                <input type="number" id="country-color-r" min="0" max="255" placeholder="R">
+                                <input type="number" id="country-color-g" min="0" max="255" placeholder="G">
+                                <input type="number" id="country-color-b" min="0" max="255" placeholder="B">
+                                <button id="pick-country-color" class="icon-action-button back" title="Выбрать цвет">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 2l4 4-10 10-4-4 10-10z"/>
+                                        <path d="M9 15l-2 5 5-2-3-3z"/>
+                                    </svg>
+                                </button>
+                                <input type="color" id="country-color-picker">
+                                <button id="random-country-color" class="icon-action-button back" type="button" title="Случайный цвет">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="country-capital" data-translate="capital_name">Название столицы</label>
+                            <input type="text" id="country-capital" name="capital_name" class="main-page-input" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="country-capital-id" data-translate="capital_id">ID столицы</label>
+                            <input type="number" id="country-capital-id" name="capital" class="main-page-input" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="country-defeated" data-translate="defeated">Побеждена</label>
+                            <select id="country-defeated" name="defeated" class="main-page-input">
+                                <option value="false" data-translate="no">Нет</option>
+                                <option value="true" data-translate="yes">Да</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="country-political" data-translate="political_system">Политический строй</label>
+                            <select id="country-political" name="political" class="main-page-input">
+                                <option value="" data-translate="">None</option>
+                                <option value="Democracy" data-translate="democracy">Демократия</option>
+                                <option value="Monarchy" data-translate="monarchy">Монархия</option>
+                                <option value="Communism" data-translate="communism">Коммунизм</option>
+                                <option value="Fascism" data-translate="fascism">Фашизм</option>
+                                <option value="trade_republic" data-translate="trade_republic">Торговый республика</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="country-group" data-translate="event_group">Группа:</label>
+                            <input type="text" id="country-group" class="main-page-input">
+                        </div>
+                        <div class="form-group">
+                            <label data-translate="vassalof">Вассал страны:</label>
+                            <input type="text" id="country-vassalof" class="main-page-input" readonly>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="country-capital" data-translate="capital_name">Название столицы</label>
-                        <input type="text" id="country-capital" name="capital_name" class="main-page-input" autocomplete="off">
-                    </div>
-                    <div class="form-group">
-                        <label for="country-capital-id" data-translate="capital_id">ID столицы</label>
-                        <input type="number" id="country-capital-id" name="capital" class="main-page-input" min="0">
-                    </div>
-                    <div class="form-group">
-                        <label for="country-defeated" data-translate="defeated">Побеждена</label>
-                        <select id="country-defeated" name="defeated" class="main-page-input">
-                            <option value="false" data-translate="no">Нет</option>
-                            <option value="true" data-translate="yes">Да</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="country-political" data-translate="political_system">Политический строй</label>
-                        <select id="country-political" name="political" class="main-page-input">
-                            <option value="" data-translate="">None</option>
-                            <option value="Democracy" data-translate="democracy">Демократия</option>
-                            <option value="Monarchy" data-translate="monarchy">Монархия</option>
-                            <option value="Communism" data-translate="communism">Коммунизм</option>
-                            <option value="Fascism" data-translate="fascism">Фашизм</option>
-                            <option value="trade_republic" data-translate="trade_republic">Торговый республика</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="country-group" data-translate="event_group">Группа:</label>
-                        <input type="text" id="country-group" class="main-page-input">
-                    </div>
-                    <div class="form-group">
-                    </div>
+                    <div class="country-form">
                     <div class="form-group">
                         <label data-translate="allies">Союзники</label>
                         <div class="array-list" id="country-allies" class="main-page-input"></div>
@@ -628,6 +634,7 @@
                             </svg>
                         </button>
                     </div>
+                </div>
                 </form>
             </div>
         </div>
@@ -1138,6 +1145,7 @@
                     </div>
                 </div>
                 <form id="reform-form">
+                    <div class="black-back">
                     <div class="form-group">
                         <label for="reform-name" data-translate="name">Название</label>
                         <input type="text" id="reform-name" class="main-page-input" required autocomplete="off">
@@ -1156,7 +1164,7 @@
                                 </svg>
                             </button>
                             <input type="color" id="reform-color-picker">
-                            <button id="random-reform-color" class="icon-action-button back" title="Случайный цвет">
+                            <button id="random-reform-color" class="icon-action-button back" type="button" title="Случайный цвет">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
                                 </svg>
@@ -1165,7 +1173,7 @@
                     </div>
                     <div class="form-group">
                         <label for="reform-ideology" data-translate="required_ideology">Требуемая идеология</label>
-                        <select id="reform-ideology" class="main-page-input" required>
+                        <select id="reform-ideology" class="main-page-input">
                             <option value="" data-translate="None"> </option>
                             <option value="Democracy" data-translate="democracy">Democracy</option>
                             <option value="Monarchy" data-translate="monarchy">Monarchy</option>
@@ -1173,7 +1181,8 @@
                             <option value="Fascism" data-translate="fascism">Fascism</option>
                             <option value="Theocracy" data-translate="theocracy">Theocracy</option>
                             <option value="Trade Republic" data-translate="trade_republic">Trade Republic</option>
-                        </select>
+                            </select>
+                        </div>
                     </div>
                 </form>
             </div>
