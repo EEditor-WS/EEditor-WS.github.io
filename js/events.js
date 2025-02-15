@@ -634,7 +634,7 @@ class EventManager {
 
             // Проверяем наличие всех необходимых элементов формы
             const requiredElements = [
-                'event-id', 'event-group-name', 'event-unique-name', 'event-title',
+                'event-id', 'event-title',
                 'event-description', 'event-image', 'event-icon'
             ];
 
@@ -655,8 +655,8 @@ class EventManager {
             event.icon = document.getElementById('event-icon').value;
 
             // Валидация обязательных полей
-            if (!event.id || !event.unique_event_name) {
-                throw new Error('ID и системное название события обязательны');
+            if (!event.id || !event.title) {
+                throw new Error('ID и заголовок события обязательны');
             }
 
             // Обновляем ответы
@@ -926,8 +926,8 @@ class EventManager {
                 { value: 'money', label: window.translator.translate('money') },
                 { value: 'discontent', label: window.translator.translate('discontent') },
                 { value: 'building_exists', label: window.translator.translate('building_exists') },
-                { value: 'political_institution', label: window.translator.translate('political_institution') } /*,
-                { value: 'cooldown', label: window.translator.translate('cooldown') } */
+                { value: 'political_institution', label: window.translator.translate('political_institution') },
+                { value: 'cooldown', label: window.translator.translate('cooldown') }
             ];
             typeSelect.innerHTML = requirementOptions.map(opt => 
                 `<option value="${opt.value}">${opt.label}</option>`
@@ -1019,7 +1019,7 @@ class EventManager {
                     
                     // Создаем опции для выпадающего списка
                     select.innerHTML = events.map(event => 
-                        `<option value="${event.id}">${event.name}</option>`
+                        `<option value="${event.id}">${event.id} - ${event.name}${event.systemName ? ` (${event.systemName})` : ''}</option>`
                     ).join('');
                     
                     // Заменяем текстовое поле на выпадающий список
@@ -1214,6 +1214,15 @@ class EventManager {
                         input.className = 'main-page-input';
                         input.placeholder = window.translator.translate('enter_number');
                         valueContainer.appendChild(input);
+                } else if (['cooldown'].includes(selectedType)) {
+                    // Для числовых значений без длительности
+                    subtypeGroup.style.display = 'none';
+                        const input = document.createElement('input');
+                        input.type = 'number';
+                        input.id = 'requirement-value';
+                        input.className = 'main-page-input';
+                        input.placeholder = window.translator.translate('enter_number');
+                        valueContainer.appendChild(input);
                 }
             } else {
                 // Для требований оставляем существующую логику
@@ -1279,8 +1288,8 @@ class EventManager {
                         ['month', 'num_of_provinces', 'year', 'turn', 'random_value', 'count_of_tasks', 'tax', 'discontent', 'money', 'land_power'].includes(selectedType) ? window.translator.translate('enter_number') :
                         ['building_exists'].includes(selectedType) ? window.translator.translate('enter_building_name') :
                         ['political_institution'].includes(selectedType) ? window.translator.translate('enter_institution_name') : window.translator.translate('enter_value');
-                    valueContainer.appendChild(input);
-                    subtypeGroup.style.display = selectedType === 'building_exists' || selectedType === 'political_institution' ? 'block' : 'none';
+                        valueContainer.appendChild(input);
+                        subtypeGroup.style.display = selectedType === 'building_exists' || selectedType === 'political_institution' || selectedType === 'cooldown' ? 'block' : 'none';
                 }
             }
         };
@@ -1360,7 +1369,7 @@ class EventManager {
                 'count_of_tasks', 'tax', 'discontent', 'money', 'land_power', 'defense', 
                 'attack', 'population_income', 'building_cost', 'add_oil', 'add_cruiser', 
                 'add_random_culture_population', 'add_shock_infantry', 'add_tank', 'add_artillery',
-                'army_losses', 'prestige', 'add_battleship', 'add_infantry', 'science'];
+                'army_losses', 'prestige', 'add_battleship', 'add_infantry', 'science', 'cooldown'];
 
             // Проверяем и обрабатываем булевы значения
             const booleanTypes = ['near_water', 'independent_land', 'no_enemy', 'enemy_near_capital', 'lost_capital'];
