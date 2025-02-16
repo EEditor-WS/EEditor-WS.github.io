@@ -16,15 +16,20 @@
     position: sticky;
     top: 0;
     z-index: 1000;
-    gap: 16px;
+    gap: 8px;
+    flex-wrap: nowrap;
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.nav-actions {
+/* Контейнер для навигационных кнопок */
+.nav-buttons-container {
     display: flex;
-    align-items: center;
-    margin-left: auto;
     gap: 8px;
-    height: 100%;
+    flex-shrink: 1;
+    min-width: 0;
+    overflow: hidden;
 }
 
 /* Кнопки навигации */
@@ -38,6 +43,22 @@
     transition: all 0.2s ease;
     background-color: rgba(52, 152, 219, 0.1);
     color: #3498db;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    flex-shrink: 1;
+    min-width: 36px;
+}
+
+.nav-button .button-icon {
+    width: 18px;
+    height: 18px;
+    display: block;
+}
+
+.nav-button .button-text {
+    display: block;
 }
 
 .nav-button:hover {
@@ -46,7 +67,15 @@
 
 .nav-button.active {
     background-color: rgba(52, 152, 219, 0.2);
-    color: #3498db;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    gap: 8px;
+    height: 100%;
+    flex-shrink: 0;
 }
 
 /* Иконки в шапке */
@@ -228,21 +257,85 @@
     background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
-/* Адаптивность */
-@media (max-width: 768px) {
+/* Кнопка сохранения */
+.save-button {
+    background-color: #2ecc71;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    min-width: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.save-button:hover {
+    background-color: #27ae60;
+}
+
+.save-button .button-icon {
+    width: 18px;
+    height: 18px;
+    display: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    flex-shrink: 0;
+}
+
+.save-button .button-text {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Медиа-запросы */
+@media (max-width: 640px) {
     .nav-header {
         padding: 0 12px;
-        gap: 8px;
+        gap: 4px;
     }
 
-    .nav-button {
-        padding: 6px 12px;
-        font-size: 13px;
+    .nav-buttons-container {
+        gap: 4px;
     }
 
-    .icon-button {
-        width: 28px;
-        height: 28px;
+    .nav-button,
+    .save-button {
+        padding: 8px;
+        width: 36px;
+        min-width: 36px;
+        justify-content: center;
+        aspect-ratio: 1;
+    }
+
+    .nav-button .button-text,
+    .save-button .button-text {
+        display: none;
+    }
+
+    .nav-button .button-icon,
+    .save-button .button-icon {
+        display: block;
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
+    }
+
+    .nav-actions {
+        gap: 4px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-header {
+        padding: 0 8px;
     }
 }
 

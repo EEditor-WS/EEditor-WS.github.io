@@ -21,17 +21,44 @@ body {
 
 /* Common elements */
 .action-button {
-    padding: 8px;
+    padding: 8px 16px;
     background: none;
     border: none;
     color: var(--text-primary);
     cursor: pointer;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 8px;
     border-radius: 4px;
     transition: background-color 0.2s;
     font-family: inherit;
+}
+
+.action-button .button-icon {
+    display: none;
+    width: 18px;
+    height: 18px;
+}
+
+.action-button .button-text {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .action-button .button-icon {
+        display: block;
+    }
+    
+    .action-button .button-text {
+        display: none;
+    }
+    
+    .action-button {
+        padding: 8px;
+        min-width: 36px;
+        min-height: 36px;
+    }
 }
 
 .action-button:hover {
@@ -451,6 +478,99 @@ body {
 }
 
 /* Убираем конфликтующие стили */
+.icon-button {
+    display: none !important;
+}
+
+.nav-button {
+    padding: 8px 16px;
+    background: rgba(52, 152, 219, 0.1);
+    border: none;
+    color: #3498db;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    position: relative;
+    min-height: 36px;
+}
+
+.nav-button:hover {
+    background-color: rgba(52, 152, 219, 0.2);
+}
+
+.nav-button.active {
+    background-color: rgba(52, 152, 219, 0.2);
+}
+
+.nav-button .button-icon {
+    display: none;
+    width: 18px;
+    height: 18px;
+}
+
+.nav-button .button-text {
+    display: inline-block;
+}
+
+.nav-button svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+}
+
+/* Тултипы для nav-button */
+.nav-button[data-tooltip]::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 6px 10px;
+    background: var(--background-secondary);
+    color: var(--text-primary);
+    font-size: 12px;
+    white-space: nowrap;
+    border-radius: 4px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+    margin-bottom: 8px;
+    border: 1px solid var(--border-color);
+    z-index: 1000;
+    display: none;
+}
+
+/* Медиа-запросы для nav-button */
+@media (max-width: 768px) {
+    .nav-button {
+        padding: 8px;
+        min-width: 36px;
+    }
+
+    .nav-button .button-icon {
+        display: block;
+    }
+
+    .nav-button .button-text {
+        display: none;
+    }
+
+    .nav-button[data-tooltip]:hover::before {
+        display: block;
+        opacity: 1;
+    }
+}
+
+/* Убираем дублирующиеся и конфликтующие стили */
 .icon-button {
     display: none !important;
 } 

@@ -10,7 +10,7 @@ body {
     display: flex;
     flex-direction: row-reverse;
     width: 100%;
-    gap: 0;
+    gap: 20px;
     padding: 20px;
     box-sizing: border-box;
 }
@@ -18,12 +18,10 @@ body {
 .file-upload-container {
     width: 30%;
     min-width: 300px;
-    max-width: 80%;
     padding: 20px;
     background-color: #242424;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: auto;
 }
 
 .data {
@@ -33,12 +31,37 @@ body {
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
-    margin-right: 20px;
+}
+
+@media (max-width: 1200px) {
+    .pmain {
+        flex-direction: column;
+    }
+
+    .file-upload-container {
+        width: 100%;
+        max-width: none;
+        order: 2;
+    }
+
+    .data {
+        width: 100%;
+        order: 1;
+    }
+
+    .settings-form {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .settings-form {
+        grid-template-columns: 1fr;
+    }
 }
 
 .drop-zone {
-    width: 80%;
-    max-width: 100%;
+    width: 100%;
     height: 200px;
     padding: 25px;
     display: flex;
@@ -49,8 +72,8 @@ body {
     border: 2px dashed #4a4a4a;
     border-radius: 10px;
     background-color: #2a2a2a;
-    margin: 0 auto;
     transition: all 0.3s ease;
+    box-sizing: border-box;
 }
 
 .drop-zone.dragover {
@@ -763,31 +786,6 @@ body {
 
 .turn-input input:focus {
     border-color: #3498db;
-}
-
-/* Адаптивность для мобильных устройств */
-@media (max-width: 768px) {
-    .pmain {
-        flex-direction: column;
-    }
-
-    .file-upload-container {
-        width: 100%;
-        min-width: auto;
-    }
-
-    .settings-form {
-        grid-template-columns: 1fr;
-    }
-
-    .nav-header {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .nav-button {
-        width: 100%;
-    }
 }
 
 /* Стили для отображения ошибок */

@@ -97,14 +97,26 @@ class Translator {
         for (const [pageId, translationKey] of Object.entries(navButtons)) {
             const button = document.querySelector(`.nav-button[data-page="${pageId}"]`);
             if (button) {
-                button.textContent = this.translate(translationKey);
+                const textSpan = button.querySelector('.button-text');
+                if (textSpan) {
+                    textSpan.textContent = this.translate(translationKey);
+                }
+                // Добавляем тултип для мобильной версии
+                button.setAttribute('data-tooltip', this.translate(translationKey));
             }
         }
 
         // Кнопка сохранения
         const saveButton = document.getElementById('force-save');
         if (saveButton) {
-            saveButton.textContent = this.translate('save');
+            const textSpan = saveButton.querySelector('.button-text');
+            if (textSpan) {
+                textSpan.textContent = this.translate('save');
+            } else {
+                saveButton.textContent = this.translate('save');
+            }
+            // Добавляем тултип для мобильной версии
+            saveButton.setAttribute('data-tooltip', this.translate('save'));
         }
     }
 

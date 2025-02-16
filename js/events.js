@@ -918,6 +918,7 @@ class EventManager {
                 { value: 'is_defeated', label: window.translator.translate('is_defeated') },
                 { value: 'land_power', label: window.translator.translate('land_power') },
                 { value: 'independent_land', label: window.translator.translate('independent_land') },
+                { value: 'controls_capital', label: window.translator.translate('controls_capital') },
                 { value: 'no_enemy', label: window.translator.translate('no_enemy') },
                 { value: 'random_value', label: window.translator.translate('random_value') },
                 { value: 'count_of_tasks', label: window.translator.translate('count_of_tasks') },
@@ -994,7 +995,7 @@ class EventManager {
                 // Получаем доступные действия из конфигурации
                 if (['month', 'num_of_provinces', 'year', 'turn', 'random_value', 'count_of_tasks', 'tax', 'discontent', 'money', 'land_power'].includes(selectedType)) {
                     actions.push('more', 'equal', 'less');
-                } else if (['near_water', 'has_pact', 'has_sanctions', 'has_war', 'independent_land', 'land_name', 'building_exists', 'land_id', 'political_institution', 'enemy_near_capital', 'is_defeated', 'lost_capital'].includes(selectedType)) {
+                } else if (['near_water', 'has_pact', 'has_sanctions', 'has_war', 'independent_land', 'land_name', 'building_exists', 'land_id', 'political_institution', 'enemy_near_capital', 'is_defeated', 'lost_capital', "controls_capital"].includes(selectedType)) {
                     actions.push('equal', 'not_equal');
                 } else if (['cooldown'].includes(selectedType)) {
                     actions.push('more', 'less');
@@ -1253,7 +1254,7 @@ class EventManager {
                     ).join('');
                     valueContainer.appendChild(select);
                     subtypeGroup.style.display = 'none'; // Скрываем поле subtype
-                } else if (['has_pact', 'has_sanctions', 'has_war', 'land_id', 'is_defeated'].includes(selectedType)) {
+                } else if (['has_pact', 'has_sanctions', 'has_war', 'land_id', 'is_defeated', "controls_capital"].includes(selectedType)) {
                         const select = document.createElement('select');
                         select.id = 'requirement-value';
                         select.className = 'main-page-input';
