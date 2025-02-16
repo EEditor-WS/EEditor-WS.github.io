@@ -39,13 +39,13 @@ body {
     }
 
     .file-upload-container {
-        width: 100%;
+        width: calc(100% - 40px);
         max-width: none;
         order: 2;
     }
 
     .data {
-        width: 100%;
+        width: calc(100% - 40px);
         order: 1;
     }
 
@@ -246,6 +246,24 @@ body {
 }
 
 .data::-webkit-scrollbar-thumb:hover {
+    background: #4a4a4a;
+}
+
+/* Стилизация скроллбара */
+.preview-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.preview-content::-webkit-scrollbar-track {
+    background: #2a2a2a;
+}
+
+.preview-content::-webkit-scrollbar-thumb {
+    background: #404040;
+    border-radius: 4px;
+}
+
+.preview-content::-webkit-scrollbar-thumb:hover {
     background: #4a4a4a;
 }
 

@@ -319,6 +319,16 @@ const translations = {
         "change_ideology": "Change ideology",
         "change_country": "Change country",
         "add_culture_population": "Add culture population",
+
+        // Groups
+        "economy": "Economy",
+        "military": "Military",
+        "population_and_culture": "Population and Culture",
+        "diplomacy": "Diplomacy",
+        "other": "Other",
+        "time_conditions": "Time Conditions",
+        "countries_and_territories": "Countries and Territories",
+        "economy_and_development": "Economy and Development",
         
 
         // Reforms page
@@ -1014,7 +1024,7 @@ const translations = {
         "provinces_count": "Количество провинций",
         "capital": "Столица",
         "capital_name": "Название столицы",
-        "capital_id": "ID столицы",
+        "capital_id": "ID провинции столицы",
         "defeated": "Побеждена",
         "political_system": "Политический строй",
         "democracy": "Демократия",
@@ -1039,6 +1049,9 @@ const translations = {
         "copy": "Копировать",
         "delete": "Удалить",
         "add_country_button": "Добавить страну",
+        "reforms_title": "Реформы",
+        "reforms_of": "Реформы страны",
+        "edit_reform": "Реформа",
 
         // Страница событий
         "events_title": "События",
@@ -1057,17 +1070,17 @@ const translations = {
         "event_hide_later": "Прятать позже",
         "event_delete_turns": "Удалить через (ходов)",
         "event_description": "Описание события",
-        "general_requirements": "Общие требования",
+        "general_requirements": "Требования события",
         "answer_1": "Ответ 1",
         "answer_2": "Ответ 2",
         "answer_3": "Ответ 3",
         "answer_text": "Текст ответа",
-        "result_description": "Описание результату",
+        "result_description": "Описание ответа",
         "auto_select": "Выбирать при игнорировании",
         "enable_answer": "Включить ответ",
         "requirements": "Требования",
         "bonuses": "Бонусы",
-        "common_requirements": "Общие требования",
+        "common_requirements": "Требования события",
 
         "save": "Сохранить",
         "cancel": "Отмена",
@@ -1104,7 +1117,7 @@ const translations = {
         "filter_value": "Значение",
         "duration": "Длительность (ходов)",
 
-        // Типы требований
+        // Типы бонусов
         "defense": "Изменить защиту",
         "attack": "Изменить атаку",
         "building_cost": "Изменить стоимость строительства",
@@ -1133,9 +1146,24 @@ const translations = {
         "annex_country": "Аннексировать страну",
         "add_artillery": "Добавить артиллерию",
         "accelerated_recruit_cost": "Стоимость ускоренного найма",
-        "maintaining_army_cost_multiplier": "Содержание армии",
+        "maintaining_army_cost_multiplier": "Стоимость содержания армии",
         "population_increase": "Увеличение населения",
         "recruit_cost": "Стоимость найма",
+        "change_ideology": "Изменить идеологию",
+        "change_country": "Изменить страну",
+        "add_culture_population": "Добавить население страны...",
+
+        // Группы
+        "economy": "Экономика",
+        "military": "Военные",
+        "population_and_culture": "Население и культура",
+        "diplomacy": "Дипломатия",
+        "other": "Прочее",
+        "time_conditions": "Временные условия",
+        "countries_and_territories": "Страны и территории",
+        "economy_and_development": "Экономика и развитие",
+
+        // Параметры
         "duration": "Длительность (ходов)",
         "enter_percent": "Введите процент",
         "enter_number": "Введите число",
@@ -1146,10 +1174,9 @@ const translations = {
         "enter_country": "Введите страну",
         "enter_year": "Введите год",
         "enter_month": "Введите месяц",
-        "change_ideology": "Изменить идеологию",
-        "change_country": "Изменить страну",
-        "add_culture_population": "Добавить население",
-        "cooldown": "Перезарядка",
+
+        // Типы условий
+        "cooldown": "Кулдаун",
         "land_id": "ID страны",
         "land_name": "Название страны",
         "near_water": "Имеет побережье",
@@ -1158,15 +1185,10 @@ const translations = {
         "has_war": "Имеет войну",
         "has_peace": "Имеет мир",
         "has_sanctions": "Имеет санкции",
-        "has_pact": "Имеет пакт",
         "enemy_near_capital": "Враг рядом с столицей",
-        "lost_capital": "Потеря столицы",
+        "lost_capital": "Потеряна столица",
         "is_defeated": "Побеждена",
-        "is_independent": "Независимая",
         "is_vassal": "Вассал",
-        "is_ally": "Альянс",
-        "is_enemy": "Враг",
-        "is_neutral": "Нейтральная",
         "land_power": "Сила страны",
         "no_enemy": "Нет врагов",
         "random_value": "Случайное значение",
@@ -1175,6 +1197,7 @@ const translations = {
         "building_exists": "Существует здание",
         "political_institution": "Политический институт",
         "independent_land": "Независимость",
+        "controls_capital": "Контролирует столицу",
 
         // Event Structure
         "docs_event_structure_title": "Структура события",
@@ -1572,6 +1595,8 @@ const translations = {
         "docs_interface_sidebar": "Бічна панель для навігації",
         "docs_interface_workspace": "Робоча область редагування",
         "docs_interface_preview": "Панель попереднього перегляду",
+        "yes": "Так",
+        "no": "Ні",
 
         // Країни
         "docs_countries": "Країни",
@@ -1621,6 +1646,7 @@ const translations = {
         "docs_reforms_conditions": "Умови проведення",
         "docs_reforms_effects": "Ефекти реформ",
         "docs_reforms_chains": "Створення ланцюжків реформ",
+        "required_ideology": "Потрібна ідеологія",
 
         // Гра
         "docs_gameplay": "Геймплей",

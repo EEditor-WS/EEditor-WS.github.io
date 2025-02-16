@@ -864,74 +864,102 @@ class EventManager {
         if (isBonus) {
             // Для бонусов показываем только бонусы
             const bonusOptions = [
+                // Экономика
+                { value: '', label: '--- ' + window.translator.translate('economy') + ' ---', disabled: true },
+                { value: 'money', label: window.translator.translate('money') },
+                { value: 'building_cost', label: window.translator.translate('building_cost') },
+                { value: 'population_income', label: window.translator.translate('population_income') },
+                { value: 'add_oil', label: window.translator.translate('add_oil') },
+                { value: 'recruit_cost', label: window.translator.translate('recruit_cost') },
+                { value: 'accelerated_recruit_cost', label: window.translator.translate('accelerated_recruit_cost') },
+                { value: 'maintaining_army_cost_multiplier', label: window.translator.translate('maintaining_army_cost_multiplier') },
+
+                // Военное дело
+                { value: '', label: '--- ' + window.translator.translate('military') + ' ---', disabled: true },
                 { value: 'defense', label: window.translator.translate('defense') },
                 { value: 'attack', label: window.translator.translate('attack') },
-                { value: 'building_cost', label: window.translator.translate('building_cost') },
-                { value: 'discontent', label: window.translator.translate('discontent') },
-                { value: 'population_income', label: window.translator.translate('population_income') },
-                { value: 'add_random_culture_population', label: window.translator.translate('add_random_culture_population') },
-                { value: 'prestige', label: window.translator.translate('prestige') },
-                { value: 'science', label: window.translator.translate('science') },
-                { value: 'money', label: window.translator.translate('money') },
-                { value: 'add_oil', label: window.translator.translate('add_oil') },
+                { value: 'army_losses', label: window.translator.translate('army_losses') },
+                { value: 'add_infantry', label: window.translator.translate('add_infantry') },
+                { value: 'add_shock_infantry', label: window.translator.translate('add_shock_infantry') },
+                { value: 'add_artillery', label: window.translator.translate('add_artillery') },
+                { value: 'add_tank', label: window.translator.translate('add_tank') },
                 { value: 'add_cruiser', label: window.translator.translate('add_cruiser') },
                 { value: 'add_battleship', label: window.translator.translate('add_battleship') },
-                { value: 'add_tank', label: window.translator.translate('add_tank') },
-                { value: 'add_artillery', label: window.translator.translate('add_artillery') },
-                { value: 'add_shock_infantry', label: window.translator.translate('add_shock_infantry') },
-                { value: 'add_infantry', label: window.translator.translate('add_infantry') },
-                { value: 'army_losses', label: window.translator.translate('army_losses') },
-                { value: 'relation_ideology_change', label: window.translator.translate('relation_ideology_change') },
+
+                // Население и культура
+                { value: '', label: '--- ' + window.translator.translate('population_and_culture') + ' ---', disabled: true },
+                { value: 'population_increase', label: window.translator.translate('population_increase') },
+                { value: 'add_random_culture_population', label: window.translator.translate('add_random_culture_population') },
+                { value: 'add_culture_population', label: window.translator.translate('add_culture_population') },
+                { value: 'discontent', label: window.translator.translate('discontent') },
+
+                // Дипломатия
+                { value: '', label: '--- ' + window.translator.translate('diplomacy') + ' ---', disabled: true },
                 { value: 'relation_change', label: window.translator.translate('relation_change') },
+                { value: 'relation_ideology_change', label: window.translator.translate('relation_ideology_change') },
                 { value: 'diplomacy_lift_sanctions', label: window.translator.translate('diplomacy_lift_sanctions') },
                 { value: 'diplomacy_sanctions', label: window.translator.translate('diplomacy_sanctions') },
                 { value: 'diplomacy_pact', label: window.translator.translate('diplomacy_pact') },
                 { value: 'diplomacy_alliance', label: window.translator.translate('diplomacy_alliance') },
                 { value: 'diplomacy_peace', label: window.translator.translate('diplomacy_peace') },
                 { value: 'diplomacy_war', label: window.translator.translate('diplomacy_war') },
+
+                // Прочее
+                { value: '', label: '--- ' + window.translator.translate('other') + ' ---', disabled: true },
+                { value: 'prestige', label: window.translator.translate('prestige') },
+                { value: 'science', label: window.translator.translate('science') },
                 { value: 'resurrect_country', label: window.translator.translate('resurrect_country') },
                 { value: 'annex_country', label: window.translator.translate('annex_country') },
-                { value: 'accelerated_recruit_cost', label: window.translator.translate('accelerated_recruit_cost') },
-                { value: 'maintaining_army_cost_multiplier', label: window.translator.translate('maintaining_army_cost_multiplier') },
-                { value: 'population_increase', label: window.translator.translate('population_increase') },
-                { value: 'recruit_cost', label: window.translator.translate('recruit_cost') },
-                { value: 'change_country', label: window.translator.translate('change_country') },
-                { value: 'add_culture_population', label: window.translator.translate('add_culture_population') }
+                { value: 'change_country', label: window.translator.translate('change_country') }
             ];
             typeSelect.innerHTML = bonusOptions.map(opt => 
-                `<option value="${opt.value}">${opt.label}</option>`
+                `<option value="${opt.value}" ${opt.disabled ? 'disabled' : ''}>${opt.label}</option>`
             ).join('');
         } else {
             // Для требований показываем только требования
             const requirementOptions = [
+                // Временные условия
+                { value: '', label: '--- ' + window.translator.translate('time_conditions') + ' ---', disabled: true },
                 { value: 'year', label: window.translator.translate('year') },
                 { value: 'month', label: window.translator.translate('month') },
                 { value: 'turn', label: window.translator.translate('turn') },
+                { value: 'cooldown', label: window.translator.translate('cooldown') },
+
+                // Страны и территории
+                { value: '', label: '--- ' + window.translator.translate('countries_and_territories') + ' ---', disabled: true },
                 { value: 'land_id', label: window.translator.translate('land_id') },
                 { value: 'land_name', label: window.translator.translate('land_name') },
+                { value: 'land_power', label: window.translator.translate('land_power') },
+                { value: 'num_of_provinces', label: window.translator.translate('num_of_provinces') },
                 { value: 'near_water', label: window.translator.translate('near_water') },
+                { value: 'controls_capital', label: window.translator.translate('controls_capital') },
+                { value: 'lost_capital', label: window.translator.translate('lost_capital') },
+                { value: 'enemy_near_capital', label: window.translator.translate('enemy_near_capital') },
+                { value: 'independent_land', label: window.translator.translate('independent_land') },
+                { value: 'is_defeated', label: window.translator.translate('is_defeated') },
+
+                // Дипломатия
+                { value: '', label: '--- ' + window.translator.translate('diplomacy') + ' ---', disabled: true },
                 { value: 'has_pact', label: window.translator.translate('has_pact') },
                 { value: 'has_sanctions', label: window.translator.translate('has_sanctions') },
                 { value: 'has_war', label: window.translator.translate('has_war') },
-                { value: 'enemy_near_capital', label: window.translator.translate('enemy_near_capital') },
-                { value: 'lost_capital', label: window.translator.translate('lost_capital') },
-                { value: 'is_defeated', label: window.translator.translate('is_defeated') },
-                { value: 'land_power', label: window.translator.translate('land_power') },
-                { value: 'independent_land', label: window.translator.translate('independent_land') },
-                { value: 'controls_capital', label: window.translator.translate('controls_capital') },
                 { value: 'no_enemy', label: window.translator.translate('no_enemy') },
-                { value: 'random_value', label: window.translator.translate('random_value') },
-                { value: 'count_of_tasks', label: window.translator.translate('count_of_tasks') },
-                { value: 'num_of_provinces', label: window.translator.translate('num_of_provinces') },
-                { value: 'tax', label: window.translator.translate('tax') },
+
+                // Экономика и развитие
+                { value: '', label: '--- ' + window.translator.translate('economy_and_development') + ' ---', disabled: true },
                 { value: 'money', label: window.translator.translate('money') },
+                { value: 'tax', label: window.translator.translate('tax') },
                 { value: 'discontent', label: window.translator.translate('discontent') },
                 { value: 'building_exists', label: window.translator.translate('building_exists') },
                 { value: 'political_institution', label: window.translator.translate('political_institution') },
-                { value: 'cooldown', label: window.translator.translate('cooldown') }
+
+                // Прочее
+                { value: '', label: '--- ' + window.translator.translate('other') + ' ---', disabled: true },
+                { value: 'random_value', label: window.translator.translate('random_value') },
+                { value: 'count_of_tasks', label: window.translator.translate('count_of_tasks') }
             ];
             typeSelect.innerHTML = requirementOptions.map(opt => 
-                `<option value="${opt.value}">${opt.label}</option>`
+                `<option value="${opt.value}" ${opt.disabled ? 'disabled' : ''}>${opt.label}</option>`
             ).join('');
         }
 
@@ -1320,17 +1348,24 @@ class EventManager {
                 editor.style.display = 'block';
                 document.getElementById('requirement-type').value = item.type;
                 document.getElementById('requirement-action').value = item.action || '';
-                document.getElementById('requirement-subtype').value = item.subtype || '';
-                if (isBonus && document.getElementById('requirement-duration')) {
-                    document.getElementById('requirement-duration').value = item.duration || 3;
-                }
+                
+                // Сначала обновляем тип, чтобы создались нужные поля
                 updateActions();
                 updateValueField();
-                // Устанавливаем значение после создания поля
+                
+                // Теперь устанавливаем значения
+                const subtypeInput = document.getElementById('requirement-subtype');
+                if (subtypeInput) {
+                    subtypeInput.value = item.subtype || '';
+                }
                 const valueElement = document.getElementById('requirement-value');
                 if (valueElement) {
                     valueElement.value = item.value;
                 }
+                if (isBonus && document.getElementById('requirement-duration')) {
+                    document.getElementById('requirement-duration').value = item.duration || 3;
+                }
+                
                 editor.dataset.editIndex = index;
             } else if (button.classList.contains('delete')) {
                 items.splice(index, 1);
