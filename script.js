@@ -491,6 +491,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (fileInfo) {
                     fileInfo.textContent = window.translator.translate('file_access_error');
                 }
+                showError('Ошибка', err);
                 return;
             }
         }
@@ -506,11 +507,13 @@ document.addEventListener('DOMContentLoaded', function() {
             if (fileInfo) {
                 fileInfo.textContent = window.translator.translate('file_saved');
             }
+            showSuccess('Сохранено', 'Файл успешно сохранен');
         } catch (error) {
             console.error('Ошибка при сохранении файла:', error);
             if (fileInfo) {
                 fileInfo.textContent = window.translator.translate('file_update_error');
             }
+            showError('Ошибка', error);
         }
     } else {
         // Для браузеров без поддержки File System Access API
@@ -527,6 +530,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (fileInfo) {
             fileInfo.textContent = window.translator.translate('file_downloaded');
         }
+        showSuccess('Скачано', 'Файл успешно скачан');
     }
 }
 
@@ -552,6 +556,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Обновляем интерфейс
                 handleFileContent(currentFile.name, text);
+                showSuccess('Загружено', 'Готово к редактированию');
             } else {
                 // Для браузеров без поддержки File System Access API
                 const input = document.createElement('input');
@@ -568,12 +573,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 };
                 
                 input.click();
+                showWarning('Загружено', 'Ошибка редактирования файла. Вместо сохранения, файл будет скачан.');
             }
         } catch (err) {
             console.error('Ошибка при открытии файла:', err);
             if (fileInfo) {
                 fileInfo.textContent = window.translator.translate('file_access_error');
             }
+            showError('Ошибка', err);
         }
     }
 

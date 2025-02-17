@@ -1548,7 +1548,13 @@ const translations = {
         "docs_requirements": "Требования",
         "docs_first_steps": "Первые шаги",
         "docs_reforms_requirements": "Требования к реформам",
-        "vassalof": "Вассал страны"
+        "vassalof": "Вассал страны",
+
+        // Уведдомления
+        "ready": "Готово",
+        "error": "Ошибка",
+        "no need": "Страны для удаления не найдена",
+        "filtres reseted": "Фильтры сброшены"
     },
     "uk": {
         // Документація

@@ -232,14 +232,19 @@ class CountryManager {
             };
 
             const handleContextMenu = (e) => {
-                console.log('Вызвано контекстное меню для страны:', country.id);
                 e.preventDefault();
                 e.stopPropagation();
+
+                const tr = e.target.closest('tr');
+                if (!tr) return;
+
+                const countryId = tr.getAttribute('data-country-id');
+                if (!countryId) return;
 
                 // Удаляем старое меню, если оно есть
                 const oldMenu = document.querySelector('.context-menu');
                 if (oldMenu) {
-                    document.body.removeChild(oldMenu);
+                    oldMenu.remove();
                 }
 
                 // Создаем новое контекстное меню
@@ -294,21 +299,19 @@ class CountryManager {
 
                 // Добавляем обработчики для пунктов меню
                 document.getElementById('duplicate-country-context')?.addEventListener('click', () => {
-                    console.log('Дублирование страны:', country.id);
-                    this.copyCurrentCountry(country.id);
-                    document.body.removeChild(contextMenu);
+                    this.copyCurrentCountry(countryId);
+                    contextMenu.remove();
                 });
 
                 document.getElementById('delete-country-context')?.addEventListener('click', () => {
-                    console.log('Удаление страны:', country.id);
-                    this.deleteCurrentCountry(country.id);
-                    document.body.removeChild(contextMenu);
+                    this.deleteCurrentCountry(countryId);
+                    contextMenu.remove();
                 });
 
                 // Закрываем меню при клике вне его
                 const closeMenu = (e) => {
                     if (!contextMenu.contains(e.target)) {
-                        document.body.removeChild(contextMenu);
+                        contextMenu.remove();
                         document.removeEventListener('click', closeMenu);
                         document.removeEventListener('contextmenu', closeMenu);
                     }
@@ -352,7 +355,17 @@ class CountryManager {
 
         // Обработчики действий со страной
         document.getElementById('copy-country')?.addEventListener('click', () => this.copyCurrentCountry());
-        document.getElementById('delete-country')?.addEventListener('click', () => this.deleteCurrentCountry());
+        
+        // Исправляем обработчик удаления
+        const deleteButton = document.getElementById('delete-country');
+        if (deleteButton) {
+            // Удаляем все старые обработчики
+            const newButton = deleteButton.cloneNode(true);
+            deleteButton.parentNode.replaceChild(newButton, deleteButton);
+            // Добавляем новый обработчик
+            newButton.addEventListener('click', () => this.deleteCurrentCountry());
+        }
+
         document.getElementById('country-reforms')?.addEventListener('click', () => {
             if (!this.currentCountry) {
                 console.error('Не выбрана страна');
@@ -469,6 +482,7 @@ class CountryManager {
         // Обработчик кнопки обновления списка
         document.getElementById('refresh-countries')?.addEventListener('click', () => {
             this.updateCountriesList();
+            showSuccess(window.translator.translate('ready'), window.translator.translate('refreshed'));
         });
     }
 
@@ -572,51 +586,82 @@ class CountryManager {
     }
 
     copyCurrentCountry(countryId) {
-        if (!countryId || !this.jsonData?.lands[countryId]) return;
+        const sourceId = countryId || this.currentCountry;
+        if (!sourceId || !this.jsonData?.lands?.[sourceId]) return;
 
         const newId = this.generateUniqueId();
-        const currentCountry = this.jsonData.lands[countryId];
+        const currentCountry = this.jsonData.lands[sourceId];
         
         this.pushToUndoStack();
+        
+        // Создаем глубокую копию страны
         this.jsonData.lands[newId] = JSON.parse(JSON.stringify(currentCountry));
+        
+        // Обновляем id и название копии
         this.jsonData.lands[newId].name += ' (копия)';
         
         this.updateCountriesList();
         this.openCountry(newId);
+        this.updateJsonAndUI();
 
-        // Обновляем JSON в превью и сохраняем
-        if (this.previewContent) {
-            this.previewContent.value = JSON.stringify(this.jsonData, null, 4);
-            if (typeof window.saveChanges === 'function') {
-                window.saveChanges();
-            }
-        }
+        showSuccess(window.translator.translate('ready'), window.translator.translate('copyed'))
     }
 
     deleteCurrentCountry(countryId) {
-        if (!countryId || !this.jsonData?.lands[countryId]) {
-            console.error('Нет страны для удаления');
-            return;
-        }
+        try {
+            // Проверяем, не выполняется ли уже удаление
+            if (this._isDeleting) return;
+            this._isDeleting = true;
 
-        if (!confirm(window.translator.translate('confirm_delete_country'))) {
-            return;
-        }
-
-        this.pushToUndoStack();
-
-        // Удаляем страну
-        delete this.jsonData.lands[countryId];
-
-        // Обновляем список
-        this.updateCountriesList();
-
-        // Обновляем JSON в превью и сохраняем
-        if (this.previewContent) {
-            this.previewContent.value = JSON.stringify(this.jsonData, null, 4);
-            if (typeof window.saveChanges === 'function') {
-                window.saveChanges();
+            // Определяем ID страны для удаления
+            const targetId = countryId || this.currentCountry;
+            
+            if (!targetId || !this.jsonData?.lands[targetId]) {
+                showError(windows.translator.translate('error'), 'Страна для удаления не найдена');
+                this._isDeleting = false;
+                return;
             }
+
+            // Запрашиваем подтверждение
+            if (!confirm(window.translator.translate('confirm_delete_country'))) {
+                this._isDeleting = false;
+                return;
+            }
+
+            this.pushToUndoStack();
+
+            // Сохраняем имя страны для уведомления
+            const countryName = this.jsonData.lands[targetId].name;
+
+            // Удаляем страну
+            delete this.jsonData.lands[targetId];
+
+            // Очищаем текущую страну, если удаляем её
+            if (this.currentCountry === targetId) {
+                this.currentCountry = null;
+            }
+
+            // Обновляем список
+            this.updateCountriesList();
+
+            // Обновляем JSON в превью и сохраняем
+            if (this.previewContent) {
+                this.previewContent.value = JSON.stringify(this.jsonData, null, 4);
+                if (typeof window.saveChanges === 'function') {
+                    window.saveChanges();
+                }
+            }
+
+            // Переключаемся на список стран
+            this.switchToCountriesList();
+
+            // Показываем уведомление об успешном удалении
+            showSuccess('Удалено', `Страна "${countryName}" успешно удалена`);
+        } catch (error) {
+            console.error('Ошибка при удалении страны:', error);
+            showError('Ошибка', 'Не удалось удалить страну');
+        } finally {
+            this._isDeleting = false;
         }
     }
 
@@ -1218,10 +1263,12 @@ class CountryManager {
                     message.push(`добавлен владелец для ${addedCount} провинций`);
                 }
                 this.fileInfo.textContent = `Результат: ${message.join(', ')}`;
+                showSuccess(window.translator.translate('ready'), window.translator.translate('non-existent owners are replaced '));
             }
         } else {
             if (this.fileInfo) {
                 this.fileInfo.textContent = 'Изменений не требуется';
+                showInfo(window.translator.translate('ready'), window.translator.translate('no need'));
             }
         }
     }
@@ -1425,6 +1472,7 @@ class CountryManager {
         });
 
         this.updateCountriesList();
+        showSuccess(window.translator.translate('ready'), window.translator.translate('filtres reseted'))
     }
 
     getColumnTitle(column) {
