@@ -3,10 +3,10 @@ const reqbonConfig = {
     // Конфигурация бонусов
     bonuses: {
         // Бонусы с длительностью
-        defense: { hasDuration: true },
-        attack: { hasDuration: true },
-        population_income: { hasDuration: true },
-        building_cost: { hasDuration: true },
+        defense: { hasDuration: true, defaultDuration: 3 },
+        attack: { hasDuration: true, defaultDuration: 3 },
+        population_income: { hasDuration: true, defaultDuration: 3 },
+        building_cost: { hasDuration: true, defaultDuration: 3 },
         relation_ideology_change: { hasDuration: true },
         relation_change: { hasDuration: true },
         accelerated_recruit_cost: { hasDuration: true },
@@ -157,3 +157,57 @@ const reqbonConfig = {
 
 // Экспортируем конфигурацию
 window.reqbonConfig = reqbonConfig;
+
+window.requirementsManager = {
+    // Get requirements/bonuses from a specific section
+    getRequirements(section) {
+        const container = document.getElementById(`event-${section}`);
+        if (!container) {
+            console.warn(`Container for ${section} not found`);
+            return [];
+        }
+
+        const items = [];
+        const itemElements = container.getElementsByClassName('array-list-item');
+        
+        Array.from(itemElements).forEach(item => {
+            const content = item.querySelector('.item-content')?.textContent;
+            if (!content) return;
+
+            // Parse item content to extract type, action, value and subtype
+            const parsed = this.parseItemContent(content);
+            if (parsed) {
+                items.push(parsed);
+            }
+        });
+
+        return items;
+    },
+
+    // Parse item content string into requirement/bonus object
+    parseItemContent(content) {
+        // Basic format: "type action value (subtype)"
+        const match = content.match(/^(\w+)\s*(\w+)?\s*([^(]+)(?:\(([^)]+)\))?$/);
+        if (!match) return null;
+
+        const [_, type, action, value, subtype] = match;
+        
+        // Create requirement object
+        const requirement = {
+            type: type.trim(),
+            value: value.trim()
+        };
+
+        // Add action if present
+        if (action && action !== 'undefined') {
+            requirement.action = action.trim();
+        }
+
+        // Add subtype if present
+        if (subtype) {
+            requirement.subtype = subtype.trim();
+        }
+
+        return requirement;
+    }
+};

@@ -24,6 +24,7 @@
         <script src="js/auth.js"></script>
         <script src="js/reqbon.js"></script>
         <script src="js/notification.js"></script>
+        <script src="js/test/move.js"></script>
         <link rel="stylesheet" href="css/countries.css">
         <link rel="stylesheet" href="css/events.css">
         <link rel="stylesheet" href="css/reforms.css">
@@ -31,6 +32,7 @@
         <link rel="stylesheet" href="css/head.css">
         <link rel="stylesheet" href="css/list.css">
         <link rel="stylesheet" href="css/notification.css">
+        <link rel="stylesheet" href="css/test/move.css">
         <!-- Google tag (gtag.js) -->
             <script async src="https://www.googletagmanager.com/gtag/js?id=G-9HFX1FVLMV"></script>
             <script>
@@ -683,6 +685,14 @@
                             <div class="tooltip">Сбросить все фильтры</div>
                         </div>
                         <div class="tooltip-container">
+                            <button onclick="window.moveManager.pasteCurrentEvent()" class="icon-action-button paste" title="Вставить">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="tooltip-container">
                             <button id="add-event" class="icon-action-button add" title="Добавить событие">
                                 <svg viewBox="0 0 24 24">
                                     <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -767,6 +777,17 @@
                         <h2><span id="event-name-header">Редактирование события</span></h2>
                     </div>
                     <div class="info-actions">
+                        <div class="tooltip-container">
+                            <button class="icon-action-button copy" onclick="window.moveManager.copyCurrentEvent()">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                                    <line x1="12" y1="11" x2="12" y2="17"></line>
+                                    <line x1="9" y1="14" x2="15" y2="14"></line>
+                                </svg>
+                            </button>
+                            <div class="tooltip">Копировать в буфер</div>
+                        </div>
                         <div class="tooltip-container">
                             <button class="icon-action-button copy" onclick="window.eventManager.copyCurrentEvent()">
                                 <svg viewBox="0 0 24 24">
@@ -1217,6 +1238,10 @@
                     </div>
                 </form>
             </div>
+        </div>
+
+        <div id="move" class="page pmove">
+            
         </div>
 
         <!-- Модальное окно фильтра -->

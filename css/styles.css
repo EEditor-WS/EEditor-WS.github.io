@@ -1,0 +1,98 @@
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+}
+
+.input-group .main-page-input {
+    flex-grow: 1;
+    margin-right: 0;
+    border-radius: 4px 0 0 4px;
+}
+
+.input-group .dropdown-button {
+    min-width: 30px;
+    padding: 0 8px;
+    background: #444;
+    border: 1px solid #666;
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-group .dropdown-button:hover {
+    background: #555;
+}
+
+.country-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    width: calc(100% - 30px);
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: 4px;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.country-dropdown option {
+    background: #333;
+    color: #fff;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.country-dropdown option:hover,
+select.main-page-input option:hover,
+.country-dropdown option:focus,
+select.main-page-input option:focus {
+    background: #444;
+    color: #fff;
+}
+
+/* Стили для выпадающих списков */
+.country-dropdown, 
+select.main-page-input {
+    background: #333;
+    color: #fff;
+    border: 1px solid #666;
+    border-radius: 4px;
+    padding: 8px;
+    width: 100%;
+    cursor: pointer;
+}
+
+select.main-page-input option {
+    background: #333;
+    color: #fff;
+    padding: 8px;
+}
+
+/* Стили для скроллбара в выпадающих списках */
+.country-dropdown::-webkit-scrollbar,
+select.main-page-input::-webkit-scrollbar {
+    width: 8px;
+}
+
+.country-dropdown::-webkit-scrollbar-track,
+select.main-page-input::-webkit-scrollbar-track {
+    background: #333;
+}
+
+.country-dropdown::-webkit-scrollbar-thumb,
+select.main-page-input::-webkit-scrollbar-thumb {
+    background: #666;
+    border-radius: 4px;
+}
+
+.country-dropdown::-webkit-scrollbar-thumb:hover,
+select.main-page-input::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}

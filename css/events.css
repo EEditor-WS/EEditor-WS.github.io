@@ -795,3 +795,62 @@
 .context-menu-item.delete:hover {
     background: #4a2a2a;
 }
+
+.input-group {
+    display: flex;  /* Включаем flexbox */
+    flex-direction: row;  /* Элементы располагаются в строку */
+    align-items: center;  /* Выравнивание элементов по центру (можно изменить) */
+    gap: 10px;  /* Отступы между элементами (при необходимости) */
+    overflow-x: auto; /* Добавляет горизонтальную прокрутку, если элементов много */
+    white-space: nowrap; /* Предотвращает перенос элементов на новую строку */
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+}
+
+.modal.active {
+    display: block;
+}
+
+.modal .modal-content {
+    background-color: #2a2a2a;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #1f1f1f;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+}
+
+.modal .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal .modal-header h3 {
+    margin: 0;
+    color: #e0e0e0;
+}
+
+.modal .modal-body {
+    margin-bottom: 20px;
+}
+
+.modal .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}

@@ -366,6 +366,20 @@ class CountryManager {
             newButton.addEventListener('click', () => this.deleteCurrentCountry());
         }
 
+        // Исправляем обработчик копирования
+        const copyButton = document.getElementById('copy-country');
+        if (copyButton) {
+            // Удаляем старые обработчики
+            const newButton = copyButton.cloneNode(true);
+            copyButton.parentNode.replaceChild(newButton, copyButton);
+            // Добавляем новый обработчик
+            newButton.addEventListener('click', () => {
+                if (this.currentCountry) {
+                    this.copyCurrentCountry(this.currentCountry);
+                }
+            });
+        }
+
         document.getElementById('country-reforms')?.addEventListener('click', () => {
             if (!this.currentCountry) {
                 console.error('Не выбрана страна');
@@ -543,7 +557,6 @@ class CountryManager {
         this.jsonData.lands[newId] = {
             name: "New country",
             color: [128, 128, 128, 255],
-            capital: 0,
             capital_name: '',
             defeated: false,
             political: '',
@@ -586,25 +599,43 @@ class CountryManager {
     }
 
     copyCurrentCountry(countryId) {
-        const sourceId = countryId || this.currentCountry;
-        if (!sourceId || !this.jsonData?.lands?.[sourceId]) return;
+        try {
+            if (this._isCopying) return;
+            this._isCopying = true;
 
-        const newId = this.generateUniqueId();
-        const currentCountry = this.jsonData.lands[sourceId];
-        
-        this.pushToUndoStack();
-        
-        // Создаем глубокую копию страны
-        this.jsonData.lands[newId] = JSON.parse(JSON.stringify(currentCountry));
-        
-        // Обновляем id и название копии
-        this.jsonData.lands[newId].name += ' (копия)';
-        
-        this.updateCountriesList();
-        this.openCountry(newId);
-        this.updateJsonAndUI();
+            const sourceId = countryId || this.currentCountry;
+            if (!sourceId || !this.jsonData?.lands?.[sourceId]) return;
 
-        showSuccess(window.translator.translate('ready'), window.translator.translate('copyed'))
+            const newId = this.generateUniqueId();
+            const currentCountry = this.jsonData.lands[sourceId];
+            
+            this.pushToUndoStack();
+            
+            // Создаем глубокую копию страны
+            this.jsonData.lands[newId] = JSON.parse(JSON.stringify(currentCountry));
+            this.jsonData.lands[newId].name += ' (копия)';
+
+            // Обновляем все за один раз
+            const jsonString = JSON.stringify(this.jsonData, null, 4);
+            if (this.previewContent) {
+                this.previewContent.value = jsonString;
+                if (typeof window.saveChanges === 'function') {
+                    window.saveChanges();
+                }
+            }
+
+            // Сначала обновляем список
+            this.updateCountriesList();
+            // Затем открываем страну без дополнительного обновления
+            this.openCountry(newId);
+
+            showSuccess(window.translator.translate('ready'), window.translator.translate('copyed'));
+        } catch (error) {
+            console.error('Error copying country:', error);
+            showError('Failed to copy country');
+        } finally {
+            this._isCopying = false;
+        }
     }
 
     deleteCurrentCountry(countryId) {
@@ -728,8 +759,15 @@ class CountryManager {
         // Заполняем отношения
         this.populateRelationLists(country);
 
-        // Переключаемся на страницу редактирования
-        this.switchToEditPage();
+        // Переключаемся на страницу редактирования без дополнительных обновлений
+        document.querySelectorAll('.page').forEach(page => {
+            page.classList.remove('active');
+        });
+        document.getElementById('country-edit')?.classList.add('active');
+
+        document.querySelectorAll('.nav-button').forEach(btn => {
+            btn.classList.remove('active');
+        });
     }
 
     setFormValues(values) {
@@ -1066,7 +1104,13 @@ class CountryManager {
             country.name = document.getElementById('country-name').value;
             country.group = document.getElementById('country-group').value;
             country.capital_name = document.getElementById('country-capital').value;
-            country.capital = parseInt(document.getElementById('country-capital-id').value) || 0;
+            const capitalId = parseInt(document.getElementById('country-capital-id').value);
+            if (!isNaN(capitalId) && capitalId > 0) {
+                country.capital = capitalId;
+            } else {
+                delete country.capital; // Удаляем свойство, если capitalId <= 0
+            }
+            
             country.defeated = document.getElementById('country-defeated').value === 'true';
             country.political = document.getElementById('country-political').value;
 
