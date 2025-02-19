@@ -553,72 +553,95 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Читаем содержимое
             const text = await currentFile.text();
+            console.log('File content:', text.substring(0, 200) + '...'); // Показываем первые 200 символов
             
-            // Обновляем интерфейс
-                handleFileContent(currentFile.name, text);
-                showSuccess('Загружено', 'Готово к редактированию');
-            } else {
-                // Для браузеров без поддержки File System Access API
-                const input = document.createElement('input');
-                input.type = 'file';
-                input.accept = '.json';
-                
-                input.onchange = async function(e) {
-                    const file = e.target.files[0];
-                    if (file) {
-                        currentFile = file;
-                        const text = await file.text();
-                        handleFileContent(file.name, text);
-                    }
-                };
-                
-                input.click();
-                showWarning('Загружено', 'Ошибка редактирования файла. Вместо сохранения, файл будет скачан.');
-            }
-        } catch (err) {
-            console.error('Ошибка при открытии файла:', err);
-            if (fileInfo) {
-                fileInfo.textContent = window.translator.translate('file_access_error');
-            }
-            showError('Ошибка', err);
-        }
-    }
+            handleFileContent(currentFile.name, text);
+            showSuccess('Загружено', 'Готово к редактированию');
+        } else {
+            // Для браузеров без поддержки File System Access API
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            
+            input.onchange = async function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    currentFile = file;
+                    const text = await file.text();
+                    handleFileContent(file.name, text);
 
-    // Функция для обработки содержимого файла
-    function handleFileContent(fileName, content) {
-        if (previewContent) {
-            previewContent.value = content;
+                    // Обновляем статус Discord, если есть name в JSON
+                    try {
+                        const jsonData = JSON.parse(text);
+                        if (jsonData.name) {
+                            console.log(jsonData.name);
+                            console.log("discordupd");
+                            updateDiscordStatus(jsonData.name);
+                        }
+                        console.log("loaded")
+                    } catch (e) {
+                        console.warn('Failed to parse JSON for Discord status:', e);
+                    }
+                }
+            };
+            
+            input.click();
+            showWarning('Загружено', 'Ошибка редактирования файла. Вместо сохранения, файл будет скачан.');
         }
-        if (previewFilename) {
-            previewFilename.textContent = fileName;
-        }
+    } catch (err) {
+        console.error('Ошибка при открытии файла:', err);
         if (fileInfo) {
-            fileInfo.textContent = `Файл: ${fileName}`;
+            fileInfo.textContent = window.translator.translate('file_access_error');
         }
-        
-        // Проверяем JSON
-        isJsonFile = fileName.toLowerCase().endsWith('.json');
-        if (isJsonFile) {
-            try {
-                const jsonData = JSON.parse(content);
-                fillFormFromJson(jsonData);
-                
-                // Обновляем данные в менеджерах
-                if (window.countryManager) {
-                    window.countryManager.jsonData = jsonData;
-                    window.countryManager.updateCountriesList();
-                }
-                if (window.eventManager) {
-                    window.eventManager.setJsonData(jsonData);
-                }
-            } catch (error) {
-                console.error('Ошибка при парсинге JSON:', error);
-                if (fileInfo) {
-                    fileInfo.textContent = window.translator.translate('file_parse_error');
-                }
+        showError('Ошибка', err);
+    }
+}
+
+// Функция для обработки содержимого файла
+function handleFileContent(fileName, content) {
+    if (previewContent) {
+        previewContent.value = content;
+    }
+    if (previewFilename) {
+        previewFilename.textContent = fileName;
+    }
+    if (fileInfo) {
+        fileInfo.textContent = `Файл: ${fileName}`;
+    }
+    
+    // Проверяем JSON
+    isJsonFile = fileName.toLowerCase().endsWith('.json');
+    if (isJsonFile) {
+        try {
+            const jsonData = JSON.parse(content);
+            console.log('Parsed JSON data:', jsonData); // Добавляем отладку
+            
+            // Проверяем и обновляем Discord статус
+            if (jsonData && jsonData.name) {
+                console.log('Found scenario name:', jsonData.name);
+                updateDiscordStatus(jsonData.name);
+            } else {
+                console.log('No scenario name found in JSON');
+            }
+
+            fillFormFromJson(jsonData);
+            
+            // Обновляем данные в менеджерах
+            if (window.countryManager) {
+                window.countryManager.jsonData = jsonData;
+                window.countryManager.updateCountriesList();
+            }
+            if (window.eventManager) {
+                window.eventManager.setJsonData(jsonData);
+            }
+        } catch (error) {
+            console.error('Ошибка при парсинге JSON:', error);
+            if (fileInfo) {
+                fileInfo.textContent = window.translator.translate('file_parse_error');
             }
         }
     }
+}
 
     // Обработчик изменений в текстовом поле
     let saveTimeout;
