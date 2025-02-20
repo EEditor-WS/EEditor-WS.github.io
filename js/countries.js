@@ -98,7 +98,7 @@ class CountryManager {
             .map(([id, country]) => ({
                 id,
                 name: country.name || '',
-                group: country.group || '',
+                group: country.group_name || '',
                 color: country.color || [128, 128, 128],
                 provinces: provincesCount[id] || 0,
                 capital_name: country.capital_name || '',
@@ -718,7 +718,7 @@ class CountryManager {
 
         this.setFormValues({
             'country-name': country.name,
-            'country-group': country.group || '',
+            'country-group': country.group_name || '',
             'country-capital': country.capital_name || '',
             'country-capital-id': country.capital || '',
             'country-defeated': country.defeated ? 'true' : 'false',
@@ -1102,7 +1102,7 @@ class CountryManager {
 
             // Обновляем основные данные
             country.name = document.getElementById('country-name').value;
-            country.group = document.getElementById('country-group').value;
+            country.group_name = document.getElementById('country-group').value;
             country.capital_name = document.getElementById('country-capital').value;
             const capitalId = parseInt(document.getElementById('country-capital-id').value);
             if (!isNaN(capitalId) && capitalId > 0) {
@@ -1559,8 +1559,8 @@ class CountryManager {
         }
 
         Object.values(this.jsonData.lands).forEach(country => {
-            if (country.group) {
-                groups.add(country.group);
+            if (country.group_name) {
+                groups.add(country.group_name);
             }
         });
 
