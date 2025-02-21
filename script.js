@@ -470,12 +470,109 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Функция для сохранения изменений
     async function saveChanges() {
-        if (hasFileSystemAccess) {
-        if (!fileHandle) {
+        const isAndroidApp = typeof Android !== 'undefined';
+        
+        if (isAndroidApp) {
             try {
-                // Запрашиваем доступ к файловой системе
-                fileHandle = await window.showSaveFilePicker({
-                        suggestedName: currentFile?.name || 'scenario.json',
+                // Отправляем только содержимое файла
+                Android.saveFile(previewContent.value);
+            } catch (err) {
+                console.error('Ошибка при сохранении файла:', err);
+                showError('Ошибка', err.message);
+            }
+        } else if (hasFileSystemAccess) {
+            if (!fileHandle) {
+                try {
+                    // Запрашиваем доступ к файловой системе
+                    fileHandle = await window.showSaveFilePicker({
+                            suggestedName: currentFile?.name || 'scenario.json',
+                        types: [{
+                            description: 'JSON Files',
+                            accept: {
+                                'application/json': ['.json']
+                            }
+                        }]
+                    });
+                } catch (err) {
+                    if (err.name === 'AbortError') {
+                        return; // Пользователь отменил выбор
+                    }
+                    console.error('Ошибка при получении доступа к файлу:', err);
+                    if (fileInfo) {
+                        fileInfo.textContent = window.translator.translate('file_access_error');
+                    }
+                    showError('Ошибка', err);
+                    return;
+                }
+            }
+
+            try {
+                // Создаем поток для записи
+                const writable = await fileHandle.createWritable();
+                // Записываем содержимое
+                await writable.write(previewContent.value);
+                // Закрываем поток
+                await writable.close();
+                
+                if (fileInfo) {
+                    fileInfo.textContent = window.translator.translate('file_saved');
+                }
+                showSuccess('Сохранено', 'Файл успешно сохранен');
+            } catch (error) {
+                console.error('Ошибка при сохранении файла:', error);
+                if (fileInfo) {
+                    fileInfo.textContent = window.translator.translate('file_update_error');
+                }
+                showError('Ошибка', error);
+            }
+        } else {
+            // Для браузеров без поддержки File System Access API
+            const blob = new Blob([previewContent.value], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = currentFile?.name || 'scenario.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            if (fileInfo) {
+                fileInfo.textContent = window.translator.translate('file_downloaded');
+            }
+            showSuccess('Скачано', 'Файл успешно скачан');
+        }
+    }
+
+    // Функция для открытия файла
+    async function openFile() {
+        try {
+            const isAndroidApp = typeof Android !== 'undefined';
+            
+            if (isAndroidApp) {
+                const content = Android.readAppSpecificFile();
+                if (content.startsWith("ERROR:")) {
+                    throw new Error(content.substring(6));
+                }
+                
+                const jsonData = JSON.parse(content);
+                isJsonFile = true;
+                
+                handleFileContent('scenario.json', content);
+                fillFormFromJson(jsonData);
+                
+                if (window.countryManager) {
+                    window.countryManager.jsonData = jsonData;
+                    window.countryManager.updateCountriesList();
+                }
+                if (window.eventManager) {
+                    window.eventManager.setJsonData(jsonData);
+                }
+                
+                showSuccess('Загружено', 'Готово к редактированию');
+            } else if (hasFileSystemAccess) {
+                // Запрашиваем доступ к файлу
+                [fileHandle] = await window.showOpenFilePicker({
                     types: [{
                         description: 'JSON Files',
                         accept: {
@@ -483,119 +580,55 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     }]
                 });
-            } catch (err) {
-                if (err.name === 'AbortError') {
-                    return; // Пользователь отменил выбор
-                }
-                console.error('Ошибка при получении доступа к файлу:', err);
-                if (fileInfo) {
-                    fileInfo.textContent = window.translator.translate('file_access_error');
-                }
-                showError('Ошибка', err);
-                return;
-            }
-        }
+                
+                // Получаем файл
+                currentFile = await fileHandle.getFile();
+                
+                // Читаем содержимое
+                const text = await currentFile.text();
+                console.log('File content:', text.substring(0, 200) + '...'); // Показываем первые 200 символов
+                
+                handleFileContent(currentFile.name, text);
+                showSuccess('Загружено', 'Готово к редактированию');
+            } else {
+                // Для браузеров без поддержки File System Access API
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = '.json';
+                
+                input.onchange = async function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        currentFile = file;
+                        const text = await file.text();
+                        handleFileContent(file.name, text);
 
-        try {
-            // Создаем поток для записи
-            const writable = await fileHandle.createWritable();
-            // Записываем содержимое
-            await writable.write(previewContent.value);
-            // Закрываем поток
-            await writable.close();
-            
-            if (fileInfo) {
-                fileInfo.textContent = window.translator.translate('file_saved');
-            }
-            showSuccess('Сохранено', 'Файл успешно сохранен');
-        } catch (error) {
-            console.error('Ошибка при сохранении файла:', error);
-            if (fileInfo) {
-                fileInfo.textContent = window.translator.translate('file_update_error');
-            }
-            showError('Ошибка', error);
-        }
-    } else {
-        // Для браузеров без поддержки File System Access API
-        const blob = new Blob([previewContent.value], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = currentFile?.name || 'scenario.json';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        
-        if (fileInfo) {
-            fileInfo.textContent = window.translator.translate('file_downloaded');
-        }
-        showSuccess('Скачано', 'Файл успешно скачан');
-    }
-}
-
-    // Функция для открытия файла
-    async function openFile() {
-        try {
-            if (hasFileSystemAccess) {
-            // Запрашиваем доступ к файлу
-            [fileHandle] = await window.showOpenFilePicker({
-                types: [{
-                    description: 'JSON Files',
-                    accept: {
-                        'application/json': ['.json']
-                    }
-                }]
-            });
-            
-            // Получаем файл
-            currentFile = await fileHandle.getFile();
-            
-            // Читаем содержимое
-            const text = await currentFile.text();
-            console.log('File content:', text.substring(0, 200) + '...'); // Показываем первые 200 символов
-            
-            handleFileContent(currentFile.name, text);
-            showSuccess('Загружено', 'Готово к редактированию');
-        } else {
-            // Для браузеров без поддержки File System Access API
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = '.json';
-            
-            input.onchange = async function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    currentFile = file;
-                    const text = await file.text();
-                    handleFileContent(file.name, text);
-
-                    // Обновляем статус Discord, если есть name в JSON
-                    try {
-                        const jsonData = JSON.parse(text);
-                        if (jsonData.name) {
-                            console.log(jsonData.name);
-                            console.log("discordupd");
-                            updateDiscordStatus(jsonData.name);
+                        // Обновляем статус Discord, если есть name в JSON
+                        try {
+                            const jsonData = JSON.parse(text);
+                            if (jsonData.name) {
+                                console.log(jsonData.name);
+                                console.log("discordupd");
+                                updateDiscordStatus(jsonData.name);
+                            }
+                            console.log("loaded")
+                        } catch (e) {
+                            console.warn('Failed to parse JSON for Discord status:', e);
                         }
-                        console.log("loaded")
-                    } catch (e) {
-                        console.warn('Failed to parse JSON for Discord status:', e);
                     }
-                }
-            };
-            
-            input.click();
-            showWarning('Загружено', 'Ошибка редактирования файла. Вместо сохранения, файл будет скачан.');
+                };
+                
+                input.click();
+                showWarning('Загружено', 'Ошибка редактирования файла. Вместо сохранения, файл будет скачан.');
+            }
+        } catch (err) {
+            console.error('Ошибка при открытии файла:', err);
+            if (fileInfo) {
+                fileInfo.textContent = window.translator.translate('file_access_error');
+            }
+            showError('Ошибка', err.message);
         }
-    } catch (err) {
-        console.error('Ошибка при открытии файла:', err);
-        if (fileInfo) {
-            fileInfo.textContent = window.translator.translate('file_access_error');
-        }
-        showError('Ошибка', err);
     }
-}
 
 // Функция для обработки содержимого файла
 function handleFileContent(fileName, content) {
@@ -831,3 +864,70 @@ function changeApplicationLanguage(lang) {
     });
 }
 
+window.onload = function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const shouldLoadFile = urlParams.get('loadFile');
+    
+    if (shouldLoadFile === 'true') {
+        loadFileViaScheme();
+    }
+}
+
+function loadFileViaScheme() {
+    console.log('Starting file load via scheme');
+    setTimeout(() => {
+        console.log('Making fetch request');
+        fetch('filedata://current')
+            .then(response => {
+                console.log('Got response:', response);
+                return response.json();
+            })
+            .then(data => {
+                console.log('Parsed data:', data);
+                if (data.error) {
+                    console.error('Error from server:', data.error);
+                    showError('Ошибка', data.error);
+                } else {
+                    console.log('Processing file:', data.fileName);
+                    handleFileContent(data.fileName, data.content);
+                }
+            })
+            .catch(error => {
+                console.error('Load error:', error);
+                // Увеличим таймаут для повторной попытки
+                setTimeout(loadFileViaScheme, 1000);
+            });
+    }, 1500); // Увеличим начальную задержку
+}
+
+function handleFileContent(fileName, content, filePath) {
+    console.log('Received file:', {
+        name: fileName,
+        path: filePath,
+        content: content
+    });
+    
+    // Обновляем интерфейс
+    document.getElementById('file-name').textContent = fileName;
+    document.getElementById('file-path').textContent = filePath;
+    editor.setValue(content);
+}
+
+function loadFileViaScheme() {
+    fetch('filedata://current')
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                showError('Error', data.error);
+            } else {
+                handleFileContent(
+                    data.fileName,
+                    data.content,
+                    data.filePath // Передаем новый параметр
+                );
+            }
+        })
+        .catch(error => {
+            setTimeout(loadFileViaScheme, 500);
+        });
+}
