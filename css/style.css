@@ -6,6 +6,7 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
+/* Статика */
 .pmain {
     display: flex;
     flex-direction: row-reverse;
@@ -13,6 +14,15 @@ body {
     gap: 20px;
     padding: 20px;
     box-sizing: border-box;
+}
+
+.data {
+    flex-grow: 1;
+    background-color: #242424;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
 }
 
 .file-upload-container {
@@ -24,14 +34,7 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.data {
-    flex-grow: 1;
-    background-color: #242424;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow-y: auto;
-}
+/* Конец статики */
 
 @media (max-width: 720px) {
     .pmain {
@@ -57,6 +60,34 @@ body {
 @media (max-width: 768px) {
     .settings-form {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .pmain {
+        gap: 0px;
+        padding: 0px;
+    }
+
+    .pcountries {
+        gap: 0px;
+        padding: 0px;
+        width: calc( 100wh - 40px);
+    }
+
+    .data {
+        border-radius: 0px;
+        padding: 0px;
+        width: 100%;
+    }
+
+    .settings-form {
+        gap: 0px;
+        padding: 0px;
+    }
+
+    .file-upload-container {
+        border-radius: 0px;
     }
 }
 
@@ -1764,3 +1795,5 @@ body {
 .groups-list::-webkit-scrollbar-thumb:hover {
     background: #444;
 }
+
+/* Адаптивность */

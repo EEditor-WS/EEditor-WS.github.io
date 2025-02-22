@@ -824,7 +824,33 @@ const translations = {
         "docs_requirements": "Требования",
         "docs_first_steps": "Первые шаги",
         "docs_reforms_requirements": "Требования к реформам",
-        "vassalof": "Vassal of"
+        "vassalof": "Vassal of",
+
+        // Download page
+        "home": "Home",
+        "download": "Download",
+        "download_title": "Download EEditor Warnament",
+        "download_links": "Download Links",
+        "windows_version": "Windows Version",
+        "android_version": "Android Version",
+        "latest_version": "Latest version",
+        "download_for_windows": "Download for Windows",
+        "download_for_android": "Download for Android",
+        "system_requirements": "System Requirements",
+        "windows_requirements": "Windows Requirements",
+        "android_requirements": "Android Requirements",
+        "win_req_os": "OS: Windows 10 (64-bit) or newer",
+        "win_req_processor": "Processor: 1.6 GHz or faster",
+        "win_req_memory": "Memory: 4 GB RAM",
+        "win_req_storage": "Storage: 2 GB free space",
+        "win_req_dotnet": ".NET Runtime: .NET 8",
+        "win_req_webview": "WebView2 Runtime: Must be installed",
+        "win_req_internet": "Internet connection: Required for dependencies and updates",
+        "android_req_os": "OS: Android 9 or newer",
+        "android_req_processor": "Processor: 2 GHz or faster",
+        "android_req_ram": "Memory: 8 GB RAM",
+        "android_req_storage": "Storage: 1 GB free space",
+        "android_req_internet": "Internet connection: Required for dependencies and updates"
     },
     "ru": {
         // Документация
@@ -1331,8 +1357,8 @@ const translations = {
         "docs_console_scenarios_desc": "Команды для роботи зі сценаріями та модифікаціями:",
         "docs_console_scenario_export": " - Экспортувати збереження в scenario.save",
         "docs_console_scenario_import": " - Імпортувати збереження з scenario.save",
-        "docs_console_scenario_patch": " - Адаптувати сценарій до нової версії карти",
-        "docs_console_scenario_cinema": " - Показати анімацію руху карти",
+        "docs_console_scenario_patch": " - Адаптувати сценарій до нової версії карты",
+        "docs_console_scenario_cinema": " - Показати анімацію руху карты",
         "docs_console_scenario_check": " - Перевірити вимоги для події",
         "docs_console_scenario_show": " - Показати подію",
 
@@ -1554,7 +1580,33 @@ const translations = {
         "ready": "Готово",
         "error": "Ошибка",
         "no need": "Страны для удаления не найдена",
-        "filtres reseted": "Фильтры сброшены"
+        "filtres reseted": "Фильтры сброшены",
+
+        // Download page
+        "home": "Домой",
+        "download": "Скачивание",
+        "download_title": "Скачать EEditor Warnament",
+        "download_links": "Ссылки скачивания",
+        "windows_version": "Windows Версия",
+        "android_version": "Android Версия",
+        "latest_version": "Последняя версия",
+        "download_for_windows": "Скачать для Windows",
+        "download_for_android": "Скачать для Android",
+        "system_requirements": "Системные требования",
+        "windows_requirements": "Windows Требования",
+        "android_requirements": "Android Требования",
+        "win_req_os": "OS: Windows 10 (64-bit) или новее",
+        "win_req_processor": "Процессор: 1.6 GHz или более",
+        "win_req_memory": "Память: 4 GB RAM",
+        "win_req_storage": "Хранилище: 2 GB свободного пространства",
+        "win_req_dotnet": ".NET Runtime: .NET 8",
+        "win_req_webview": "WebView2 Runtime: Должно быть установлено",
+        "win_req_internet": "Интернет соединение: Необходимо для некоторого функционала и обновлений",
+        "android_req_os": "OS: Android 9 или новее",
+        "android_req_processor": "Процессор: 2 GHz или более",
+        "android_req_ram": "Память: 8 GB RAM",
+        "android_req_storage": "Хранилище: 1 GB свободного пространства",
+        "android_req_internet": "Интернет соединение: Необходимо для некоторого функционала и обновлений"
     },
     "uk": {
         // Документація
@@ -2053,4 +2105,4 @@ const translations = {
         "annex_country": "Елді қосып алу",
         "duration": "Ұзақтығы (жүріс)"
     }
-}; 
+};

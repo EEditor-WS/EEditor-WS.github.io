@@ -98,7 +98,7 @@ class CountryManager {
             .map(([id, country]) => ({
                 id,
                 name: country.name || '',
-                group: country.group_name || '',
+                group: country.group || '',
                 color: country.color || [128, 128, 128],
                 provinces: provincesCount[id] || 0,
                 capital_name: country.capital_name || '',
@@ -718,7 +718,7 @@ class CountryManager {
 
         this.setFormValues({
             'country-name': country.name,
-            'country-group': country.group_name || '',
+            'country-group': country.group || '',
             'country-capital': country.capital_name || '',
             'country-capital-id': country.capital || '',
             'country-defeated': country.defeated ? 'true' : 'false',
@@ -864,8 +864,6 @@ class CountryManager {
             console.error('Не выбрана текущая страна');
             return;
         }
-
-        this.pushToUndoStack();
 
         // Создаем элемент
         const itemDiv = document.createElement('div');
@@ -1102,7 +1100,7 @@ class CountryManager {
 
             // Обновляем основные данные
             country.name = document.getElementById('country-name').value;
-            country.group_name = document.getElementById('country-group').value;
+            country.group = document.getElementById('country-group').value;
             country.capital_name = document.getElementById('country-capital').value;
             const capitalId = parseInt(document.getElementById('country-capital-id').value);
             if (!isNaN(capitalId) && capitalId > 0) {
@@ -1559,8 +1557,8 @@ class CountryManager {
         }
 
         Object.values(this.jsonData.lands).forEach(country => {
-            if (country.group_name) {
-                groups.add(country.group_name);
+            if (country.group) {
+                groups.add(country.group);
             }
         });
 

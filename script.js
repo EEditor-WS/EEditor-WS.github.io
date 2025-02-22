@@ -604,7 +604,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         handleFileContent(file.name, text);
 
                         // Обновляем статус Discord, если есть name в JSON
-                        try {
+                        /*try {
                             const jsonData = JSON.parse(text);
                             if (jsonData.name) {
                                 console.log(jsonData.name);
@@ -614,7 +614,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             console.log("loaded")
                         } catch (e) {
                             console.warn('Failed to parse JSON for Discord status:', e);
-                        }
+                        }*/
                     }
                 };
                 
@@ -652,7 +652,7 @@ function handleFileContent(fileName, content) {
             // Проверяем и обновляем Discord статус
             if (jsonData && jsonData.name) {
                 console.log('Found scenario name:', jsonData.name);
-                updateDiscordStatus(jsonData.name);
+                //updateDiscordStatus(jsonData.name);
             } else {
                 console.log('No scenario name found in JSON');
             }

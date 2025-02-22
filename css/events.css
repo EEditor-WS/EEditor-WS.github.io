@@ -152,6 +152,7 @@
     border: 1px solid #1f1f1f;
     overflow: auto;
     box-sizing: border-box;
+    min-width: 500px;
 }
 
 .event-answers {

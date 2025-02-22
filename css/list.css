@@ -40,7 +40,7 @@
 
 /* Таблица списка */
 .list-table {
-    width: 100%;
+    width: calc( 100% - 10px );
     border-collapse: collapse;
     background-color: #242424;
     border-radius: 10px;
@@ -242,6 +242,22 @@
         padding: 6px 8px;
         font-size: 12px;
     }
+
+    .table-container {
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: auto;
+        white-space: nowrap;
+        height: calc(100vh - 180px);
+        margin: 0;
+        padding: 0;
+        position: relative;
+    }
+
+    .list-table {
+        width: 100%;
+        min-width: max-content;
+    }
 }
 
 .info-title {
@@ -437,4 +453,38 @@ input[type="color"] {
     border-radius: 8px;
     border: 1px solid #1f1f1f;
     overflow: auto;
+}
+
+/* Обновляем стили для контейнера таблицы */
+.table-container {
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    overscroll-behavior: contain;
+    padding-bottom: 12px;
+}
+
+/* Стилизуем скроллбар для контейнера */
+.table-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background: #1a1a1a;
+    border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+    background: #444;
+}
+
+.list-table {
+    width: 100%;
+    min-width: max-content;
 }
