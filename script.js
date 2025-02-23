@@ -548,8 +548,32 @@ document.addEventListener('DOMContentLoaded', function() {
     async function openFile() {
         try {
             const isAndroidApp = typeof Android !== 'undefined';
+
+            const urlParams = new URLSearchParams(window.location.search);
+            showSuccess(urlParams, urlParams);
             
-            if (isAndroidApp) {
+            if (urlParams.has('eval') && urlParams.get('eval') === 'openfile') {
+                const content = Android.getOpenedFileData();
+                if (content.startsWith("ERROR:")) {
+                    throw new Error(content.substring(6));
+                }
+                
+                const jsonData = JSON.parse(content);
+                isJsonFile = true;
+                
+                handleFileContent('scenario.json', content);
+                fillFormFromJson(jsonData);
+                
+                if (window.countryManager) {
+                    window.countryManager.jsonData = jsonData;
+                    window.countryManager.updateCountriesList();
+                }
+                if (window.eventManager) {
+                    window.eventManager.setJsonData(jsonData);
+                }
+                
+                showSuccess('Загружено', 'Готово к редактированию');
+            } else if (isAndroidApp) {
                 const content = Android.readAppSpecificFile();
                 if (content.startsWith("ERROR:")) {
                     throw new Error(content.substring(6));
@@ -865,11 +889,18 @@ function changeApplicationLanguage(lang) {
 }
 
 window.onload = function() {
+    if (urlParams.has('eval') && urlParams.get('eval') === 'openfile') {
+        openfile();
+    }
     const urlParams = new URLSearchParams(window.location.search);
     const shouldLoadFile = urlParams.get('loadFile');
     
     if (shouldLoadFile === 'true') {
         loadFileViaScheme();
+    }
+
+    if (urlParams.has('eval') && urlParams.get('eval') === 'openfile') {
+        openfile();
     }
 }
 
@@ -930,4 +961,8 @@ function loadFileViaScheme() {
         .catch(error => {
             setTimeout(loadFileViaScheme, 500);
         });
+}
+
+if (urlParams.has('eval') && urlParams.get('eval') === 'openfile') {
+    openfile();
 }
