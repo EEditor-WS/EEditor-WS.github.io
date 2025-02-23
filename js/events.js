@@ -915,6 +915,8 @@ class EventManager {
                 { value: 'diplomacy_sanctions', label: window.translator.translate('diplomacy_sanctions') },
                 { value: 'diplomacy_pact', label: window.translator.translate('diplomacy_pact') },
                 { value: 'diplomacy_alliance', label: window.translator.translate('diplomacy_alliance') },
+                { value: 'diplomacy_become_vassal', label: window.translator.translate('diplomacy_become_vassal') },
+                { value: 'diplomacy_get_vassal', label: window.translator.translate('diplomacy_get_vassal') },
                 { value: 'diplomacy_peace', label: window.translator.translate('diplomacy_peace') },
                 { value: 'diplomacy_war', label: window.translator.translate('diplomacy_war') },
 
@@ -938,14 +940,18 @@ class EventManager {
                 { value: 'month', label: window.translator.translate('month') },
                 { value: 'turn', label: window.translator.translate('turn') },
                 { value: 'cooldown', label: window.translator.translate('cooldown') },
+                { value: 'event_choice', label: window.translator.translate('event_choice') },
+                { value: 'received_event', label: window.translator.translate('received_event' ) },
 
                 // Страны и территории
                 { value: '', label: '--- ' + window.translator.translate('countries_and_territories') + ' ---', disabled: true },
                 { value: 'land_id', label: window.translator.translate('land_id') },
                 { value: 'land_name', label: window.translator.translate('land_name') },
+                { value: 'group_name', label: window.translator.translate('group_name') },
                 { value: 'land_power', label: window.translator.translate('land_power') },
                 { value: 'num_of_provinces', label: window.translator.translate('num_of_provinces') },
                 { value: 'near_water', label: window.translator.translate('near_water') },
+                { value: 'is_player', label: window.translator.translate('is_player') },
                 { value: 'controls_capital', label: window.translator.translate('controls_capital') },
                 { value: 'lost_capital', label: window.translator.translate('lost_capital') },
                 { value: 'enemy_near_capital', label: window.translator.translate('enemy_near_capital') },
@@ -955,6 +961,8 @@ class EventManager {
                 // Дипломатия
                 { value: '', label: '--- ' + window.translator.translate('diplomacy') + ' ---', disabled: true },
                 { value: 'has_pact', label: window.translator.translate('has_pact') },
+                { value: 'has_alliance', label: window.translator.translate('has_alliance') },
+                { value: 'has_vassal', label: window.translator.translate('has_vassal') },
                 { value: 'has_sanctions', label: window.translator.translate('has_sanctions') },
                 { value: 'has_war', label: window.translator.translate('has_war') },
                 { value: 'no_enemy', label: window.translator.translate('no_enemy') },
@@ -986,7 +994,7 @@ class EventManager {
                 const showDuration = isBonus && config?.hasDuration;
                 
                 // Форматируем значение в зависимости от типа
-                const booleanTypes = ['near_water', 'independent_land', 'no_enemy', 'enemy_near_capital', 'lost_capital'];
+                const booleanTypes = ['near_water', 'is_player', 'independent_land', 'no_enemy', 'enemy_near_capital', 'lost_capital'];
                 let displayValue = item.value;
                 if (booleanTypes.includes(item.type)) {
                     displayValue = item.value ? window.translator.translate('yes') : window.translator.translate('no');
@@ -1037,7 +1045,7 @@ class EventManager {
                 // Получаем доступные действия из конфигурации
                 if (['month', 'num_of_provinces', 'year', 'turn', 'random_value', 'count_of_tasks', 'tax', 'discontent', 'money', 'land_power'].includes(selectedType)) {
                     actions.push('more', 'equal', 'less');
-                } else if (['near_water', 'has_pact', 'has_sanctions', 'has_war', 'independent_land', 'land_name', 'building_exists', 'land_id', 'political_institution', 'enemy_near_capital', 'is_defeated', 'lost_capital', "controls_capital"].includes(selectedType)) {
+                } else if (['near_water', 'is_player', 'has_pact', 'has_alliance', 'has_vassal', 'has_sanctions', 'has_war', 'independent_land', 'land_name', 'building_exists', 'land_id', "group_name", 'political_institution', 'enemy_near_capital', 'is_defeated', 'lost_capital', "controls_capital", "received_event"].includes(selectedType)) {
                     actions.push('equal', 'not_equal');
                 } else if (['cooldown'].includes(selectedType)) {
                     actions.push('more', 'less');
@@ -1077,6 +1085,86 @@ class EventManager {
                     input.className = 'main-page-input';
                     input.placeholder = window.translator.translate('enter_number');
                     valueContainer.appendChild(input);
+                } else if (['event_choice'].includes(selectedType)) {
+                    actions.push('equal', 'not_equal');
+                
+                    // Создаем выпадающий список событий для подтипа
+                    const subtypeGroup = document.querySelector('[for="requirement-subtype"]').parentElement;
+                    subtypeGroup.style.display = 'block';
+                
+                    const subtypeInput = document.getElementById('requirement-subtype');
+                    const select = document.createElement('select');
+                    select.id = 'requirement-subtype';
+                    select.className = 'main-page-input';
+                
+                    // Получаем список всех событий
+                    const events = Object.entries(this.jsonData.custom_events || {}).map(([id, event]) => ({
+                        id,
+                        name: event.unique_event_name || event.title || id
+                    }));
+                
+                    // Сортируем события по имени
+                    events.sort((a, b) => a.name.localeCompare(b.name));
+                
+                    // Создаем опции для выпадающего списка
+                    select.innerHTML = events.map(event =>
+                        `<option value="${event.id}">${event.id} - ${event.name}${event.systemName ? ` (${event.systemName})` : ''}</option>`
+                    ).join('');
+                
+                    // Заменяем текстовое поле на выпадающий список
+                    subtypeInput.parentNode.replaceChild(select, subtypeInput);
+                
+                    // Создаем выпадающий список для значения (1, 2, 3)
+                    const valueContainer = document.getElementById('requirement-value-container');
+                    valueContainer.innerHTML = '';
+                
+                    const valueSelect = document.createElement('select');
+                    valueSelect.id = 'requirement-value';
+                    valueSelect.className = 'main-page-input';
+                    valueSelect.innerHTML = `
+                        <option value="1">${window.translator.translate('answer')} 1</option>
+                        <option value="2">${window.translator.translate('answer')} 2</option>
+                        <option value="3">${window.translator.translate('answer')} 3</option>
+                    `;
+                    valueContainer.appendChild(valueSelect);
+                } else if (['received_event'].includes(selectedType)) {
+                    actions.push('equal', 'not_equal');
+
+                    // Создаем выпадающий список событий для значений
+                    const valueGroup = document.querySelector('[for="requirement-value"]').parentElement;
+                    valueGroup.style.display = 'block';
+                    
+                    const valueInput = document.getElementById('requirement-value');
+                    const select = document.createElement('select');
+                    select.id = 'requirement-value';
+                    select.className = 'main-page-input';
+                    
+                    // Получаем список всех событий
+                    const events = Object.entries(this.jsonData.custom_events || {}).map(([id, event]) => ({
+                      id,
+                      name: event.unique_event_name || event.title || id
+                    }));
+                    
+                    // Сортируем события по имени
+                    events.sort((a, b) => a.name.localeCompare(b.name));
+                    
+                    // Создаем опции для выпадающего списка
+                    select.innerHTML = events.map(event => 
+                      `<option value="${event.id}">${event.id} - ${event.name}${event.systemName ? ` (${event.systemName})` : ''}</option>`
+                    ).join('');
+                    
+                    // Заменяем текстовое поле на выпадающий список
+                    valueInput.parentNode.replaceChild(select, valueInput);
+                    
+                    // Создаем числовое поле для подтипа (если необходимо)
+                    const subtypeContainer = document.getElementById('requirement-subtype-container');
+                    subtypeContainer.innerHTML = '';
+                    const input = document.createElement('input');
+                    input.type = 'number';
+                    input.id = 'requirement-subtype';
+                    input.className = 'main-page-input';
+                    input.placeholder = window.translator.translate('enter_number');
+                    subtypeContainer.appendChild(input);
                 } else if (['no_enemy'].includes(selectedType)) {
                     actions.push('equal');
                 }
@@ -1173,7 +1261,7 @@ class EventManager {
                         ).join('');
                         valueContainer.appendChild(select);
                     subtypeGroup.style.display = 'none';
-                } else if (['diplomacy_lift_sanctions', 'diplomacy_sanctions', 'diplomacy_pact', 'diplomacy_alliance', 'diplomacy_peace', 'diplomacy_war'].includes(selectedType)) {
+                } else if (['diplomacy_lift_sanctions', 'diplomacy_sanctions', 'diplomacy_pact', 'diplomacy_become_vassal', 'diplomacy_get_vassal', 'diplomacy_alliance', 'diplomacy_peace', 'diplomacy_war'].includes(selectedType)) {
                     // Для дипломатических действий со странами
                     const select = document.createElement('select');
                     select.id = 'requirement-value';
@@ -1269,7 +1357,7 @@ class EventManager {
                 }
             } else {
                 // Для требований оставляем существующую логику
-                if (['near_water', 'independent_land', 'no_enemy', 'enemy_near_capital', 'lost_capital'].includes(selectedType)) {
+                if (['near_water', 'is_player', 'independent_land', 'no_enemy', 'enemy_near_capital', 'lost_capital'].includes(selectedType)) {
                         valueContainer.innerHTML = `
                             <select id="requirement-value" class="main-page-input">
                         <option value='true'>${window.translator.translate('yes')}</option>
@@ -1296,17 +1384,53 @@ class EventManager {
                     ).join('');
                     valueContainer.appendChild(select);
                     subtypeGroup.style.display = 'none'; // Скрываем поле subtype
-                } else if (['has_pact', 'has_sanctions', 'has_war', 'land_id', 'is_defeated', "controls_capital"].includes(selectedType)) {
+                } else if (['has_pact', 'has_alliance', 'has_vassal', 'has_sanctions', 'has_war', 'land_id', 'is_defeated', "controls_capital"].includes(selectedType)) {
                         const select = document.createElement('select');
                         select.id = 'requirement-value';
                         select.className = 'main-page-input';
-                        const countries = Object.entries(this.jsonData.lands || {}).map(([id, country]) => ({
-                            id,
-                            name: country.name
-                        }));
-                        select.innerHTML = countries.map(country => 
-                            `<option value="${country.id}">${country.name}</option>`
+
+                        // Добавляем опцию "any" первой
+                        select.innerHTML = `<option value="any">${window.translator.translate('any')}</option>`;
+
+                        // Получаем список стран и сортируем его по имени
+                        const countries = Object.entries(this.jsonData.lands || {})
+                            .map(([id, country]) => ({
+                                id,
+                                name: country.name || id
+                            }))
+                            .sort((a, b) => a.name.localeCompare(b.name));
+
+                        // Добавляем остальные опции
+                        select.innerHTML += countries.map(country => 
+                            `<option value="${country.id}">${country.name || country.id}</option>`
                         ).join('');
+
+                        valueContainer.appendChild(select);
+                    subtypeGroup.style.display = 'none';
+                } else if (['group_name'].includes(selectedType)) {
+                    // Получаем все уникальные group_name из существующих стран
+                    const groups = new Set();
+                    Object.values(this.jsonData.lands || {}).forEach(country => {
+                        if (country.group_name && typeof country.group_name === 'string') {
+                            groups.add(country.group_name);
+                        }
+                    });
+
+                    // Создаем выпадающий список
+                    const select = document.createElement('select');
+                    select.id = 'requirement-value';
+                    select.className = 'main-page-input';
+
+                    // Добавляем пустой вариант
+                    select.innerHTML = '<option value="">[Нет группы]</option>';
+
+                    // Добавляем отсортированные группы
+                    Array.from(groups)
+                        .sort((a, b) => a.localeCompare(b))
+                        .forEach(group => {
+                            select.innerHTML += `<option value="${group}">${group}</option>`;
+                        });
+
                     valueContainer.appendChild(select);
                     subtypeGroup.style.display = 'none';
                 } else if (['land_name'].includes(selectedType)) {
@@ -1372,6 +1496,27 @@ class EventManager {
                     valueContainer.appendChild(inputGroup);
                     
                     subtypeGroup.style.display = 'none';
+                } else if (['received_event'].includes(selectedType)) {
+                    const select = document.createElement('select');
+                    select.id = 'requirement-value';
+                    select.className = 'main-page-input';
+                    
+                    // Получаем список всех событий
+                    const events = Object.entries(this.jsonData.custom_events || {}).map(([id, event]) => ({
+                        id,
+                        name: event.unique_event_name || event.title || id
+                    }));
+                    
+                    // Сортируем события по имени
+                    events.sort((a, b) => a.name.localeCompare(b.name));
+                    
+                    // Создаем опции для выпадающего списка
+                    select.innerHTML = events.map(event => 
+                        `<option value="${event.id}">${event.id} - ${event.name}${event.systemName ? ` (${event.systemName})` : ''}</option>`
+                    ).join('');
+                    
+                    valueContainer.appendChild(select);
+                    subtypeGroup.style.display = 'none';
                 } else {
                     const input = document.createElement('input');
                     input.type = 'text';
@@ -1382,7 +1527,7 @@ class EventManager {
                         ['building_exists'].includes(selectedType) ? window.translator.translate('enter_building_name') :
                         ['political_institution'].includes(selectedType) ? window.translator.translate('enter_institution_name') : window.translator.translate('enter_value');
                         valueContainer.appendChild(input);
-                        subtypeGroup.style.display = selectedType === 'building_exists' || selectedType === 'political_institution' || selectedType === 'cooldown' ? 'block' : 'none';
+                        subtypeGroup.style.display = selectedType === 'building_exists' || selectedType === 'political_institution' || selectedType === 'event_choice' || selectedType === 'cooldown' ? 'block' : 'none';
                 }
             }
         };
@@ -1472,7 +1617,7 @@ class EventManager {
                 'army_losses', 'prestige', 'add_battleship', 'add_infantry', 'science', 'cooldown'];
 
             // Проверяем и обрабатываем булевы значения
-            const booleanTypes = ['near_water', 'independent_land', 'no_enemy', 'enemy_near_capital', 'lost_capital'];
+            const booleanTypes = ['near_water', 'is_player', 'independent_land', 'no_enemy', 'enemy_near_capital', 'lost_capital'];
 
             if (numericTypes.includes(type)) {
                 // Удаляем кавычки и пробелы с начала и конца
@@ -1827,7 +1972,7 @@ class EventManager {
                     ).join('');
                     valueContainer.appendChild(select);
                 subtypeGroup.style.display = 'none';
-            } else if (['diplomacy_lift_sanctions', 'diplomacy_sanctions', 'diplomacy_pact', 'diplomacy_alliance', 'diplomacy_peace', 'diplomacy_war'].includes(selectedType)) {
+            } else if (['diplomacy_lift_sanctions', 'diplomacy_sanctions', 'diplomacy_pact', 'diplomacy_become_vassal', 'diplomacy_get_vassal', 'diplomacy_alliance', 'diplomacy_peace', 'diplomacy_war'].includes(selectedType)) {
                 // Для дипломатических действий со странами
                 const select = document.createElement('select');
                 select.id = 'requirement-value';
@@ -1923,7 +2068,7 @@ class EventManager {
             }
         } else {
             // Для требований оставляем существующую логику
-            if (['near_water', 'independent_land', 'no_enemy', 'enemy_near_capital', 'lost_capital'].includes(selectedType)) {
+            if (['near_water', 'is_player', 'independent_land', 'no_enemy', 'enemy_near_capital', 'lost_capital'].includes(selectedType)) {
                     valueContainer.innerHTML = `
                         <select id="requirement-value" class="main-page-input">
                     <option value='true'>${window.translator.translate('yes')}</option>
@@ -1950,10 +2095,13 @@ class EventManager {
                 ).join('');
                 valueContainer.appendChild(select);
                 subtypeGroup.style.display = 'none'; // Скрываем поле subtype
-            } else if (['has_pact', 'has_sanctions', 'has_war', 'land_id', 'is_defeated', "controls_capital"].includes(selectedType)) {
+            } else if (['has_pact', 'has_alliance', 'has_vassal', 'has_sanctions', 'has_war', 'land_id', 'is_defeated', "controls_capital"].includes(selectedType)) {
                     const select = document.createElement('select');
                     select.id = 'requirement-value';
                     select.className = 'main-page-input';
+
+                    // Добавляем опцию "any" первой
+                    select.innerHTML = `<option value="any">${window.translator.translate('any')}</option>`;
 
                     // Получаем список стран и сортируем его по имени
                     const countries = Object.entries(this.jsonData.lands || {})
@@ -1963,12 +2111,38 @@ class EventManager {
                         }))
                         .sort((a, b) => a.name.localeCompare(b.name));
 
-                    // Добавляем опции
-                    select.innerHTML = countries.map(country => 
+                    // Добавляем остальные опции
+                    select.innerHTML += countries.map(country => 
                         `<option value="${country.id}">${country.name || country.id}</option>`
                     ).join('');
 
                     valueContainer.appendChild(select);
+                subtypeGroup.style.display = 'none';
+            } else if (['group_name'].includes(selectedType)) {
+                // Получаем все уникальные group_name из существующих стран
+                const groups = new Set();
+                Object.values(this.jsonData.lands || {}).forEach(country => {
+                    if (country.group_name && typeof country.group_name === 'string') {
+                        groups.add(country.group_name);
+                    }
+                });
+
+                // Создаем выпадающий список
+                const select = document.createElement('select');
+                select.id = 'requirement-value';
+                select.className = 'main-page-input';
+
+                // Добавляем пустой вариант
+                select.innerHTML = '<option value="">[Нет группы]</option>';
+
+                // Добавляем отсортированные группы
+                Array.from(groups)
+                    .sort((a, b) => a.localeCompare(b))
+                    .forEach(group => {
+                        select.innerHTML += `<option value="${group}">${group}</option>`;
+                    });
+
+                valueContainer.appendChild(select);
                 subtypeGroup.style.display = 'none';
             } else if (['land_name'].includes(selectedType)) {
                 // Создаем контейнер для инпута и кнопки
@@ -2033,6 +2207,27 @@ class EventManager {
                 valueContainer.appendChild(inputGroup);
                 
                 subtypeGroup.style.display = 'none';
+            } else if (['received_event'].includes(selectedType)) {
+                const select = document.createElement('select');
+                select.id = 'requirement-value';
+                select.className = 'main-page-input';
+                
+                // Получаем список всех событий
+                const events = Object.entries(this.jsonData.custom_events || {}).map(([id, event]) => ({
+                    id,
+                    name: event.unique_event_name || event.title || id
+                }));
+                
+                // Сортируем события по имени
+                events.sort((a, b) => a.name.localeCompare(b.name));
+                
+                // Создаем опции для выпадающего списка
+                select.innerHTML = events.map(event => 
+                    `<option value="${event.id}">${event.id} - ${event.name}${event.systemName ? ` (${event.systemName})` : ''}</option>`
+                ).join('');
+                
+                valueContainer.appendChild(select);
+                subtypeGroup.style.display = 'none';
             } else {
                 const input = document.createElement('input');
                 input.type = 'text';
@@ -2043,7 +2238,7 @@ class EventManager {
                     ['building_exists'].includes(selectedType) ? window.translator.translate('enter_building_name') :
                     ['political_institution'].includes(selectedType) ? window.translator.translate('enter_institution_name') : window.translator.translate('enter_value');
                     valueContainer.appendChild(input);
-                    subtypeGroup.style.display = selectedType === 'building_exists' || selectedType === 'political_institution' || selectedType === 'cooldown' ? 'block' : 'none';
+                    subtypeGroup.style.display = selectedType === 'building_exists' || selectedType === 'political_institution' || selectedType === 'event_choice' || selectedType === 'cooldown' ? 'block' : 'none';
             }
         }
     }

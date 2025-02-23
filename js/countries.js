@@ -98,7 +98,7 @@ class CountryManager {
             .map(([id, country]) => ({
                 id,
                 name: country.name || '',
-                group: country.group || '',
+                group: country.group_name || '',
                 color: country.color || [128, 128, 128],
                 provinces: provincesCount[id] || 0,
                 capital_name: country.capital_name || '',
@@ -135,10 +135,8 @@ class CountryManager {
 
             // Отдельно проверяем фильтр групп
             if (this.filters.groups.length > 0) {
-                const countryGroup = country.group || '';
-                if (!this.filters.groups.includes(countryGroup)) {
-                    return false;
-                }
+                const countryGroup = country.group_name || '';
+                return this.filters.groups.includes(countryGroup);
             }
 
             return true;
@@ -170,9 +168,9 @@ class CountryManager {
                         valueA = a.capital_name || '';
                         valueB = b.capital_name || '';
                         break;
-                    case 'group':
-                        valueA = a.group || '';
-                        valueB = b.group || '';
+                    case 'group_name':
+                        valueA = a.group_name || '';
+                        valueB = b.group_name || '';
                         break;
                     default:
                         return 0;
@@ -214,7 +212,7 @@ class CountryManager {
 
             const groupCell = document.createElement('td');
             groupCell.setAttribute('data-country-id', country.id);
-            groupCell.textContent = country.group;
+            groupCell.textContent = country.group_name;
 
             const provincesCell = document.createElement('td');
             provincesCell.setAttribute('data-country-id', country.id);
@@ -457,7 +455,7 @@ class CountryManager {
                 });
 
                 // Показываем соответствующее модальное окно
-                if (column === 'group') {
+                if (column === 'group_name') {
                     this.showGroupFilterModal();
                 } else {
                     this.currentFilterColumn = column;
@@ -718,7 +716,7 @@ class CountryManager {
 
         this.setFormValues({
             'country-name': country.name,
-            'country-group': country.group || '',
+            'country-group': country.group_name || '',
             'country-capital': country.capital_name || '',
             'country-capital-id': country.capital || '',
             'country-defeated': country.defeated ? 'true' : 'false',
@@ -1100,7 +1098,7 @@ class CountryManager {
 
             // Обновляем основные данные
             country.name = document.getElementById('country-name').value;
-            country.group = document.getElementById('country-group').value;
+            country.group_name = document.getElementById('country-group').value;
             country.capital_name = document.getElementById('country-capital').value;
             const capitalId = parseInt(document.getElementById('country-capital-id').value);
             if (!isNaN(capitalId) && capitalId > 0) {
@@ -1355,6 +1353,9 @@ class CountryManager {
             console.error('Не найдены необходимые элементы модального окна');
             return;
         }
+
+        // Сохраняем текущую колонку
+        this.currentFilterColumn = column;
         
         // Настраиваем заголовок с переводом
         const columnTitle = this.getColumnTitle(column);
@@ -1367,12 +1368,17 @@ class CountryManager {
         // Настраиваем доступные операторы в зависимости от типа колонки
         this.setupOperators(column);
         
-        // Восстанавливаем текущие настройки фильтра
-        const filter = this.filters[column];
+        // Восстанавливаем текущие настройки фильтра, если они есть
+        const filter = this.filters[column] || { operator: null, value: null };
         if (filter.operator) {
             operator.value = filter.operator;
         } else {
             operator.selectedIndex = 0;
+        }
+
+        // Создаем фильтр, если его нет
+        if (!this.filters[column]) {
+            this.filters[column] = { operator: null, value: null };
         }
         
         // Обновляем поле ввода значения
@@ -1524,7 +1530,7 @@ class CountryManager {
             system_name: 'system_name',
             provinces_count: 'provinces_count',
             capital: 'capital',
-            group: 'group'
+            group_name: 'group_name'
         };
         return window.translator.translate(titles[column] || column);
     }
@@ -1536,38 +1542,75 @@ class CountryManager {
     }
 
     showGroupFilterModal() {
-        console.log('Открытие модального окна фильтра групп стран');
-        const modal = document.getElementById('countries-groups-filter-modal');
-        if (!modal) {
-            console.error('Модальное окно фильтра групп не найдено');
-            return;
-        }
+        const modal = document.createElement('div');
+        modal.className = 'modal active';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>${window.translator.translate('filter_groups')}</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="filter-form">
+                        <div class="groups-list" id="groups-filter-list">
+                            ${this.generateGroupCheckboxes()}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="action-button apply-filter">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20.3 2H3.7c-.9 0-1.7.8-1.7 1.7v16.6c0 .9.8 1.7 1.7 1.7h16.6c.9 0 1.7-.8 1.7-1.7V3.7c0-.9-.8-1.7-1.7-1.7zm-2.3 11.8l-5.5 5.5c-.4.4-1 .4-1.4 0L5.6 13.8c-.4-.4-.4-1 0-1.4.4-.4 1-.4 1.4 0l4.2 4.2 4.9-4.9c.4-.4 1-.4 1.4 0 .5.4.5 1.1.1 1.4z"/>
+                        </svg>
+                        <span>${window.translator.translate('apply')}</span>
+                    </button>
+                    <button class="action-button clear-filter">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
+                        </svg>
+                        <span>${window.translator.translate('clear')}</span>
+                    </button>
+                </div>
+            </div>
+        `;
 
-        const groupsList = document.getElementById('countries-groups-filter-list');
-        if (!groupsList) {
-            console.error('Список групп не найден');
-            return;
-        }
+        document.body.appendChild(modal);
 
-        // Получаем все уникальные группы
-        const groups = new Set();
-        if (!this.jsonData?.lands) {
-            console.warn('Нет данных о странах');
-            return;
-        }
+        // Обработчики
+        const closeButton = modal.querySelector('.close-modal');
+        const applyButton = modal.querySelector('.apply-filter');
+        const clearButton = modal.querySelector('.clear-filter');
 
-        Object.values(this.jsonData.lands).forEach(country => {
-            if (country.group) {
-                groups.add(country.group);
-            }
+        closeButton.addEventListener('click', () => modal.remove());
+        
+        applyButton.addEventListener('click', () => {
+            const checkedGroups = Array.from(modal.querySelectorAll('input[type="checkbox"]:checked'))
+                .map(checkbox => checkbox.value);
+            
+            this.filters.groups = checkedGroups;
+            this.updateCountriesList();
+            modal.remove();
         });
 
-        console.log('Найдено групп:', groups.size);
+        clearButton.addEventListener('click', () => {
+            this.filters.groups = [];
+            this.updateCountriesList();
+            modal.remove();
+        });
+    }
 
-        // Сортируем группы по алфавиту
-        const sortedGroups = Array.from(groups).sort();
+    generateGroupCheckboxes() {
+        // Получаем все уникальные группы
+        const groups = new Set();
+        if (this.jsonData?.lands) {
+            Object.values(this.jsonData.lands).forEach(country => {
+                if (country.group_name) {
+                    groups.add(country.group_name);
+                }
+            });
+        }
 
-        // Создаем чекбоксы для каждой группы
+        // Создаем HTML для чекбоксов
         let html = `
             <div class="group-checkbox-item">
                 <input type="checkbox" id="country-group-empty" value=""
@@ -1576,64 +1619,18 @@ class CountryManager {
             </div>
         `;
 
-        html += sortedGroups.map(group => {
-            const isChecked = this.filters.groups.includes(group);
-            console.log(`Группа ${group}, выбрана: ${isChecked}`);
-            return `
+        // Добавляем отсортированные группы
+        html += Array.from(groups)
+            .sort((a, b) => a.localeCompare(b))
+            .map(group => `
                 <div class="group-checkbox-item">
                     <input type="checkbox" id="country-group-${group}" value="${group}"
-                           ${isChecked ? 'checked' : ''}>
+                           ${this.filters.groups.includes(group) ? 'checked' : ''}>
                     <label for="country-group-${group}">${group}</label>
                 </div>
-            `;
-        }).join('');
+            `).join('');
 
-        groupsList.innerHTML = html;
-
-        // Обновляем заголовок модального окна
-        const title = modal.querySelector('.modal-title');
-        if (title) {
-            title.setAttribute('data-translate', 'filter_groups');
-            title.textContent = this.getColumnTitle('filter_groups');
-        }
-
-        // Обработчики кнопок
-        const applyButton = modal.querySelector('#countries-groups-filter-apply');
-        const clearButton = modal.querySelector('#countries-groups-filter-clear');
-        const closeButton = modal.querySelector('.close-modal');
-
-        // Удаляем старые обработчики
-        const newApplyButton = applyButton.cloneNode(true);
-        const newClearButton = clearButton.cloneNode(true);
-        const newCloseButton = closeButton.cloneNode(true);
-
-        applyButton.parentNode.replaceChild(newApplyButton, applyButton);
-        clearButton.parentNode.replaceChild(newClearButton, clearButton);
-        closeButton.parentNode.replaceChild(newCloseButton, closeButton);
-
-        // Добавляем новые обработчики
-        newApplyButton.addEventListener('click', () => {
-            const checkedGroups = Array.from(groupsList.querySelectorAll('input[type="checkbox"]:checked'))
-                .map(checkbox => checkbox.value);
-            
-            console.log('Выбранные группы:', checkedGroups);
-            this.filters.groups = checkedGroups;
-            this.updateCountriesList();
-            modal.classList.remove('active');
-        });
-
-        newClearButton.addEventListener('click', () => {
-            this.filters.groups = [];
-            this.updateCountriesList();
-            modal.classList.remove('active');
-        });
-
-        newCloseButton.addEventListener('click', () => {
-            modal.classList.remove('active');
-        });
-
-        // Показываем модальное окно
-        modal.classList.add('active');
+        return html;
     }
 
     openColorPicker() {
