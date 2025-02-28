@@ -1517,6 +1517,70 @@ class EventManager {
                     
                     valueContainer.appendChild(select);
                     subtypeGroup.style.display = 'none';
+                } else if (['building_exists'].includes(selectedType)) {
+                    // Show subtype group for building selection
+                    subtypeGroup.style.display = 'block';
+                    const subtypeInput = document.getElementById('requirement-subtype');
+                    const select = document.createElement('select');
+                    select.id = 'requirement-subtype';
+                    select.className = 'main-page-input';
+                
+                    const buildingCategories = {
+                        'extraction': [
+                            'sawmill',
+                            'iron_mine',
+                            'gold_mine', 
+                            'uranium_mine',
+                            'oil_derrick'
+                        ],
+                        'economy': [
+                            'port',
+                            'machine_factory',
+                            'shipyard',
+                            'farm',
+                            'muzeum',
+                            'university',
+                            'science_center'
+                        ],
+                        'production': [
+                            'steel_plant',
+                            'mint',
+                            'weapon_factory',
+                            'chemical_weapon_factory',
+                            'training_camp',
+                            'nuclear_weapon_factory',
+                            'heavy_water_plant',
+                            'uranium_reactor'
+                        ],
+                        'defense': [
+                            'defense_line',
+                            'fortress',
+                            'hospital',
+                            'bridgehead'
+                        ]
+                    };
+                
+                    // Create dropdown with categories and options
+                    let optionsHtml = '';
+                    for (const [category, buildings] of Object.entries(buildingCategories)) {
+                        optionsHtml += `<option disabled style="font-weight:bold;background-color:#f0f0f0">${category}</option>`;
+                        buildings.forEach(building => {
+                            optionsHtml += `<option value="${building}">${building}</option>`;
+                        });
+                    }
+                    select.innerHTML = optionsHtml;
+                
+                    // Replace existing input with dropdown
+                    subtypeInput.parentNode.replaceChild(select, subtypeInput);
+                
+                    // Create boolean value field
+                    const valueContainer = document.getElementById('requirement-value-container');
+                    valueContainer.innerHTML = `
+                        <select id="requirement-value" class="main-page-input">
+                            <option value='true'>${window.translator.translate('yes')}</option>
+                            <option value='false'>${window.translator.translate('no')}</option>
+                        </select>
+                    `;
                 } else {
                     const input = document.createElement('input');
                     input.type = 'text';
@@ -2228,6 +2292,70 @@ class EventManager {
                 
                 valueContainer.appendChild(select);
                 subtypeGroup.style.display = 'none';
+            } else if (['building_exists'].includes(selectedType)) {
+                // Show subtype group for building selection
+                subtypeGroup.style.display = 'block';
+                const subtypeInput = document.getElementById('requirement-subtype');
+                const select = document.createElement('select');
+                select.id = 'requirement-subtype';
+                select.className = 'main-page-input';
+            
+                const buildingCategories = {
+                    'extraction': [
+                        'sawmill',
+                        'iron_mine',
+                        'gold_mine', 
+                        'uranium_mine',
+                        'oil_derrick'
+                    ],
+                    'economy': [
+                        'port',
+                        'machine_factory',
+                        'shipyard',
+                        'farm',
+                        'muzeum',
+                        'university',
+                        'science_center'
+                    ],
+                    'production': [
+                        'steel_plant',
+                        'mint',
+                        'weapon_factory',
+                        'chemical_weapon_factory',
+                        'training_camp',
+                        'nuclear_weapon_factory',
+                        'heavy_water_plant',
+                        'uranium_reactor'
+                    ],
+                    'defense': [
+                        'defense_line',
+                        'fortress',
+                        'hospital',
+                        'bridgehead'
+                    ]
+                };
+            
+                // Create dropdown with categories and options
+                let optionsHtml = '';
+                for (const [category, buildings] of Object.entries(buildingCategories)) {
+                    optionsHtml += `<option disabled style="font-weight:bold;background-color:#f0f0f0">${category}</option>`;
+                    buildings.forEach(building => {
+                        optionsHtml += `<option value="${building}">${building}</option>`;
+                    });
+                }
+                select.innerHTML = optionsHtml;
+            
+                // Replace existing input with dropdown
+                subtypeInput.parentNode.replaceChild(select, subtypeInput);
+            
+                // Create boolean value field
+                const valueContainer = document.getElementById('requirement-value-container');
+                valueContainer.innerHTML = `
+                    <select id="requirement-value" class="main-page-input">
+                        <option value='true'>${window.translator.translate('yes')}</option>
+                        <option value='false'>${window.translator.translate('no')}</option>
+                    </select>
+                `;
             } else {
                 const input = document.createElement('input');
                 input.type = 'text';
