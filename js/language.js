@@ -831,7 +831,33 @@ const translations = {
         "is_player": "Is Player",
         "has_vassal": "Has Vassal",
         "diplomacy_become_vassal": "Become Vassal",
-        "diplomacy_get_vassal": "Get Vassal"
+        "diplomacy_get_vassal": "Get Vassal",
+
+        // Download page
+        "home": "Home",
+        "download": "Download",
+        "download_title": "Download EEditor Warnament",
+        "download_links": "Download Links",
+        "windows_version": "Windows Version",
+        "android_version": "Android Version",
+        "latest_version": "Latest version",
+        "download_for_windows": "Download for Windows",
+        "download_for_android": "Download for Android",
+        "system_requirements": "System Requirements",
+        "windows_requirements": "Windows Requirements",
+        "android_requirements": "Android Requirements",
+        "win_req_os": "OS: Windows 10 (64-bit) or newer",
+        "win_req_processor": "Processor: 1.6 GHz or faster",
+        "win_req_memory": "Memory: 4 GB RAM",
+        "win_req_storage": "Storage: 2 GB free space",
+        "win_req_dotnet": ".NET Runtime: .NET 8",
+        "win_req_webview": "WebView2 Runtime: Must be installed",
+        "win_req_internet": "Internet connection: Required for dependencies and updates",
+        "android_req_os": "OS: Android 9 or newer",
+        "android_req_processor": "Processor: 2 GHz or faster",
+        "android_req_ram": "Memory: 8 GB RAM",
+        "android_req_storage": "Storage: 1 GB free space",
+        "android_req_internet": "Internet connection: Required for dependencies and updates"
     },
     "ru": {
         // Документация
@@ -1562,7 +1588,39 @@ const translations = {
         "is_player": "Является игроком",
         "has_vassal": "Имеет вассала",
         "diplomacy_become_vassal": "Стать вассалом",
-        "diplomacy_get_vassal": "Получить вассала"
+        "diplomacy_get_vassal": "Получить вассала",
+
+        // Уведдомления
+        "ready": "Готово",
+        "error": "Ошибка",
+        "no need": "Страны для удаления не найдена",
+        "filtres reseted": "Фильтры сброшены",
+
+        // Download page
+        "home": "Домой",
+        "download": "Скачивание",
+        "download_title": "Скачать EEditor Warnament",
+        "download_links": "Ссылки скачивания",
+        "windows_version": "Windows Версия",
+        "android_version": "Android Версия",
+        "latest_version": "Последняя версия",
+        "download_for_windows": "Скачать для Windows",
+        "download_for_android": "Скачать для Android",
+        "system_requirements": "Системные требования",
+        "windows_requirements": "Windows Требования",
+        "android_requirements": "Android Требования",
+        "win_req_os": "OS: Windows 10 (64-bit) или новее",
+        "win_req_processor": "Процессор: 1.6 GHz или более",
+        "win_req_memory": "Память: 4 GB RAM",
+        "win_req_storage": "Хранилище: 2 GB свободного пространства",
+        "win_req_dotnet": ".NET Runtime: .NET 8",
+        "win_req_webview": "WebView2 Runtime: Должно быть установлено",
+        "win_req_internet": "Интернет соединение: Необходимо для некоторого функционала и обновлений",
+        "android_req_os": "OS: Android 9 или новее",
+        "android_req_processor": "Процессор: 2 GHz или более",
+        "android_req_ram": "Память: 8 GB RAM",
+        "android_req_storage": "Хранилище: 1 GB свободного пространства",
+        "android_req_internet": "Интернет соединение: Необходимо для некоторого функционала и обновлений"
     },
     "uk": {
         // Документація
@@ -3183,7 +3241,7 @@ const translations = {
         "docs_map_editor_image_menu": "Менюл принчипал ал едиторулуй хэрцилор",
         "docs_map_editor_image_editing": "Интерфаца де едитаре а хэрций",
         "docs_map_editor_image_province": "Креаря примей провинчий",
-        "docs_map_editor_image_second_province": "Адэугаря целей де-а доуа провинчий",
+        "docs_map_editor_image_second_province": "Адэугаря целуй де-а доуа провинчий",
         "docs_map_editor_image_enclave": "Креаря парций принчипале а провинчией",
         "docs_map_editor_image_enclave2": "Адэугаря примулуй анклав",
         "docs_map_editor_image_enclave3": "Адэугаря целуй де-ал доилеа анклав",

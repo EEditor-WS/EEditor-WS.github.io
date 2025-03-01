@@ -550,6 +550,21 @@ body {
     background-color: #333;
     border-radius: 3px;
     gap: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.array-list-item:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.array-list-item .item-controls {
+    opacity: 0.3;
+    transition: opacity 0.2s;
+}
+
+.array-list-item:hover .item-controls {
+    opacity: 1;
 }
 
 .relation-info {
@@ -773,7 +788,7 @@ body {
 .relation-edit-modal label {
     display: block;
     margin-bottom: 8px;
-    color: var(--text-color);
+    color: #e0e0e0;
     font-size: 14px;
 }
 
@@ -781,18 +796,48 @@ body {
 .relation-edit-modal select {
     width: 100%;
     padding: 8px 12px;
-    border: 1px solid var(--border-color);
+    border: 1px solid #404040;
     border-radius: 4px;
-    background: var(--background-secondary);
-    color: var(--text-color);
+    background: #2a2a2a;
+    color: #e0e0e0;
     font-size: 14px;
     transition: border-color 0.2s ease;
 }
 
 .relation-edit-modal input:focus,
 .relation-edit-modal select:focus {
-    border-color: var(--primary-color);
+    border-color: #3498db;
     outline: none;
+}
+
+.modal-footer .action-button {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.modal-footer .action-button.secondary {
+    background: #333;
+    color: #e0e0e0;
+    border: 1px solid #404040;
+}
+
+.modal-footer .action-button.secondary:hover {
+    background: #404040;
+    border-color: #4a4a4a;
+}
+
+.modal-footer .action-button:not(.secondary) {
+    background: #3a80d2;
+    color: white;
+    border: 1px solid #2d6bb3;
+}
+
+.modal-footer .action-button:not(.secondary):hover {
+    background: #2d6bb3;
+    border-color: #255c9e;
 }
 
 .country-select {
@@ -1797,3 +1842,89 @@ body {
 }
 
 /* Адаптивность */
+
+.requirement-item:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.requirement-item:active {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.requirement-item td:last-child {
+    width: 40px;
+    text-align: right;
+}
+
+.requirement-item .delete {
+    opacity: 0.5;
+}
+
+.requirement-item:hover .delete {
+    opacity: 1;
+}
+
+/* Добавляем стили для строк таблицы в списке требований/бонусов */
+#requirements-items tr {
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#requirements-items tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Стили для кнопок в редакторе требований/бонусов */
+.requirements-editor-button {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Добавляем отступ между иконкой и текстом */
+}
+
+.requirements-editor-button img {
+    width: 16px !important; /* Устанавливаем ширину изображения */
+    height: 16px !important; /* Устанавливаем высоту изображения */
+    display: inline-block; /* Убедимся, что изображение отображается как inline-block */
+}
+
+.requirements-editor-button:hover {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+}
+
+.requirements-editor-button.primary {
+    background-color: rgba(52, 152, 219, 0.1);
+    color: #3498db;
+}
+
+.requirements-editor-button.primary:hover {
+    background-color: rgba(52, 152, 219, 0.2);
+}
+
+.requirements-editor-button.secondary {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+}
+
+.requirements-editor-button.secondary:hover {
+    background-color: rgba(231, 76, 60, 0.2);
+}
+
+#add-requirement,
+#save-requirement,
+#cancel-requirement {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 100px;
+}
