@@ -390,6 +390,24 @@ class EventManager {
                 document.addEventListener('contextmenu', closeMenu);
             });
         }
+
+        // Обработчики удаления требований и бонусов
+        const deleteButtons = document.querySelectorAll('.delete');
+        deleteButtons.forEach(button => {
+            const listener = (e) => {
+                const index = e.target.getAttribute('data-index');
+                const container = e.target.closest('.array-list');
+                if (container) {
+                    const items = Array.from(container.children);
+                    if (items[index]) {
+                        container.removeChild(items[index]);
+                        this.saveChanges();
+                    }
+                }
+            };
+            button.addEventListener('click', listener);
+            this.eventListeners.push({ element: button, event: 'click', listener });
+        });
     }
 
     createNewEvent() {
@@ -606,6 +624,7 @@ class EventManager {
 
         const isRequirement = container.id.includes('requirements');
         
+        // Список бонусов без длительности
         const bonusesWithoutDuration = [
             'add_oil', 'add_cruiser', 'add_random_culture_population', 
             'add_shock_infantry', 'discontent', 'add_tank', 'add_artillery', 'army_losses', 
@@ -616,18 +635,16 @@ class EventManager {
             `${item.type} ${item.action || ''} ${item.value}${item.subtype ? ` (${item.subtype})` : ''}` :
             bonusesWithoutDuration.includes(item.type) ?
                 `${item.type} ${item.value}` :
-                `${item.type} ${item.value}${item.duration ? ` на ${item.duration} ходов` : ''}${item.subtype ? ` (${item.subtype})` : ''}`;
+            `${item.type} ${item.value}${item.duration ? ` на ${item.duration} ходов` : ''}${item.subtype ? ` (${item.subtype})` : ''}`;
 
         itemDiv.innerHTML = `
             <div class="item-content">${content}</div>
             <div class="item-controls">
+                <button type="button" class="item-edit">✎</button>
                 <button type="button" class="item-delete">×</button>
             </div>
         `;
 
-        // Добавляем курсор-указатель и подсветку при наведении
-        itemDiv.style.cursor = 'pointer';
-        
         container.appendChild(itemDiv);
     }
 
@@ -1008,6 +1025,7 @@ class EventManager {
                     <td>${displayValue}</td>
                     <td>
                         <div class="requirement-actions">
+                            <button type="button" class="edit" data-index="${index}">✎</button>
                             <button type="button" class="delete" data-index="${index}">×</button>
                         </div>
                     </td>
@@ -1045,7 +1063,7 @@ class EventManager {
                 // Получаем доступные действия из конфигурации
                 if (['month', 'num_of_provinces', 'year', 'turn', 'random_value', 'count_of_tasks', 'tax', 'discontent', 'money', 'land_power'].includes(selectedType)) {
                     actions.push('more', 'equal', 'less');
-                } else if (['near_water', 'is_player', 'has_pact', 'has_alliance', 'has_vassal', 'has_sanctions', 'has_war', 'no_enemy', 'independent_land', 'land_name', 'building_exists', 'land_id', "group_name", 'political_institution', 'enemy_near_capital', 'is_defeated', 'lost_capital', "controls_capital", "received_event"].includes(selectedType)) {
+                } else if (['near_water', 'is_player', 'has_pact', 'has_alliance', 'has_vassal', 'has_sanctions', 'has_war', 'independent_land', 'land_name', 'building_exists', 'land_id', "group_name", 'political_institution', 'enemy_near_capital', 'is_defeated', 'lost_capital', "controls_capital", "received_event"].includes(selectedType)) {
                     actions.push('equal', 'not_equal');
                 } else if (['cooldown'].includes(selectedType)) {
                     actions.push('more', 'less');
@@ -1448,7 +1466,7 @@ class EventManager {
                     // Создаем кнопку для открытия выпадающего списка
                     const dropdownButton = document.createElement('button');
                     dropdownButton.type = 'button';
-                    dropdownButton.className = 'dropdown-button';
+                    dropdownButton.className = 'dropdown-button icon-action-button refresh';
                     dropdownButton.innerHTML = '▼';
                     
                     // Создаем выпадающий список
@@ -1548,26 +1566,15 @@ class EventManager {
         };
 
         list.onclick = (e) => {
-            // Проверяем клик на строку таблицы
-            const row = e.target.closest('tr');
-            const deleteButton = e.target.closest('.item-delete');
-            
-            if (!row) return;
+            const button = e.target.closest('button');
+            if (!button) return;
 
-            if (deleteButton) {
-                // Обработка удаления
-                const index = Array.from(list.children).indexOf(row);
-                items.splice(index, 1);
-                updateList();
-                this.saveChanges();
-            } else {
-                // Обработка редактирования при клике на строку
-                const index = Array.from(list.children).indexOf(row);
-                const currentItem = items[index];
-                
+            const index = parseInt(button.dataset.index);
+            if (button.classList.contains('edit')) {
+                const item = items[index];
                 editor.style.display = 'block';
-                document.getElementById('requirement-type').value = currentItem.type;
-                document.getElementById('requirement-action').value = currentItem.action || '';
+                document.getElementById('requirement-type').value = item.type;
+                document.getElementById('requirement-action').value = item.action || '';
                 
                 // Сначала обновляем тип, чтобы создались нужные поля
                 updateActions();
@@ -1576,17 +1583,21 @@ class EventManager {
                 // Теперь устанавливаем значения
                 const subtypeInput = document.getElementById('requirement-subtype');
                 if (subtypeInput) {
-                    subtypeInput.value = currentItem.subtype || '';
+                    subtypeInput.value = item.subtype || '';
                 }
                 const valueElement = document.getElementById('requirement-value');
                 if (valueElement) {
-                    valueElement.value = currentItem.value;
+                    valueElement.value = item.value;
                 }
                 if (isBonus && document.getElementById('requirement-duration')) {
-                    document.getElementById('requirement-duration').value = currentItem.duration || 3;
+                    document.getElementById('requirement-duration').value = item.duration || 3;
                 }
                 
                 editor.dataset.editIndex = index;
+            } else if (button.classList.contains('delete')) {
+                items.splice(index, 1);
+                updateList();
+                this.saveChanges();
             }
         };
 
@@ -1674,10 +1685,6 @@ class EventManager {
         updateValueField();
         editor.style.display = 'none';
         modal.classList.add('active');
-
-        addButton.className = 'requirements-editor-button primary';
-        saveButton.className = 'requirements-editor-button primary';
-        cancelButton.className = 'requirements-editor-button secondary';
     }
 
     loadAvailableImages() {
