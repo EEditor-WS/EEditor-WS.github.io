@@ -94,3 +94,15 @@ h1 {
 .roadmap.planed {
     background-color: #2980b9; /* Мягкий синий цвет для запланированных задач */
 }
+
+.roadmap-table-head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.roadmap-data {
+    font-size: 12px;
+    color: #888;
+    margin-top: 4px;
+}
