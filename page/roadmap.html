@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roadmap</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/head.css">
+    <link rel="stylesheet" href="css/notification.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="roadmap/roadmap.css">
+</head>
+<body>
+    <div class="container">
+        <button class="back-button" onclick="window.location.href='../index.html'">Назад</button>
+        <h1>Roadmap</h1>
+        <table class="roadmap-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th colspan="2">уже</th>
+                    <th colspan="3">в будущем</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th>Ранний Доступ</th>
+                    <th>До релиза</th>
+                    <th>Релиз</th>
+                    <th>Ближнее Будущее</th>
+                    <th>Дальнее Будущее</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Редактор</th>
+                    <td><div class="roadmap-card roadmap ready">Базовые функции</div><div class="roadmap-card roadmap ready">Веб-версия</div></td>
+                    <td><div class="roadmap-card roadmap ready">Исправление ошибок</div></td>
+                    <td><div class="roadmap-card roadmap ready">Копирование событий</div></td>
+                    <td><div class="roadmap-card roadmap work">Улучшение работы</div><div class="roadmap-card roadmap work">Исправление ошибок</div><div class="roadmap-card roadmap work">Устранение лоигческих ошибок и стандартизация интерфейса</div></td>
+                    <td><div class="roadmap-card roadmap planed">Поддержка плагинов</div><div class="roadmap-card roadmap planed">Поддержка сценариев Expansion</div></td>
+                </tr>
+                <tr>
+                    <th>Mobile</th>
+                    <td></td>
+                    <td><div class="roadmap-card roadmap ready">Версия для Android</div><div class="roadmap-card roadmap ready">Ассоциация .json файлов</div></td>
+                    <td><div class="roadmap-card roadmap ready">Адаптивный интерфейс</div></td>
+                    <td><div class="roadmap-card roadmap work">Авто-точки сохранения, продолжение редактирования</div><div class="roadmap-card roadmap work">Простой доступ к папке Warnament</div></td>
+                    <td><div class="roadmap-card roadmap planed">Поддержка жестов</div></td>
+                </tr>
+                <tr>
+                    <th>Desktop</th>
+                    <td></td>
+                    <td><div class="roadmap-card roadmap ready">Версия для Windows</div></td>
+                    <td></td>
+                    <td><div class="roadmap-card roadmap planed">Ассоциация .json файлов</div><div class="roadmap-card roadmap planed">Авто-точки сохранения, продолжение редактирования</div></td>
+                    <td><div class="roadmap-card roadmap planed">Работа с папкой Warnament</div><div class="roadmap-card roadmap planed">Быстрая отправка карт и сценариев в папку Warnament на телефон</div></td>
+                </tr>
+                <tr>
+                    <th>Онлайн</th>
+                    <td><div class="roadmap-card roadmap ready">Вход при помощи Discord-аккаунта</div></td>
+                    <td></td>
+                    <td></td>
+                    <td><div class="roadmap-card roadmap work">Копирование стран</div><div class="roadmap-card roadmap planed">Копирование сразу нескольких стран и событий</div><div class="roadmap-card roadmap planed">Библиотека карт, сценариев, стран, событий</div></td>
+                    <td><div class="roadmap-card roadmap planed">Синхронизация данных</div></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="roadmap/roadmap.js"></script>
+</body>
+</html>

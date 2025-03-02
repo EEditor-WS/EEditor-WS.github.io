@@ -15,13 +15,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    /*
     // Обработчик для кнопки "Назад"
     const backButton = document.getElementById('back-to-reforms');
     if (backButton) {
         backButton.addEventListener('click', () => {
             window.location.href = '/';
         });
-    }
+    } */
 
     // Обработчики для языкового переключателя
     const langChooser = document.getElementById('currentLangChooser');
