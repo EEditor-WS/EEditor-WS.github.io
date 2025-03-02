@@ -21,15 +21,19 @@ body {
     cursor: pointer;
     font-size: 14px;
     margin-bottom: 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .back-button:hover {
     background-color: #2980b9;
+    transform: translateY(-2px);
 }
 
 h1 {
     text-align: center;
     margin-bottom: 20px;
+    font-size: 24px;
+    color: #ffffff;
 }
 
 .roadmap-table {
@@ -81,6 +85,11 @@ h1 {
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.roadmap-card:hover {
+    transform: translateY(-2px);
 }
 
 .roadmap.ready {
