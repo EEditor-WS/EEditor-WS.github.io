@@ -148,11 +148,17 @@ class EventManager {
         }
 
         // Сортировка
-        if (this.sortColumn) {
+        if (this.sortColumn === 'id') {
+            events.sort((a, b) => {
+                // Извлекаем числа из ID (например, из 'E1' получаем 1)
+                const numA = parseInt(a.id.replace('E', ''));
+                const numB = parseInt(b.id.replace('E', ''));
+                return this.sortDirection === 'asc' ? numA - numB : numB - numA;
+            });
+        } else {
             events.sort((a, b) => {
                 let valueA = a[this.sortColumn] || '';
                 let valueB = b[this.sortColumn] || '';
-
                 return this.sortDirection === 'asc' 
                     ? String(valueA).localeCompare(String(valueB))
                     : String(valueB).localeCompare(String(valueA));
@@ -1289,10 +1295,15 @@ class EventManager {
                     const countrySelect = document.createElement('select');
                     countrySelect.id = 'requirement-subtype';
                     countrySelect.className = 'main-page-input';
-                    const countries = Object.entries(this.jsonData.lands || {}).map(([id, country]) => ({
-                        id,
-                        name: country.name
-                    }));
+                    
+                    // Получаем список стран и сортируем по названию (без учета регистра)
+                    const countries = Object.entries(this.jsonData.lands || {})
+                        .map(([id, country]) => ({
+                            id,
+                            name: country.name || id
+                        }))
+                        .sort((a, b) => a.name.toString().toUpperCase().localeCompare(b.name.toString().toUpperCase()));
+                    
                     countrySelect.innerHTML = countries.map(country => 
                         `<option value="${country.id}">${country.name}</option>`
                     ).join('');
@@ -1429,7 +1440,7 @@ class EventManager {
                                 id,
                                 name: country.name || id
                             }))
-                            .sort((a, b) => a.name.localeCompare(b.name));
+                            .sort((a, b) => a.name.toUpperCase().localeCompare(b.name.toUpperCase()));
 
                         // Добавляем остальные опции
                         select.innerHTML += countries.map(country => 
@@ -1479,7 +1490,7 @@ class EventManager {
                     // Создаем кнопку для открытия выпадающего списка
                     const dropdownButton = document.createElement('button');
                     dropdownButton.type = 'button';
-                    dropdownButton.className = 'dropdown-button icon-action-button refresh';
+                    dropdownButton.className = 'dropdown-button';
                     dropdownButton.innerHTML = '▼';
                     
                     // Создаем выпадающий список
@@ -1493,7 +1504,7 @@ class EventManager {
                             id,
                             name: country.name || id
                         }))
-                        .sort((a, b) => a.name.localeCompare(b.name));
+                        .sort((a, b) => a.name.toUpperCase().localeCompare(b.name.toUpperCase()));
 
                     // Добавляем опции в выпадающий список
                     dropdown.innerHTML = countries.map(country => 
@@ -1539,7 +1550,7 @@ class EventManager {
                     }));
                     
                     // Сортируем события по имени
-                    events.sort((a, b) => a.name.localeCompare(b.name));
+                    events.sort((a, b) => a.name.toUpperCase().localeCompare(b.name.toUpperCase()));
                     
                     // Создаем опции для выпадающего списка
                     select.innerHTML = events.map(event => 
@@ -2012,10 +2023,15 @@ class EventManager {
                 const countrySelect = document.createElement('select');
                 countrySelect.id = 'requirement-subtype';
                 countrySelect.className = 'main-page-input';
-                const countries = Object.entries(this.jsonData.lands || {}).map(([id, country]) => ({
-                    id,
-                    name: country.name
-                }));
+                
+                // Получаем список стран и сортируем по названию (без учета регистра)
+                const countries = Object.entries(this.jsonData.lands || {})
+                    .map(([id, country]) => ({
+                        id,
+                        name: country.name || id
+                    }))
+                    .sort((a, b) => a.name.toString().toUpperCase().localeCompare(b.name.toString().toUpperCase()));
+                
                 countrySelect.innerHTML = countries.map(country => 
                     `<option value="${country.id}">${country.name}</option>`
                 ).join('');
@@ -2152,7 +2168,7 @@ class EventManager {
                             id,
                             name: country.name || id
                         }))
-                        .sort((a, b) => a.name.localeCompare(b.name));
+                        .sort((a, b) => a.name.toUpperCase().localeCompare(b.name.toUpperCase()));
 
                     // Добавляем остальные опции
                     select.innerHTML += countries.map(country => 
@@ -2216,7 +2232,7 @@ class EventManager {
                         id,
                         name: country.name || id
                     }))
-                    .sort((a, b) => a.name.localeCompare(b.name));
+                    .sort((a, b) => a.name.toUpperCase().localeCompare(b.name.toUpperCase()));
 
                 // Добавляем опции в выпадающий список
                 dropdown.innerHTML = countries.map(country => 
@@ -2262,7 +2278,7 @@ class EventManager {
                 }));
                 
                 // Сортируем события по имени
-                events.sort((a, b) => a.name.localeCompare(b.name));
+                events.sort((a, b) => a.name.toUpperCase().localeCompare(b.name.toUpperCase()));
                 
                 // Создаем опции для выпадающего списка
                 select.innerHTML = events.map(event => 
@@ -2373,4 +2389,19 @@ document.addEventListener('click', function(e) {
         window.translator.updateTranslations(modal);
     }
 });
+
+function sortCountriesByName(countries) {
+    return countries.sort((a, b) => {
+        const nameA = a.name.toUpperCase();
+        const nameB = b.name.toUpperCase();
+        return nameA.localeCompare(nameB);
+    });
+}
+
+function createCountrySelect(countries) {
+    return countries
+        .sort((a, b) => a.name.toUpperCase().localeCompare(b.name.toUpperCase()))
+        .map(country => `<option value="${country.id}">${country.name}</option>`)
+        .join('');
+}
 
