@@ -418,3 +418,13 @@
 .language-switcher:hover .lang-dropdown {
     display: block;
 }
+
+.icon-action-button svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+}
