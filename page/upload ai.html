@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Scenario - EEditor</title>
+    <link rel="icon" type="image/x-icon" href="../img/ico/ico.svg">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/head.css">
+    <link rel="stylesheet" href="../css/notification.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="./upload/upload.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="../index.html" class="nav-logo">
+                <img src="../img/ico/ico.svg" alt="Logo">
+                <span>EEditor</span>
+            </a>
+            <a href="../index.html" class="nav-button">
+                <img src="../img/ico/events.svg" alt="Events">
+                <span>Events</span>
+            </a>
+            <a href="./countries.html" class="nav-button">
+                <img src="../img/ico/countries.svg" alt="Countries">
+                <span>Countries</span>
+            </a>
+        </div>
+        <div class="nav-right">
+            <button class="nav-button active" id="upload-scenario">
+                <img src="../img/ico/upload.svg" alt="Upload">
+                <span>Upload</span>
+            </button>
+            <button class="nav-button" id="toggle-theme">
+                <img src="../img/ico/theme.svg" alt="Theme">
+            </button>
+            <button class="nav-button" id="toggle-language">
+                <img src="../img/ico/language.svg" alt="Language">
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Upload Scenario</h1>
+        <form id="upload-form" class="upload-form">
+            <div class="form-grid">
+                <div class="form-section">
+                    <h2>Basic Information</h2>
+                    <div class="form-group">
+                        <label for="scenario-name">Name</label>
+                        <input type="text" id="scenario-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="scenario-author">Author</label>
+                        <input type="text" id="scenario-author" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="scenario-description">Description</label>
+                        <textarea id="scenario-description" rows="4" required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Dates</h2>
+                    <div class="form-group">
+                        <label for="upload-date">Upload Date</label>
+                        <input type="date" id="upload-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="update-date">Last Update</label>
+                        <input type="date" id="update-date" required>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Categories & Language</h2>
+                    <div class="form-group">
+                        <label for="scenario-categories">Categories</label>
+                        <select id="scenario-categories" multiple required>
+                            <option value="historical">Historical</option>
+                            <option value="modern">Modern</option>
+                            <option value="fantasy">Fantasy</option>
+                            <option value="alternative">Alternative History</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="scenario-language">Language</label>
+                        <select id="scenario-language" required>
+                            <option value="en">English</option>
+                            <option value="ru">Russian</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Screenshot</h2>
+                    <div class="form-group">
+                        <label for="scenario-screenshot">Upload Screenshot</label>
+                        <input type="file" id="scenario-screenshot" accept="image/*" required>
+                        <div id="screenshot-preview" class="screenshot-preview"></div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Scenario Features</h2>
+                    <div class="features-grid">
+                        <div class="form-group">
+                            <label for="feature-economy">Economy</label>
+                            <select id="feature-economy" required>
+                                <option value="complete">Complete</option>
+                                <option value="partial">Partial</option>
+                                <option value="development">In Development</option>
+                                <option value="none">None</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="feature-population">Population</label>
+                            <select id="feature-population" required>
+                                <option value="complete">Complete</option>
+                                <option value="partial">Partial</option>
+                                <option value="development">In Development</option>
+                                <option value="none">None</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="feature-resources">Resources</label>
+                            <select id="feature-resources" required>
+                                <option value="complete">Complete</option>
+                                <option value="partial">Partial</option>
+                                <option value="development">In Development</option>
+                                <option value="none">None</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="feature-diplomacy">Diplomacy</label>
+                            <select id="feature-diplomacy" required>
+                                <option value="complete">Complete</option>
+                                <option value="partial">Partial</option>
+                                <option value="development">In Development</option>
+                                <option value="none">None</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="feature-uprisings">Uprisings</label>
+                            <select id="feature-uprisings" required>
+                                <option value="complete">Complete</option>
+                                <option value="partial">Partial</option>
+                                <option value="development">In Development</option>
+                                <option value="none">None</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="feature-reforms">Reforms</label>
+                            <select id="feature-reforms" required>
+                                <option value="complete">Complete</option>
+                                <option value="partial">Partial</option>
+                                <option value="development">In Development</option>
+                                <option value="none">None</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="feature-events">Events</label>
+                            <select id="feature-events" required>
+                                <option value="complete">Complete</option>
+                                <option value="partial">Partial</option>
+                                <option value="development">In Development</option>
+                                <option value="none">None</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Map Information</h2>
+                    <div class="form-group">
+                        <label for="map-name">Map Name</label>
+                        <input type="text" id="map-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="province-count">Province Count</label>
+                        <input type="number" id="province-count" min="1" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="secondary" onclick="window.history.back()">Cancel</button>
+                <button type="submit" class="primary">Upload Scenario</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="../js/language.js"></script>
+    <script src="./upload/upload.js"></script>
+</body>
+</html>

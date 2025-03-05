@@ -1,0 +1,109 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.upload-form {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: var(--background-secondary);
+    border-radius: 8px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.form-section {
+    padding: 15px;
+    background: var(--background-primary);
+    border-radius: 6px;
+}
+
+.form-section h2 {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    color: var(--text-primary);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--text-primary);
+}
+
+.form-group select,
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--input-background);
+    color: var(--text-primary);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.screenshot-preview {
+    margin-top: 10px;
+    max-width: 300px;
+    height: 150px;
+    border: 2px dashed var(--border-color);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.screenshot-preview img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.form-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.form-actions button {
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.form-actions .primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.form-actions .secondary {
+    background: var(--background-secondary);
+    color: var(--text-primary);
+}
+
+/* Стили для multiple select */
+select[multiple] {
+    height: 100px;
+}
