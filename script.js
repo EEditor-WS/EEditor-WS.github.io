@@ -474,11 +474,50 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (isAndroidApp) {
             try {
-                // Отправляем только содержимое файла
+                // Try Android save method first
                 Android.saveFile(previewContent.value);
+                // If we got here, save was successful
+                showSuccess('Сохранено', 'Файл успешно сохранен');
             } catch (err) {
-                console.error('Ошибка при сохранении файла:', err);
-                showError('Ошибка', err.message);
+                console.error('Android save failed:', err);
+                // Try fallback method using File System Access API
+                try {
+                    if (hasFileSystemAccess) {
+                        if (!fileHandle) {
+                            fileHandle = await window.showSaveFilePicker({
+                                suggestedName: currentFile?.name || 'scenario.json',
+                                types: [{
+                                    description: 'JSON Files',
+                                    accept: {
+                                        'application/json': ['.json']
+                                    }
+                                }]
+                            });
+                        }
+                        
+                        const writable = await fileHandle.createWritable();
+                        await writable.write(previewContent.value);
+                        await writable.close();
+                        
+                        showSuccess('Сохранено', 'Файл успешно сохранен');
+                    } else {
+                        // Final fallback - download file
+                        const blob = new Blob([previewContent.value], { type: 'application/json' });
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = currentFile?.name || 'scenario.json';
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(url);
+                        
+                        showSuccess('Скачано', 'Файл успешно скачан');
+                    }
+                } catch (fallbackErr) {
+                    console.error('Fallback save failed:', fallbackErr);
+                    showError('Ошибка', 'Не удалось сохранить файл');
+                }
             }
         } else if (hasFileSystemAccess) {
             if (!fileHandle) {
