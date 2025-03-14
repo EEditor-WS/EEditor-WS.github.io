@@ -659,7 +659,7 @@ class EventManager {
         if (this.isEditing) return;
         this.pushToUndoStack();
         this.saveChanges();
-    }
+            }
 
     saveChanges() {
         if (!this.currentEvent || !this.jsonData?.custom_events?.[this.currentEvent]) {
@@ -1195,14 +1195,38 @@ class EventManager {
                 }
             }
 
-            actionSelect.innerHTML = actions.map(action => `
-                <option value="${action}">${
-                    action === 'more' ? window.translator.translate('more') :
-                    action === 'equal' ? window.translator.translate('equal') :
-                    action === 'not_equal' ? window.translator.translate('not_equal') :
-                    action === 'less' ? window.translator.translate('less') : action
-                }</option>
-            `).join('');
+            if (['event_choice'].includes(selectedType)) {
+                // Создаем выпадающий список для стран
+                const select = document.createElement('select');
+                select.id = 'requirement-action';
+                select.className = 'main-page-input';
+
+                // Получаем список стран и сортируем по имени
+                const countries = Object.entries(this.jsonData.lands || {})
+                    .map(([id, country]) => ({
+                        id,
+                        name: country.name || id
+                    }))
+                    .sort((a, b) => a.name.toString().toUpperCase().localeCompare(b.name.toString().toUpperCase()));
+
+                // Создаем опции для выпадающего списка
+                select.innerHTML = countries.map(country => 
+                    `<option value="${country.id}">${country.name}</option>`
+                ).join('');
+
+                // Заменяем оригинальный элемент на новый выпадающий список
+                const actionSelect = document.getElementById('requirement-action');
+                actionSelect.parentNode.replaceChild(select, actionSelect);
+            } else {
+                actionSelect.innerHTML = actions.map(action => `
+                    <option value="${action}">${
+                        action === 'more' ? window.translator.translate('more') :
+                        action === 'equal' ? window.translator.translate('equal') :
+                        action === 'not_equal' ? window.translator.translate('not_equal') :
+                        action === 'less' ? window.translator.translate('less') : action
+                    }</option>
+                `).join('');
+            }
         };
 
         // Функция для обновления поля значения в зависимости от типа
