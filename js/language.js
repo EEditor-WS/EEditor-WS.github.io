@@ -148,6 +148,8 @@ const translations = {
         "choose_file": "Choose file",
         "file_preview": "File preview",
         "changes_not_saved": "Changes not saved",
+        "changes_saved": "Changes saved",
+        "file_parse_error": "File parse error",
 
         // Settings form
         "title": "Title",
@@ -1011,6 +1013,8 @@ const translations = {
         "choose_file": "Выберите файл",
         "file_preview": "Предпросмотр файла",
         "changes_not_saved": "Изменения не сохранены",
+        "changes_saved": "Изменения сохранены",
+        "save_error": "Ошибка сохранения",
 
         // Форма настроек
         "title": "Заголовок",
@@ -1774,6 +1778,8 @@ const translations = {
         "choose_file": "Виберіть файл",
         "file_preview": "Попередній перегляд файлу",
         "changes_not_saved": "Зміни не збережено",
+        "changes_saved": "Зміни збережено",
+        "save_error": "Неполадка збереження",
 
         // Форма настроек
         "title": "Заголовок",
@@ -2761,6 +2767,8 @@ const translations = {
         "choose_file": "Алеӂець фиширул",
         "file_preview": "Превизуализаря фиширулуй",
         "changes_not_saved": "Модификэриле ну сынт салвате",
+        "changes_saved": "Модификэриле ау фост салвате",
+        "error_saving": "Ероре ла салваре",
 
         // Форма настроек
         "title": "Титлу",

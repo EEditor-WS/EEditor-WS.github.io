@@ -72,7 +72,7 @@ body {
     .pcountries {
         gap: 0px;
         padding: 0px;
-        width: calc( 100wh - 40px);
+        width: calc( 100wh - 150px);
     }
 
     .data {

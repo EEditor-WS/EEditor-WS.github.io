@@ -434,8 +434,8 @@ class EventManager {
         const newEvent = {
             id: newId,
             group_name: "",
-            unique_event_name: `Event ${newId.toLowerCase()}`,
-            title: "New Event Title",
+            unique_event_name: "",
+            title: `Event ${newId.toLowerCase()}`,
             description: "",
             answer1: "ignore",
             answer2: "",
@@ -1202,7 +1202,7 @@ class EventManager {
                 select.className = 'main-page-input';
 
                 // Получаем список стран и сортируем по имени
-                const countries = Object.entries(this.jsonData.lands || {})
+                const countries = Object.entries(JSON.parse(document.getElementById('preview-content').value).lands || {})
                     .map(([id, country]) => ({
                         id,
                         name: country.name || id
@@ -1263,7 +1263,7 @@ class EventManager {
                     const select = document.createElement('select');
                     select.id = 'requirement-value';
                     select.className = 'main-page-input';
-                            const countries = Object.entries(this.jsonData.lands || {}).map(([id, country]) => ({
+                            const countries = Object.entries(JSON.parse(document.getElementById('preview-content').value).lands || {}).map(([id, country]) => ({
                                 id,
                                 name: country.name
                             }));
@@ -1279,7 +1279,7 @@ class EventManager {
                     const countrySelect = document.createElement('select');
                     countrySelect.id = 'requirement-subtype';
                     countrySelect.className = 'main-page-input';
-                    const countries = Object.entries(this.jsonData.lands || {}).map(([id, country]) => ({
+                    const countries = Object.entries(JSON.parse(document.getElementById('preview-content').value).lands || {}).map(([id, country]) => ({
                         id,
                         name: country.name
                     }));
@@ -1301,7 +1301,7 @@ class EventManager {
                         const select = document.createElement('select');
                         select.id = 'requirement-value';
                         select.className = 'main-page-input';
-                        const countries = Object.entries(this.jsonData.lands || {}).map(([id, country]) => ({
+                        const countries = Object.entries(JSON.parse(document.getElementById('preview-content').value).lands || {}).map(([id, country]) => ({
                             id,
                             name: country.name
                         }));
@@ -1321,7 +1321,7 @@ class EventManager {
                     countrySelect.className = 'main-page-input';
                     
                     // Получаем список стран и сортируем по названию (без учета регистра)
-                    const countries = Object.entries(this.jsonData.lands || {})
+                    const countries = Object.entries(JSON.parse(document.getElementById('preview-content').value).lands || {})
                         .map(([id, country]) => ({
                             id,
                             name: country.name || id
@@ -1350,12 +1350,12 @@ class EventManager {
                     ideologySelect.id = 'requirement-subtype';
                     ideologySelect.className = 'main-page-input';
                     const ideologies = [
-                        window.translator.translate('democracy'),
-                        window.translator.translate('monarchy'),
-                        window.translator.translate('communism'),
-                        window.translator.translate('fascism'),
-                        window.translator.translate('theocracy'),
-                        window.translator.translate('trade_republic')
+                        "Democracy",
+                        "Monarchy",
+                        "Communism",
+                        "Fascism",
+                        "Theocracy",
+                        "Trade_republic"
                     ];
                     ideologySelect.innerHTML = ideologies.map(ideology => 
                         `<option value="${ideology}">${ideology}</option>`
@@ -1377,7 +1377,7 @@ class EventManager {
                     const countrySelect = document.createElement('select');
                     countrySelect.id = 'requirement-subtype';
                     countrySelect.className = 'main-page-input';
-                    const countries = Object.entries(this.jsonData.lands || {}).map(([id, country]) => ({
+                    const countries = Object.entries(JSON.parse(document.getElementById('preview-content').value).lands || {}).map(([id, country]) => ({
                         id,
                         name: country.name
                     }));
@@ -1437,13 +1437,12 @@ class EventManager {
                     select.id = 'requirement-value';
                     select.className = 'main-page-input';
                     const institutions = [
-                        window.translator.translate('democracy'),
-                        window.translator.translate('monarchy'),
-                        window.translator.translate('communism'),
-                        window.translator.translate('fascism'),
-                        window.translator.translate('theocracy'),
-                        window.translator.translate('paganism'),
-                        window.translator.translate('trade_republic')
+                        "Democracy",
+                        "Monarchy",
+                        "Communism",
+                        "Fascism",
+                        "Theocracy",
+                        "Trade_republic"
                     ];
                     select.innerHTML = institutions.map(inst => 
                         `<option value="${inst}">${inst}</option>`
@@ -1459,7 +1458,7 @@ class EventManager {
                         select.innerHTML = `<option value="any">${window.translator.translate('any')}</option>`;
 
                         // Получаем список стран и сортируем его по имени
-                        const countries = Object.entries(this.jsonData.lands || {})
+                        const countries = Object.entries(JSON.parse(document.getElementById('preview-content').value).lands || {})
                             .map(([id, country]) => ({
                                 id,
                                 name: country.name || id
@@ -1474,28 +1473,38 @@ class EventManager {
                         valueContainer.appendChild(select);
                     subtypeGroup.style.display = 'none';
                 } else if (['group_name'].includes(selectedType)) {
-                    // Получаем все уникальные group_name из существующих стран
+                    // Получ.аем все .уникальные group_name из существующих стран
                     const groups = new Set();
-                    Object.values(this.jsonData.lands || {}).forEach(country => {
+                    Object.values(JSON.parse(document.getElementById('preview-content').value).lands || {}).forEach(country => {
                         if (country.group_name && typeof country.group_name === 'string') {
                             groups.add(country.group_name);
                         }
                     });
 
-                    // Создаем выпадающий список
+                    // Создаем выпадающий список заново
                     const select = document.createElement('select');
                     select.id = 'requirement-value';
                     select.className = 'main-page-input';
 
-                    // Добавляем пустой вариант
-                    select.innerHTML = '<option value="">[Нет группы]</option>';
+                    // Очищаем и добавляем опции (вместо +=)
+                    select.innerHTML = '<option value="">[Нет группы]</option>'; // Замена вместо добавления
 
-                    // Добавляем отсортированные группы
                     Array.from(groups)
-                        .sort((a, b) => a.localeCompare(b))
-                        .forEach(group => {
-                            select.innerHTML += `<option value="${group}">${group}</option>`;
-                        });
+                    .sort((a, b) => a.localeCompare(b))
+                    .forEach(group => {
+                        select.innerHTML += `<option value="${group}">${group}</option>`; // Лучше заменить на appendChild
+                    });
+
+                    // Или оптимально через DOM:
+                    select.replaceChildren(); // Очистка
+                    const emptyOption = new Option('[Нет группы]', '');
+                    select.append(emptyOption);
+
+                    Array.from(groups)
+                    .sort((a, b) => a.localeCompare(b))
+                    .forEach(group => {
+                        select.append(new Option(group, group)); // Безопасное добавление
+                    });
 
                     valueContainer.appendChild(select);
                     subtypeGroup.style.display = 'none';
@@ -1523,7 +1532,7 @@ class EventManager {
                     dropdown.style.display = 'none';
 
                     // Получаем список стран и сортируем его по имени
-                    const countries = Object.entries(this.jsonData.lands || {})
+                    const countries = Object.entries(JSON.parse(document.getElementById('preview-content').value).lands || {})
                         .map(([id, country]) => ({
                             id,
                             name: country.name || id
@@ -1959,6 +1968,8 @@ class EventManager {
     }
 
     updateValueField() {
+        console.log("updateValueField");
+
         const valueContainer = document.getElementById('requirement-value-container');
         const subtypeGroup = document.querySelector('[for="requirement-subtype"]').parentElement;
         const selectedType = document.getElementById('requirement-type').value;
@@ -2078,12 +2089,12 @@ class EventManager {
                 ideologySelect.id = 'requirement-subtype';
                 ideologySelect.className = 'main-page-input';
                 const ideologies = [
-                    window.translator.translate('democracy'),
-                    window.translator.translate('monarchy'),
-                    window.translator.translate('communism'),
-                    window.translator.translate('fascism'),
-                    window.translator.translate('theocracy'),
-                    window.translator.translate('trade_republic')
+                    "Democracy",
+                    "Monarchy",
+                    "Communism",
+                    "Fascism",
+                    "Theocracy",
+                    "Trade_republic"
                 ];
                 ideologySelect.innerHTML = ideologies.map(ideology => 
                     `<option value="${ideology}">${ideology}</option>`
@@ -2165,13 +2176,12 @@ class EventManager {
                 select.id = 'requirement-value';
                 select.className = 'main-page-input';
                 const institutions = [
-                    window.translator.translate('democracy'),
-                    window.translator.translate('monarchy'),
-                    window.translator.translate('communism'),
-                    window.translator.translate('fascism'),
-                    window.translator.translate('theocracy'),
-                    window.translator.translate('paganism'),
-                    window.translator.translate('trade_republic')
+                    "Democracy",
+                    "Monarchy",
+                    "Communism",
+                    "Fascism",
+                    "Theocracy",
+                    "Trade_republic"
                 ];
                 select.innerHTML = institutions.map(inst => 
                     `<option value="${inst}">${inst}</option>`
@@ -2202,7 +2212,7 @@ class EventManager {
                     valueContainer.appendChild(select);
                 subtypeGroup.style.display = 'none';
             } else if (['group_name'].includes(selectedType)) {
-                // Получаем все уникальные group_name из существующих стран
+                /* // Получаем все уникальные group_name из существующих стран
                 const groups = new Set();
                 Object.values(this.jsonData.lands || {}).forEach(country => {
                     if (country.group_name && typeof country.group_name === 'string') {
@@ -2225,6 +2235,33 @@ class EventManager {
                         select.innerHTML += `<option value="${group}">${group}</option>`;
                     });
 
+                valueContainer.appendChild(select);
+                subtypeGroup.style.display = 'none'; */
+                // Очищаем контейнер перед созданием нового списка
+                valueContainer.innerHTML = '';
+
+                // Получаем актуальные группы из данных
+                const groups = new Set();
+                Object.values(this.jsonData.lands || {}).forEach(country => {
+                    if (country.group_name && typeof country.group_name === 'string') {
+                        groups.add(country.group_name);
+                    }
+                });
+
+                // Создаем новый select элемент
+                const select = document.createElement('select');
+                select.id = 'requirement-value';
+                select.className = 'main-page-input';
+
+                // Формируем все опции сразу через шаблонную строку
+                select.innerHTML = `
+                    <option value="">[Нет группы]</option>
+                    ${Array.from(groups)
+                        .sort((a, b) => a.localeCompare(b))
+                        .map(group => `<option value="${group}">${group}</option>`)
+                        .join('')}
+                `;
+                // Добавляем список в контейнер
                 valueContainer.appendChild(select);
                 subtypeGroup.style.display = 'none';
             } else if (['land_name'].includes(selectedType)) {
@@ -2380,7 +2417,7 @@ function createRequirementEditor() {
     modal.innerHTML = `
     `;
     document.body.appendChild(modal);
-    window.translator.updateTranslations(modal);
+    window.translator.updateModals(modal);
     return modal;
 }
 
@@ -2392,7 +2429,7 @@ function createBonusEditor() {
         </div>
     `;
     document.body.appendChild(modal);
-    window.translator.updateTranslations(modal);
+    window.translator.updateModals(modal);
     return modal;
 }
 
@@ -2401,7 +2438,7 @@ document.addEventListener('click', function(e) {
     if (e.target.matches('#add-requirement')) {
         const modal = createRequirementEditor();
         // ... existing code ...
-        window.translator.updateTranslations(modal);
+        window.translator.updateModals(modal);
     }
 });
 
@@ -2410,7 +2447,7 @@ document.addEventListener('click', function(e) {
     if (e.target.matches('#add-bonus')) {
         const modal = createBonusEditor();
         // ... existing code ...
-        window.translator.updateTranslations(modal);
+        window.translator.updateModals(modal);
     }
 });
 

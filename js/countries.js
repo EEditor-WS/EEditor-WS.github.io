@@ -455,7 +455,7 @@ class CountryManager {
                 });
 
                 // Показываем соответствующее модальное окно
-                if (column === 'group_name') {
+                if (column === 'group') {
                     this.showGroupFilterModal();
                 } else {
                     this.currentFilterColumn = column;
@@ -490,12 +490,6 @@ class CountryManager {
                 this.updateFilterValueInput();
             });
         }
-
-        // Обработчик кнопки обновления списка
-        document.getElementById('refresh-countries')?.addEventListener('click', () => {
-            this.updateCountriesList();
-            showSuccess(window.translator.translate('ready'), window.translator.translate('refreshed'));
-        });
     }
 
     initColorHandlers() {

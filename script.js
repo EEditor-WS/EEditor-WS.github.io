@@ -927,7 +927,7 @@ function changeApplicationLanguage(lang) {
     });
 }
 
-window.onload = function() {
+/* window.onload = function() {
     if (urlParams.has('eval') && urlParams.get('eval') === 'openfile') {
         openfile();
     }
@@ -941,7 +941,7 @@ window.onload = function() {
     if (urlParams.has('eval') && urlParams.get('eval') === 'openfile') {
         openfile();
     }
-}
+} */
 
 function loadFileViaScheme() {
     console.log('Starting file load via scheme');
@@ -1002,6 +1002,7 @@ function loadFileViaScheme() {
         });
 }
 
-if (urlParams.has('eval') && urlParams.get('eval') === 'openfile') {
+/* if (urlParams.has('eval') && urlParams.get('eval') === 'openfile') {
     openfile();
 }
+*/
