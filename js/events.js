@@ -1473,39 +1473,39 @@ class EventManager {
                         valueContainer.appendChild(select);
                     subtypeGroup.style.display = 'none';
                 } else if (['group_name'].includes(selectedType)) {
-// Получаем все уникальные group_name из существующих стран
-const groups = new Set();
-Object.values(JSON.parse(document.getElementById('preview-content').value).lands || {}).forEach(country => {
-    if (country.group_name && typeof country.group_name === 'string') {
-        // Разбиваем строку групп по запятым и добавляем каждую группу отдельно
-        country.group_name.split(',').forEach(part => {
-            const trimmed = part.trim();
-            if (trimmed) {
-                groups.add(trimmed);
-            }
-        });
-    }
-});
+                    // Получаем все уникальные group_name из существующих стран
+                    const groups = new Set();
+                    Object.values(JSON.parse(document.getElementById('preview-content').value).lands || {}).forEach(country => {
+                        if (country.group_name && typeof country.group_name === 'string') {
+                            // Разбиваем строку групп по запятым и добавляем каждую группу отдельно
+                            country.group_name.split(',').forEach(part => {
+                                const trimmed = part.trim();
+                                if (trimmed) {
+                                    groups.add(trimmed);
+                                }
+                            });
+                        }
+                    });
 
-// Создаем выпадающий список заново
-const select = document.createElement('select');
-select.id = 'requirement-value';
-select.className = 'main-page-input';
+                    // Создаем выпадающий список заново
+                    const select = document.createElement('select');
+                    select.id = 'requirement-value';
+                    select.className = 'main-page-input';
 
-// Очищаем и добавляем опции
-select.replaceChildren(); // Очистка
-const emptyOption = new Option('[Нет группы]', '');
-select.append(emptyOption);
+                    // Очищаем и добавляем опции
+                    select.replaceChildren(); // Очистка
+                    const emptyOption = new Option('[Нет группы]', '');
+                    select.append(emptyOption);
 
-// Сортируем и добавляем группы
-Array.from(groups)
-    .sort((a, b) => a.localeCompare(b))
-    .forEach(group => {
-        select.append(new Option(group, group)); // Безопасное добавление
-    });
+                    // Сортируем и добавляем группы
+                    Array.from(groups)
+                        .sort((a, b) => a.localeCompare(b))
+                        .forEach(group => {
+                            select.append(new Option(group, group)); // Безопасное добавление
+                        });
 
-valueContainer.appendChild(select);
-subtypeGroup.style.display = 'none';
+                    valueContainer.appendChild(select);
+                    subtypeGroup.style.display = 'none';
                 } else if (['land_name'].includes(selectedType)) {
                     // Создаем контейнер для инпута и кнопки
                     const inputGroup = document.createElement('div');
@@ -1570,26 +1570,57 @@ subtypeGroup.style.display = 'none';
                     
                     subtypeGroup.style.display = 'none';
                 } else if (['received_event'].includes(selectedType)) {
-                    const select = document.createElement('select');
-                    select.id = 'requirement-value';
-                    select.className = 'main-page-input';
-                    
-                    // Получаем список всех событий
-                    const events = Object.entries(this.jsonData.custom_events || {}).map(([id, event]) => ({
-                        id,
-                        name: event.unique_event_name || event.title || id
-                    }));
-                    
-                    // Сортируем события по имени
-                    events.sort((a, b) => a.name.toUpperCase().localeCompare(b.name.toUpperCase()));
-                    
-                    // Создаем опции для выпадающего списка
-                    select.innerHTML = events.map(event => 
-                        `<option value="${event.id}">${event.id} - ${event.name}${event.systemName ? ` (${event.systemName})` : ''}</option>`
-                    ).join('');
-                    
-                    valueContainer.appendChild(select);
-                    subtypeGroup.style.display = 'none';
+                    // Создаем селект для стран и any в subtypeGroup
+                    const subtypeSelect = document.createElement('select');
+                    subtypeSelect.id = 'requirement-subtype'; // Новый уникальный ID
+                    subtypeSelect.className = 'main-page-input';
+
+                    // Добавляем опцию "any"
+                    const anyOption = new Option(window.translator?.translate('any') || 'any', 'any');
+                    subtypeSelect.appendChild(anyOption);
+
+                    // Получаем и сортируем страны
+                    const countries = Object.entries(JSON.parse(document.getElementById('preview-content').value).lands || {})
+                        .map(([id, country]) => ({
+                            id,
+                            name: country.name || id
+                        }))
+                        .sort((a, b) => a.name.toUpperCase().localeCompare(b.name.toUpperCase()));
+
+                    // Добавляем страны в subtypeSelect
+                    countries.forEach(country => {
+                        const option = new Option(country.name || country.id, country.id);
+                        subtypeSelect.appendChild(option);
+                    });
+
+                    // Вставляем селект в контейнер subtypeGroup
+                    subtypeGroup.innerHTML = ''; // Очищаем контейнер
+                    subtypeGroup.appendChild(subtypeSelect);
+                    subtypeGroup.style.display = 'block'; // Показываем контейнер
+
+                    // Создаем селект для ивентов в valueContainer
+                    const valueSelect = document.createElement('select');
+                    valueSelect.id = 'requirement-value';
+                    valueSelect.className = 'main-page-input';
+
+                    // Получаем и обрабатываем события
+                    const events = Object.entries(this.jsonData.custom_events || {})
+                        .map(([id, event]) => ({
+                            id,
+                            name: event.unique_event_name || event.title || id,
+                            systemName: event.systemName || null
+                        }))
+                        .sort((a, b) => a.name.toUpperCase().localeCompare(b.name.toUpperCase()));
+
+                    // Добавляем опции для ивентов
+                    events.forEach(event => {
+                        const optionText = `${event.id} - ${event.name}${event.systemName ? ` (${event.systemName})` : ''}`;
+                        valueSelect.appendChild(new Option(optionText, event.id));
+                    });
+
+                    // Очищаем и обновляем valueContainer
+                    valueContainer.innerHTML = '';
+                    valueContainer.appendChild(valueSelect);
                 } else {
                     const input = document.createElement('input');
                     input.type = 'text';
