@@ -493,7 +493,7 @@ class EventManager {
         if (!this.currentEvent || !this.jsonData?.custom_events?.[this.currentEvent]) return;
 
         const newId = this.generateUniqueId();
-        const currentEvent = this.jsonData.custom_events[this.currentEvent];
+        const currentEvent = JSON.parse(document.getElementById('preview-content').value)[this.currentEvent];
         
         this.pushToUndoStack();
         
@@ -1473,41 +1473,39 @@ class EventManager {
                         valueContainer.appendChild(select);
                     subtypeGroup.style.display = 'none';
                 } else if (['group_name'].includes(selectedType)) {
-                    // Получ.аем все .уникальные group_name из существующих стран
-                    const groups = new Set();
-                    Object.values(JSON.parse(document.getElementById('preview-content').value).lands || {}).forEach(country => {
-                        if (country.group_name && typeof country.group_name === 'string') {
-                            groups.add(country.group_name);
-                        }
-                    });
+// Получаем все уникальные group_name из существующих стран
+const groups = new Set();
+Object.values(JSON.parse(document.getElementById('preview-content').value).lands || {}).forEach(country => {
+    if (country.group_name && typeof country.group_name === 'string') {
+        // Разбиваем строку групп по запятым и добавляем каждую группу отдельно
+        country.group_name.split(',').forEach(part => {
+            const trimmed = part.trim();
+            if (trimmed) {
+                groups.add(trimmed);
+            }
+        });
+    }
+});
 
-                    // Создаем выпадающий список заново
-                    const select = document.createElement('select');
-                    select.id = 'requirement-value';
-                    select.className = 'main-page-input';
+// Создаем выпадающий список заново
+const select = document.createElement('select');
+select.id = 'requirement-value';
+select.className = 'main-page-input';
 
-                    // Очищаем и добавляем опции (вместо +=)
-                    select.innerHTML = '<option value="">[Нет группы]</option>'; // Замена вместо добавления
+// Очищаем и добавляем опции
+select.replaceChildren(); // Очистка
+const emptyOption = new Option('[Нет группы]', '');
+select.append(emptyOption);
 
-                    Array.from(groups)
-                    .sort((a, b) => a.localeCompare(b))
-                    .forEach(group => {
-                        select.innerHTML += `<option value="${group}">${group}</option>`; // Лучше заменить на appendChild
-                    });
+// Сортируем и добавляем группы
+Array.from(groups)
+    .sort((a, b) => a.localeCompare(b))
+    .forEach(group => {
+        select.append(new Option(group, group)); // Безопасное добавление
+    });
 
-                    // Или оптимально через DOM:
-                    select.replaceChildren(); // Очистка
-                    const emptyOption = new Option('[Нет группы]', '');
-                    select.append(emptyOption);
-
-                    Array.from(groups)
-                    .sort((a, b) => a.localeCompare(b))
-                    .forEach(group => {
-                        select.append(new Option(group, group)); // Безопасное добавление
-                    });
-
-                    valueContainer.appendChild(select);
-                    subtypeGroup.style.display = 'none';
+valueContainer.appendChild(select);
+subtypeGroup.style.display = 'none';
                 } else if (['land_name'].includes(selectedType)) {
                     // Создаем контейнер для инпута и кнопки
                     const inputGroup = document.createElement('div');
@@ -2439,6 +2437,7 @@ document.addEventListener('click', function(e) {
         const modal = createRequirementEditor();
         // ... existing code ...
         window.translator.updateModals(modal);
+        window.translator.updateAllTranslations();
     }
 });
 

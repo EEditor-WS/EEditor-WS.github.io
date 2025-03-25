@@ -1,3 +1,7 @@
+function scenarioData() {
+    return JSON.parse(document.getElementById('preview-content').value);
+}
+
 // Утилиты для работы с цветом
 const ColorUtils = {
     // Преобразует массив RGB в строку
