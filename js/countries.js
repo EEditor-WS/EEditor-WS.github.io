@@ -135,8 +135,21 @@ class CountryManager {
 
             // Отдельно проверяем фильтр групп
             if (this.filters.groups.length > 0) {
-                const countryGroup = country.group_name || '';
-                return this.filters.groups.includes(countryGroup);
+                if (!country.group_name) {
+                    // Если у страны нет группы, проверяем есть ли пустая группа в фильтре
+                    return this.filters.groups.includes('');
+                }
+                
+                // Разбиваем группы страны на массив
+                const countryGroups = country.group_name.split(',').map(g => g.trim());
+                
+                // Проверяем, есть ли хотя бы одна группа из фильтра в группах страны
+                return this.filters.groups.some(filterGroup => {
+                    if (filterGroup === '') {
+                        return false; // Пустая группа уже обработана выше
+                    }
+                    return countryGroups.includes(filterGroup);
+                });
             }
 
             return true;
@@ -1538,6 +1551,26 @@ class CountryManager {
     showGroupFilterModal() {
         const modal = document.createElement('div');
         modal.className = 'modal active';
+
+        // Собираем все уникальные группы, разбивая строки с несколькими группами
+        const groups = new Set();
+        if (this.jsonData?.lands) {
+            Object.values(this.jsonData.lands).forEach(country => {
+                if (country.group_name) {
+                    // Разбиваем строку групп по запятой и добавляем каждую группу отдельно
+                    country.group_name.split(',').forEach(group => {
+                        const trimmedGroup = group.trim();
+                        if (trimmedGroup) {
+                            groups.add(trimmedGroup);
+                        }
+                    });
+                }
+            });
+        }
+
+        // Сортируем группы
+        const sortedGroups = Array.from(groups).sort();
+
         modal.innerHTML = `
             <div class="modal-content">
                 <div class="modal-header">
@@ -1545,10 +1578,19 @@ class CountryManager {
                     <button class="close-modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <div class="filter-form">
-                        <div class="groups-list" id="groups-filter-list">
-                            ${this.generateGroupCheckboxes()}
+                    <div class="groups-list" id="groups-filter-list">
+                        <div class="group-checkbox-item">
+                            <input type="checkbox" id="country-group-empty" value=""
+                                   ${this.filters.groups.includes('') ? 'checked' : ''}>
+                            <label for="country-group-empty" data-translate="empty_group">[Пусто]</label>
                         </div>
+                        ${sortedGroups.map(group => `
+                            <div class="group-checkbox-item">
+                                <input type="checkbox" id="country-group-${group}" value="${group}"
+                                       ${this.filters.groups.includes(group) ? 'checked' : ''}>
+                                <label for="country-group-${group}">${group}</label>
+                            </div>
+                        `).join('')}
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -1571,60 +1613,19 @@ class CountryManager {
         document.body.appendChild(modal);
 
         // Обработчики
-        const closeButton = modal.querySelector('.close-modal');
-        const applyButton = modal.querySelector('.apply-filter');
-        const clearButton = modal.querySelector('.clear-filter');
-
-        closeButton.addEventListener('click', () => modal.remove());
-        
-        applyButton.addEventListener('click', () => {
+        modal.querySelector('.close-modal').addEventListener('click', () => modal.remove());
+        modal.querySelector('.apply-filter').addEventListener('click', () => {
             const checkedGroups = Array.from(modal.querySelectorAll('input[type="checkbox"]:checked'))
                 .map(checkbox => checkbox.value);
-            
             this.filters.groups = checkedGroups;
             this.updateCountriesList();
             modal.remove();
         });
-
-        clearButton.addEventListener('click', () => {
+        modal.querySelector('.clear-filter').addEventListener('click', () => {
             this.filters.groups = [];
             this.updateCountriesList();
             modal.remove();
         });
-    }
-
-    generateGroupCheckboxes() {
-        // Получаем все уникальные группы
-        const groups = new Set();
-        if (this.jsonData?.lands) {
-            Object.values(this.jsonData.lands).forEach(country => {
-                if (country.group_name) {
-                    groups.add(country.group_name);
-                }
-            });
-        }
-
-        // Создаем HTML для чекбоксов
-        let html = `
-            <div class="group-checkbox-item">
-                <input type="checkbox" id="country-group-empty" value=""
-                       ${this.filters.groups.includes('') ? 'checked' : ''}>
-                <label for="country-group-empty" data-translate="empty_group">[Пусто]</label>
-            </div>
-        `;
-
-        // Добавляем отсортированные группы
-        html += Array.from(groups)
-            .sort((a, b) => a.localeCompare(b))
-            .map(group => `
-                <div class="group-checkbox-item">
-                    <input type="checkbox" id="country-group-${group}" value="${group}"
-                           ${this.filters.groups.includes(group) ? 'checked' : ''}>
-                    <label for="country-group-${group}">${group}</label>
-                </div>
-            `).join('');
-
-        return html;
     }
 
     openColorPicker() {
