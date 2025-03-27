@@ -489,25 +489,39 @@ class EventManager {
         return `E${maxId + 1}`;
     }
 
-    copyCurrentEvent() {
-        if (!this.currentEvent || !this.jsonData?.custom_events?.[this.currentEvent]) return;
+    copyCurrentEvent(eventId) {
+        try {
+            if (this._isCopying) return;
+            this._isCopying = true;
 
-        const newId = this.generateUniqueId();
-        const currentEvent = JSON.parse(document.getElementById('preview-content').value)[this.currentEvent];
-        
-        this.pushToUndoStack();
-        
-        // Создаем глубокую копию события
-        this.jsonData.custom_events[newId] = JSON.parse(JSON.stringify(currentEvent));
-        
-        // Обновляем id и заголовок копии
-        this.jsonData.custom_events[newId].id = newId;
-        this.jsonData.custom_events[newId].title += ' (копия)';
-        this.jsonData.custom_events[newId].unique_event_name = `${currentEvent.unique_event_name}_copy`;
-        
-        this.updateEventsList();
-        this.openEvent(newId);
-        this.saveChanges();
+            const sourceId = eventId || this.currentEvent;
+            if (!sourceId || !this.jsonData?.custom_events?.[sourceId]) {
+                console.error('Source event not found');
+                return;
+            }
+
+            const newId = this.generateUniqueId();
+            const sourceEvent = this.jsonData.custom_events[sourceId];
+            
+            this.pushToUndoStack();
+            
+            // Создаем глубокую копию события
+            this.jsonData.custom_events[newId] = JSON.parse(JSON.stringify(sourceEvent));
+            this.jsonData.custom_events[newId].unique_event_name = `${sourceEvent.unique_event_name || ''}_copy`;
+            this.jsonData.custom_events[newId].title += ' (копия)';
+
+            // Обновляем все за один раз
+            this.updateJsonInPreview();
+            this.updateEventsList();
+            this.openEvent(newId);
+
+            showSuccess(window.translator.translate('ready'), window.translator.translate('copyed'));
+        } catch (error) {
+            console.error('Error copying event:', error);
+            showError('Failed to copy event');
+        } finally {
+            this._isCopying = false;
+        }
     }
 
     deleteCurrentEvent() {
