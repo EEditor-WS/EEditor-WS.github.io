@@ -137,6 +137,7 @@ class EventManager {
                 group: event.group_name || '',
                 name: event.unique_event_name || '',
                 title: event.title || '',
+                requirements: event.requirements || '',
                 ...event
             }));
 
@@ -197,10 +198,14 @@ class EventManager {
             const titleCell = document.createElement('td');
             titleCell.textContent = event.title;
 
+            const requirementsCell = document.createElement('td');
+            requirementsCell.textContent = convertObjectToReadableString(event.requirements);
+
             tr.appendChild(idCell);
             tr.appendChild(groupCell);
             tr.appendChild(nameCell);
             tr.appendChild(titleCell);
+            tr.appendChild(requirementsCell);
 
             tbody.appendChild(tr);
         });

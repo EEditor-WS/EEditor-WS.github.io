@@ -117,6 +117,40 @@ const DOMUtils = {
     }
 };
 
+function convertObjectToReadableString(obj) {
+    if (!Array.isArray(obj)) {
+      return "Некорректный формат объекта.";
+    }
+  
+    const translations = {
+      land_name: "Название участка",
+      near_water: "Близость к воде",
+      equal: " = ",
+      not_equal: " ≠ ",
+      more: " > ",
+      less: " < ",
+    };
+  
+    const results = obj.map((item) => {
+      let type = translations[item.type] || item.type;
+      let action = translations[item.action] || item.action;
+      let value = item.value;
+  
+      if (typeof value === "boolean") {
+        value = value ? "да" : "нет";
+      }
+  
+      if (item.subtype) {
+        const subtype = translations[item.subtype] || item.subtype;
+        return `${type} (${subtype}) ${action} ${value}`;
+      } else {
+        return `${type} ${action} ${value}`;
+      }
+    });
+  
+    return results.join(",\n \n \n \n \n \n");
+  }
+
 // Экспортируем утилиты
 window.ColorUtils = ColorUtils;
 window.ValidationUtils = ValidationUtils;

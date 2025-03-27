@@ -823,9 +823,9 @@ const translations = {
         "docs_files_ready": "Подготовка файлов",
 
         // Общие разделы
-        "docs_requirements": "Требования",
-        "docs_first_steps": "Первые шаги",
-        "docs_reforms_requirements": "Требования к реформам",
+        "docs_requirements": "Requirements",
+        "docs_first_steps": "The first steps",
+        "docs_reforms_requirements": "Requirements for reforms",
         "vassalof": "Vassal of",
         "event_choice": "Event Choice",
         "received_event": "Received Event",
@@ -1107,7 +1107,7 @@ const translations = {
         "event_hide_later": "Прятать позже",
         "event_delete_turns": "Удалить через (ходов)",
         "event_description": "Описание события",
-        "general_requirements": "Требования события",
+        "general_requirements": "Условия события",
         "answer_1": "Ответ 1",
         "answer_2": "Ответ 2",
         "answer_3": "Ответ 3",
@@ -1115,7 +1115,7 @@ const translations = {
         "result_description": "Описание ответа",
         "auto_select": "Выбирать при игнорировании",
         "enable_answer": "Включить ответ",
-        "requirements": "Требования",
+        "requirements": "Условия",
         "bonuses": "Бонусы",
         "common_requirements": "Требования события",
 
@@ -1124,7 +1124,7 @@ const translations = {
         "add": "Добавить",
 
         // Редактор требований
-        "requirements_editor": "Редактор требований",
+        "requirements_editor": "Редактор условий",
         "bonus_editor": "Редактор бонусов",
         "type": "Тип",
         "subtype": "Подтип",
@@ -1582,9 +1582,9 @@ const translations = {
         "docs_files_ready": "Подготовка файлов",
 
         // Общие разделы
-        "docs_requirements": "Требования",
+        "docs_requirements": "Условия",
         "docs_first_steps": "Первые шаги",
-        "docs_reforms_requirements": "Требования к реформам",
+        "docs_reforms_requirements": "Условия реформ",
         "vassalof": "Вассал страны",
         "event_choice": "Выбор события",
         "received_event": "Полученное событие",
