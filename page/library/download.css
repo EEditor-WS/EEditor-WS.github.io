@@ -1,0 +1,69 @@
+.download-up {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  
+  .download-awards {
+    position: absolute;
+    x: 0;
+    y: 0;
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+  }
+  
+  .download-award {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .download-award-name {
+    margin-top: 8px;
+    font-size: 14px;
+    max-width: 100px;
+  }
+
+  .download-cards {
+    display: flex; /* Используем flexbox для расположения карточек */
+    flex-wrap: wrap; /* Позволяем карточкам переноситься на новую строку */
+    justify-content: space-between; /* Распределяем карточки по ширине контейнера */
+  }
+
+  .download-card {
+    width: 250px;
+  }
+
+  .download-award-img {
+    width: 40px;
+  }
+
+  .download-info-ico {
+    width: 30px;
+    color: #ffffff
+  }
+
+  .download-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .download-row-big {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+  }
+
+  .download-tags {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .download-tags > * {
+    /* Стили для дочерних элементов div */
+    margin: 1px; /* Добавляем отступы между элементами */
+  }
