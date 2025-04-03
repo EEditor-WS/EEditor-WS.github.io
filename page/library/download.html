@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
     <!-- Google Tag Manager -->
@@ -19,6 +18,7 @@
         <link rel="stylesheet" href="../../css/library.css">
         <link rel="stylesheet" href="../../css/head.css">
         <link rel="stylesheet" href="../../css/list.css">
+        <link rel="stylesheet" href="../../css/style.css">
         <link rel="stylesheet" href="download.css">
         <link rel="icon" type="image/x-icon" href="../../favicon.ico">
         <script src="../../js/library.js"></script>
@@ -27,6 +27,7 @@
         <script src="../../js/upload.js"></script>
         <script src="../../js/auth.js"></script>
         <script src="../../js/head.js"></script>
+        <script src="download.js"></script>
         <!-- Google tag (gtag.js) -->
             <script async src="https://www.googletagmanager.com/gtag/js?id=G-9HFX1FVLMV"></script>
             <script>
@@ -49,11 +50,9 @@
                     <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </button>
-            <button class="nav-button active" data-page="countries" data-translate="countries">Страны</button>
-            <button class="nav-button" data-page="reforms" data-translate="reforms">Реформы</button>
-            <button class="nav-button" data-page="events" data-translate="events">События</button>
+            <button class="nav-button active" data-page="scenarios" data-translate="scenarios">Сценарии</button>
+            <button class="nav-button" data-page="maps" data-translate="maps">Карты</button>
             <div class="nav-actions">
-                <button id="force-save" class="action-button save-button">Сохранить</button>
                 <div class="nav-icons">
                     <button id="settings-button" class="icon-action-button settings" title="Настройки">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -154,66 +153,173 @@
 
         <div id="scenarios" class="page list active">
             <div class="download-container">
-                <div class="header">
+                <div class="lib-header">
                     <h2 /*data-translate="scenarios"*/>Сценарии</h2>
                     <div class="header-actions">
-                        
+                        <div class="tooltip-container">
+                            <button id="filters" class="icon-action-button filters" title="Filters" onclick="libShowFilters()">
+                                <svg viewBox="0 0 24 24" width="14" height="14">
+                                    <path d="M3 4h18l-7 8v8l-4-2v-6z" fill="none" stroke="currentColor" stroke-width="2"></path>
+                                </svg>
+                            </button>
+                            <div class="tooltip" style="left: 1278.5px; top: 106px;">Migrate Groups</div>
+                        </div>
                     </div>
                 </div>
-                <div class="download-cards" id="download-cards">
-                    <div class="download-card" style="background-color: #333333; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
-                        <div class="download-up">
-                            <img src="../../img/library/none.png" style="width: 250px; border-radius: 8px;">
-                            <div class="download-awards">
-                                <div class="download-award">
-                                    <img src="star.png" class="download-award-img">
-                                </div>
-                                <div class="download-award">
-                                    <img src="enot.png" class="download-award-img">
-                                </div>
-                            </div>
+                <div class="lib-down">
+                    <div class="lib-filters" id="lib-filters">
+                        <div class="lib-filters-header">
+                            <h3>Фильтры</h3>
+                            <button class="collapse-filters" onclick="libShowFilters()" style="width: 25px; font-size: 25px">×</button>
                         </div>
-                        <div class="download-info">
-                            <h1 class="download-title">Modern World</h1>
-                            <div class="download-row-big">
-                                <div class="download-row">
-                                    <img src="autor.svg" class="download-info-ico" />
-                                    <a href="." style="color: #3B83BD">@eenot</a>
+                        
+                        <div class="lib-filters-content">
+                            <!-- Search box -->
+                            <div class="filter-group">
+                                <input type="text" id="lib-search" class="lib-search" placeholder="Поиск..." oninput="libApplyFilters()">
+                            </div>
+
+                            <!-- Type filter -->
+                            <div class="filter-group">
+                                <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
+                                    <label>Тип сценария</label>
+                                    <button class="collapse-filter-group" type="button">▼</button>
                                 </div>
-                                <div class="download-row">
-                                    <p>2025</p>
-                                    <img src="calendar.svg" class="download-info-ico" />
+                                <div class="filter-group-content collapsed">
+                                    <select id="lib-type-filter" onchange="libApplyFilters()">
+                                        <option value="">Все типы</option>
+                                        <option value="sandbox">Песочница</option>
+                                        <option value="historical">Исторический</option>
+                                        <option value="lore">Сюжетный</option>
+                                        <option value="battle">Одиночный бой</option>
+                                        <option value="command-battle">Коммандный бой</option>
+                                        <option value="generals">Генералы</option>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="download-row-big">
-                                <div class="download-row">
-                                    <img src="flag.png" class="download-info-ico" />
-                                    <p>EN, RU</p>
+
+                            <!-- Time period filter -->
+                            <div class="filter-group">
+                                <div class="filter-group-header collapsed" onclick="libToggleFilterGroup(this)">
+                                    <label>Эпоха</label>
+                                    <button class="collapse-filter-group" type="button">▼</button>
                                 </div>
-                                <div class="download-row">
-                                    <p>Sandbox</p>
-                                    <img src="gamemode.png" class="download-info-ico" />
+                                <div class="filter-group-content collapsed">
+                                    <div class="checkbox-list">
+                                        <label><input type="checkbox" value="ancient" onchange="libApplyFilters()"> Довоенный</label>
+                                        <label><input type="checkbox" value="ww1" onchange="libApplyFilters()"> WWI</label>
+                                        <label><input type="checkbox" value="interbellum" onchange="libApplyFilters()"> Интербеллум</label>
+                                        <label><input type="checkbox" value="ww2" onchange="libApplyFilters()"> WW2</label>
+                                        <label><input type="checkbox" value="coldwar" onchange="libApplyFilters()"> CW</label>
+                                        <label><input type="checkbox" value="modern" onchange="libApplyFilters()"> Современность</label>
+                                        <label><input type="checkbox" value="alternative" onchange="libApplyFilters()"> Альтернативный</label>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="download-tags">
-                                <a href="." style="color: #3B83BD">#World</a>
-                                <p>, </p>
-                                <a href="." style="color: #3B83BD">#For Phones</a>
-                                <p>, </p>
-                                <a href="." style="color: #3B83BD">#Recomended</a>
-                                <p>, </p>
-                                <a href="." style="color: #3B83BD">#without events</a>
-                                <p>, </p>
-                                <a href="." style="color: #3B83BD">#without reforms</a>
-                            </div>
-                            <div class="download-row-big">
-                                <div class="download-row">
-                                    <img src="world.svg" class="download-info-ico" />
-                                    <p>World by ЕЕнот</p>
+
+                            <div class="filter-group">
+                                <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
+                                    <label>Язык</label>
+                                    <button class="collapse-filter-group" type="button">▼</button>
                                 </div>
-                                <button class="download-download-button" onclick="downloadCurrentScenario" style="background-color: #44944A; border-radius: 8px; width: 45px; height: 45px; border: none; cursor: pointer;">
-                                    <img src="download.svg" class="download-info-ico" />
-                                </button>
+                                <div class="filter-group-content collapsed">
+                                    <select id="title" class="main-page-input" autocomplete="off">
+                                        <option value="">Все</option>
+                                        <option value="en">English</option>
+                                        <option value="ru">Русский</option>
+                                        <option value="uk">Українська</option>
+                                        <option value="mo">Молдовеняскэ</option>
+                                        <option value="be">Беларуская</option>
+                                        <option value="kk">Қазақша</option>
+                                        <option value="de">Deutsch</option>
+                                        <option value="fr">Français</option>
+                                        <option value="es">Español</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <div class="filter-group-header collapsed" onclick="libToggleFilterGroup(this)">
+                                    <label>Количество Провинций</label>
+                                    <button class="collapse-filter-group" type="button">▼</button>
+                                </div>
+                                <div class="filter-group-content collapsed">
+                                    <div class="checkbox-list">
+                                        <label><input type="checkbox" value="0" onchange="libApplyFilters()"> 100-</label>
+                                        <label><input type="checkbox" value="100" onchange="libApplyFilters()"> 100+</label>
+                                        <label><input type="checkbox" value="500" onchange="libApplyFilters()"> 500+</label>
+                                        <label><input type="checkbox" value="750" onchange="libApplyFilters()"> 750+</label>
+                                        <label><input type="checkbox" value="1000" onchange="libApplyFilters()"> 1000+</label>
+                                        <label><input type="checkbox" value="1250" onchange="libApplyFilters()"> 1250+</label>
+                                        <label><input type="checkbox" value="1500" onchange="libApplyFilters()"> 1500+</label>
+                                        <label><input type="checkbox" value="2000" onchange="libApplyFilters()"> 2000+</label>
+                                        <label><input type="checkbox" value="2500" onchange="libApplyFilters()"> 2500+</label>
+                                        <label><input type="checkbox" value="3000" onchange="libApplyFilters()"> 3000+</label>
+                                        <label><input type="checkbox" value="4000" onchange="libApplyFilters()"> 4000+</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Clear filters button -->
+                            <button class="clear-filters-btn" onclick="libClearFilters()">Сбросить фильтры</button>
+                        </div>
+                    </div>
+                    <div class="download-cards" id="download-cards">
+                        <div class="download-card" style="background-color: #333333; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+                            <div class="download-up">
+                                <img src="../../img/library/none.png" style="width: 250px; border-radius: 8px;">
+                                <div class="download-awards">
+                                    <div class="download-award">
+                                        <img src="star.svg" class="download-award-img">
+                                    </div>
+                                    <div class="download-award">
+                                        <img src="enot.png" class="download-award-img">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="download-info">
+                                <h1 class="download-title">Modern World</h1>
+                                <div class="download-row-big">
+                                    <div class="download-row">
+                                        <img src="autor.svg" class="download-info-ico" />
+                                        <a href="." style="color: #3B83BD">@eenot</a>
+                                    </div>
+                                    <div class="download-row">
+                                        <p>2025</p>
+                                        <img src="calendar.svg" class="download-info-ico" />
+                                    </div>
+                                </div>
+                                <div class="download-row-big">
+                                    <div class="download-row">
+                                        <img src="flag.svg" class="download-info-ico" />
+                                        <p>EN, RU</p>
+                                    </div>
+                                    <div class="download-row">
+                                        <a href="." style="color: #6e8699">Sandbox</a>
+                                        <img src="gamemode.svg" class="download-info-ico" />
+                                    </div>
+                                </div>
+                                <div class="download-tags">
+                                    <a href="." style="color: #6e8699">#World</a>
+                                    <p>, </p>
+                                    <a href="." style="color: #6e8699">#For Phones</a>
+                                    <p>, </p>
+                                    <a href="." style="color: #6e8699">#Recomended</a>
+                                    <p>, </p>
+                                    <a href="." style="color: #6e8699">#without events</a>
+                                    <p>, </p>
+                                    <a href="." style="color: #6e8699">#without reforms</a>
+                                </div>
+                                <div class="download-row-big">
+                                    <div class="download-row">
+                                        <img src="world.svg" class="download-info-ico" />
+                                        <p>World by ЕЕнот</p>
+                                    </div>
+                                    <button class="download-download-button" onclick="downloadCurrentScenario" style="background-color: #44944A; border-radius: 8px; width: 45px; height: 45px; border: none; cursor: pointer;">
+                                        <img src="download.svg" class="download-info-ico" />
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>

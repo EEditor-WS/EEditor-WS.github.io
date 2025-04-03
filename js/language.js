@@ -1600,6 +1600,15 @@ const translations = {
         "no need": "Страны для удаления не найдена",
         "filtres reseted": "Фильтры сброшены",
 
+        // Библиотека
+        "library": "Библиотека",
+        "scenario": "Сценарий",
+        "scenarios": "Сценарии",
+        "mod": "Мод",
+        "mods": "Моды",
+        "map": "Карта",
+        "maps": "Карты",
+
         // Download page
         "home": "Домой",
         "download": "Скачивание",

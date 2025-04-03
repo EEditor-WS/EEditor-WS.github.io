@@ -4,14 +4,14 @@
     gap: 20px;
   }
   
-  .download-awards {
+.download-awards {
     position: absolute;
     x: 0;
     y: 0;
     display: flex;
     gap: 5px;
     flex-wrap: wrap;
-  }
+}
   
   .download-award {
     display: flex;
@@ -30,6 +30,7 @@
     display: flex; /* Используем flexbox для расположения карточек */
     flex-wrap: wrap; /* Позволяем карточкам переноситься на новую строку */
     justify-content: space-between; /* Распределяем карточки по ширине контейнера */
+    flex: 1;
   }
 
   .download-card {
@@ -67,3 +68,207 @@
     /* Стили для дочерних элементов div */
     margin: 1px; /* Добавляем отступы между элементами */
   }
+
+  .tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+
+.lib-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    gap: 10px;
+    width: 100%;
+}
+
+.download-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    background-color: #1e1e1e;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.icon-action-button[id="filters"], .icon-action-button.filters {
+  background-color: rgba(231, 220, 60, 0.12);
+  color: #ffc400;
+}
+
+/* Filter Container */
+.lib-filters {
+    background-color: var(--background-secondary);
+    border-radius: 8px;
+    padding: 16px;
+    margin-right: 16px;
+    width: 280px;
+    transition: transform 0.3s ease;
+    display: none;
+}
+
+.lib-filters.active {
+    display: block;
+}
+
+/* Filter Header */
+.lib-filters-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.lib-filters-header h3 {
+    margin: 0;
+    font-size: 1.1em;
+    color: var(--text-primary);
+}
+
+.collapse-filters {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 4px;
+    transition: transform 0.3s ease;
+}
+
+/* Filter Content */
+.lib-filters-content {
+    transition: max-height 0.3s ease;
+}
+
+.lib-filters-content.collapsed {
+    max-height: 0;
+    overflow: hidden;
+}
+
+/* Filter Groups */
+.filter-group {
+    margin-bottom: 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.filter-group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    cursor: pointer;
+    background-color: var(--background-tertiary);
+    border-radius: 4px 4px 0 0;
+}
+
+.filter-group-header label {
+    margin: 0;
+    font-size: 0.9em;
+    color: var(--text-primary);
+    cursor: pointer;
+}
+
+.collapse-filter-group {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 0;
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+}
+
+.filter-group-content {
+    padding: 12px;
+    background-color: var(--background-secondary);
+    transition: all 0.3s ease;
+}
+
+.filter-group-content.collapsed {
+    padding: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.collapse-filter-group.collapsed {
+    transform: rotate(-90deg);
+}
+
+/* Search Input */
+.lib-search {
+    width: 95%;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--background-primary);
+    color: var(--text-primary);
+}
+
+/* Select Inputs */
+.filter-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--background-primary);
+    color: var(--text-primary);
+}
+
+/* Checkbox List */
+.checkbox-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.checkbox-list label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    color: var(--text-primary);
+    font-size: 0.9em;
+}
+
+.checkbox-list input[type="checkbox"] {
+    margin: 0;
+    cursor: pointer;
+}
+
+/* Clear Filters Button */
+.clear-filters-btn {
+    width: 100%;
+    padding: 8px;
+    background-color: var(--background-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.clear-filters-btn:hover {
+    background-color: var(--background-hover);
+}
+
+/* Layout */
+.lib-down {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .lib-down {
+        flex-direction: column;
+    }
+
+    .lib-filters {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 16px;
+    }
+}
