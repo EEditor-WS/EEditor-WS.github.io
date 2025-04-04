@@ -86,3 +86,41 @@ function libClearFilters() {
     // Re-apply filters (will show all items since filters are cleared)
     libApplyFilters();
 }
+
+async function libDownloadScenario() {
+    const rawUrl = 'https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/lib/scenarios/eenot_world_v1_modern-world.json';
+    
+    try {
+      const response = await fetch(rawUrl);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      // Определяем тип содержимого и имя файла
+      const contentType = response.headers.get('content-type') || 'application/octet-stream';
+      const fileName = rawUrl.split('/').pop() || 'file';
+  
+      // Создаем Blob с правильным MIME-типом
+      const blob = await response.blob();
+      const enhancedBlob = new Blob([blob], { type: contentType });
+  
+      // Создаем ссылку для скачивания
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(enhancedBlob);
+      link.download = fileName;
+      
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      URL.revokeObjectURL(link.href);
+      
+    } catch (error) {
+      console.error('Ошибка:', error);
+      // Fallback: открываем в новой вкладке
+      window.open(rawUrl, '_blank');
+    }
+  }
+  
+  

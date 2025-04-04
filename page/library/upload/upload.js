@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('upload-form');
     const screenshotInput = document.getElementById('scenario-screenshot');
     const screenshotPreview = document.getElementById('screenshot-preview');
+    const today = new Date().toISOString().split('T')[0];
 
     // Автоматически устанавливаем текущую дату
     const today = new Date().toISOString().split('T')[0];

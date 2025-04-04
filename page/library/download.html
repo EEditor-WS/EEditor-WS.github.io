@@ -11,6 +11,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>EEditor WS | Library</title>
+        <link rel="icon" type="image/x-icon" href="../../img/ico/ico.svg">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
@@ -20,7 +21,6 @@
         <link rel="stylesheet" href="../../css/list.css">
         <link rel="stylesheet" href="../../css/style.css">
         <link rel="stylesheet" href="download.css">
-        <link rel="icon" type="image/x-icon" href="../../favicon.ico">
         <script src="../../js/library.js"></script>
         <script src="../../js/language.js"></script>
         <script src="../../js/translator.js"></script>
@@ -268,7 +268,9 @@
                     <div class="download-cards" id="download-cards">
                         <div class="download-card" style="background-color: #333333; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
                             <div class="download-up">
-                                <img src="../../img/library/none.png" style="width: 250px; border-radius: 8px;">
+                                <a href="upload.html?type=scenario&scenario=eenot_world_v1_modern-world.json">
+                                    <img src="../../img/library/none.png" class="download-goto-page" style="width: 250px; border-radius: 8px;">
+                                </a>
                                 <div class="download-awards">
                                     <div class="download-award">
                                         <img src="star.svg" class="download-award-img">
@@ -279,11 +281,11 @@
                                 </div>
                             </div>
                             <div class="download-info">
-                                <h1 class="download-title">Modern World</h1>
+                                <a href="upload.html?type=scenario&scenario=eenot_world_v1_modern-world.json" class="download-title download-goto-page">Modern World</a>
                                 <div class="download-row-big">
                                     <div class="download-row">
                                         <img src="autor.svg" class="download-info-ico" />
-                                        <a href="." style="color: #3B83BD">@eenot</a>
+                                        <a href="https://discord.com/users/794675642037567498" style="color: #3B83BD">@eenot</a>
                                     </div>
                                     <div class="download-row">
                                         <p>2025</p>
@@ -296,27 +298,27 @@
                                         <p>EN, RU</p>
                                     </div>
                                     <div class="download-row">
-                                        <a href="." style="color: #6e8699">Sandbox</a>
+                                        <a href="#" style="color: #6e8699">Sandbox</a>
                                         <img src="gamemode.svg" class="download-info-ico" />
                                     </div>
                                 </div>
                                 <div class="download-tags">
-                                    <a href="." style="color: #6e8699">#World</a>
+                                    <a href="#" style="color: #6e8699">#World</a>
                                     <p>, </p>
-                                    <a href="." style="color: #6e8699">#For Phones</a>
+                                    <a href="#" style="color: #6e8699">#For Phones</a>
                                     <p>, </p>
-                                    <a href="." style="color: #6e8699">#Recomended</a>
+                                    <a href="#" style="color: #6e8699">#Recomended</a>
                                     <p>, </p>
-                                    <a href="." style="color: #6e8699">#without events</a>
+                                    <a href="#" style="color: #6e8699">#without events</a>
                                     <p>, </p>
-                                    <a href="." style="color: #6e8699">#without reforms</a>
+                                    <a href="#" style="color: #6e8699">#without reforms</a>
                                 </div>
                                 <div class="download-row-big">
                                     <div class="download-row">
                                         <img src="world.svg" class="download-info-ico" />
                                         <p>World by ЕЕнот</p>
                                     </div>
-                                    <button class="download-download-button" onclick="downloadCurrentScenario" style="background-color: #44944A; border-radius: 8px; width: 45px; height: 45px; border: none; cursor: pointer;">
+                                    <button class="download-download-button" onclick="libDownloadScenario()" style="background-color: #44944A; border-radius: 8px; width: 45px; height: 45px; border: none; cursor: pointer;">
                                         <img src="download.svg" class="download-info-ico" />
                                     </button>
                                 </div>

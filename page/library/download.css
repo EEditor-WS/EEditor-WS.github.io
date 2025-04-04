@@ -35,6 +35,7 @@
 
   .download-card {
     width: 250px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   }
 
   .download-award-img {
@@ -107,6 +108,7 @@
     width: 280px;
     transition: transform 0.3s ease;
     display: none;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 .lib-filters.active {
@@ -271,4 +273,24 @@
         margin-right: 0;
         margin-bottom: 16px;
     }
+}
+
+.download-title {
+  text-decoration: none; /* Убирает подчеркивание */
+  color: white; /* Делает текст белым */
+  font-size: 35px; /* Размер шрифта */
+  font-weight: bold; /* Жирный шрифт */
+
+}
+
+.download-goto-page:hover {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.nav-header {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    flex-direction: row;
 }
