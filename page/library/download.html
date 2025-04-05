@@ -20,6 +20,7 @@
         <link rel="stylesheet" href="../../css/head.css">
         <link rel="stylesheet" href="../../css/list.css">
         <link rel="stylesheet" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/head.css">
         <link rel="stylesheet" href="download.css">
         <script src="../../js/library.js"></script>
         <script src="../../js/language.js"></script>
@@ -27,6 +28,7 @@
         <script src="../../js/upload.js"></script>
         <script src="../../js/auth.js"></script>
         <script src="../../js/head.js"></script>
+        <script src="downloadlist.js"></script>
         <script src="download.js"></script>
         <!-- Google tag (gtag.js) -->
             <script async src="https://www.googletagmanager.com/gtag/js?id=G-9HFX1FVLMV"></script>
@@ -73,27 +75,27 @@
                         <div id="currentLang" class="void"></div>
                         <div id="langDropdown" class="lang-dropdown">
                             <a href="#" data-lang="en">
-                                <img src="img/lang/en.svg" class="lang-flag" alt="English">
+                                <img src="../../img/lang/en.svg" class="lang-flag" alt="English">
                                 English
                             </a>
                             <a href="#" data-lang="ru">
-                                <img src="img/lang/ru.svg" class="lang-flag" alt="Русский">
+                                <img src="../../img/lang/ru.svg" class="lang-flag" alt="Русский">
                                 Русский
                             </a>
                             <a href="#" data-lang="uk">
-                                <img src="img/lang/uk.svg" class="lang-flag" alt="Українська">
+                                <img src="../../img/lang/uk.svg" class="lang-flag" alt="Українська">
                                 Українська
                             </a>
                             <a href="#" data-lang="mo">
-                                <img src="../img/lang/mo.svg" class="lang-flag" alt="Молдовеняскэ">
+                                <img src="../../img/lang/mo.svg" class="lang-flag" alt="Молдовеняскэ">
                                 Молдовеняскэ
                             </a>
                             <a href="#" data-lang="be">
-                                <img src="img/lang/be.svg" class="lang-flag" alt="Беларуская">
+                                <img src="../../img/lang/be.svg" class="lang-flag" alt="Беларуская">
                                 Беларуская (часткова)
                             </a>
                             <a href="#" data-lang="kk">
-                                <img src="img/lang/kk.svg" class="lang-flag" alt="Қазақша">
+                                <img src="../../img/lang/kk.svg" class="lang-flag" alt="Қазақша">
                                 Қазақша (ішінара)
                             </a>
                         </div>
@@ -154,7 +156,7 @@
         <div id="scenarios" class="page list active">
             <div class="download-container">
                 <div class="lib-header">
-                    <h2 /*data-translate="scenarios"*/>Сценарии</h2>
+                    <h2 data-translate="scenarios">Сценарии</h2>
                     <div class="header-actions">
                         <div class="tooltip-container">
                             <button id="filters" class="icon-action-button filters" title="Filters" onclick="libShowFilters()">
@@ -266,64 +268,7 @@
                         </div>
                     </div>
                     <div class="download-cards" id="download-cards">
-                        <div class="download-card" style="background-color: #333333; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
-                            <div class="download-up">
-                                <a href="upload.html?type=scenario&scenario=eenot_world_v1_modern-world.json">
-                                    <img src="../../img/library/none.png" class="download-goto-page" style="width: 250px; border-radius: 8px;">
-                                </a>
-                                <div class="download-awards">
-                                    <div class="download-award">
-                                        <img src="star.svg" class="download-award-img">
-                                    </div>
-                                    <div class="download-award">
-                                        <img src="enot.png" class="download-award-img">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="download-info">
-                                <a href="upload.html?type=scenario&scenario=eenot_world_v1_modern-world.json" class="download-title download-goto-page">Modern World</a>
-                                <div class="download-row-big">
-                                    <div class="download-row">
-                                        <img src="autor.svg" class="download-info-ico" />
-                                        <a href="https://discord.com/users/794675642037567498" style="color: #3B83BD">@eenot</a>
-                                    </div>
-                                    <div class="download-row">
-                                        <p>2025</p>
-                                        <img src="calendar.svg" class="download-info-ico" />
-                                    </div>
-                                </div>
-                                <div class="download-row-big">
-                                    <div class="download-row">
-                                        <img src="flag.svg" class="download-info-ico" />
-                                        <p>EN, RU</p>
-                                    </div>
-                                    <div class="download-row">
-                                        <a href="#" style="color: #6e8699">Sandbox</a>
-                                        <img src="gamemode.svg" class="download-info-ico" />
-                                    </div>
-                                </div>
-                                <div class="download-tags">
-                                    <a href="#" style="color: #6e8699">#World</a>
-                                    <p>, </p>
-                                    <a href="#" style="color: #6e8699">#For Phones</a>
-                                    <p>, </p>
-                                    <a href="#" style="color: #6e8699">#Recomended</a>
-                                    <p>, </p>
-                                    <a href="#" style="color: #6e8699">#without events</a>
-                                    <p>, </p>
-                                    <a href="#" style="color: #6e8699">#without reforms</a>
-                                </div>
-                                <div class="download-row-big">
-                                    <div class="download-row">
-                                        <img src="world.svg" class="download-info-ico" />
-                                        <p>World by ЕЕнот</p>
-                                    </div>
-                                    <button class="download-download-button" onclick="libDownloadScenario()" style="background-color: #44944A; border-radius: 8px; width: 45px; height: 45px; border: none; cursor: pointer;">
-                                        <img src="download.svg" class="download-info-ico" />
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- Cards will be loaded dynamically -->
                     </div>
                 </div>
             </div>

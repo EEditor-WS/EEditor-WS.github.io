@@ -87,9 +87,7 @@ function libClearFilters() {
     libApplyFilters();
 }
 
-async function libDownloadScenario() {
-    const rawUrl = 'https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/lib/scenarios/eenot_world_v1_modern-world.json';
-    
+async function libDownloadScenario(rawUrl) {
     try {
       const response = await fetch(rawUrl);
       
@@ -122,5 +120,4 @@ async function libDownloadScenario() {
       window.open(rawUrl, '_blank');
     }
   }
-  
-  
+

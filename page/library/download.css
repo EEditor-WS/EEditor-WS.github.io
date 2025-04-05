@@ -14,10 +14,13 @@
 }
   
   .download-award {
+    width: 40px;
+    height: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    justify-content: center
   }
   
   .download-award-name {
@@ -29,8 +32,9 @@
   .download-cards {
     display: flex; /* Используем flexbox для расположения карточек */
     flex-wrap: wrap; /* Позволяем карточкам переноситься на новую строку */
-    justify-content: space-between; /* Распределяем карточки по ширине контейнера */
+    justify-content: flex-start; /* Распределяем карточки по ширине контейнера */
     flex: 1;
+    gap: 20px; /* Отступы между карточками */
   }
 
   .download-card {
@@ -51,6 +55,14 @@
     display: flex;
     align-items: center;
     gap: 10px;
+  }
+
+  .download-row a {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-decoration: none;
   }
 
   .download-row-big {
