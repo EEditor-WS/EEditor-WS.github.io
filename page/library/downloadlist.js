@@ -15,6 +15,10 @@ const scenariosData = [
         gameMode: "Sandbox",
         tags: ["World", "For Phones", "Recomended", "without events", "without reforms"],
         worldCreator: "ЕЕнот",
+        map: {
+            name: "World by ЕЕнот",
+            id: "eenot_world_v1"
+        },
         awards: ["star", "enot"],
         // Hidden parameters
         publishDate: "2025-01-19",
@@ -39,6 +43,10 @@ const scenariosData = [
         gameMode: "Sandbox",
         tags: ["World", "For Phones", "Recomended", "without events", "without reforms"],
         worldCreator: "ЕЕнот",
+        map: {
+            name: "World by ЕЕнот",
+            id: "eenot_world_v1"
+        },
         awards: [],
         // Hidden parameters
         publishDate: "2025-01-24",
@@ -63,6 +71,10 @@ const scenariosData = [
         gameMode: "Sandbox",
         tags: ["World", "For Phones", "without events", "without reforms"],
         worldCreator: "ЕЕнот",
+        map: {
+            name: "World by ЕЕнот",
+            id: "eenot_world_v1"
+        },
         awards: [],
         // Hidden parameters
         publishDate: "2025-01-24",
@@ -87,6 +99,10 @@ const scenariosData = [
         gameMode: "Sandbox",
         tags: ["World", "For Phones", "Recomended", "without events", "without reforms"],
         worldCreator: "ЕЕнот",
+        map: {
+            name: "World by ЕЕнот",
+            id: "eenot_world_v1"
+        },
         awards: ["star"],
         // Hidden parameters
         publishDate: "2025-01-31",
@@ -150,6 +166,66 @@ function truncateAuthorName(name, maxLength = 13) {
     return name.substring(0, maxLength) + '...';
 }
 
+// Добавляем отслеживание загруженных карт
+const downloadedMaps = new Set();
+
+// Обновляем функцию скачивания
+async function libDownloadScenario(rawUrl, mapId) {
+    console.log(`Map ID: ${mapId}, Downloaded Maps: ${Array.from(downloadedMaps)}`); // Debugging line
+    try {
+        // Сначала скачиваем сценарий
+        const fileName = rawUrl.split('/').pop();
+        await downloadFile(rawUrl, fileName);
+
+        // Проверяем, нужно ли предлагать скачать карту
+        console.log(`Map ID: ${mapId}, Downloaded Maps: ${Array.from(downloadedMaps)}`); // Debugging line
+        if (mapId && !downloadedMaps.has(mapId)) {
+            const shouldDownloadMap = window.confirm(`Хотите скачать карту ${mapId}?`);
+            if (shouldDownloadMap) {
+                const mapUrl = `https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/lib/maps/${mapId}_!.map`;
+                const mapFileName = `${mapId}_!.map`;
+                try {
+                    await downloadFile(mapUrl, mapFileName);
+                    downloadedMaps.add(mapId); // Отмечаем карту как загруженную только после успешного скачивания
+                    console.log(`Map ${mapId} downloaded successfully`);
+                } catch (mapError) {
+                    console.error(`Error downloading map ${mapId}:`, mapError);
+                    alert(`Ошибка при скачивании карты ${mapId}`);
+                }
+            }
+        }
+    } catch (error) {
+        console.error('Ошибка при скачивании сценария:', error);
+        alert('Ошибка при скачивании сценария. Попробуйте позже.');
+        // При ошибке пробуем открыть в новой вкладке
+        window.open(rawUrl, '_blank');
+    }
+}
+
+// Обновляем вспомогательную функцию для скачивания файлов
+async function downloadFile(url, fileName) {
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const contentType = response.headers.get('content-type') || 'application/octet-stream';
+    const blob = await response.blob();
+    const enhancedBlob = new Blob([blob], { type: contentType });
+
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(enhancedBlob);
+    link.download = fileName || url.split('/').pop() || 'file';
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    URL.revokeObjectURL(link.href);
+
+    return new Promise(resolve => setTimeout(resolve, 100)); // Небольшая задержка между скачиваниями
+}
+
 // Generate HTML for a scenario card
 function generateScenarioCard(scenario) {
     const sortedAwards = sortAwardsByWeight(scenario.awards || []);
@@ -165,46 +241,73 @@ function generateScenarioCard(scenario) {
         .join('<p>, </p>');
 
     return `
-        <div class="download-card" style="background-color: #333333; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
-            <div class="download-up">
-                <a href="${scenario.detailsLink}">
-                    <img src="${scenario.image}" class="download-goto-page" style="width: 250px; border-radius: 8px;">
-                </a>
-                <div class="download-awards">
-                    ${awardsHTML}
+        <div class="download-card" 
+            style="background-color: #333333; border-radius: 8px; padding: 16px; margin-bottom: 16px;"
+            data-title="${scenario.title.toLowerCase()}"
+            data-author="${scenario.author.name.toLowerCase()}"
+            data-type="${scenario.type}"
+            data-period="${scenario.period}"
+            data-year="${scenario.year}"
+            data-languages="${scenario.languages.join(',').toLowerCase()}"
+            data-worldcreator="${scenario.worldCreator.toLowerCase()}"
+            data-map-name="${scenario.map.name}"
+            data-map-id="${scenario.map.id}"
+            data-publish-date="${scenario.publishDate}"
+            data-update-date="${scenario.lastUpdate}"
+            data-mechanics='${JSON.stringify({
+                economy: "none",
+                population: "none",
+                resources: "none",
+                diplomacy: "none",
+                rebellions: "none",
+                reforms: "none",
+                events: "none",
+                ...scenario.mechanics
+            })}'
+        >
+            <div class="download-info">
+                <div class="download-up">
+                    <a href="${scenario.detailsLink}">
+                        <img src="${scenario.image}" class="download-goto-page" style="width: 250px; border-radius: 8px;">
+                    </a>
+                    <div class="download-awards">
+                        ${awardsHTML}
+                    </div>
+                </div>
+                <div class="download-center">
+                    <a href="${scenario.detailsLink}" class="download-title download-goto-page">${scenario.title}</a>
+                    <div class="download-row-big">
+                        <div class="download-row">
+                            <img src="autor.svg" class="download-info-ico" />
+                            <a href="${scenario.author.link}" style="color: ${scenario.author.color}">${truncateAuthorName(scenario.author.name)}</a>
+                        </div>
+                        <div class="download-row">
+                            <p>${scenario.year}</p>
+                            <img src="calendar.svg" class="download-info-ico" />
+                        </div>
+                    </div>
+                    <div class="download-row-big">
+                        <div class="download-row">
+                            <img src="flag.svg" class="download-info-ico" />
+                            <p>${scenario.languages.join(", ")}</p>
+                        </div>
+                        <div class="download-row">
+                            <a href="#" style="color: #6e8699">${scenario.gameMode}</a>
+                            <img src="gamemode.svg" class="download-info-ico" />
+                        </div>
+                    </div>
+                    <div class="download-tags">
+                        ${tagsHTML}
+                    </div>
                 </div>
             </div>
-            <div class="download-info">
-                <a href="${scenario.detailsLink}" class="download-title download-goto-page">${scenario.title}</a>
-                <div class="download-row-big">
-                    <div class="download-row">
-                        <img src="autor.svg" class="download-info-ico" />
-                        <a href="${scenario.author.link}" style="color: ${scenario.author.color}">${truncateAuthorName(scenario.author.name)}</a>
-                    </div>
-                    <div class="download-row">
-                        <p>${scenario.year}</p>
-                        <img src="calendar.svg" class="download-info-ico" />
-                    </div>
-                </div>
-                <div class="download-row-big">
-                    <div class="download-row">
-                        <img src="flag.svg" class="download-info-ico" />
-                        <p>${scenario.languages.join(", ")}</p>
-                    </div>
-                    <div class="download-row">
-                        <a href="#" style="color: #6e8699">${scenario.gameMode}</a>
-                        <img src="gamemode.svg" class="download-info-ico" />
-                    </div>
-                </div>
-                <div class="download-tags">
-                    ${tagsHTML}
-                </div>
+            <div class="download-down">
                 <div class="download-row-big">
                     <div class="download-row">
                         <img src="world.svg" class="download-info-ico" />
-                        <p>World by ${scenario.worldCreator}</p>
+                        <p>${scenario.map.name}</p>
                     </div>
-                    <button class="download-download-button" onclick="libDownloadScenario('${scenario.downloadUrl}')" style="background-color: #44944A; border-radius: 8px; width: 45px; height: 45px; border: none; cursor: pointer;">
+                    <button class="download-download-button" onclick="libDownloadScenario('${scenario.downloadUrl}', '${scenario.map.id}')" style="background-color: #44944A; border-radius: 8px; width: 45px; height: 45px; border: none; cursor: pointer;">
                         <img src="download.svg" class="download-info-ico" />
                     </button>
                 </div>

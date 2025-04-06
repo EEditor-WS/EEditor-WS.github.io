@@ -38,6 +38,8 @@
   }
 
   .download-card {
+    display: flex;
+    flex-direction: column;
     width: 250px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   }
@@ -305,4 +307,42 @@
     justify-content: space-between;
     margin-bottom: 10px;
     flex-direction: row;
+}
+
+.mainform {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-element {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-element label {
+    color: var(--text-secondary);
+    font-size: 0.9em;
+}
+
+.form-element input,
+.form-element select {
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--background-primary);
+    color: var(--text-primary);
+}
+
+.form-element input[type="date"] {
+    color-scheme: dark;
+}
+
+.download-down {
+    max-height: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }

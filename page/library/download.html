@@ -181,6 +181,148 @@
                                 <input type="text" id="lib-search" class="lib-search" placeholder="Поиск..." oninput="libApplyFilters()">
                             </div>
 
+                            <!-- New filter groups -->
+                            <div class="filter-group">
+                                <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
+                                    <label>Основные параметры</label>
+                                    <button class="collapse-filter-group" type="button">▼</button>
+                                </div>
+                                <div class="filter-group-content collapsed">
+                                    <div class="mainform">
+                                        <div class="form-element">
+                                            <label>Автор</label>
+                                            <select id="lib-autor-filter" onchange="libApplyFilters()">
+                                                <option value="">Все авторы</option>
+                                                <option value="@eenot">ЕЕнот</option>
+                                                <option value="@helvetic_brutalisation">Helvetic Brutalisation</option>
+                                                <option value="@theman_the_myth_the_legend">HIM</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-element">
+                                            <label>Карта</label>
+                                            <select id="lib-map-filter" onchange="libApplyFilters()">
+                                                <option value="">Все карты</option>
+                                                <option value="eenot_world_v1">World by ЕЕнот</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="filter-group">
+                                <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
+                                    <label>Наполнение</label>
+                                    <button class="collapse-filter-group" type="button">▼</button>
+                                </div>
+                                <div class="filter-group-content collapsed">
+                                
+                                    <div class="filter-group">
+                                        <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
+                                            <label>Экономика</label>
+                                            <button class="collapse-filter-group" type="button">▼</button>
+                                        </div>
+                                        <div class="filter-group-content collapsed">
+                                            <div class="checkbox-list">
+                                                <label><input type="checkbox" value="none" name="economy" onchange="libApplyFilters()"> Нету</label>
+                                                <label><input type="checkbox" value="partially" name="economy" onchange="libApplyFilters()"> Частично</label>
+                                                <label><input type="checkbox" value="developing" name="economy" onchange="libApplyFilters()"> В разработке</label>
+                                                <label><input type="checkbox" value="yes" name="economy" onchange="libApplyFilters()"> Есть</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="filter-group">
+                                        <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
+                                            <label>Население</label>
+                                            <button class="collapse-filter-group" type="button">▼</button>
+                                        </div>
+                                        <div class="filter-group-content collapsed">
+                                            <div class="checkbox-list">
+                                                <label><input type="checkbox" value="none" name="population" onchange="libApplyFilters()"> Нету</label>
+                                                <label><input type="checkbox" value="partially" name="population" onchange="libApplyFilters()"> Частично</label>
+                                                <label><input type="checkbox" value="developing" name="population" onchange="libApplyFilters()"> В разработке</label>
+                                                <label><input type="checkbox" value="yes" name="population" onchange="libApplyFilters()"> Есть</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="filter-group">
+                                        <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
+                                            <label>Ресурсы</label>
+                                            <button class="collapse-filter-group" type="button">▼</button>
+                                        </div>
+                                        <div class="filter-group-content collapsed">
+                                            <div class="checkbox-list">
+                                                <label><input type="checkbox" value="none" name="resources" onchange="libApplyFilters()"> Нету</label>
+                                                <label><input type="checkbox" value="partially" name="resources" onchange="libApplyFilters()"> Частично</label>
+                                                <label><input type="checkbox" value="developing" name="resources" onchange="libApplyFilters()"> В разработке</label>
+                                                <label><input type="checkbox" value="yes" name="resources" onchange="libApplyFilters()"> Есть</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="filter-group">
+                                        <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
+                                            <label>Дипломатия</label>
+                                            <button class="collapse-filter-group" type="button">▼</button>
+                                        </div>
+                                        <div class="filter-group-content collapsed">
+                                            <div class="checkbox-list">
+                                                <label><input type="checkbox" value="none" name="diplomacy" onchange="libApplyFilters()"> Нету</label>
+                                                <label><input type="checkbox" value="partially" name="diplomacy" onchange="libApplyFilters()"> Частично</label>
+                                                <label><input type="checkbox" value="developing" name="diplomacy" onchange="libApplyFilters()"> В разработке</label>
+                                                <label><input type="checkbox" value="yes" name="diplomacy" onchange="libApplyFilters()"> Есть</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="filter-group">
+                                        <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
+                                            <label>Восстания</label>
+                                            <button class="collapse-filter-group" type="button">▼</button>
+                                        </div>
+                                        <div class="filter-group-content collapsed">
+                                            <div class="checkbox-list">
+                                                <label><input type="checkbox" value="none" name="rebellions" onchange="libApplyFilters()"> Нету</label>
+                                                <label><input type="checkbox" value="partially" name="rebellions" onchange="libApplyFilters()"> Частично</label>
+                                                <label><input type="checkbox" value="developing" name="rebellions" onchange="libApplyFilters()"> В разработке</label>
+                                                <label><input type="checkbox" value="yes" name="rebellions" onchange="libApplyFilters()"> Есть</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="filter-group">
+                                        <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
+                                            <label>Реформы</label>
+                                            <button class="collapse-filter-group" type="button">▼</button>
+                                        </div>
+                                        <div class="filter-group-content collapsed">
+                                            <div class="checkbox-list">
+                                                <label><input type="checkbox" value="none" name="reforms" onchange="libApplyFilters()"> Нету</label>
+                                                <label><input type="checkbox" value="partially" name="reforms" onchange="libApplyFilters()"> Частично</label>
+                                                <label><input type="checkbox" value="developing" name="reforms" onchange="libApplyFilters()"> В разработке</label>
+                                                <label><input type="checkbox" value="yes" name="reforms" onchange="libApplyFilters()"> Есть</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="filter-group">
+                                        <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
+                                            <label>События</label>
+                                            <button class="collapse-filter-group" type="button">▼</button>
+                                        </div>
+                                        <div class="filter-group-content collapsed">
+                                            <div class="checkbox-list">
+                                                <label><input type="checkbox" value="none" name="events" onchange="libApplyFilters()"> Нету</label>
+                                                <label><input type="checkbox" value="partially" name="events" onchange="libApplyFilters()"> Частично</label>
+                                                <label><input type="checkbox" value="developing" name="events" onchange="libApplyFilters()"> В разработке</label>
+                                                <label><input type="checkbox" value="yes" name="events" onchange="libApplyFilters()"> Есть</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <!-- Type filter -->
                             <div class="filter-group">
                                 <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
@@ -212,7 +354,7 @@
                                         <label><input type="checkbox" value="ww1" onchange="libApplyFilters()"> WWI</label>
                                         <label><input type="checkbox" value="interbellum" onchange="libApplyFilters()"> Интербеллум</label>
                                         <label><input type="checkbox" value="ww2" onchange="libApplyFilters()"> WW2</label>
-                                        <label><input type="checkbox" value="coldwar" onchange="libApplyFilters()"> CW</label>
+                                        <label><input type="checkbox" value="cw" onchange="libApplyFilters()"> CW</label>
                                         <label><input type="checkbox" value="modern" onchange="libApplyFilters()"> Современность</label>
                                         <label><input type="checkbox" value="alternative" onchange="libApplyFilters()"> Альтернативный</label>
                                     </div>
@@ -225,7 +367,7 @@
                                     <button class="collapse-filter-group" type="button">▼</button>
                                 </div>
                                 <div class="filter-group-content collapsed">
-                                    <select id="title" class="main-page-input" autocomplete="off">
+                                    <select id="lib-language-filter" class="main-page-input" onchange="libApplyFilters()">
                                         <option value="">Все</option>
                                         <option value="en">English</option>
                                         <option value="ru">Русский</option>

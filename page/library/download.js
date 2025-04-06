@@ -25,99 +25,90 @@ function libToggleFilterGroup(header) {
 
 function libApplyFilters() {
     const searchText = document.getElementById('lib-search').value.toLowerCase();
+    const authorFilter = document.getElementById('lib-autor-filter').value.toLowerCase();
+    const mapFilter = document.getElementById('lib-map-filter').value.toLowerCase();
     const typeFilter = document.getElementById('lib-type-filter').value;
-    const sizeFilter = document.getElementById('lib-size-filter').value;
-    const ratingFilter = document.getElementById('lib-rating-filter').value;
-    
-    // Get selected time periods
-    const timePeriods = Array.from(document.querySelectorAll('.checkbox-list input:checked'))
+    const languageFilter = document.getElementById('lib-language-filter').value; // Обновленный ID
+    const timePeriods = Array.from(document.querySelectorAll('.checkbox-list input[type="checkbox"]:checked:not([name^="mechanics"])'))
         .map(cb => cb.value);
 
-    // Get all scenario items
-    const scenarios = document.querySelectorAll('.scenario-item');
+    // Get mechanics filters
+    const mechanicsFilters = {
+        economy: getCheckedValues('economy'),
+        population: getCheckedValues('population'),
+        resources: getCheckedValues('resources'),
+        diplomacy: getCheckedValues('diplomacy'),
+        rebellions: getCheckedValues('rebellions'),
+        reforms: getCheckedValues('reforms'),
+        events: getCheckedValues('events')
+    };
 
-    scenarios.forEach(scenario => {
+    const cards = document.querySelectorAll('.download-card');
+    cards.forEach(card => {
         let visible = true;
 
-        // Apply search filter
+        // Apply text search
         if (searchText) {
-            const text = scenario.textContent.toLowerCase();
-            visible = text.includes(searchText);
+            visible = visible && card.textContent.toLowerCase().includes(searchText);
+        }
+
+        // Apply author filter
+        if (authorFilter) {
+            visible = visible && card.dataset.author.includes(authorFilter);
+        }
+
+        // Apply map filter
+        if (mapFilter) {
+            visible = visible && card.dataset.worldcreator.includes(mapFilter);
         }
 
         // Apply type filter
-        if (visible && typeFilter) {
-            visible = scenario.dataset.type === typeFilter;
+        if (typeFilter) {
+            visible = visible && card.dataset.type === typeFilter;
+        }
+
+        // Apply language filter
+        if (languageFilter) {
+            visible = visible && card.dataset.languages.includes(languageFilter);
         }
 
         // Apply time period filter
-        if (visible && timePeriods.length > 0) {
-            visible = timePeriods.some(period => scenario.dataset.period === period);
+        if (timePeriods.length > 0) {
+            visible = visible && timePeriods.includes(card.dataset.period);
         }
 
-        // Apply size filter
-        if (visible && sizeFilter) {
-            visible = scenario.dataset.size === sizeFilter;
-        }
+        // Apply mechanics filters
+        const mechanics = JSON.parse(card.dataset.mechanics || '{}');
+        Object.entries(mechanicsFilters).forEach(([mechanic, values]) => {
+            if (values.length > 0) {
+                visible = visible && values.includes(mechanics[mechanic]);
+            }
+        });
 
-        // Apply rating filter
-        if (visible && ratingFilter) {
-            visible = parseFloat(scenario.dataset.rating) >= parseFloat(ratingFilter);
-        }
-
-        // Show/hide scenario
-        scenario.style.display = visible ? 'block' : 'none';
+        card.style.display = visible ? 'block' : 'none';
     });
 }
 
+function getCheckedValues(name) {
+    return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`))
+        .map(cb => cb.value);
+}
+
 function libClearFilters() {
-    // Reset search
+    // Clear search
     document.getElementById('lib-search').value = '';
-
-    // Reset select elements
+    
+    // Clear dropdowns
+    document.getElementById('lib-autor-filter').value = '';
+    document.getElementById('lib-map-filter').value = '';
     document.getElementById('lib-type-filter').value = '';
-    document.getElementById('lib-size-filter').value = '';
-    document.getElementById('lib-rating-filter').value = '';
-
-    // Uncheck all checkboxes
+    document.getElementById('lib-language-filter').value = ''; // Обновленный ID
+    
+    // Clear all checkboxes
     document.querySelectorAll('.checkbox-list input[type="checkbox"]')
         .forEach(cb => cb.checked = false);
 
-    // Re-apply filters (will show all items since filters are cleared)
+    // Re-apply filters to show all cards
     libApplyFilters();
 }
-
-async function libDownloadScenario(rawUrl) {
-    try {
-      const response = await fetch(rawUrl);
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-  
-      // Определяем тип содержимого и имя файла
-      const contentType = response.headers.get('content-type') || 'application/octet-stream';
-      const fileName = rawUrl.split('/').pop() || 'file';
-  
-      // Создаем Blob с правильным MIME-типом
-      const blob = await response.blob();
-      const enhancedBlob = new Blob([blob], { type: contentType });
-  
-      // Создаем ссылку для скачивания
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(enhancedBlob);
-      link.download = fileName;
-      
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      
-      URL.revokeObjectURL(link.href);
-      
-    } catch (error) {
-      console.error('Ошибка:', error);
-      // Fallback: открываем в новой вкладке
-      window.open(rawUrl, '_blank');
-    }
-  }
 
