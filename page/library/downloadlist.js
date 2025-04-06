@@ -1,3 +1,9 @@
+const inGameMaps = [
+    "jalhund_europe_vg",
+    "jaba_america_vg",
+    "parcoucat_euro4_vg"
+]
+
 const scenariosData = [
     {
         id: "modern_world",
@@ -10,7 +16,7 @@ const scenariosData = [
             link: "https://discord.com/users/794675642037567498",
             color: "#3B83BD"
         },
-        year: "2025",
+        year: "2015",
         languages: ["EN", "RU"],
         gameMode: "Sandbox",
         tags: ["World", "For Phones", "Recomended", "without events", "without reforms"],
@@ -26,6 +32,34 @@ const scenariosData = [
         hiddenScore: 1,
         type: "sandbox",
         period: "modern"
+    },
+    {
+        id: "new_revolution",
+        title: "New Revolution",
+        image: "temporarily/jalhund_europe_new-revolution.png",
+        detailsLink: "detalis.html?type=scenario&scenario=jalhund_europe_vg_new-revolution.json",
+        downloadUrl: "https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/lib/scenarios/jalhund_europe_vg_new-revolution.json",
+        author: {
+            name: "@eenot",
+            link: "https://discord.com/users/794675642037567498",
+            color: "#3B83BD"
+        },
+        year: "2022",
+        languages: ["RU"],
+        gameMode: "Sandbox",
+        tags: ["Europe", "For Phones", "Recomended", "without events", "without reforms"],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Standart Europe",
+            id: "jalhund_europe_vg"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2024-10-30",
+        lastUpdate: "2024-10-30",
+        hiddenScore: 1,
+        type: "sandbox",
+        period: "alternative"
     },
     {
         id: "ww2",
@@ -178,7 +212,7 @@ async function libDownloadScenario(rawUrl, mapId) {
         await downloadFile(rawUrl, fileName);
 
         // Проверяем, нужно ли предлагать скачать карту
-        if (mapId && !downloadedMaps.has(mapId)) {
+        if (mapId && !downloadedMaps.has(mapId) && !inGameMaps.includes(mapId)) {
             // Сохраняем информацию о карте для модального окна
             currentMapDownload = {
                 mapId: mapId,
