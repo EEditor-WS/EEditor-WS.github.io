@@ -169,36 +169,54 @@ function truncateAuthorName(name, maxLength = 13) {
 // Добавляем отслеживание загруженных карт
 const downloadedMaps = new Set();
 
-// Обновляем функцию скачивания
+let currentMapDownload = null;
+
 async function libDownloadScenario(rawUrl, mapId) {
-    console.log(`Map ID: ${mapId}, Downloaded Maps: ${Array.from(downloadedMaps)}`); // Debugging line
     try {
         // Сначала скачиваем сценарий
         const fileName = rawUrl.split('/').pop();
         await downloadFile(rawUrl, fileName);
 
         // Проверяем, нужно ли предлагать скачать карту
-        console.log(`Map ID: ${mapId}, Downloaded Maps: ${Array.from(downloadedMaps)}`); // Debugging line
         if (mapId && !downloadedMaps.has(mapId)) {
-            const shouldDownloadMap = window.confirm(`Хотите скачать карту ${mapId}?`);
-            if (shouldDownloadMap) {
-                const mapUrl = `https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/lib/maps/${mapId}_!.map`;
-                const mapFileName = `${mapId}_!.map`;
-                try {
-                    await downloadFile(mapUrl, mapFileName);
-                    downloadedMaps.add(mapId); // Отмечаем карту как загруженную только после успешного скачивания
-                    console.log(`Map ${mapId} downloaded successfully`);
-                } catch (mapError) {
-                    console.error(`Error downloading map ${mapId}:`, mapError);
-                    alert(`Ошибка при скачивании карты ${mapId}`);
-                }
-            }
+            // Сохраняем информацию о карте для модального окна
+            currentMapDownload = {
+                mapId: mapId,
+                mapUrl: `https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/lib/maps/${mapId}_!.map`,
+                fileName: `${mapId}_!.map`
+            };
+            
+            // Показываем модальное окно
+            const modal = document.getElementById('downloadMapModal');
+            const mapNameText = document.getElementById('mapNameText');
+            mapNameText.textContent = mapId;
+            modal.classList.add('active');
         }
     } catch (error) {
         console.error('Ошибка при скачивании сценария:', error);
         alert('Ошибка при скачивании сценария. Попробуйте позже.');
-        // При ошибке пробуем открыть в новой вкладке
         window.open(rawUrl, '_blank');
+    }
+}
+
+function closeDownloadMapModal() {
+    const modal = document.getElementById('downloadMapModal');
+    modal.classList.remove('active');
+    downloadedMaps.add(currentMapDownload.mapId);
+    currentMapDownload = null;
+}
+
+async function confirmDownloadMap() {
+    if (!currentMapDownload) return;
+
+    try {
+        await downloadFile(currentMapDownload.mapUrl, currentMapDownload.fileName);
+        console.log(`Map ${currentMapDownload.mapId} downloaded successfully`);
+    } catch (error) {
+        console.error(`Error downloading map ${currentMapDownload.mapId}:`, error);
+        alert(`Ошибка при скачивании карты ${currentMapDownload.mapId}`);
+    } finally {
+        closeDownloadMapModal();
     }
 }
 
@@ -232,7 +250,7 @@ function generateScenarioCard(scenario) {
     const awardsHTML = sortedAwards
         .map(award => `
             <div class="download-award">
-                <img src="temporarily/awards/${award}.svg" class="download-award-img">
+                <img src="temporarily/awards/${award}.svg" class="download-award-img" title="${award}">
             </div>
         `).join('');
 

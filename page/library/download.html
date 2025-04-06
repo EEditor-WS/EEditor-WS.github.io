@@ -520,5 +520,20 @@
                 </form>
             </div>
         </div>
+        <div id="downloadMapModal" class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Скачать карту</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Хотите скачать карту для этого сценария?</p>
+                    <p id="mapNameText" style="font-weight: bold;"></p>
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-button secondary" onclick="closeDownloadMapModal()">Отмена</button>
+                    <button class="modal-button primary" onclick="confirmDownloadMap(); downloadedMaps.add(currentMapDownload.mapId)">Скачать</button>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
