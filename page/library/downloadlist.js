@@ -57,7 +57,7 @@ const scenariosData = [
         // Hidden parameters
         publishDate: "2024-10-30",
         lastUpdate: "2024-10-30",
-        hiddenScore: 1,
+        hiddenScore: -250,
         type: "sandbox",
         period: "alternative"
     },
@@ -144,6 +144,258 @@ const scenariosData = [
         hiddenScore: 0,
         type: "sandbox",
         period: "alternative"
+    },
+    {
+        id: "1444",
+        title: "1444",
+        image: "temporarily/estebanf259_euromagnus_v1_1444.png",
+        detailsLink: "detalis.html?type=scenario&scenario=estebanf259_euromagnus_v1_1444.json",
+        downloadUrl: "https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/lib/scenarios/estebanf259_euromagnus_v1_1444.json",
+        author: {
+            name: "@totoska",
+            link: "https://discord.com/users/820194328201920524",
+            color: "#3B83BD"
+        },
+        year: "1444",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [""],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "EuroMagnus by Estebanf259",
+            id: "estebanf259_euromagnus_v1"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2024-11-17",
+        lastUpdate: "2024-11-17",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ancient"
+    },
+    {
+        id: "pick-roman-empire",
+        title: "The peak of the Roman Empire",
+        image: "temporarily/parkourcat_euro4_vg_pick-roman-empire.png",
+        detailsLink: "detalis.html?type=scenario&scenario=parkourcat_euro4_vg_pick-roman-empire.json",
+        downloadUrl: "https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/lib/scenarios/parkourcat_euro4_vg_pick-roman-empire.json",
+        author: {
+            name: "@totoska",
+            link: "https://discord.com/users/820194328201920524",
+            color: "#3B83BD"
+        },
+        year: "1177",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [""],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Euro4 Standart",
+            id: "parkourcat_euro4_vg"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2024-11-20",
+        lastUpdate: "2024-11-20",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ancient"
+    },
+    {
+        id: "shw",
+        title: "The Seven Hours War",
+        image: "temporarily/shahz0d_world_v1_shw.png",
+        detailsLink: "detalis.html?type=scenario&scenario=shahz0d_world_v1_shw.json",
+        downloadUrl: "https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/lib/scenarios/shahz0d_world_v1_shw.json",
+        author: {
+            name: "@totoska",
+            link: "https://discord.com/users/820194328201920524",
+            color: "#3B83BD"
+        },
+        year: "2000",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [""],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "World Plus",
+            id: "shahz0d_world_v1"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2024-11-21",
+        lastUpdate: "2024-11-21",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "alternative"
+    },
+    {
+        id: "kaiserreich",
+        title: "Kaiserreich",
+        image: "temporarily/zachary_eurasia_v1_kaiserreich.png",
+        detailsLink: "detalis.html?type=scenario&scenario=zachary_eurasia_v1_kaiserreich.json",
+        downloadUrl: "https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/lib/scenarios/zachary_eurasia_v1_kaiserreich.json",
+        author: {
+            name: "@totoska",
+            link: "https://discord.com/users/820194328201920524",
+            color: "#3B83BD"
+        },
+        year: "1936",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [""],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Eurasia by Zachary",
+            id: "zachary_eurasia_v1"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2024-12-03",
+        lastUpdate: "2024-12-03",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "alternative"
+    },
+    {
+        id: "modern",
+        title: "Modern Day",
+        image: "temporarily/zachary_eurasia_v1_modern.png",
+        detailsLink: "detalis.html?type=scenario&scenario=zachary_eurasia_v1_modern.json",
+        downloadUrl: "https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/lib/scenarios/zachary_eurasia_v1_modern.json",
+        author: {
+            name: "@totoska",
+            link: "https://discord.com/users/820194328201920524",
+            color: "#3B83BD"
+        },
+        year: "2020",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [""],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Eurasia by Zachary",
+            id: "zachary_eurasia_v1"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-03-07",
+        lastUpdate: "2025-03-07",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "modern"
+    },
+    {
+        id: "tno",
+        title: "The New Order",
+        image: "temporarily/zachary_eurasia_v1_tno.png",
+        detailsLink: "detalis.html?type=scenario&scenario=zachary_eurasia_v1_tno.json",
+        downloadUrl: "https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/lib/scenarios/zachary_eurasia_v1_tno.json",
+        author: {
+            name: "@totoska",
+            link: "https://discord.com/users/820194328201920524",
+            color: "#3B83BD"
+        },
+        year: "1962",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [""],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Eurasia by Zachary",
+            id: "zachary_eurasia_v1"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2024-12-17",
+        lastUpdate: "2024-12-17",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "alternative"
+    },
+    {
+        id: "ww2",
+        title: "World War 2",
+        image: "temporarily/zachary_world_v1_ww2.png",
+        detailsLink: "detalis.html?type=scenario&scenario=zachary_world_v1_ww2.json",
+        downloadUrl: "https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/lib/scenarios/zachary_world_v1_ww2.json",
+        author: {
+            name: "@totoska",
+            link: "https://discord.com/users/820194328201920524",
+            color: "#3B83BD"
+        },
+        year: "1936",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [""],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "World by Zachary",
+            id: "zachary_world_v1"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-03-07",
+        lastUpdate: "2025-03-07",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ww2"
+    },
+    {
+        id: "1-1",
+        title: "1v1 Warnament",
+        image: "temporarily/enotochel_pvp_v1_1-1.png",
+        detailsLink: "detalis.html?type=scenario&scenario=enotochel_pvp_v1_1-1.json",
+        downloadUrl: "https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/lib/scenarios/enotochel_pvp_v1_1-1.json",
+        author: {
+            name: "@totoska",
+            link: "https://discord.com/users/820194328201920524",
+            color: "#3B83BD"
+        },
+        year: "0",
+        languages: ["EN"],
+        gameMode: "battle",
+        tags: [""],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "PvP map by Енотий",
+            id: "enotochel_pvp_v1"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2024-12-23",
+        lastUpdate: "2024-12-23",
+        hiddenScore: 0,
+        type: "battle",
+        period: ""
+    },
+    {
+        id: "1-1",
+        title: "1v1 Warnament (+Watcher)",
+        image: "temporarily/enotochel_pvp_v1_1-1-watcher.png",
+        detailsLink: "detalis.html?type=scenario&scenario=enotochel_pvp_v1_1-1-watcher.json",
+        downloadUrl: "https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/lib/scenarios/enotochel_pvp_v1_1-1-watcher.json",
+        author: {
+            name: "@totoska",
+            link: "https://discord.com/users/820194328201920524",
+            color: "#3B83BD"
+        },
+        year: "0",
+        languages: ["EN"],
+        gameMode: "battle",
+        tags: [""],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "PvP map by Енотий",
+            id: "enotochel_pvp_v1"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2024-12-23",
+        lastUpdate: "2024-12-23",
+        hiddenScore: 0,
+        type: "battle",
+        period: ""
     },
     // Add more scenarios here...
 ];
