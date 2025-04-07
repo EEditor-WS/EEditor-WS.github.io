@@ -366,7 +366,7 @@ const scenariosData = [
         publishDate: "2024-12-23",
         lastUpdate: "2024-12-23",
         hiddenScore: 0,
-        type: "Battle",
+        type: "battle",
         period: ""
     },
     {
@@ -394,7 +394,7 @@ const scenariosData = [
         publishDate: "2024-12-23",
         lastUpdate: "2024-12-23",
         hiddenScore: 0,
-        type: "Battle",
+        type: "battle",
         period: ""
     },
     // Add more scenarios here...
