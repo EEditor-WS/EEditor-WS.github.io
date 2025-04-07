@@ -252,7 +252,7 @@ const scenariosData = [
         awards: [],
         // Hidden parameters
         publishDate: "2024-12-03",
-        lastUpdate: "2024-12-03",
+        lastUpdate: "2025-04-07",
         hiddenScore: 0,
         type: "sandbox",
         period: "alternative"
