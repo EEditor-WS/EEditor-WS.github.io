@@ -492,6 +492,18 @@ function closeDownloadMapModal() {
     currentMapDownload = null;
 }
 
+function closeErrorMapModal() {
+    const modal = document.getElementById('errorMapModal');
+    modal.classList.remove('active');
+}
+
+function showErrorMapModal(mapId) {
+    const modal = document.getElementById('errorMapModal');
+    const errorText = document.getElementById('errorMapText');
+    errorText.textContent = mapId;
+    modal.classList.add('active');
+}
+
 async function confirmDownloadMap() {
     if (!currentMapDownload) return;
 
@@ -500,7 +512,7 @@ async function confirmDownloadMap() {
         console.log(`Map ${currentMapDownload.mapId} downloaded successfully`);
     } catch (error) {
         console.error(`Error downloading map ${currentMapDownload.mapId}:`, error);
-        alert(`Ошибка при скачивании карты ${currentMapDownload.mapId}`);
+        showErrorMapModal(currentMapDownload.mapId);
     } finally {
         closeDownloadMapModal();
     }

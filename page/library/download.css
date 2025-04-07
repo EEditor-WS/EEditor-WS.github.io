@@ -405,6 +405,13 @@
 .modal-button.primary {
     background-color: #44944A;
     color: white;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.modal-button.primary:hover {
+    background-color: #367a3a;
 }
 
 .modal-button.secondary {

@@ -535,5 +535,21 @@
                 </div>
             </div>
         </div>
+        <div id="errorMapModal" class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Ошибка загрузки карты</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Не удалось найти карту в библиотеке EEditor'а.</p>
+                    <p id="errorMapText" style="font-weight: bold; margin-bottom: 15px;"></p>
+                    <p>Вы можете поискать карту в канале карт на официальном Discord сервере Warnament..</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-button secondary" onclick="closeErrorMapModal()">Закрыть</button>
+                    <a href="https://discord.com/channels/1016359140832071751/1105050406746333244" target="_blank" class="modal-button primary">Открыть Discord</a>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
