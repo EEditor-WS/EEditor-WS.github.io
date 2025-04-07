@@ -85,7 +85,7 @@ function libApplyFilters() {
             }
         });
 
-        card.style.display = visible ? 'block' : 'none';
+        card.style.display = visible ? '' : 'none';
     });
 }
 
