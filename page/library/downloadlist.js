@@ -354,7 +354,7 @@ const scenariosData = [
         },
         year: "0",
         languages: ["EN"],
-        gameMode: "battle",
+        gameMode: "Battle",
         tags: [""],
         worldCreator: "ЕЕнот",
         map: {
@@ -366,7 +366,7 @@ const scenariosData = [
         publishDate: "2024-12-23",
         lastUpdate: "2024-12-23",
         hiddenScore: 0,
-        type: "battle",
+        type: "Battle",
         period: ""
     },
     {
@@ -382,7 +382,7 @@ const scenariosData = [
         },
         year: "0",
         languages: ["EN"],
-        gameMode: "battle",
+        gameMode: "Battle",
         tags: [""],
         worldCreator: "ЕЕнот",
         map: {
@@ -394,7 +394,7 @@ const scenariosData = [
         publishDate: "2024-12-23",
         lastUpdate: "2024-12-23",
         hiddenScore: 0,
-        type: "battle",
+        type: "Battle",
         period: ""
     },
     // Add more scenarios here...
