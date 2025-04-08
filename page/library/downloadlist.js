@@ -423,7 +423,147 @@ const scenariosData = [
         lastUpdate: "2023-07-03",
         hiddenScore: 0,
         type: "sandbox",
-        period: ""
+        period: "cw"
+    },
+    {
+        id: "modern",
+        title: "Modern Day",
+        image: "temporarily/estebanf259_world-redux_v2_modern.png",
+        detailsLink: "detalis.html?type=scenario&scenario=estebanf259_world-redux_v2_modern.json",
+        downloadUrl: "https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/lib/scenarios/estebanf259_world-redux_v2_modern.json",
+        author: {
+            name: "@deleted_user",
+            link: "https://discord.com/users/456226577798135808",
+            color: "#3B83BD"
+        },
+        year: "2000",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [""],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "World Map Redux",
+            id: "estebanf259_world-redux_v2"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2023-07-03",
+        lastUpdate: "2023-07-03",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "modern"
+    },
+    {
+        id: "hoi4-formables",
+        title: "Hoi4 Formables",
+        image: "temporarily/none.png",
+        detailsLink: "detalis.html?type=scenario&scenario=estebanf259_world-redux_v2_hoi4-formables.json",
+        downloadUrl: "https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/lib/scenarios/estebanf259_world-redux_v2_hoi4-formables.json",
+        author: {
+            name: "@deleted_user",
+            link: "https://discord.com/users/456226577798135808",
+            color: "#3B83BD"
+        },
+        year: "1936",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [""],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "World Map Redux",
+            id: "estebanf259_world-redux_v2"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2023-11-10",
+        lastUpdate: "2023-11-10",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ww2"
+    },
+    {
+        id: "1218",
+        title: "1218",
+        image: "temporarily/estebanf259_world-redux_v2_1218.png",
+        detailsLink: "detalis.html?type=scenario&scenario=estebanf259_world-redux_v2_1218.json",
+        downloadUrl: "https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/lib/scenarios/estebanf259_world-redux_v2_1218.json",
+        author: {
+            name: "@deleted_user",
+            link: "https://discord.com/users/456226577798135808",
+            color: "#3B83BD"
+        },
+        year: "1218",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [""],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "World Map Redux",
+            id: "estebanf259_world-redux_v2"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2023-07-03",
+        lastUpdate: "2023-07-03",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ancient"
+    },
+    {
+        id: "1756",
+        title: "1756",
+        image: "temporarily/estebanf259_world-redux_v2_1756.png",
+        detailsLink: "detalis.html?type=scenario&scenario=estebanf259_world-redux_v2_1756.json",
+        downloadUrl: "https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/lib/scenarios/estebanf259_world-redux_v2_1756.json",
+        author: {
+            name: "@deleted_user",
+            link: "https://discord.com/users/456226577798135808",
+            color: "#3B83BD"
+        },
+        year: "1756",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [""],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "World Map Redux",
+            id: "estebanf259_world-redux_v2"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2023-07-03",
+        lastUpdate: "2023-07-03",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ancient"
+    },
+    {
+        id: "continents",
+        title: "World 3g ago",
+        image: "temporarily/zachary_world-3ga_v1_continents.png",
+        detailsLink: "detalis.html?type=scenario&scenario=zachary_world-3ga_v1_continents.json",
+        downloadUrl: "https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/lib/scenarios/zachary_world-3ga_v1_continents.json",
+        author: {
+            name: "@zacharyzachary.bachary",
+            link: "https://discord.com/users/804839006403428423",
+            color: "#3B83BD"
+        },
+        year: "-3000000000",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [""],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "World Map (3 billion years ago)",
+            id: "zachary_world-3ga_v1"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-04-09",
+        lastUpdate: "2025-04-09",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ancient"
     },
     // Add more scenarios here...
 ];
