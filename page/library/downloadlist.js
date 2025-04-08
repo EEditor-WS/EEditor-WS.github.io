@@ -397,6 +397,34 @@ const scenariosData = [
         type: "battle",
         period: ""
     },
+    {
+        id: "cw",
+        title: "The Cold War",
+        image: "temporarily/estebanf259_world-redux_v2_cw.png",
+        detailsLink: "detalis.html?type=scenario&scenario=estebanf259_world-redux_v2_cw.json",
+        downloadUrl: "https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/lib/scenarios/estebanf259_world-redux_v2_cw.json",
+        author: {
+            name: "@deleted_user",
+            link: "https://discord.com/users/456226577798135808",
+            color: "#3B83BD"
+        },
+        year: "1949",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [""],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "World Map Redux",
+            id: "estebanf259_world-redux_v2"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2023-07-03",
+        lastUpdate: "2023-07-03",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: ""
+    },
     // Add more scenarios here...
 ];
 
