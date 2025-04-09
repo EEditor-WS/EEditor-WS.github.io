@@ -28,7 +28,7 @@ function libApplyFilters() {
     const authorFilter = document.getElementById('lib-autor-filter').value.toLowerCase();
     const mapFilter = document.getElementById('lib-map-filter').value.toLowerCase();
     const typeFilter = document.getElementById('lib-type-filter').value;
-    const languageFilter = document.getElementById('lib-language-filter').value; // Обновленный ID
+    const languageFilter = document.getElementById('lib-language-filter').value;
     const timePeriods = Array.from(document.querySelectorAll('.checkbox-list input[type="checkbox"]:checked:not([name^="mechanics"])'))
         .map(cb => cb.value);
 
@@ -43,7 +43,10 @@ function libApplyFilters() {
         events: getCheckedValues('events')
     };
 
-    const cards = document.querySelectorAll('.download-card');
+    // Get all cards and convert to array for sorting
+    const cards = Array.from(document.querySelectorAll('.download-card'));
+    
+    // Filter and sort cards
     cards.forEach(card => {
         let visible = true;
 
@@ -85,8 +88,21 @@ function libApplyFilters() {
             }
         });
 
+        // Update visibility
         card.style.display = visible ? '' : 'none';
     });
+
+    // Re-sort visible cards
+    const container = document.getElementById('download-cards');
+    const visibleCards = cards.filter(card => card.style.display !== 'none')
+        .sort((a, b) => {
+            const scoreA = parseFloat(a.dataset.score) || 0;
+            const scoreB = parseFloat(b.dataset.score) || 0;
+            return scoreB - scoreA;
+        });
+
+    // Reappend cards in sorted order
+    visibleCards.forEach(card => container.appendChild(card));
 }
 
 function getCheckedValues(name) {
@@ -102,7 +118,7 @@ function libClearFilters() {
     document.getElementById('lib-autor-filter').value = '';
     document.getElementById('lib-map-filter').value = '';
     document.getElementById('lib-type-filter').value = '';
-    document.getElementById('lib-language-filter').value = ''; // Обновленный ID
+    document.getElementById('lib-language-filter').value = '';
     
     // Clear all checkboxes
     document.querySelectorAll('.checkbox-list input[type="checkbox"]')
