@@ -390,6 +390,14 @@ class CountryManager {
                 }
             });
         }
+        
+        document.getElementById('country-all-diplomacy')?.addEventListener('click', () => {
+            if (!this.currentCountry) {
+                console.error('Не выбрана страна');
+                return;
+            }
+            this.showMassRelationModal(this.currentCountry);
+        });
 
         document.getElementById('country-reforms')?.addEventListener('click', () => {
             if (!this.currentCountry) {
@@ -1676,6 +1684,85 @@ class CountryManager {
             preview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
         }
         this.saveChanges();
+    }
+
+    showMassRelationModal(ccountry) {
+        let modalAllRelations = document.getElementById('massRelationModal');
+        modalAllRelations.classList.add("active");
+        console.log('modalAllRelations', modalAllRelations, ccountry);
+    }
+
+    closeMassRelationModal() {
+        let modalAllRelations = document.getElementById('massRelationModal');
+        if (modalAllRelations) {
+            modalAllRelations.classList.remove("active");
+        }
+    }
+
+    saveMassRelationModal() {
+        if (!this.currentCountry || !this.jsonData?.lands) return;
+
+        const modal = document.getElementById('massRelationModal');
+        if (!modal) return;
+
+        // Получаем все параметры из формы
+        const relationType = document.getElementById('massRelationType').value;
+        const turn = parseInt(modal.querySelector('.param-turn').value) || 0;
+        const duration = modal.querySelector('.param-duration').value;
+        const initiator = modal.querySelector('.param-initiator').value === 'true';
+
+        this.pushToUndoStack();
+
+        // Инициализируем объект отношений для текущей страны если он не существует
+        if (!this.jsonData.lands[this.currentCountry][relationType]) {
+            this.jsonData.lands[this.currentCountry][relationType] = {};
+        }
+
+        // Для каждой страны (кроме текущей и служебных) добавляем отношения
+        Object.entries(this.jsonData.lands).forEach(([countryId, _]) => {
+            if (countryId !== this.currentCountry && countryId !== 'undeveloped_land' && countryId !== 'provinces') {
+                // Создаем параметры отношения для текущей страны
+                const relationParams = {
+                    turn: turn
+                };
+
+                // Добавляем опциональные параметры если они указаны
+                if (duration) {
+                    relationParams.duration = parseInt(duration);
+                }
+                if (initiator !== undefined) {
+                    relationParams.initiator = initiator;
+                }
+
+                // Добавляем отношение текущей страны к целевой
+                this.jsonData.lands[this.currentCountry][relationType][countryId] = relationParams;
+
+                // Инициализируем объект отношений для целевой страны если он не существует
+                if (!this.jsonData.lands[countryId][relationType]) {
+                    this.jsonData.lands[countryId][relationType] = {};
+                }
+
+                // Создаем обратное отношение
+                const reciprocalParams = { ...relationParams };
+                if (initiator !== undefined) {
+                    reciprocalParams.initiator = !initiator; // Инвертируем для второй страны
+                }
+
+                // Добавляем обратное отношение от целевой страны к текущей
+                this.jsonData.lands[countryId][relationType][this.currentCountry] = reciprocalParams;
+            }
+        });
+
+        // Сохраняем изменения и обновляем интерфейс
+        this.updateJsonAndUI();
+        modal.classList.remove('active');
+        this.openCountry(this.currentCountry);
+
+        // Показываем уведомление об успешном применении
+        showSuccess(
+            window.translator.translate('success'),
+            window.translator.translate('mass_relation_applied')
+        );
     }
 }
 

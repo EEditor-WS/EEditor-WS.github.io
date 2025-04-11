@@ -115,7 +115,7 @@
             <div class="nav-actions">
                 <button id="force-save" class="action-button save-button">
                     <svg class="button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1-2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
                         <polyline points="17 21 17 13 7 13 7 21"></polyline>
                         <polyline points="7 3 7 8 15 8"></polyline>
                     </svg>
@@ -501,6 +501,14 @@
                         <h2><span id="country-name-header"></span></h2>
                     </div>
                     <div class="info-actions">
+                        <div class="tooltip-container">
+                            <button id="country-all-diplomacy" class="icon-action-button back">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9"/>
+                                </svg>
+                            </button>
+                            <div class="tooltip">Diplomacy with all</div>
+                        </div>
                         <div class="tooltip-container">
                             <button id="country-reforms" class="icon-action-button back">
                                 <svg viewBox="0 0 24 24">
@@ -1355,6 +1363,48 @@
                 <div class="modal-footer">
                     <button id="countries-groups-filter-clear" class="action-button secondary" data-translate="filter_clear">Сбросить</button>
                     <button id="countries-groups-filter-apply" class="action-button" data-translate="filter_apply">Применить</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Модальное окно массовых отношений -->
+        <div id="massRelationModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 data-translate="mass_relation">Массовые отношения</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label data-translate="select_relation_type">Выберите тип отношений</label>
+                        <select id="massRelationType" class="param-relation-type main-page-input">
+                            <option value="allies" data-translate="allies">Союзники</option>
+                            <option value="enemies" data-translate="enemies">Враги</option>
+                            <option value="guaranteed" data-translate="independence_guarantees">Гарантии независимости</option>
+                            <option value="guaranteed_by" data-translate="guaranteed_by">Гарантии от</option>
+                            <option value="pacts" data-translate="pacts">Пакты</option>
+                            <option value="sanctions" data-translate="sanctions">Санкции</option>
+                            <option value="vassals" data-translate="vassals">Вассалы</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label data-translate="relation_turn">Ход</label>
+                        <input type="number" class="param-turn main-page-input" value="0" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label data-translate="relation_duration">Длительность</label>
+                        <input type="number" class="param-duration main-page-input" value="" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label data-translate="relation_initiator">Инициатор</label>
+                        <select class="param-initiator main-page-input">
+                            <option value="false" data-translate="no">Нет</option>
+                            <option value="true" data-translate="yes">Да</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-button secondary" data-action="cancel" data-translate="cancel" onclick="window.countryManager.closeMassRelationModal()">Отмена</button>
+                    <button class="modal-button primary" data-action="apply" data-translate="apply" onclick="window.countryManager.saveMassRelationModal()">Применить</button>
                 </div>
             </div>
         </div>
