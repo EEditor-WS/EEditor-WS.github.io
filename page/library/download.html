@@ -525,31 +525,31 @@
         <div id="downloadMapModal" class="modal-overlay">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3>Скачать карту</h3>
+                    <h3 data-translate="download_map">Скачать карту</h3>
                 </div>
                 <div class="modal-body">
-                    <p>Хотите скачать карту для этого сценария?</p>
+                    <p data-translate="do_u_want_download_map_for_this_scenario">Хотите скачать карту для этого сценария?</p>
                     <p id="mapNameText" style="font-weight: bold;"></p>
                 </div>
                 <div class="modal-footer">
-                    <button class="modal-button secondary" onclick="closeDownloadMapModal()">Отмена</button>
-                    <button class="modal-button primary" onclick="confirmDownloadMap(); downloadedMaps.add(currentMapDownload.mapId)">Скачать</button>
+                    <button class="modal-button secondary" onclick="closeDownloadMapModal()" data-translate="cancel">Отмена</button>
+                    <button class="modal-button primary" onclick="confirmDownloadMap(); downloadedMaps.add(currentMapDownload.mapId)" data-translate="download">Скачать</button>
                 </div>
             </div>
         </div>
         <div id="errorMapModal" class="modal-overlay">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3>Ошибка загрузки карты</h3>
+                    <h3 data-translate="error_downloading_map">Ошибка загрузки карты</h3>
                 </div>
                 <div class="modal-body">
-                    <p>Не удалось найти карту в библиотеке EEditor'а.</p>
+                    <p data-translate="not_filde_map_in_library">Не удалось найти карту в библиотеке EEditor'а.</p>
                     <p id="errorMapText" style="font-weight: bold; margin-bottom: 15px;"></p>
-                    <p>Вы можете поискать карту в канале карт на официальном Discord сервере Warnament..</p>
+                    <p data-translate="try_ty_find_discord">Вы можете поискать карту в канале карт на официальном Discord сервере Warnament..</p>
                 </div>
                 <div class="modal-footer">
-                    <button class="modal-button secondary" onclick="closeErrorMapModal()">Закрыть</button>
-                    <a href="https://discord.com/channels/1016359140832071751/1105050406746333244" target="_blank" class="modal-button primary">Открыть Discord</a>
+                    <button class="modal-button secondary" onclick="closeErrorMapModal()" data-translate="close">Закрыть</button>
+                    <a href="https://discord.com/channels/1016359140832071751/1105050406746333244" target="_blank" class="modal-button primary" data-translate="open_discord">Открыть Discord</a>
                 </div>
             </div>
         </div>

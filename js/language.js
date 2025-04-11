@@ -835,6 +835,20 @@ const translations = {
         "diplomacy_become_vassal": "Become Vassal",
         "diplomacy_get_vassal": "Get Vassal",
 
+        // Библиотека
+        "library": "Library",
+        "scenario": "Scenario",
+        "scenarios": "Scenarios",
+        "mod": "Mod",
+        "mods": "Mods",
+        "map": "Map",
+        "maps": "Maps",
+        "download_map": "Download map?",
+        "do_u_want_download_map_for_this_scenario": "Want to download the map for this scenario?",
+        "not_filde_map_in_library": "It was not possible to find a map in the EEditor library.",
+        "try_ty_find_discord": "You can look for a map in the #maps channel on the official Discord server of Warnament..",
+        "open_discord": "Open Discord",
+
         // Download page
         "home": "Home",
         "download": "Download",
@@ -1608,6 +1622,11 @@ const translations = {
         "mods": "Моды",
         "map": "Карта",
         "maps": "Карты",
+        "download_map": "Скачать карту?",
+        "do_u_want_download_map_for_this_scenario": "Хотите скачать карту для этого сценария?",
+        "not_filde_map_in_library": "Не удалось найти карту в библиотеке EEditor'а.",
+        "try_ty_find_discord": "Вы можете поискать карту в канале карт на официальном Discord сервере Warnament..",
+        "open_discord": "Открыть Discord",
 
         // Download page
         "home": "Домой",
