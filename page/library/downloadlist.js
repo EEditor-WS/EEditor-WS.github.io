@@ -1,6 +1,6 @@
 console.log('Library downloadlist.js loaded');
-//const libLink = '${libLink}';
-const libLink = 'http://192.168.100.18:8081/'
+const libLink = 'https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/';
+//const libLink = 'http://192.168.100.18:8081/'
 
 // Award score values задаються в другом файле.
 
