@@ -45,7 +45,7 @@ const scenariosData = [
             "jalhund",
             "europe",
             "vg",
-            "new_revolution",
+            "new-revolution",
         ],
         title: "New Revolution",
         author: {
@@ -431,11 +431,13 @@ const scenariosData = [
         period: ""
     },
     {
-        id: "cw",
+        id: [
+            "estebanf259",
+            "world-redux",
+            "v2",
+            "cw",
+        ],
         title: "The Cold War",
-        image: "temporarily/estebanf259_world-redux_v2_cw.png",
-        detailsLink: "detalis.html?type=scenario&scenario=estebanf259_world-redux_v2_cw.json",
-        downloadUrl: "${libLink}lib/scenarios/estebanf259_world-redux_v2_cw.json",
         author: {
             name: "@deleted_user",
             link: "https://discord.com/users/456226577798135808",
@@ -459,11 +461,13 @@ const scenariosData = [
         period: "cw"
     },
     {
-        id: "modern",
+        id: [
+            "estebanf259",
+            "world-redux",
+            "v2",
+            "modern",
+        ],
         title: "Modern Day",
-        image: "temporarily/estebanf259_world-redux_v2_modern.png",
-        detailsLink: "detalis.html?type=scenario&scenario=estebanf259_world-redux_v2_modern.json",
-        downloadUrl: "${libLink}lib/scenarios/estebanf259_world-redux_v2_modern.json",
         author: {
             name: "@deleted_user",
             link: "https://discord.com/users/456226577798135808",
@@ -487,11 +491,13 @@ const scenariosData = [
         period: "modern"
     },
     {
-        id: "hoi4-formables",
+        id: [
+            "estebanf259",
+            "world-redux",
+            "v2",
+            "hoi4-formables",
+        ],
         title: "Hoi4 Formables",
-        image: "temporarily/none.png",
-        detailsLink: "detalis.html?type=scenario&scenario=estebanf259_world-redux_v2_hoi4-formables.json",
-        downloadUrl: "${libLink}lib/scenarios/estebanf259_world-redux_v2_hoi4-formables.json",
         author: {
             name: "@deleted_user",
             link: "https://discord.com/users/456226577798135808",
@@ -515,11 +521,13 @@ const scenariosData = [
         period: "ww2"
     },
     {
-        id: "1218",
+        id: [
+            "estebanf259",
+            "world-redux",
+            "v2",
+            "1218",
+        ],
         title: "1218",
-        image: "temporarily/estebanf259_world-redux_v2_1218.png",
-        detailsLink: "detalis.html?type=scenario&scenario=estebanf259_world-redux_v2_1218.json",
-        downloadUrl: "${libLink}lib/scenarios/estebanf259_world-redux_v2_1218.json",
         author: {
             name: "@deleted_user",
             link: "https://discord.com/users/456226577798135808",
@@ -543,11 +551,13 @@ const scenariosData = [
         period: "ancient"
     },
     {
-        id: "1756",
+        id: [
+            "estebanf259",
+            "world-redux",
+            "v2",
+            "1756",
+        ],
         title: "1756",
-        image: "temporarily/estebanf259_world-redux_v2_1756.png",
-        detailsLink: "detalis.html?type=scenario&scenario=estebanf259_world-redux_v2_1756.json",
-        downloadUrl: "${libLink}lib/scenarios/estebanf259_world-redux_v2_1756.json",
         author: {
             name: "@deleted_user",
             link: "https://discord.com/users/456226577798135808",
@@ -571,11 +581,13 @@ const scenariosData = [
         period: "ancient"
     },
     {
-        id: "continents",
+        id: [
+            "zachary",
+            "world-3ga",
+            "v1",
+            "continents",
+        ],
         title: "World 3g ago",
-        image: "temporarily/zachary_world-3ga_v1_continents.png",
-        detailsLink: "detalis.html?type=scenario&scenario=zachary_world-3ga_v1_continents.json",
-        downloadUrl: "${libLink}lib/scenarios/zachary_world-3ga_v1_continents.json",
         author: {
             name: "@zacharyzachary.bachary",
             link: "https://discord.com/users/804839006403428423",
