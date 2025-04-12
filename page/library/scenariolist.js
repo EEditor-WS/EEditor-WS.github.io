@@ -26,7 +26,7 @@ const scenariosData = [
         year: "2015",
         languages: ["EN", "RU"],
         gameMode: "Sandbox",
-        tags: ["World", "For Phones", "Recomended", "without events", "without reforms"],
+        tags: ["World", "For Phones", "Recommended", "without events", "without reforms", "Modern Day"],
         worldCreator: "ЕЕнот",
         map: {
             name: "World by ЕЕнот",
@@ -56,7 +56,7 @@ const scenariosData = [
         year: "2022",
         languages: ["RU"],
         gameMode: "Sandbox",
-        tags: ["Europe", "For Phones", "Recomended", "without events", "without reforms"],
+        tags: ["Europe", "For Phones", "Recommended", "without events", "without reforms", "Alternative History"],
         worldCreator: "ЕЕнот",
         map: {
             name: "Standart Europe",
@@ -86,7 +86,7 @@ const scenariosData = [
         year: "1936",
         languages: ["EN"],
         gameMode: "Sandbox",
-        tags: ["World", "For Phones", "Recomended", "without events", "without reforms"],
+        tags: ["World", "For Phones", "Recommended", "without events", "without reforms", "Historical", "WW2"],
         worldCreator: "ЕЕнот",
         map: {
             name: "World by ЕЕнот",
@@ -116,7 +116,7 @@ const scenariosData = [
         year: "1965",
         languages: ["EN"],
         gameMode: "Sandbox",
-        tags: ["World", "For Phones", "without events", "without reforms"],
+        tags: ["World", "For Phones", "without events", "without reforms", "Historical", "Cold War"],
         worldCreator: "ЕЕнот",
         map: {
             name: "World by ЕЕнот",
@@ -146,7 +146,7 @@ const scenariosData = [
         year: "1984",
         languages: ["EN"],
         gameMode: "Sandbox",
-        tags: ["World", "For Phones", "Recomended", "without events", "without reforms"],
+        tags: ["World", "For Phones", "Recommended", "without events", "without reforms", "Alternative History", "1984"],
         worldCreator: "ЕЕнот",
         map: {
             name: "World by ЕЕнот",
@@ -176,7 +176,7 @@ const scenariosData = [
         year: "1444",
         languages: ["EN"],
         gameMode: "Sandbox",
-        tags: [""],
+        tags: ["Europe", "Historical", "Medieval", "without events", "without reforms"],
         worldCreator: "ЕЕнот",
         map: {
             name: "EuroMagnus by Estebanf259",
@@ -206,7 +206,7 @@ const scenariosData = [
         year: "1177",
         languages: ["EN"],
         gameMode: "Sandbox",
-        tags: [""],
+        tags: ["Europe", "Historical", "Roman Empire", "Ancient"],
         worldCreator: "ЕЕнот",
         map: {
             name: "Euro4 Standart",
@@ -236,7 +236,7 @@ const scenariosData = [
         year: "2000",
         languages: ["EN"],
         gameMode: "Sandbox",
-        tags: [""],
+        tags: ["World", "Alternative History", "Half-Life", "Post-apocalyptic"],
         worldCreator: "ЕЕнот",
         map: {
             name: "World Plus",
@@ -254,7 +254,7 @@ const scenariosData = [
         id: [
             "zachary",
             "eurasia",
-            "v1",
+            "v2",
             "kaiserreich",
         ],
         title: "Kaiserreich",
@@ -266,7 +266,7 @@ const scenariosData = [
         year: "1936",
         languages: ["EN"],
         gameMode: "Sandbox",
-        tags: [""],
+        tags: ["Eurasia", "Alternative History", "WW1", "Kaiserreich"],
         worldCreator: "ЕЕнот",
         map: {
             name: "Eurasia by Zachary",
@@ -284,7 +284,7 @@ const scenariosData = [
         id: [
             "zachary",
             "eurasia",
-            "v1",
+            "v2",
             "modern",
         ],
         title: "Modern Day",
@@ -296,7 +296,7 @@ const scenariosData = [
         year: "2020",
         languages: ["EN"],
         gameMode: "Sandbox",
-        tags: [""],
+        tags: ["Eurasia", "Modern Day", "2020s"],
         worldCreator: "ЕЕнот",
         map: {
             name: "Eurasia by Zachary",
@@ -314,7 +314,7 @@ const scenariosData = [
         id: [
             "zachary",
             "eurasia",
-            "v1",
+            "v2",
             "tno",
         ],
         title: "The New Order",
@@ -326,7 +326,7 @@ const scenariosData = [
         year: "1962",
         languages: ["EN"],
         gameMode: "Sandbox",
-        tags: [""],
+        tags: ["Eurasia", "Alternative History", "WW2", "The New Order", "Cold War"],
         worldCreator: "ЕЕнот",
         map: {
             name: "Eurasia by Zachary",
@@ -356,7 +356,7 @@ const scenariosData = [
         year: "1936",
         languages: ["EN"],
         gameMode: "Sandbox",
-        tags: [""],
+        tags: ["World", "Historical", "WW2", "1936"],
         worldCreator: "ЕЕнот",
         map: {
             name: "World by Zachary",
@@ -386,7 +386,7 @@ const scenariosData = [
         year: "0",
         languages: ["EN"],
         gameMode: "Battle",
-        tags: [""],
+        tags: ["PvP", "Battle", "1v1", "Competitive"],
         worldCreator: "ЕЕнот",
         map: {
             name: "PvP map by Енотий",
@@ -416,7 +416,7 @@ const scenariosData = [
         year: "0",
         languages: ["EN"],
         gameMode: "Battle",
-        tags: [""],
+        tags: ["PvP", "Battle", "1v1", "Competitive", "Spectator"],
         worldCreator: "ЕЕнот",
         map: {
             name: "PvP map by Енотий",
@@ -446,7 +446,7 @@ const scenariosData = [
         year: "1949",
         languages: ["EN"],
         gameMode: "Sandbox",
-        tags: [""],
+        tags: ["World", "Historical", "Cold War", "Redux"],
         worldCreator: "ЕЕнот",
         map: {
             name: "World Map Redux",
@@ -476,7 +476,7 @@ const scenariosData = [
         year: "2000",
         languages: ["EN"],
         gameMode: "Sandbox",
-        tags: [""],
+        tags: ["World", "Modern Day", "Redux", "2000s"],
         worldCreator: "ЕЕнот",
         map: {
             name: "World Map Redux",
@@ -506,7 +506,7 @@ const scenariosData = [
         year: "1936",
         languages: ["EN"],
         gameMode: "Sandbox",
-        tags: [""],
+        tags: ["World", "WW2", "Hearts of Iron", "Formable Nations", "Redux"],
         worldCreator: "ЕЕнот",
         map: {
             name: "World Map Redux",
@@ -536,7 +536,7 @@ const scenariosData = [
         year: "1218",
         languages: ["EN"],
         gameMode: "Sandbox",
-        tags: [""],
+        tags: ["World", "Historical", "Medieval", "Redux", "13th Century"],
         worldCreator: "ЕЕнот",
         map: {
             name: "World Map Redux",
@@ -566,7 +566,7 @@ const scenariosData = [
         year: "1756",
         languages: ["EN"],
         gameMode: "Sandbox",
-        tags: [""],
+        tags: ["World", "Historical", "18th Century", "Redux"],
         worldCreator: "ЕЕнот",
         map: {
             name: "World Map Redux",
@@ -596,7 +596,7 @@ const scenariosData = [
         year: "-3000000000",
         languages: ["EN"],
         gameMode: "Sandbox",
-        tags: [""],
+        tags: ["World", "Historical", "Prehistoric", "Geology", "Continents"],
         worldCreator: "ЕЕнот",
         map: {
             name: "World Map (3 billion years ago)",
@@ -610,7 +610,470 @@ const scenariosData = [
         type: "sandbox",
         period: "ancient"
     },
-    // Add more scenarios here...
+    {
+        id: [
+            "zachary",
+            "eurasia",
+            "v2",
+            "1800"
+        ],
+        title: "Europe 1800",
+        author: {
+            name: "@zacharyzachary.bachary",
+            link: "https://discord.com/users/804839006403428423",
+            color: "#3B83BD"
+        },
+        year: "1800",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: ["Eurasia", "Historical", "Napoleonic Era", "19th Century"],
+        worldCreator: "Zachary",
+        map: {
+            name: "Eurasia by Zachary",
+            id: "zachary_eurasia_v2"
+        },
+        awards: [],
+        publishDate: "2025-03-07",
+        lastUpdate: "2025-03-07",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ancient"
+    },
+    {
+        id: [
+            "zachary",
+            "eurasia",
+            "v2",
+            "1812"
+        ],
+        title: "Napoleonic Wars",
+        author: {
+            name: "@zacharyzachary.bachary",
+            link: "https://discord.com/users/804839006403428423",
+            color: "#3B83BD"
+        },
+        year: "1812",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: ["Eurasia", "Historical", "Napoleonic Wars", "19th Century"],
+        worldCreator: "Zachary",
+        map: {
+            name: "Eurasia by Zachary",
+            id: "zachary_eurasia_v2"
+        },
+        awards: [],
+        publishDate: "2025-03-07",
+        lastUpdate: "2025-03-07",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ancient"
+    },
+    {
+        id: [
+            "zachary",
+            "eurasia",
+            "v2",
+            "1939"
+        ],
+        title: "World War 2 Start",
+        author: {
+            name: "@zacharyzachary.bachary",
+            link: "https://discord.com/users/804839006403428423",
+            color: "#3B83BD"
+        },
+        year: "1939",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: ["Eurasia", "Historical", "WW2", "20th Century"],
+        worldCreator: "Zachary",
+        map: {
+            name: "Eurasia by Zachary",
+            id: "zachary_eurasia_v2"
+        },
+        awards: [],
+        publishDate: "2025-03-07",
+        lastUpdate: "2025-03-07",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ww2"
+    },
+    {
+        id: [
+            "zachary",
+            "eurasia",
+            "v2",
+            "ep2"
+        ],
+        title: "Episode 2",
+        author: {
+            name: "@zacharyzachary.bachary",
+            link: "https://discord.com/users/804839006403428423",
+            color: "#3B83BD"
+        },
+        year: "2025",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: ["Eurasia", "Alternative History", "Future", "Episode 2"],
+        worldCreator: "Zachary",
+        map: {
+            name: "Eurasia by Zachary",
+            id: "zachary_eurasia_v2"
+        },
+        awards: [],
+        publishDate: "2025-03-07",
+        lastUpdate: "2025-03-07",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "alternative"
+    },
+    {
+        id: [
+            "zachary",
+            "eurasia",
+            "v2",
+            "ep3"
+        ],
+        title: "Episode 3",
+        author: {
+            name: "@zacharyzachary.bachary",
+            link: "https://discord.com/users/804839006403428423",
+            color: "#3B83BD"
+        },
+        year: "2025",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: ["Eurasia", "Alternative History", "Future", "Episode 3"],
+        worldCreator: "Zachary",
+        map: {
+            name: "Eurasia by Zachary",
+            id: "zachary_eurasia_v2"
+        },
+        awards: [],
+        publishDate: "2025-03-07",
+        lastUpdate: "2025-03-07",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "alternative"
+    },
+    {
+        id: [
+            "zachary",
+            "eurasia",
+            "v2",
+            "ep4"
+        ],
+        title: "Episode 4",
+        author: {
+            name: "@zacharyzachary.bachary",
+            link: "https://discord.com/users/804839006403428423",
+            color: "#3B83BD"
+        },
+        year: "2025",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: ["Eurasia", "Alternative History", "Future", "Episode 4"],
+        worldCreator: "Zachary",
+        map: {
+            name: "Eurasia by Zachary",
+            id: "zachary_eurasia_v2"
+        },
+        awards: [],
+        publishDate: "2025-03-07",
+        lastUpdate: "2025-03-07",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "alternative"
+    },
+    {
+        id: [
+            "zachary",
+            "eurasia",
+            "v2",
+            "fac"
+        ],
+        title: "Fall of Constantinople",
+        author: {
+            name: "@zacharyzachary.bachary",
+            link: "https://discord.com/users/804839006403428423",
+            color: "#3B83BD"
+        },
+        year: "2077",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: ["Eurasia", "Post-apocalyptic", "Fallout", "Alternative History"],
+        worldCreator: "Zachary",
+        map: {
+            name: "Eurasia by Zachary",
+            id: "zachary_eurasia_v2"
+        },
+        awards: [],
+        publishDate: "2025-03-07",
+        lastUpdate: "2025-03-07",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "future"
+    },
+    {
+        id: [
+            "zachary",
+            "eurasia",
+            "v2",
+            "ww1"
+        ],
+        title: "World War 1",
+        author: {
+            name: "@zacharyzachary.bachary",
+            link: "https://discord.com/users/804839006403428423",
+            color: "#3B83BD"
+        },
+        year: "1914",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: ["Eurasia", "Historical", "WW1", "20th Century"],
+        worldCreator: "Zachary",
+        map: {
+            name: "Eurasia by Zachary",
+            id: "zachary_eurasia_v2"
+        },
+        awards: [],
+        publishDate: "2025-03-07",
+        lastUpdate: "2025-03-07",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ww1"
+    },
+    {
+        id: [
+            "zachary",
+            "eurasia",
+            "v2",
+            "nw"
+        ],
+        title: "Napoleonic War",
+        author: {
+            name: "@zacharyzachary.bachary",
+            link: "https://discord.com/users/804839006403428423",
+            color: "#3B83BD"
+        },
+        year: "2025",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: ["Eurasia", "Alternative History", "Nuclear War", "Post-apocalyptic"],
+        worldCreator: "Zachary",
+        map: {
+            name: "Eurasia by Zachary",
+            id: "zachary_eurasia_v2"
+        },
+        awards: [],
+        publishDate: "2025-03-07",
+        lastUpdate: "2025-03-07",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "alternative"
+    },
+    {
+        id: [
+            "zachary",
+            "world",
+            "v1",
+            "islam"
+        ],
+        title: "Islamic World",
+        author: {
+            name: "@zacharyzachary.bachary",
+            link: "https://discord.com/users/804839006403428423",
+            color: "#3B83BD"
+        },
+        year: "632",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: ["World", "Historical", "Islam", "7th Century", "Medieval"],
+        worldCreator: "Zachary",
+        map: {
+            name: "World by Zachary",
+            id: "zachary_world_v1"
+        },
+        awards: [],
+        publishDate: "2025-03-07",
+        lastUpdate: "2025-03-07",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ancient"
+    },
+    {
+        id: [
+            "zachary",
+            "world",
+            "v1",
+            "revolutionary-war"
+        ],
+        title: "American Revolution",
+        author: {
+            name: "@zacharyzachary.bachary",
+            link: "https://discord.com/users/804839006403428423",
+            color: "#3B83BD"
+        },
+        year: "1776",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: ["World", "Historical", "American Revolution", "18th Century"],
+        worldCreator: "Zachary",
+        map: {
+            name: "World by Zachary",
+            id: "zachary_world_v1"
+        },
+        awards: [],
+        publishDate: "2025-03-07",
+        lastUpdate: "2025-03-07",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ancient"
+    },
+    {
+        id: [
+            "zachary",
+            "world",
+            "v1",
+            "ww1"
+        ],
+        title: "World War 1",
+        author: {
+            name: "@zacharyzachary.bachary",
+            link: "https://discord.com/users/804839006403428423",
+            color: "#3B83BD"
+        },
+        year: "1914",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: ["World", "Historical", "WW1", "20th Century"],
+        worldCreator: "Zachary",
+        map: {
+            name: "World by Zachary",
+            id: "zachary_world_v1"
+        },
+        awards: [],
+        publishDate: "2025-03-07",
+        lastUpdate: "2025-03-07",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ww1"
+    },
+    {
+        id: [
+            "zachary",
+            "world",
+            "v1",
+            "ww2z"
+        ],
+        title: "World War 2",
+        author: {
+            name: "@zacharyzachary.bachary",
+            link: "https://discord.com/users/804839006403428423",
+            color: "#3B83BD"
+        },
+        year: "1936",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: ["World", "Alternative History", "WW2", "Zombies"],
+        worldCreator: "Zachary",
+        map: {
+            name: "World by Zachary",
+            id: "zachary_world_v1"
+        },
+        awards: [],
+        publishDate: "2025-03-27",
+        lastUpdate: "2025-03-27",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ww2"
+    },
+    {
+        id: [
+            "zachary",
+            "usa",
+            "v1",
+            "2025"
+        ],
+        title: "USA 2025",
+        author: {
+            name: "@zacharyzachary.bachary",
+            link: "https://discord.com/users/804839006403428423",
+            color: "#3B83BD"
+        },
+        year: "2025",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: ["USA", "Modern Day", "Future", "2025"],
+        worldCreator: "Zachary",
+        map: {
+            name: "USA by Zachary",
+            id: "zachary_usa_v1"
+        },
+        awards: [],
+        publishDate: "2025-01-21",
+        lastUpdate: "2025-01-21",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "modern"
+    },
+    {
+        id: [
+            "zachary",
+            "usa",
+            "v1",
+            "civil"
+        ],
+        title: "American Civil War",
+        author: {
+            name: "@zacharyzachary.bachary",
+            link: "https://discord.com/users/804839006403428423",
+            color: "#3B83BD"
+        },
+        year: "1861",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: ["USA", "Historical", "Civil War", "19th Century"],
+        worldCreator: "Zachary",
+        map: {
+            name: "USA by Zachary",
+            id: "zachary_usa_v1"
+        },
+        awards: [],
+        publishDate: "2025-02-02",
+        lastUpdate: "2025-02-02",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ancient"
+    },
+    {
+        id: [
+            "zachary",
+            "usa",
+            "v1",
+            "ethnic"
+        ],
+        title: "USA Ethnic Map",
+        author: {
+            name: "@zacharyzachary.bachary",
+            link: "https://discord.com/users/804839006403428423",
+            color: "#3B83BD"
+        },
+        year: "2020",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: ["USA", "Modern Day", "Ethnic Groups", "Demographics"],
+        worldCreator: "Zachary",
+        map: {
+            name: "USA by Zachary",
+            id: "zachary_usa_v1"
+        },
+        awards: [],
+        publishDate: "2025-01-23",
+        lastUpdate: "2025-01-23",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "modern"
+    }
 ];
 
 console.log("Данные сценариев загружены");
