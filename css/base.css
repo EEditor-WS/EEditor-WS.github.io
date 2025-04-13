@@ -574,3 +574,29 @@ body {
 .icon-button {
     display: none !important;
 }
+
+/* Стили для дипломатических полей */
+.main-page-input[type="text"], 
+.main-page-input[type="number"],
+.main-page-input[type="select"],
+select.main-page-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--background-primary);
+    color: var(--text-primary);
+}
+
+/* Специальные стили для select элементов */
+select.main-page-input {
+    appearance: auto;
+    -webkit-appearance: auto;
+    -moz-appearance: auto;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding-right: 30px;
+}

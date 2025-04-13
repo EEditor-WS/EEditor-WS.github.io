@@ -7,6 +7,7 @@ const reqbonConfig = {
         attack: { hasDuration: true, defaultDuration: 3 },
         population_income: { hasDuration: true, defaultDuration: 3 },
         population_growth: { hasDuration: true, defaultDuration: 3 },
+        population_growth: { hasDuration: true, defaultDuration: 3 },
         building_cost: { hasDuration: true, defaultDuration: 3 },
         relation_ideology_change: { hasDuration: true },
         relation_change: { hasDuration: true },
@@ -89,17 +90,27 @@ const reqbonConfig = {
             actions: ['equal', 'not_equal']
         },
         has_pact: {
-            subType: false,
+            subType: true,
             value: 'country',
             actions: ['equal', 'not_equal']
         },
         has_sanctions: {
-            subType: false,
+            subType: true,
             value: 'country',
             actions: ['equal', 'not_equal']
         },
         has_war: {
-            subType: false,
+            subType: true,
+            value: 'country',
+            actions: ['equal', 'not_equal']
+        },
+        has_alliance: {
+            subType: true,
+            value: 'country',
+            actions: ['equal', 'not_equal']
+        },
+        has_vassal: {
+            subType: true,
             value: 'country',
             actions: ['equal', 'not_equal']
         },
@@ -232,3 +243,48 @@ window.requirementsManager = {
         return requirement;
     }
 };
+
+// Функция для создания селекта со странами
+function createCountrySelect(selectedValue = '') {
+    const select = document.createElement('select');
+    select.className = 'main-page-input';
+    
+    // Добавляем специальные опции
+    select.innerHTML = `
+        <option value="any" ${selectedValue === 'any' ? 'selected' : ''}>${window.translator?.translate('any') || 'any'}</option>
+        <option value="this" ${selectedValue === 'this' ? 'selected' : ''}>${window.translator?.translate('this') || 'this'}</option>
+    `;
+    
+    // Получаем список стран и сортируем по имени
+    const countries = Object.entries(window.eventManager?.jsonData?.lands || {})
+        .map(([id, country]) => ({
+            id,
+            name: country.name || id
+        }))
+        .sort((a, b) => a.name.toString().toUpperCase().localeCompare(b.name.toString().toUpperCase()));
+    
+    // Добавляем страны в select
+    select.innerHTML += countries.map(country => 
+        `<option value="${country.id}" ${selectedValue === country.id ? 'selected' : ''}>${country.name}</option>`
+    ).join('');
+    
+    return select;
+}
+
+// Обновляем функцию создания поля значения
+function updateValueField(type, currentValue = '') {
+    const valueContainer = document.getElementById('requirement-value-container');
+    if (!valueContainer) return;
+    
+    valueContainer.innerHTML = '';
+    
+    const config = window.reqbonConfig.requirements[type];
+    if (!config) return;
+    
+    if (config.value === 'country') {
+        const select = createCountrySelect(currentValue);
+        select.id = 'requirement-value';
+        valueContainer.appendChild(select);
+    }
+    // Остальная логика для других типов...
+}
