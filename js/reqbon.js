@@ -6,6 +6,7 @@ const reqbonConfig = {
         defense: { hasDuration: true, defaultDuration: 3 },
         attack: { hasDuration: true, defaultDuration: 3 },
         population_income: { hasDuration: true, defaultDuration: 3 },
+        population_growth: { hasDuration: true, defaultDuration: 3 },
         building_cost: { hasDuration: true, defaultDuration: 3 },
         relation_ideology_change: { hasDuration: true },
         relation_change: { hasDuration: true },
@@ -17,6 +18,21 @@ const reqbonConfig = {
         discontent: { hasDuration: true },
 
         // Бонусы без длительности
+        resource: { 
+            hasDuration: false,
+            subtypes: [
+                'gold',
+                'iron',
+                'oil',
+                'steel',
+                'uranium',
+                'wood',
+                'cartridges',
+                'chemical_weapon',
+                'heavy_water',
+                'nuclear_weapon'
+            ]
+        },
         resurrect_country: { hasDuration: false },
         add_oil: { hasDuration: false },
         add_cruiser: { hasDuration: false },
@@ -150,6 +166,11 @@ const reqbonConfig = {
         building_exists: {
             subType: false,
             value: 'building',
+            actions: ['equal', 'not_equal']
+        },
+        controls_capital: {
+            subType: 'country', // Changed from true to 'country' to specify the type
+            value: 'country',
             actions: ['equal', 'not_equal']
         }
     }
