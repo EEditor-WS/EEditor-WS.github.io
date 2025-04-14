@@ -1073,6 +1073,66 @@ const scenariosData = [
         hiddenScore: 0,
         type: "sandbox",
         period: "modern"
+    },
+    {
+        id: [
+            "zachary",
+            "world",
+            "v2",
+            "kaiserreich",
+        ],
+        title: "Kaiserreich",
+        author: {
+            name: "@totoska",
+            link: "https://discord.com/users/820194328201920524",
+            color: "#3B83BD"
+        },
+        year: "1936",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: ["World", "Alternative History", "Kaiserreich"],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "World by Zachary",
+            id: "zachary_world_v2"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-04-14",
+        lastUpdate: "2025-04-14",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "alternative"
+    },
+    {
+        id: [
+            "zachary",
+            "world",
+            "v2",
+            "kalterkrieg",
+        ],
+        title: "Kalterkrieg",
+        author: {
+            name: "@totoska",
+            link: "https://discord.com/users/820194328201920524",
+            color: "#3B83BD"
+        },
+        year: "1948",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: ["World", "Alternative History", "Kalterkrieg"],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "World by Zachary",
+            id: "zachary_world_v2"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-04-14",
+        lastUpdate: "2025-04-14",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "alternative"
     }
 ];
 
