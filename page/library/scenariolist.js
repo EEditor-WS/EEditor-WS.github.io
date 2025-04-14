@@ -1078,7 +1078,7 @@ const scenariosData = [
         id: [
             "zachary",
             "world",
-            "v2",
+            "v1",
             "kaiserreich",
         ],
         title: "Kaiserreich",
@@ -1094,7 +1094,7 @@ const scenariosData = [
         worldCreator: "ЕЕнот",
         map: {
             name: "World by Zachary",
-            id: "zachary_world_v2"
+            id: "zachary_world_v1"
         },
         awards: [],
         // Hidden parameters
@@ -1108,7 +1108,7 @@ const scenariosData = [
         id: [
             "zachary",
             "world",
-            "v2",
+            "v1",
             "kalterkrieg",
         ],
         title: "Kalterkrieg",
@@ -1124,7 +1124,7 @@ const scenariosData = [
         worldCreator: "ЕЕнот",
         map: {
             name: "World by Zachary",
-            id: "zachary_world_v2"
+            id: "zachary_world_v1"
         },
         awards: [],
         // Hidden parameters
