@@ -57,12 +57,12 @@ function libApplyFilters() {
 
         // Apply author filter
         if (authorFilter) {
-            visible = visible && card.dataset.author.includes(authorFilter);
+            visible = visible && card.dataset.author.toLowerCase().includes(authorFilter);
         }
 
         // Apply map filter
         if (mapFilter) {
-            visible = visible && card.dataset.worldcreator.includes(mapFilter);
+            visible = visible && card.dataset.mapId.toLowerCase() === mapFilter.toLowerCase();
         }
 
         // Apply type filter
