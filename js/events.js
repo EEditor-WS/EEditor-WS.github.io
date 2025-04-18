@@ -928,7 +928,7 @@ class EventManager {
                 { value: 'building_cost', label: window.translator.translate('building_cost') },
                 { value: 'population_income', label: window.translator.translate('population_income') },
                 { value: 'population_growth', label: window.translator.translate('population_growth') },
-                { value: 'add_oil', label: window.translator.translate('add_oil') },
+                // { value: 'add_oil', label: window.translator.translate('add_oil') },
                 { value: 'resource', label: window.translator.translate('resource') },
                 { value: 'recruit_cost', label: window.translator.translate('recruit_cost') },
                 { value: 'accelerated_recruit_cost', label: window.translator.translate('accelerated_recruit_cost') },
