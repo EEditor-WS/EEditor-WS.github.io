@@ -2,11 +2,15 @@ const inGameMaps = [
     "jalhund_europe_vg",
     "jaba_america_vg",
     "parcoucat_euro4_vg",
+    "jalhund_europe",
+    "jaba_america",
+    "parcoucat_euro4",
 ];
 
 const awardScores = {
     "star": 25,
     "enot": 50,
+    "50": 25,
 };
 
 const scenariosData = [
@@ -1133,6 +1137,216 @@ const scenariosData = [
         hiddenScore: 0,
         type: "sandbox",
         period: "alternative"
+    },
+    {
+        id: [
+            "jalhund",
+            "europe",
+            "vg",
+            "1941",
+        ],
+        title: "Великая Отечественная Война",
+        author: {
+            name: "@pelo3918",
+            link: "https://discord.com/users/1071700840492056717",
+            color: "#3B83BD"
+        },
+        year: "1941",
+        languages: ["RU"],
+        gameMode: "Sandbox",
+        tags: ["Europe", "Historical", "WW2", "1941"],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Standart Europe",
+            id: "jalhund_europe_vg"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2024-07-01",
+        lastUpdate: "2024-07-01",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ww2"
+    },
+    {
+        id: [
+            "jalhund",
+            "europe",
+            "vg",
+            "modern-ru",
+        ],
+        title: "Современный Мир",
+        author: {
+            name: "@pelo3918",
+            link: "https://discord.com/users/1071700840492056717",
+            color: "#3B83BD"
+        },
+        year: "2020",
+        languages: ["RU"],
+        gameMode: "Sandbox",
+        tags: ["Europe", "Historical", "Modern", "2020"],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Standart Europe",
+            id: "jalhund_europe_vg"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2024-06-14",
+        lastUpdate: "2024-06-14",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "modern"
+    },
+    {
+        id: [
+            "jalhund",
+            "europe",
+            "vg",
+            "modern-en",
+        ],
+        title: "Modern World",
+        author: {
+            name: "@pelo3918",
+            link: "https://discord.com/users/1071700840492056717",
+            color: "#3B83BD"
+        },
+        year: "2020",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: ["Europe", "Historical", "Modern", "2020"],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Standart Europe",
+            id: "jalhund_europe_vg"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2024-06-14",
+        lastUpdate: "2024-06-14",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "modern"
+    },
+    {
+        id: [
+            "jalhund",
+            "europe",
+            "vg",
+            "1985",
+        ],
+        title: "Холодная Война",
+        author: {
+            name: "@pelo3918",
+            link: "https://discord.com/users/1071700840492056717",
+            color: "#3B83BD"
+        },
+        year: "1985",
+        languages: ["RU"],
+        gameMode: "Sandbox",
+        tags: ["Europe", "Historical"],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Standart Europe",
+            id: "jalhund_europe_vg"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2024-07-01",
+        lastUpdate: "2024-07-01",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "cw"
+    },
+    {
+        id: [
+            "jalhund",
+            "europe",
+            "vg",
+            "nw-ru",
+        ],
+        title: "Северная Война",
+        author: {
+            name: "@pelo3918",
+            link: "https://discord.com/users/1071700840492056717",
+            color: "#3B83BD"
+        },
+        year: "1700",
+        languages: ["RU"],
+        gameMode: "Sandbox",
+        tags: ["Europe", "Historical"],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Standart Europe",
+            id: "jalhund_europe_vg"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2024-04-12",
+        lastUpdate: "2024-04-12",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ancient"
+    },
+    {
+        id: [
+            "jalhund",
+            "europe",
+            "vg",
+            "nw-en",
+        ],
+        title: "Northern War",
+        author: {
+            name: "@pelo3918",
+            link: "https://discord.com/users/1071700840492056717",
+            color: "#3B83BD"
+        },
+        year: "1700",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: ["Europe", "Historical"],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Standart Europe",
+            id: "jalhund_europe_vg"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2024-04-12",
+        lastUpdate: "2024-04-12",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ancient"
+    },
+    {
+        id: [
+            "parkourcat",
+            "euro4",
+            "vg",
+            "hsb",
+        ],
+        title: "Эллада наносит ответный удар",
+        author: {
+            name: "@pelo3918",
+            link: "https://discord.com/users/1071700840492056717",
+            color: "#3B83BD"
+        },
+        year: "-323",
+        languages: ["RU"],
+        gameMode: "Sandbox",
+        tags: ["Europe", "Historical", "Ancient"],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Euro4 Standart",
+            id: "parkourcat_euro4_vg"
+        },
+        awards: ["50"],
+        // Hidden parameters
+        publishDate: "2024-02-03",
+        lastUpdate: "2024-02-03",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ancient"
     }
 ];
 
