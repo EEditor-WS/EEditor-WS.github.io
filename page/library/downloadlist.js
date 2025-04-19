@@ -107,7 +107,7 @@ function generateScenarioCard(scenario) {
     const awardsHTML = sortedAwards
         .map(award => `
             <div class="download-award">
-                <img src="temporarily/awards/${award}.svg" class="download-award-img" title="${award}">
+                <img src="temporarily/awards/${award}.svg" class="download-award-img" title="${award === "enot" ? "EEnot recommends" : award}">
             </div>
         `).join('');
 

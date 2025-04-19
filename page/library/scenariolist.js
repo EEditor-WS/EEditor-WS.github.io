@@ -156,7 +156,7 @@ const scenariosData = [
             name: "World by ЕЕнот",
             id: "eenot_world_v1"
         },
-        awards: ["star"],
+        awards: ["enot"],
         // Hidden parameters
         publishDate: "2025-01-31",
         lastUpdate: "2025-01-31",
@@ -306,7 +306,7 @@ const scenariosData = [
             name: "Eurasia by Zachary",
             id: "zachary_eurasia_v1"
         },
-        awards: [],
+        awards: ["star","enot"],
         // Hidden parameters
         publishDate: "2025-03-07",
         lastUpdate: "2025-03-07",
@@ -366,7 +366,7 @@ const scenariosData = [
             name: "World by Zachary",
             id: "zachary_world_v1"
         },
-        awards: [],
+        awards: ["star","enot"],
         // Hidden parameters
         publishDate: "2025-03-07",
         lastUpdate: "2025-03-07",
@@ -1007,7 +1007,7 @@ const scenariosData = [
         year: "2025",
         languages: ["EN"],
         gameMode: "Sandbox",
-        tags: ["USA", "Modern Day", "Future", "2025"],
+        tags: ["USA", "Modern Day", "2025"],
         worldCreator: "Zachary",
         map: {
             name: "USA by Zachary",
@@ -1100,7 +1100,7 @@ const scenariosData = [
             name: "World by Zachary",
             id: "zachary_world_v1"
         },
-        awards: [],
+        awards: ["enot"],
         // Hidden parameters
         publishDate: "2025-04-14",
         lastUpdate: "2025-04-14",
@@ -1220,7 +1220,7 @@ const scenariosData = [
             name: "Standart Europe",
             id: "jalhund_europe_vg"
         },
-        awards: [],
+        awards: ["star","enot"],
         // Hidden parameters
         publishDate: "2024-06-14",
         lastUpdate: "2024-06-14",
@@ -1250,7 +1250,7 @@ const scenariosData = [
             name: "Standart Europe",
             id: "jalhund_europe_vg"
         },
-        awards: [],
+        awards: ["enot"],
         // Hidden parameters
         publishDate: "2024-07-01",
         lastUpdate: "2024-07-01",
