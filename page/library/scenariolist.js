@@ -1352,7 +1352,7 @@ const scenariosData = [
         id: [
             "eenot",
             "arstotzka",
-            "v1",
+            "v2",
             "1996",
         ],
         title: "Arstotzka World - 1996",
@@ -1368,12 +1368,12 @@ const scenariosData = [
         worldCreator: "ЕЕнот",
         map: {
             name: "World by ЕЕнот",
-            id: "eenot_arstotzka_v1"
+            id: "eenot_arstotzka_v2"
         },
         awards: ["enot"],
         // Hidden parameters
         publishDate: "2025-04-21",
-        lastUpdate: "2025-04-21",
+        lastUpdate: "2025-05-21",
         hiddenScore: 0,
         type: "sandbox",
         period: "alternative"
