@@ -1347,7 +1347,37 @@ const scenariosData = [
         hiddenScore: 0,
         type: "sandbox",
         period: "ancient"
-    }
+    },
+    {
+        id: [
+            "eenot",
+            "arstotzka",
+            "v1",
+            "1996",
+        ],
+        title: "Arstotzka World - 1996",
+        author: {
+            name: "@eenot",
+            link: "https://discord.com/users/794675642037567491",
+            color: "#3B83BD"
+        },
+        year: "1996",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: ["World", "For Phones", "Recommended", "without events", "without reforms"],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "World by ЕЕнот",
+            id: "eenot_arstotzka_v1"
+        },
+        awards: ["enot"],
+        // Hidden parameters
+        publishDate: "2025-04-21",
+        lastUpdate: "2025-04-21",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "alternative"
+    },
 ];
 
 console.log("Данные сценариев загружены");
