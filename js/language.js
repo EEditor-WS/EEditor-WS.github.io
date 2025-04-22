@@ -1131,13 +1131,13 @@ const translations = {
         "enable_answer": "Включить ответ",
         "requirements": "Условия",
         "bonuses": "Бонусы",
-        "common_requirements": "Требования события",
+        "common_requirements": "Условия события",
 
         "save": "Сохранить",
         "cancel": "Отмена",
         "add": "Добавить",
 
-        // Редактор требований
+        // Редактор условий
         "requirements_editor": "Редактор условий",
         "bonus_editor": "Редактор бонусов",
         "type": "Тип",
@@ -1916,7 +1916,7 @@ const translations = {
         "cancel": "Скасувати",
         "add": "Додати",
 
-        // Редактор требований
+        // Редактор условий
         "requirements_editor": "Редактор вимог",
         "bonus_editor": "Редактор бонусів",
         "type": "Тип",

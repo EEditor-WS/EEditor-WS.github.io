@@ -1176,19 +1176,46 @@ class EventManager {
                 } else if (['received_event'].includes(selectedType)) {
                     actions.push('equal', 'not_equal');
 
-                    // Создаем выпадающий список событий для значений
-                    const valueGroup = document.querySelector('[for="requirement-value"]').parentElement;
-                    valueGroup.style.display = 'block';
+                    // Создаем выпадающий список стран для subtype
+                    const subtypeGroup = document.querySelector('[for="requirement-subtype"]').parentElement;
+                    subtypeGroup.style.display = 'block';
                     
-                    const valueInput = document.getElementById('requirement-value');
+                    const subtypeInput = document.getElementById('requirement-subtype');
+                    const subtypeSelect = document.createElement('select');
+                    subtypeSelect.id = 'requirement-subtype';
+                    subtypeSelect.className = 'main-page-input';
+                    
+                    // Получаем список стран и сортируем по имени
+                    const countries = Object.entries(this.jsonData.lands || {})
+                        .map(([id, country]) => ({
+                            id,
+                            name: country.name || id
+                        }))
+                        .sort((a, b) => a.name.toString().toUpperCase().localeCompare(b.name.toString().toUpperCase()));
+                    
+                    // Создаем опции для выпадающего списка с any и this
+                    subtypeSelect.innerHTML = `
+                        <option value="any">${window.translator.translate('any')}</option>
+                        <option value="this">${window.translator.translate('this')}</option>
+                        ${countries.map(country => 
+                            `<option value="${country.id}">${country.name}</option>`
+                        ).join('')}
+                    `;
+                    
+                    // Заменяем текстовое поле на выпадающий список
+                    if (subtypeInput) {
+                        subtypeInput.parentNode.replaceChild(subtypeSelect, subtypeInput);
+                    }
+                    
+                    // Создаем выпадающий список событий для value
                     const select = document.createElement('select');
                     select.id = 'requirement-value';
                     select.className = 'main-page-input';
                     
                     // Получаем список всех событий
                     const events = Object.entries(this.jsonData.custom_events || {}).map(([id, event]) => ({
-                      id,
-                      name: event.unique_event_name || event.title || id
+                        id,
+                        name: event.unique_event_name || event.title || id
                     }));
                     
                     // Сортируем события по имени
@@ -1196,21 +1223,10 @@ class EventManager {
                     
                     // Создаем опции для выпадающего списка
                     select.innerHTML = events.map(event => 
-                      `<option value="${event.id}">${event.id} - ${event.name}${event.systemName ? ` (${event.systemName})` : ''}</option>`
+                        `<option value="${event.id}">${event.id} - ${event.name}</option>`
                     ).join('');
                     
-                    // Заменяем текстовое поле на выпадающий список
-                    valueInput.parentNode.replaceChild(select, valueInput);
-                    
-                    // Создаем числовое поле для подтипа (если необходимо)
-                    const subtypeContainer = document.getElementById('requirement-subtype-container');
-                    subtypeContainer.innerHTML = '';
-                    const input = document.createElement('input');
-                    input.type = 'number';
-                    input.id = 'requirement-subtype';
-                    input.className = 'main-page-input';
-                    input.placeholder = window.translator.translate('enter_number');
-                    subtypeContainer.appendChild(input);
+                    valueContainer.appendChild(select);
                 } else if (['no_enemy'].includes(selectedType)) {
                     actions.push('equal');
                 }
@@ -1716,6 +1732,37 @@ class EventManager {
                     
                     subtypeGroup.style.display = 'none';
                 } else if (['received_event'].includes(selectedType)) {
+                    subtypeGroup.style.display = 'block';
+                    
+                    // Создаем выпадающий список для subtype
+                    const subtypeInput = document.getElementById('requirement-subtype');
+                    const subtypeSelect = document.createElement('select');
+                    subtypeSelect.id = 'requirement-subtype';
+                    subtypeSelect.className = 'main-page-input';
+
+                    // Получаем список стран и сортируем по имени
+                    const countries = Object.entries(this.jsonData.lands || {})
+                        .map(([id, country]) => ({
+                            id,
+                            name: country.name || id
+                        }))
+                        .sort((a, b) => a.name.toString().toUpperCase().localeCompare(b.name.toString().toUpperCase()));
+
+                    // Создаем опции для выпадающего списка с any и this
+                    subtypeSelect.innerHTML = `
+                        <option value="any">${window.translator.translate('any')}</option>
+                        <option value="this">${window.translator.translate('this')}</option>
+                        ${countries.map(country => 
+                            `<option value="${country.id}">${country.name}</option>`
+                        ).join('')}
+                    `;
+
+                    // Заменяем текущее поле ввода на выпадающий список
+                    if (subtypeInput) {
+                        subtypeInput.parentNode.replaceChild(subtypeSelect, subtypeInput);
+                    }
+
+                    // Создаем выпадающий список событий для value
                     const select = document.createElement('select');
                     select.id = 'requirement-value';
                     select.className = 'main-page-input';
@@ -1727,15 +1774,14 @@ class EventManager {
                     }));
                     
                     // Сортируем события по имени
-                    events.sort((a, b) => a.name.toUpperCase().localeCompare(b.name.toUpperCase()));
+                    events.sort((a, b) => a.name.localeCompare(b.name));
                     
                     // Создаем опции для выпадающего списка
                     select.innerHTML = events.map(event => 
-                        `<option value="${event.id}">${event.id} - ${event.name}${event.systemName ? ` (${event.systemName})` : ''}</option>`
+                        `<option value="${event.id}">${event.id} - ${event.name}</option>`
                     ).join('');
                     
                     valueContainer.appendChild(select);
-                    subtypeGroup.style.display = 'none';
                 } else {
                     const input = document.createElement('input');
                     input.type = 'text';
