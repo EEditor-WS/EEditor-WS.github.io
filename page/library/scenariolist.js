@@ -1378,6 +1378,56 @@ const scenariosData = [
         type: "sandbox",
         period: "alternative"
     },
+    {
+        id: [
+            "zachary",
+            "world-am",
+            "v1",
+            "modern",
+        ],
+        title: "World According to Americans",
+        author: {
+            name: "@zacharyzachary.bachary",
+            link: "https://discord.com/users/804839006403428423",
+            color: "#3B83BD"
+        },
+        year: "2026",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: ["World", "For Phones", "without events", "without reforms"],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-01-28",
+        lastUpdate: "2025-02-21",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "modern"
+    },
+    {
+        id: [
+            "zachary",
+            "world-am",
+            "v1",
+            "ru",
+        ],
+        title: "Мир, со слов русских",
+        author: {
+            name: "@eenot",
+            link: "https://discord.com/users/794675642037567491",
+            color: "#3B83BD"
+        },
+        year: "2026",
+        languages: ["RU"],
+        gameMode: "Sandbox",
+        tags: ["World", "For Phones", "without events", "without reforms"],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-03-26",
+        lastUpdate: "2025-03-26",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "modern"
+    },
 ];
 
 console.log("Данные сценариев загружены");
