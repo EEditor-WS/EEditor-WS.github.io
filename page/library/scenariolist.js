@@ -1395,6 +1395,10 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "For Phones", "without events", "without reforms"],
+        map: {
+            name: "World According to Americans",
+            id: "zachary_world-am_v1"
+        },
         awards: [],
         // Hidden parameters
         publishDate: "2025-01-28",
@@ -1420,6 +1424,10 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["World", "For Phones", "without events", "without reforms"],
+        map: {
+            name: "World According to Americans",
+            id: "zachary_world-am_v1"
+        },
         awards: [],
         // Hidden parameters
         publishDate: "2025-03-26",

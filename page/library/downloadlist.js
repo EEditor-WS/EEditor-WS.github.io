@@ -129,7 +129,6 @@ function generateScenarioCard(scenario) {
             data-period="${scenario.period}"
             data-year="${scenario.year}"
             data-languages="${scenario.languages.join(',').toLowerCase()}"
-            data-worldcreator="${scenario.worldCreator.toLowerCase()}"
             data-map-name="${scenario.map.name}"
             data-map-id="${mapId}"
             data-publish-date="${scenario.publishDate}"
