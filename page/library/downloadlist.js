@@ -120,6 +120,20 @@ function generateScenarioCard(scenario) {
     const scenarioPath = generateScenarioPath(scenario.id);
     const detailsLink = generateDetailsLink(scenario.id);
     const score = calculateScenarioScore(scenario);
+    
+    const status = scenario.status || "completed";
+    const statusLabel = {
+        "early_access": "Early Access",
+        "in_development": "In Development",
+        "discontinued": "Discontinued",
+        "beta": "Beta",
+        "alpha": "Alpha",
+        "stable": "Stable",
+        "completed": "Completed",
+        "archived": "Archived",
+        "experimental": "Experimental",
+        "frozen": "Frozen"
+    }[status] || "";
 
     return `
         <div class="download-card" 
@@ -138,11 +152,16 @@ function generateScenarioCard(scenario) {
         >
             <div class="download-info">
                 <div class="download-up">
-                    <a href="${detailsLink}">
-                        <img src="${imagePath}" class="download-goto-page" style="width: 250px; border-radius: 8px;">
-                    </a>
-                    <div class="download-awards">
-                        ${awardsHTML}
+                    <div class="download-image-container">
+                        <a href="${detailsLink}">
+                            <img src="${imagePath}" class="download-goto-page" style="width: 250px; border-radius: 8px;">
+                        </a>
+                        <div class="download-awards">
+                            ${awardsHTML}
+                        </div>
+                        <div class="download-status status-${status}">
+                            ${statusLabel}
+                        </div>
                     </div>
                 </div>
                 <div class="download-center">

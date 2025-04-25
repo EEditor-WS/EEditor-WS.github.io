@@ -8,6 +8,9 @@ let fileInfo = null;
 // Проверяем поддержку File System Access API
 const hasFileSystemAccess = 'showOpenFilePicker' in window;
 
+// Инициализируем параметры URL
+const urlParams = new URLSearchParams(window.location.search);
+
 // Глобальная переменная для хранения данных из lands.json
 let markedCountries = new Set();
 
@@ -205,10 +208,203 @@ function loadLandsJson() {
     input.click();
 }
 
+// Function to fill form from JSON data
+function fillFormFromJson(jsonData) {
+    try {
+        // Clear all form fields before filling
+        const settingsForm = document.getElementById('settings-form');
+        if (!settingsForm) return;
+        
+        settingsForm.reset();
+
+        // Fill form fields
+        const mappings = {
+            // Numeric values
+            'map_hash': { type: 'number', id: 'map_hash' },
+            'technology_lvl': { type: 'number', id: 'technology_lvl' },
+            'year': { type: 'number', id: 'year' },
+            'last_turn': { type: 'number', id: 'last_turn' },
+            'month': { type: 'number', id: 'month' },
+            'num_of_provinces': { type: 'number', id: 'num_of_provinces' },
+            'turn': { type: 'number', id: 'turn' },
+            'min_game_version': { type: 'number', id: 'min_game_version' },
+
+            // String values with selection
+            'resources_spawn': { type: 'select', id: 'resources_spawn' },
+            'bots_behavior': { type: 'select', id: 'bots_behavior' },
+            'difficulty': { type: 'select', id: 'difficulty' },
+            'fog_of_war': { type: 'select', id: 'fog_of_war' },
+
+            // Enabled/disabled values
+            'sandbox': { type: 'enabled-disabled', id: 'sandbox' },
+            'technologies_are_opened': { type: 'enabled-disabled', id: 'technologies_are_opened' },
+            'no_initial_diplomacy': { type: 'enabled-disabled', id: 'no_initial_diplomacy' },
+            'no_nuclear_weapon': { type: 'enabled-disabled', id: 'no_nuclear_weapon' },
+
+            // Pure boolean values
+            'play_after_last_turn': { type: 'pure-boolean', id: 'play_after_last_turn' },
+
+            // Text values
+            'name': { type: 'text', id: 'name' },
+            'id': { type: 'text', id: 'id' },
+            'player_land': { type: 'select', id: 'player_land' }
+        };
+
+        // Process each field according to mapping
+        for (const [key, config] of Object.entries(mappings)) {
+            const value = jsonData[key];
+            if (value === undefined) continue;
+
+            const element = document.getElementById(config.id);
+            if (!element) {
+                console.warn(`Element with id '${config.id}' not found`);
+                continue;
+            }
+
+            switch (config.type) {
+                case 'number':
+                    element.value = parseInt(value) || 0;
+                    break;
+                case 'select':
+                    if (config.id === 'player_land') {
+                        // Special handling for player_land
+                        if (window.countryUtils && typeof window.countryUtils.updatePlayerLandSelect === 'function') {
+                            window.countryUtils.updatePlayerLandSelect(jsonData.lands, value);
+                        } else if (typeof updatePlayerLandSelect === 'function') {
+                            updatePlayerLandSelect(jsonData.lands, value);
+                        }
+                    } else {
+                        element.value = value;
+                    }
+                    break;
+                case 'enabled-disabled':
+                    element.value = value;
+                    break;
+                case 'pure-boolean':
+                    element.value = value ? 'true' : 'false';
+                    break;
+                case 'text':
+                    element.value = value;
+                    break;
+            }
+        }
+
+        // Handle water color separately
+        if (Array.isArray(jsonData.water_color) && jsonData.water_color.length >= 3) {
+            const [r, g, b] = jsonData.water_color;
+            
+            const rInput = document.getElementById('water_color_r');
+            const gInput = document.getElementById('water_color_g');
+            const bInput = document.getElementById('water_color_b');
+            const preview = document.getElementById('water_color_preview');
+
+            if (rInput) rInput.value = r;
+            if (gInput) gInput.value = g;
+            if (bInput) bInput.value = b;
+            
+            if (preview) {
+                preview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+            }
+        }
+
+        // Update countries list if present in JSON
+        if (jsonData.lands) {
+            if (window.countryUtils && typeof window.countryUtils.updateCountriesList === 'function') {
+                window.countryUtils.updateCountriesList(jsonData.lands);
+            } else if (typeof updateCountriesList === 'function') {
+                updateCountriesList(jsonData.lands);
+            }
+        }
+
+    } catch (error) {
+        console.error('Error filling form:', error);
+        throw error;
+    }
+}
+
+// Создаем класс для управления сценарием
+class ScenarioManager {
+    constructor() {
+        this.currentScenario = null;
+        this.originalContent = null;
+        this.currentFileName = 'scenario.json';
+        this.hasChanges = false;
+
+        // Привязываем обработчик изменений
+        if (previewContent) {
+            previewContent.addEventListener('input', () => {
+                this.handleContentChange();
+            });
+        }
+    }
+
+    handleContentChange() {
+        if (!this.originalContent) {
+            this.originalContent = previewContent.value;
+            return;
+        }
+        this.hasChanges = this.originalContent !== previewContent.value;
+    }
+
+    hasUnsavedChanges() {
+        return this.hasChanges;
+    }
+
+    getCurrentScenario() {
+        try {
+            return JSON.parse(previewContent.value);
+        } catch (e) {
+            console.error('Error parsing scenario:', e);
+            return null;
+        }
+    }
+
+    getCurrentFileName() {
+        return this.currentFileName;
+    }
+
+    async loadScenario(scenarioData) {
+        try {
+            const content = JSON.stringify(scenarioData, null, 4);
+            if (previewContent) {
+                previewContent.value = content;
+                this.originalContent = content;
+                this.hasChanges = false;
+            }
+            
+            fillFormFromJson(scenarioData);
+            
+            if (window.countryManager) {
+                window.countryManager.jsonData = scenarioData;
+                window.countryManager.updateCountriesList();
+            }
+            if (window.eventManager) {
+                window.eventManager.setJsonData(scenarioData);
+            }
+            
+            if (fileInfo) {
+                fileInfo.textContent = window.translator.translate('backup_restored');
+            }
+
+            return true;
+        } catch (e) {
+            console.error('Error loading scenario:', e);
+            return false;
+        }
+    }
+
+    setCurrentFileName(fileName) {
+        this.currentFileName = fileName;
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // Инициализация глобальных переменных
     previewContent = document.getElementById('preview-content');
     fileInfo = document.getElementById('file-info');
+
+    // Инициализируем менеджер сценария перед другими менеджерами
+    window.scenarioManager = new ScenarioManager();
 
     // Инициализируем данные о странах
     initLandsData();
@@ -710,31 +906,41 @@ function handleFileContent(fileName, content) {
     if (isJsonFile) {
         try {
             const jsonData = JSON.parse(content);
-            console.log('Parsed JSON data:', jsonData); // Добавляем отладку
+            console.log('Parsed JSON data:', jsonData);
             
-            // Проверяем и обновляем Discord статус
-            if (jsonData && jsonData.name) {
-                console.log('Found scenario name:', jsonData.name);
-                //updateDiscordStatus(jsonData.name);
-            } else {
-                console.log('No scenario name found in JSON');
+            // Обновляем состояние ScenarioManager
+            if (window.scenarioManager) {
+                window.scenarioManager.currentFileName = fileName;
+                window.scenarioManager.originalContent = content;
+                window.scenarioManager.hasChanges = false;
             }
 
-            fillFormFromJson(jsonData);
-            
-            // Обновляем данные в менеджерах
+            // Обновляем данные в менеджере стран
             if (window.countryManager) {
+                console.log('Updating CountryManager...');
                 window.countryManager.jsonData = jsonData;
                 window.countryManager.updateCountriesList();
+            } else {
+                console.warn('CountryManager not initialized');
             }
+
+            // Обновляем данные в менеджере событий
             if (window.eventManager) {
+                console.log('Updating EventManager...');
                 window.eventManager.setJsonData(jsonData);
+            } else {
+                console.warn('EventManager not initialized');
             }
+
+            // Заполняем форму
+            fillFormFromJson(jsonData);
+
         } catch (error) {
             console.error('Ошибка при парсинге JSON:', error);
             if (fileInfo) {
                 fileInfo.textContent = window.translator.translate('file_parse_error');
             }
+            showError('Ошибка', 'Не удалось загрузить файл. Проверьте консоль для деталей.');
         }
     }
 }
@@ -1002,7 +1208,11 @@ function loadFileViaScheme() {
         });
 }
 
-/* if (urlParams.has('eval') && urlParams.get('eval') === 'openfile') {
-    openfile();
+try {
+    if (urlParams.has('eval') && urlParams.get('eval') === 'openfile') {
+        openfile();
+    }
+} catch (e) {
+    console.error('Error during file opening:', e);
+    showError('Ошибка', 'Не удалось отобразить статус');
 }
-*/

@@ -351,6 +351,26 @@
                                 </div>
                             </div-->
 
+                            <div class="filter-group">
+                                <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
+                                    <label>Статус</label>
+                                    <button class="collapse-filter-group" type="button">▼</button>
+                                </div>
+                                <div class="filter-group-content collapsed">
+                                    <div class="checkbox-list">
+                                        <label><input type="checkbox" value="completed" name="status" onchange="libApplyFilters()"> Завершён</label>
+                                        <label><input type="checkbox" value="early_access" name="status" onchange="libApplyFilters()"> Ранний доступ</label>
+                                        <label><input type="checkbox" value="in_development" name="status" onchange="libApplyFilters()"> В разработке</label>
+                                        <label><input type="checkbox" value="beta" name="status" onchange="libApplyFilters()"> Бета</label>
+                                        <label><input type="checkbox" value="alpha" name="status" onchange="libApplyFilters()"> Альфа</label>
+                                        <label><input type="checkbox" value="experimental" name="status" onchange="libApplyFilters()"> Эксперементальный</label>
+                                        <label><input type="checkbox" value="frozen" name="status" onchange="libApplyFilters()"> Заморожен</label>
+                                        <label><input type="checkbox" value="archived" name="status" onchange="libApplyFilters()"> Архивный</label>
+                                        <label><input type="checkbox" value="discontinued" name="status" onchange="libApplyFilters()"> Заброшен</label>
+                                    </div>
+                                </div>
+                            </div>
+
                             <!-- Type filter -->
                             <div class="filter-group">
                                 <div class="filter-group-header" onclick="libToggleFilterGroup(this)">

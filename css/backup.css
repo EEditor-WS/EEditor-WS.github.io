@@ -1,0 +1,68 @@
+.restore-backup {
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #246a99;
+    color: white;
+}
+
+.restore-backup:hover {
+    background-color: #194969;
+}
+
+.delete-backup {
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #992424;
+    color: white;
+}
+
+.delete-backup:hover {
+    background-color: #992424;
+    color: white;
+}
+
+.create-backup {
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #24993f;
+    color: white;
+}
+
+.create-backup:hover {
+    background-color: #249936;
+    color: white;
+}
+
+.backup-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+

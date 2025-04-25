@@ -607,3 +607,33 @@ select.main-page-input {
     background-position: right 8px center;
     padding-right: 30px;
 }
+
+/* Logo and avatar styles */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.logo-icon {
+    width: 35px;
+}
+
+.logo-text {
+    max-height: 35px;
+}
+
+.account-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.account-avatar.hidden {
+    display: none;
+}
+
+.requirement-editor.hidden {
+    display: none;
+}

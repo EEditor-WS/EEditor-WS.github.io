@@ -7,6 +7,18 @@ const inGameMaps = [
     "parcoucat_euro4",
 ];
 
+const statusScores = {
+    "complate": 40,
+    "early_access": 30,
+    "in_development": 20,
+    "beta": 15,
+    "alpha": 10,
+    "experimental": 5,
+    "frozen": 0,
+    "archived": -30,
+    "discontinued": -50,
+};
+
 const awardScores = {
     "star": 25,
     "enot": 50,
@@ -40,9 +52,10 @@ const scenariosData = [
         // Hidden parameters
         publishDate: "2025-01-19",
         lastUpdate: "2025-01-19",
-        hiddenScore: 1,
+        hiddenScore: 50,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        status: "archived",
     },
     {
         id: [
@@ -72,7 +85,8 @@ const scenariosData = [
         lastUpdate: "2024-10-30",
         hiddenScore: -250,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        status: "discontinued",
     },
     {
         id: [
@@ -102,7 +116,7 @@ const scenariosData = [
         lastUpdate: "2025-01-24",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww2"
+        period: "ww2",
     },
     {
         id: [
@@ -132,7 +146,7 @@ const scenariosData = [
         lastUpdate: "2025-01-24",
         hiddenScore: 0,
         type: "sandbox",
-        period: "cw"
+        period: "cw",
     },
     {
         id: [
@@ -1376,7 +1390,7 @@ const scenariosData = [
         lastUpdate: "2025-05-21",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
     },
     {
         id: [

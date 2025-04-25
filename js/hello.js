@@ -9,12 +9,12 @@ class HelloScreen {
                 terms: `Terms of Use and Disclaimer
 
 1. Acceptance of Terms
-By accessing and using this website, you accept and agree to be bound by these Terms of Use.
+By accessing and using this software (website or application), you accept and agree to be bound by these Terms of Use.
 
 2. Disclaimer of Liability
-2.1. The website and its content are provided "as is" and "as available" without any warranties of any kind.
-2.2. The website owner bears no responsibility for:
-   - Any damages or losses resulting from the use of this website
+2.1. The software and its content are provided "as is" and "as available" without any warranties of any kind.
+2.2. The software owner bears no responsibility for:
+   - Any damages or losses resulting from the use of this software
    - The accuracy, completeness, or reliability of the content
    - Any modifications made to scenarios or game files
    - Any consequences of using the created or modified content
@@ -23,21 +23,21 @@ By accessing and using this website, you accept and agree to be bound by these T
 
 3. User Responsibilities
 3.1. Users are solely responsible for:
-   - All actions performed on the website
+   - All actions performed while using the software
    - Content they create, modify, or download
    - Compliance with applicable laws and regulations
    - Backing up their data and content
 
 4. Intellectual Property
 4.1. Users retain ownership of their created content
-4.2. The website owner is not responsible for any intellectual property disputes
+4.2. The software owner is not responsible for any intellectual property disputes
 
 5. Limitation of Liability
-5.1. Under no circumstances shall the website owner be liable for any direct, indirect, incidental, special, or consequential damages.
-5.2. The website owner is not liable for any loss of data, profits, or other losses.
+5.1. Under no circumstances shall the software owner be liable for any direct, indirect, incidental, special, or consequential damages.
+5.2. The software owner is not liable for any loss of data, profits, or other losses.
 
 6. Changes to Terms
-The website owner reserves the right to modify these terms at any time without notice.
+The software owner reserves the right to modify these terms at any time without notice.
 
 By clicking "I Accept", you acknowledge that you have read and understood these terms and agree to be bound by them.`,
                 login_title: "Join Our Community",
@@ -62,12 +62,12 @@ By clicking "I Accept", you acknowledge that you have read and understood these 
                 terms: `Условия использования и отказ от ответственности
 
 1. Принятие условий
-Получая доступ к этому веб-сайту и используя его, вы принимаете и соглашаетесь соблюдать настоящие Условия использования.
+Получая доступ к этому программному обеспечению (веб-сайт или приложение) и используя его, вы принимаете и соглашаетесь соблюдать настоящие Условия использования.
 
 2. Отказ от ответственности
-2.1. Веб-сайт и его содержимое предоставляются "как есть" и "как доступно" без каких-либо гарантий.
-2.2. Владелец сайта не несёт ответственности за:
-   - Любой ущерб или потери, возникшие в результате использования этого веб-сайта
+2.1. Программное обеспечение и его содержимое предоставляются "как есть" и "как доступно" без каких-либо гарантий.
+2.2. Владелец программного обеспечения не несёт ответственности за:
+   - Любой ущерб или потери, возникшие в результате использования этого программного обеспечения
    - Точность, полноту или достоверность контента
    - Любые модификации сценариев или игровых файлов
    - Любые последствия использования созданного или модифицированного контента
@@ -76,21 +76,21 @@ By clicking "I Accept", you acknowledge that you have read and understood these 
 
 3. Ответственность пользователя
 3.1. Пользователи несут полную ответственность за:
-   - Все действия, выполняемые на сайте
+   - Все действия, выполняемые при использовании программного обеспечения
    - Контент, который они создают, модифицируют или скачивают
    - Соблюдение применимых законов и правил
    - Резервное копирование своих данных и контента
 
 4. Интеллектуальная собственность
 4.1. Пользователи сохраняют права на созданный ими контент
-4.2. Владелец сайта не несёт ответственности за любые споры об интеллектуальной собственности
+4.2. Владелец программного обеспечения не несёт ответственности за любые споры об интеллектуальной собственности
 
 5. Ограничение ответственности
-5.1. Ни при каких обстоятельствах владелец сайта не несёт ответственности за любые прямые, косвенные, случайные, особые или последующие убытки.
-5.2. Владелец сайта не несёт ответственности за любую потерю данных, прибыли или другие потери.
+5.1. Ни при каких обстоятельствах владелец программного обеспечения не несёт ответственности за любые прямые, косвенные, случайные, особые или последующие убытки.
+5.2. Владелец программного обеспечения не несёт ответственности за любую потерю данных, прибыли или другие потери.
 
 6. Изменения в условиях
-Владелец сайта оставляет за собой право изменять эти условия в любое время без уведомления.
+Владелец программного обеспечения оставляет за собой право изменять эти условия в любое время без уведомления.
 
 Нажимая "Принимаю", вы подтверждаете, что прочитали и поняли эти условия и соглашаетесь их соблюдать.`,
                 login_title: "Присоединяйтесь к сообществу",
@@ -115,12 +115,12 @@ By clicking "I Accept", you acknowledge that you have read and understood these 
                 terms: `Умови використання та відмова від відповідальності
 
 1. Прийняття умов
-Отримуючи доступ до цього веб-сайту та використовуючи його, ви приймаєте та погоджуєтесь дотримуватися цих Умов використання.
+Отримуючи доступ до цього програмного забезпечення (веб-сайт або додаток) та використовуючи його, ви приймаєте та погоджуєтесь дотримуватися цих Умов використання.
 
 2. Відмова від відповідальності
-2.1. Веб-сайт та його вміст надаються "як є" та "як доступно" без будь-яких гарантій.
-2.2. Власник сайту не несе відповідальності за:
-   - Будь-які збитки або втрати, що виникли в результаті використання цього веб-сайту
+2.1. Програмне забезпечення та його вміст надаються "як є" та "як доступно" без будь-яких гарантій.
+2.2. Власник програмного забезпечення не несе відповідальності за:
+   - Будь-які збитки або втрати, що виникли в результаті використання цього програмного забезпечення
    - Точність, повноту або достовірність контенту
    - Будь-які модифікації сценаріїв або ігрових файлів
    - Будь-які наслідки використання створеного або модифікованого контенту
@@ -129,21 +129,21 @@ By clicking "I Accept", you acknowledge that you have read and understood these 
 
 3. Відповідальність користувача
 3.1. Користувачі несуть повну відповідальність за:
-   - Всі дії, що виконуються на сайті
+   - Всі дії, що виконуються при використанні програмного забезпечення
    - Контент, який вони створюють, модифікують або завантажують
    - Дотримання застосовних законів та правил
    - Резервне копіювання своїх даних та контенту
 
 4. Інтелектуальна власність
 4.1. Користувачі зберігають права на створений ними контент
-4.2. Власник сайту не несе відповідальності за будь-які суперечки щодо інтелектуальної власності
+4.2. Власник програмного забезпечення не несе відповідальності за будь-які суперечки щодо інтелектуальної власності
 
 5. Обмеження відповідальності
-5.1. За жодних обставин власник сайту не несе відповідальності за будь-які прямі, непрямі, випадкові, особливі або подальші збитки.
-5.2. Власник сайту не несе відповідальності за будь-яку втрату даних, прибутку або інші втрати.
+5.1. За жодних обставин власник програмного забезпечення не несе відповідальності за будь-які прямі, непрямі, випадкові, особливі або подальші збитки.
+5.2. Власник програмного забезпечення не несе відповідальності за будь-яку втрату даних, прибутку або інші втрати.
 
 6. Зміни в умовах
-Власник сайту залишає за собою право змінювати ці умови в будь-який час без повідомлення.
+Власник програмного забезпечення залишає за собою право змінювати ці умови в будь-який час без повідомлення.
 
 Натискаючи "Приймаю", ви підтверджуєте, що прочитали та зрозуміли ці умови та погоджуєтесь їх дотримуватися.`,
                 login_title: "Приєднуйтесь до спільноти",
@@ -492,4 +492,4 @@ By clicking "I Accept", you acknowledge that you have read and understood these 
 // Создаем экземпляр при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
     window.helloScreen = new HelloScreen();
-}); 
+});

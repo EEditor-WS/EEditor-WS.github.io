@@ -228,7 +228,7 @@ class CountryManager {
             sysNameCell.textContent = country.id;
 
             const groupCell = document.createElement('td');
-            groupCell.textContent = country.group;
+            groupCell.textContent = country.group || '';
 
             const provincesCell = document.createElement('td');
             provincesCell.textContent = country.provinces;
@@ -707,7 +707,7 @@ class CountryManager {
     showRelationParamsModal(e) {
         const button = e.target;
         const itemDiv = button.closest('.array-list-item');
-        const input = itemDiv.querySelector('.array-item-input');
+        const input = itemDiv.querySelector('input');
         const relationType = itemDiv.closest('.array-list').id.replace('country-', '');
 
         const params = {

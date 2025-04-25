@@ -138,6 +138,8 @@ const translations = {
         "logout": "Logout",
         "discord": "Discord Server",
         "stable_version": "Stable Version",
+        "backups": "Backups",
+        "backup": "Backup",
 
         // Main page
         "editor": "Editor",
@@ -1017,6 +1019,8 @@ const translations = {
         "logout": "Выйти",
         "discord": "Discord сервер",
         "stable_version": "Стабильная версия",
+        "backups": "Резервные копии",
+        "backup": "Резервная копия",
 
         // Главная страница
         "editor": "Редактор",
@@ -1796,6 +1800,8 @@ const translations = {
         "logout": "Вийти",
         "discord": "Discord сервер",
         "stable_version": "Стабільна версія",
+        "backups": "Резервні копії",
+        "backup": "Резервна копія",
 
         // Главная страница
         "editor": "Редактор",
@@ -2785,6 +2791,8 @@ const translations = {
         "logout": "Еширe",
         "discord": "Сервер Discord",
         "stable_version": "Версиуне стабилэ",
+        "backups": "Бэкапури",
+        "backup": "Бэкап",
 
         // Главная страница
         "editor": "Едитор",

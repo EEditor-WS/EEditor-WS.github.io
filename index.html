@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
     <!-- Google Tag Manager -->
         <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -23,6 +23,7 @@
         <script src="js/events.js"></script>
         <script src="js/reforms.js"></script>
         <script src="js/auth.js"></script>
+        <script src="js/backup.js"></script>
         <script src="js/reqbon.js"></script>
         <script src="js/notification.js"></script>
         <script src="js/migrations.js"></script>
@@ -36,6 +37,7 @@
         <link rel="stylesheet" href="css/list.css">
         <link rel="stylesheet" href="css/notification.css">
         <link rel="stylesheet" href="css/test/move.css">
+        <link rel="stylesheet" href="css/backup.css">
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-9HFX1FVLMV"></script>
         <script>
@@ -88,9 +90,9 @@
             height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <!-- End Google Tag Manager (noscript) -->
         <nav class="nav-header">
-            <div class="logo" style="display: flex; align-items: center; gap: 5px;">
-                <img style="width: 35px" src="img/ico/ico.svg">
-                <h style="max-height: 35px">EEditor</h>
+            <div class="logo">
+                <img class="logo-icon" src="img/ico/ico.svg" alt="EEditor Logo">
+                <h1 class="logo-text">EEditor</h1>
             </div>
             <br>
             <div class="nav-buttons-container">
@@ -103,7 +105,7 @@
                 </button>
                 <button class="nav-button" data-page="countries">
                     <svg class="button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path>
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-3.59 10-8-3.59-8-8-8z"></path>
                         <path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6z"></path>
                     </svg>
                     <span class="button-text">Страны</span>
@@ -181,7 +183,7 @@
                     </button>
                     <div id="accountDropdown" class="account-dropdown">
                         <div class="account-info">
-                            <img class="account-avatar" src="" alt="Avatar" style="width: 32px; height: 32px; border-radius: 50%; margin-right: 8px; display: none;">
+                            <img class="account-avatar hidden" src="" alt="User Avatar">
                             <div>
                                 <div class="account-name">Гость</div>
                                 <div class="account-id">#0000</div>
@@ -207,11 +209,19 @@
                         </a>
                         <div class="account-divider"></div>
                         <a href="page/settings.html?return=main" class="account-item" data-action="settings">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M19.4 15C19.2669 15.3016 19.2272 15.6362 19.286 15.9606C19.3448 16.285 19.4995 16.5843 19.73 16.82L19.79 16.88C19.976 17.0657 20.1235 17.2863 20.2241 17.5291C20.3248 17.7719 20.3766 18.0322 20.3766 18.295C20.3766 18.5578 20.3248 18.8181 20.2241 19.0609C20.1235 19.3037 19.976 19.5243 19.79 19.71C19.6043 19.896 19.3837 20.0435 19.1409 20.1441C18.8981 20.2448 18.6378 20.2966 18.375 20.2966C18.1122 20.2966 17.8519 20.2448 17.6091 20.1441C17.3663 20.0435 17.1457 19.896 16.96 19.71L16.9 19.65C16.6643 19.4195 16.365 19.2648 16.0406 19.206C15.7162 19.1472 15.3816 19.1869 15.08 19.32C14.7842 19.4468 14.532 19.6572 14.3543 19.9255C14.1766 20.1938 14.0813 20.5082 14.08 20.83V21C14.08 21.5304 13.8693 22.0391 13.4942 22.4142C13.1191 22.7893 12.6104 23 12.08 23C11.5496 23 11.0409 22.7893 10.6658 22.4142C10.2907 22.0391 10.08 21.5304 10.08 21V20.91C10.0723 20.579 9.96512 20.258 9.77251 19.9887C9.5799 19.7194 9.31074 19.5143 9 19.4C8.69838 19.2669 8.36381 19.2272 8.03941 19.286C7.71502 19.3448 7.41568 19.4995 7.18 19.73L7.12 19.79C6.93425 19.976 6.71368 20.1235 6.47088 20.2241C6.22808 20.3248 5.96783 20.3766 5.705 20.3766C5.44217 20.3766 5.18192 20.3248 4.93912 20.2241C4.69632 20.1235 4.47575 19.976 4.29 19.79C4.10405 19.6043 3.95653 19.3837 3.85588 19.1409C3.75523 18.8981 3.70343 18.6378 3.70343 18.375C3.70343 18.1122 3.75523 17.8519 3.85588 17.6091C3.95653 17.3663 4.10405 17.1457 4.29 16.96L4.35 16.9C4.58054 16.6643 4.73519 16.365 4.794 16.0406C4.85282 15.7162 4.81312 15.3816 4.68 15.08C4.55324 14.7842 4.34276 14.532 4.07447 14.3543C3.80618 14.1766 3.49179 14.0813 3.17 14.08H3C2.46957 14.08 1.96086 13.8693 1.58579 13.4942C1.21071 13.1191 1 12.6104 1 12.08C1 11.5496 1.21071 11.0409 1.58579 10.6658C1.96086 10.2907 2.46957 10.08 3 10.08H3.09C3.42099 10.0723 3.742 9.96512 4.0113 9.77251C4.28059 9.5799 4.48572 9.31074 4.6 9C4.73312 8.69838 4.77282 8.36381 4.714 8.03941C4.65519 7.71502 4.50054 7.41568 4.27 7.18L4.21 7.12C4.02405 6.93425 3.87653 6.71368 3.77588 6.47088C3.67523 6.22808 3.62343 5.96783 3.62343 5.705C3.62343 5.44217 3.67523 5.18192 3.77588 4.93912C3.87653 4.69632 4.02405 4.47575 4.21 4.29C4.39575 4.10405 4.61632 3.95653 4.85912 3.85588C5.10192 3.75523 5.36217 3.70343 5.625 3.70343C5.88783 3.70343 6.14808 3.75523 6.39088 3.85588C6.63368 3.95653 6.85425 4.10405 7.04 4.29L7.1 4.35C7.33568 4.58054 7.63502 4.73519 7.95941 4.794C8.28381 4.85282 8.61838 4.81312 8.92 4.68H9C9.29577 4.55324 9.54802 4.34276 9.72569 4.07447C9.90337 3.80618 9.99872 3.49179 10 3.17V3C10 2.46957 10.2107 1.96086 10.5858 1.58579C10.9609 1.21071 11.4696 1 12 1C12.5304 1 13.0391 1.21071 13.4142 1.58579C13.7893 1.96086 14 2.46957 14 3V3.09C14.0013 3.41179 14.0966 3.72618 14.2743 3.99447C14.452 4.26276 14.7042 4.47324 15 4.6C15.3016 4.73312 15.6362 4.77282 15.9606 4.714C16.285 4.65519 16.5843 4.50054 16.82 4.27L16.88 4.21C17.0657 4.02405 17.2863 3.87653 17.5291 3.77588C17.7719 3.67523 18.0322 3.62343 18.295 3.62343C18.5578 3.62343 18.8181 3.67523 19.0609 3.77588C19.3037 3.87653 19.5243 4.02405 19.71 4.21C19.896 4.39575 20.0435 4.61632 20.1441 4.85912C20.2448 5.10192 20.2966 5.36217 20.2966 5.625C20.2966 5.88783 20.2448 6.14808 20.1441 6.39088C20.0435 6.63368 19.896 6.85425 19.71 7.04L19.65 7.1C19.4195 7.33568 19.2648 7.63502 19.206 7.95941C19.1472 8.28381 19.1869 8.61838 19.32 8.92V9C19.4468 9.29577 19.6572 9.54802 19.9255 9.72569C20.1938 9.90337 20.5082 9.99872 20.83 10H21C21.5304 10 22.0391 10.2107 22.4142 10.5858C22.7893 10.9609 23 11.4696 23 12C23 12.5304 22.7893 13.0391 22.4142 13.4142C22.0391 13.7893 21.5304 14 21 14H20.91C20.5882 14.0013 20.2738 14.0966 20.0055 14.2743C19.7372 14.452 19.5268 14.7042 19.4 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M19.4 15C19.2669 15.3016 19.2272 15.6362 19.286 15.9606C19.3448 16.285 19.4995 16.5843 19.73 16.82L19.79 16.88C19.976 17.0657 20.1235 17.2863 20.2241 17.5291C20.3248 17.7719 20.3766 18.0322 20.3766 18.295C20.3766 18.5578 20.3248 18.8181 20.2241 19.0609C20.1235 19.3037 19.976 19.5243 19.79 19.71C19.6043 19.896 19.3837 20.0435 19.1409 20.1441C18.8981 20.2448 18.6378 20.2966 18.375 20.2966C18.1122 20.2966 17.8519 20.2448 17.6091 20.1441C17.3663 20.0435 17.1457 19.896 16.96 19.71L16.9 19.65C16.6643 19.4195 16.365 19.2648 16.0406 19.206C15.7162 19.1472 15.3816 19.1869 15.08 19.32C14.7842 19.4468 14.532 19.6572 14.3543 19.9255C14.1766 20.1938 14.0813 20.5082 14.08 20.83V21C14.08 21.5304 13.8693 22.0391 13.4942 22.4142C13.1191 22.7893 12.6104 23 12.08 23C11.5496 23 11.0409 22.7893 10.6658 22.4142C10.2907 22.0391 10.08 21.5304 10.08 21V20.91C10.0723 20.579 9.96512 20.258 9.77251 19.9887C9.5799 19.7194 9.31074 19.5143 9 19.4C8.69838 19.2669 8.36381 19.2272 8.03941 19.286C7.71502 19.3448 7.41568 19.4995 7.18 19.73L7.12 19.79C6.93425 19.976 6.71368 20.1235 6.47088 20.2241C6.22808 20.3248 5.96783 20.3766 5.705 20.3766C5.44217 20.3766 5.18192 20.3248 4.93912 20.2241C4.69632 20.1235 4.47575 19.976 4.29 19.79C4.10405 19.6043 3.95653 19.3837 3.85588 19.1409C3.75523 18.8981 3.70343 18.6378 3.70343 18.375C3.70343 18.1122 3.75523 17.8519 3.85588 17.6091C3.95653 17.3663 4.10405 17.1457 4.29 16.96L4.35 16.9C4.58054 16.6643 4.73519 16.365 4.794 16.0406C4.85282 15.7162 4.81312 15.3816 4.68 15.08C4.55324 14.7842 4.34276 14.532 4.07447 14.3543C3.80618 14.1766 3.49179 14.0813 3.17 14.08H3C2.46957 14.08 1.96086 13.8693 1.58579 13.4942C1.21071 13.1191 1 12.6104 1 12.08C1 11.5496 1.21071 11.0409 1.58579 10.6658C1.96086 10.2907 2.46957 10.08 3 10.08H3.09C3.42099 10.0723 3.742 9.96512 4.0113 9.77251C4.28059 9.5799 4.48572 9.31074 4.6 9C4.73312 8.69838 4.77282 8.36381 4.714 8.03941C4.65519 7.71502 4.50054 7.41568 4.27 7.18L4.21 7.12C4.02405 6.93425 3.87653 6.71368 3.77588 6.47088C3.67523 6.22808 3.62343 5.96783 3.62343 5.705C3.62343 5.44217 3.67523 5.18192 3.77588 4.93912C3.87653 4.69632 4.02405 4.47575 4.21 4.29C4.39575 4.10405 4.61632 3.95653 4.85912 3.85588C5.10192 3.75523 5.36217 3.70343 5.625 3.70343C5.88783 3.70343 6.14808 3.75523 6.39088 3.85588C6.63368 3.95653 6.85425 4.10405 7.04 4.29L7.1 4.35C7.33568 4.58054 7.63502 4.73519 7.95941 4.794C8.28381 4.85282 8.61838 4.81312 8.92 4.68H9C9.29577 4.55324 9.54802 4.34276 9.72569 4.07447C9.90337 3.80618 9.99872 3.49179 10 3.17V3C10 2.46957 10.2107 1.96086 10.5858 1.58579C10.9609 1.21071 11.4696 1 12 1C12.5304 1 13.0391 1.21071 13.4142 1.58579C13.7893 1.96086 14 2.46957 14 3V3.09C14.0013 3.41179 14.0966 3.72618 14.2743 3.99447C14.452 4.26276 14.7042 4.47324 15 4.6C15.3016 4.73312 15.6362 4.77282 15.9606 4.714C16.285 4.65519 16.5843 4.50054 16.82 4.27L16.88 4.21C17.0657 4.02405 17.2863 3.87653 17.5291 3.77588C17.7719 3.67523 18.0322 3.62343 18.295 3.62343C18.5578 3.62343 18.8181 3.67523 19.0609 3.77588C19.3037 3.87653 19.5243 4.02405 19.71 4.21C19.896 4.39575 20.0435 4.61632 20.1441 4.85912C20.2448 5.10192 20.2966 5.36217 20.2966 5.625C20.2966 5.88783 20.2448 6.14808 20.1441 6.39088C20.0435 6.63368 19.896 6.85425 19.71 7.04L19.65 7.1C19.4195 7.33568 19.2648 7.63502 19.206 7.95941C19.1472 8.28381 19.1869 8.61838 19.32 8.92V9C19.4468 9.29577 19.6572 9.54802 19.9255 9.72569C20.1938 9.90337 20.5082 9.99872 20.83 10H21C21.5304 10 22.0391 10.2107 22.4142 10.5858C22.7893 10.9609 23 11.4696 23 12C23 12.5304 22.7893 13.0391 22.4142 13.4142C22.0391 13.7893 21.5304 14 21 14H20.91C20.5882 14.0013 20.2738 14.0966 20.0055 14.2743C19.7372 14.452 19.5268 14.7042 19.4 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                             </svg>
                             <span data-translate="settings">Настройки</span>
+                        </a>
+                        <a href="#" class="account-item" data-action="backups">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 6V12H20V6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M4 12L8 16H16L20 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <rect x="4" y="6" width="16" height="2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span data-translate="backups">Бекапы</span>
                         </a>
                         <a href="#" class="account-item" data-action="logout">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -222,7 +232,7 @@
                             <span data-translate="logout">Выйти</span>
                         </a>
                         <div class="account-divider"></div>
-                        <a href="https://discord.gg/s5JgHChaQE" target="_blank" class="account-item" data-action="discord">
+                        <a href="https://discord.gg/s5JgHChaQE" target="_blank" rel="noopener" class="account-item" data-action="discord">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.369-.444.85-.608 1.23a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.23A.077.077 0 0 0 8.562 3c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.093-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026 13.83 13.83 0 0 0 1.226-1.963.074.074 0 0 0-.041-.104 13.175 13.175 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.245.195.372.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028zM8.02 15.278c-1.182 0-2.157-1.069-2.157-2.38 0-1.312.956-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.956 2.38-2.157 2.38zm7.975 0c-1.183 0-2.157-1.069-2.157-2.38 0-1.312.955-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.946 2.38-2.157 2.38z" stroke="currentColor" stroke-width="1"/>
                             </svg>
@@ -253,7 +263,7 @@
                         <div class="preview-header">
                             <span id="preview-filename" data-translate="file_preview">Предпросмотр файла</span>
                         </div>
-                        <textarea id="preview-content" class="preview-content"></textarea>
+                        <textarea id="preview-content" class="preview-content" title="Предпросмотр содержимого файла"></textarea>
                     </div>
                 </div>
             </div>
@@ -383,7 +393,8 @@
                         <div class="tooltip-container">
                             <button id="clear-filters" class="icon-action-button clear" title="Сбросить все фильтры">
                                 <svg viewBox="0 0 24 24">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"></path>
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-3.59 10-8-3.59-8-8-8z"></path>
+                                    <path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6z"></path>
                                 </svg>
                             </button>
                             <div class="tooltip">Сбросить все фильтры</div>
@@ -508,7 +519,7 @@
                     </div>
                     <div class="info-actions">
                         <div class="tooltip-container">
-                            <button id="country-all-diplomacy" class="icon-action-button back">
+                            <button type="button" id="country-all-diplomacy" class="icon-action-button back" title="Дипломатия со всеми">
                                 <svg viewBox="0 0 24 24">
                                     <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9"/>
                                 </svg>
@@ -516,7 +527,7 @@
                             <div class="tooltip">Diplomacy with all</div>
                         </div>
                         <div class="tooltip-container">
-                            <button id="country-reforms" class="icon-action-button back">
+                            <button type="button" id="country-reforms" class="icon-action-button back" title="Реформы">
                                 <svg viewBox="0 0 24 24">
                                     <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9"/>
                                 </svg>
@@ -555,13 +566,13 @@
                                 <input type="number" id="country-color-r" min="0" max="255" placeholder="R">
                                 <input type="number" id="country-color-g" min="0" max="255" placeholder="G">
                                 <input type="number" id="country-color-b" min="0" max="255" placeholder="B">
-                                <button id="pick-country-color" class="icon-action-button back" title="Выбрать цвет">
+                                <button type="button" id="pick-country-color" class="icon-action-button back" title="Выбрать цвет">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M12 2l4 4-10 10-4-4 10-10z"/>
                                         <path d="M9 15l-2 5 5-2-3-3z"/>
                                     </svg>
                                 </button>
-                                <input type="color" id="country-color-picker">
+                                <input type="color" id="country-color-picker" title="Выбрать цвет">
                                 <button id="random-country-color" class="icon-action-button back" type="button" title="Случайный цвет">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
@@ -601,7 +612,7 @@
                         </div>
                         <div class="form-group">
                             <label data-translate="vassalof">Вассал страны:</label>
-                            <input type="text" id="country-vassalof" class="main-page-input" readonly>
+                            <input type="text" id="country-vassalof" class="main-page-input" readonly title="Вассал страны">
                         </div>
                     </div>
                     <div class="country-form">
@@ -800,9 +811,9 @@
                     </div>
                     <div class="info-actions">
                         <div class="tooltip-container">
-                            <button class="icon-action-button copy" onclick="window.moveManager.copyCurrentEvent()">
+                            <button type="button" class="icon-action-button copy" title="Копировать в буфер" onclick="window.moveManager.copyCurrentEvent()">
                                 <svg viewBox="0 0 24 24">
-                                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
                                     <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
                                     <line x1="12" y1="11" x2="12" y2="17"></line>
                                     <line x1="9" y1="14" x2="15" y2="14"></line>
@@ -811,7 +822,7 @@
                             <div class="tooltip">Копировать в буфер</div>
                         </div>
                         <div class="tooltip-container">
-                            <button class="icon-action-button copy" onclick="window.eventManager.copyCurrentEvent()">
+                            <button type="button" class="icon-action-button copy" title="Копировать" onclick="window.eventManager.copyCurrentEvent()">
                                 <svg viewBox="0 0 24 24">
                                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
@@ -820,7 +831,7 @@
                             <div class="tooltip">Копировать</div>
                         </div>
                         <div class="tooltip-container">
-                            <button class="icon-action-button delete" onclick="window.eventManager.deleteCurrentEvent()">
+                            <button type="button" class="icon-action-button delete" title="Удалить" onclick="window.eventManager.deleteCurrentEvent()">
                                 <svg viewBox="0 0 24 24">
                                     <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
                                 </svg>
@@ -1015,7 +1026,7 @@
                     <button class="close-modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <select id="country-select" class="country-select main-page-input">
+                    <select id="country-select" class="country-select main-page-input" title="Выберите страну">
                         <option data-translate="choose_country..." value="">Выберите страну...</option>
                     </select>
                     <div class="turn-input">
@@ -1058,27 +1069,25 @@
                             </tbody>
                         </table>
                     </div>
-                    <div id="requirement-editor" class="requirement-editor" style="display: none;">
+                    <div id="requirement-editor" class="requirement-editor hidden">
                         <div class="form-group">
                             <label for="requirement-type" data-translate="type"></label>
-                            <select id="requirement-type" class="main-page-input">
+                            <select id="requirement-type" class="main-page-input" title="Тип требования">
+                                <option value="" data-translate="select_type">Выберите тип</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="requirement-duration" data-translate="duration"></label>
-                            <input type="text" id="requirement-duration" class="main-page-input" autocomplete="off">
+                            <input type="text" id="requirement-duration" class="main-page-input" autocomplete="off" title="Длительность требования" placeholder="Длительность">
                         </div>
                         <div class="form-group">
                             <label for="requirement-subtype" data-translate="subtype"></label>
-                            <input type="text" id="requirement-subtype" class="main-page-input" autocomplete="off">
+                            <input type="text" id="requirement-subtype" class="main-page-input" autocomplete="off" title="Подтип требования" placeholder="Подтип">
                         </div>
                         <div class="form-group">
                             <label for="requirement-action" data-translate="action"></label>
-                            <select id="requirement-action" class="main-page-input">
-                                <option value="more" data-translate="more"></option>
-                                <option value="equal" data-translate="equal"></option>
-                                <option value="not_equal" data-translate="not_equal"></option>
-                                <option value="less" data-translate="less"></option>
+                            <select id="requirement-action" class="main-page-input" title="Действие требования">
+                                <option value="" data-translate="select_action">Выберите действие</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -1088,7 +1097,7 @@
                         <div class="info-actions">
                             <button type="button" id="save-requirement" class="icon-action-button save">
                                 <svg viewBox="0 0 24 24">
-                                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1-2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
                                     <polyline points="17 21 17 13 7 13 7 21"/>
                                     <polyline points="7 3 7 8 15 8"/>
                                 </svg>
@@ -1110,6 +1119,41 @@
                         </svg>
                         <span class="button-text" data-translate="add">Добавить</span>
                     </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно для бекапов -->
+        <div id="backups-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 data-translate="backups">Бекапы</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="backup-list" id="backup-list">
+                        <!-- Бекапы будут добавлены динамически -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!--button class="modal-button secondary" data-action="close" data-translate="close">Закрыть</button-->
+                    <button class="create-backup" onclick="window.backupManager.createBackup()" data-translate="create">Создать</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно подтверждения восстановления бекапа -->
+        <div id="restore-backup-confirm-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 data-translate="confirm_restore">Подтверждение восстановления</h3>
+                </div>
+                <div class="modal-body">
+                    <p data-translate="confirm_restore_message">Вы уверены, что хотите восстановить этот бекап? Все несохраненные изменения будут потеряны.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="delete-backup" data-action="cancel" data-translate="cancel">Отмена</button>
+                    <button class="restore-backup" data-action="confirm" data-translate="restore">Восстановить</button>
                 </div>
             </div>
         </div>
@@ -1242,7 +1286,7 @@
                                     <path d="M9 15l-2 5 5-2-3-3z"/>
                                 </svg>
                             </button -->
-                            <input type="color" id="reform-color-picker">
+                            <input type="color" id="reform-color-picker" title="Выбрать цвет">
                             <button id="random-reform-color" class="icon-action-button back" type="button" title="Случайный цвет">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
@@ -1257,7 +1301,6 @@
                             <option value="Democracy" data-translate="democracy">Democracy</option>
                             <option value="Monarchy" data-translate="monarchy">Monarchy</option>
                             <option value="Communism" data-translate="communism">Communism</option>
-                            <option value="Fascism" data-translate="fascism">Fascism</option>
                             <option value="Theocracy" data-translate="theocracy">Theocracy</option>
                             <option value="Trade Republic" data-translate="trade_republic">Trade Republic</option>
                             </select>
@@ -1382,7 +1425,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label data-translate="select_relation_type">Выберите тип отношений</label>
-                        <select id="massRelationType" class="param-relation-type main-page-input">
+                        <select id="massRelationType" class="param-relation-type main-page-input" title="Тип отношений">
                             <option value="allies" data-translate="allies">Союзники</option>
                             <option value="enemies" data-translate="enemies">Враги</option>
                             <option value="guaranteed" data-translate="independence_guarantees">Гарантии независимости</option>
@@ -1394,15 +1437,15 @@
                     </div>
                     <div class="form-group">
                         <label data-translate="relation_turn">Ход</label>
-                        <input type="number" class="param-turn main-page-input" value="0" min="0">
+                        <input type="number" class="param-turn main-page-input" value="0" min="0" title="Ход" placeholder="Ход">
                     </div>
                     <div class="form-group">
                         <label data-translate="relation_duration">Длительность</label>
-                        <input type="number" class="param-duration main-page-input" value="" min="0">
+                        <input type="number" class="param-duration main-page-input" value="" min="0" title="Длительность" placeholder="Длительность">
                     </div>
                     <div class="form-group">
                         <label data-translate="relation_initiator">Инициатор</label>
-                        <select class="param-initiator main-page-input">
+                        <select class="param-initiator main-page-input" title="Инициатор">
                             <option value="false" data-translate="no">Нет</option>
                             <option value="true" data-translate="yes">Да</option>
                         </select>

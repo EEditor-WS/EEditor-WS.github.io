@@ -54,7 +54,7 @@ class SettingsManager {
     }
 
     createSettingsContent() {
-        const content = document.querySelector('.settings-content');
+        /*const content = document.querySelector('.settings-content');
         if (!content) return;
 
         content.innerHTML = `
@@ -68,8 +68,19 @@ class SettingsManager {
                         ${this.translations[this.currentLang].clear_data}
                     </button>
                 </div>
+                <h3 data-translate="backup_settings">Настройки бекапов</h3>
+                <div class="backup-settings">
+                    <div class="backup-interval-setting">
+                        <label for="backup-interval" data-translate="backup_interval">Интервал автосохранения (минут):</label>
+                        <input type="number" id="backup-interval" value="5" min="1" max="60">
+                    </div>
+                    <div class="backup-limit-setting">
+                        <label for="backup-limit" data-translate="backup_limit">Максимальное количество бекапов:</label>
+                        <input type="number" id="backup-limit" value="20" min="1" max="100">
+                    </div>
+                </div>
             </div>
-        `;
+        `;*/
 
         // Добавляем стили
         const style = document.createElement('style');

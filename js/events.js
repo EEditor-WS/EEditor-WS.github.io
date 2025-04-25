@@ -54,17 +54,26 @@ class EventManager {
         }
     }
 
-    setJsonData(jsonData) {
+    async loadScenario(content) {
         try {
-            this.jsonData = jsonData;
+            this.jsonData = JSON.parse(content);
             if (!this.jsonData.custom_events) {
                 this.jsonData.custom_events = {};
             }
             this.updateEventsList();
+            return true;
         } catch (error) {
-            console.error('Ошибка при установке JSON данных:', error);
-            this.fileInfo.textContent = window.translator.translate('data_update_error');
+            console.error('Error loading scenario in EventManager:', error);
+            return false;
         }
+    }
+
+    setJsonData(jsonData) {
+        this.jsonData = jsonData;
+        if (!this.jsonData.custom_events) {
+            this.jsonData.custom_events = {};
+        }
+        this.updateEventsList();
     }
 
     init() {
