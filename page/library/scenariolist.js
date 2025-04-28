@@ -1450,6 +1450,130 @@ const scenariosData = [
         type: "sandbox",
         period: "modern"
     },
+    {
+        id: [
+            "eenot",
+            "moldavia",
+            "v1",
+            "1990",
+        ],
+        title: "Moldavia - 1990",
+        author: {
+            name: "@eenot",
+            link: "https://discord.com/users/794675642037567491",
+            color: "#3B83BD"
+        },
+        year: "1990",
+        languages: ["RU"],
+        gameMode: "Sandbox",
+        tags: ["For Phones", "without events", "without reforms", "Modern Day"],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Moldavia by ЕЕнот",
+            id: "eenot_moldavia_v1"
+        },
+        awards: ["enot"],
+        // Hidden parameters
+        publishDate: "2025-04-28",
+        lastUpdate: "2025-04-28",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "modern",
+        status: "in_development",
+    },
+    {
+        id: [
+            "eenot",
+            "moldavia",
+            "v1",
+            "2025",
+        ],
+        title: "Moldavia - 2025",
+        author: {
+            name: "@eenot",
+            link: "https://discord.com/users/794675642037567491",
+            color: "#3B83BD"
+        },
+        year: "2025",
+        languages: ["EN","RU"],
+        gameMode: "Sandbox",
+        tags: ["For Phones", "without events", "without reforms", "Modern Day"],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Moldavia by ЕЕнот",
+            id: "eenot_moldavia_v1"
+        },
+        awards: ["enot"],
+        // Hidden parameters
+        publishDate: "2025-04-28",
+        lastUpdate: "2025-04-28",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "modern",
+        status: "in_development",
+    },
+    {
+        id: [
+            "eenot",
+            "moldavia",
+            "v1",
+            "1941",
+        ],
+        title: "Moldavia - 1941",
+        author: {
+            name: "@eenot",
+            link: "https://discord.com/users/794675642037567491",
+            color: "#3B83BD"
+        },
+        year: "1941",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: ["For Phones", "without events", "without reforms", "World War 2"],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Moldavia by ЕЕнот",
+            id: "eenot_moldavia_v1"
+        },
+        awards: ["enot"],
+        // Hidden parameters
+        publishDate: "2025-04-28",
+        lastUpdate: "2025-04-28",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ww2",
+        status: "in_development",
+    },
+    {
+        id: [
+            "eenot",
+            "moldavia",
+            "v1",
+            "1944",
+        ],
+        title: "Moldavia - 1944",
+        author: {
+            name: "@eenot",
+            link: "https://discord.com/users/794675642037567491",
+            color: "#3B83BD"
+        },
+        year: "1944",
+        languages: ["RU"],
+        gameMode: "Sandbox",
+        tags: ["For Phones", "without events", "without reforms", "World War 2"],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Moldavia by ЕЕнот",
+            id: "eenot_moldavia_v1"
+        },
+        awards: ["enot"],
+        // Hidden parameters
+        publishDate: "2025-04-28",
+        lastUpdate: "2025-04-28",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ww2",
+        status: "in_development",
+    },
 ];
 
 console.log("Данные сценариев загружены");
