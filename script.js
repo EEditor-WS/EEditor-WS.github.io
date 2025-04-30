@@ -879,7 +879,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 input.click();
                 showWarning('Загружено', 'Ошибка редактирования файла. Вместо сохранения, файл будет скачан.');
-            }
+            };
         } catch (err) {
             console.error('Ошибка при открытии файла:', err);
             if (fileInfo) {

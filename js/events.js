@@ -1657,7 +1657,13 @@ class EventManager {
                     const groups = new Set();
                     Object.values(this.jsonData.lands || {}).forEach(country => {
                         if (country.group_name && typeof country.group_name === 'string') {
-                            groups.add(country.group_name);
+                            // Разбиваем строку групп по запятой и добавляем каждую группу отдельно
+                            country.group_name.split(',').forEach(group => {
+                                const trimmedGroup = group.trim();
+                                if (trimmedGroup) {
+                                    groups.add(trimmedGroup);
+                                }
+                            });
                         }
                     });
 
@@ -1666,9 +1672,9 @@ class EventManager {
                     select.id = 'requirement-value';
                     select.className = 'main-page-input';
 
-                    // Формируем все опции сразу через шаблонную строку
+                    // Формируем все опции сразу через шаблонную строку, сортируем группы по алфавиту
                     select.innerHTML = `
-                        <option value="">[Нет группы]</option>
+                        <option value="">[${window.translator.translate('empty_group')}]</option>
                         ${Array.from(groups)
                             .sort((a, b) => a.localeCompare(b))
                             .map(group => `<option value="${group}">${group}</option>`)

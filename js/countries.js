@@ -98,7 +98,7 @@ class CountryManager {
             .map(([id, country]) => ({
                 id,
                 name: country.name || '',
-                group: country.group || '', // Changed from group_name to group
+                group: country.group_name || '', // Changed from group_name to group
                 color: country.color || [128, 128, 128],
                 provinces: provincesCount[id] || 0,
                 capital_name: country.capital_name || '',
@@ -135,13 +135,13 @@ class CountryManager {
 
             // Отдельно проверяем фильтр групп
             if (this.filters.groups.length > 0) {
-                if (!country.group) { // Changed from group_name to group
+                if (!country.group_name) { // Changed from group_name to group
                     // Если у страны нет группы, проверяем есть ли пустая группа в фильтре
                     return this.filters.groups.includes('');
                 }
                 
                 // Разбиваем группы страны на массив
-                const countryGroups = country.group.split(',').map(g => g.trim()); // Changed from group_name to group
+                const countryGroups = country.group_name.split(',').map(g => g.trim()); // Changed from group_name to group
                 
                 // Проверяем, есть ли хотя бы одна группа из фильтра в группах страны
                 return this.filters.groups.some(filterGroup => {
@@ -225,7 +225,7 @@ class CountryManager {
 
             const groupCell = document.createElement('td');
             groupCell.setAttribute('data-country-id', country.id);
-            groupCell.textContent = country.group;
+            groupCell.textContent = country.group_name;
 
             const provincesCell = document.createElement('td');
             provincesCell.setAttribute('data-country-id', country.id);
@@ -731,7 +731,7 @@ class CountryManager {
 
         this.setFormValues({
             'country-name': country.name,
-            'country-group': country.group || '', // Changed from group_name to group
+            'country-group': country.group_name || '', // Changed from group_name to group
             'country-capital': country.capital_name || '',
             'country-capital-id': country.capital || '',
             'country-defeated': country.defeated ? 'true' : 'false',
@@ -1113,7 +1113,7 @@ class CountryManager {
 
             // Обновляем основные данные
             country.name = document.getElementById('country-name').value;
-            country.group = document.getElementById('country-group').value; // Changed from group_name to group
+            country.group_name = document.getElementById('country-group').value; // Changed from group_name to group
             country.capital_name = document.getElementById('country-capital').value;
             const capitalId = parseInt(document.getElementById('country-capital-id').value);
             if (!isNaN(capitalId) && capitalId > 0) {

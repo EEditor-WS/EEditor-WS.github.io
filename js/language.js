@@ -1606,7 +1606,7 @@ const translations = {
         "vassalof": "Вассал страны",
         "event_choice": "Выбор события",
         "received_event": "Полученное событие",
-        "group_name": "Название группы",
+        "group_name": "Группа",
         "is_player": "Является игроком",
         "has_vassal": "Имеет вассала",
         "diplomacy_become_vassal": "Стать вассалом",
