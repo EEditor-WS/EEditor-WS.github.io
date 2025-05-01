@@ -1574,6 +1574,36 @@ const scenariosData = [
         period: "ww2",
         status: "in_development",
     },
+    {
+        id: [
+            "eenot",
+            "world",
+            "v1",
+            "ww1",
+        ],
+        title: "World War 1",
+        author: {
+            name: "@totoska",
+            link: "https://discord.com/users/820194328201920524",
+            color: "#3B83BD"
+        },
+        year: "1914",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: ["World", "Historical", "WW1"],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "World by ЕЕнот",
+            id: "eenot_world_v1"
+        },
+        awards: ["star","enot"],
+        // Hidden parameters
+        publishDate: "2025-05-01",
+        lastUpdate: "2025-05-01",
+        hiddenScore: 10,
+        type: "sandbox",
+        period: "ww1"
+    },
 ];
 
 console.log("Данные сценариев загружены");
