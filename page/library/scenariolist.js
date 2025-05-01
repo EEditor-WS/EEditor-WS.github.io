@@ -1503,7 +1503,7 @@ const scenariosData = [
             name: "Moldavia by ЕЕнот",
             id: "eenot_moldavia_v1"
         },
-        awards: ["enot"],
+        awards: [],
         // Hidden parameters
         publishDate: "2025-04-28",
         lastUpdate: "2025-04-28",
@@ -1534,7 +1534,7 @@ const scenariosData = [
             name: "Moldavia by ЕЕнот",
             id: "eenot_moldavia_v1"
         },
-        awards: ["enot"],
+        awards: [],
         // Hidden parameters
         publishDate: "2025-04-28",
         lastUpdate: "2025-04-28",
@@ -1565,7 +1565,7 @@ const scenariosData = [
             name: "Moldavia by ЕЕнот",
             id: "eenot_moldavia_v1"
         },
-        awards: ["enot"],
+        awards: [],
         // Hidden parameters
         publishDate: "2025-04-28",
         lastUpdate: "2025-04-28",
