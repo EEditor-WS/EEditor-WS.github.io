@@ -1623,7 +1623,7 @@ const scenariosData = [
         tags: [],
         worldCreator: "ЕЕнот",
         map: {
-            name: "enaatme by BluePum",
+            name: "Europe+ by BluePum",
             id: "bluepum_enaatme_v2"
         },
         awards: [],
@@ -1653,7 +1653,7 @@ const scenariosData = [
         tags: [],
         worldCreator: "ЕЕнот",
         map: {
-            name: "enaatme by BluePum",
+            name: "Europe+ by BluePum",
             id: "bluepum_enaatme_v2"
         },
         awards: ["star","enot"],
@@ -1683,7 +1683,7 @@ const scenariosData = [
         tags: [],
         worldCreator: "ЕЕнот",
         map: {
-            name: "enaatme by BluePum",
+            name: "Europe+ by BluePum",
             id: "bluepum_enaatme_v2"
         },
         awards: [],
@@ -1713,7 +1713,7 @@ const scenariosData = [
         tags: [],
         worldCreator: "ЕЕнот",
         map: {
-            name: "enaatme by BluePum",
+            name: "Europe+ by BluePum",
             id: "bluepum_enaatme_v4"
         },
         awards: ["star","enot"],
@@ -1743,7 +1743,7 @@ const scenariosData = [
         tags: [],
         worldCreator: "ЕЕнот",
         map: {
-            name: "enaatme by BluePum",
+            name: "Europe+ by BluePum",
             id: "bluepum_enaatme_v4"
         },
         awards: ["star","enot"],
