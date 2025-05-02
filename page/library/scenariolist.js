@@ -1671,13 +1671,13 @@ const scenariosData = [
             "v2",
             "fc",
         ],
-        title: "1444",
+        title: "First coalition of france",
         author: {
             name: "@atharva04303",
             link: "https://discord.com/users/1306545186146353193",
             color: "#3B83BD"
         },
-        year: "1444",
+        year: "1792",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
