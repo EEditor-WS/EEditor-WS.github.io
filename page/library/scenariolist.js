@@ -1604,6 +1604,96 @@ const scenariosData = [
         type: "sandbox",
         period: "ww1"
     },
+    {
+        id: [
+            "bluepum",
+            "europe+",
+            "v2",
+            "1444-atharva",
+        ],
+        title: "1444",
+        author: {
+            name: "@atharva04303",
+            link: "https://discord.com/users/1306545186146353193",
+            color: "#3B83BD"
+        },
+        year: "1444",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Europe+ by BluePum",
+            id: "bluepum_europe+_v2"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-04-30",
+        lastUpdate: "2025-04-30",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ancient"
+    },
+    {
+        id: [
+            "bluepum",
+            "europe+",
+            "v2",
+            "modern-atharva",
+        ],
+        title: "Modern",
+        author: {
+            name: "@atharva04303",
+            link: "https://discord.com/users/1306545186146353193",
+            color: "#3B83BD"
+        },
+        year: "2025",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Europe+ by BluePum",
+            id: "bluepum_europe+_v2"
+        },
+        awards: ["star","enot"],
+        // Hidden parameters
+        publishDate: "2025-04-29",
+        lastUpdate: "2025-04-29",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "modern"
+    },
+    {
+        id: [
+            "bluepum",
+            "europe+",
+            "v2",
+            "fc",
+        ],
+        title: "1444",
+        author: {
+            name: "@atharva04303",
+            link: "https://discord.com/users/1306545186146353193",
+            color: "#3B83BD"
+        },
+        year: "1444",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Europe+ by BluePum",
+            id: "bluepum_europe+_v2"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-04-30",
+        lastUpdate: "2025-04-30",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ancient"
+    },
 ];
 
 console.log("Данные сценариев загружены");
