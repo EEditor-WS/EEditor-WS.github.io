@@ -1694,6 +1694,66 @@ const scenariosData = [
         type: "sandbox",
         period: "ancient"
     },
+    {
+        id: [
+            "bluepum",
+            "europe+",
+            "v4",
+            "1991",
+        ],
+        title: "1991",
+        author: {
+            name: "@blue_pum_67269",
+            link: "https://discord.com/users/1260558860796825610",
+            color: "#3B83BD"
+        },
+        year: "2025",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Europe+ by BluePum",
+            id: "bluepum_europe+_v4"
+        },
+        awards: ["star","enot"],
+        // Hidden parameters
+        publishDate: "2025-05-02",
+        lastUpdate: "2025-05-02",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "modern"
+    },
+    {
+        id: [
+            "bluepum",
+            "europe+",
+            "v4",
+            "ww1",
+        ],
+        title: "World War 1",
+        author: {
+            name: "@blue_pum_67269",
+            link: "https://discord.com/users/1260558860796825610",
+            color: "#3B83BD"
+        },
+        year: "1914",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Europe+ by BluePum",
+            id: "bluepum_europe+_v4"
+        },
+        awards: ["star","enot"],
+        // Hidden parameters
+        publishDate: "2025-05-02",
+        lastUpdate: "2025-05-02",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ww1"
+    },
 ];
 
 console.log("Данные сценариев загружены");
