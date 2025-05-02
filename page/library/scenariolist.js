@@ -1607,7 +1607,7 @@ const scenariosData = [
     {
         id: [
             "bluepum",
-            "europe+",
+            "enaatme",
             "v2",
             "1444-atharva",
         ],
@@ -1623,8 +1623,8 @@ const scenariosData = [
         tags: [],
         worldCreator: "ЕЕнот",
         map: {
-            name: "Europe+ by BluePum",
-            id: "bluepum_europe+_v2"
+            name: "enaatme by BluePum",
+            id: "bluepum_enaatme_v2"
         },
         awards: [],
         // Hidden parameters
@@ -1637,7 +1637,7 @@ const scenariosData = [
     {
         id: [
             "bluepum",
-            "europe+",
+            "enaatme",
             "v2",
             "modern-atharva",
         ],
@@ -1653,8 +1653,8 @@ const scenariosData = [
         tags: [],
         worldCreator: "ЕЕнот",
         map: {
-            name: "Europe+ by BluePum",
-            id: "bluepum_europe+_v2"
+            name: "enaatme by BluePum",
+            id: "bluepum_enaatme_v2"
         },
         awards: ["star","enot"],
         // Hidden parameters
@@ -1667,7 +1667,7 @@ const scenariosData = [
     {
         id: [
             "bluepum",
-            "europe+",
+            "enaatme",
             "v2",
             "fc",
         ],
@@ -1683,8 +1683,8 @@ const scenariosData = [
         tags: [],
         worldCreator: "ЕЕнот",
         map: {
-            name: "Europe+ by BluePum",
-            id: "bluepum_europe+_v2"
+            name: "enaatme by BluePum",
+            id: "bluepum_enaatme_v2"
         },
         awards: [],
         // Hidden parameters
@@ -1697,7 +1697,7 @@ const scenariosData = [
     {
         id: [
             "bluepum",
-            "europe+",
+            "enaatme",
             "v4",
             "1991",
         ],
@@ -1713,8 +1713,8 @@ const scenariosData = [
         tags: [],
         worldCreator: "ЕЕнот",
         map: {
-            name: "Europe+ by BluePum",
-            id: "bluepum_europe+_v4"
+            name: "enaatme by BluePum",
+            id: "bluepum_enaatme_v4"
         },
         awards: ["star","enot"],
         // Hidden parameters
@@ -1727,7 +1727,7 @@ const scenariosData = [
     {
         id: [
             "bluepum",
-            "europe+",
+            "enaatme",
             "v4",
             "ww1",
         ],
@@ -1743,8 +1743,8 @@ const scenariosData = [
         tags: [],
         worldCreator: "ЕЕнот",
         map: {
-            name: "Europe+ by BluePum",
-            id: "bluepum_europe+_v4"
+            name: "enaatme by BluePum",
+            id: "bluepum_enaatme_v4"
         },
         awards: ["star","enot"],
         // Hidden parameters
