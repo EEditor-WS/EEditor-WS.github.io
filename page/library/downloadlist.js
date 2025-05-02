@@ -1,6 +1,7 @@
 console.log('Library downloadlist.js loaded');
 const libLink = 'https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/';
 //const libLink = 'http://192.168.100.18:8081/'
+//const libLink = 'https://ee-lib-data.netlify.app/'
 
 // Award score values задаються в другом файле.
 
@@ -154,7 +155,7 @@ function generateScenarioCard(scenario) {
                 <div class="download-up">
                     <div class="download-image-container">
                         <a href="${detailsLink}">
-                            <img src="${imagePath}" class="download-goto-page" style="width: 250px; border-radius: 8px;">
+                            <img src="${imagePath}" class="download-goto-page" style="width: 250px; border-radius: 15px 15px 0 0;">
                         </a>
                         <div class="download-awards">
                             ${awardsHTML}
@@ -197,7 +198,7 @@ function generateScenarioCard(scenario) {
                         <img src="world.svg" class="download-info-ico" />
                         <p>${scenario.map.name}</p>
                     </div>
-                    <button class="download-download-button" onclick="libDownloadScenario('${scenarioPath}', '${mapId}', '${scenario.id[0]}', '${scenario.id[1]}', '${scenario.id[2]}')" style="background-color: #44944A; border-radius: 8px; width: 45px; height: 45px; border: none; cursor: pointer;">
+                    <button class="download-download-button" onclick="libDownloadScenario('${scenarioPath}', '${mapId}', '${scenario.id[0]}', '${scenario.id[1]}', '${scenario.id[2]}')" style="background-color: #44944A; border-radius: 15px; width: 45px; height: 45px; border: none; cursor: pointer;">
                         <img src="download.svg" class="download-info-ico" />
                     </button>
                 </div>

@@ -19,7 +19,7 @@
     top: 10px;
     right: 10px;
     padding: 4px 8px;
-    border-radius: 4px;
+    border-radius: 15px;
     font-size: 12px;
     font-weight: 500;
     color: white;
@@ -88,6 +88,7 @@
     flex-direction: column;
     width: 250px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
 }
 
 .download-image-container {
@@ -168,7 +169,7 @@
     gap: 10px;
     padding: 10px;
     background-color: #1e1e1e;
-    border-radius: 5px;
+    border-radius: 15px;
     width: 100%;
 }
 
@@ -483,4 +484,12 @@
 .modal-button.secondary {
     background-color: var(--background-tertiary);
     color: var(--text-primary);
+}
+
+.nav-button, .back {
+    background-color: rgba(52, 152, 219, 0.2);
+    color: #3498db;
+    padding: 8px 16px;
+    border-radius: 15px;
+    height: 20px;
 }
