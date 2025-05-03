@@ -1458,6 +1458,7 @@ body {
     color: #e0e0e0;
     font-size: 14px;
     cursor: pointer;
+    -webkit-user-select: none;
     user-select: none;
     position: relative;
     padding-right: 20px;
@@ -1517,4 +1518,175 @@ body {
 .country-actions {
     display: flex;
     gap: 10px;
+}
+
+/* MAPS STYLES */
+
+/* Map cards styles */
+.map-card {
+    background: var(--background-tertiary);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.map-card .card-stats {
+    display: flex;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.map-card .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.map-card .stat-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.map-card .stat-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.map-card .feature-tag {
+    display: inline-block;
+    padding: 4px 8px;
+    margin: 4px;
+    background: var(--background-secondary);
+    border-radius: 4px;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.map-card .card-features {
+    margin: 8px 0;
+}
+
+/* Map filters styles */
+/*#map-lib-filters {
+    position: fixed;
+    right: -300px;
+    top: 0;
+    bottom: 0;
+    width: 300px;
+    background: var(--background-secondary);
+    transition: right 0.3s ease;
+    z-index: 1000;
+    padding: 16px;
+}
+
+#map-lib-filters.active {
+    right: 0;
+}*/
+
+.map-filter-group {
+    margin-bottom: 16px;
+}
+
+.map-filter-group .filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+/* Map filter checkboxes */
+.map-filter-group .checkbox-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.map-filter-group .checkbox-list label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.map-filter-group .checkbox-list input[type="checkbox"] {
+    margin: 0;
+}
+
+.card-regions {
+    margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.region-tag {
+    display: inline-block;
+    padding: 4px 8px;
+    background: #2a2a2a;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #888;
+}
+
+.stat-value[data-load="ultralight"] {
+    color: #2ecc71;
+}
+
+.stat-value[data-load="mobile"] {
+    color: #3498db;
+}
+
+.stat-value[data-load="normal"] {
+    color: #f1c40f;
+}
+
+.stat-value[data-load="heavy"] {
+    color: #e67e22;
+}
+
+.stat-value[data-load="superheavy"] {
+    color: #e74c3c;
+}
+
+.header-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.header-logo {
+    width: 35px;
+}
+
+.header-title {
+    max-height: 35px;
+}
+
+.header-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 8px;
+    display: none;
+}
+
+.tooltip-positioned {
+    left: 1278.5px;
+    top: 106px;
+}
+
+.collapse-button {
+    width: 25px;
+    font-size: 25px;
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+.error-text {
+    font-weight: bold;
+    margin-bottom: 15px;
 }

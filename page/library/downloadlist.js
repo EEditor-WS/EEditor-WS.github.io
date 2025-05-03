@@ -169,22 +169,22 @@ function generateScenarioCard(scenario) {
                     <a href="${detailsLink}" class="download-title download-goto-page">${scenario.title}</a>
                     <div class="download-row-big">
                         <div class="download-row">
-                            <img src="autor.svg" class="download-info-ico" />
+                            <img src="../../img/library/autor.svg" class="download-info-ico" />
                             <a href="${scenario.author.link}" style="color: ${scenario.author.color}">${truncateAuthorName(scenario.author.name)}</a>
                         </div>
                         <div class="download-row">
                             <p>${scenario.year}</p>
-                            <img src="calendar.svg" class="download-info-ico" />
+                            <img src="../../img/library/calendar.svg" class="download-info-ico" />
                         </div>
                     </div>
                     <div class="download-row-big">
                         <div class="download-row">
-                            <img src="flag.svg" class="download-info-ico" />
+                            <img src="../../img/library/flag.svg" class="download-info-ico" />
                             <p>${scenario.languages.join(", ")}</p>
                         </div>
                         <div class="download-row">
                             <a href="#" style="color: #6e8699">${scenario.gameMode}</a>
-                            <img src="gamemode.svg" class="download-info-ico" />
+                            <img src="../../img/library/gamemode.svg" class="download-info-ico" />
                         </div>
                     </div>
                     <div class="download-tags">
@@ -195,11 +195,11 @@ function generateScenarioCard(scenario) {
             <div class="download-down">
                 <div class="download-row-big">
                     <div class="download-row">
-                        <img src="world.svg" class="download-info-ico" />
+                        <img src="../../img/library/world.svg" class="download-info-ico" />
                         <p>${scenario.map.name}</p>
                     </div>
                     <button class="download-download-button" onclick="libDownloadScenario('${scenarioPath}', '${mapId}', '${scenario.id[0]}', '${scenario.id[1]}', '${scenario.id[2]}')" style="background-color: #44944A; border-radius: 15px; width: 45px; height: 45px; border: none; cursor: pointer;">
-                        <img src="download.svg" class="download-info-ico" />
+                        <img src="../../img/library/download.svg" class="download-info-ico" />
                     </button>
                 </div>
             </div>

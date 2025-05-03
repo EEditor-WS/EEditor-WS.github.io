@@ -223,3 +223,107 @@ function libClearFilters() {
     libApplyFilters();
 }
 
+// КАРТЫ
+
+// Функция для отображения/скрытия фильтров карт
+function libShowMapFilters() {
+    const filtersElement = document.querySelector('#map-lib-filters');
+    if (filtersElement) {
+        filtersElement.classList.toggle('active');
+    }
+}
+
+// Функция для получения выбранных значений чекбоксов
+function getCheckedValuesMap(name) {
+    return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`))
+        .map(cb => cb.value);
+}
+
+// Функция для применения фильтров к картам
+function applyMapFilters() {
+    const searchText = document.getElementById('map-lib-search').value.toLowerCase();
+    const authorFilter = document.getElementById('map-lib-author-filter').value.toLowerCase();
+    const typeFilter = document.getElementById('map-lib-type-filter').value;
+    
+    // Получаем выбранные особенности
+    const selectedFeatures = getCheckedValuesMap('features');
+    
+    // Получаем минимальное количество провинций
+    const provinceFilters = getCheckedValuesMap('provinces')
+        .map(v => parseInt(v))
+        .sort((a, b) => b - a); // Сортируем по убыванию
+    const minProvinces = provinceFilters[0] || 0;
+
+    // Создаем объект с фильтрами
+    const filters = {
+        search: searchText,
+        author: authorFilter,
+        type: typeFilter,
+        features: selectedFeatures,
+        minProvinces: minProvinces
+    };
+
+    // Применяем фильтры и отображаем карты
+    displayMaps(filters);
+}
+
+// Функция для очистки фильтров карт
+function clearMapFilters() {
+    // Очищаем поле поиска
+    document.getElementById('map-lib-search').value = '';
+    
+    // Сбрасываем селекты
+    document.getElementById('map-lib-author-filter').value = '';
+    document.getElementById('map-lib-type-filter').value = '';
+    
+    // Снимаем все чекбоксы
+    document.querySelectorAll('input[type="checkbox"][name="features"]').forEach(cb => {
+        cb.checked = false;
+    });
+    document.querySelectorAll('input[type="checkbox"][name="provinces"]').forEach(cb => {
+        cb.checked = false;
+    });
+
+    // Применяем фильтры
+    applyMapFilters();
+}
+
+// Обработчик для загрузки карты
+async function downloadMap(mapId) {
+    showSuccess(window.translator.translate('downloading'), window.translator.translate('downloading_map'));
+    
+    // TODO: Добавить реальную логику загрузки карты
+    console.log(`Downloading map: ${mapId}`);
+    
+    // Имитация загрузки
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    showSuccess(window.translator.translate('ready'), window.translator.translate('map_downloaded'));
+}
+
+// Инициализация при загрузке страницы
+document.addEventListener('DOMContentLoaded', () => {
+    // Подключаем maplist.js
+    const script = document.createElement('script');
+    script.src = 'maplist.js';
+    script.onload = () => {
+        // После загрузки списка карт, отображаем их
+        displayMaps();
+    };
+    document.head.appendChild(script);
+
+    // Добавляем обработчики для кнопок навигации
+    document.querySelectorAll('.nav-button').forEach(button => {
+        button.addEventListener('click', () => {
+            // Убираем активный класс у всех кнопок и страниц
+            document.querySelectorAll('.nav-button').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            
+            // Добавляем активный класс нужной кнопке и странице
+            button.classList.add('active');
+            const pageId = button.getAttribute('data-page');
+            document.getElementById(pageId)?.classList.add('active');
+        });
+    });
+});
+
