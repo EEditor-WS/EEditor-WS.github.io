@@ -1703,8 +1703,8 @@ const scenariosData = [
         ],
         title: "1991",
         author: {
-            name: "@blue_pum_67269",
-            link: "https://discord.com/users/1260558860796825610",
+            name: "@atharva04303",
+            link: "https://discord.com/users/1306545186146353193",
             color: "#3B83BD"
         },
         year: "2025",
@@ -1719,7 +1719,7 @@ const scenariosData = [
         awards: ["star","enot"],
         // Hidden parameters
         publishDate: "2025-05-02",
-        lastUpdate: "2025-05-02",
+        lastUpdate: "2025-05-03",
         hiddenScore: 0,
         type: "sandbox",
         period: "modern"
@@ -1753,6 +1753,66 @@ const scenariosData = [
         hiddenScore: 0,
         type: "sandbox",
         period: "ww1"
+    },
+    {
+        id: [
+            "bluepum",
+            "enaatme",
+            "v1",
+            "ww2",
+        ],
+        title: "World War 2",
+        author: {
+            name: "@radardev",
+            link: "https://discord.com/users/951467148063158324",
+            color: "#3B83BD"
+        },
+        year: "1936",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Europe+ by BluePum",
+            id: "bluepum_enaatme_v1"
+        },
+        awards: ["star","enot"],
+        // Hidden parameters
+        publishDate: "2025-04-27",
+        lastUpdate: "2025-04-27",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ww2"
+    },
+    {
+        id: [
+            "bluepum",
+            "enaatme",
+            "v2",
+            "cw",
+        ],
+        title: "Cold War",
+        author: {
+            name: "@zachary.bachary",
+            link: "https://discord.com/users/804839006403428423",
+            color: "#3B83BD"
+        },
+        year: "1964",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Europe+ by BluePum",
+            id: "bluepum_enaatme_v2"
+        },
+        awards: ["enot"],
+        // Hidden parameters
+        publishDate: "2025-04-29",
+        lastUpdate: "2025-04-29",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "cw"
     },
 ];
 
