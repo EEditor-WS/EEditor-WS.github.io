@@ -1,0 +1,73 @@
+End-User License Agreement (EULA)
+
+for users submitting scenarios and/or maps to the library
+
+Effective date: [insert date]
+
+1. General Terms
+
+This End-User License Agreement (hereinafter referred to as the “Agreement”) governs the relationship between you (the “User”) and the owner of the scenario and map library (the “Administrator”) regarding content submitted by the User to the library, including but not limited to scenarios, maps, descriptions, images, and related materials (“Content”).
+
+By submitting Content to the library, the User confirms that they have read, understood, and agreed to the terms of this Agreement.
+
+
+---
+
+2. Content Rights
+
+2.1. All copyrights to the Content remain with the User.
+
+2.2. By submitting Content to the library, the User grants the Administrator a non-exclusive, royalty-free, perpetual, irrevocable, worldwide license to:
+
+use the Content for purposes related to the operation, development, and promotion of the library;
+
+reproduce, distribute, and share the Content with third parties;
+
+modify, adapt, standardize, and process the Content (including correcting errors, converting formats, translation, etc.);
+
+include the Content in collections, archives, bundles, or other projects.
+
+
+2.3. The User affirms that they are the sole copyright holder of the Content or have the legal right to grant such a license.
+
+
+---
+
+3. User Restrictions
+
+3.1. The User agrees not to submit Content that:
+
+infringes on the intellectual property rights of others;
+
+contains malware, exploits, or links to malicious resources;
+
+violates laws or public moral standards;
+
+is intended for spam, advertising, or harmful activities.
+
+
+3.2. The Administrator reserves the right to remove or modify any Content that violates this Agreement or the library's standards.
+
+
+---
+
+
+4. Disclaimer of Liability
+
+4.1. The Administrator is not responsible for any damages arising from the use or inability to use the Content, including modified or adapted versions.
+
+4.2. The library is provided "as is", without warranties of any kind, either express or implied.
+
+
+---
+
+5. Feedback and Suggestions
+
+5.1. The User may submit suggestions for improving the library. Such suggestions become the property of the Administrator and may be used without additional compensation or permission.
+
+
+---
+
+6. Miscellaneous
+
+6.1. The Administrator may update this Agreement at any time. The updated version will be posted in the library, and continued use will be considered acceptance of the new terms.
