@@ -1,24 +1,5 @@
 mapsData = [
     {
-        id: ["jalhund", "europe", "vg"],
-        title: "Standart Europe",
-        author: {
-            name: "@jalhund",
-            link: "https://discord.com/users/277053272959008768",
-            color: "#3B83BD"
-        },
-        description: "Builded-in map of Europe by game developer",
-        type: "continent",
-        region: ["europe"],
-        provinces: 293,
-        features: ["water_provinces", "islands"],
-        status: "completed",
-        publishDate: "1912-04-15",
-        lastUpdate: "2077-01-01",
-        load: "mobile",
-        hiddenScore: 0,
-    },
-    {
         id: ["eenot", "world", "v1"],
         title: "World by ЕЕнот",
         author: {
@@ -38,6 +19,25 @@ mapsData = [
         hiddenScore: 0,
     },
     {
+        id: ["eenot", "moldavia", "v1"],
+        title: "Moldavia by ЕЕнот",
+        author: {
+            name: "@eenot",
+            link: "https://discord.com/users/852608191783919676",
+            color: "#3B83BD"
+        },
+        description: "Map of Republic of Moldova, Pridnestrovian Moldavian Rupublic and Odesska Oblast of Ukraine",
+        type: "country",
+        region: ["europe"],
+        provinces: 1147,
+        features: ["rivers", "shores"],
+        status: "completed",
+        publishDate: "2025-04-28",
+        lastUpdate: "2025-04-28",
+        load: "ultralight",
+        hiddenScore: 0,
+    },
+    {
         id: ["bluepum", "enaatme", "v4"],
         title: "Europe+ by Bluepum",
         author: {
@@ -52,7 +52,330 @@ mapsData = [
         features: ["water_provinces", "islands"],
         status: "in_development",
         publishDate: "2025-04-26",
-        lastUpdate: "2024-05-01",
+        lastUpdate: "2025-05-01",
+        load: "light",
+        hiddenScore: 0,
+    },
+    {
+        id: ["bluepum", "germany", "v1"],
+        title: "Germany by Bluepum",
+        author: {
+            name: "@bluepum",
+            link: "https://discord.com/users/277053272959008768",
+            color: "#3B83BD"
+        },
+        description: "This is the administrative division of Germany",
+        type: "country",
+        region: ["europe"],
+        provinces: 412,
+        features: [],
+        status: "completed",
+        publishDate: "2025-04-24",
+        lastUpdate: "2025-04-24",
+        load: "mobile",
+        hiddenScore: 0,
+    },
+    {
+        id: ["eenot", "arstotzka", "v2"],
+        title: "Arstotzka World by ЕЕнот",
+        author: {
+            name: "@eenot",
+            link: "https://discord.com/users/852608191783919676",
+            color: "#3B83BD"
+        },
+        description: "Unofficial world map of Paper's Please world",
+        type: "world",
+        region: ["other"],
+        provinces: 373,
+        features: ["rivers", "shores", "water_provinces"],
+        status: "completed",
+        publishDate: "2025-04-21",
+        lastUpdate: "2025-04-21",
+        load: "mobile",
+        hiddenScore: 0,
+    },
+    {
+        id: ["zachary", "world-3ga", "v1"],
+        title: "World 3b years ago by Zachary",
+        author: {
+            name: "@zachary.bachary",
+            link: "https://discord.com/users/852608191783919676",
+            color: "#3B83BD"
+        },
+        description: "Unofficial world map of Paper's Please world",
+        type: "world",
+        region: ["other"],
+        provinces: 130,
+        features: ["water_provinces"],
+        status: "completed",
+        publishDate: "2025-04-09",
+        lastUpdate: "2025-04-09",
+        load: "mobile",
+        hiddenScore: 0,
+    },
+    {
+        id: ["zachary", "authun", "v1"],
+        title: "Austria-Hungaria by Zachary",
+        author: {
+            name: "@zachary.bachary",
+            link: "https://discord.com/users/852608191783919676",
+            color: "#3B83BD"
+        },
+        description: "Map of Austro-Hungarian Empire",
+        type: "region",
+        region: ["europe","balkans"],
+        provinces: 1644,
+        features: [],
+        status: "completed",
+        publishDate: "2025-01-31", 
+        lastUpdate: "2025-01-31",
+        load: "normal",
+        hiddenScore: 0,
+    },
+    {
+        id: ["zachary", "world-am", "v1"],
+        title: "World according to America",
+        author: {
+            name: "@zachary.bachary",
+            link: "https://discord.com/users/852608191783919676",
+            color: "#3B83BD"
+        },
+        description: "World according to America",
+        type: "world",
+        region: ["europe","asia", "africa", "oceania", "america"],
+        provinces: 665,
+        features: [],
+        status: "completed",
+        publishDate: "2025-01-28", 
+        lastUpdate: "2025-01-28",
+        load: "normal",
+        hiddenScore: 0,
+    },
+    {
+        id: ["zachary", "panem", "v2"],
+        title: "Panem v2 by Zachary",
+        author: {
+            name: "@zachary.bachary",
+            link: "https://discord.com/users/852608191783919676",
+            color: "#3B83BD"
+        },
+        description: "Map of Panem from Hunger Games",
+        type: "country",
+        region: ["america"],
+        provinces: 358,
+        features: [],
+        status: "completed",
+        publishDate: "2025-01-27", 
+        lastUpdate: "2025-01-27",
+        load: "light",
+        hiddenScore: 0,
+    },
+    {
+        id: ["zachary", "eurasia", "v2"],
+        title: "Terra Eurasia by Zachary",
+        author: {
+            name: "@zachary.bachary",
+            link: "https://discord.com/users/852608191783919676",
+            color: "#3B83BD"
+        },
+        description: "Big detalized map of Eurasia",
+        type: "continent",
+        region: ["europe", "asia", "north_africa"],
+        provinces: 4587,
+        features: [],
+        status: "completed",
+        publishDate: "2024-11-29", 
+        lastUpdate: "2024-11-29",
+        load: "superheavy",
+        hiddenScore: 0,
+    },
+    {
+        id: ["zachary", "mars", "v1"],
+        title: "Terraformed Mars by Zachary",
+        author: {
+            name: "@zachary.bachary",
+            link: "https://discord.com/users/852608191783919676",
+            color: "#3B83BD"
+        },
+        description: "Map of Mars with terraformed areas",
+        type: "world",
+        region: ["other"],
+        provinces: 438,
+        features: [],
+        status: "completed",
+        publishDate: "2025-01-20", 
+        lastUpdate: "2025-01-20",
+        load: "light",
+        hiddenScore: 0,
+    },
+    {
+        id: ["zachary", "florida", "v1"],
+        title: "Florida by Zachary",
+        author: {
+            name: "@zachary.bachary",
+            link: "https://discord.com/users/852608191783919676",
+            color: "#3B83BD"
+        },
+        description: "Florida",
+        type: "oblast",
+        region: ["america"],
+        provinces: 159,
+        features: [],
+        status: "completed",
+        publishDate: "2024-10-31", 
+        lastUpdate: "2024-10-31",
+        load: "ultralight",
+        hiddenScore: 0,
+    },
+    {
+        id: ["zachary", "africa", "v3"],
+        title: "Terra Africa by Zachary",
+        author: {
+            name: "@zachary.bachary",
+            link: "https://discord.com/users/852608191783919676",
+            color: "#3B83BD"
+        },
+        description: "Welcome to Terra Africa! This map was built to be as big as possible which is why its my new highest province map",
+        type: "continent",
+        region: ["africa", "middle_east", "mediterranean"],
+        provinces: 1031,
+        features: [],
+        status: "completed",
+        publishDate: "2024-10-16", 
+        lastUpdate: "2024-10-29",
+        load: "normal",
+        hiddenScore: 0,
+    },
+    {
+        id: ["zachary", "australia", "v1"],
+        title: "Terra Australis by Zachary",
+        author: {
+            name: "@zachary.bachary",
+            link: "https://discord.com/users/852608191783919676",
+            color: "#3B83BD"
+        },
+        description: "I guess i decided that my maps should follow a naming convention so... After Terra Novus we have Terra Australis! This is a map of south east Asia and Oceania!",
+        type: "continent",
+        region: ["australia", "oceania", "south_east_asia"],
+        provinces: 668,
+        features: [],
+        status: "completed",
+        publishDate: "2024-10-07", 
+        lastUpdate: "2024-10-07",
+        load: "light",
+        hiddenScore: 0,
+    },
+    {
+        id: ["zachary", "america", "v2"],
+        title: "Terra Novus by Zachary",
+        author: {
+            name: "@zachary.bachary",
+            link: "https://discord.com/users/852608191783919676",
+            color: "#3B83BD"
+        },
+        description: "This is meine magnum opus, the Americas! This is a remake of my previous map called the Americas, this one has 2x the detail and better provinces that allow more historical boundaries.",
+        type: "continent",
+        region: ["americas", "north_america", "south_america", "central_america"],
+        provinces: 1822,
+        features: [],
+        status: "completed",
+        publishDate: "2024-08-22", 
+        lastUpdate: "2024-10-07",
+        load: "normal",
+        hiddenScore: 0,
+    },
+    {
+        id: ["zachary", "europe1815", "v2"],
+        title: "Europe 1815 by Zachary",
+        author: {
+            name: "@zachary.bachary",
+            link: "https://discord.com/users/852608191783919676",
+            color: "#3B83BD"
+        },
+        description: "Thankfully the German Confederation has much less chaos then the Holy Roman Empire. I hope its accurate.",
+        type: "continent",
+        region: ["europe"],
+        provinces: 0,
+        features: [],
+        status: "completed",
+        publishDate: "2024-07-26", 
+        lastUpdate: "2024-07-26",
+        load: "light",
+        hiddenScore: 0,
+    },
+    {
+        id: ["zachary", "usa", "v1"],
+        title: "USA by Zachary",
+        author: {
+            name: "@zachary.bachary",
+            link: "https://discord.com/users/852608191783919676",
+            color: "#3B83BD"
+        },
+        description: "Three maps in 3 days.",
+        type: "country",
+        region: ["north_america"],
+        provinces: 286,
+        features: [],
+        status: "completed",
+        publishDate: "2025-01-21", 
+        lastUpdate: "2025-01-21",
+        load: "mobile",
+        hiddenScore: 0,
+    },
+    {
+        id: ["pelo", "greece", "v1"],
+        title: "Aegean Sea by Pelo",
+        author: {
+            name: "@pelo3918",
+            link: "https://discord.com/users/1071700840492056717",
+            color: "#3B83BD"
+        },
+        description: "Thankfully the German Confederation has much less chaos then the Holy Roman Empire. I hope its accurate.",
+        type: "country",
+        region: ["europe"],
+        provinces: 311,
+        features: [],
+        status: "completed",
+        publishDate: "2024-07-26", 
+        lastUpdate: "2024-07-26",
+        load: "light",
+        hiddenScore: 0,
+    },
+    {
+        id: ["jaba", "america", "vg"],
+        title: "America standart",
+        author: {
+            name: "@jaba4275",
+            link: "https://discord.com/users/921793805915668520",
+            color: "#3B83BD"
+        },
+        description: "Standart map of America",
+        type: "continent",
+        region: ["america", "north_america", "south_america", "central_america"],
+        provinces: 430,
+        features: [],
+        status: "completed",
+        publishDate: "2023-08-12", 
+        lastUpdate: "2023-08-19",
+        load: "light",
+        hiddenScore: 0,
+    },
+    {
+        id: ["parkourfox", "euro4", "vg"],
+        title: "Euro4 standart",
+        author: {
+            name: "@parkourfox",
+            link: "https://discord.com/users/921793805915668520",
+            color: "#3B83BD"
+        },
+        description: "Standart map of America",
+        type: "continent",
+        region: ["europe", "north_africa", "middle_east"],
+        provinces: 430,
+        features: [],
+        status: "completed",
+        publishDate: "2023-08-05", 
+        lastUpdate: "2023-08-05",
         load: "light",
         hiddenScore: 0,
     },
@@ -60,7 +383,7 @@ mapsData = [
         id: ["zachary", "world", "v1"],
         title: "World by Zachary",
         author: {
-            name: "@zacharyzachary.bachary",
+            name: "@zachary.bachary",
             link: "https://discord.com/users/852608191783919676",
             color: "#3B83BD"
         },
@@ -73,8 +396,27 @@ mapsData = [
         publishDate: "2025-02-10", 
         lastUpdate: "2025-02-10",
         load: "normal",
+        hiddenScore: 150,
+    },
+    {
+        id: ["jalhund", "europe", "vg"],
+        title: "Europe Standart",
+        author: {
+            name: "@jalhund",
+            link: "https://discord.com/users/277053272959008768",
+            color: "#3B83BD"
+        },
+        description: "Builded-in map of Europe by game developer",
+        type: "continent",
+        region: ["europe"],
+        provinces: 293,
+        features: ["water_provinces", "islands"],
+        status: "completed",
+        publishDate: "1912-04-15",
+        lastUpdate: "2077-01-01",
+        load: "mobile",
         hiddenScore: 0,
-    }
+    },
 ];
 
 const mapTypes = {
@@ -325,3 +667,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Отображаем карты
     displayMaps();
 });
+
+function getMapData(map) {
+    const mapInfo = mapsData.find(m => m.id.join('_') === map);
+    if (!mapInfo) {
+        console.error(`Map with ID ${map} not found`);
+        return null;
+    }
+    return mapInfo;
+}
