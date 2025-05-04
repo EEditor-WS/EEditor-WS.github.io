@@ -44,10 +44,6 @@ const scenariosData = [
         gameMode: "Sandbox",
         tags: ["World", "For Phones", "Recommended", "without events", "without reforms", "Modern Day"],
         worldCreator: "ЕЕнот",
-        map: {
-            name: "World by ЕЕнот",
-            id: "eenot_world_v1"
-        },
         awards: ["star", "enot"],
         // Hidden parameters
         publishDate: "2025-01-19",
@@ -106,10 +102,6 @@ const scenariosData = [
         gameMode: "Sandbox",
         tags: ["World", "For Phones", "Recommended", "without events", "without reforms", "Historical", "WW2"],
         worldCreator: "ЕЕнот",
-        map: {
-            name: "World by ЕЕнот",
-            id: "eenot_world_v1"
-        },
         awards: [],
         // Hidden parameters
         publishDate: "2025-01-24",
@@ -136,10 +128,6 @@ const scenariosData = [
         gameMode: "Sandbox",
         tags: ["World", "For Phones", "without events", "without reforms", "Historical", "Cold War"],
         worldCreator: "ЕЕнот",
-        map: {
-            name: "World by ЕЕнот",
-            id: "eenot_world_v1"
-        },
         awards: [],
         // Hidden parameters
         publishDate: "2025-01-24",
@@ -166,10 +154,6 @@ const scenariosData = [
         gameMode: "Sandbox",
         tags: ["World", "For Phones", "Recommended", "without events", "without reforms", "Alternative History", "1984"],
         worldCreator: "ЕЕнот",
-        map: {
-            name: "World by ЕЕнот",
-            id: "eenot_world_v1"
-        },
         awards: ["enot"],
         // Hidden parameters
         publishDate: "2025-01-31",
@@ -607,7 +591,7 @@ const scenariosData = [
         ],
         title: "World 3g ago",
         author: {
-            name: "@zacharyzachary.bachary",
+            name: "@zachary.bachary",
             link: "https://discord.com/users/804839006403428423",
             color: "#3B83BD"
         },
@@ -637,7 +621,7 @@ const scenariosData = [
         ],
         title: "Europe 1800",
         author: {
-            name: "@zacharyzachary.bachary",
+            name: "@zachary.bachary",
             link: "https://discord.com/users/804839006403428423",
             color: "#3B83BD"
         },
@@ -666,7 +650,7 @@ const scenariosData = [
         ],
         title: "Napoleonic Wars",
         author: {
-            name: "@zacharyzachary.bachary",
+            name: "@zachary.bachary",
             link: "https://discord.com/users/804839006403428423",
             color: "#3B83BD"
         },
@@ -695,7 +679,7 @@ const scenariosData = [
         ],
         title: "World War 2 Start",
         author: {
-            name: "@zacharyzachary.bachary",
+            name: "@zachary.bachary",
             link: "https://discord.com/users/804839006403428423",
             color: "#3B83BD"
         },
@@ -724,7 +708,7 @@ const scenariosData = [
         ],
         title: "Episode 2",
         author: {
-            name: "@zacharyzachary.bachary",
+            name: "@zachary.bachary",
             link: "https://discord.com/users/804839006403428423",
             color: "#3B83BD"
         },
@@ -753,7 +737,7 @@ const scenariosData = [
         ],
         title: "Episode 3",
         author: {
-            name: "@zacharyzachary.bachary",
+            name: "@zachary.bachary",
             link: "https://discord.com/users/804839006403428423",
             color: "#3B83BD"
         },
@@ -782,7 +766,7 @@ const scenariosData = [
         ],
         title: "Episode 4",
         author: {
-            name: "@zacharyzachary.bachary",
+            name: "@zachary.bachary",
             link: "https://discord.com/users/804839006403428423",
             color: "#3B83BD"
         },
@@ -811,7 +795,7 @@ const scenariosData = [
         ],
         title: "Fall of Constantinople",
         author: {
-            name: "@zacharyzachary.bachary",
+            name: "@zachary.bachary",
             link: "https://discord.com/users/804839006403428423",
             color: "#3B83BD"
         },
@@ -840,7 +824,7 @@ const scenariosData = [
         ],
         title: "World War 1",
         author: {
-            name: "@zacharyzachary.bachary",
+            name: "@zachary.bachary",
             link: "https://discord.com/users/804839006403428423",
             color: "#3B83BD"
         },
@@ -869,7 +853,7 @@ const scenariosData = [
         ],
         title: "Napoleonic War",
         author: {
-            name: "@zacharyzachary.bachary",
+            name: "@zachary.bachary",
             link: "https://discord.com/users/804839006403428423",
             color: "#3B83BD"
         },
@@ -898,7 +882,7 @@ const scenariosData = [
         ],
         title: "Islamic World",
         author: {
-            name: "@zacharyzachary.bachary",
+            name: "@zachary.bachary",
             link: "https://discord.com/users/804839006403428423",
             color: "#3B83BD"
         },
@@ -927,7 +911,7 @@ const scenariosData = [
         ],
         title: "American Revolution",
         author: {
-            name: "@zacharyzachary.bachary",
+            name: "@zachary.bachary",
             link: "https://discord.com/users/804839006403428423",
             color: "#3B83BD"
         },
@@ -956,7 +940,7 @@ const scenariosData = [
         ],
         title: "World War 1",
         author: {
-            name: "@zacharyzachary.bachary",
+            name: "@zachary.bachary",
             link: "https://discord.com/users/804839006403428423",
             color: "#3B83BD"
         },
@@ -985,7 +969,7 @@ const scenariosData = [
         ],
         title: "World War 2",
         author: {
-            name: "@zacharyzachary.bachary",
+            name: "@zachary.bachary",
             link: "https://discord.com/users/804839006403428423",
             color: "#3B83BD"
         },
@@ -1014,7 +998,7 @@ const scenariosData = [
         ],
         title: "USA 2025",
         author: {
-            name: "@zacharyzachary.bachary",
+            name: "@zachary.bachary",
             link: "https://discord.com/users/804839006403428423",
             color: "#3B83BD"
         },
@@ -1043,7 +1027,7 @@ const scenariosData = [
         ],
         title: "American Civil War",
         author: {
-            name: "@zacharyzachary.bachary",
+            name: "@zachary.bachary",
             link: "https://discord.com/users/804839006403428423",
             color: "#3B83BD"
         },
@@ -1072,7 +1056,7 @@ const scenariosData = [
         ],
         title: "USA Ethnic Map",
         author: {
-            name: "@zacharyzachary.bachary",
+            name: "@zachary.bachary",
             link: "https://discord.com/users/804839006403428423",
             color: "#3B83BD"
         },
@@ -1401,7 +1385,7 @@ const scenariosData = [
         ],
         title: "World According to Americans",
         author: {
-            name: "@zacharyzachary.bachary",
+            name: "@zachary.bachary",
             link: "https://discord.com/users/804839006403428423",
             color: "#3B83BD"
         },
@@ -1592,10 +1576,6 @@ const scenariosData = [
         gameMode: "Sandbox",
         tags: ["World", "Historical", "WW1"],
         worldCreator: "ЕЕнот",
-        map: {
-            name: "World by ЕЕнот",
-            id: "eenot_world_v1"
-        },
         awards: ["star","enot"],
         // Hidden parameters
         publishDate: "2025-05-01",
