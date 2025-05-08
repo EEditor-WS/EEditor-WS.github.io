@@ -1794,6 +1794,187 @@ const scenariosData = [
         type: "sandbox",
         period: "cw"
     },
+    {
+        id: [
+            "zachary",
+            "deadhand",
+            "v1",
+            "2022",
+        ],
+        title: "Dead Hand | Aftermath of WW3",
+        author: {
+            name: "@zachary.bachary",
+            link: "https://discord.com/users/804839006403428423",
+            color: "#3B83BD"
+        },
+        year: "2022",
+        languages: ["EN"],
+        gameMode: "Historical",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Dead Hand by BluePum",
+            id: "zachary_deadhand_v1"
+        },
+        awards: ["enot"],
+        // Hidden parameters
+        publishDate: "2025-05-07",
+        lastUpdate: "2025-05-07",
+        hiddenScore: 0,
+        type: "historical",
+        period: "alternative"
+    },
+    {
+        id: [
+            "bluepum",
+            "enaatme",
+            "v4",
+            "ww2",
+        ],
+        title: "World War 2",
+        author: {
+            name: "@blue_pum_67269",
+            link: "https://discord.com/users/1260558860796825610",
+            color: "#3B83BD"
+        },
+        year: "1936",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Europe+ by BluePum",
+            id: "bluepum_enaatme_v2"
+        },
+        awards: ["enot"],
+        // Hidden parameters
+        publishDate: "2025-05-07",
+        lastUpdate: "2025-05-07",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ww2"
+    },
+    {
+        id: [
+            "stewardconstruct",
+            "europe",
+            "v1",
+            "ww1",
+        ],
+        title: "World War 1",
+        author: {
+            name: "@stewardconstruct.",
+            link: "https://discord.com/users/1114590604668706927",
+            color: "#3B83BD"
+        },
+        year: "1914",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Europe by Public nuisance 🇷🇸☦",
+            id: "stewardconstruct_europe_v1"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-05-07",
+        lastUpdate: "2025-05-07",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ww1"
+    },
+    {
+        id: [
+            "stewardconstruct",
+            "europe",
+            "v1",
+            "ww2",
+        ],
+        title: "World War 2",
+        author: {
+            name: "@stewardconstruct.",
+            link: "https://discord.com/users/1114590604668706927",
+            color: "#3B83BD"
+        },
+        year: "1936",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Europe by Public nuisance 🇷🇸☦",
+            id: "stewardconstruct_europe_v1"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-05-07",
+        lastUpdate: "2025-05-07",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ww2"
+    },
+    {
+        id: [
+            "stewardconstruct",
+            "serbia",
+            "v1",
+            "regions",
+        ],
+        title: "Regions of Serbia",
+        author: {
+            name: "@stewardconstruct.",
+            link: "https://discord.com/users/1114590604668706927",
+            color: "#3B83BD"
+        },
+        year: "2025",
+        languages: ["other"],
+        gameMode: "Sandbox",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "",
+            id: "stewardconstruct_serbia_v1"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-03-15",
+        lastUpdate: "2025-03-15",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "modern"
+    },
+    {
+        id: [
+            "stewardconstruct",
+            "yugoslavia",
+            "v1",
+            "modern",
+        ],
+        title: "West Balkans / Yugoslavia",
+        author: {
+            name: "@stewardconstruct.",
+            link: "https://discord.com/users/1114590604668706927",
+            color: "#3B83BD"
+        },
+        year: "2025",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "",
+            id: "stewardconstruct_yugoslavia_v1"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-03-19",
+        lastUpdate: "2025-03-19",
+        hiddenScore: -250,
+        type: "sandbox",
+        period: "modern",
+        status: "discontinued"
+    },
 ];
 
 console.log("Данные сценариев загружены");
