@@ -2084,7 +2084,7 @@ const scenariosData = [
             "pelo",
             "greece",
             "v1",
-            "persiainvasion-war",
+            "peloponessian-war",
         ],
         title: "Пелопонесская война",
         author: {
