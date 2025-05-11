@@ -116,12 +116,13 @@ function generateScenarioCard(scenario) {
         .map(tag => `<a href="#" style="color: #6e8699">#${tag}</a>`)
         .join('<p>, </p>');
 
-    const mapId = generateMapId(scenario.id, '_', 2);
+    const mapId = scenario.id.slice(0, 2);
+    const mapData = getMapData(scenario.id.slice(0, 3).join('_'));
     const imagePath = generateImagePath(scenario.id);
     const scenarioPath = generateScenarioPath(scenario.id);
     const detailsLink = generateDetailsLink(scenario.id);
     const score = calculateScenarioScore(scenario);
-    
+
     const status = scenario.status || "completed";
     const statusLabel = {
         "early_access": "Early Access",
@@ -135,6 +136,10 @@ function generateScenarioCard(scenario) {
         "experimental": "Experimental",
         "frozen": "Frozen"
     }[status] || "";
+    console.log('--------------------');
+    console.log(`Scenario: ${scenario.title}, Status: ${statusLabel}`);
+    console.log(scenario.id.slice(0, 2).join('_'));
+    console.log('--------------------');
 
     return `
         <div class="download-card" 
@@ -144,8 +149,8 @@ function generateScenarioCard(scenario) {
             data-period="${scenario.period}"
             data-year="${scenario.year}"
             data-languages="${scenario.languages.join(',').toLowerCase()}"
-            data-map-name="${scenario.map.name}"
-            data-map-id="${mapId}"
+            data-map-name="${mapData ? mapData.title : scenario.map.name}"
+            data-map-id="${scenario.id.slice(0, 2).join('_')}"
             data-publish-date="${scenario.publishDate}"
             data-update-date="${scenario.lastUpdate}"
             data-mechanics='${JSON.stringify(scenario.mechanics || {})}'
@@ -155,7 +160,7 @@ function generateScenarioCard(scenario) {
                 <div class="download-up">
                     <div class="download-image-container">
                         <a href="${detailsLink}">
-                            <img src="${imagePath}" class="download-goto-page" style="width: 250px; border-radius: 15px 15px 0 0;">
+                            <img src="${imagePath}" class="download-goto-page" style="width: 250px; height: 156px; object-fit: cover; border-radius: 15px 15px 0 0;">
                         </a>
                         <div class="download-awards">
                             ${awardsHTML}
@@ -196,7 +201,7 @@ function generateScenarioCard(scenario) {
                 <div class="download-row-big">
                     <div class="download-row">
                         <img src="../../img/library/world.svg" class="download-info-ico" />
-                        <p>${scenario.map.name}</p>
+                        <p>${mapData ? mapData.title : scenario.map.name}</p>
                     </div>
                     <button class="download-download-button" onclick="libDownloadScenario('${scenarioPath}', '${mapId}', '${scenario.id[0]}', '${scenario.id[1]}', '${scenario.id[2]}')" style="background-color: #44944A; border-radius: 15px; width: 45px; height: 45px; border: none; cursor: pointer;">
                         <img src="../../img/library/download.svg" class="download-info-ico" />
@@ -208,25 +213,28 @@ function generateScenarioCard(scenario) {
 }
 
 // Download handling functions
-async function libDownloadScenario(rawUrl, mapId, autor, map, verison) {
+async function libDownloadScenario(rawUrl, mapId, autor, map, version) {
     try {
         const fileName = rawUrl.split('/').pop();
         await downloadFile(rawUrl, fileName);
 
         if (mapId && !downloadedMaps.has(mapId) && !inGameMaps.includes(mapId)) {
+            const mapData = getMapData(mapId);
             currentMapDownload = {
                 mapId: mapId,
-                mapUrl: `${libLink}lib/${autor}/${map}/${autor}_${map}_${verison}_!.map`,
-                fileName: `${autor}_${map}_${verison}_!.map`
+                mapUrl: `${libLink}lib/${autor}/${map}/${autor}_${map}_${version}_!.map`,
+                fileName: `${autor}_${map}_${version}_!.map`,
+                mapName: `${autor}_${map}_${version}`
+                //mapName: mapData ? mapData.title : mapId
             };
             
             const modal = document.getElementById('downloadMapModal');
             const mapNameText = document.getElementById('mapNameText');
-            mapNameText.textContent = mapId;
+            mapNameText.textContent = currentMapDownload.mapName;
             modal.classList.add('active');
         }
     } catch (error) {
-        console.error('Ошибка при скачивании сценария:', error);
+        console.error('Error downloading scenario:', error);
         showErrorMapModal(mapId);
     }
 }

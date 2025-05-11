@@ -1076,10 +1076,7 @@ function handleFileContent(fileName, content) {
 
     // Загружаем данные при старте
     loadLandsJson();
-
-    // Инициализируем менеджер стран
-    window.countryManager = new CountryManager();
-
+    
     // Обработчик для кнопки удаления несуществующих владельцев
     document.getElementById('remove-invalid-owners')?.addEventListener('click', () => {
         if (!window.countryManager) return;

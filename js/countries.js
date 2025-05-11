@@ -361,6 +361,12 @@ class CountryManager {
     }
 
     initEventListeners() {
+        // Очищаем старые обработчики событий, если они есть
+        document.querySelectorAll('.add-country-button').forEach(button => {
+            const clone = button.cloneNode(true);
+            button.parentNode.replaceChild(clone, button);
+        });
+        
         // Обработчик добавления новой страны
         document.getElementById('add-country')?.addEventListener('click', () => this.createNewCountry());
 
@@ -511,6 +517,12 @@ class CountryManager {
                 this.updateFilterValueInput();
             });
         }
+        // Закрываем меню при клике вне его
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('#country-actions-button')) {
+                document.getElementById('countryActionsDropdown')?.classList.remove('active');
+            }
+        });
     }
 
     initColorHandlers() {
@@ -648,6 +660,70 @@ class CountryManager {
             showError('Failed to copy country');
         } finally {
             this._isCopying = false;
+        }
+    }
+
+    copySelectedCountries() {
+        try {
+            const selectedInputs = document.querySelectorAll('.country-checkbox:checked');
+            const countries = Array.from(selectedInputs).map(input => {
+                const countryId = input.value;
+                return {
+                    id: countryId,
+                    ...this.jsonData.lands[countryId]
+                };
+            });
+
+            if (countries.length === 0) {
+                showError(window.translator.translate('no_countries_selected'));
+                return;
+            }
+
+            // Store the countries in clipboard
+            const countryData = JSON.stringify(countries);
+            localStorage.setItem('copiedCountries', countryData);
+            
+            showSuccess(
+                window.translator.translate('success'),
+                window.translator.translate('countries_copied').replace('{count}', countries.length)
+            );
+        } catch (error) {
+            console.error('Error copying countries:', error);
+            showError(window.translator.translate('failed_to_copy_countries'));
+        }
+    }
+
+    pasteManyCountries() {
+        try {
+            const copiedData = localStorage.getItem('copiedCountries');
+            if (!copiedData) {
+                showError(window.translator.translate('no_copied_countries'));
+                return;
+            }
+
+            this.pushToUndoStack();
+
+            const countries = JSON.parse(copiedData);
+            
+            // First clean up invalid relations between copied countries
+            this.cleanInvalidRelations(countries);
+
+            // Add the countries with new unique IDs
+            countries.forEach(country => {
+                const newId = this.generateUniqueId();
+                const newCountry = { ...country, id: newId };
+                newCountry.name += ' (копия)';
+                this.jsonData.lands[newId] = newCountry;
+            });
+
+            this.updateJsonAndUI();
+            showSuccess(
+                window.translator.translate('success'),
+                window.translator.translate('countries_pasted').replace('{count}', countries.length)
+            );
+        } catch (error) {
+            console.error('Error pasting countries:', error);
+            showError(window.translator.translate('failed_to_paste_countries'));
         }
     }
 
@@ -857,6 +933,9 @@ class CountryManager {
     }
 
     handleAddRelation(e) {
+        // Удаляем существующие модальные окна перед добавлением нового элемента
+        document.querySelectorAll('.modal.active').forEach(modal => modal.remove());
+        
         // Находим ближайшую кнопку, если клик был по SVG или line
         const button = e.target.closest('.add-country-button');
         if (!button) return;
@@ -921,6 +1000,9 @@ class CountryManager {
     }
 
     showRelationParamsModal(e) {
+        // Проверяем и удаляем существующие модальные окна
+        document.querySelectorAll('.modal.active').forEach(modal => modal.remove());
+        
         const button = e.target;
         const itemDiv = button.closest('.array-list-item');
         const input = itemDiv.querySelector('.array-item-input');
@@ -1699,6 +1781,70 @@ class CountryManager {
         }
     }
 
+    copySelectedCountries() {
+        try {
+            const selectedInputs = document.querySelectorAll('.country-checkbox:checked');
+            const countries = Array.from(selectedInputs).map(input => {
+                const countryId = input.value;
+                return {
+                    id: countryId,
+                    ...this.jsonData.lands[countryId]
+                };
+            });
+
+            if (countries.length === 0) {
+                showError(window.translator.translate('no_countries_selected'));
+                return;
+            }
+
+            // Store the countries in clipboard
+            const countryData = JSON.stringify(countries);
+            localStorage.setItem('copiedCountries', countryData);
+            
+            showSuccess(
+                window.translator.translate('success'),
+                window.translator.translate('countries_copied').replace('{count}', countries.length)
+            );
+        } catch (error) {
+            console.error('Error copying countries:', error);
+            showError(window.translator.translate('failed_to_copy_countries'));
+        }
+    }
+
+    pasteManyCountries() {
+        try {
+            const copiedData = localStorage.getItem('copiedCountries');
+            if (!copiedData) {
+                showError(window.translator.translate('no_copied_countries'));
+                return;
+            }
+
+            this.pushToUndoStack();
+
+            const countries = JSON.parse(copiedData);
+            
+            // First clean up invalid relations between copied countries
+            this.cleanInvalidRelations(countries);
+
+            // Add the countries with new unique IDs
+            countries.forEach(country => {
+                const newId = this.generateUniqueId();
+                const newCountry = { ...country, id: newId };
+                newCountry.name += ' (копия)';
+                this.jsonData.lands[newId] = newCountry;
+            });
+
+            this.updateJsonAndUI();
+            showSuccess(
+                window.translator.translate('success'),
+                window.translator.translate('countries_pasted').replace('{count}', countries.length)
+            );
+        } catch (error) {
+            console.error('Error pasting countries:', error);
+            showError(window.translator.translate('failed_to_paste_countries'));
+        }
+    }
+
     saveMassRelationModal() {
         if (!this.currentCountry || !this.jsonData?.lands) return;
 
@@ -1765,6 +1911,51 @@ class CountryManager {
         );
     }
 
+    cleanInvalidRelations(countries) {
+        if (!countries || !this.jsonData?.lands) return;
+
+        // Create a set of valid country IDs that includes both existing and to-be-pasted countries
+        const validCountryIds = new Set([
+            ...Object.keys(this.jsonData.lands),
+            ...countries.map(country => country.id)
+        ]);
+
+        // For each country that will be pasted
+        countries.forEach(countryData => {
+            // List of all relation types to check
+            const relationTypes = ['allies', 'enemies', 'guaranteed', 'guaranteed_by', 'pacts', 'sanctions', 'vassals'];
+
+            // Check and clean each relation type
+            relationTypes.forEach(relationType => {
+                if (countryData[relationType] && typeof countryData[relationType] === 'object') {
+                    // Get and clean the relations for this type
+                    const relations = countryData[relationType];
+                    const invalidRelations = [];
+                    
+                    // Identify invalid relations
+                    Object.keys(relations).forEach(relatedCountryId => {
+                        // A relation is invalid if:
+                        // - The related country doesn't exist and isn't being pasted, or
+                        // - It's a self-relation
+                        if (!validCountryIds.has(relatedCountryId) || countryData.id === relatedCountryId) {
+                            invalidRelations.push(relatedCountryId);
+                        }
+                    });
+
+                    // Remove the invalid relations
+                    invalidRelations.forEach(relatedCountryId => {
+                        delete relations[relatedCountryId];
+                    });
+                }
+            });
+
+            // Special handling for vassal_of if it exists
+            if (countryData.vassal_of && !validCountryIds.has(countryData.vassal_of)) {
+                delete countryData.vassal_of;
+            }
+        });
+    }
+
     async loadScenario(scenarioData) {
         try {
             this.jsonData = scenarioData;
@@ -1785,6 +1976,20 @@ class CountryManager {
         } catch (error) {
             console.error('Error loading scenario in CountryManager:', error);
             return false;
+        }
+    }
+    
+    saveScen() {
+        // Обновляем содержимое в редакторе и сохраняем в файл
+        if (this.previewContent) {
+            console.log('Обновляем содержимое в редакторе и сохраняем в файл');
+            const jsonString = JSON.stringify(this.jsonData, null, 4);
+            this.previewContent.value = jsonString;
+            
+            // Сохраняем изменения в файл
+            if (typeof window.saveChanges === 'function') {
+                window.saveChanges();
+            }
         }
     }
 }

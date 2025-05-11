@@ -1,0 +1,160 @@
+.download-section,
+.requirements-section {
+    margin: 2rem auto;
+    padding: 1.5rem;
+    max-width: 1200px;
+}
+
+.download-cards,
+.requirements-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.download-card,
+.requirements-card {
+    background-color: #242424;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.download-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.download-card h3,
+.requirements-card h3 {
+    margin: 0 0 1rem;
+    color: #e0e0e0;
+    font-size: 1.25rem;
+}
+
+.download-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: rgba(52, 152, 219, 0.1);
+    color: #3498db;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    border: none;
+    font-size: 0.875rem;
+    cursor: pointer;
+}
+
+.download-button:hover {
+    background-color: rgba(52, 152, 219, 0.2);
+    transform: translateY(-1px);
+}
+
+.download-button svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+}
+
+.requirements-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.requirements-card li {
+    padding: 0.75rem;
+    border-bottom: 1px solid #333;
+    color: #e0e0e0;
+    font-size: 0.875rem;
+}
+
+.requirements-card li:last-child {
+    border-bottom: none;
+}
+
+.section-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem auto;
+    max-width: 1200px;
+}
+
+.section-nav .nav-button {
+    padding: 0.75rem 1.5rem;
+    background-color: #242424;
+    border: 1px solid #333;
+    border-radius: 6px;
+    color: #e0e0e0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.section-nav .nav-button:hover {
+    background-color: #2c2c2c;
+}
+
+.section-nav .nav-button.active {
+    background-color: #3498db;
+    border-color: #3498db;
+    color: #fff;
+}
+
+#scenarios,
+#maps {
+    display: none;
+}
+
+#scenarios.active,
+#maps.active {
+    display: block;
+}
+
+.maps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.account-button-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+.account-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 8px;
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .download-section,
+    .requirements-section {
+        padding: 1rem;
+    }
+
+    .download-cards,
+    .requirements-container {
+        grid-template-columns: 1fr;
+    }
+}

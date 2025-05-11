@@ -155,6 +155,7 @@ function libApplyFilters() {
         // Apply map filter
         if (mapFilter) {
             visible = visible && card.dataset.mapId.toLowerCase() === mapFilter.toLowerCase();
+            console.log(card.dataset.author);
         }
 
         // Apply type filter

@@ -1,0 +1,97 @@
+.pcopycountries {
+    padding: 20px;
+}
+
+.country-copy-content {
+    margin-top: 20px;
+}
+
+.country-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.country-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: var(--background-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.country-item label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.country-item input[type="checkbox"] {
+    margin: 0;
+}
+
+.country-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+}
+
+.copy-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 0;
+}
+
+.action-button.copy {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--accent-color);
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.action-button.copy:hover {
+    background: var(--accent-color-hover);
+}
+
+.action-button.copy svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.select-all-container {
+    margin: 10px 0;
+    padding: 10px;
+    background: var(--background-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.select-all {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.select-all input[type="checkbox"] {
+    margin: 0;
+    cursor: pointer;
+}
