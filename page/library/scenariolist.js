@@ -2060,6 +2060,32 @@ const scenariosData = [
             "v1",
             "persiainvasion-war",
         ],
+        title: "Греко-Персидская воина",
+        author: {
+            name: "@pelo3918",
+            link: "https://discord.com/users/1071700840492056717",
+            color: "#3B83BD"
+        },
+        year: "-480",
+        languages: ["RU"],
+        gameMode: "Sandbox",
+        tags: ["Europe", "Historical", "Ancient"],
+        worldCreator: "ЕЕнот",
+        awards: [],
+        // Hidden parameters
+        publishDate: "2024-06-07",
+        lastUpdate: "2024-06-07",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ancient"
+    },
+    {
+        id: [
+            "pelo",
+            "greece",
+            "v1",
+            "persiainvasion-war",
+        ],
         title: "Пелопонесская война",
         author: {
             name: "@pelo3918",
