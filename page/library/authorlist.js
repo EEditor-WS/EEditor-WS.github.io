@@ -19,6 +19,11 @@ const authorsData = {
         link: "https://discord.com/users/820194328201920524",
         color: "#3B83BD"
     },
+    kolkhoznik: {
+        name: "@nickolay_batsiev_suleimanov",
+        link: "https://discord.com/users/1057029940484247682",
+        color: "#3B83BD"
+    },
     esteban: {
         name: "@deleted_user",
         link: "https://discord.com/users/456226577798135808",
