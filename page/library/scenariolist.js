@@ -34,11 +34,7 @@ const scenariosData = [
             "modern-world",
         ],
         title: "Modern World",
-        author: {
-            name: "@eenot",
-            link: "https://discord.com/users/794675642037567491",
-            color: "#3B83BD"
-        },
+        author: "eenot",
         year: "2015",
         languages: ["EN", "RU"],
         gameMode: "Sandbox",
@@ -61,11 +57,7 @@ const scenariosData = [
             "new-revolution",
         ],
         title: "New Revolution",
-        author: {
-            name: "@eenot",
-            link: "https://discord.com/users/794675642037567498",
-            color: "#3B83BD"
-        },
+        author: "eenot",
         year: "2022",
         languages: ["RU"],
         gameMode: "Sandbox",
@@ -92,11 +84,7 @@ const scenariosData = [
             "ww2",
         ],
         title: "World War 2",
-        author: {
-            name: "@theman_the_myth_the_legend",
-            link: "https://discord.com/users/1083919275951149118",
-            color: "#3B83BD"
-        },
+        author: "theman_the_myth_the_legend",
         year: "1936",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -118,11 +106,7 @@ const scenariosData = [
             "cw",
         ],
         title: "The Cold War",
-        author: {
-            name: "@theman_the_myth_the_legend",
-            link: "https://discord.com/users/1083919275951149118",
-            color: "#3B83BD"
-        },
+        author: "theman_the_myth_the_legend",
         year: "1965",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -144,11 +128,7 @@ const scenariosData = [
             "1984",
         ],
         title: "1984",
-        author: {
-            name: "@helvetic_brutalisation",
-            link: "https://discord.com/users/1280887382920532073",
-            color: "#3B83BD"
-        },
+        author: "helvetic_brutalisation",
         year: "1984",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -170,11 +150,7 @@ const scenariosData = [
             "1444",
         ],
         title: "1444",
-        author: {
-            name: "@totoska",
-            link: "https://discord.com/users/820194328201920524",
-            color: "#3B83BD"
-        },
+        author: "totoska",
         year: "1444",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -200,11 +176,7 @@ const scenariosData = [
             "pick-roman-empire",
         ],
         title: "The peak of the Roman Empire",
-        author: {
-            name: "@totoska",
-            link: "https://discord.com/users/820194328201920524",
-            color: "#3B83BD"
-        },
+        author: "totoska",
         year: "1177",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -230,11 +202,7 @@ const scenariosData = [
             "shw",
         ],
         title: "The Seven Hours War",
-        author: {
-            name: "@totoska",
-            link: "https://discord.com/users/820194328201920524",
-            color: "#3B83BD"
-        },
+        author: "totoska",
         year: "2000",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -260,11 +228,7 @@ const scenariosData = [
             "kaiserreich",
         ],
         title: "Kaiserreich",
-        author: {
-            name: "@totoska",
-            link: "https://discord.com/users/820194328201920524",
-            color: "#3B83BD"
-        },
+        author: "totoska",
         year: "1936",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -290,11 +254,7 @@ const scenariosData = [
             "modern",
         ],
         title: "Modern Day",
-        author: {
-            name: "@totoska",
-            link: "https://discord.com/users/820194328201920524",
-            color: "#3B83BD"
-        },
+        author: "totoska",
         year: "2020",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -320,11 +280,7 @@ const scenariosData = [
             "tno",
         ],
         title: "The New Order",
-        author: {
-            name: "@totoska",
-            link: "https://discord.com/users/820194328201920524",
-            color: "#3B83BD"
-        },
+        author: "totoska",
         year: "1962",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -350,11 +306,7 @@ const scenariosData = [
             "ww2",
         ],
         title: "World War 2",
-        author: {
-            name: "@totoska",
-            link: "https://discord.com/users/820194328201920524",
-            color: "#3B83BD"
-        },
+        author: "totoska",
         year: "1936",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -380,11 +332,7 @@ const scenariosData = [
             "1-1",
         ],
         title: "1v1 Warnament",
-        author: {
-            name: "@totoska",
-            link: "https://discord.com/users/820194328201920524",
-            color: "#3B83BD"
-        },
+        author: "totoska",
         year: "0",
         languages: ["EN"],
         gameMode: "Battle",
@@ -410,11 +358,7 @@ const scenariosData = [
             "1-1-watcher",
         ],
         title: "1v1 Warnament (+Watcher)",
-        author: {
-            name: "@totoska",
-            link: "https://discord.com/users/820194328201920524",
-            color: "#3B83BD"
-        },
+        author: "totoska",
         year: "0",
         languages: ["EN"],
         gameMode: "Battle",
@@ -440,11 +384,7 @@ const scenariosData = [
             "cw",
         ],
         title: "The Cold War",
-        author: {
-            name: "@deleted_user",
-            link: "https://discord.com/users/456226577798135808",
-            color: "#3B83BD"
-        },
+        author: "esteban",
         year: "1949",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -470,11 +410,7 @@ const scenariosData = [
             "modern",
         ],
         title: "Modern Day",
-        author: {
-            name: "@deleted_user",
-            link: "https://discord.com/users/456226577798135808",
-            color: "#3B83BD"
-        },
+        author: "esteban",
         year: "2000",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -500,11 +436,7 @@ const scenariosData = [
             "hoi4-formables",
         ],
         title: "Hoi4 Formables",
-        author: {
-            name: "@deleted_user",
-            link: "https://discord.com/users/456226577798135808",
-            color: "#3B83BD"
-        },
+        author: "esteban",
         year: "1936",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -530,11 +462,7 @@ const scenariosData = [
             "1218",
         ],
         title: "1218",
-        author: {
-            name: "@deleted_user",
-            link: "https://discord.com/users/456226577798135808",
-            color: "#3B83BD"
-        },
+        author: "esteban",
         year: "1218",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -560,11 +488,7 @@ const scenariosData = [
             "1756",
         ],
         title: "1756",
-        author: {
-            name: "@deleted_user",
-            link: "https://discord.com/users/456226577798135808",
-            color: "#3B83BD"
-        },
+        author: "esteban",
         year: "1756",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -590,11 +514,7 @@ const scenariosData = [
             "continents",
         ],
         title: "World 3g ago",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/804839006403428423",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         year: "-3000000000",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -620,11 +540,7 @@ const scenariosData = [
             "1800"
         ],
         title: "Europe 1800",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/804839006403428423",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         year: "1800",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -649,11 +565,7 @@ const scenariosData = [
             "1812"
         ],
         title: "Napoleonic Wars",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/804839006403428423",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         year: "1812",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -678,11 +590,7 @@ const scenariosData = [
             "1939"
         ],
         title: "World War 2 Start",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/804839006403428423",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         year: "1939",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -707,11 +615,7 @@ const scenariosData = [
             "ep2"
         ],
         title: "Episode 2",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/804839006403428423",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         year: "2025",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -736,11 +640,7 @@ const scenariosData = [
             "ep3"
         ],
         title: "Episode 3",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/804839006403428423",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         year: "2025",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -765,11 +665,7 @@ const scenariosData = [
             "ep4"
         ],
         title: "Episode 4",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/804839006403428423",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         year: "2025",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -794,11 +690,7 @@ const scenariosData = [
             "fac"
         ],
         title: "Fall of Constantinople",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/804839006403428423",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         year: "2077",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -823,11 +715,7 @@ const scenariosData = [
             "ww1"
         ],
         title: "World War 1",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/804839006403428423",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         year: "1914",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -852,11 +740,7 @@ const scenariosData = [
             "nw"
         ],
         title: "Napoleonic War",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/804839006403428423",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         year: "2025",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -881,11 +765,7 @@ const scenariosData = [
             "islam"
         ],
         title: "Islamic World",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/804839006403428423",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         year: "632",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -910,11 +790,7 @@ const scenariosData = [
             "revolutionary-war"
         ],
         title: "American Revolution",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/804839006403428423",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         year: "1776",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -939,11 +815,7 @@ const scenariosData = [
             "ww1"
         ],
         title: "World War 1",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/804839006403428423",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         year: "1914",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -968,11 +840,7 @@ const scenariosData = [
             "ww2z"
         ],
         title: "World War 2",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/804839006403428423",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         year: "1936",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -997,11 +865,7 @@ const scenariosData = [
             "2025"
         ],
         title: "USA 2025",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/804839006403428423",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         year: "2025",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -1026,11 +890,7 @@ const scenariosData = [
             "civil"
         ],
         title: "American Civil War",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/804839006403428423",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         year: "1861",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -1055,11 +915,7 @@ const scenariosData = [
             "ethnic"
         ],
         title: "USA Ethnic Map",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/804839006403428423",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         year: "2020",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -1084,11 +940,7 @@ const scenariosData = [
             "kaiserreich",
         ],
         title: "Kaiserreich",
-        author: {
-            name: "@totoska",
-            link: "https://discord.com/users/820194328201920524",
-            color: "#3B83BD"
-        },
+        author: "totska",
         year: "1936",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -1114,11 +966,7 @@ const scenariosData = [
             "kalterkrieg",
         ],
         title: "Kalterkrieg",
-        author: {
-            name: "@totoska",
-            link: "https://discord.com/users/820194328201920524",
-            color: "#3B83BD"
-        },
+        author: "totska",
         year: "1948",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -1144,11 +992,7 @@ const scenariosData = [
             "1941",
         ],
         title: "Великая Отечественная Война",
-        author: {
-            name: "@pelo3918",
-            link: "https://discord.com/users/1071700840492056717",
-            color: "#3B83BD"
-        },
+        author: "pelo",
         year: "1941",
         languages: ["RU"],
         gameMode: "Sandbox",
@@ -1174,11 +1018,7 @@ const scenariosData = [
             "modern-ru",
         ],
         title: "Современный Мир",
-        author: {
-            name: "@pelo3918",
-            link: "https://discord.com/users/1071700840492056717",
-            color: "#3B83BD"
-        },
+        author: "pelo",
         year: "2020",
         languages: ["RU"],
         gameMode: "Sandbox",
@@ -1204,11 +1044,7 @@ const scenariosData = [
             "modern-en",
         ],
         title: "Modern World",
-        author: {
-            name: "@pelo3918",
-            link: "https://discord.com/users/1071700840492056717",
-            color: "#3B83BD"
-        },
+        author: "pelo",
         year: "2020",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -1234,11 +1070,7 @@ const scenariosData = [
             "1985",
         ],
         title: "Холодная Война",
-        author: {
-            name: "@pelo3918",
-            link: "https://discord.com/users/1071700840492056717",
-            color: "#3B83BD"
-        },
+        author: "pelo",
         year: "1985",
         languages: ["RU"],
         gameMode: "Sandbox",
@@ -1264,11 +1096,7 @@ const scenariosData = [
             "nw-ru",
         ],
         title: "Северная Война",
-        author: {
-            name: "@pelo3918",
-            link: "https://discord.com/users/1071700840492056717",
-            color: "#3B83BD"
-        },
+        author: "pelo",
         year: "1700",
         languages: ["RU"],
         gameMode: "Sandbox",
@@ -1294,11 +1122,7 @@ const scenariosData = [
             "nw-en",
         ],
         title: "Northern War",
-        author: {
-            name: "@pelo3918",
-            link: "https://discord.com/users/1071700840492056717",
-            color: "#3B83BD"
-        },
+        author: "pelo",
         year: "1700",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -1324,11 +1148,7 @@ const scenariosData = [
             "hsb",
         ],
         title: "Эллада наносит ответный удар",
-        author: {
-            name: "@pelo3918",
-            link: "https://discord.com/users/1071700840492056717",
-            color: "#3B83BD"
-        },
+        author: "pelo",
         year: "-323",
         languages: ["RU"],
         gameMode: "Sandbox",
@@ -1354,11 +1174,7 @@ const scenariosData = [
             "1996",
         ],
         title: "Arstotzka World - 1996",
-        author: {
-            name: "@eenot",
-            link: "https://discord.com/users/794675642037567491",
-            color: "#3B83BD"
-        },
+        author: "eenot",
         year: "1996",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -1384,11 +1200,7 @@ const scenariosData = [
             "modern",
         ],
         title: "World According to Americans",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/804839006403428423",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         year: "2026",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -1413,11 +1225,7 @@ const scenariosData = [
             "ru",
         ],
         title: "Мир, со слов русских",
-        author: {
-            name: "@eenot",
-            link: "https://discord.com/users/794675642037567491",
-            color: "#3B83BD"
-        },
+        author: "eenot",
         year: "2026",
         languages: ["RU"],
         gameMode: "Sandbox",
@@ -1442,11 +1250,7 @@ const scenariosData = [
             "1990",
         ],
         title: "Moldavia - 1990",
-        author: {
-            name: "@eenot",
-            link: "https://discord.com/users/794675642037567491",
-            color: "#3B83BD"
-        },
+        author: "eenot",
         year: "1990",
         languages: ["RU"],
         gameMode: "Sandbox",
@@ -1473,11 +1277,7 @@ const scenariosData = [
             "2025",
         ],
         title: "Moldavia - 2025",
-        author: {
-            name: "@eenot",
-            link: "https://discord.com/users/794675642037567491",
-            color: "#3B83BD"
-        },
+        author: "eenot",
         year: "2025",
         languages: ["EN","RU"],
         gameMode: "Sandbox",
@@ -1504,11 +1304,7 @@ const scenariosData = [
             "1941",
         ],
         title: "Moldavia - 1941",
-        author: {
-            name: "@eenot",
-            link: "https://discord.com/users/794675642037567491",
-            color: "#3B83BD"
-        },
+        author: "eenot",
         year: "1941",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -1535,11 +1331,7 @@ const scenariosData = [
             "1944",
         ],
         title: "Moldavia - 1944",
-        author: {
-            name: "@eenot",
-            link: "https://discord.com/users/794675642037567491",
-            color: "#3B83BD"
-        },
+        author: "eenot",
         year: "1944",
         languages: ["RU"],
         gameMode: "Sandbox",
@@ -1566,11 +1358,7 @@ const scenariosData = [
             "ww1",
         ],
         title: "World War 1",
-        author: {
-            name: "@totoska",
-            link: "https://discord.com/users/820194328201920524",
-            color: "#3B83BD"
-        },
+        author: "totoska",
         year: "1914",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -1592,11 +1380,7 @@ const scenariosData = [
             "1444-atharva",
         ],
         title: "1444",
-        author: {
-            name: "@atharva04303",
-            link: "https://discord.com/users/1306545186146353193",
-            color: "#3B83BD"
-        },
+        author: "atharva",
         year: "1444",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -1622,11 +1406,7 @@ const scenariosData = [
             "modern-atharva",
         ],
         title: "Modern",
-        author: {
-            name: "@atharva04303",
-            link: "https://discord.com/users/1306545186146353193",
-            color: "#3B83BD"
-        },
+        author: "atharva",
         year: "2025",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -1652,11 +1432,7 @@ const scenariosData = [
             "fc",
         ],
         title: "First coalition of france",
-        author: {
-            name: "@atharva04303",
-            link: "https://discord.com/users/1306545186146353193",
-            color: "#3B83BD"
-        },
+        author: "atharva",
         year: "1792",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -1682,11 +1458,7 @@ const scenariosData = [
             "1991",
         ],
         title: "1991",
-        author: {
-            name: "@atharva04303",
-            link: "https://discord.com/users/1306545186146353193",
-            color: "#3B83BD"
-        },
+        author: "atharva",
         year: "2025",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -1712,11 +1484,7 @@ const scenariosData = [
             "ww1",
         ],
         title: "World War 1",
-        author: {
-            name: "@blue_pum_67269",
-            link: "https://discord.com/users/1260558860796825610",
-            color: "#3B83BD"
-        },
+        author: "bluepum",
         year: "1914",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -1742,11 +1510,7 @@ const scenariosData = [
             "ww2",
         ],
         title: "World War 2",
-        author: {
-            name: "@radardev",
-            link: "https://discord.com/users/951467148063158324",
-            color: "#3B83BD"
-        },
+        author: "radardev",
         year: "1936",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -1772,11 +1536,7 @@ const scenariosData = [
             "cw",
         ],
         title: "Cold War",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/804839006403428423",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         year: "1964",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -1802,11 +1562,7 @@ const scenariosData = [
             "2022",
         ],
         title: "Dead Hand | Aftermath of WW3",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/804839006403428423",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         year: "2022",
         languages: ["EN"],
         gameMode: "Historical",
@@ -1832,11 +1588,7 @@ const scenariosData = [
             "ww2",
         ],
         title: "World War 2",
-        author: {
-            name: "@blue_pum_67269",
-            link: "https://discord.com/users/1260558860796825610",
-            color: "#3B83BD"
-        },
+        author: "bluepum",
         year: "1936",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -1862,11 +1614,7 @@ const scenariosData = [
             "ww1",
         ],
         title: "World War 1",
-        author: {
-            name: "@stewardconstruct.",
-            link: "https://discord.com/users/1114590604668706927",
-            color: "#3B83BD"
-        },
+        author: "stewardconstruct",
         year: "1914",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -1892,11 +1640,7 @@ const scenariosData = [
             "ww2",
         ],
         title: "World War 2",
-        author: {
-            name: "@stewardconstruct.",
-            link: "https://discord.com/users/1114590604668706927",
-            color: "#3B83BD"
-        },
+        author: "stewardconstruct",
         year: "1936",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -1922,11 +1666,7 @@ const scenariosData = [
             "regions",
         ],
         title: "Regions of Serbia",
-        author: {
-            name: "@stewardconstruct.",
-            link: "https://discord.com/users/1114590604668706927",
-            color: "#3B83BD"
-        },
+        author: "stewardconstruct",
         year: "2025",
         languages: ["other"],
         gameMode: "Sandbox",
@@ -1952,11 +1692,7 @@ const scenariosData = [
             "modern",
         ],
         title: "West Balkans / Yugoslavia",
-        author: {
-            name: "@stewardconstruct.",
-            link: "https://discord.com/users/1114590604668706927",
-            color: "#3B83BD"
-        },
+        author: "stewardconstruct",
         year: "2025",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -1983,11 +1719,7 @@ const scenariosData = [
             "corinthian-war",
         ],
         title: "Коринфская война",
-        author: {
-            name: "@pelo3918",
-            link: "https://discord.com/users/1071700840492056717",
-            color: "#3B83BD"
-        },
+        author: "pelo",
         year: "-395",
         languages: ["RU"],
         gameMode: "Sandbox",
@@ -2009,11 +1741,7 @@ const scenariosData = [
             "grcirn-war",
         ],
         title: "Греко-Персидская война",
-        author: {
-            name: "@pelo3918",
-            link: "https://discord.com/users/1071700840492056717",
-            color: "#3B83BD"
-        },
+        author: "pelo",
         year: "-480",
         languages: ["RU"],
         gameMode: "Sandbox",
@@ -2035,11 +1763,7 @@ const scenariosData = [
             "macedonia",
         ],
         title: "Начало возвышения Македонии",
-        author: {
-            name: "@pelo3918",
-            link: "https://discord.com/users/1071700840492056717",
-            color: "#3B83BD"
-        },
+        author: "pelo",
         year: "-355",
         languages: ["RU"],
         gameMode: "Sandbox",
@@ -2061,11 +1785,7 @@ const scenariosData = [
             "persiainvasion-war",
         ],
         title: "Греко-Персидская воина",
-        author: {
-            name: "@pelo3918",
-            link: "https://discord.com/users/1071700840492056717",
-            color: "#3B83BD"
-        },
+        author: "pelo",
         year: "-480",
         languages: ["RU"],
         gameMode: "Sandbox",
@@ -2087,11 +1807,7 @@ const scenariosData = [
             "peloponessian-war",
         ],
         title: "Пелопонесская война",
-        author: {
-            name: "@pelo3918",
-            link: "https://discord.com/users/1071700840492056717",
-            color: "#3B83BD"
-        },
+        author: "pelo",
         year: "-431",
         languages: ["RU"],
         gameMode: "Sandbox",
@@ -2113,11 +1829,7 @@ const scenariosData = [
             "persiainvasion-war-en",
         ],
         title: "Sacred war of Hellada",
-        author: {
-            name: "@pelo3918",
-            link: "https://discord.com/users/1071700840492056717",
-            color: "#3B83BD"
-        },
+        author: "pelo",
         year: "-480",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -2130,6 +1842,182 @@ const scenariosData = [
         hiddenScore: 0,
         type: "sandbox",
         period: "ancient"
+    },
+    {
+        id: [
+            "trid",
+            "archangelsk",
+            "v1",
+            "!",
+        ],
+        title: "Archangelsk",
+        author: "trid",
+        year: "2009",
+        languages: ["RU"],
+        gameMode: "Sandbox",
+        tags: ["Russia", "Modern Day", "Archangelsk"],
+        worldCreator: "ЕЕнот",
+        awards: [],
+        // Hidden parameters
+        publishDate: "2024-02-04",
+        lastUpdate: "2024-02-04",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "modern"
+    },
+    {
+        id: [
+            "chuckcha",
+            "europe",
+            "v1",
+            "1328",
+        ],
+        title: "1328",
+        author: "chuckcha",
+        year: "1328",
+        languages: ["RU"],
+        gameMode: "Sandbox",
+        tags: [""],
+        worldCreator: "ЕЕнот",
+        awards: [],
+        // Hidden parameters
+        publishDate: "2023-11-21",
+        lastUpdate: "2023-11-21",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ancient"
+    },
+    {
+        id: [
+            "chuckcha",
+            "europe",
+            "v1",
+            "1444",
+        ],
+        title: "1328",
+        author: "jaba",
+        year: "1444",
+        languages: ["RU"],
+        gameMode: "Sandbox",
+        tags: [""],
+        worldCreator: "ЕЕнот",
+        awards: [],
+        // Hidden parameters
+        publishDate: "2024-02-24",
+        lastUpdate: "2024-02-24",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ancient"
+    },
+    {
+        id: [
+            "jaba",
+            "asia",
+            "v1",
+            "1444",
+        ],
+        title: "1444 Asia",
+        author: "jaba",
+        year: "1444",
+        languages: ["RU"],
+        gameMode: "Sandbox",
+        tags: [""],
+        worldCreator: "ЕЕнот",
+        awards: [],
+        // Hidden parameters
+        publishDate: "2024-02-23",
+        lastUpdate: "2024-02-23",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ancient"
+    },
+    {
+        id: [
+            "jaba",
+            "asia",
+            "v1",
+            "1904",
+        ],
+        title: "Russo-Japanese War (generals)",
+        author: "jaba",
+        year: "1904",
+        languages: ["RU"],
+        gameMode: "Sandbox",
+        tags: [""],
+        worldCreator: "ЕЕнот",
+        awards: [],
+        // Hidden parameters
+        publishDate: "2024-03-19",
+        lastUpdate: "2024-03-19",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ancient"
+    },
+    {
+        id: [
+            "jaba",
+            "asia",
+            "v1",
+            "1945",
+        ],
+        title: "1945 Asia",
+        author: "jaba",
+        year: "1945",
+        languages: ["RU"],
+        gameMode: "Sandbox",
+        tags: [""],
+        worldCreator: "ЕЕнот",
+        awards: [],
+        // Hidden parameters
+        publishDate: "2024-03-19",
+        lastUpdate: "2024-03-19",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "cw"
+    },
+    {
+        id: [
+            "jaba",
+            "asia",
+            "v1",
+            "ww2",
+        ],
+        title: "World War 2 in Asia",
+        author: "jaba",
+        year: "1936",
+        languages: ["RU"],
+        gameMode: "Sandbox",
+        tags: [""],
+        worldCreator: "ЕЕнот",
+        awards: [],
+        // Hidden parameters
+        publishDate: "2024-04-22",
+        lastUpdate: "2024-04-22",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ww2"
+    },
+    {
+        id: [
+            "jalhund",
+            "lp16",
+            "v1",
+            "!",
+        ],
+        title: "LP-16 by Jalhund",
+        author: "jalhund",
+        year: "0",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [""],
+        worldCreator: "ЕЕнот",
+        awards: [],
+        // Hidden parameters
+        publishDate: "2023-06-12",
+        lastUpdate: "2023-06-12",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "other"
     },
 ];
 

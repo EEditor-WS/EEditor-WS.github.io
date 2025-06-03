@@ -94,8 +94,13 @@ function getSortedScenarios() {
 
 // Helper function to truncate author name
 function truncateAuthorName(name, maxLength = 13) {
-    if (name.length <= maxLength) return name;
-    return name.substring(0, maxLength) + '...';
+    try {
+        if (name.length <= maxLength) return name;
+        return name.substring(0, maxLength) + '...';
+    } catch (error) {
+        console.error('Error truncating author name:', error);
+        return name; // Fallback to original name if error occurs
+    }
 }
 
 // Store downloaded maps
@@ -144,7 +149,7 @@ function generateScenarioCard(scenario) {
     return `
         <div class="download-card" 
             data-title="${scenario.title.toLowerCase()}"
-            data-author="${scenario.author.name.toLowerCase()}"
+            data-author="${authorsData[scenario.author]?.name.toLowerCase()}"
             data-type="${scenario.type}"
             data-period="${scenario.period}"
             data-year="${scenario.year}"
@@ -175,7 +180,7 @@ function generateScenarioCard(scenario) {
                     <div class="download-row-big">
                         <div class="download-row">
                             <img src="../../img/library/autor.svg" class="download-info-ico" />
-                            <a href="${scenario.author.link}" style="color: ${scenario.author.color}">${truncateAuthorName(scenario.author.name)}</a>
+                            <a href="${authorsData[scenario.author]?.link}" style="color: ${authorsData[scenario.author]?.color}">${truncateAuthorName(authorsData[scenario.author]?.name)}</a>
                         </div>
                         <div class="download-row">
                             <p>${scenario.year}</p>

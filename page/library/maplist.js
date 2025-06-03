@@ -2,11 +2,7 @@ mapsData = [
     {
         id: ["eenot", "world", "v1"],
         title: "World by ЕЕнот",
-        author: {
-            name: "@eenot",
-            link: "https://discord.com/users/852608191783919676",
-            color: "#3B83BD"
-        },
+        author: "eenot",
         description: "The best world map for normal and low devices. Very optimized. By developer of EEditor",
         type: "world",
         region: ["europe", "north_africa", "middle_east", "asia", "americas", "africa", "oceania"],
@@ -21,11 +17,7 @@ mapsData = [
     {
         id: ["eenot", "moldavia", "v1"],
         title: "Moldavia by ЕЕнот",
-        author: {
-            name: "@eenot",
-            link: "https://discord.com/users/852608191783919676",
-            color: "#3B83BD"
-        },
+        author: "eenot",
         description: "Map of Republic of Moldova, Pridnestrovian Moldavian Rupublic and Odesska Oblast of Ukraine",
         type: "country",
         region: ["europe"],
@@ -40,11 +32,7 @@ mapsData = [
     {
         id: ["bluepum", "enaatme", "v4"],
         title: "Europe+ by Bluepum",
-        author: {
-            name: "@bluepum",
-            link: "https://discord.com/users/277053272959008768",
-            color: "#3B83BD"
-        },
+        author: "bluepum",
         description: "Map of Europe, North Africa and Middle East",
         type: "continent",
         region: ["europe", "north_africa", "middle_east"],
@@ -59,11 +47,7 @@ mapsData = [
     {
         id: ["bluepum", "germany", "v1"],
         title: "Germany by Bluepum",
-        author: {
-            name: "@bluepum",
-            link: "https://discord.com/users/277053272959008768",
-            color: "#3B83BD"
-        },
+        author: "bluepum",
         description: "This is the administrative division of Germany",
         type: "country",
         region: ["europe"],
@@ -78,11 +62,7 @@ mapsData = [
     {
         id: ["eenot", "arstotzka", "v2"],
         title: "Arstotzka World by ЕЕнот",
-        author: {
-            name: "@eenot",
-            link: "https://discord.com/users/852608191783919676",
-            color: "#3B83BD"
-        },
+        author: "eenot",
         description: "Unofficial world map of Paper's Please world",
         type: "world",
         region: ["other"],
@@ -97,11 +77,7 @@ mapsData = [
     {
         id: ["zachary", "world-3ga", "v1"],
         title: "World 3b years ago by Zachary",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/852608191783919676",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         description: "Unofficial world map of Paper's Please world",
         type: "world",
         region: ["other"],
@@ -116,11 +92,7 @@ mapsData = [
     {
         id: ["zachary", "authun", "v1"],
         title: "Austria-Hungaria by Zachary",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/852608191783919676",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         description: "Map of Austro-Hungarian Empire",
         type: "region",
         region: ["europe","balkans"],
@@ -135,11 +107,7 @@ mapsData = [
     {
         id: ["zachary", "world-am", "v1"],
         title: "World according to America",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/852608191783919676",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         description: "World according to America",
         type: "world",
         region: ["europe","asia", "africa", "oceania", "america"],
@@ -154,11 +122,7 @@ mapsData = [
     {
         id: ["zachary", "panem", "v2"],
         title: "Panem v2 by Zachary",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/852608191783919676",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         description: "Map of Panem from Hunger Games",
         type: "country",
         region: ["america"],
@@ -173,11 +137,7 @@ mapsData = [
     {
         id: ["zachary", "eurasia", "v2"],
         title: "Terra Eurasia by Zachary",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/852608191783919676",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         description: "Big detalized map of Eurasia",
         type: "continent",
         region: ["europe", "asia", "north_africa"],
@@ -192,11 +152,7 @@ mapsData = [
     {
         id: ["zachary", "mars", "v1"],
         title: "Terraformed Mars by Zachary",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/852608191783919676",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         description: "Map of Mars with terraformed areas",
         type: "world",
         region: ["other"],
@@ -211,11 +167,7 @@ mapsData = [
     {
         id: ["zachary", "florida", "v1"],
         title: "Florida by Zachary",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/852608191783919676",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         description: "Florida",
         type: "oblast",
         region: ["america"],
@@ -230,11 +182,7 @@ mapsData = [
     {
         id: ["zachary", "africa", "v3"],
         title: "Terra Africa by Zachary",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/852608191783919676",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         description: "Welcome to Terra Africa! This map was built to be as big as possible which is why its my new highest province map",
         type: "continent",
         region: ["africa", "middle_east", "mediterranean"],
@@ -249,11 +197,7 @@ mapsData = [
     {
         id: ["zachary", "australia", "v1"],
         title: "Terra Australis by Zachary",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/852608191783919676",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         description: "I guess i decided that my maps should follow a naming convention so... After Terra Novus we have Terra Australis! This is a map of south east Asia and Oceania!",
         type: "continent",
         region: ["australia", "oceania", "south_east_asia"],
@@ -268,11 +212,7 @@ mapsData = [
     {
         id: ["zachary", "america", "v2"],
         title: "Terra Novus by Zachary",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/852608191783919676",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         description: "This is meine magnum opus, the Americas! This is a remake of my previous map called the Americas, this one has 2x the detail and better provinces that allow more historical boundaries.",
         type: "continent",
         region: ["americas", "north_america", "south_america", "central_america"],
@@ -287,11 +227,7 @@ mapsData = [
     {
         id: ["zachary", "europe1815", "v2"],
         title: "Europe 1815 by Zachary",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/852608191783919676",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         description: "Thankfully the German Confederation has much less chaos then the Holy Roman Empire. I hope its accurate.",
         type: "continent",
         region: ["europe"],
@@ -306,11 +242,7 @@ mapsData = [
     {
         id: ["zachary", "usa", "v1"],
         title: "USA by Zachary",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/852608191783919676",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         description: "Three maps in 3 days.",
         type: "country",
         region: ["north_america"],
@@ -325,11 +257,7 @@ mapsData = [
     {
         id: ["zachary", "deadhand", "v1"],
         title: "Dead Hand | Aftermath of WW3",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/852608191783919676",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         description: "The year is 2024, 60 years after nuclear bombs were detonated in WW3! Explore the post nuclear 'paradise' that has everything from Soviet warlords to Khagantes all in the good old USA, this has events and tons of lore.",
         type: "region",
         region: ["north_america"],
@@ -344,11 +272,7 @@ mapsData = [
     {
         id: ["pelo", "greece", "v1"],
         title: "Aegean Sea by Pelo",
-        author: {
-            name: "@pelo3918",
-            link: "https://discord.com/users/1071700840492056717",
-            color: "#3B83BD"
-        },
+        author: "pelo",
         description: "Thankfully the German Confederation has much less chaos then the Holy Roman Empire. I hope its accurate.",
         type: "country",
         region: ["europe"],
@@ -363,11 +287,7 @@ mapsData = [
     {
         id: ["jaba", "america", "vg"],
         title: "America standart",
-        author: {
-            name: "@jaba4275",
-            link: "https://discord.com/users/921793805915668520",
-            color: "#3B83BD"
-        },
+        author: "jaba",
         description: "Standart map of America",
         type: "continent",
         region: ["america", "north_america", "south_america", "central_america"],
@@ -382,11 +302,7 @@ mapsData = [
     {
         id: ["parkourfox", "euro4", "vg"],
         title: "Euro4 standart",
-        author: {
-            name: "@parkourfox",
-            link: "https://discord.com/users/921793805915668520",
-            color: "#3B83BD"
-        },
+        author: "parkourfox",
         description: "Standart map of America",
         type: "continent",
         region: ["europe", "north_africa", "middle_east"],
@@ -401,11 +317,7 @@ mapsData = [
     {
         id: ["zachary", "world", "v1"],
         title: "World by Zachary",
-        author: {
-            name: "@zachary.bachary",
-            link: "https://discord.com/users/852608191783919676",
-            color: "#3B83BD"
-        },
+        author: "zachary",
         description: "One of the bestest world maps",
         type: "world",
         region: ["water_provinces", "islands", "straits", "rivers", "shores"],
@@ -420,11 +332,7 @@ mapsData = [
     {
         id: ["jalhund", "europe", "vg"],
         title: "Europe Standart",
-        author: {
-            name: "@jalhund",
-            link: "https://discord.com/users/277053272959008768",
-            color: "#3B83BD"
-        },
+        author: "jalhund",
         description: "Builded-in map of Europe by game developer",
         type: "continent",
         region: ["europe"],
@@ -439,11 +347,7 @@ mapsData = [
     {
         id: ["stewardconstruct", "europe", "v1"],
         title: "Europe (Our Empire)",
-        author: {
-            name: "@stewardconstruct.",
-            link: "https://discord.com/users/1114590604668706927",
-            color: "#3B83BD"
-        },
+        author: "stewardconstruct",
         description: "A map of Europe, north Africa and middle east, province map from game our empire with minor changes",
         type: "region",
         region: ["europe", "north_africa", "middle_east"],
@@ -458,11 +362,7 @@ mapsData = [
     {
         id: ["stewardconstruct", "serbia", "v1"],
         title: "Serbia",
-        author: {
-            name: "@stewardconstruct.",
-            link: "https://discord.com/users/1114590604668706927",
-            color: "#3B83BD"
-        },
+        author: "stewardconstruct",
         description: "",
         type: "country",
         region: ["europe", "balcans"],
@@ -477,11 +377,7 @@ mapsData = [
     {
         id: ["stewardconstruct", "yugoslavia", "v1"],
         title: "Yugoslavia",
-        author: {
-            name: "@stewardconstruct.",
-            link: "https://discord.com/users/1114590604668706927",
-            color: "#3B83BD"
-        },
+        author: "stewardconstruct",
         description: "",
         type: "region",
         region: ["europe", "balcans"],
@@ -491,6 +387,111 @@ mapsData = [
         publishDate: "2025-03-19", 
         lastUpdate: "2025-03-19",
         load: "light",
+        hiddenScore: 0,
+    },
+    {
+        id: ["trid", "archangelsk", "v1"],
+        title: "Archangelsk",
+        author: "trid",
+        description: "",
+        type: "oblast",
+        region: ["europe", "russia"],
+        provinces: 75,
+        features: [],
+        status: "completed",
+        publishDate: "2024-02-04", 
+        lastUpdate: "2024-02-04",
+        load: "ultralight",
+        hiddenScore: 0,
+    },
+    {
+        id: ["chuckcha", "europe", "v1"],
+        title: "Crusader Kings 3 Europe, Africa and Middle East",
+        author: "chuckcha",
+        description: "",
+        type: "continent",
+        region: ["europe", "africa", "middle_east"],
+        provinces: 1810,
+        features: [],
+        status: "completed",
+        publishDate: "2023-01-29", 
+        lastUpdate: "2023-01-29",
+        load: "normal",
+        hiddenScore: 0,
+    },
+    {
+        id: ["jalhund", "euro5l", "v1"],
+        title: "Euro5 Lite by jalhund",
+        author: "jalhund",
+        description: "",
+        type: "continent",
+        region: ["europe", "africa", "middle_east"],
+        provinces: 880,
+        features: [],
+        status: "completed",
+        publishDate: "2024-03-16", 
+        lastUpdate: "2024-03-16",
+        load: "normal",
+        hiddenScore: 0,
+    },
+    {
+        id: ["jaba", "asia", "v1"],
+        title: "Asia and Oceania EU4",
+        author: "jaba",
+        description: "",
+        type: "continent",
+        region: ["middle_east", "asia", "oceania"],
+        provinces: 1352,
+        features: [],
+        status: "completed",
+        publishDate: "2024-02-20", 
+        lastUpdate: "2024-02-20",
+        load: "normal",
+        hiddenScore: 0,
+    },
+    {
+        id: ["jaba", "world", "v1"],
+        title: "World EU4 by Jaba",
+        author: "jaba",
+        description: "",
+        type: "world",
+        region: ["middle_east", "asia", "europe", "north_africa", "americas", "africa", "oceania", "world"],
+        provinces: 3553,
+        features: [],
+        status: "completed",
+        publishDate: "2024-04-03", 
+        lastUpdate: "2024-04-03",
+        load: "superheavy",
+        hiddenScore: 0,
+    },
+    {
+        id: ["jalhund", "lp16", "v1"],
+        title: "LP-16 by Jalhund",
+        author: "jalhund",
+        description: "",
+        type: "custom",
+        region: ["other"],
+        provinces: 269,
+        features: [],
+        status: "completed",
+        publishDate: "2023-06-12", 
+        lastUpdate: "2023-06-12",
+        load: "ultralight",
+        hiddenScore: 0,
+    },
+    {
+        id: ["trid", "eurosat", "v5"],
+        title: "Eurosat by Trid",
+        author: "trid",
+        description: "",
+        type: "continent",
+        region: ["europe", "africa", "middle_east"],
+        provinces: 1160,
+        features: [],
+        status: "completed",
+        publishDate: "2024-02-12", 
+        lastUpdate: "2023-03-27",
+        load: "norlmal",
         hiddenScore: 0,
     },
 ];
@@ -551,7 +552,7 @@ function generateMapCard(map) {
     return `
         <div class="download-card" 
             data-title="${map.title}"
-            data-author="${map.author.name}" 
+            data-author="${authorsData[map.author]?.name}" 
             data-type="${map.type}" 
             data-map-id="${map.id.join('_')}" 
             data-publish-date="${map.publishDate}"
@@ -582,7 +583,7 @@ function generateMapCard(map) {
                     <div class="download-row-big">
                         <div class="download-row">
                             <img src="../../img/library/autor.svg" class="download-info-ico" />
-                            <a href="${map.author.link}" style="color: ${map.author.color}">${truncateAuthorName(map.author.name)}</a>
+                            <a href="${authorsData[map.author]?.link}" style="color: ${authorsData[map.author]?.color}">${truncateAuthorName(authorsData[map.author]?.name)}</a>
                         </div>
                         <div class="download-row">
                             <p>${map.provinces}</p>
@@ -642,7 +643,7 @@ function displayMaps(filters = {}) {
         filteredMaps = filteredMaps.filter(map => map.type === filters.type);
     }
     if (filters.author) {
-        filteredMaps = filteredMaps.filter(map => map.author.name.toLowerCase().includes(filters.author.toLowerCase()));
+        filteredMaps = filteredMaps.filter(map => authorsData[map.author]?.name.toLowerCase().includes(filters.author.toLowerCase()));
     }
     if (filters.search) {
         const searchLower = filters.search.toLowerCase();
