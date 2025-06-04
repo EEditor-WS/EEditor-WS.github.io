@@ -1402,7 +1402,7 @@ const scenariosData = [
         id: [
             "bluepum",
             "enaatme",
-            "v2",
+            "v5",
             "modern-atharva",
         ],
         title: "Modern",
@@ -1414,12 +1414,12 @@ const scenariosData = [
         worldCreator: "ЕЕнот",
         map: {
             name: "Europe+ by BluePum",
-            id: "bluepum_enaatme_v2"
+            id: "bluepum_enaatme_v5"
         },
         awards: ["star","enot"],
         // Hidden parameters
         publishDate: "2025-04-29",
-        lastUpdate: "2025-04-29",
+        lastUpdate: "2025-05-20",
         hiddenScore: 0,
         type: "sandbox",
         period: "modern"
@@ -1480,7 +1480,7 @@ const scenariosData = [
         id: [
             "bluepum",
             "enaatme",
-            "v4",
+            "v5",
             "ww1",
         ],
         title: "World War 1",
@@ -1492,12 +1492,12 @@ const scenariosData = [
         worldCreator: "ЕЕнот",
         map: {
             name: "Europe+ by BluePum",
-            id: "bluepum_enaatme_v4"
+            id: "bluepum_enaatme_v5"
         },
         awards: ["star","enot"],
         // Hidden parameters
         publishDate: "2025-05-02",
-        lastUpdate: "2025-05-02",
+        lastUpdate: "2025-05-15",
         hiddenScore: 0,
         type: "sandbox",
         period: "ww1"
@@ -1590,7 +1590,7 @@ const scenariosData = [
         title: "World War 2",
         author: "bluepum",
         year: "1936",
-        languages: ["EN"],
+        languages: ["EN", "RU"],
         gameMode: "Sandbox",
         tags: [],
         worldCreator: "ЕЕнот",
@@ -1605,6 +1605,32 @@ const scenariosData = [
         hiddenScore: 0,
         type: "sandbox",
         period: "ww2"
+    },
+    {
+        id: [
+            "bluepum",
+            "enaatme",
+            "v5",
+            "1683",
+        ],
+        title: "Great Turkish War",
+        author: "bluepum",
+        year: "1683",
+        languages: ["EN", "RU"],
+        gameMode: "Sandbox",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Europe+ by BluePum",
+            id: "bluepum_enaatme_v5"
+        },
+        awards: ["enot"],
+        // Hidden parameters
+        publishDate: "2025-05-16",
+        lastUpdate: "2025-05-16",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ancient"
     },
     {
         id: [
@@ -2678,6 +2704,72 @@ const scenariosData = [
         hiddenScore: 0,
         type: "sandbox",
         period: "alternative"
+    },
+    {
+        id: [
+            "bluepum",
+            "world",
+            "v2",
+            "!",
+        ],
+        title: "World with Lost Continents",
+        author: "bluepum",
+        year: "0",
+        languages: ["EN", "RU"],
+        gameMode: "Sandbox",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-05-26", 
+        lastUpdate: "2025-05-27",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "alternative"
+    },
+    {
+        id: [
+            "bluepum",
+            "atlantis",
+            "v2",
+            "regions",
+        ],
+        title: "Atlantis",
+        author: "bluepum",
+        year: "2025",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-05-31", 
+        lastUpdate: "2025-05-31",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "alternative"
+    },
+    {
+        id: [
+            "pelo",
+            "euam",
+            "v1",
+            "1492",
+        ],
+        title: "Завоевание рая - Europe and America",
+        author: "pelo",
+        year: "1492",
+        languages: ["RU"],
+        gameMode: "Sandbox",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        awards: ["star"],
+        // Hidden parameters
+        publishDate: "2025-06-02", 
+        lastUpdate: "2025-06-02",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ancient"
     },
 ];
 
