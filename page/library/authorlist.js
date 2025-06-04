@@ -89,4 +89,9 @@ const authorsData = {
         link: "https://discord.com/users/702259308817285220",
         color: "#3B83BD"
     },
+    mapmancer: {
+        name: "@stilltrex",
+        link: "https://discord.com/users/950707094229766174",
+        color: "#3B83BD"
+    },
 }
