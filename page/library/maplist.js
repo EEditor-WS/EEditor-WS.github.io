@@ -345,7 +345,7 @@ mapsData = [
         hiddenScore: 0,
     },
     {
-        id: ["stewardconstruct", "europe", "v1"],
+        id: ["stewardconstruct", "europe", "v2"],
         title: "Europe (Our Empire)",
         author: "stewardconstruct",
         description: "A map of Europe, north Africa and middle east, province map from game our empire with minor changes",
@@ -355,7 +355,7 @@ mapsData = [
         features: [],
         status: "completed",
         publishDate: "2025-05-05", 
-        lastUpdate: "2025-05-05",
+        lastUpdate: "2025-06-04",
         load: "mobile",
         hiddenScore: 0,
     },

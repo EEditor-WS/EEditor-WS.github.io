@@ -1636,7 +1636,7 @@ const scenariosData = [
         id: [
             "stewardconstruct",
             "europe",
-            "v1",
+            "v2",
             "ww1",
         ],
         title: "World War 1",
@@ -1646,10 +1646,6 @@ const scenariosData = [
         gameMode: "Sandbox",
         tags: [],
         worldCreator: "ЕЕнот",
-        map: {
-            name: "Europe by Public nuisance 🇷🇸☦",
-            id: "stewardconstruct_europe_v1"
-        },
         awards: [],
         // Hidden parameters
         publishDate: "2025-05-07",
@@ -1657,6 +1653,28 @@ const scenariosData = [
         hiddenScore: 0,
         type: "sandbox",
         period: "ww1"
+    },
+    {
+        id: [
+            "stewardconstruct",
+            "europe",
+            "v2",
+            "1941",
+        ],
+        title: "1941",
+        author: "bluepum",
+        year: "1914",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-06-05",
+        lastUpdate: "2025-06-05",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ww2"
     },
     {
         id: [
@@ -1673,7 +1691,7 @@ const scenariosData = [
         tags: [],
         worldCreator: "ЕЕнот",
         map: {
-            name: "Europe by Public nuisance 🇷🇸☦",
+            name: "Europe (Our Empire)",
             id: "stewardconstruct_europe_v1"
         },
         awards: [],
@@ -1683,6 +1701,32 @@ const scenariosData = [
         hiddenScore: 0,
         type: "sandbox",
         period: "ww2"
+    },
+    {
+        id: [
+            "stewardconstruct",
+            "europe",
+            "v1",
+            "napoleon",
+        ],
+        title: "Napoleonic Wars",
+        author: "stewardconstruct",
+        year: "1812",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        map: {
+            name: "Europe (Our Empire)",
+            id: "stewardconstruct_europe_v1"
+        },
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-05-14",
+        lastUpdate: "2025-05-14",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ancient"
     },
     {
         id: [
@@ -1698,10 +1742,6 @@ const scenariosData = [
         gameMode: "Sandbox",
         tags: [],
         worldCreator: "ЕЕнот",
-        map: {
-            name: "",
-            id: "stewardconstruct_serbia_v1"
-        },
         awards: [],
         // Hidden parameters
         publishDate: "2025-03-15",
@@ -1724,10 +1764,6 @@ const scenariosData = [
         gameMode: "Sandbox",
         tags: [],
         worldCreator: "ЕЕнот",
-        map: {
-            name: "",
-            id: "stewardconstruct_yugoslavia_v1"
-        },
         awards: [],
         // Hidden parameters
         publishDate: "2025-03-19",

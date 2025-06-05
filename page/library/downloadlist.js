@@ -1,7 +1,14 @@
 console.log('Library downloadlist.js loaded');
-const libLink = 'https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/';
+//const libLink = 'https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/';
 //const libLink = 'http://192.168.100.18:8081/'
 //const libLink = 'https://ee-lib-data.netlify.app/'
+
+let liblink;
+if (window.location.href.includes('file:///')) {
+    libLink = 'http://192.168.100.18:8081/';
+} else {
+    libLink = 'https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/';
+}
 
 // Award score values задаються в другом файле.
 
@@ -312,5 +319,53 @@ function loadScenarios() {
     container.innerHTML = sortedScenarios.map(generateScenarioCard).join('');
 }
 
+// Функция для заполнения списка авторов
+function populateAuthorFilter() {
+    const authorSelect = document.getElementById('lib-autor-filter');
+    if (!authorSelect) return;
+
+    // Получаем уникальных авторов из авторских данных
+    const authors = Object.entries(authorsData)
+        .sort((a, b) => a[1].name.localeCompare(b[1].name));
+
+    // Очищаем текущие опции
+    authorSelect.innerHTML = '<option value="">Все авторы</option>';
+
+    // Добавляем опции для каждого автора
+    authors.forEach(([id, data]) => {
+        const option = document.createElement('option');
+        option.value = data.name;
+        option.textContent = data.name.replace('@', '');
+        authorSelect.appendChild(option);
+    });
+}
+
+// Функция для заполнения списка карт
+function populateMapFilter() {
+    const mapSelect = document.getElementById('lib-map-filter');
+    if (!mapSelect) return;
+
+    // Получаем уникальные карты
+    const maps = mapsData
+        .sort((a, b) => a.title.localeCompare(b.title));
+
+    // Очищаем текущие опции
+    mapSelect.innerHTML = '<option value="">Все карты</option>';
+
+    // Добавляем опции для каждой карты
+    maps.forEach(map => {
+        const option = document.createElement('option');
+        option.value = map.id.join('_');
+        option.textContent = map.title;
+        mapSelect.appendChild(option);
+    });
+}
+
 // Initialize when the page loads
-document.addEventListener('DOMContentLoaded', loadScenarios);
+document.addEventListener('DOMContentLoaded', () => {
+    // Populate filters
+    populateAuthorFilter();
+    populateMapFilter();
+    
+    loadScenarios();
+});
