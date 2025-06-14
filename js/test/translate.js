@@ -91,6 +91,9 @@ function createLanguageDialog() {
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             z-index: 1000;
+            color: white;
+            background-color: #333;
+            outline: none;
         `;
 
         // Добавляем содержимое
@@ -116,7 +119,11 @@ function createLanguageDialog() {
                     <option value="fr">Français</option>
                 </select>
             </div>
-            <button id="translateBtn" style="padding: 5px 15px;">Начать перевод</button>
+            <div style="margin-bottom: 20px;">
+                <label>Переводить столицы? </label>
+                <input type="checkbox" id="isCapitals" value="yes" checked>
+            </div>
+            <button id="translateBtn" style="outline: none; padding: 5px 15px; border-radius: 7px; background-color: #2980b9;">Начать перевод</button>
         `;
 
         // Добавляем диалог на страницу
@@ -127,8 +134,9 @@ function createLanguageDialog() {
         translateBtn.onclick = () => {
             const sourceLang = dialog.querySelector('#sourceLang').value;
             const targetLang = dialog.querySelector('#targetLang').value;
+            const isCapitals = dialog.querySelector('#isCapitals').checked;
             document.body.removeChild(dialog);
-            resolve({ sourceLang, targetLang });
+            resolve({ sourceLang, targetLang, isCapitals });
         };
     });
 }
@@ -140,20 +148,34 @@ function createLanguageDialog() {
  * @param {string} targetLang - Целевой язык
  * @returns {Promise<Object>} Объект с переведенными данными
  */
-async function translateParameters(data, sourceLang, targetLang) {
+async function translateParameters(data, sourceLang, targetLang, isCapitals = true) {
     window.showInfo('Перевод', 'Начинаем перевод параметров...');
 
-    const fieldsToTranslate = [
-        'name',
-        'capital_name',
-        'title',
-        'answer1',
-        'answer2',
-        'answer3',
-        'description1',
-        'description2',
-        'description3'
-    ];
+    let fieldsToTranslate;
+    if (isCapitals) {
+        fieldsToTranslate = [
+            'name',
+            'capital_name',
+            'title',
+            'answer1',
+            'answer2',
+            'answer3',
+            'description1',
+            'description2',
+            'description3'
+        ];
+    } else {
+        fieldsToTranslate = [
+            'name',
+            'title',
+            'answer1',
+            'answer2',
+            'answer3',
+            'description1',
+            'description2',
+            'description3'
+        ];
+    }
 
     // Рекурсивная функция для обхода объекта
     async function translateObject(obj) {
@@ -178,11 +200,15 @@ async function translateParameters(data, sourceLang, targetLang) {
                 translatedObj[key] = await translateObject(value);
             } else if (typeof value === 'string' && fieldsToTranslate.includes(key)) {
                 try {
+                    if (value.trim() === '') {
+                        console.warn(`Пропускаем пустое поле ${key}`);
+                        continue; // Пропускаем пустые строки
+                    }
                     console.log(`Переводим ${key}: ${value}`);
                     const translated = await translateText(value, sourceLang, targetLang);
                     translatedObj[key] = translated;
                     console.log(`Переведено ${key}: ${translated}`);
-                    window.showSuccess('Перевод', `Переведено: ${key}`);
+                    window.showSuccess('Перевод', `Переведено: ${key} как "${translated}"`);
                 } catch (error) {
                     console.error(`Ошибка при переводе поля ${key}:`, error);
                     window.showError('Перевод', `Ошибка перевода: ${key}`);
@@ -207,7 +233,7 @@ async function translateParameters(data, sourceLang, targetLang) {
 async function translateCurrentFile() {
     //try {
         // Получаем выбор языков от пользователя
-        const { sourceLang, targetLang } = await createLanguageDialog();
+        const { sourceLang, targetLang, isCapitals } = await createLanguageDialog();
 
         // Получаем данные из текущего файла
         const fileContent = JSON.stringify(window.countryManager.jsonData);
@@ -224,13 +250,13 @@ async function translateCurrentFile() {
         if (Array.isArray(data)) {
             const translatedArray = [];
             for (const item of data) {
-                const translatedItem = await translateParameters(item, sourceLang, targetLang);
+                const translatedItem = await translateParameters(item, sourceLang, targetLang, isCapitals);
                 translatedArray.push(translatedItem);
             }
             return translatedArray;
         } else {
             // Если это объект, переводим его
-            return await translateParameters(data, sourceLang, targetLang);
+            return await translateParameters(data, sourceLang, targetLang, isCapitals);
         }
     /*} catch (error) {
         console.log('ошибка');

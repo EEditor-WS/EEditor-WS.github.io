@@ -520,9 +520,16 @@ class EventManager {
             this.pushToUndoStack();
             
             // Создаем глубокую копию события
-            this.jsonData.custom_events[newId] = JSON.parse(JSON.stringify(sourceEvent));
-            this.jsonData.custom_events[newId].unique_event_name = `${sourceEvent.unique_event_name || ''}_copy`;
-            this.jsonData.custom_events[newId].title += ' (копия)';
+            const eventCopy = JSON.parse(JSON.stringify(sourceEvent));
+            
+            // Устанавливаем правильный id и обновляем название
+            eventCopy.id = newId;
+            // Добавляем '_copy' только если уникальное имя не пустое
+            eventCopy.unique_event_name = sourceEvent.unique_event_name ? `${sourceEvent.unique_event_name}_copy` : '';
+            eventCopy.title = `${sourceEvent.title || ''} (копия)`;
+
+            // Сохраняем копию в общий список
+            this.jsonData.custom_events[newId] = eventCopy;
 
             // Обновляем все за один раз
             this.updateJsonInPreview();
