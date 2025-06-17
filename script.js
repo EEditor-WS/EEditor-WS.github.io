@@ -1213,3 +1213,12 @@ try {
     console.error('Error during file opening:', e);
     showError('Ошибка', 'Не удалось отобразить статус');
 }
+
+if (isAndroidApp) {
+    try {
+        openfile();
+    } catch (e) {
+        console.error('Error during Android file opening:', e);
+        showError('Ошибка', 'Не удалось открыть файл на Android');
+    }
+}
