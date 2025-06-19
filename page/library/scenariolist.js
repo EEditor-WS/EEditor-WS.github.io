@@ -2893,7 +2893,7 @@ const scenariosData = [
         publishDate: "2025-06-14", 
         lastUpdate: "2025-06-14",
         hiddenScore: 200,
-        type: "sandbox",
+        type: "lore",
         period: "alternative",
         status: "archived"
     },
