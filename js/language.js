@@ -53,6 +53,7 @@ const translations = {
         "docs_countries_edit": "Editing existing countries",
         "docs_countries_relations": "Setting up relations between countries",
         "docs_countries_territories": "Managing territories",
+        "(copy)": " (copy)",
 
         // Events
         "docs_events_title": "Events",
@@ -187,6 +188,7 @@ const translations = {
         "few": "Few",
         "enabled": "Yes",
         "disabled": "No",
+        "without_name": "Without name",
 
         // Countries page
         "countries_title": "Countries",
@@ -370,6 +372,7 @@ const translations = {
         "relation_turn_short": "Turn",
         "relation_duration_short": "Duration",
         "relation_initiator_short": "Initiator",
+        "select_country": "Select country",
 
         // Country names
         "country_civilization_13": "Great Britain",
@@ -924,6 +927,21 @@ const translations = {
         "docs_interface_preview": "Панель предпросмотра",
         "yes": "Да",
         "no": "Нет",
+        "without_name": "Без названия",
+
+        // Modal windows
+        "new_country": "Новая страна",
+        "create": "Создать",
+        "fill_all_fields": "Пожалуйста, заполните все поля",
+        "country_exists": "Страна с этим ID уже существует",
+        "relation_params": "Параметры отношений",
+        "relation_turn": "Начальный ход",
+        "relation_duration": "Длительность",
+        "relation_initiator": "Инициатор",
+        "relation_turn_short": "Ход",
+        "relation_duration_short": "Длительность",
+        "relation_initiator_short": "Инициатор",
+        "select_country": "Выбери страну",
 
         // Страны
         "docs_countries": "Страны",
@@ -933,6 +951,7 @@ const translations = {
         "docs_countries_edit": "Редактирование существующих",
         "docs_countries_relations": "Настройка отношений между странами",
         "docs_countries_territories": "Управление территориями",
+        "(copy)": " (копия)",
 
         // События
         "docs_events_title": "События",
@@ -1107,6 +1126,7 @@ const translations = {
         "reforms_title": "Реформы",
         "reforms_of": "Реформы страны",
         "edit_reform": "Реформа",
+        "new_reform": "Новая реформа",
 
         // Страница событий
         "events_title": "События",
@@ -1705,6 +1725,21 @@ const translations = {
         "docs_interface_preview": "Панель попереднього перегляду",
         "yes": "Так",
         "no": "Ні",
+        "without_name": "Без назви",
+
+        // Modal windows
+        "new_country": "Нова країна",
+        "create": "Створити",
+        "fill_all_fields": "Будьласка заповніть усі поля",
+        "country_exists": "Країна з цим ID уже існує",
+        "relation_params": "Параметри відносин",
+        "relation_turn": "Хід початку",
+        "relation_duration": "Продовжність",
+        "relation_initiator": "Ініціатор",
+        "relation_turn_short": "Хід",
+        "relation_duration_short": "Продовжність",
+        "relation_initiator_short": "Ініціатор",
+        "select_country": "Обери країну",
 
         // Країни
         "docs_countries": "Країни",
@@ -1714,6 +1749,7 @@ const translations = {
         "docs_countries_edit": "Редагування існуючих",
         "docs_countries_relations": "Налаштування відносин між країнами",
         "docs_countries_territories": "Керування територіями",
+        "(copy)": " (копія)",
 
         // События
         "docs_events_title": "Події",
@@ -1755,6 +1791,7 @@ const translations = {
         "docs_reforms_effects": "Ефекти реформ",
         "docs_reforms_chains": "Створення ланцюжків реформ",
         "required_ideology": "Необхідна ідеологія",
+        "new_reform": "Нова реформа",
 
         // Игра
         "docs_gameplay": "Геймплей",

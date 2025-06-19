@@ -123,21 +123,43 @@ function convertObjectToReadableString(obj) {
     }
   
     const translations = {
-      land_name: "Название участка",
-      near_water: "Близость к воде",
       equal: " = ",
       not_equal: " ≠ ",
       more: " > ",
       less: " < ",
     };
   
-    const results = obj.map((item) => {
+    /*const results = obj.map((item) => {
       let type = translations[item.type] || item.type;
       let action = translations[item.action] || item.action;
+      let value = item.value;*/
+  
+    const results = obj.map((item) => {
+      let type = window.translator.translate(item.type) || item.type;
+      let action = translations[item.action] || item.action;
       let value = item.value;
+
+      // ---------------------------
+      
+        try {
+            if (action.includes("civilization")) {
+                action = window.eventManager.jsonData.lands[action].name;
+            }
+            if (value.includes("civilization")) {
+                value = window.eventManager.jsonData.lands[value].name;
+            }
+            if (subtype.includes("civilization")) {
+                subtype = window.eventManager.jsonData.lands[subtype].name;
+            }
+            alert("всё норм");
+        } catch (e) {
+            console.error("Ошибка при обработке действия:", e);
+        }
+
+      // ---------------------------
   
       if (typeof value === "boolean") {
-        value = value ? "да" : "нет";
+        value = value ? "yes" : "no";
       }
   
       if (item.subtype) {
@@ -147,8 +169,11 @@ function convertObjectToReadableString(obj) {
         return `${type} ${action} ${value}`;
       }
     });
+
+    let retres = '[' + results.join('],		\n,[') + ']';
+
   
-    return results.join(",\n \n \n \n \n \n");
+    return retres;
   }
 
 // Экспортируем утилиты

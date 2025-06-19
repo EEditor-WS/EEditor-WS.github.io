@@ -526,7 +526,7 @@ class EventManager {
             eventCopy.id = newId;
             // Добавляем '_copy' только если уникальное имя не пустое
             eventCopy.unique_event_name = sourceEvent.unique_event_name ? `${sourceEvent.unique_event_name}_copy` : '';
-            eventCopy.title = `${sourceEvent.title || ''} (копия)`;
+            eventCopy.title = `${sourceEvent.title || ''} ${window.translator.translate("(copy)")}`;
 
             // Сохраняем копию в общий список
             this.jsonData.custom_events[newId] = eventCopy;
@@ -564,7 +564,7 @@ class EventManager {
         // Заполняем основные поля
         const titleHeader = document.getElementById('event-name-header');
         if (titleHeader) {
-            titleHeader.textContent = event.title || 'Без названия';
+            titleHeader.textContent = event.title || window.translator.translate("without_name");
         }
 
         this.setFormValues({
@@ -742,7 +742,7 @@ class EventManager {
             // Обновляем заголовок
             const titleHeader = document.getElementById('event-name-header');
             if (titleHeader) {
-                titleHeader.textContent = event.title || 'Без названия';
+                titleHeader.textContent = event.title || window.translator.translate("without_name");
             }
 
             this.updateEventsList();
@@ -840,7 +840,7 @@ class EventManager {
             this.previewContent.setSelectionRange(cursorPosition, cursorPosition);
 
         if (this.fileInfo) {
-            this.fileInfo.textContent = 'Изменения не сохранены';
+            this.fileInfo.textContent = window.translator.translate("changes_not_saved");
         }
         } finally {
             this.isEditing = false;
@@ -1061,12 +1061,37 @@ class EventManager {
                 if (booleanTypes.includes(item.type)) {
                     displayValue = item.value ? window.translator.translate('yes') : window.translator.translate('no');
                 }
+
+                // -------------------------------------------
+
+                let tSType;
+                if (typeof item.subtype === "string" && item.subtype.includes("civilization")) {
+                    tSType = window.eventManager.jsonData.lands[item.subtype]?.name ?? item.subtype;
+                } else {
+                    tSType = item.subtype ?? "";
+                }
+
+                let tAction;
+                if (typeof item.action === "string" && item.action.includes("civilization")) {
+                    tAction = window.eventManager.jsonData.lands[item.action]?.name ?? item.action;
+                } else {
+                    tAction = window.translator.translate(item.action) ?? "";
+                }
+
+                let tValue;
+                if (typeof displayValue === "string" && displayValue.includes("civilization")) {
+                    tValue = window.eventManager.jsonData.lands[displayValue]?.name ?? displayValue;
+                } else {
+                    tValue = displayValue ?? "";
+                }
+
+                // -------------------------------------------
                 
                 row.innerHTML = `
-                    <td>${item.type}</td>
-                    <td>${item.subtype || ''}</td>
-                    <td>${isBonus ? (item.duration ? `${item.duration} ходов` : '') : (item.action || '')}</td>
-                    <td>${displayValue}</td>
+                    <td>${window.translator.translate(item.type)}</td>
+                    <td>${tSType || ''}</td>
+                    <td>${isBonus ? (item.duration ? `${item.duration} turns` : '') : (tAction || '')}</td>
+                    <td>${tValue}</td>
                     <td>
                         <div class="requirement-actions">
                             <button type="button" class="edit" data-index="${index}">✎</button>
@@ -2100,10 +2125,20 @@ class EventManager {
             <option value="contains">${window.translator.translate('filter_contains')}</option>
         `;
 
-        // Создаем поле ввода
+        // Создаем поле ввода в зависимости от типа колонки
+        let inputType = 'text'; // По умолчанию текстовое поле
+        let placeholder = 'filter_text_value';
+        
+        // Числовые колонки
+        if (['order', 'year', 'duration'].includes(column)) {
+            inputType = 'number';
+            placeholder = 'filter_number_value';
+        }
+
         valueContainer.innerHTML = `
-            <input type="number" id="events-filter-value" class="main-page-input" 
-                   placeholder="${window.translator.translate('filter_text_value')}">
+            <input type="${inputType}" id="events-filter-value" class="main-page-input" 
+                   placeholder="${window.translator.translate(placeholder)}"
+                   ${inputType === 'number' ? 'min="0"' : ''}>
         `;
 
         // Устанавливаем текущие значения фильтра, если они есть

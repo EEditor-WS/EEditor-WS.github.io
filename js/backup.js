@@ -91,7 +91,6 @@ class BackupManager {
         // Save to localStorage
         console.log('Creating backup:', currentData);
         localStorage.setItem('scenario_backups', JSON.stringify(this.backups));
-        this.showBackupModal(); // Update UI immediately
     }
 
     async restoreBackup(index) {

@@ -471,7 +471,7 @@ class CountryManager {
         document.getElementById('back-to-countries-list')?.addEventListener('click', () => this.backToCountriesList());
 
         // Обработчики фильтров
-        document.querySelectorAll('.th-filter').forEach(button => {
+        document.querySelectorAll('#countries .th-filter').forEach(button => {
             button.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const column = button.closest('th').getAttribute('data-sort');
@@ -580,7 +580,7 @@ class CountryManager {
 
         // Создаем новую страну с дефолтными значениями
         this.jsonData.lands[newId] = {
-            name: "New country",
+            name: window.translator.translate("new_country"),
             color: [128, 128, 128, 255],
             capital_name: '',
             defeated: false,
@@ -638,7 +638,7 @@ class CountryManager {
             
             // Создаем глубокую копию страны
             this.jsonData.lands[newId] = JSON.parse(JSON.stringify(currentCountry));
-            this.jsonData.lands[newId].name += ' (copy)';
+            this.jsonData.lands[newId].name += window.translator.translate("(copy)");
 
             // Обновляем все за один раз
             const jsonString = JSON.stringify(this.jsonData, null, 4);
@@ -712,7 +712,7 @@ class CountryManager {
             countries.forEach(country => {
                 const newId = this.generateUniqueId();
                 const newCountry = { ...country, id: newId };
-                newCountry.name += ' (copy)';
+                newCountry.name += window.translator.translate("(copy)");
                 this.jsonData.lands[newId] = newCountry;
             });
 
@@ -915,12 +915,18 @@ class CountryManager {
             extraInfo += `<span class="relation-initiator">Initiator: ${params.initiator ? 'Да' : 'Нет'}</span>`;
         }
 
+        // Получаем название страны из jsonData
+        const countryName = this.jsonData?.lands[targetCountry]?.name || targetCountry;
+        
         itemDiv.innerHTML = `
             <div class="relation-info">
-                <input type="text" class="array-item-input" value="${targetCountry}"
-                    data-turn="${params.turn || 0}"
-                    data-duration="${params.duration || ''}"
-                    data-initiator="${params.initiator || false}">
+                <div class="array-item-text">
+                    <span class="country-name">${countryName}</span>
+                    <input type="hidden" class="array-item-input" value="${targetCountry}"
+                        data-turn="${params.turn || 0}"
+                        data-duration="${params.duration || ''}"
+                        data-initiator="${params.initiator || false}">
+                </div>
                 <div class="relation-params">${extraInfo}</div>
             </div>
             <div class="relation-controls">
@@ -962,10 +968,12 @@ class CountryManager {
         itemDiv.className = 'array-list-item';
         itemDiv.innerHTML = `
             <div class="relation-info">
-                <input type="text" class="array-item-input" value=""
-                    data-turn="0">
+                <div class="array-item-text">
+                    <span class="country-name"></span>
+                    <input type="hidden" class="array-item-input" value="" data-turn="0">
+                </div>
                 <div class="relation-params">
-                    <span class="relation-turn">Ход: 0</span>
+                    <span class="relation-turn">${window.translator.translate("turn")}: 0</span>
                 </div>
             </div>
             <div class="relation-controls">
@@ -1089,9 +1097,17 @@ class CountryManager {
             
             // Обновляем отношения для текущей страны
             input.value = selectedCountryId;
+            // Обновляем скрытый input с ID страны
             input.setAttribute('data-turn', turn);
             if (duration) input.setAttribute('data-duration', duration);
             if (initiator !== undefined) input.setAttribute('data-initiator', initiator);
+            input.value = selectedCountryId;
+
+            // Обновляем отображаемое название страны
+            const countryNameSpan = itemDiv.querySelector('.country-name');
+            if (countryNameSpan) {
+                countryNameSpan.textContent = this.jsonData?.lands[selectedCountryId]?.name || selectedCountryId;
+            }
 
             const paramsDiv = itemDiv.querySelector('.relation-params');
             paramsDiv.innerHTML = this.formatRelationParams({
@@ -1169,13 +1185,13 @@ class CountryManager {
     formatRelationParams(params) {
         let html = '';
         if (params.turn !== undefined) {
-            html += `<span class="relation-turn" data-translate="relation_turn_short">Ход</span>: ${params.turn}`;
+            html += `<span class="relation-turn" data-translate="relation_turn_short">${window.translator.translate("relation_turn_short")}</span>: ${params.turn}`;
         }
         if (params.duration !== undefined) {
-            html += `<span class="relation-duration" data-translate="relation_duration_short">Длительность</span>: ${params.duration}`;
+            html += `<span class="relation-duration" data-translate="relation_duration_short">${window.translator.translate("relation_duration_short")}</span>: ${params.duration}`;
         }
         if (params.initiator !== undefined) {
-            html += `<span class="relation-initiator" data-translate="relation_initiator_short">Инициатор</span>: ${params.initiator ? window.translator.translate('yes') : window.translator.translate('no')}`;
+            html += `<span class="relation-initiator" data-translate="relation_initiator_short">${window.translator.translate("relation_initiator_short")}</span>: ${params.initiator ? window.translator.translate('yes') : window.translator.translate('no')}`;
         }
         return html;
     }
@@ -1830,7 +1846,7 @@ class CountryManager {
             countries.forEach(country => {
                 const newId = this.generateUniqueId();
                 const newCountry = { ...country, id: newId };
-                newCountry.name += ' (copy)';
+                newCountry.name += window.translator.translate("(copy)");
                 this.jsonData.lands[newId] = newCountry;
             });
 
