@@ -638,7 +638,7 @@ class CountryManager {
             
             // Создаем глубокую копию страны
             this.jsonData.lands[newId] = JSON.parse(JSON.stringify(currentCountry));
-            this.jsonData.lands[newId].name += ' (копия)';
+            this.jsonData.lands[newId].name += ' (copy)';
 
             // Обновляем все за один раз
             const jsonString = JSON.stringify(this.jsonData, null, 4);
@@ -712,7 +712,7 @@ class CountryManager {
             countries.forEach(country => {
                 const newId = this.generateUniqueId();
                 const newCountry = { ...country, id: newId };
-                newCountry.name += ' (копия)';
+                newCountry.name += ' (copy)';
                 this.jsonData.lands[newId] = newCountry;
             });
 
@@ -906,13 +906,13 @@ class CountryManager {
 
         let extraInfo = '';
         if (params.turn !== undefined) {
-            extraInfo += `<span class="relation-turn">Ход: ${params.turn}</span>`;
+            extraInfo += `<span class="relation-turn">Trun: ${params.turn}</span>`;
         }
         if (params.duration !== undefined) {
-            extraInfo += `<span class="relation-duration">Длительность: ${params.duration}</span>`;
+            extraInfo += `<span class="relation-duration">Duration: ${params.duration}</span>`;
         }
         if (params.initiator !== undefined) {
-            extraInfo += `<span class="relation-initiator">Инициатор: ${params.initiator ? 'Да' : 'Нет'}</span>`;
+            extraInfo += `<span class="relation-initiator">Initiator: ${params.initiator ? 'Да' : 'Нет'}</span>`;
         }
 
         itemDiv.innerHTML = `
@@ -1830,7 +1830,7 @@ class CountryManager {
             countries.forEach(country => {
                 const newId = this.generateUniqueId();
                 const newCountry = { ...country, id: newId };
-                newCountry.name += ' (копия)';
+                newCountry.name += ' (copy)';
                 this.jsonData.lands[newId] = newCountry;
             });
 
