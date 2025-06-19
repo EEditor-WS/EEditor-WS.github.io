@@ -2807,6 +2807,72 @@ const scenariosData = [
         type: "sandbox",
         period: "ancient"
     },
+    {
+        id: [
+            "pelo",
+            "euam",
+            "v1",
+            "1492-en",
+        ],
+        title: "Conquest of Paradise - Europe and America",
+        author: "pelo",
+        year: "1492",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        awards: ["star"],
+        // Hidden parameters
+        publishDate: "2025-06-02", 
+        lastUpdate: "2025-06-11",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ancient"
+    },
+    {
+        id: [
+            "pelo",
+            "euam",
+            "v1",
+            "modern",
+        ],
+        title: "Modern - Europe and America",
+        author: "zachary",
+        year: "2025",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        awards: ["star"],
+        // Hidden parameters
+        publishDate: "2025-06-12", 
+        lastUpdate: "2025-06-12",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "modern"
+    },
+    {
+        id: [
+            "pelo",
+            "euam",
+            "v1",
+            "modern-ru",
+        ],
+        title: "Современность - Europe and America",
+        author: "eenot",
+        year: "2025",
+        languages: ["RU"],
+        gameMode: "Sandbox",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        awards: ["star"],
+        // Hidden parameters
+        publishDate: "2025-06-12", 
+        lastUpdate: "2025-06-12",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "modern"
+    },
 ];
 
 console.log("Данные сценариев загружены");
