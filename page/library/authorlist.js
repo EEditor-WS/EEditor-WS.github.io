@@ -27,7 +27,7 @@ const authorsData = {
     esteban: {
         name: "@deleted_user",
         link: "https://discord.com/users/456226577798135808",
-        color: "#3B83BD"
+        color: "#FF83BD"
     },
     zachary: {
         name: "@zachary.bachary",
@@ -92,6 +92,11 @@ const authorsData = {
     mapmancer: {
         name: "@stilltrex",
         link: "https://discord.com/users/950707094229766174",
+        color: "#3B83BD"
+    },
+    chitterss: {
+        name: "@deleted_user",
+        link: "https://discord.com/users/611870107970568214",
         color: "#3B83BD"
     },
 }

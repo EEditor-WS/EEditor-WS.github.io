@@ -23,6 +23,7 @@ const awardScores = {
     "star": 25,
     "enot": 50,
     "50": 25,
+    "only": 100,
 };
 
 const scenariosData = [
@@ -2872,6 +2873,29 @@ const scenariosData = [
         hiddenScore: 0,
         type: "sandbox",
         period: "modern"
+    },
+    {
+        id: [
+            "chitterss",
+            "world",
+            "v3",
+            "twosides",
+        ],
+        title: "Two Sides",
+        author: "trid",
+        year: "2025",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        awards: ["only", "star", "enot"],
+        // Hidden parameters
+        publishDate: "2025-06-14", 
+        lastUpdate: "2025-06-14",
+        hiddenScore: 200,
+        type: "sandbox",
+        period: "alternative",
+        status: "archived"
     },
 ];
 

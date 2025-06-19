@@ -644,6 +644,21 @@ mapsData = [
         load: "mobile",
         hiddenScore: 0,
     },
+    {
+        id: ["chitterss", "world", "v3"],
+        title: "World by chitterss",
+        author: "chitterss",
+        description: "",
+        type: "continent",
+        region: ["europe", "america", "north_america", "asia", "africa", "oceania", "middle_east"],
+        provinces: 1091,
+        features: [],
+        status: "completed",
+        publishDate: "2023-07-25", 
+        lastUpdate: "2023-07-30",
+        load: "hight",
+        hiddenScore: 0,
+    },
 ];
 
 const mapTypes = {
