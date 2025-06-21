@@ -1238,8 +1238,8 @@ generateUniqueId(minimumID = 0) {
                     
                     // Создаем опции для выпадающего списка с any и this
                     subtypeSelect.innerHTML = `
-                        <option value="any">${window.translator.translate('any')}</option>
                         <option value="this">${window.translator.translate('this')}</option>
+                        <option value="any">${window.translator.translate('any')}</option>
                         ${countries.map(country => 
                             `<option value="${country.id}">${country.name}</option>`
                         ).join('')}
@@ -1354,7 +1354,7 @@ generateUniqueId(minimumID = 0) {
                             const countries = Object.entries(this.jsonData.lands || {}).map(([id, country]) => ({
                                 id,
                                 name: country.name
-                            }));
+                            })).sort((a, b) => a.name.localeCompare(b.name));;
                             select.innerHTML = countries.map(country => 
                                 `<option value="${country.id}">${country.name}</option>`
                             ).join('');
@@ -1363,27 +1363,33 @@ generateUniqueId(minimumID = 0) {
                     // Для добавления населения культуры с подтипом страны
                     subtypeGroup.style.display = 'block';
                     const subtypeInput = document.getElementById('requirement-subtype');
+
                     // Создаем выпадающий список для стран
                     const countrySelect = document.createElement('select');
                     countrySelect.id = 'requirement-subtype';
                     countrySelect.className = 'main-page-input';
+
+                    // Получаем и сортируем список стран по имени
                     const countries = Object.entries(this.jsonData.lands || {}).map(([id, country]) => ({
                         id,
                         name: country.name
-                    }));
-                    countrySelect.innerHTML = countries.map(country => 
+                    })).sort((a, b) => a.name.localeCompare(b.name));
+
+                    // Заполняем выпадающий список
+                    countrySelect.innerHTML = countries.map(country =>
                         `<option value="${country.id}">${country.name}</option>`
-                            ).join('');
+                    ).join('');
+
                     // Заменяем текстовое поле на выпадающий список
                     subtypeInput.parentNode.replaceChild(countrySelect, subtypeInput);
 
                     // Добавляем поле для числового значения
-                        const input = document.createElement('input');
-                        input.type = 'number';
-                        input.id = 'requirement-value';
-                        input.className = 'main-page-input';
-                        input.placeholder = window.translator.translate('enter_number');
-                        valueContainer.appendChild(input);
+                    const input = document.createElement('input');
+                    input.type = 'number';
+                    input.id = 'requirement-value';
+                    input.className = 'main-page-input';
+                    input.placeholder = window.translator.translate('enter_number');
+                    valueContainer.appendChild(input);
                 } else if (['resurrect_country', 'annex_country'].includes(selectedType)) {
                     // Существующая логика для старых бонусов
                         const select = document.createElement('select');
@@ -1392,7 +1398,7 @@ generateUniqueId(minimumID = 0) {
                         const countries = Object.entries(this.jsonData.lands || {}).map(([id, country]) => ({
                             id,
                             name: country.name
-                        }));
+                        })).sort((a, b) => a.name.localeCompare(b.name));;
                         select.innerHTML = countries.map(country => 
                             `<option value="${country.id}">${country.name}</option>`
                         ).join('');
@@ -1416,9 +1422,12 @@ generateUniqueId(minimumID = 0) {
                         }))
                         .sort((a, b) => a.name.toString().toUpperCase().localeCompare(b.name.toString().toUpperCase()));
                     
-                    countrySelect.innerHTML = countries.map(country => 
-                        `<option value="${country.id}">${country.name}</option>`
-                    ).join('');
+                    // Создаем опции для выпадающего списка с any и this
+                    countrySelect.innerHTML = `
+                        ${countries.map(country => 
+                            `<option value="${country.id}">${country.name}</option>`
+                        ).join('')}
+                    `;
                     
                     // Заменяем текстовое поле на выпадающий список
                     subtypeInput.parentNode.replaceChild(countrySelect, subtypeInput);
@@ -1468,7 +1477,7 @@ generateUniqueId(minimumID = 0) {
                     const countries = Object.entries(this.jsonData.lands || {}).map(([id, country]) => ({
                         id,
                         name: country.name
-                    }));
+                    })).sort((a, b) => a.name.localeCompare(b.name));;
                     countrySelect.innerHTML = countries.map(country => 
                         `<option value="${country.id}">${country.name}</option>`
                             ).join('');
