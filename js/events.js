@@ -482,26 +482,28 @@ class EventManager {
         this.openEvent(newId);
     }
 
-    generateUniqueId() {
-        if (!this.jsonData || !this.jsonData.custom_events) {
-            return 'E1';
-        }
-
-        // Получаем все существующие ID
-        const existingIds = Object.keys(this.jsonData.custom_events)
-            .filter(id => id.startsWith('E'))
-            .map(id => parseInt(id.substring(1)))
-            .filter(num => !isNaN(num));
-
-        // Если нет существующих ID, возвращаем E1
-        if (existingIds.length === 0) {
-            return 'E1';
-        }
-
-        // Находим максимальный номер и увеличиваем его на 1
-        const maxId = Math.max(...existingIds);
-        return `E${maxId + 1}`;
+generateUniqueId(minimumID = 0) {
+    if (!this.jsonData || !this.jsonData.custom_events) {
+        // Вернём ID, который больше minimumID
+        return `E${Math.max(1, minimumID + 1)}`;
     }
+
+    // Извлекаем существующие числовые ID
+    const existingIds = new Set(
+        Object.keys(this.jsonData.custom_events)
+            .filter(id => /^E\d+$/.test(id))
+            .map(id => parseInt(id.substring(1), 10))
+            .filter(num => !isNaN(num))
+    );
+
+    // Начинаем с первого подходящего ID
+    let newId = minimumEventID + 1;
+    while (existingIds.has(newId)) {
+        newId++;
+    }
+
+    return `E${newId}`;
+}
 
     copyCurrentEvent(eventId) {
         try {

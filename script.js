@@ -1214,6 +1214,9 @@ try {
     showError('Ошибка', 'Не удалось отобразить статус');
 }
 
+    let minimumEventID = 0;
+    let minimumCountryID = 0;
+
 if (isAndroidApp) {
     try {
         openfile();
