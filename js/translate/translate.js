@@ -15,28 +15,63 @@ document.addEventListener('DOMContentLoaded', () => {
  */
 async function translateText(text, sourceLang = 'en', targetLang = 'ru') {
     try {
-        // My Memory Translation API endpoint
-        const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sourceLang}|${targetLang}`;
+        // Если определена и не пуста CSV-таблица переводов
+        if (typeof tableTranslations === 'string' && tableTranslations.trim().length > 0) {
+            // Сопоставление коротких кодов с заголовками столбцов
+            const langMap = {
+                ru: "Русский",
+                en: "English",
+                uk: "Українська"
+            };
 
+            const fromLang = langMap[sourceLang] || sourceLang;
+            const toLang   = langMap[targetLang]  || targetLang;
+
+            // Парсим CSV
+            const csvData = tableTranslations.trim();
+            const lines   = csvData.split(/\r?\n/);
+            const headers = lines[0].split(',');
+
+            const fromIndex = headers.indexOf(fromLang);
+            const toIndex   = headers.indexOf(toLang);
+
+            if (fromIndex === -1 || toIndex === -1) {
+                console.warn(`Языки "${fromLang}" или "${toLang}" не найдены в таблице.`);
+            } else {
+                // Ищем точное совпадение в колонке-источнике
+                for (let i = 1; i < lines.length; i++) {
+                    const row = lines[i].split(',');
+                    if (row[fromIndex]?.trim() === text.trim()) {
+                        return row[toIndex]?.trim() || text;
+                    }
+                }
+            }
+
+            // Если не нашли в таблице — возвращаем оригинал
+            // return text;
+        }
+        showInfo('Обращение к переводчику, так как нету в таблице')
+
+        // Если таблицы нет — вызываем внешний API MyMemory
+        const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sourceLang}|${targetLang}`;
         const response = await fetch(url);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const data = await response.json();
-
-        // Проверяем успешность перевода
-        if (data.responseStatus === 200) {
+        if (data.responseStatus === 200 && data.responseData?.translatedText) {
             return data.responseData.translatedText;
         } else {
             throw new Error(data.responseDetails || 'Translation failed');
         }
     } catch (error) {
         console.error('Translation error:', error);
-        // Возвращаем исходный текст в случае ошибки
         return text;
     }
 }
+
+
 
 /**
  * Переводит HTML элемент и все его дочерние элементы
