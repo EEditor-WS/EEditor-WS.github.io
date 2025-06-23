@@ -351,11 +351,11 @@ function populateMapFilter() {
 
     // Очищаем текущие опции
     mapSelect.innerHTML = '<option value="">Все карты</option>';
-
     // Добавляем опции для каждой карты
     maps.forEach(map => {
         const option = document.createElement('option');
-        option.value = map.id.join('_');
+        // Используем только первые два элемента ID для соответствия с data-map-id в карточках
+        option.value = map.id.slice(0, 2).join('_');
         option.textContent = map.title;
         mapSelect.appendChild(option);
     });
