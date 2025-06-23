@@ -2857,7 +2857,7 @@ const scenariosData = [
             "pelo",
             "euam",
             "v1",
-            "modern-ru",
+            "modern-ru2",
         ],
         title: "Современность - Europe and America",
         author: "eenot",
