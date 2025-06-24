@@ -2,8 +2,6 @@
 \
 document.addEventListener('DOMContentLoaded', () => {
 \
-    // Дожидаемся инициализации системы уведомлений
-\
     window.addEventListener('notificationSystemReady', () => {
 \
         // Система уведомлений готова к использованию
@@ -87,12 +85,6 @@ function lookupInTable(text, sourceLang, targetLang) {
 }
 \
 
-\
-/**
-\
- * Переводит текст с использованием таблицы или API
-\
- */
 \
 async function translateText(text, sourceLang = 'en', targetLang = 'ru') {
 \
@@ -428,49 +420,49 @@ async function translateCurrentFile() {
 \
     const data = JSON.parse(fileContent);
 \
-    if (Array.isArray(data)) {
-\
-        return await Promise.all(data.map(item => translateParameters(item, sourceLang, targetLang, isCapitals)));
-\
-    } else {
-\
-        return await translateParameters(data, sourceLang, targetLang, isCapitals);
-\
-    }
-\
-}
+    let translated;
 \
 
 \
-async function translateAndSaveFile() {
+    if (Array.isArray(data)) {
 \
-    translateCurrentFile()
+        translated = await Promise.all(data.map(item => translateParameters(item, sourceLang, targetLang, isCapitals)));
 \
-        .then(translatedData => {
+    } else {
 \
-            if (window.countryManager) {
+        translated = await translateParameters(data, sourceLang, targetLang, isCapitals);
 \
-                window.countryManager.jsonData = translatedData;
+    }
 \
-                window.countryManager.updateCountriesList();
+
 \
-            }
+    // Сохраняем результат
 \
-            if (window.eventManager) {
+    if (window.countryManager) {
 \
-                window.eventManager.setJsonData(translatedData);
+        window.countryManager.jsonData = translated;
 \
-            }
+        window.countryManager.updateCountriesList();
 \
-            fillFormFromJson(translatedData);
+    }
 \
-            if (previewContent) {
+    if (window.eventManager) {
 \
-                previewContent.value = JSON.stringify(translatedData);
+        window.eventManager.setJsonData(translated);
 \
-            }
+    }
 \
-        });
+    fillFormFromJson(translated);
+\
+    if (window.previewContent) {
+\
+        previewContent.value = JSON.stringify(translated);
+\
+    }
+\
+
+\
+    return true;
 \
 }
 \
@@ -480,7 +472,7 @@ function translate() {
 \
     showNotification('Запуск перевода...', 'info');
 \
-    return translateAndSaveFile()
+    return translateCurrentFile()
 \
         .then(success => {
 \
