@@ -99,4 +99,9 @@ const authorsData = {
         link: "https://discord.com/users/611870107970568214",
         color: "#3B83BD"
     },
+    grimreaper: {
+        name: "@grimreaper54",
+        link: "https://discord.com/users/720328844464357446",
+        color: "#3B83BD"
+    },
 }
