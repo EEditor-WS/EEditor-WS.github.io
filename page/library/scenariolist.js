@@ -2803,7 +2803,7 @@ const scenariosData = [
         awards: ["star"],
         // Hidden parameters
         publishDate: "2025-06-02", 
-        lastUpdate: "2025-06-02",
+        lastUpdate: "2025-06-19",
         hiddenScore: 0,
         type: "sandbox",
         period: "ancient"
@@ -2835,7 +2835,7 @@ const scenariosData = [
             "pelo",
             "euam",
             "v1",
-            "modern",
+            "modern-en",
         ],
         title: "Modern - Europe and America",
         author: "zachary",
@@ -2870,6 +2870,28 @@ const scenariosData = [
         // Hidden parameters
         publishDate: "2025-06-12", 
         lastUpdate: "2025-06-12",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "modern"
+    },
+    {
+        id: [
+            "pelo",
+            "euam",
+            "v1",
+            "modern-uk",
+        ],
+        title: "Сучасність - Europe and America",
+        author: "eenot",
+        year: "2025",
+        languages: ["UK"],
+        gameMode: "Sandbox",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-06-12", 
+        lastUpdate: "2025-06-24",
         hiddenScore: 0,
         type: "sandbox",
         period: "modern"

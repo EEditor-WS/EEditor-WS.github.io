@@ -640,7 +640,7 @@ mapsData = [
         features: [],
         status: "completed",
         publishDate: "2025-06-02", 
-        lastUpdate: "2025-06-02",
+        lastUpdate: "2025-06-23",
         load: "mobile",
         hiddenScore: 0,
     },
