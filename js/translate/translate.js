@@ -232,7 +232,7 @@ function showNotification(message, type = 'info') {
     }, 3000);
 }
 
-function translate() {
+function translateAndSaveFile() {
     showNotification('Запуск перевода...', 'info');
     return translateCurrentFile()
         .then(success => {
