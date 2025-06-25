@@ -53,7 +53,7 @@ async function translateText(text, sourceLang = 'en', targetLang = 'ru') {
     try {
         const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sourceLang}|${targetLang}`;
         const response = await fetch(url);
-        const data = await response.json();
+        const data = await new Promise(resolve => setTimeout(resolve, 1000));
         if (data?.responseStatus === 200 && data.responseData?.translatedText) {
             result = data.responseData.translatedText;
         } else {
