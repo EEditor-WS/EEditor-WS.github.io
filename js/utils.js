@@ -176,6 +176,29 @@ function convertObjectToReadableString(obj) {
     return retres;
   }
 
+function transformCustomEvents() {
+  let data = JSON.parse(previewContent.value);
+  let oldEvents = data.custom_events;
+  let newEvents = {};
+
+  for (let key in oldEvents) {
+    let event = oldEvents[key];
+    if (event.id) {
+      newEvents[event.id] = event;
+    } else {
+      console.log("Пропущено событие без id:", key, event);
+    }
+  }
+
+  data.custom_events = newEvents;
+
+  previewContent.value = JSON.stringify(data, null, 2);
+  window.eventManager.syncronizeWithPreview();
+  showSuccess("ID Роздан чётенько!");
+
+  return data;
+}
+
 // Экспортируем утилиты
 window.ColorUtils = ColorUtils;
 window.ValidationUtils = ValidationUtils;

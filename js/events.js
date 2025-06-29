@@ -54,6 +54,14 @@ class EventManager {
         }
     }
 
+    syncronizeWithPreview() {
+        try {
+            this.jsonData = JSON.parse(this.previewContent.value);
+        } catch (error) {
+            console.error('Ошибка при синхронизации с previewContent:', error);
+        }
+    }
+
     async loadScenario(content) {
         try {
             this.jsonData = JSON.parse(content);
