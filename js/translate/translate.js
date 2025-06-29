@@ -1,137 +1,104 @@
 // Зависимости
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Дожидаемся инициализации системы уведомлений
     window.addEventListener('notificationSystemReady', () => {
         // Система уведомлений готова к использованию
     });
 });
 
-/**
- * Переводит текст с использованием API My Memory Translation
- * @param {string} text - Текст для перевода
- * @param {string} sourceLang - Исходный язык (en, ru, etc)
- * @param {string} targetLang - Целевой язык (en, ru, etc)
- * @returns {Promise<string>} Переведенный текст
- */
-async function translateText(text, sourceLang = 'en', targetLang = 'ru') {
-    try {
-        // Если определена и не пуста CSV-таблица переводов
-        if (typeof tableTranslations === 'string' && tableTranslations.trim().length > 0) {
-            // Сопоставление коротких кодов с заголовками столбцов
-            const langMap = {
-                ru: "Русский",
-                en: "English",
-                uk: "Українська"
-            };
+// Кэш и таблица переводов
+const translationCache = new Map();
+let parsedTable = null;
 
-            const fromLang = langMap[sourceLang] || sourceLang;
-            const toLang   = langMap[targetLang]  || targetLang;
-
-            // Парсим CSV
-            const csvData = tableTranslations.trim();
-            const lines   = csvData.split(/\r?\n/);
-            const headers = lines[0].split(',');
-
-            const fromIndex = headers.indexOf(fromLang);
-            const toIndex   = headers.indexOf(toLang);
-
-            if (fromIndex === -1 || toIndex === -1) {
-                console.warn(`Языки "${fromLang}" или "${toLang}" не найдены в таблице.`);
-            } else {
-                // Ищем точное совпадение в колонке-источнике
-                for (let i = 1; i < lines.length; i++) {
-                    const row = lines[i].split(',');
-                    if (row[fromIndex]?.trim() === text.trim()) {
-                        return row[toIndex]?.trim() || text;
-                    }
-                }
-            }
-
-            // Если не нашли в таблице — возвращаем оригинал
-            // return text;
-        }
-        showInfo('Обращение к переводчику, так как нету в таблице')
-
-        // Если таблицы нет — вызываем внешний API MyMemory
-        const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sourceLang}|${targetLang}`;
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        if (data.responseStatus === 200 && data.responseData?.translatedText) {
-            return data.responseData.translatedText;
-        } else {
-            throw new Error(data.responseDetails || 'Translation failed');
-        }
-    } catch (error) {
-        console.error('Translation error:', error);
-        return text;
-    }
+function parseTranslationTable() {
+    if (parsedTable) return parsedTable;
+    const langMap = {
+        ru: "Русский",
+        en: "English",
+        uk: "Українська"
+    };
+    const lines = tableTranslations.trim().split(/\r?\n/);
+    const headers = lines[0].split(',');
+    const map = lines.slice(1).map(line => line.split(','));
+    parsedTable = { headers, map, langMap };
+    return parsedTable;
 }
 
+function lookupInTable(text, sourceLang, targetLang) {
+    const { headers, map, langMap } = parseTranslationTable();
+    const fromIndex = headers.indexOf(langMap[sourceLang] || sourceLang);
+    const toIndex = headers.indexOf(langMap[targetLang] || targetLang);
+    if (fromIndex === -1 || toIndex === -1) return null;
+    for (const row of map) {
+        if (row[fromIndex]?.trim() === text.trim()) {
+            return row[toIndex]?.trim() || null;
+        }
+    }
+    return null;
+}
 
+async function translateText(text, sourceLang = 'en', targetLang = 'ru') {
+    const cacheKey = `${sourceLang}:${targetLang}:${text}`;
+    if (translationCache.has(cacheKey)) {
+        return translationCache.get(cacheKey);
+    }
+    let result = null;
+    if (typeof tableTranslations === 'string' && tableTranslations.trim()) {
+        result = lookupInTable(text, sourceLang, targetLang);
+        if (result) {
+            translationCache.set(cacheKey, result);
+            return result;
+        }
+    }
+    try {
+        const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sourceLang}|${targetLang}`;
+        const response = await fetch(url);
+        const data = await new Promise(resolve => setTimeout(resolve, 1000));
+        if (data?.responseStatus === 200 && data.responseData?.translatedText) {
+            result = data.responseData.translatedText;
+        } else {
+            result = text;
+        }
+    } catch (err) {
+        console.error('Ошибка API перевода:', err);
+        result = text;
+    }
+    translationCache.set(cacheKey, result);
+    return result;
+}
 
-/**
- * Переводит HTML элемент и все его дочерние элементы
- * @param {HTMLElement} element - HTML элемент для перевода
- * @param {string} sourceLang - Исходный язык (en, ru, etc)
- * @param {string} targetLang - Целевой язык (en, ru, etc)
- */
 async function translateElement(element, sourceLang = 'en', targetLang = 'ru') {
-    // Рекурсивно обходим все текстовые узлы
-    const walk = document.createTreeWalker(
-        element,
-        NodeFilter.SHOW_TEXT,
-        null,
-        false
-    );
-
+    const walk = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null, false);
     let node;
-    let promises = [];
-
+    const promises = [];
     while (node = walk.nextNode()) {
         const text = node.textContent.trim();
         if (text) {
-            // Собираем все промисы переводов
             promises.push(
-                translateText(text, sourceLang, targetLang)
-                    .then(translatedText => {
-                        node.textContent = translatedText;
-                    })
+                translateText(text, sourceLang, targetLang).then(translated => {
+                    node.textContent = translated;
+                })
             );
         }
     }
-
-    // Ждем завершения всех переводов
     await Promise.all(promises);
 }
 
-/**
- * Создает диалог выбора языков для перевода
- * @returns {Promise<{sourceLang: string, targetLang: string}>} Выбранные языки
- */
 function createLanguageDialog() {
     return new Promise((resolve) => {
-        // Создаем диалоговое окно
         const dialog = document.createElement('div');
         dialog.style.cssText = `
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: white;
+            background: #333;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             z-index: 1000;
             color: white;
-            background-color: #333;
-            outline: none;
-        `;
-
-        // Добавляем содержимое
+            outline: none;`;
         dialog.innerHTML = `
             <h3 style="margin-top: 0;">Выберите языки для перевода</h3>
             <div style="margin-bottom: 15px;">
@@ -158,15 +125,10 @@ function createLanguageDialog() {
                 <label>Переводить столицы? </label>
                 <input type="checkbox" id="isCapitals" value="yes" checked>
             </div>
-            <button id="translateBtn" style="outline: none; padding: 5px 15px; border-radius: 7px; background-color: #2980b9;">Начать перевод</button>
+            <button id="translateBtn" style="outline: none; padding: 5px 15px; border-radius: 7px; background-color: #2980b9; color: white;">Начать перевод</button>
         `;
-
-        // Добавляем диалог на страницу
         document.body.appendChild(dialog);
-
-        // Обработчик кнопки
-        const translateBtn = dialog.querySelector('#translateBtn');
-        translateBtn.onclick = () => {
+        dialog.querySelector('#translateBtn').onclick = () => {
             const sourceLang = dialog.querySelector('#sourceLang').value;
             const targetLang = dialog.querySelector('#targetLang').value;
             const isCapitals = dialog.querySelector('#isCapitals').checked;
@@ -176,148 +138,82 @@ function createLanguageDialog() {
     });
 }
 
-/**
- * Переводит все указанные параметры в объекте данных
- * @param {Object} data - Объект с данными для перевода
- * @param {string} sourceLang - Исходный язык
- * @param {string} targetLang - Целевой язык
- * @returns {Promise<Object>} Объект с переведенными данными
- */
 async function translateParameters(data, sourceLang, targetLang, isCapitals = true) {
     window.showInfo('Перевод', 'Начинаем перевод параметров...');
-
-    let fieldsToTranslate;
-    if (isCapitals) {
-        fieldsToTranslate = [
-            'name',
-            'capital_name',
-            'title',
-            'answer1',
-            'answer2',
-            'answer3',
-            'description1',
-            'description2',
-            'description3'
-        ];
-    } else {
-        fieldsToTranslate = [
-            'name',
-            'title',
-            'answer1',
-            'answer2',
-            'answer3',
-            'description1',
-            'description2',
-            'description3'
-        ];
-    }
-
-    // Рекурсивная функция для обхода объекта
+    const fieldsToTranslate = isCapitals
+        ? ['name', 'capital_name', 'title', 'answer1', 'answer2', 'answer3', 'description1', 'description2', 'description3']
+        : ['name', 'title', 'answer1', 'answer2', 'answer3', 'description1', 'description2', 'description3'];
     async function translateObject(obj) {
         if (!obj || typeof obj !== 'object') return obj;
-
-        // Если это массив, обрабатываем каждый элемент
         if (Array.isArray(obj)) {
-            const newArray = [];
-            for (const item of obj) {
-                newArray.push(await translateObject(item));
-            }
-            return newArray;
+            return await Promise.all(obj.map(item => translateObject(item)));
         }
-
-        // Создаем копию объекта
         const translatedObj = { ...obj };
-
-        // Обходим все поля объекта
+        const translationTasks = [];
         for (const [key, value] of Object.entries(obj)) {
             if (typeof value === 'object' && value !== null) {
-                // Рекурсивно обрабатываем вложенные объекты
-                translatedObj[key] = await translateObject(value);
-            } else if (typeof value === 'string' && fieldsToTranslate.includes(key)) {
-                try {
-                    if (value.trim() === '') {
-                        console.warn(`Пропускаем пустое поле ${key}`);
-                        continue; // Пропускаем пустые строки
-                    }
-                    console.log(`Переводим ${key}: ${value}`);
-                    const translated = await translateText(value, sourceLang, targetLang);
-                    translatedObj[key] = translated;
-                    console.log(`Переведено ${key}: ${translated}`);
-                    window.showSuccess('Перевод', `Переведено: ${key} как "${translated}"`);
-                } catch (error) {
-                    console.error(`Ошибка при переводе поля ${key}:`, error);
-                    window.showError('Перевод', `Ошибка перевода: ${key}`);
-                }
-                // Добавляем небольшую задержку, чтобы не перегружать API
-                await new Promise(resolve => setTimeout(resolve, 1000));
+                translationTasks.push(
+                    translateObject(value).then(translated => {
+                        translatedObj[key] = translated;
+                    })
+                );
+            } else if (typeof value === 'string' && fieldsToTranslate.includes(key) && value.trim()) {
+                translationTasks.push(
+                    translateText(value, sourceLang, targetLang).then(translated => {
+                        translatedObj[key] = translated;
+                        window.showSuccess('Перевод', `Переведено: ${key}`);
+                    }).catch(error => {
+                        console.error(`Ошибка перевода ${key}:`, error);
+                        window.showError('Перевод', `Ошибка перевода: ${key}`);
+                    })
+                );
             }
         }
-
+        await Promise.all(translationTasks);
         return translatedObj;
     }
-
-    // Переводим весь объект
     const result = await translateObject(data);
-    window.showSuccess('Перевод', 'Перевод параметров завершен');
+    window.showSuccess('Перевод', 'Перевод параметров завершён');
     return result;
 }
 
-/**
- * Основная функция для перевода данных из текущего файла
- */
 async function translateCurrentFile() {
-    //try {
-        // Получаем выбор языков от пользователя
-        const { sourceLang, targetLang, isCapitals } = await createLanguageDialog();
-
-        // Получаем данные из текущего файла
-        const fileContent = JSON.stringify(window.countryManager.jsonData);
-        console.log('проверка...');
-        if (!fileContent) {
-            throw new Error('Не удалось найти содержимое файла');
-        }
-
-        // Парсим JSON
-        const data = JSON.parse(fileContent);
-
-        // Если это массив, переводим каждый элемент
-        console.log('Начинаем перевод данных...');
-        if (Array.isArray(data)) {
-            const translatedArray = [];
-            for (const item of data) {
-                const translatedItem = await translateParameters(item, sourceLang, targetLang, isCapitals);
-                translatedArray.push(translatedItem);
-            }
-            return translatedArray;
-        } else {
-            // Если это объект, переводим его
-            return await translateParameters(data, sourceLang, targetLang, isCapitals);
-        }
-    /*} catch (error) {
-        console.log('ошибка');
-        console.error('Ошибка при переводе файла:', error);
-        return null;
-    }*/
+    const { sourceLang, targetLang, isCapitals } = await createLanguageDialog();
+    const fileContent = JSON.stringify(window.countryManager.jsonData);
+    if (!fileContent) throw new Error('Не удалось найти содержимое файла');
+    const data = JSON.parse(fileContent);
+    let translated;
+    if (Array.isArray(data)) {
+        translated = await Promise.all(data.map(item => translateParameters(item, sourceLang, targetLang, isCapitals)));
+    } else {
+        translated = await translateParameters(data, sourceLang, targetLang, isCapitals);
+    }
+    if (window.countryManager) {
+        window.countryManager.jsonData = translated;
+        window.countryManager.updateCountriesList();
+    }
+    if (window.eventManager) {
+        window.eventManager.setJsonData(translated);
+    }
+    fillFormFromJson(translated);
+    if (window.previewContent) {
+        previewContent.value = JSON.stringify(translated);
+    }
+    return true;
 }
 
-/**
- * Показывает уведомление о состоянии процесса
- * @param {string} message - Текст уведомления
- * @param {string} type - Тип уведомления ('info', 'success', 'error')
- */
-/*function window.showInfo(message, type = 'info') {
+function showNotification(message, type = 'info') {
     const colors = {
         info: '#2196F3',
         success: '#4CAF50',
         error: '#f44336'
     };
-
     const notification = document.createElement('div');
     notification.style.cssText = `
         position: fixed;
         top: 20px;
         right: 20px;
-        background: ${colors[type]};
+        background: ${colors[type] || '#2196F3'};
         color: white;
         padding: 10px 20px;
         border-radius: 4px;
@@ -325,48 +221,20 @@ async function translateCurrentFile() {
     `;
     notification.textContent = message;
     document.body.appendChild(notification);
-
     setTimeout(() => {
-        if (notification && notification.parentNode) {
-            notification.style.opacity = '0';
-            notification.style.transition = 'opacity 0.5s ease';
-            setTimeout(() => {
-                if (notification && notification.parentNode) {
-                    document.body.removeChild(notification);
-                }
-            }, 500);
-        }
+        notification.style.opacity = '0';
+        notification.style.transition = 'opacity 0.5s ease';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                document.body.removeChild(notification);
+            }
+        }, 500);
     }, 3000);
-}*/
-
-/**
- * Переводит файл и сохраняет изменения
- * @returns {Promise<boolean>} Возвращает true если файл сохранен, false если операция отменена
- */
-async function translateAndSaveFile() {
-    translateCurrentFile()
-        .then(translatedData => {
-            if (window.countryManager) {
-                window.countryManager.jsonData = translatedData;
-                window.countryManager.updateCountriesList();
-            }
-            if (window.eventManager) {
-                window.eventManager.setJsonData(translatedData);
-            }
-            fillFormFromJson(translatedData);
-            if (previewContent) {
-                previewContent.value = JSON.stringify(translatedData);
-            }
-        }
-    )
 }
 
-/**
- * Рекомендуемый способ вызова функции перевода
- */
-function translate() {
+function translateAndSaveFile() {
     showNotification('Запуск перевода...', 'info');
-    return translateAndSaveFile()
+    return translateCurrentFile()
         .then(success => {
             if (success) {
                 console.log('✅ Файл успешно переведен и сохранен');
@@ -380,15 +248,3 @@ function translate() {
             return false;
         });
 }
-
-// Пример использования:
-/*
-translateAndSaveFile()
-    .then(success => {
-        if (success) {
-            console.log('Файл успешно переведен и сохранен');
-        } else {
-            console.log('Операция была отменена пользователем');
-        }
-    });
-*/
