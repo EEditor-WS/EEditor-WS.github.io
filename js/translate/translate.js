@@ -10,6 +10,46 @@ document.addEventListener('DOMContentLoaded', () => {
 const translationCache = new Map();
 let parsedTable = null;
 
+// Семафор для API переводчика
+let translationInProgress = false;
+const translationQueue = [];
+
+// Функция для обработки очереди переводов
+async function processTranslationQueue() {
+    if (translationInProgress || translationQueue.length === 0) return;
+    
+    translationInProgress = true;
+    const { text, sourceLang, targetLang, resolve, reject } = translationQueue.shift();
+    
+    try {
+        const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sourceLang}|${targetLang}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        await new Promise(r => setTimeout(r, 1000)); // Задержка 1 секунда между запросами
+        
+        if (data?.responseStatus === 200 && data.responseData?.translatedText) {
+            resolve(data.responseData.translatedText);
+        } else {
+            resolve(text);
+        }
+    } catch (err) {
+        console.error('Ошибка API перевода:', err);
+        resolve(text);
+    } finally {
+        translationInProgress = false;
+        processTranslationQueue(); // Обрабатываем следующий запрос в очереди
+    }
+}
+
+// Функция для добавления запроса в очередь
+function queueTranslationRequest(text, sourceLang, targetLang) {
+    return new Promise((resolve, reject) => {
+        translationQueue.push({ text, sourceLang, targetLang, resolve, reject });
+        processTranslationQueue();
+    });
+}
+
 function parseTranslationTable() {
     if (parsedTable) return parsedTable;
     const langMap = {
@@ -42,6 +82,7 @@ async function translateText(text, sourceLang = 'en', targetLang = 'ru') {
     if (translationCache.has(cacheKey)) {
         return translationCache.get(cacheKey);
     }
+    
     let result = null;
     if (typeof tableTranslations === 'string' && tableTranslations.trim()) {
         result = lookupInTable(text, sourceLang, targetLang);
@@ -50,19 +91,9 @@ async function translateText(text, sourceLang = 'en', targetLang = 'ru') {
             return result;
         }
     }
-    try {
-        const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sourceLang}|${targetLang}`;
-        const response = await fetch(url);
-        const data = await new Promise(resolve => setTimeout(resolve, 1000));
-        if (data?.responseStatus === 200 && data.responseData?.translatedText) {
-            result = data.responseData.translatedText;
-        } else {
-            result = text;
-        }
-    } catch (err) {
-        console.error('Ошибка API перевода:', err);
-        result = text;
-    }
+    
+    // Используем очередь для API запросов
+    result = await queueTranslationRequest(text, sourceLang, targetLang);
     translationCache.set(cacheKey, result);
     return result;
 }
