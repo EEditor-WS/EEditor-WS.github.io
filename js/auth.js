@@ -7,9 +7,9 @@ const COOKIE_EXPIRES_DAYS = 30;
 // Разбиваем токен на части
 const GITHUB_TOKEN_PARTS = [
     'github_pat_11A6XWVIA0',
-    'sIpTSLtCHu21_GWTr2APD',
-    'Wth5T1CXmr4I7rb16b0P0',
-    'fNySlZvb4YRLvBE6G6CM2SSCmLEQnF'
+    'hbkg2iJQvbcT_Ul7fsGU0',
+    'iQCypjG6rqmiwAiWxYMzi',
+    'e6WAPyhlwhtoRXZ6GH22OEok8ab8cB'
 ];
 
 function getGithubToken() {
@@ -516,4 +516,4 @@ window.authManager = new AuthManager();
 // Проверяем, находимся ли мы на странице callback
 if (window.location.pathname === '/auth/discord/callback') {
     window.authManager.handleDiscordCallback();
-} 
+}
