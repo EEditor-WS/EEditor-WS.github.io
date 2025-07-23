@@ -1,4 +1,91 @@
 class CountryManager {
+    // Показывает подробности силы страны при наведении на powerCellInList
+    showPowerBreakdown(countryId, anchorElement) {
+        if (!this.jsonData?.lands?.[countryId]) return;
+        const land = this.jsonData.lands[countryId];
+        // Подсчет провинций
+        let provincesCount = 0;
+        if (this.jsonData.provinces) {
+            for (const province of this.jsonData.provinces) {
+                if (province.owner === countryId) provincesCount++;
+            }
+        }
+        // Подсчет провинций вассалов
+        let vassalProvinces = 0;
+        let vassalList = [];
+        if (land.vassals) {
+            for (const vassalId of Object.keys(land.vassals)) {
+                let vassalProv = 0;
+                if (this.jsonData.provinces) {
+                    for (const province of this.jsonData.provinces) {
+                        if (province.owner === vassalId) vassalProv++;
+                    }
+                }
+                vassalList.push({ id: vassalId, count: vassalProv, name: this.jsonData.lands[vassalId]?.name || vassalId });
+                vassalProvinces += vassalProv;
+            }
+        }
+        // Экономика
+        let economy = 0;
+        if (typeof land.economy === 'number') economy = land.economy;
+        else if (land.economy && typeof land.economy.value === 'number') economy = land.economy.value;
+        // Армия
+        let army = 0;
+        if (typeof land.army_power === 'number') army = land.army_power;
+        else if (land.army && typeof land.army.power === 'number') army = land.army.power;
+        // Формула
+        let total = 200 * provincesCount + 200 * vassalProvinces + economy + army;
+        // Строим HTML
+        let html = `<div class="power-breakdown-tooltip">
+            <b>${window.translator ? window.translator.translate('power_breakdown') : 'Power breakdown'}</b><br>
+            <span>${window.translator ? window.translator.translate('provinces') : 'Provinces'}: </span>+${provincesCount} × 200 = <b>${provincesCount * 200}</b><br>`;
+        if (vassalList.length > 0) {
+            html += `<span>${window.translator ? window.translator.translate('vassal_provinces') : 'Vassal provinces'}:</span><ul style='margin:0 0 0 1em;padding:0;'>`;
+            for (const v of vassalList) {
+                html += `<li>${v.name} (${v.id}): ${v.count} × 200 = <b>${v.count * 200}</b></li>`;
+            }
+            html += `</ul>Total: <b>${vassalProvinces * 200}</b><br>`;
+        }
+        html += `<span>${window.translator ? window.translator.translate('economy') : 'Economy'}: </span><b>${economy}</b><br>`;
+        html += `<span>${window.translator ? window.translator.translate('army_power') : 'Army power'}: </span><b>${army}</b><br>`;
+        html += `<hr style='margin:2px 0'><b>${window.translator ? window.translator.translate('total_power') : 'Total power'}: ${total}</b></div>`;
+        // Создаем и показываем тултип
+        let tooltip = document.createElement('div');
+        tooltip.className = 'power-breakdown-tooltip-container';
+        tooltip.innerHTML = html;
+        tooltip.style.position = 'fixed';
+        tooltip.style.zIndex = 10000;
+        tooltip.style.background = '#222';
+        tooltip.style.color = '#fff';
+        tooltip.style.border = '1px solid #888';
+        tooltip.style.borderRadius = '6px';
+        tooltip.style.padding = '8px 12px';
+        tooltip.style.fontSize = '13px';
+        tooltip.style.boxShadow = '0 2px 8px rgba(0,0,0,0.2)';
+        // Позиционируем слева от anchorElement
+        const rect = anchorElement.getBoundingClientRect();
+        // tooltip ширина появится только после добавления в DOM, поэтому сначала добавим, потом скорректируем
+        document.body.appendChild(tooltip);
+        const tooltipRect = tooltip.getBoundingClientRect();
+        // Слева от ячейки, по вертикали выравниваем верх
+        let left = rect.left - tooltipRect.width - 8;
+        if (left < 0) left = 0;
+        tooltip.style.left = left + 'px';
+        tooltip.style.top = (rect.top - 8) + 'px';
+        // Сохраняем ссылку для удаления
+        anchorElement._powerTooltip = tooltip;
+        return;
+        document.body.appendChild(tooltip);
+        // Сохраняем ссылку для удаления
+        anchorElement._powerTooltip = tooltip;
+    }
+
+    hidePowerBreakdown(anchorElement) {
+        if (anchorElement && anchorElement._powerTooltip) {
+            anchorElement._powerTooltip.remove();
+            anchorElement._powerTooltip = null;
+        }
+    }
     constructor() {
         this.currentCountry = null;
         this.jsonData = null;
@@ -66,7 +153,6 @@ class CountryManager {
         });
     }
 
-    // Модифицируем метод updateCountriesList
     updateCountriesList() {
         console.log('Обновление списка стран...');
         if (!this.jsonData?.lands) {
@@ -92,66 +178,68 @@ class CountryManager {
             }
         }
 
+        // Получить список вассалов для страны
+        function getVassals(land) {
+            if (!land || !land.vassals) return [];
+            return Object.keys(land.vassals);
+        }
+
+        // Получить провинции страны
+        function getLandProvinces(landId) {
+            if (!landId || !provincesCount[landId]) return 0;
+            return provincesCount[landId] || 0;
+        }
+
+        // Получить экономику страны
+        function getLandEconomy(land) {
+            // Попытка взять поле economy, иначе 0
+            if (land && typeof land.economy === 'number') return land.economy;
+            if (land && land.economy && typeof land.economy.value === 'number') return land.economy.value;
+            return 0;
+        }
+
+        // Получить силу армии страны
+        function getLandPower(land) {
+            // Попытка взять поле army_power, иначе 0
+            if (land && typeof land.army_power === 'number') return land.army_power;
+            if (land && land.army && typeof land.army.power === 'number') return land.army.power;
+            return 0;
+        }
+
+        // Вычислить силу страны по формуле
+        function calculateCountryPower(land, landId) {
+            let k = 0;
+            k += 200 * getLandProvinces(landId);
+            for (const vassalId of getVassals(land)) {
+                k += 200 * getLandProvinces(vassalId);
+            }
+            k += getLandEconomy(land);
+            k += getLandPower(land);
+            return k;
+        }
+
         // Создаем массив стран для сортировки и фильтрации
         let countries = Object.entries(this.jsonData.lands)
             .filter(([id]) => id !== 'provinces')
-            .map(([id, country]) => ({
-                id,
-                name: country.name || '',
-                group: country.group_name || '', // Changed from group_name to group
-                color: country.color || [128, 128, 128],
-                provinces: provincesCount[id] || 0,
-                capital_name: country.capital_name || '',
-                ...country
-            }));
+            .map(([id, country]) => {
+                const power = calculateCountryPower(country, id);
+                return {
+                    id,
+                    name: country.name || '',
+                    group: country.group_name || '',
+                    color: country.color || [128, 128, 128],
+                    provinces: provincesCount[id] || 0,
+                    capital_name: country.capital_name || '',
+                    power,
+                    ...country
+                };
+            });
 
         console.log('Найдено стран:', countries.length);
 
         // Применяем фильтры
         countries = countries.filter(country => {
-            // Проверяем стандартные фильтры
-            for (const [column, filter] of Object.entries(this.filters)) {
-                if (column === 'groups') continue; // Пропускаем фильтр групп
-                if (!filter.operator || !filter.value) continue;
-
-                let value = country[column];
-                if (column === 'color') {
-                    const [r, g, b] = country.color;
-                    value = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
-                }
-
-                switch (filter.operator) {
-                    case 'contains':
-                        if (!String(value).toLowerCase().includes(filter.value.toLowerCase())) return false;
-                        break;
-                    case 'equals':
-                        if (String(value).toLowerCase() !== filter.value.toLowerCase()) return false;
-                        break;
-                    case 'not_equals':
-                        if (String(value).toLowerCase() === filter.value.toLowerCase()) return false;
-                        break;
-                }
-            }
-
-            // Отдельно проверяем фильтр групп
-            if (this.filters.groups.length > 0) {
-                if (!country.group_name) { // Changed from group_name to group
-                    // Если у страны нет группы, проверяем есть ли пустая группа в фильтре
-                    return this.filters.groups.includes('');
-                }
-                
-                // Разбиваем группы страны на массив
-                const countryGroups = country.group_name.split(',').map(g => g.trim()); // Changed from group_name to group
-                
-                // Проверяем, есть ли хотя бы одна группа из фильтра в группах страны
-                return this.filters.groups.some(filterGroup => {
-                    if (filterGroup === '') {
-                        return false; // Пустая группа уже обработана выше
-                    }
-                    return countryGroups.includes(filterGroup);
-                });
-            }
-
+            // ...existing code...
             return true;
         });
 
@@ -159,7 +247,6 @@ class CountryManager {
         if (this.sortColumn) {
             countries.sort((a, b) => {
                 let valueA, valueB;
-                
                 switch (this.sortColumn) {
                     case 'color':
                         valueA = a.color ? a.color[0] + a.color[1] + a.color[2] : 0;
@@ -185,10 +272,13 @@ class CountryManager {
                         valueA = a.group_name || '';
                         valueB = b.group_name || '';
                         break;
+                    case 'power':
+                        valueA = a.power || 0;
+                        valueB = b.power || 0;
+                        break;
                     default:
                         return 0;
                 }
-
                 if (typeof valueA === 'string') {
                     return this.sortDirection === 'asc' 
                         ? valueA.localeCompare(valueB)
@@ -234,6 +324,12 @@ class CountryManager {
             const capitalCell = document.createElement('td');
             capitalCell.setAttribute('data-country-id', country.id);
             capitalCell.textContent = country.capital_name;
+
+            // Новая ячейка: сила страны
+            const powerCell = document.createElement('td');
+            powerCell.setAttribute('data-country-id', country.id);
+            powerCell.setAttribute('id', 'powerCellInList');
+            powerCell.textContent = country.power;
 
             // Добавляем обработчики событий
             const handleClick = (e) => {
@@ -333,9 +429,17 @@ class CountryManager {
             };
 
             // Добавляем обработчики к каждой ячейке
-            [tr, colorCell, nameCell, sysNameCell, groupCell, provincesCell, capitalCell].forEach(element => {
+            [tr, colorCell, nameCell, sysNameCell, groupCell, provincesCell, capitalCell, powerCell].forEach(element => {
                 element.addEventListener('click', handleClick);
                 element.addEventListener('contextmenu', handleContextMenu);
+            });
+
+            // Добавляем обработчики для тултипа силы
+            powerCell.addEventListener('mouseenter', (e) => {
+                this.showPowerBreakdown(country.id, powerCell);
+            });
+            powerCell.addEventListener('mouseleave', (e) => {
+                this.hidePowerBreakdown(powerCell);
             });
 
             tr.appendChild(colorCell);
@@ -344,6 +448,7 @@ class CountryManager {
             tr.appendChild(groupCell);
             tr.appendChild(provincesCell);
             tr.appendChild(capitalCell);
+            tr.appendChild(powerCell);
 
             tbody.appendChild(tr);
         });
@@ -471,7 +576,7 @@ class CountryManager {
         document.getElementById('back-to-countries-list')?.addEventListener('click', () => this.backToCountriesList());
 
         // Обработчики фильтров
-        document.querySelectorAll('#countries .th-filter').forEach(button => {
+        document.querySelectorAll('.th-filter').forEach(button => {
             button.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const column = button.closest('th').getAttribute('data-sort');
@@ -1133,6 +1238,7 @@ class CountryManager {
         
         return Object.entries(this.jsonData.lands)
             .filter(([id]) => id !== 'provinces' && id !== this.currentCountry)
+            .sort(([, a], [, b]) => a.name.localeCompare(b.name))
             .map(([id, country]) => {
                 return `<option value="${id}">${country.name} - ${id}</option>`;
             })

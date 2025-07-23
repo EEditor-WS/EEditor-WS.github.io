@@ -531,7 +531,31 @@ generateUniqueId(minimumID = 0) {
             
             // Создаем глубокую копию события
             const eventCopy = JSON.parse(JSON.stringify(sourceEvent));
-            
+
+            // Рекурсивно заменить все вхождения старого ID на новый во всех полях
+            function replaceIdDeep(obj, oldId, newId) {
+                if (Array.isArray(obj)) {
+                    return obj.map(item => replaceIdDeep(item, oldId, newId));
+                } else if (obj && typeof obj === 'object') {
+                    const newObj = {};
+                    for (const key in obj) {
+                        if (typeof obj[key] === 'string' && obj[key] === oldId) {
+                            newObj[key] = newId;
+                        } else {
+                            newObj[key] = replaceIdDeep(obj[key], oldId, newId);
+                        }
+                    }
+                    return newObj;
+                }
+                return obj;
+            }
+            // Заменяем во всех requirements/bonuses и вложенных
+            ['requirements','requirements1','requirements2','requirements3','bonuses','bonuses1','bonuses2','bonuses3'].forEach(field => {
+                if (Array.isArray(eventCopy[field])) {
+                    eventCopy[field] = replaceIdDeep(eventCopy[field], sourceId, newId);
+                }
+            });
+
             // Устанавливаем правильный id и обновляем название
             eventCopy.id = newId;
             // Добавляем '_copy' только если уникальное имя не пустое
@@ -933,6 +957,10 @@ generateUniqueId(minimumID = 0) {
         const saveButton = document.getElementById('save-requirement');
         const cancelButton = document.getElementById('cancel-requirement');
         const typeSelect = document.getElementById('requirement-type');
+        const actionSelect = document.getElementById('requirement-action');
+        const subtypeInput = document.getElementById('requirement-subtype');
+        const valueInput = document.getElementById('requirement-value');
+        const durationInput = document.getElementById('requirement-duration');
 
         // Определяем тип редактора (требования или бонусы)
         const isBonus = answer.includes('bonus');
@@ -953,7 +981,7 @@ generateUniqueId(minimumID = 0) {
                 { value: 'money', label: window.translator.translate('money') },
                 { value: 'building_cost', label: window.translator.translate('building_cost') },
                 { value: 'population_income', label: window.translator.translate('population_income') },
-                { value: 'population_growth', label: window.translator.translate('population_growth') },
+                { value: 'population_increase', label: window.translator.translate('population_increase') },
                 // { value: 'add_oil', label: window.translator.translate('add_oil') },
                 { value: 'resource', label: window.translator.translate('resource') },
                 { value: 'recruit_cost', label: window.translator.translate('recruit_cost') },
@@ -1109,6 +1137,14 @@ generateUniqueId(minimumID = 0) {
                         </div>
                     </td>
                 `;
+                row.addEventListener('click', () => {
+                    // При клике на строку — заполняем форму текущими значениями
+                    if (typeSelect) typeSelect.value = item.type || '';
+                    if (actionSelect) actionSelect.value = item.action || '';
+                    if (subtypeInput) subtypeInput.value = item.subtype || '';
+                    if (valueInput) valueInput.value = item.value || '';
+                    if (durationInput && typeof item.duration !== 'undefined') durationInput.value = item.duration;
+                });
                 list.appendChild(row);
             });
         };
@@ -1498,7 +1534,7 @@ generateUniqueId(minimumID = 0) {
                     input.className = 'main-page-input';
                     input.placeholder = window.translator.translate('enter_percent');
                     valueContainer.appendChild(input);
-                } else if (['defense', 'attack', 'population_income', 'population_growth', 'building_cost'].includes(selectedType)) {
+                } else if (['defense', 'attack', 'population_income', 'population_increase', 'building_cost'].includes(selectedType)) {
                     // Для процентных значений
                     subtypeGroup.style.display = 'none';
                     const input = document.createElement('input');
@@ -1616,7 +1652,7 @@ generateUniqueId(minimumID = 0) {
                         "Propaganda",
                         "Religion",
                         "Revanchism I",
-                        "Revanchism II",
+                        "Revanchизм II",
                         "Science I",
                         "Science II",
                         "Scientific Program",
@@ -1757,7 +1793,7 @@ generateUniqueId(minimumID = 0) {
                     dropdown.className = 'country-dropdown';
                     dropdown.style.display = 'none';
 
-                    // Получаем список стран и сортируем его по имени
+                    // Получаем список стран и сортируем их по имени
                     const countries = Object.entries(this.jsonData.lands || {})
                         .map(([id, country]) => ({
                             id,
@@ -1887,25 +1923,19 @@ generateUniqueId(minimumID = 0) {
                 const item = items[index];
                 editor.style.display = 'block';
                 document.getElementById('requirement-type').value = item.type;
-                document.getElementById('requirement-action').value = item.action || '';
-                
                 // Сначала обновляем тип, чтобы создались нужные поля
                 updateActions();
                 updateValueField();
-                
-                // Теперь устанавливаем значения
+                // Теперь выставляем значения для всех полей (action, subtype, value, duration)
+                const actionInput = document.getElementById('requirement-action');
+                if (actionInput && typeof item.action !== 'undefined') actionInput.value = item.action;
                 const subtypeInput = document.getElementById('requirement-subtype');
-                if (subtypeInput) {
-                    subtypeInput.value = item.subtype || '';
-                }
-                const valueElement = document.getElementById('requirement-value');
-                if (valueElement) {
-                    valueElement.value = item.value;
-                }
+                if (subtypeInput && typeof item.subtype !== 'undefined') subtypeInput.value = item.subtype;
+                const valueInput = document.getElementById('requirement-value');
+                if (valueInput && typeof item.value !== 'undefined') valueInput.value = item.value;
                 if (isBonus && document.getElementById('requirement-duration')) {
                     document.getElementById('requirement-duration').value = item.duration || 3;
                 }
-                
                 editor.dataset.editIndex = index;
             } else if (button.classList.contains('delete')) {
                 items.splice(index, 1);
@@ -1943,7 +1973,7 @@ generateUniqueId(minimumID = 0) {
             // Проверяем и обрабатываем числовые значения
             const numericTypes = ['month', 'num_of_provinces', 'year', 'turn', 'random_value', 
                 'count_of_tasks', 'tax', 'discontent', 'money', 'land_power', 'defense', 
-                'attack', 'population_income', 'population_growth', 'building_cost', 'add_oil', 'add_cruiser', 
+                'attack', 'population_income', 'population_increase', 'building_cost', 'add_oil', 'add_cruiser', 
                 'add_random_culture_population', 'add_shock_infantry', 'add_tank', 'add_artillery',
                 'army_losses', 'prestige', 'add_battleship', 'add_infantry', 'science', 'cooldown'];
 
