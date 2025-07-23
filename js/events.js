@@ -160,9 +160,12 @@ class EventManager {
 
         // Применяем фильтры
         if (this.filters.groups) {
-            events = events.filter(event => 
-                this.filters.groups.includes(event.group)
-            );
+            events = events.filter(event => {
+                // event.group может содержать несколько групп через запятую
+                const eventGroups = (event.group || '').split(/\s*,\s*/).filter(Boolean);
+                // Если хотя бы одна из групп события есть в фильтре, событие показываем
+                return eventGroups.some(group => this.filters.groups.includes(group));
+            });
         }
 
         // Сортировка
@@ -244,6 +247,13 @@ class EventManager {
             form.addEventListener('change', (e) => this.handleFormChange(e));
             form.addEventListener('submit', (e) => e.preventDefault());
         }
+
+        // Закрываем меню действий ивентов при клике вне его
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('#event-actions-button')) {
+                document.getElementById('eventActionsDropdown')?.classList.remove('active');
+            }
+        });
 
         // Обработчики изображений
         document.getElementById('event-image')?.addEventListener('change', (e) => {
@@ -2081,7 +2091,10 @@ generateUniqueId(minimumID = 0) {
 
         Object.values(this.jsonData.custom_events).forEach(event => {
             if (event.group_name) {
-                groups.add(event.group_name);
+                // Разбиваем по запятым с любым количеством пробелов вокруг
+                event.group_name.split(/\s*,\s*/).forEach(group => {
+                    if (group) groups.add(group);
+                });
             }
         });
 

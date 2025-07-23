@@ -1076,12 +1076,6 @@ function handleFileContent(fileName, content) {
 
     // Загружаем данные при старте
     loadLandsJson();
-    
-    // Обработчик для кнопки удаления несуществующих владельцев
-    document.getElementById('remove-invalid-owners')?.addEventListener('click', () => {
-        if (!window.countryManager) return;
-        window.countryManager.removeInvalidOwners();
-    });
 
     // Инициализация тултипов
     document.querySelectorAll('.icon-action-button').forEach(button => {

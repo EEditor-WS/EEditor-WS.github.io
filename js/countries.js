@@ -239,7 +239,49 @@ class CountryManager {
 
         // Применяем фильтры
         countries = countries.filter(country => {
-            // ...existing code...
+            // Проверяем стандартные фильтры
+            for (const [column, filter] of Object.entries(this.filters)) {
+                if (column === 'groups') continue; // Пропускаем фильтр групп
+                if (!filter.operator || !filter.value) continue;
+
+                let value = country[column];
+                if (column === 'color') {
+                    const [r, g, b] = country.color;
+                    value = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+                }
+
+                switch (filter.operator) {
+                    case 'contains':
+                        if (!String(value).toLowerCase().includes(filter.value.toLowerCase())) return false;
+                        break;
+                    case 'equals':
+                        if (String(value).toLowerCase() !== filter.value.toLowerCase()) return false;
+                        break;
+                    case 'not_equals':
+                        if (String(value).toLowerCase() === filter.value.toLowerCase()) return false;
+                        break;
+                }
+            }
+
+            // Отдельно проверяем фильтр групп
+            if (this.filters.groups.length > 0) {
+                if (!country.group_name) { // Changed from group_name to group
+                    // Если у страны нет группы, проверяем есть ли пустая группа в фильтре
+                    return this.filters.groups.includes('');
+                }
+                
+                // Разбиваем группы страны на массив
+                const countryGroups = country.group_name.split(',').map(g => g.trim()); // Changed from group_name to group
+                
+                // Проверяем, есть ли хотя бы одна группа из фильтра в группах страны
+                return this.filters.groups.some(filterGroup => {
+                    if (filterGroup === '') {
+                        return false; // Пустая группа уже обработана выше
+                    }
+                    return countryGroups.includes(filterGroup);
+                });
+            }
+
             return true;
         });
 
@@ -576,7 +618,7 @@ class CountryManager {
         document.getElementById('back-to-countries-list')?.addEventListener('click', () => this.backToCountriesList());
 
         // Обработчики фильтров
-        document.querySelectorAll('.th-filter').forEach(button => {
+        document.querySelectorAll('#countries .th-filter').forEach(button => {
             button.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const column = button.closest('th').getAttribute('data-sort');

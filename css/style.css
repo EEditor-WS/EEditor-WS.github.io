@@ -1928,3 +1928,16 @@ body {
     justify-content: center;
     min-width: 100px;
 }
+
+.preview-content {
+    display: none
+}
+
+.preview-content.active {
+    display: flex
+}
+
+.preview-header {
+    display: flex;
+    justify-content: space-between;
+}

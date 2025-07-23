@@ -462,6 +462,7 @@ input[type="color"] {
     scroll-behavior: smooth;
     overscroll-behavior: contain;
     padding-bottom: 12px;
+    height: calc(100vh - 140px);
 }
 
 /* Стилизуем скроллбар для контейнера */
