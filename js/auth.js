@@ -7,9 +7,9 @@ const COOKIE_EXPIRES_DAYS = 30;
 // Разбиваем токен на части
 const GITHUB_TOKEN_PARTS = [
     'github_pat_11A6XWVIA0',
-    'hbkg2iJQvbcT_Ul7fsGU0',
-    'iQCypjG6rqmiwAiWxYMzi',
-    'e6WAPyhlwhtoRXZ6GH22OEok8ab8cB'
+    '6LXw4MXWml9w_jTRJcEez',
+    'c6AUek56SPUShw2LYJBcl',
+    '9PJrIHfws6lG9eELABVLOHsh8oFlHF'
 ];
 
 function getGithubToken() {
