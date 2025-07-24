@@ -1,3 +1,4 @@
+// Страны
 function copyManyCountries() {
     const navButtons = document.querySelectorAll('.nav-button');
     navButtons.forEach(btn => btn.classList.remove('active'));
@@ -158,5 +159,130 @@ async function pasteManyCountries() {
         console.error('Failed to paste countries:', err);
         showError(window.translator.translate('error'), 
             window.translator.translate('paste_failed'));
+    }
+}
+
+// События
+function copyManyEvents() {
+    const navButtons = document.querySelectorAll('.nav-button');
+    navButtons.forEach(btn => btn.classList.remove('active'));
+    
+    // Switch to pcopy-events page
+    const pageId = "pcopy-events";
+    document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+    });
+    document.getElementById(pageId)?.classList.add('active');
+
+    // Setup select all checkbox handler
+    const selectAllCheckbox = document.getElementById('select-all-events');
+    if (selectAllCheckbox) {
+        selectAllCheckbox.checked = false;
+        selectAllCheckbox.onchange = (e) => {
+            const checkboxes = document.querySelectorAll('#pcopy-events-list input[type="checkbox"]');
+            checkboxes.forEach(checkbox => checkbox.checked = e.target.checked);
+        };
+    }
+    
+    // Populate events list
+    const eventsList = document.getElementById('pcopy-events-list');
+    if (!eventsList) return;
+    
+    eventsList.innerHTML = '';
+    const events = window.eventManager.jsonData?.custom_events;
+    
+    if (!events) return;
+    
+    // Create a checkbox for each event
+    Object.entries(events).forEach(([id, event]) => {
+        if (id === 'provinces') return;
+        const div = document.createElement('div');
+        div.className = 'event-item';
+        const label = document.createElement('label');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.value = id;
+        checkbox.dataset.eventId = id;
+        const name = document.createElement('span');
+        name.textContent = event.title || event.unique_event_name || event.name || id;
+        label.appendChild(checkbox);
+        label.appendChild(name);
+        div.appendChild(label);
+        eventsList.appendChild(div);
+    });
+    
+    // Add copy button handler
+    const copyButton = document.getElementById('copy-selected-events');
+    if (copyButton) {
+        copyButton.onclick = () => {
+            const selectedEvents = Array.from(document.querySelectorAll('#pcopy-events-list input[type="checkbox"]:checked'))
+                .map(checkbox => checkbox.dataset.eventId)
+                .filter(Boolean);
+            if (selectedEvents.length === 0) return;
+            const eventsToCopy = selectedEvents.reduce((acc, id) => {
+                if (window.eventManager.jsonData?.custom_events[id]) {
+                    // Клонируем событие
+                    acc[id] = JSON.parse(JSON.stringify(window.eventManager.jsonData.custom_events[id]));
+                }
+                return acc;
+            }, {});
+            // Copy to clipboard
+            const dataStr = JSON.stringify(eventsToCopy, null, 2);
+            navigator.clipboard.writeText(dataStr).then(() => {
+                showSuccess(window.translator.translate('ready'), window.translator.translate('copyed'));
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                showError(window.translator.translate('error'), window.translator.translate('copy_failed'));
+            });
+        };
+    }
+}
+
+async function pasteManyEvents() {
+    try {
+        const clipText = await navigator.clipboard.readText();
+        let eventsData;
+        try {
+            eventsData = JSON.parse(clipText);
+        } catch (e) {
+            showError(window.translator.translate('error'), window.translator.translate('invalid_json'));
+            return;
+        }
+        if (!eventsData || typeof eventsData !== 'object') {
+            showError(window.translator.translate('error'), window.translator.translate('invalid_json'));
+            console.error('PasteManyEvents: invalid JSON or not an object:', eventsData);
+            alert(eventsData);
+            return;
+        }
+        // Инициализируем custom_events если нужно
+        if (!window.eventManager.jsonData) {
+            window.eventManager.jsonData = {};
+        }
+        if (!window.eventManager.jsonData.custom_events) {
+            window.eventManager.jsonData.custom_events = {};
+        }
+        // Получаем существующие eventId
+        const existingIds = new Set(Object.keys(window.eventManager.jsonData.custom_events));
+        // Вставляем события
+        for (const [eventId, eventData] of Object.entries(eventsData)) {
+            if (existingIds.has(eventId)) {
+                showError('Error', `event ${eventId} is used now`);
+                continue;
+            }
+            window.eventManager.jsonData.custom_events[eventId] = eventData;
+            existingIds.add(eventId);
+        }
+        // Обновляем UI
+        window.eventManager.updateEventsList();
+        showSuccess(window.translator.translate('ready'), window.translator.translate('events_pasted'));
+        if (window.eventManager.saveScen) {
+            console.log('saving...');
+            window.eventManager.saveScen();
+            console.log('saved');
+        }
+    } catch (err) {
+        console.error('Failed to paste events:', err);
+        showError(window.translator.translate('error'), window.translator.translate('paste_failed') + ': ' + (err && err.message ? err.message : err));
+        alert('Paste failed: ' + (err && err.message ? err.message : err));
     }
 }
