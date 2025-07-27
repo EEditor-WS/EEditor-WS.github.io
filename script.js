@@ -5,6 +5,12 @@ let isJsonFile = false;
 let previewContent = null;
 let fileInfo = null;
 
+let isAndroidApp;
+try {
+    isAndroidApp = typeof Android !== 'undefined';
+} catch (e) {
+}
+
 // Проверяем поддержку File System Access API
 const hasFileSystemAccess = 'showOpenFilePicker' in window;
 
@@ -666,7 +672,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Функция для сохранения изменений
     async function saveChanges() {
-        const isAndroidApp = typeof Android !== 'undefined';
+        isAndroidApp = typeof Android !== 'undefined';
         
         if (isAndroidApp) {
             try {

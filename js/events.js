@@ -158,6 +158,12 @@ class EventManager {
                 ...event
             }));
 
+            
+        const eventsCountEl = document.getElementById('eventsCount');
+        if (eventsCountEl) {
+            eventsCountEl.textContent = events.length;
+        } 
+
         // Применяем фильтры
         if (this.filters.groups) {
             events = events.filter(event => {

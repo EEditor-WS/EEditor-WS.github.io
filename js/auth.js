@@ -30,28 +30,28 @@ class AuthManager {
                 settings: 'Settings'
             },
             'ru': {
-                guest: 'Гость',
+                guest: 'Guest',
                 login: 'Войти',
                 register: 'Регистрация',
                 logout: 'Выйти',
                 settings: 'Настройки'
             },
             'uk': {
-                guest: 'Гість',
+                guest: 'Guest',
                 login: 'Увійти',
                 register: 'Реєстрація',
                 logout: 'Вийти',
                 settings: 'Налаштування'
             },
             'be': {
-                guest: 'Госць',
+                guest: 'Guest',
                 login: 'Увайсці',
                 register: 'Рэгістрацыя',
                 logout: 'Выйсці',
                 settings: 'Налады'
             },
             'kk': {
-                guest: 'Қонақ',
+                guest: 'Guest',
                 login: 'Кіру',
                 register: 'Тіркелу',
                 logout: 'Шығу',
@@ -203,14 +203,27 @@ class AuthManager {
     loadUserData() {
         console.log('🔄 Загрузка данных пользователя...');
         try {
-            const userData = localStorage.getItem('userData');
+            let userData = localStorage.getItem('userData');
             if (userData) {
                 this.currentUser = JSON.parse(userData);
                 console.log('✅ Данные пользователя загружены:', this.currentUser);
-                this.updateUI();
             } else {
-                console.log('ℹ️ Пользователь не авторизован');
-                this.updateUI();
+                // Создаем гостевой аккаунт
+                let guestId = localStorage.getItem('guestId');
+                if (!guestId) {
+                    guestId = 'guest' + Array.from({length: 6}, () => Math.floor(Math.random() * 10)).join('');
+                    localStorage.setItem('guestId', guestId);
+                }
+                this.currentUser = {
+                    id: guestId,
+                    username: guestId,
+                    displayName: guestId,
+                    avatar: null,
+                    lastLogin: new Date().toISOString(),
+                    status: 'guest'
+                };
+                localStorage.setItem('userData', JSON.stringify(this.currentUser));
+                console.log('👤 Создан локальный гостевой аккаунт:', this.currentUser);
             }
         } catch (error) {
             console.error('❌ Ошибка при загрузке данных пользователя:', error);
@@ -429,12 +442,11 @@ class AuthManager {
 
         const currentLang = document.body.getAttribute('data-lang') || 'ru';
 
-        if (this.currentUser) {
-            // Обновляем имя и ID
+        if (this.currentUser && this.currentUser.status !== 'guest') {
+            // Авторизованный пользователь
             accountName.textContent = this.currentUser.displayName || this.currentUser.username;
             accountId.textContent = `@${this.currentUser.username}`;
-            
-            // Обновляем аватарку в меню
+            // ...аватар, кнопки, меню...
             if (accountAvatar && this.currentUser.avatar) {
                 accountAvatar.src = this.currentUser.avatar;
                 accountAvatar.style.display = 'block';
@@ -442,8 +454,6 @@ class AuthManager {
                 accountAvatar.style.display = 'none';
                 accountAvatar.src = '';
             }
-
-            // Обновляем аватарку в кнопке
             if (accountButtonAvatar && accountButtonIcon) {
                 if (this.currentUser.avatar) {
                     accountButtonAvatar.src = this.currentUser.avatar;
@@ -454,8 +464,6 @@ class AuthManager {
                     accountButtonAvatar.style.display = 'none';
                 }
             }
-
-            // Показываем/скрываем элементы меню
             if (loginItem) loginItem.style.display = 'none';
             if (registerItem) registerItem.style.display = 'none';
             if (logoutItem) {
@@ -467,10 +475,11 @@ class AuthManager {
             }
         } else {
             // Гостевой режим
+            let guestId = this.currentUser?.username || '';
+            let guestSuffix = guestId.length >= 11 ? guestId.slice(-6) : guestId;
             accountName.textContent = this.translations[currentLang]?.guest || 'Гость';
-            accountId.textContent = '#0000';
-            
-            // Скрываем аватарки
+            accountId.textContent = `#${guestSuffix}`;
+            // ...аватар, кнопки, меню...
             if (accountAvatar) {
                 accountAvatar.style.display = 'none';
                 accountAvatar.src = '';
@@ -480,8 +489,6 @@ class AuthManager {
                 accountButtonAvatar.style.display = 'none';
                 accountButtonAvatar.src = '';
             }
-
-            // Показываем/скрываем элементы меню
             if (loginItem) {
                 loginItem.style.display = 'flex';
                 const loginText = loginItem.querySelector('[data-translate="login"]');

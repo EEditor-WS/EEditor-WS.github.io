@@ -33,6 +33,9 @@
         <script src="js/test/move.js"></script>
         <script src="js/test/move2.js"></script>
         <script src="js/test/copyEcoPopRes.js"></script>
+        <script src="js/coop/coop.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-peer@9.11.1/simplepeer.min.js"></script>
+        <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
         <link rel="stylesheet" href="css/base.css">
         <link rel="stylesheet" href="css/countries.css">
         <link rel="stylesheet" href="css/events.css">
@@ -43,6 +46,7 @@
         <link rel="stylesheet" href="css/notification.css">
         <link rel="stylesheet" href="css/test/move.css">
         <link rel="stylesheet" href="css/backup.css">
+        <link rel="stylesheet" href="css/coop.css">
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-9HFX1FVLMV"></script>
         <script>
@@ -195,7 +199,7 @@
                         <div class="account-info">
                             <img class="account-avatar hidden" src="" alt="User Avatar">
                             <div>
-                                <div class="account-name">Гость</div>
+                                <div class="account-name">Guest</div>
                                 <div class="account-id">#0000</div>
                             </div>
                         </div>
@@ -248,15 +252,15 @@
                             </svg>
                             <span data-translate="discord">Discord server</span>
                         </a>
-                        <a href="stable/index.html" target="_blank" class="account-item" data-action="stable">
+                        <!--a href="stable/index.html" target="_blank" class="account-item" data-action="stable">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                             <span data-translate="stable_version">Stable version</span>
-                        </a>
-                        <a onclick="translateAndSaveFile()" target="_blank" class="account-item" data-action="stable">
+                        </a-->
+                        <a onclick="translateAndSaveFile()" target="_blank" class="account-item" data-action="translateFile">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             </svg>
                             <span data-translate="translate">Translate</span>
@@ -264,12 +268,22 @@
                         <a onclick="minimumEventID = Number(prompt('Минимальный ID события?'))" target="_blank" class="account-item" data-action="stable">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             </svg>
-                            <span data-translate="min_evenent_id">Minimal ID of events</span>
+                            <span data-translate="min_event_id">Minimal ID of events</span>
                         </a>
-                        <a onclick="eval(prompt('enter JS code'))" target="_blank" class="account-item" data-action="stable">
+                        <a onclick="eval(prompt('enter JS code'))" target="_blank" class="account-item" data-action="evalJS">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             </svg>
                             <span data-translate="eval_js_code">Выполнить JS код</span>
+                        </a>
+                        <!--a onclick="window.CoopManager.coopSettings()" target="_blank" class="account-item" data-action="coopSettings">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            </svg>
+                            <span data-translate="coopSync">Синхронизация совместного</span>
+                        </a-->
+                        <a onclick="document.getElementById('param-copy-modal').classList.add('active')" target="_blank" class="account-item" data-action="transferParams
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            </svg>
+                            <span data-translate="transfer_params">Перенести параметры</span>
                         </a>
                     </div>
                 </div>
@@ -361,7 +375,7 @@
                         <input type="number" id="technology_lvl" name="technology_lvl" class="main-page-input">
                     </div>
 
-                    <div class="form-group">
+                    <!-- div class="form-group">
                         <label for="technologies_are_opened" data-translate="technologies_are_opened">Открыты Все Технологии</label>
                         <select id="technologies_are_opened" name="technologies_are_opened" class="main-page-input">
                             <option value="disabled" data-translate="no">Нет</option>
@@ -403,7 +417,7 @@
                             <option value="enabled" data-translate="yes">Да</option>
                             <option value="disabled" data-translate="no">Нет</option>
                         </select>
-                    </div>
+                    </div-->
 
                     <div class="form-group">
                         <label for="no_nuclear_weapon" data-translate="no_nuclear_weapon">Без Ядерного Оружия</label>
@@ -413,13 +427,13 @@
                         </select>
                     </div>
 
-                    <div class="form-group">
+                    <!--div class="form-group">
                         <label for="sandbox" data-translate="sandbox">Sandbox</label>
                         <select id="sandbox" name="sandbox" class="main-page-input">
                             <option value="enabled" data-translate="yes">Да</option>
                             <option value="disabled" data-translate="no">Нет</option>
                         </select>
-                    </div>
+                    </div-->
 
                     <div class="form-group">
                         <label for="turn" data-translate="turn">Turn</label>
@@ -431,7 +445,9 @@
         <div id="countries" class="page pcountries">
             <div class="list-container">
                 <div class="list-header">
-                    <h2 data-translate="countries">Страны</h2>
+                    <div style="display: inline-flex;">
+                        <h2 data-translate="countries">Страны</h2><h2> - </h2><h2 id="countryCount"></h2>
+                    </div>
                     <div class="header-actions">
                         <div class="tooltip-container">
                             <button id="clear-filters" class="icon-action-button clear" title="Сбросить все фильтры">
@@ -698,8 +714,9 @@
                             <select id="country-political" name="political" class="main-page-input">
                                 <option value="" data-translate="">None</option>
                                 <option value="Democracy" data-translate="democracy">Демократия</option>
-                                <option value="Monarchy" data-translate="monarchy">Монархия</option>
                                 <option value="Communism" data-translate="communism">Коммунизм</option>
+                                <option value="Monarchy" data-translate="monarchy">Монархия</option>
+                                <option value="Theocracy" data-translate="theocracy">Theocracy</option>
                                 <option value="Fascism" data-translate="fascism">Фашизм</option>
                                 <option value="trade_republic" data-translate="trade_republic">Торговый республика</option>
                             </select>
@@ -795,7 +812,9 @@
         <div id="events" class="page pevents">
             <div class="list-container">
                 <div class="list-header">
-                    <h2 data-translate="events">События</h2>
+                    <div style="display: inline-flex;">
+                        <h2 data-translate="events">События</h2><h2> - </h2><h2 id="eventsCount"></h2>
+                    </div>
                     <div class="header-actions">
                         <div class="tooltip-container">
                             <button id="clear-events-filters" class="icon-action-button clear" title="Сбросить все фильтры">
@@ -1465,12 +1484,12 @@
                             <input type="number" id="reform-color-r" min="0" max="255" placeholder="R">
                             <input type="number" id="reform-color-g" min="0" max="255" placeholder="G">
                             <input type="number" id="reform-color-b" min="0" max="255" placeholder="B">
-                            <!-- button id="pick-reform-color" class="icon-action-button back" type="button" title="Выбрать цвет">
+                            <button id="pick-reform-color" class="icon-action-button back" type="button" title="Выбрать цвет">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M12 2l4 4-10 10-4-4 10-10z"/>
                                     <path d="M9 15l-2 5 5-2-3-3z"/>
                                 </svg>
-                            </button -->
+                            </button>
                             <input type="color" id="reform-color-picker" title="Выбрать цвет">
                             <button id="random-reform-color" class="icon-action-button back" type="button" title="Случайный цвет">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1484,9 +1503,10 @@
                         <select id="reform-ideology" class="main-page-input">
                             <option value="" data-translate="None"> </option>
                             <option value="Democracy" data-translate="democracy">Democracy</option>
-                            <option value="Monarchy" data-translate="monarchy">Monarchy</option>
                             <option value="Communism" data-translate="communism">Communism</option>
+                            <option value="Monarchy" data-translate="monarchy">Monarchy</option>
                             <option value="Theocracy" data-translate="theocracy">Theocracy</option>
+                            <option value="Fascism" data-translate="fascism">Фашизм</option>
                             <option value="Trade Republic" data-translate="trade_republic">Trade Republic</option>
                             </select>
                         </div>
@@ -1550,6 +1570,115 @@
                     </div>
                     <div id="pcopy-events-list" class="country-list">
                         <!-- Events will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="pcoop" class="page pcoop">
+            <div class="list-container">
+                <div class="list-header">
+                    <div class="reform-title">
+                        <div class="tooltip-container">
+                            <button id="back-to-main" class="icon-action-button back" title="Назад" onclick="     const pageId = 'main';     document.querySelectorAll('.page').forEach(page => {     page.classList.remove('active');     });     document.getElementById(pageId)?.classList.add('active');">
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                                    <polyline points="12 19 5 12 12 5"></polyline>
+                                </svg>
+                            </button>
+                            <div class="tooltip" data-translate="back">Назад</div>
+                        </div>
+                        <h2>Совместная синхронизация</h2>
+                    </div>
+                    <div class="header-actions">
+                        <div class="tooltip-container">
+                            <button id="download-scenario" class="icon-action-button add" title="Получить сценарий">
+                                <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 16 16">
+                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                                </svg>
+                            </button>
+                            <div class="tooltip">Получить сценарий</div>
+                        </div>
+                        <div class="tooltip-container">
+                            <button id="upload-scenario" class="icon-action-button add" title="Передать сценарий">
+                                <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"  width="128" height="111.2" viewBox="0,0,128,111.2">
+                                    <g transform="translate(-232,-180)">
+                                        <g fill="#000000" stroke="none" stroke-miterlimit="10">
+                                            <path d="M236,251.2c2.20914,0 4,1.79086 4,4v20c0,4.41828 3.58172,8 8,8h96c4.41828,0 8,-3.58172 8,-8v-20c0,-2.20914 1.79086,-4 4,-4c2.20914,0 4,1.79086 4,4v20c0,8.83656 -7.16344,16 -16,16h-96c-8.83656,0 -16,-7.16344 -16,-16v-20c0,-2.20914 1.79086,-4 4,-4z"/>
+                                            <path d="M293.168,181.17515c0.75043,-0.75233 1.76938,-1.17515 2.832,-1.17515c1.06262,0 2.08157,0.42282 2.832,1.17515l24,24c1.56407,1.56407 1.56407,4.09993 0,5.664c-1.56407,1.56407 -4.09993,1.56407 -5.664,0l-17.168,-17.176v70.344c0,2.20914 -1.79086,4 -4,4c-2.20914,0 -4,-1.79086 -4,-4v-70.344l-17.168,17.176c-1.56407,1.56407 -4.09993,1.56407 -5.664,0c-1.56407,-1.56407 -1.56407,-4.09993 0,-5.664z"/>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </button>
+                            <div class="tooltip">Передать сценарий</div>
+                        </div>
+                        <div class="tooltip-container">
+                            <button id="coop-actions-button" class="icon-action-button more" title="Действия" onclick="const dropdown = document.getElementById('coopActionsDropdown'); dropdown.classList.toggle('active');">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="1"></circle>
+                                    <circle cx="12" cy="5" r="1"></circle>
+                                    <circle cx="12" cy="19" r="1"></circle>
+                                </svg>
+                            </button>
+                            <div id="coopActionsDropdown" class="dropdown-menu">
+                                <a href="#" class="menu-item" id="blank" onclick="alert()">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 2v6h-6"></path>
+                                        <path d="M3 12a9 9 0 0 1 15-6.7L21 8"></path>
+                                        <path d="M3 22v-6h6"></path>
+                                    </svg>
+                                    <span>blank</span>
+                                </a>
+                            </div>
+                                    <path d="M21 12a9 9 0 0 1-15 6.7L3 16"></path>
+                                
+                            
+                            <div class="tooltip">Tools</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-header">
+                    <button id="coop-will-send" class="action-button secondary" data-translate="coop_sender">Отправитель</button>
+                    <button id="coop-will-recive" class="action-button secondary" data-translate="coop_reciver">Получатель</button>
+                </div>
+                <div class="coop-mainContent">
+                    <div class="data hiden" id="coopSend">
+                        <div id="coopConnectData" class="coopData coopConnectData" style="min-height: 250px; background-color: #181818; border-radius: 8px; margin-bottom: 10px; padding: 10px;">
+                            <div id="coop-connect-head" class="coop-connect-head">
+                                <h3 data-translate="coop_connect_data">Данные подключения</h3>
+                                <button id="coop-send-connect-button" class="action-button secondary" data-translate="coop_connect">Подключиться</button>
+                            </div>
+                            <div class="coopDataContent">
+                                <div class="coopDataContent-left">
+                                    <p data-translate="coop_connect_data_description">Введите ник отправителя, чтобы начать синхронизацию.</p>
+                                    <input type="text" id="coop-send-room" class="main-page-input" placeholder="Введите ник отправителя" autocomplete="on" data-translate-placeholder="coop_room_placeholder">
+                                </div>
+                                <p id="coop-send-status" class="coop-status">Введите ник отправителя и присоединитесь</p>
+                                <div class="coopDataContent-right" id="coop-send-debug">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="data hiden" id="coopRecive">
+                        <div id="coopConnectData" class="coopData coopConnectData" style="min-height: 250px; background-color: #181818; border-radius: 8px; margin-bottom: 10px; padding: 10px;">
+                            <div id="coop-connect-head" class="coop-connect-head">
+                                <h3 data-translate="coop_connect_data">Данные подключения</h3>
+                                <button id="coop-recive-connect-button" class="action-button secondary" data-translate="coop_connect">Подключиться</button>
+                            </div>
+                            <div class="coopDataContent">
+                                <div class="coopDataContent-left">
+                                    <p data-translate="coop_connect_data_description_recivera">Введите ник получателя, чтобы начать синхронизацию.</p>
+                                    <input type="text" id="coop-recive-room" class="main-page-input" placeholder="Введите ник получателя" autocomplete="on" data-translate-placeholder="coop_room_placeholder">
+                                </div>
+                                <p id="coop-recive-status" class="coop-status">Введите ник получателя и присоединитесь</p>
+                                <div class="coopDataContent-right" id="coop-recive-debug">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div id="coopMaintData" class="coopData coopMainData" style="min-height: 750px; background-color: #181818; border-radius: 8px"></div>
                     </div>
                 </div>
             </div>
@@ -1698,5 +1827,89 @@
                 </div>
             </div>
         </div>
+
+        <!-- Модальное окно для копирования параметров -->
+        <div id="param-copy-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" data-translate="transfer_params">Перенести параметры</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <select id="param-copy-select1" class="main-page-input">
+                        <option value=""></option>
+                        <option value="population_limit" data-translate="population">Население</option>
+                        <option value="infrastructure_level" data-translate="economic">Экономика</option>
+                        <option value="relief" data-translate="relief">Рельеф</option>
+                        <option value="water" data-translate="water">Вода</option>
+                        <option value="river" data-translate="river">Река</option>
+                        <option value="resource_rule.wood" data-translate="wood">Древесина</option>
+                        <option value="resource_rule.iron" data-translate="iron">Железо</option>
+                        <option value="resource_rule.gold" data-translate="gold">Золото</option>
+                        <option value="resource_rule.oil" data-translate="oil">Нефть</option>
+                        <option value="resource_rule.uranium" data-translate="uranium">Уран</option>
+                    </select>
+                    <select id="param-copy-select2" class="main-page-input">
+                        <option value=""></option>
+                        <option value="population_limit" data-translate="population">Население</option>
+                        <option value="infrastructure_level" data-translate="economic">Экономика</option>
+                        <option value="relief" data-translate="relief">Рельеф</option>
+                        <option value="water" data-translate="water">Вода</option>
+                        <option value="river" data-translate="river">Река</option>
+                        <option value="resource_rule.wood" data-translate="wood">Древесина</option>
+                        <option value="resource_rule.iron" data-translate="iron">Железо</option>
+                        <option value="resource_rule.gold" data-translate="gold">Золото</option>
+                        <option value="resource_rule.oil" data-translate="oil">Нефть</option>
+                        <option value="resource_rule.uranium" data-translate="uranium">Уран</option>
+                    </select>
+                    <select id="param-copy-select3" class="main-page-input">
+                        <option value=""></option>
+                        <option value="population_limit" data-translate="population">Население</option>
+                        <option value="infrastructure_level" data-translate="economic">Экономика</option>
+                        <option value="relief" data-translate="relief">Рельеф</option>
+                        <option value="water" data-translate="water">Вода</option>
+                        <option value="river" data-translate="river">Река</option>
+                        <option value="resource_rule.wood" data-translate="wood">Древесина</option>
+                        <option value="resource_rule.iron" data-translate="iron">Железо</option>
+                        <option value="resource_rule.gold" data-translate="gold">Золото</option>
+                        <option value="resource_rule.oil" data-translate="oil">Нефть</option>
+                        <option value="resource_rule.uranium" data-translate="uranium">Уран</option>
+                    </select>
+                    <select id="param-copy-select4" class="main-page-input">
+                        <option value=""></option>
+                        <option value="population_limit" data-translate="population">Население</option>
+                        <option value="infrastructure_level" data-translate="economic">Экономика</option>
+                        <option value="relief" data-translate="relief">Рельеф</option>
+                        <option value="water" data-translate="water">Вода</option>
+                        <option value="river" data-translate="river">Река</option>
+                        <option value="resource_rule.wood" data-translate="wood">Древесина</option>
+                        <option value="resource_rule.iron" data-translate="iron">Железо</option>
+                        <option value="resource_rule.gold" data-translate="gold">Золото</option>
+                        <option value="resource_rule.oil" data-translate="oil">Нефть</option>
+                        <option value="resource_rule.uranium" data-translate="uranium">Уран</option>
+                    </select>
+                    <select id="param-copy-select5" class="main-page-input">
+                        <option value=""></option>
+                        <option value="population_limit" data-translate="population">Население</option>
+                        <option value="infrastructure_level" data-translate="economic">Экономика</option>
+                        <option value="relief" data-translate="relief">Рельеф</option>
+                        <option value="water" data-translate="water">Вода</option>
+                        <option value="river" data-translate="river">Река</option>
+                        <option value="resource_rule.wood" data-translate="wood">Древесина</option>
+                        <option value="resource_rule.iron" data-translate="iron">Железо</option>
+                        <option value="resource_rule.gold" data-translate="gold">Золото</option>
+                        <option value="resource_rule.oil" data-translate="oil">Нефть</option>
+                        <option value="resource_rule.uranium" data-translate="uranium">Уран</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <!--button id="params-copy-clipboard" class="action-button secondary" data-translate="copyToClipboard">Копировать в Clipboard</button-->
+                    <button id="params-copy-copy" class="action-button secondary" data-translate="copy" onclick="copyParam(document.getElementById('param-copy-select1').value, document.getElementById('param-copy-select2').value, document.getElementById('param-copy-select3').value, document.getElementById('param-copy-select4').value, document.getElementById('param-copy-select5').value)">Копировать</button>
+                    <button id="params-copy-paste" class="action-button" data-translate="filter_apply">Вставить</button>
+                </div>
+            </div>
+        </div>
     </body>
+        <script src="js/coop/coop-connect-send.js"></script>
+        <script src="js/coop/coop-connect-recive.js"></script>
 </html>

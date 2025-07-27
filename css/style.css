@@ -898,8 +898,8 @@ body {
 .form-group select:focus,
 .nav-button:focus,
 .action-button:focus {
-    outline: 2px solid #3498db;
-    outline-offset: 2px;
+    /*outline: 2px solid #3498db;
+    outline-offset: 2px;*/
 }
 
 /* Улучшение контрастности */

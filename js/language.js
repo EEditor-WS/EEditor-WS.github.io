@@ -206,6 +206,7 @@ const translations = {
         "democracy": "Democracy",
         "monarchy": "Monarchy",
         "communism": "Communism",
+        "theocracy": "Theocracy",
         "fascism": "Fascism",
         "trade_republic": "Trade Republic",
         "allies": "Allies",
@@ -840,6 +841,26 @@ const translations = {
         "diplomacy_become_vassal": "Become Vassal",
         "diplomacy_get_vassal": "Get Vassal",
 
+        // Уведдомления
+        "ready": "Ready",
+        "error": "Error",
+        "no need": "No countries for removal was found",
+        "filtres reseted": "The filters are reset",
+
+        // Синхроназция - coop
+        "coopSync": "Synchronization of Coop",
+        "sync_coop": "Synchronization - coop",
+        "sync_coop_desc": "Synchronization allows players in cooperative mode to jointly manage events and changes in the game. It provides synchronous execution of actions, such as changes in economics, diplomacy and military operations.",
+        "coop_connect_data_description": "Enter the nickname of the sender",
+        "coop_connect_data": "Connection data",
+        "coop_room_placeholder": "Enter the nickname of the sender",
+        "coop_connect": "Connect",
+        "eval_js_code": "Run JS",
+        "min_event_id": "Minimum ID events",
+        "max_event_id": "Maximum ID events",
+        "translate": "Translate",
+        "countryPower": "Country's power",
+
         // Библиотека
         "library": "Library",
         "scenario": "Scenario",
@@ -1031,7 +1052,7 @@ const translations = {
         "docs_economy_finance": "Финансовая система",
 
         // Меню аккаунта
-        "guest": "Гость",
+        "guest": "Guest",
         "login": "Войти через Discord",
         "register": "Регистрация",
         "settings": "Настройки",
@@ -1104,6 +1125,7 @@ const translations = {
         "democracy": "Демократия",
         "monarchy": "Монархия",
         "communism": "Коммунизм",
+        "theocracy": "Теократия",
         "fascism": "Фашизм",
         "trade_republic": "Торговая Республика",
         "allies": "Союзники",
@@ -1638,6 +1660,20 @@ const translations = {
         "no need": "Страны для удаления не найдена",
         "filtres reseted": "Фильтры сброшены",
 
+        // Синхроназция - coop
+        "coopSync": "Синхронизация Coop",
+        "sync_coop": "Синхронизация - кооператив",
+        "sync_coop_desc": "Синхронизация позволяет игрокам в кооперативном режиме совместно управлять событиями и изменениями в игре. Она обеспечивает синхронное выполнение действий, таких как изменения в экономике, дипломатии и военных действиях.",
+        "coop_connect_data_description": "Введите ник отправителя",
+        "coop_connect_data": "Данные подключения",
+        "coop_room_placeholder": "Введите ник отправителя",
+        "coop_connect": "Подключиться",
+        "eval_js_code": "Выполнить JS",
+        "min_event_id": "Минимальный ID события",
+        "max_event_id": "Максимальный ID события",
+        "translate": "Перевести",
+        "countryPower": "Сила страны",
+
         // Библиотека
         "library": "Библиотека",
         "scenario": "Сценарий",
@@ -1903,6 +1939,7 @@ const translations = {
         "democracy": "Демократія",
         "monarchy": "Монархія",
         "communism": "Комунізм",
+        "theocracy": "Теократія",
         "fascism": "Фашизм",
         "trade_republic": "Торгова Республіка",
         "allies": "Союзники",
@@ -2427,7 +2464,27 @@ const translations = {
         "is_player": "Є гравцем",
         "has_vassal": "Має васала",
         "diplomacy_become_vassal": "Стати васалом",
-        "diplomacy_get_vassal": "Отримати васала"
+        "diplomacy_get_vassal": "Отримати васала",
+
+        // Уведдомления
+        "ready": "Готово",
+        "error": "Ошибка",
+        "no need": "Країни для видалення не знайдени",
+        "filtres reseted": "Фільтри скинуті",
+
+        // Синхроназция - coop
+        "coopSync": "Синхронізація Coop",
+        "sync_coop": "Синхронізація - кооператив",
+        "sync_coop_desc": "Синхронизация позволяет игрокам в кооперативном режиме совместно управлять событиями и изменениями в игре. Она обеспечивает синхронное выполнение действий, таких как изменения в экономике, дипломатии и военных действиях.",
+        "coop_connect_data_description": "Впишіть нік відправника",
+        "coop_connect_data": "Дані підключення",
+        "coop_room_placeholder": "Впишіть нік відправника",
+        "coop_connect": "Підключитися",
+        "eval_js_code": "Виконати JS",
+        "min_event_id": "Мінімальний ID події",
+        "max_event_id": "Максимальний ID події",
+        "translate": "Перекласти",
+        "countryPower": "Сила країни",
     },
     "be": {
         // Дакументацыя
@@ -2894,6 +2951,7 @@ const translations = {
         "democracy": "Демокрацие",
         "monarchy": "Монархие",
         "communism": "Комунисм",
+        "theocracy": "Теокрация",
         "fascism": "Фашисм",
         "trade_republic": "Република Комерчиалэ",
         "allies": "Алиаць",

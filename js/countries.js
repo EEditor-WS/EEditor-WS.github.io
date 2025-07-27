@@ -236,6 +236,10 @@ class CountryManager {
             });
 
         console.log('Найдено стран:', countries.length);
+        const countryCountEl = document.getElementById('countryCount');
+        if (countryCountEl) {
+            countryCountEl.textContent = countries.length;
+        }
 
         // Применяем фильтры
         countries = countries.filter(country => {
