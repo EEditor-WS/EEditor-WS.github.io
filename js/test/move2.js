@@ -320,7 +320,7 @@ function copyParam(param1, param2, param3, param4, param5) {
     });
 
     localStorage.setItem("copyParam", JSON.stringify(provPop));
-    enot = JSON.stringify(provPop);
+    //enot = JSON.stringify(provPop);
 }
 
 function pasteParam(param1, param2, param3, param4, param5) {
@@ -330,7 +330,7 @@ function pasteParam(param1, param2, param3, param4, param5) {
 
     try {
         updates = JSON.parse(localStorage.copyParam || "[]");
-        updates = JSON.parse(enot || "[]");
+        //updates = JSON.parse(enot || "[]");
     } catch (e) {
         console.error("Ошибка парсинга данных из localStorage:", e);
         return;
