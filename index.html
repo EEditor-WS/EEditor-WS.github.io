@@ -1843,11 +1843,12 @@
                         <option value="relief" data-translate="relief">Рельеф</option>
                         <option value="water" data-translate="water">Вода</option>
                         <option value="river" data-translate="river">Река</option>
-                        <option value="resource_rule.wood" data-translate="wood">Древесина</option>
+                        <option value="resource_rule" data-translate="resources">Ресурсы</option>
+                        <!--option value="resource_rule.wood" data-translate="wood">Древесина</option>
                         <option value="resource_rule.iron" data-translate="iron">Железо</option>
                         <option value="resource_rule.gold" data-translate="gold">Золото</option>
                         <option value="resource_rule.oil" data-translate="oil">Нефть</option>
-                        <option value="resource_rule.uranium" data-translate="uranium">Уран</option>
+                        <option value="resource_rule.uranium" data-translate="uranium">Уран</option-->
                     </select>
                     <select id="param-copy-select2" class="main-page-input">
                         <option value=""></option>
@@ -1856,11 +1857,12 @@
                         <option value="relief" data-translate="relief">Рельеф</option>
                         <option value="water" data-translate="water">Вода</option>
                         <option value="river" data-translate="river">Река</option>
-                        <option value="resource_rule.wood" data-translate="wood">Древесина</option>
+                        <option value="resource_rule" data-translate="resources">Ресурсы</option>
+                        <!--option value="resource_rule.wood" data-translate="wood">Древесина</option>
                         <option value="resource_rule.iron" data-translate="iron">Железо</option>
                         <option value="resource_rule.gold" data-translate="gold">Золото</option>
                         <option value="resource_rule.oil" data-translate="oil">Нефть</option>
-                        <option value="resource_rule.uranium" data-translate="uranium">Уран</option>
+                        <option value="resource_rule.uranium" data-translate="uranium">Уран</option-->
                     </select>
                     <select id="param-copy-select3" class="main-page-input">
                         <option value=""></option>
@@ -1869,11 +1871,12 @@
                         <option value="relief" data-translate="relief">Рельеф</option>
                         <option value="water" data-translate="water">Вода</option>
                         <option value="river" data-translate="river">Река</option>
-                        <option value="resource_rule.wood" data-translate="wood">Древесина</option>
+                        <option value="resource_rule" data-translate="resources">Ресурсы</option>
+                        <!--option value="resource_rule.wood" data-translate="wood">Древесина</option>
                         <option value="resource_rule.iron" data-translate="iron">Железо</option>
                         <option value="resource_rule.gold" data-translate="gold">Золото</option>
                         <option value="resource_rule.oil" data-translate="oil">Нефть</option>
-                        <option value="resource_rule.uranium" data-translate="uranium">Уран</option>
+                        <option value="resource_rule.uranium" data-translate="uranium">Уран</option-->
                     </select>
                     <select id="param-copy-select4" class="main-page-input">
                         <option value=""></option>
@@ -1882,11 +1885,12 @@
                         <option value="relief" data-translate="relief">Рельеф</option>
                         <option value="water" data-translate="water">Вода</option>
                         <option value="river" data-translate="river">Река</option>
-                        <option value="resource_rule.wood" data-translate="wood">Древесина</option>
+                        <option value="resource_rule" data-translate="resources">Ресурсы</option>
+                        <!--option value="resource_rule.wood" data-translate="wood">Древесина</option>
                         <option value="resource_rule.iron" data-translate="iron">Железо</option>
                         <option value="resource_rule.gold" data-translate="gold">Золото</option>
                         <option value="resource_rule.oil" data-translate="oil">Нефть</option>
-                        <option value="resource_rule.uranium" data-translate="uranium">Уран</option>
+                        <option value="resource_rule.uranium" data-translate="uranium">Уран</option-->
                     </select>
                     <select id="param-copy-select5" class="main-page-input">
                         <option value=""></option>
@@ -1895,17 +1899,18 @@
                         <option value="relief" data-translate="relief">Рельеф</option>
                         <option value="water" data-translate="water">Вода</option>
                         <option value="river" data-translate="river">Река</option>
-                        <option value="resource_rule.wood" data-translate="wood">Древесина</option>
+                        <option value="resource_rule" data-translate="resources">Ресурсы</option>
+                        <!--option value="resource_rule.wood" data-translate="wood">Древесина</option>
                         <option value="resource_rule.iron" data-translate="iron">Железо</option>
                         <option value="resource_rule.gold" data-translate="gold">Золото</option>
                         <option value="resource_rule.oil" data-translate="oil">Нефть</option>
-                        <option value="resource_rule.uranium" data-translate="uranium">Уран</option>
+                        <option value="resource_rule.uranium" data-translate="uranium">Уран</option-->
                     </select>
                 </div>
                 <div class="modal-footer">
                     <!--button id="params-copy-clipboard" class="action-button secondary" data-translate="copyToClipboard">Копировать в Clipboard</button-->
                     <button id="params-copy-copy" class="action-button secondary" data-translate="copy" onclick="copyParam(document.getElementById('param-copy-select1').value, document.getElementById('param-copy-select2').value, document.getElementById('param-copy-select3').value, document.getElementById('param-copy-select4').value, document.getElementById('param-copy-select5').value)">Копировать</button>
-                    <button id="params-copy-paste" class="action-button" data-translate="filter_apply">Вставить</button>
+                    <button id="params-copy-paste" class="action-button" data-translate="filter_apply" onclick="pasteParam(document.getElementById('param-copy-select1').value, document.getElementById('param-copy-select2').value, document.getElementById('param-copy-select3').value, document.getElementById('param-copy-select4').value, document.getElementById('param-copy-select5').value)">Вставить</button>
                 </div>
             </div>
         </div>

@@ -1,3 +1,6 @@
+let enot;
+
+
 // Страны
 function copyManyCountries() {
     const navButtons = document.querySelectorAll('.nav-button');
@@ -317,14 +320,17 @@ function copyParam(param1, param2, param3, param4, param5) {
     });
 
     localStorage.setItem("copyParam", JSON.stringify(provPop));
+    enot = JSON.stringify(provPop);
 }
 
 function pasteParam(param1, param2, param3, param4, param5) {
     const params = [param1, param2, param3, param4, param5].filter(Boolean); // исключаем пустые
     let updates;
+    alert(params.join(', '));
 
     try {
         updates = JSON.parse(localStorage.copyParam || "[]");
+        updates = JSON.parse(enot || "[]");
     } catch (e) {
         console.error("Ошибка парсинга данных из localStorage:", e);
         return;
@@ -345,5 +351,5 @@ function pasteParam(param1, param2, param3, param4, param5) {
     });
 
     // Показываем результат
-    previewContent.value = provinces;
+    previewContent.value = JSON.stringify(window.countryManager.jsonData, null, 2);
 }
