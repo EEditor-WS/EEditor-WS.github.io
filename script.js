@@ -1225,3 +1225,21 @@ if (isAndroidApp) {
         showError('Ошибка', 'Не удалось открыть файл на Android');
     }
 }
+
+function setPageZoom(zoomLevel) {
+  // Проверяем, что zoomLevel является числом и находится в разумных пределах
+  if (typeof zoomLevel !== 'number' || zoomLevel <= 0) {
+    console.error('Неверное значение масштаба. Используйте число больше 0.');
+    alert("блять");
+    return;
+  }
+
+  // Устанавливаем свойство zoom для элемента <body>
+  document.body.style.zoom = zoomLevel + '%';
+  console.log('Масштаб страницы установлен на: ' + zoomLevel + '%');
+  localStorage.pageZoom = parseFloat(zoomLevel); // Сохраняем значение в localStorage
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    setPageZoom(parseFloat(localStorage.pageZoom) || 100);
+});

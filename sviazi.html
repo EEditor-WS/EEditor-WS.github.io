@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Граф событий</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body { margin: 0; overflow: hidden; background: #111; }
+    rect {
+      /*fill: #3498db;*/
+      stroke: #fff;
+      stroke-width: 1.5px;
+      cursor: grab;
+    }
+    line {
+      stroke: #aaa;
+      cursor: pointer;
+    }
+    text {
+      fill: #fff;
+      font: 11px sans-serif;
+      pointer-events: none;
+    }
+    .tooltip {
+      position: absolute;
+      background: #222;
+      color: #fff;
+      padding: 8px 12px;
+      font-size: 12px;
+      border-radius: 6px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      z-index: 1000;
+      max-width: 300px;
+    }
+    .link-invisible {
+      stroke: transparent;
+      stroke-width: 20px;
+      cursor: pointer;
+    }
+    .choice-text {
+      fill: #fff;
+      font: 12px sans-serif;
+      text-anchor: middle;
+      pointer-events: none;
+      font-weight: bold;
+    }
+    .user-link {
+      stroke-width: 3px;
+    }
+    .comment-input {
+      position: absolute;
+      background: #333;
+      color: #fff;
+      border: 1px solid #555;
+      padding: 5px;
+      font-size: 12px;
+      border-radius: 4px;
+      display: none;
+      z-index: 1001;
+    }
+  </style>
+</head>
+<body>
+	<div style="width:100%;height:25px;border-radius: 8px;background-color: #3b3b3b;position: absolute;display: flex;justify-content: space-between;">
+		<p style="margin: 5px; color:white">enot</p>
+		<div style="display:flex;"><button>Load</button><button>Save</button></div>
+    </div>
+  <div class="tooltip" id="tooltip"></div>
+  <input type="text" class="comment-input" id="commentInput" placeholder="Введите комментарий...">
+  <script>
+    let eventData = null;
+
+    // Слушаем сообщения от родительского окна
+    window.addEventListener('message', function(event) {
+      // Если данные еще не получены
+      if (!eventData) {
+        eventData = event.data;
+        // После получения данных инициализируем граф
+        initializeGraph();
+      }
+    });
+
+    // Функция инициализации графа
+    function initializeGraph() {
+      if (!eventData) {
+        console.error('No event data received yet');
+        return;
+      }
+
+      // Преобразование данных в узлы и связи
+      function parseEventData(data) {
+        const nodes = [];
+        const links = [];
+
+        // Создаем узлы
+      Object.keys(data).forEach(key => {
+        const event = data[key];
+        const nodeName = `${key} - ${event.title} - ${event.unique_event_name}`;
+        nodes.push({
+          id: key,
+          name: nodeName,
+          title: event.title,
+          unique_event_name: event.unique_event_name,
+          customColor: event.eeditor?.color || null
+        });
+      });
+
+      // Создаем связи на основе requirements
+      Object.keys(data).forEach(sourceKey => {
+        const event = data[sourceKey];
+        
+        event.requirements.forEach(req => {
+          let link = {
+            source: sourceKey,
+            target: null
+          };
+
+          // Определяем тип связи и её свойства
+          switch(req.type) {
+            case "cooldown":
+              link.type = "cooldown";
+              link.cooldownTime = req.value;
+              link.direction = "source"; // source, target, both, none
+              link.target = req.subtype; // кулдаун идет к указанному в subtype
+              break;
+              
+            case "event_choice":
+              link.type = "choice";
+              link.choiceNumber = req.value;
+              link.direction = "source";
+              link.target = req.subtype; // выбор идет к указанному в subtype
+              break;
+              
+            case "received_event":
+              if (req.action === "equal") {
+                link.type = "event_received";
+                link.direction = "source";
+                link.target = req.value; // связь идет к указанному в value
+              } else if (req.action === "not_equal") {
+                link.type = "event_not_received";
+                link.direction = "source"; 
+                link.target = req.value; // связь идет к указанному в value
+              }
+              break;
+          }
+
+          // Проверяем, что цель существует
+          if (link.target && data[link.target]) {
+            links.push(link);
+          }
+        });
+      });
+
+      // Определяем цвета узлов на основе связей
+      nodes.forEach(node => {
+        if (!node.customColor) {
+          const hasIncoming = links.some(link => link.target === node.id);
+          const hasOutgoing = links.some(link => link.source === node.id);
+          
+          if (!hasIncoming && hasOutgoing) {
+            // Только входящие связи - красный (конец)
+            node.nodeColor = "#e74c3c";
+          } else if (/*hasIncoming && */!hasOutgoing) {
+            // Только исходящие связи - зеленый (начало)
+            node.nodeColor = "#27ae60";
+          } else {
+            // Есть и входящие и исходящие или нет связей - синий
+            node.nodeColor = "#3498db";
+          }
+        } else {
+          node.nodeColor = node.customColor;
+        }
+      });
+
+      return { nodes, links };
+    }
+
+      const { nodes, links } = parseEventData(eventData);
+      console.log("Узлы:", nodes);
+      console.log("Связи:", links);
+
+      // Отдельная переменная для пользовательских связей
+    const userCreatedLinks = links.filter(link => link.type === "user_created");
+
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    const svg = d3.select("body")
+      .append("svg")
+      .attr("width", width)
+      .attr("height", height);
+
+    // Определение маркеров для стрелок
+    const defs = svg.append("defs");
+    
+    // Стрелки для кулдауна (оранжевые)
+    defs.append("marker")
+      .attr("id", "arrow-cooldown")
+      .attr("viewBox", "0 -5 10 10")
+      .attr("refX", 8)
+      .attr("refY", 0)
+      .attr("markerWidth", 6)
+      .attr("markerHeight", 6)
+      .attr("orient", "auto")
+      .append("path")
+      .attr("d", "M0,-5L10,0L0,5")
+      .attr("fill", "#f39c12");
+
+    defs.append("marker")
+      .attr("id", "arrow-cooldown-start")
+      .attr("viewBox", "0 -5 10 10")
+      .attr("refX", 2)
+      .attr("refY", 0)
+      .attr("markerWidth", 6)
+      .attr("markerHeight", 6)
+      .attr("orient", "auto")
+      .append("path")
+      .attr("d", "M10,-5L0,0L10,5")
+      .attr("fill", "#f39c12");
+
+    // Стрелки для выбора варианта (зеленые)
+    defs.append("marker")
+      .attr("id", "arrow-choice")
+      .attr("viewBox", "0 -5 10 10")
+      .attr("refX", 8)
+      .attr("refY", 0)
+      .attr("markerWidth", 6)
+      .attr("markerHeight", 6)
+      .attr("orient", "auto")
+      .append("path")
+      .attr("d", "M0,-5L10,0L0,5")
+      .attr("fill", "#27ae60");
+
+    defs.append("marker")
+      .attr("id", "arrow-choice-start")
+      .attr("viewBox", "0 -5 10 10")
+      .attr("refX", 2)
+      .attr("refY", 0)
+      .attr("markerWidth", 6)
+      .attr("markerHeight", 6)
+      .attr("orient", "auto")
+      .append("path")
+      .attr("d", "M10,-5L0,0L10,5")
+      .attr("fill", "#27ae60");
+
+    // Стрелки для полученного события (синие)
+    defs.append("marker")
+      .attr("id", "arrow-event")
+      .attr("viewBox", "0 -5 10 10")
+      .attr("refX", 8)
+      .attr("refY", 0)
+      .attr("markerWidth", 6)
+      .attr("markerHeight", 6)
+      .attr("orient", "auto")
+      .append("path")
+      .attr("d", "M0,-5L10,0L0,5")
+      .attr("fill", "#3498db");
+
+    defs.append("marker")
+      .attr("id", "arrow-event-start")
+      .attr("viewBox", "0 -5 10 10")
+      .attr("refX", 2)
+      .attr("refY", 0)
+      .attr("markerWidth", 6)
+      .attr("markerHeight", 6)
+      .attr("orient", "auto")
+      .append("path")
+      .attr("d", "M10,-5L0,0L10,5")
+      .attr("fill", "#3498db");
+
+    // Стрелки для не полученного события (красные)
+    defs.append("marker")
+      .attr("id", "arrow-event-not")
+      .attr("viewBox", "0 -5 10 10")
+      .attr("refX", 8)
+      .attr("refY", 0)
+      .attr("markerWidth", 6)
+      .attr("markerHeight", 6)
+      .attr("orient", "auto")
+      .append("path")
+      .attr("d", "M0,-5L10,0L0,5")
+      .attr("fill", "#e74c3c");
+
+    defs.append("marker")
+      .attr("id", "arrow-event-not-start")
+      .attr("viewBox", "0 -5 10 10")
+      .attr("refX", 2)
+      .attr("refY", 0)
+      .attr("markerWidth", 6)
+      .attr("markerHeight", 6)
+      .attr("orient", "auto")
+      .append("path")
+      .attr("d", "M10,-5L0,0L10,5")
+      .attr("fill", "#e74c3c");
+
+    // Стрелки для пользовательских связей (фиолетовые)
+    defs.append("marker")
+      .attr("id", "arrow-user")
+      .attr("viewBox", "0 -5 10 10")
+      .attr("refX", 8)
+      .attr("refY", 0)
+      .attr("markerWidth", 6)
+      .attr("markerHeight", 6)
+      .attr("orient", "auto")
+      .append("path")
+      .attr("d", "M0,-5L10,0L0,5")
+      .attr("fill", "#9b59b6");
+
+    defs.append("marker")
+      .attr("id", "arrow-user-start")
+      .attr("viewBox", "0 -5 10 10")
+      .attr("refX", 2)
+      .attr("refY", 0)
+      .attr("markerWidth", 6)
+      .attr("markerHeight", 6)
+      .attr("orient", "auto")
+      .append("path")
+      .attr("d", "M10,-5L0,0L10,5")
+      .attr("fill", "#9b59b6");
+
+    const zoomGroup = svg.append("g");
+
+    const linkGroup = zoomGroup.append("g");
+    const invisibleLinkGroup = zoomGroup.append("g");
+    const textGroup = zoomGroup.append("g"); // для текста на связях
+    const nodeGroup = zoomGroup.append("g");
+
+	svg.call(d3.zoom()
+	  .on("zoom", (event) => {
+		zoomGroup.attr("transform", event.transform);
+	  })
+	);
+
+    const simulation = d3.forceSimulation(nodes)
+      .force("link", d3.forceLink().id(d => d.id).distance(200))
+      .force("charge", d3.forceManyBody().strength(-800))
+      //.force("center", d3.forceCenter(width / 2, height / 2));
+      .force("center", d3.forceCenter(width * 3, height * 3));
+
+    const nodeWidth = 200;
+    const nodeHeight = 60;
+
+    const node = nodeGroup.selectAll("g")
+      .data(nodes)
+      .join("g")
+      .call(drag(simulation));
+
+    node.append("rect")
+      .attr("width", nodeWidth)
+      .attr("height", nodeHeight)
+      .attr("x", -nodeWidth / 2)
+      .attr("y", -nodeHeight / 2)
+      .attr("rx", 10)
+      .attr("ry", 10)
+      .attr("fill", d => d.nodeColor);
+
+    // Многострочный текст для узлов
+    node.each(function(d) {
+      const textElement = d3.select(this);
+      const words = d.name.split(' - ');
+      
+      words.forEach((word, i) => {
+        textElement.append("text")
+          .text(word)
+          .attr("text-anchor", "middle")
+          .attr("dy", (i - words.length/2 + 0.5) * 15)
+          .attr("font-size", i === 0 ? "12px" : "10px")
+          .attr("font-weight", i === 0 ? "bold" : "normal");
+      });
+    });
+
+    const tooltip = d3.select("#tooltip");
+    const commentInput = d3.select("#commentInput");
+    let currentEditingLink = null;
+
+    function getMarkerEnd(d) {
+      if (!d.direction || d.direction === "none") return "";
+      
+      if (d.direction === "target" || d.direction === "both") {
+        if (d.type === "cooldown") return "url(#arrow-cooldown)";
+        if (d.type === "choice") return "url(#arrow-choice)";
+        if (d.type === "event_received") return "url(#arrow-event)";
+        if (d.type === "event_not_received") return "url(#arrow-event-not)";
+        if (d.type === "user_created") return "url(#arrow-user)";
+      }
+      return "";
+    }
+
+    function getMarkerStart(d) {
+      if (!d.direction || d.direction === "none") return "";
+      
+      if (d.direction === "source" || d.direction === "both") {
+        if (d.type === "cooldown") return "url(#arrow-cooldown-start)";
+        if (d.type === "choice") return "url(#arrow-choice-start)";
+        if (d.type === "event_received") return "url(#arrow-event-start)";
+        if (d.type === "event_not_received") return "url(#arrow-event-not-start)";
+        if (d.type === "user_created") return "url(#arrow-user-start)";
+      }
+      return "";
+    }
+
+    function updateLinks() {
+      // Видимые связи
+      const visibleLinks = linkGroup.selectAll("line")
+        .data(links, d => d.source + "-" + d.target);
+
+      visibleLinks.join(
+        enter => enter.append("line")
+          .attr("stroke-width", getStrokeWidth)
+          .attr("stroke", getStrokeColor)
+          .attr("stroke-dasharray", d => d.type === "user_created" ? "5,3" : "0")
+          .attr("marker-end", getMarkerEnd)
+          .attr("marker-start", getMarkerStart)
+          .attr("class", d => d.type === "user_created" ? "user-link" : ""),
+        update => update
+          .attr("stroke-width", getStrokeWidth)
+          .attr("stroke", getStrokeColor)
+          .attr("stroke-dasharray", d => d.type === "user_created" ? "5,3" : "0")
+          .attr("marker-end", getMarkerEnd)
+          .attr("marker-start", getMarkerStart),
+        exit => exit.remove()
+      );
+
+      // Невидимые связи с увеличенной зоной наведения
+      const invisibleLinks = invisibleLinkGroup.selectAll("line")
+        .data(links, d => d.source + "-" + d.target);
+
+      invisibleLinks.join(
+        enter => enter.append("line")
+          .attr("class", "link-invisible")
+          .on("mousemove", (event, d) => {
+            showTooltip(event, d);
+          })
+          .on("mouseout", () => {
+            // Добавляем небольшую задержку перед скрытием
+            setTimeout(() => {
+              tooltip.style("opacity", 0);
+            }, 100);
+          })
+          .on("dblclick", (event, d) => {
+            if (d.type === "user_created") {
+              showCommentInput(event, d);
+            }
+          }),
+        update => update,
+        exit => exit.remove()
+      );
+
+      // Текст для выбора варианта
+      const choiceTexts = textGroup.selectAll("text")
+        .data(links.filter(d => d.type === "choice"), d => d.source + "-" + d.target);
+
+      choiceTexts.join(
+        enter => enter.append("text")
+          .attr("class", "choice-text")
+          .text(d => d.choiceNumber)
+          .attr("font-size", "14px")
+          .attr("font-weight", "bold"),
+        update => update.text(d => d.choiceNumber),
+        exit => exit.remove()
+      );
+    }
+
+    function showTooltip(event, d) {
+      let content = `<b>Тип:</b> ${getTypeText(d)}`;
+      
+      const directionText = d.direction === "both" ? "двунаправленная" :
+                          d.direction === "target" ? "к цели" :
+                          d.direction === "source" ? "от источника" : "без направления";
+      content += `<br><b>Направление:</b> ${directionText}`;
+      
+      if (d.type === "cooldown") {
+        content += `<br><b>Длительность:</b> ${d.cooldownTime}с`;
+      }
+      
+      if (d.type === "user_created" && d.comment) {
+        content += `<br><b>Комментарий:</b> ${d.comment}`;
+      }
+      
+      // Показываем исходный и целевой узлы
+      const sourceNode = getNodeById(d.source);
+      const targetNode = getNodeById(d.target);
+      content += `<br><br><b>От:</b> ${sourceNode ? sourceNode.name : d.source}`;
+      content += `<br><b>К:</b> ${targetNode ? targetNode.name : d.target}`;
+      
+      tooltip
+        .style("left", event.pageX + 10 + "px")
+        .style("top", event.pageY + "px")
+        .style("opacity", 1)
+        .html(content);
+    }
+
+    function showCommentInput(event, d) {
+      currentEditingLink = d;
+      commentInput
+        .style("left", event.pageX + "px")
+        .style("top", event.pageY + "px")
+        .style("display", "block")
+        .property("value", d.comment || "")
+        .node().focus();
+    }
+
+    // Обработка ввода комментария
+    commentInput.on("keydown", function(event) {
+      if (event.key === "Enter") {
+        if (currentEditingLink) {
+          currentEditingLink.comment = this.value;
+        }
+        commentInput.style("display", "none");
+        currentEditingLink = null;
+      } else if (event.key === "Escape") {
+        commentInput.style("display", "none");
+        currentEditingLink = null;
+      }
+    });
+
+    // Скрыть поле комментария при клике вне его
+    svg.on("click", () => {
+      commentInput.style("display", "none");
+      currentEditingLink = null;
+    });
+
+    function getTypeText(d) {
+      switch(d.type) {
+        case "cooldown": return "кулдаун";
+        case "choice": return "выбор варианта";
+        case "event_received": return "получено событие";
+        case "event_not_received": return "не получено событие";
+        case "user_created": return "пользовательская связь";
+        default: return d.type;
+      }
+    }
+
+    function getStrokeColor(d) {
+      switch(d.type) {
+        case "cooldown": return "#f39c12";
+        case "choice": return "#27ae60";
+        case "event_received": return "#3498db";
+        case "event_not_received": return "#e74c3c";
+        case "user_created": return "#9b59b6";
+        default: return "#aaa";
+      }
+    }
+
+    function getStrokeWidth(d) {
+      if (d.type === "user_created") return 3;
+      return 2;
+    }
+
+    function calculateLinkPosition(sourceNode, targetNode) {
+      const dx = targetNode.x - sourceNode.x;
+      const dy = targetNode.y - sourceNode.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      
+      if (distance === 0) return { x1: sourceNode.x, y1: sourceNode.y, x2: targetNode.x, y2: targetNode.y };
+      
+      const unitX = dx / distance;
+      const unitY = dy / distance;
+      
+      const sourceRadius = Math.sqrt((nodeWidth/2)**2 + (nodeHeight/2)**2);
+      const targetRadius = Math.sqrt((nodeWidth/2)**2 + (nodeHeight/2)**2);
+      
+      return {
+        x1: sourceNode.x + unitX * sourceRadius * 0.7,
+        y1: sourceNode.y + unitY * sourceRadius * 0.7,
+        x2: targetNode.x - unitX * targetRadius * 0.7,
+        y2: targetNode.y - unitY * targetRadius * 0.7
+      };
+    }
+
+    simulation.on("tick", () => {
+      updateLinks();
+
+      // Обновление позиций видимых связей
+      linkGroup.selectAll("line")
+        .each(function(d) {
+          const sourceNode = getNodeById(d.source);
+          const targetNode = getNodeById(d.target);
+          if (sourceNode && targetNode) {
+            const pos = calculateLinkPosition(sourceNode, targetNode);
+            
+            d3.select(this)
+              .attr("x1", pos.x1)
+              .attr("y1", pos.y1)
+              .attr("x2", pos.x2)
+              .attr("y2", pos.y2);
+          }
+        });
+
+      // Обновление позиций невидимых связей
+      invisibleLinkGroup.selectAll("line")
+        .each(function(d) {
+          const sourceNode = getNodeById(d.source);
+          const targetNode = getNodeById(d.target);
+          if (sourceNode && targetNode) {
+            const pos = calculateLinkPosition(sourceNode, targetNode);
+            
+            d3.select(this)
+              .attr("x1", pos.x1)
+              .attr("y1", pos.y1)
+              .attr("x2", pos.x2)
+              .attr("y2", pos.y2);
+          }
+        });
+
+      // Обновление позиций текста для выбора варианта
+      textGroup.selectAll("text")
+        .each(function(d) {
+          const sourceNode = getNodeById(d.source);
+          const targetNode = getNodeById(d.target);
+          if (sourceNode && targetNode) {
+            const centerX = (sourceNode.x + targetNode.x) / 2;
+            const centerY = (sourceNode.y + targetNode.y) / 2;
+            
+            d3.select(this)
+              .attr("x", centerX)
+              .attr("y", centerY + 4);
+          }
+        });
+
+      node.attr("transform", d => `translate(${d.x},${d.y})`);
+    });
+
+    function getNodeById(id) {
+      return typeof id === 'string' ? nodes.find(n => n.id === id) : id;
+    }
+
+    function drag(simulation) {
+      return d3.drag()
+        .on("start", (event, d) => {
+          if (!event.active) simulation.alphaTarget(0.3).restart();
+          d.fx = d.x;
+          d.fy = d.y;
+        })
+        .on("drag", (event, d) => {
+          d.fx = event.x;
+          d.fy = event.y;
+        })
+        .on("end", (event, d) => {
+          if (!event.active) simulation.alphaTarget(0);
+          d.fx = null;
+          d.fy = null;
+        });
+    }
+
+    // Настройка симуляции
+    simulation.force("link", d3.forceLink(links).id(d => d.id).distance(200));
+	
+		const STORAGE_KEY = "graph_node_positions";
+    }
+
+// ------------------------------------------------------------------------------------------------
+	// Сохраняет положение узлов в localStorage
+	function savePositions(nodes) {
+	  const positions = nodes.map(node => ({
+		id: node.id,
+		x: node.x,
+		y: node.y,
+		fx: node.fx,
+		fy: node.fy
+	  }));
+	  localStorage.setItem(STORAGE_KEY, JSON.stringify(positions));
+	}
+
+	// Загружает положение узлов из localStorage и применяет к текущим узлам
+	function loadPositions(nodes) {
+	  const saved = localStorage.getItem(STORAGE_KEY);
+	  if (!saved) return; // если нет сохранения — ничего не делаем
+
+	  try {
+		const positions = JSON.parse(saved);
+		const posMap = new Map(positions.map(p => [p.id, p]));
+
+		nodes.forEach(node => {
+		  if (posMap.has(node.id)) {
+			const p = posMap.get(node.id);
+			node.x = p.x !== undefined ? p.x : node.x;
+			node.y = p.y !== undefined ? p.y : node.y;
+			node.fx = p.fx !== undefined ? p.fx : null;
+			node.fy = p.fy !== undefined ? p.fy : null;
+		  }
+		});
+	  } catch (e) {
+		console.warn("Ошибка загрузки позиций из localStorage:", e);
+	  }
+	}
+
+  </script>
+</body>
+</html>

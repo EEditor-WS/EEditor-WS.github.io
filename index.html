@@ -13,6 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/x-icon" href="img/ico/ico.svg">
         <script src="lands_data.js"></script>
+        <script src="js/base.js"></script>
         <script src="js/notification.js"></script>
         <script src="js/translate/table.js"></script>
         <script src="js/translate/translate.js"></script>
@@ -284,6 +285,11 @@
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             </svg>
                             <span data-translate="transfer_params">Перенести параметры</span>
+                        </a>
+                        <a onclick="setPageZoom(parseFloat(prompt('Enter scale for zoom', localStorage.pageZoom || 100)))" target="_blank" class="account-item" data-action="transferParams
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            </svg>
+                            <span data-translate="setPageZoom">Масштаб страницы</span>
                         </a>
                     </div>
                 </div>
@@ -816,6 +822,12 @@
                         <h2 data-translate="events">События</h2><h2> - </h2><h2 id="eventsCount"></h2>
                     </div>
                     <div class="header-actions">
+                        <div class="tooltip-container">
+                            <button onclick="try{ changePage('psviazi'); const iframe = document.getElementById('iframe-sviazi'); iframe.contentWindow.postMessage(window.eventManager.jsonData.custom_events, '*');} catch {}" id="show-sviazi" class="icon-action-button clear" title="Show sviazi">
+                                э
+                            </button>
+                            <div class="tooltip">Show sviazi</div>
+                        </div>
                         <div class="tooltip-container">
                             <button id="clear-events-filters" class="icon-action-button clear" title="Сбросить все фильтры">
                                 <svg viewBox="0 0 24 24">
@@ -1681,6 +1693,11 @@
                         <div id="coopMaintData" class="coopData coopMainData" style="min-height: 750px; background-color: #181818; border-radius: 8px"></div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div id="psviazi" class="page psviazi">
+            <div class="list-container">
+                <iframe id="iframe-sviazi" src="sviazi.html" style="min-height: 88vh;" frameborder="0"></iframe>
             </div>
         </div>
 
