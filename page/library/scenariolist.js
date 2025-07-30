@@ -3001,7 +3001,7 @@ const scenariosData = [
         awards: ["only", "star", "enot"],
         // Hidden parameters
         publishDate: "2025-06-14", 
-        lastUpdate: "2025-06-14",
+        lastUpdate: "2025-07-30",
         hiddenScore: 200,
         type: "lore",
         period: "alternative",
