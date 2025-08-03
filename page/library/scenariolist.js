@@ -3028,6 +3028,7 @@ const scenariosData = [
         hiddenScore: 250,
         type: "historical",
         period: "interbellum",
+        status: "in_development"
     },
     {
         id: [
@@ -3050,6 +3051,7 @@ const scenariosData = [
         hiddenScore: 250,
         type: "historical",
         period: "interbellum",
+        status: "in_development"
     },
 ];
 
