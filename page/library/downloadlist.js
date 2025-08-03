@@ -167,6 +167,7 @@ function generateScenarioCard(scenario) {
             data-update-date="${scenario.lastUpdate}"
             data-mechanics='${JSON.stringify(scenario.mechanics || {})}'
             data-score="${score}"
+            data-full-id="${scenario.id.join('_')}"
         >
             <div class="download-info">
                 <div class="download-up">

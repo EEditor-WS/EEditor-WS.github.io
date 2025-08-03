@@ -32,6 +32,7 @@ function getUrlParams() {
         map: params.get('map') || '',
         type: params.get('type') || '',
         language: params.get('lang') || '',
+        fullid: params.get('fullid') || '',
         period: params.getAll('period') || [],
         mechanics: {
             economy: params.getAll('economy') || [],
@@ -55,12 +56,14 @@ function updateUrlWithFilters() {
     const mapFilter = document.getElementById('lib-map-filter').value;
     const typeFilter = document.getElementById('lib-type-filter').value;
     const languageFilter = document.getElementById('lib-language-filter').value;
+    const fullIdFilter = document.getElementById('lib-full-id-filter').value.trim();
 
     if (searchText) params.set('search', searchText);
     if (authorFilter) params.set('author', authorFilter);
     if (mapFilter) params.set('map', mapFilter);
     if (typeFilter) params.set('type', typeFilter);
     if (languageFilter) params.set('lang', languageFilter);
+    if (fullIdFilter) params.set('fullid', fullIdFilter);
 
     // Add period filters
     const timePeriods = Array.from(document.querySelectorAll('.checkbox-list input[type="checkbox"]:checked:not([name^="mechanics"])'))
@@ -97,6 +100,7 @@ function applyUrlParams() {
     document.getElementById('lib-map-filter').value = params.map;
     document.getElementById('lib-type-filter').value = params.type;
     document.getElementById('lib-language-filter').value = params.language;
+    document.getElementById('lib-full-id-filter').value = params.fullid;
 
     // Set period checkboxes
     document.querySelectorAll('.checkbox-list input[type="checkbox"]:not([name^="mechanics"])')
@@ -121,6 +125,7 @@ function libApplyFilters() {
     const mapFilter = document.getElementById('lib-map-filter').value.toLowerCase();
     const typeFilter = document.getElementById('lib-type-filter').value;
     const languageFilter = document.getElementById('lib-language-filter').value;
+    const fullIdFilter = document.getElementById('lib-full-id-filter').value.trim();
     const timePeriods = Array.from(document.querySelectorAll('.checkbox-list input[type="checkbox"]:checked:not([name^="mechanics"])'))
         .map(cb => cb.value);
 
@@ -171,6 +176,10 @@ function libApplyFilters() {
         // Apply time period filter
         if (timePeriods.length > 0) {
             visible = visible && timePeriods.includes(card.dataset.period);
+        }
+
+        if (fullIdFilter) {
+            visible = visible && card.dataset.fullId === fullIdFilter;
         }
 
         // Apply mechanics filters
