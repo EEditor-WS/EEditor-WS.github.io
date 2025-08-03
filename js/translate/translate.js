@@ -172,8 +172,8 @@ function createLanguageDialog() {
 async function translateParameters(data, sourceLang, targetLang, isCapitals = true) {
     window.showInfo('Перевод', 'Начинаем перевод параметров...');
     const fieldsToTranslate = isCapitals
-        ? ['name', 'capital_name', 'title', 'answer1', 'answer2', 'answer3', 'description1', 'description2', 'description3']
-        : ['name', 'title', 'answer1', 'answer2', 'answer3', 'description1', 'description2', 'description3'];
+        ? ['name', 'capital_name', 'title', 'answer1', 'answer2', 'answer3', 'description', 'description1', 'description2', 'description3']
+        : ['name', 'title', 'answer1', 'answer2', 'answer3', 'description', 'description1', 'description2', 'description3'];
     async function translateObject(obj) {
         if (!obj || typeof obj !== 'object') return obj;
         if (Array.isArray(obj)) {
