@@ -300,9 +300,9 @@ mapsData = [
         hiddenScore: 0,
     },
     {
-        id: ["parkourfox", "euro4", "vg"],
+        id: ["parkourcat", "euro4", "vg"],
         title: "Euro4 standart",
-        author: "parkourfox",
+        author: "parkourcat",
         description: "Standart map of America",
         type: "continent",
         region: ["europe", "north_africa", "middle_east"],

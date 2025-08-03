@@ -69,7 +69,7 @@ const authorsData = {
         link: "https://discord.com/users/921793805915668520",
         color: "#3B83BD"
     },
-    parkourfox: {
+    parkourcat: {
         name: "@parkourfox",
         link: "https://discord.com/users/921793805915668520",
         color: "#3B83BD"

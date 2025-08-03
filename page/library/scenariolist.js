@@ -2991,7 +2991,7 @@ const scenariosData = [
             "v3",
             "twosides",
         ],
-        title: "Two Sides",
+        title: "Two Sides (EVENTS)",
         author: "trid",
         year: "2025",
         languages: ["EN"],
@@ -3006,6 +3006,28 @@ const scenariosData = [
         type: "lore",
         period: "alternative",
         status: "archived"
+    },
+    {
+        id: [
+            "parkourcat", 
+            "euro4", 
+            "vg",
+            "interwar",
+        ],
+        title: "Interwar (EVENTS)",
+        author: "pelo",
+        year: "1919",
+        languages: ["RU"],
+        gameMode: "Sandbox",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        awards: ["only", "star", "enot"],
+        // Hidden parameters
+        publishDate: "2024-01-11", 
+        lastUpdate: "2025-07-31",
+        hiddenScore: 250,
+        type: "historical",
+        period: "interbellum",
     },
 ];
 

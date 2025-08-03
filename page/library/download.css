@@ -81,6 +81,7 @@
     justify-content: flex-start; /* Распределяем карточки по ширине контейнера */
     flex: 1;
     gap: 20px; /* Отступы между карточками */
+    justify-content: space-evenly; /* Распределяем карточки равномерно */
 }
 
 .download-card {
@@ -110,7 +111,7 @@
 }
 
 .download-award-img {
-    width: 25px;
+    width: 100%;
 }
 
 .download-info-ico {
@@ -492,4 +493,53 @@
     padding: 8px 16px;
     border-radius: 15px;
     height: 20px;
+}
+
+.gradient-overlay {
+  position: absolute; /* или relative/fixed — зависит от контекста */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  pointer-events: none; /* чтобы элементы под градиентом оставались кликабельными */
+}
+
+.download-goto-page {
+    width: 250px; 
+    height: 156px; 
+    object-fit: cover; 
+    border-radius: 15px 15px 0 0;
+}
+
+
+@media (max-width: 768px) {
+    .download-cards {
+        flex-direction: column; /* Переключаемся на вертикальное расположение карточек */
+        align-items: center; /* Центрируем карточки по горизонтали */
+    }
+
+    .download-card {
+        width: 100%; /* Задаем ширину карточки на всю ширину контейнера */
+        max-width: 500px; /* Ограничиваем максимальную ширину карточки */
+    }
+
+    .download-goto-page {
+        width: 100%; /* Задаем ширину изображения на всю ширину карточки */
+        height: auto; /* Высота будет автоматически подстраиваться */
+        border-radius: 15px 15px 0 0; /* Сохраняем радиус скругления */
+    }
+    
+    .download-image-container {
+        position: relative;
+        width: 100%;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .download-award {
+        width: 50px;
+        height: 50px;
+    }
 }
