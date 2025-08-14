@@ -3001,11 +3001,11 @@ const scenariosData = [
         awards: ["only", "star", "enot"],
         // Hidden parameters
         publishDate: "2025-06-14", 
-        lastUpdate: "2025-07-30",
+        lastUpdate: "2025-08-14",
         hiddenScore: 200,
         type: "lore",
         period: "alternative",
-        status: "archived"
+        status: "in_development"
     },
     {
         id: [
