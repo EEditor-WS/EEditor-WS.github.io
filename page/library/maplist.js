@@ -13,6 +13,7 @@ mapsData = [
         lastUpdate: "2025-01-19",
         load: "light",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["eenot", "moldavia", "v1"],
@@ -28,6 +29,7 @@ mapsData = [
         lastUpdate: "2025-04-28",
         load: "ultralight",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["bluepum", "enaatme", "v5"],
@@ -43,6 +45,7 @@ mapsData = [
         lastUpdate: "2025-05-14",
         load: "light",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["bluepum", "germany", "v1"],
@@ -58,6 +61,7 @@ mapsData = [
         lastUpdate: "2025-04-24",
         load: "mobile",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["eenot", "arstotzka", "v2"],
@@ -73,6 +77,7 @@ mapsData = [
         lastUpdate: "2025-04-21",
         load: "mobile",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["zachary", "world-3ga", "v1"],
@@ -88,6 +93,7 @@ mapsData = [
         lastUpdate: "2025-04-09",
         load: "mobile",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["zachary", "authun", "v1"],
@@ -103,6 +109,7 @@ mapsData = [
         lastUpdate: "2025-01-31",
         load: "normal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["zachary", "world-am", "v1"],
@@ -118,6 +125,7 @@ mapsData = [
         lastUpdate: "2025-01-28",
         load: "normal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["zachary", "panem", "v2"],
@@ -133,6 +141,7 @@ mapsData = [
         lastUpdate: "2025-01-27",
         load: "light",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["zachary", "eurasia", "v2"],
@@ -148,6 +157,7 @@ mapsData = [
         lastUpdate: "2024-11-29",
         load: "superheavy",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["zachary", "mars", "v1"],
@@ -163,6 +173,7 @@ mapsData = [
         lastUpdate: "2025-01-20",
         load: "light",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["zachary", "florida", "v1"],
@@ -178,6 +189,7 @@ mapsData = [
         lastUpdate: "2024-10-31",
         load: "ultralight",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["zachary", "africa", "v3"],
@@ -193,6 +205,7 @@ mapsData = [
         lastUpdate: "2024-10-29",
         load: "normal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["zachary", "australia", "v1"],
@@ -208,6 +221,7 @@ mapsData = [
         lastUpdate: "2024-10-07",
         load: "light",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["zachary", "america", "v2"],
@@ -223,6 +237,7 @@ mapsData = [
         lastUpdate: "2024-10-07",
         load: "normal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["zachary", "europe1815", "v2"],
@@ -238,6 +253,7 @@ mapsData = [
         lastUpdate: "2024-07-26",
         load: "light",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["zachary", "usa", "v1"],
@@ -253,6 +269,7 @@ mapsData = [
         lastUpdate: "2025-01-21",
         load: "mobile",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["zachary", "deadhand", "v1"],
@@ -268,6 +285,7 @@ mapsData = [
         lastUpdate: "2025-05-07",
         load: "normal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["pelo", "greece", "v1"],
@@ -283,6 +301,7 @@ mapsData = [
         lastUpdate: "2024-07-26",
         load: "light",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["jaba", "america", "vg"],
@@ -298,6 +317,7 @@ mapsData = [
         lastUpdate: "2023-08-19",
         load: "light",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["parkourcat", "euro4", "vg"],
@@ -313,6 +333,7 @@ mapsData = [
         lastUpdate: "2023-08-05",
         load: "light",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["zachary", "world", "v1"],
@@ -328,6 +349,7 @@ mapsData = [
         lastUpdate: "2025-02-10",
         load: "normal",
         hiddenScore: 150,
+        rights: true
     },
     {
         id: ["jalhund", "europe", "vg"],
@@ -343,6 +365,7 @@ mapsData = [
         lastUpdate: "2077-01-01",
         load: "mobile",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["stewardconstruct", "europe", "v2"],
@@ -358,6 +381,7 @@ mapsData = [
         lastUpdate: "2025-06-04",
         load: "mobile",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["stewardconstruct", "serbia", "v1"],
@@ -373,6 +397,7 @@ mapsData = [
         lastUpdate: "2025-03-15",
         load: "mobile",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["stewardconstruct", "yugoslavia", "v1"],
@@ -388,6 +413,7 @@ mapsData = [
         lastUpdate: "2025-03-19",
         load: "light",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["trid", "archangelsk", "v1"],
@@ -403,6 +429,7 @@ mapsData = [
         lastUpdate: "2024-02-04",
         load: "ultralight",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["chuckcha", "europe", "v1"],
@@ -418,6 +445,7 @@ mapsData = [
         lastUpdate: "2023-01-29",
         load: "normal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["jalhund", "euro5l", "v1"],
@@ -433,6 +461,7 @@ mapsData = [
         lastUpdate: "2024-03-16",
         load: "normal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["jaba", "asia", "v1"],
@@ -448,6 +477,7 @@ mapsData = [
         lastUpdate: "2024-02-20",
         load: "normal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["jaba", "world", "v1"],
@@ -463,6 +493,7 @@ mapsData = [
         lastUpdate: "2024-04-03",
         load: "superheavy",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["jalhund", "lp16", "v1"],
@@ -478,6 +509,7 @@ mapsData = [
         lastUpdate: "2023-06-12",
         load: "ultralight",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["trid", "eurosat", "v5"],
@@ -493,6 +525,7 @@ mapsData = [
         lastUpdate: "2024-03-27",
         load: "norlmal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["trid", "euro5l+", "v1"],
@@ -508,6 +541,7 @@ mapsData = [
         lastUpdate: "2024-07-22",
         load: "norlmal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["jaba", "korea", "v2"],
@@ -523,6 +557,7 @@ mapsData = [
         lastUpdate: "2024-10-01",
         load: "norlmal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["trid", "ukraine", "v2"],
@@ -538,6 +573,7 @@ mapsData = [
         lastUpdate: "2024-09-15",
         load: "norlmal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["chuckcha", "tigerland", "v1"],
@@ -553,6 +589,7 @@ mapsData = [
         lastUpdate: "2024-09-15",
         load: "norlmal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["chuckcha", "tigerland", "v2"],
@@ -568,6 +605,7 @@ mapsData = [
         lastUpdate: "2024-11-17",
         load: "norlmal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["chuckcha", "tigerland", "v3"],
@@ -583,6 +621,7 @@ mapsData = [
         lastUpdate: "2024-11-17",
         load: "norlmal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["mapmancer", "centaura", "v1"],
@@ -598,6 +637,7 @@ mapsData = [
         lastUpdate: "2025-04-13",
         load: "norlmal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["bluepum", "world", "v2"],
@@ -613,6 +653,7 @@ mapsData = [
         lastUpdate: "2025-05-27",
         load: "mobile",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["bluepum", "atlantis", "v2"],
@@ -628,6 +669,7 @@ mapsData = [
         lastUpdate: "2025-05-27",
         load: "light",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["pelo", "euam", "v1"],
@@ -643,6 +685,7 @@ mapsData = [
         lastUpdate: "2025-06-23",
         load: "mobile",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["chitterss", "world", "v3"],
@@ -658,6 +701,7 @@ mapsData = [
         lastUpdate: "2023-07-30",
         load: "hight",
         hiddenScore: 0,
+        rights: true
     },
 ];
 
@@ -713,6 +757,14 @@ function generateMapCard(map) {
     const awardsHTML = ''; // Can be implemented later if needed
     const status = map.status || 'completed';
     const statusLabel = status.charAt(0).toUpperCase() + status.slice(1);
+    let noRights;
+    if (map.rights === true) {
+        noRights = "";
+    } else {
+        noRights = `<button class="download-download-button" onclick="askDelete()" style="background-color: #945d44ff; border-radius: 15px; width: 45px; height: 45px; border: none; cursor: pointer;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"role="img" aria-label="Жалоба: предупреждение" focusable="false"><title>Жалоба</title><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                    </button>`;
+    }
 
     return `
         <div class="download-card" 
@@ -784,9 +836,12 @@ function generateMapCard(map) {
                             <img src="../../img/library/calendar.svg" class="download-info-ico" />
                         <p title="Last Update">${new Date(map.lastUpdate).toLocaleDateString()}</p>
                     </div>
-                    <button class="download-download-button" onclick="downloadMapMap('${map.id.join('_')}')" style="background-color: #44944A; border-radius: 15px; width: 45px; height: 45px; border: none; cursor: pointer;">
-                        <img src="../../img/library/download.svg" class="download-info-ico" />
-                    </button>
+                    <div style="display:flex;flex-direction:column;align-items:bottom">
+                        ${noRights}
+                        <button class="download-download-button" onclick="downloadMapMap('${map.id.join('_')}')" style="background-color: #44944A; border-radius: 15px; width: 45px; height: 45px; border: none; cursor: pointer;">
+                            <img src="../../img/library/download.svg" class="download-info-ico" />
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

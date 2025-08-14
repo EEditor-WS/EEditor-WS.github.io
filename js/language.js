@@ -874,6 +874,7 @@ const translations = {
         "not_filde_map_in_library": "It was not possible to find a map in the EEditor library.",
         "try_ty_find_discord": "You can look for a map in the #maps channel on the official Discord server of Warnament..",
         "open_discord": "Open Discord",
+        "if_u_want_to_delete_it_from_here_write_to_eenot": "If you want to delete this map/scenario from EE Lib, then write to me in Discord @enot_enot or Telegram @eenot_eenot",
 
         // Download page
         "home": "Home",
@@ -1687,6 +1688,7 @@ const translations = {
         "not_filde_map_in_library": "Не удалось найти карту в библиотеке EEditor'а.",
         "try_ty_find_discord": "Вы можете поискать карту в канале карт на официальном Discord сервере Warnament..",
         "open_discord": "Открыть Discord",
+        "if_u_want_to_delete_it_from_here_write_to_eenot": "Если вы хотите, чтобы ваша карта/сценарий были удалены отсюда, напишите мне в личные сообщения Discord @enot_enot Telegram @eenot_eenot",
 
         // Download page
         "home": "Домой",

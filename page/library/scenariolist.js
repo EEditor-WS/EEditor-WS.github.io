@@ -49,6 +49,7 @@ const scenariosData = [
         type: "sandbox",
         period: "modern",
         status: "archived",
+        rights: true
     },
     {
         id: [
@@ -76,6 +77,7 @@ const scenariosData = [
         type: "sandbox",
         period: "alternative",
         status: "discontinued",
+        rights: true
     },
     {
         id: [
@@ -98,6 +100,7 @@ const scenariosData = [
         hiddenScore: 0,
         type: "sandbox",
         period: "ww2",
+        rights: true
     },
     {
         id: [
@@ -120,6 +123,7 @@ const scenariosData = [
         hiddenScore: 0,
         type: "sandbox",
         period: "cw",
+        rights: true
     },
     {
         id: [
@@ -141,7 +145,8 @@ const scenariosData = [
         lastUpdate: "2025-01-31",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -167,7 +172,8 @@ const scenariosData = [
         lastUpdate: "2024-11-17",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -193,7 +199,8 @@ const scenariosData = [
         lastUpdate: "2024-11-20",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -219,7 +226,8 @@ const scenariosData = [
         lastUpdate: "2024-11-21",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -245,7 +253,8 @@ const scenariosData = [
         lastUpdate: "2025-04-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -271,7 +280,8 @@ const scenariosData = [
         lastUpdate: "2025-04-30",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -297,7 +307,8 @@ const scenariosData = [
         lastUpdate: "2024-12-17",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -323,7 +334,8 @@ const scenariosData = [
         lastUpdate: "2025-03-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww2"
+        period: "ww2",
+        rights: true
     },
     {
         id: [
@@ -349,7 +361,8 @@ const scenariosData = [
         lastUpdate: "2024-12-23",
         hiddenScore: 0,
         type: "battle",
-        period: ""
+        period: "",
+        rights: true
     },
     {
         id: [
@@ -375,7 +388,8 @@ const scenariosData = [
         lastUpdate: "2024-12-23",
         hiddenScore: 0,
         type: "battle",
-        period: ""
+        period: "",
+        rights: true
     },
     {
         id: [
@@ -401,7 +415,8 @@ const scenariosData = [
         lastUpdate: "2023-07-03",
         hiddenScore: 0,
         type: "sandbox",
-        period: "cw"
+        period: "cw",
+        rights: true
     },
     {
         id: [
@@ -427,7 +442,8 @@ const scenariosData = [
         lastUpdate: "2023-07-03",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -453,7 +469,8 @@ const scenariosData = [
         lastUpdate: "2023-11-10",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww2"
+        period: "ww2",
+        rights: true
     },
     {
         id: [
@@ -479,7 +496,8 @@ const scenariosData = [
         lastUpdate: "2023-07-03",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -505,7 +523,8 @@ const scenariosData = [
         lastUpdate: "2023-07-03",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -531,7 +550,8 @@ const scenariosData = [
         lastUpdate: "2025-04-09",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -556,7 +576,8 @@ const scenariosData = [
         lastUpdate: "2025-03-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -581,7 +602,8 @@ const scenariosData = [
         lastUpdate: "2025-03-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -606,7 +628,8 @@ const scenariosData = [
         lastUpdate: "2025-03-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww2"
+        period: "ww2",
+        rights: true
     },
     {
         id: [
@@ -631,7 +654,8 @@ const scenariosData = [
         lastUpdate: "2025-03-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -656,7 +680,8 @@ const scenariosData = [
         lastUpdate: "2025-03-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -681,7 +706,8 @@ const scenariosData = [
         lastUpdate: "2025-03-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -706,7 +732,8 @@ const scenariosData = [
         lastUpdate: "2025-03-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "future"
+        period: "future",
+        rights: true
     },
     {
         id: [
@@ -731,7 +758,8 @@ const scenariosData = [
         lastUpdate: "2025-03-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww1"
+        period: "ww1",
+        rights: true
     },
     {
         id: [
@@ -756,7 +784,8 @@ const scenariosData = [
         lastUpdate: "2025-03-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -781,7 +810,8 @@ const scenariosData = [
         lastUpdate: "2025-03-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -806,7 +836,8 @@ const scenariosData = [
         lastUpdate: "2025-03-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -831,7 +862,8 @@ const scenariosData = [
         lastUpdate: "2025-03-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww1"
+        period: "ww1",
+        rights: true
     },
     {
         id: [
@@ -856,7 +888,8 @@ const scenariosData = [
         lastUpdate: "2025-03-27",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww2"
+        period: "ww2",
+        rights: true
     },
     {
         id: [
@@ -881,7 +914,8 @@ const scenariosData = [
         lastUpdate: "2025-01-21",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -906,7 +940,8 @@ const scenariosData = [
         lastUpdate: "2025-02-02",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -931,7 +966,8 @@ const scenariosData = [
         lastUpdate: "2025-01-23",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -957,7 +993,8 @@ const scenariosData = [
         lastUpdate: "2025-04-14",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -983,7 +1020,8 @@ const scenariosData = [
         lastUpdate: "2025-04-14",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -1009,7 +1047,8 @@ const scenariosData = [
         lastUpdate: "2024-07-01",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww2"
+        period: "ww2",
+        rights: true
     },
     {
         id: [
@@ -1035,7 +1074,8 @@ const scenariosData = [
         lastUpdate: "2024-06-14",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -1061,7 +1101,8 @@ const scenariosData = [
         lastUpdate: "2024-06-14",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -1087,7 +1128,8 @@ const scenariosData = [
         lastUpdate: "2024-07-01",
         hiddenScore: 0,
         type: "sandbox",
-        period: "cw"
+        period: "cw",
+        rights: true
     },
     {
         id: [
@@ -1113,7 +1155,8 @@ const scenariosData = [
         lastUpdate: "2024-04-12",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1139,7 +1182,8 @@ const scenariosData = [
         lastUpdate: "2024-04-12",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1165,7 +1209,8 @@ const scenariosData = [
         lastUpdate: "2024-02-03",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1192,6 +1237,7 @@ const scenariosData = [
         hiddenScore: 0,
         type: "sandbox",
         period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -1216,7 +1262,8 @@ const scenariosData = [
         lastUpdate: "2025-02-21",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -1241,7 +1288,8 @@ const scenariosData = [
         lastUpdate: "2025-03-26",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -1269,6 +1317,7 @@ const scenariosData = [
         type: "sandbox",
         period: "modern",
         status: "in_development",
+        rights: true
     },
     {
         id: [
@@ -1296,6 +1345,7 @@ const scenariosData = [
         type: "sandbox",
         period: "modern",
         status: "in_development",
+        rights: true
     },
     {
         id: [
@@ -1323,6 +1373,7 @@ const scenariosData = [
         type: "sandbox",
         period: "ww2",
         status: "in_development",
+        rights: true
     },
     {
         id: [
@@ -1350,6 +1401,7 @@ const scenariosData = [
         type: "sandbox",
         period: "ww2",
         status: "in_development",
+        rights: true
     },
     {
         id: [
@@ -1371,7 +1423,8 @@ const scenariosData = [
         lastUpdate: "2025-05-01",
         hiddenScore: 10,
         type: "sandbox",
-        period: "ww1"
+        period: "ww1",
+        rights: true
     },
     {
         id: [
@@ -1397,7 +1450,8 @@ const scenariosData = [
         lastUpdate: "2025-04-30",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1423,7 +1477,8 @@ const scenariosData = [
         lastUpdate: "2025-05-20",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -1449,7 +1504,8 @@ const scenariosData = [
         lastUpdate: "2025-04-30",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1475,7 +1531,8 @@ const scenariosData = [
         lastUpdate: "2025-05-03",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -1501,7 +1558,8 @@ const scenariosData = [
         lastUpdate: "2025-05-15",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww1"
+        period: "ww1",
+        rights: true
     },
     {
         id: [
@@ -1527,7 +1585,8 @@ const scenariosData = [
         lastUpdate: "2025-04-27",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww2"
+        period: "ww2",
+        rights: true
     },
     {
         id: [
@@ -1553,7 +1612,8 @@ const scenariosData = [
         lastUpdate: "2025-04-29",
         hiddenScore: 0,
         type: "sandbox",
-        period: "cw"
+        period: "cw",
+        rights: true
     },
     {
         id: [
@@ -1579,7 +1639,8 @@ const scenariosData = [
         lastUpdate: "2025-05-07",
         hiddenScore: 0,
         type: "historical",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -1605,7 +1666,8 @@ const scenariosData = [
         lastUpdate: "2025-05-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww2"
+        period: "ww2",
+        rights: true
     },
     {
         id: [
@@ -1631,7 +1693,8 @@ const scenariosData = [
         lastUpdate: "2025-05-16",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1653,7 +1716,8 @@ const scenariosData = [
         lastUpdate: "2025-05-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww1"
+        period: "ww1",
+        rights: true
     },
     {
         id: [
@@ -1675,7 +1739,8 @@ const scenariosData = [
         lastUpdate: "2025-06-05",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww2"
+        period: "ww2",
+        rights: true
     },
     {
         id: [
@@ -1701,7 +1766,8 @@ const scenariosData = [
         lastUpdate: "2025-05-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww2"
+        period: "ww2",
+        rights: true
     },
     {
         id: [
@@ -1727,7 +1793,8 @@ const scenariosData = [
         lastUpdate: "2025-05-14",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1749,7 +1816,8 @@ const scenariosData = [
         lastUpdate: "2025-03-15",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -1772,7 +1840,8 @@ const scenariosData = [
         hiddenScore: -250,
         type: "sandbox",
         period: "modern",
-        status: "discontinued"
+        status: "discontinued",
+        rights: true
     },
     {
         id: [
@@ -1794,7 +1863,8 @@ const scenariosData = [
         lastUpdate: "2024-06-09",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1816,7 +1886,8 @@ const scenariosData = [
         lastUpdate: "2024-06-09",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1838,7 +1909,8 @@ const scenariosData = [
         lastUpdate: "2024-06-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1860,7 +1932,8 @@ const scenariosData = [
         lastUpdate: "2024-06-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1882,7 +1955,8 @@ const scenariosData = [
         lastUpdate: "2024-06-29",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1904,7 +1978,8 @@ const scenariosData = [
         lastUpdate: "2024-06-29",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1926,7 +2001,8 @@ const scenariosData = [
         lastUpdate: "2024-06-08",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1948,7 +2024,8 @@ const scenariosData = [
         lastUpdate: "2024-06-08",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1970,7 +2047,8 @@ const scenariosData = [
         lastUpdate: "2024-12-17",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1992,7 +2070,8 @@ const scenariosData = [
         lastUpdate: "2024-12-17",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -2014,7 +2093,8 @@ const scenariosData = [
         lastUpdate: "2024-02-04",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -2036,7 +2116,8 @@ const scenariosData = [
         lastUpdate: "2023-11-21",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -2058,7 +2139,8 @@ const scenariosData = [
         lastUpdate: "2024-02-24",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -2080,7 +2162,8 @@ const scenariosData = [
         lastUpdate: "2024-02-23",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -2102,7 +2185,8 @@ const scenariosData = [
         lastUpdate: "2024-03-19",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -2124,7 +2208,8 @@ const scenariosData = [
         lastUpdate: "2024-03-19",
         hiddenScore: 0,
         type: "sandbox",
-        period: "cw"
+        period: "cw",
+        rights: true
     },
     {
         id: [
@@ -2146,7 +2231,8 @@ const scenariosData = [
         lastUpdate: "2024-04-22",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww2"
+        period: "ww2",
+        rights: true
     },
     {
         id: [
@@ -2168,7 +2254,8 @@ const scenariosData = [
         lastUpdate: "2023-06-12",
         hiddenScore: 0,
         type: "sandbox",
-        period: "other"
+        period: "other",
+        rights: true
     },
     {
         id: [
@@ -2190,7 +2277,8 @@ const scenariosData = [
         lastUpdate: "2024-04-06",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -2212,7 +2300,8 @@ const scenariosData = [
         lastUpdate: "2024-04-06",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww1"
+        period: "ww1",
+        rights: true
     },
     {
         id: [
@@ -2234,7 +2323,8 @@ const scenariosData = [
         lastUpdate: "2024-04-06",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww2"
+        period: "ww2",
+        rights: true
     },
     {
         id: [
@@ -2256,7 +2346,8 @@ const scenariosData = [
         lastUpdate: "2024-03-27",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -2278,7 +2369,8 @@ const scenariosData = [
         lastUpdate: "2024-03-27",
         hiddenScore: 0,
         type: "sandbox",
-        period: "interbellum"
+        period: "interbellum",
+        rights: true
     },
     {
         id: [
@@ -2300,7 +2392,8 @@ const scenariosData = [
         lastUpdate: "2024-03-27",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2322,7 +2415,8 @@ const scenariosData = [
         lastUpdate: "2024-03-27",
         hiddenScore: 0,
         type: "sandbox",
-        period: "cw"
+        period: "cw",
+        rights: true
     },
     {
         id: [
@@ -2344,7 +2438,8 @@ const scenariosData = [
         lastUpdate: "2024-03-27",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2366,7 +2461,8 @@ const scenariosData = [
         lastUpdate: "2024-04-05",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2388,7 +2484,8 @@ const scenariosData = [
         lastUpdate: "2024-04-21",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2410,7 +2507,8 @@ const scenariosData = [
         lastUpdate: "2024-05-29",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -2432,7 +2530,8 @@ const scenariosData = [
         lastUpdate: "2023-10-01",
         hiddenScore: 0,
         type: "sandbox",
-        period: "cw"
+        period: "cw",
+        rights: true
     },
     {
         id: [
@@ -2454,7 +2553,8 @@ const scenariosData = [
         lastUpdate: "2023-10-01",
         hiddenScore: 0,
         type: "sandbox",
-        period: "cw"
+        period: "cw",
+        rights: true
     },
     {
         id: [
@@ -2476,7 +2576,8 @@ const scenariosData = [
         lastUpdate: "2024-09-15",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -2498,7 +2599,8 @@ const scenariosData = [
         lastUpdate: "2024-09-15",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -2520,7 +2622,8 @@ const scenariosData = [
         lastUpdate: "2024-12-04",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2542,7 +2645,8 @@ const scenariosData = [
         lastUpdate: "2023-10-19",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -2564,7 +2668,8 @@ const scenariosData = [
         lastUpdate: "2023-10-19",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -2586,7 +2691,8 @@ const scenariosData = [
         lastUpdate: "2023-10-19",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -2608,7 +2714,8 @@ const scenariosData = [
         lastUpdate: "2023-10-19",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -2630,7 +2737,8 @@ const scenariosData = [
         lastUpdate: "2023-10-28",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2652,7 +2760,8 @@ const scenariosData = [
         lastUpdate: "2023-10-16",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2674,7 +2783,8 @@ const scenariosData = [
         lastUpdate: "2024-10-16",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2696,7 +2806,8 @@ const scenariosData = [
         lastUpdate: "2024-02-10",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2718,7 +2829,8 @@ const scenariosData = [
         lastUpdate: "2024-02-10",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2740,7 +2852,8 @@ const scenariosData = [
         lastUpdate: "2024-11-18",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2762,7 +2875,8 @@ const scenariosData = [
         lastUpdate: "2024-12-08",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2784,7 +2898,8 @@ const scenariosData = [
         lastUpdate: "2025-01-17",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2806,7 +2921,8 @@ const scenariosData = [
         lastUpdate: "2025-04-13",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2828,7 +2944,8 @@ const scenariosData = [
         lastUpdate: "2025-04-13",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2850,7 +2967,8 @@ const scenariosData = [
         lastUpdate: "2025-05-27",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2872,7 +2990,8 @@ const scenariosData = [
         lastUpdate: "2025-05-31",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2894,7 +3013,8 @@ const scenariosData = [
         lastUpdate: "2025-06-19",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -2916,7 +3036,8 @@ const scenariosData = [
         lastUpdate: "2025-06-11",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -2938,7 +3059,8 @@ const scenariosData = [
         lastUpdate: "2025-06-12",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -2960,7 +3082,8 @@ const scenariosData = [
         lastUpdate: "2025-06-12",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -2982,7 +3105,8 @@ const scenariosData = [
         lastUpdate: "2025-06-24",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -3005,7 +3129,8 @@ const scenariosData = [
         hiddenScore: 200,
         type: "lore",
         period: "alternative",
-        status: "in_development"
+        status: "in_development",
+        rights: true
     },
     {
         id: [
@@ -3028,7 +3153,8 @@ const scenariosData = [
         hiddenScore: 250,
         type: "historical",
         period: "interbellum",
-        status: "in_development"
+        status: "in_development",
+        rights: true
     },
     {
         id: [
@@ -3051,7 +3177,8 @@ const scenariosData = [
         hiddenScore: 250,
         type: "historical",
         period: "interbellum",
-        status: "in_development"
+        status: "in_development",
+        rights: true
     },
 ];
 
