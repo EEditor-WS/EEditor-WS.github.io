@@ -1,20 +1,27 @@
 const DISCORD_CLIENT_ID = '1333948751919972434';
 const DISCORD_REDIRECT_URI = window.location.origin + '/auth/discord/callback';
-const GITHUB_REPO = 'eenot-eenot/eeditor-ws-data';
+const GITHUB_REPO = 'EEditor-WS/eeditor-ws-data';
 const COOKIE_NAME = 'ee_auth';
 const COOKIE_EXPIRES_DAYS = 30;
 
 // Разбиваем токен на части
 const GITHUB_TOKEN_PARTS = [
     'github_pat_11A6XWVIA0',
-    '6LXw4MXWml9w_jTRJcEez',
-    'c6AUek56SPUShw2LYJBcl',
-    '9PJrIHfws6lG9eELABVLOHsh8oFlHF'
+    'sUVgIIS3uO64_0T8BMfz0',
+    'SRsH9BSX8o7xKejeO3omT',
+    'CewEqM2SDQEVrjAQJFKSUIqK1tm19h'
 ];
 
 function getGithubToken() {
     return GITHUB_TOKEN_PARTS.join('');
 }
+
+window.cryptoManager = {
+    encrypt(data) {
+        // Просто превращаем объект в JSON
+        return JSON.stringify(data);
+    }
+};
 
 class AuthManager {
     constructor() {

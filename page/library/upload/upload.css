@@ -63,3 +63,13 @@
 .action-button:hover {
     background-color: var(--hover-color);
 }
+
+.uplOne {
+    display: flex;
+    flex-direction: column;
+}
+
+.uploadThing {
+    display: flex;
+    flex-direction: row;
+}

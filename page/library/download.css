@@ -358,11 +358,11 @@
 }
 
 .download-title {
-  text-decoration: none; /* Убирает подчеркивание */
-  color: white; /* Делает текст белым */
-  font-size: 35px; /* Размер шрифта */
-  font-weight: bold; /* Жирный шрифт */
-
+    text-decoration: none; /* Убирает подчеркивание */
+    color: white; /* Делает текст белым */
+    font-size: 35px; /* Размер шрифта */
+    font-weight: bold; /* Жирный шрифт */
+    text-align: center;
 }
 
 .download-goto-page:hover {

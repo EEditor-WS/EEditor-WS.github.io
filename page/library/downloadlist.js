@@ -1,3 +1,31 @@
+const inGameMaps = [
+    "jalhund_europe_vg",
+    "jaba_america_vg",
+    "parcoucat_euro4_vg",
+    "jalhund_europe",
+    "jaba_america",
+    "parcoucat_euro4",
+];
+
+const statusScores = {
+    "complate": 40,
+    "early_access": 30,
+    "in_development": 20,
+    "beta": 15,
+    "alpha": 10,
+    "experimental": 5,
+    "frozen": 0,
+    "archived": -30,
+    "discontinued": -50,
+};
+
+const awardScores = {
+    "star": 25,
+    "enot": 50,
+    "50": 25,
+    "only": 100,
+};
+
 console.log('Library downloadlist.js loaded');
 //const libLink = 'https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/';
 //const libLink = 'http://192.168.100.18:8081/'
@@ -197,7 +225,17 @@ function generateScenarioCard(scenario) {
                     <div class="download-row-big">
                         <div class="download-row">
                             <img src="../../img/library/autor.svg" class="download-info-ico" />
-                            <a href="${authorsData[scenario.author]?.link}" style="color: ${authorsData[scenario.author]?.color}">${truncateAuthorName(authorsData[scenario.author]?.name)}</a>
+                            <div class="authors" style="display:flex; flex-direction:column">
+                            ${
+                                scenario.author
+                                    ?.map(authorId => {
+                                        const author = authorsData[authorId];
+                                        return `<a href="${author?.link}" style="color: ${author?.color}">${truncateAuthorName(author?.name)}</a>`;
+                                    })
+                                    .join("")
+                            }
+                            </div>
+                            <!--a href="${authorsData[scenario.author]?.link}" style="color: ${authorsData[scenario.author]?.color}">${truncateAuthorName(authorsData[scenario.author]?.name)}</a-->
                         </div>
                         <div class="download-row">
                             <p>${scenario.year}</p>
@@ -210,7 +248,7 @@ function generateScenarioCard(scenario) {
                             <p>${scenario.languages.join(", ")}</p>
                         </div>
                         <div class="download-row">
-                            <a href="#" style="color: #6e8699">${scenario.gameMode}</a>
+                            <a href="#" style="color: #6e8699">${scenario.type}</a>
                             <img src="../../img/library/gamemode.svg" class="download-info-ico" />
                         </div>
                     </div>

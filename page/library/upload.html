@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Scenario - EEditor</title>
     <!--link rel="icon" type="image/x-icon" href="../../img/ico/ico.svg"-->
-    <link rel="icon" type="image/x-icon" href="icon.svg">
+    <link rel="icon" type="image/x-icon" href="../../img/library/icon.svg">
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/head.css">
     <link rel="stylesheet" href="../../css/notification.css">
@@ -16,12 +16,14 @@
     <script src="../../js/head.js"></script>
     <script src="../../js/auth.js"></script>
     <script src="../../js/notification.js"></script>
+    <script src="../../js/fetch.js"></script>
+    <script src="scenariolist.js"></script>
     <script src="upload/upload.js"></script>
 </head>
 <body>
     <nav class="nav-header">
         <div style="display: flex; align-items: center; gap: 5px;">
-            <img style="width: 35px" src="icon.svg">
+            <img style="width: 35px" src="../../img/library/icon.svg">
             <h style="max-height: 35px">EEditor Lib</h>
         </div>
         <br>
@@ -154,60 +156,121 @@
             <div class="nav-icons">
                 <input type="file" id="scenario-file" accept=".json" style="display: none;">
                 <input type="file" id="image-file" accept="image/*" style="display: none;">
-                <button class="action-button" id="upload-scenario-btn">
+                <div class="uploadThing">
+                    <div class="uplOne">
+                        <span class="button-text">Сценарий</span>
+                        <input type="file" id="file-input">
+                    </div>
+                    <div class="uplOne">
+                        <span class="button-text">Картинка</span>
+                        <input type="file" id="image-input">
+                    </div>
+                </div>
+                <!--button class="action-button" id="upload-scenario-btn">
                     <span class="button-text">Сценарий</span>
                 </button>
                 <button class="action-button" id="upload-image-btn">
                     <span class="button-text">Картинка</span>
-                </button>
+                </button-->
             </div>
         </div>
         <div class="params-scenario-library">
             <div class="mainform">
                 <div class="form-element">
                     <label>Название</label>
-                    <input type="text" id="title" title="title" class="main-page-input" autocomplete="off">
+                    <input type="text" id="scenario-title" title="title" class="main-page-input" autocomplete="off">
                 </div>
                 <div class="form-element">
                     <label>Автор</label>
-                    <input type="text" id="title" title="title" class="main-page-input" autocomplete="off">
+                    <input type="text" id="scenario-author" title="author" class="main-page-input" autocomplete="off">
                 </div>
                 <div class="form-element">
                     <label>Карта</label>
-                    <input type="text" id="title" title="title" class="main-page-input" autocomplete="off">
+                    <input type="text" id="scenario-map" title="map" class="main-page-input" autocomplete="off">
                 </div>
                 <div class="form-element">
-                    <label>Язык</label>
-                    <select id="title" class="main-page-input" autocomplete="off">
-                        <option value="en">English</option>
-                        <option value="ru">Русский</option>
-                        <option value="uk">Українська</option>
-                        <option value="mo">Молдовеняскэ</option>
-                        <option value="be">Беларуская</option>
-                        <option value="kk">Қазақша</option>
-                        <option value="de">Deutsch</option>
-                        <option value="fr">Français</option>
-                        <option value="es">Español</option>
-                        <option value="other">Other</option>
-                    </select>
+                    <label>Языки</label>
+                    <div class="checkbox-list" id="scenario-languages">
+                        <label><input type="checkbox" value="en" name="languages" id="lang-en"> English</label>
+                        <label><input type="checkbox" value="ru" name="languages" id="lang-ru"> Русский</label>
+                        <label><input type="checkbox" value="uk" name="languages" id="lang-uk"> Українська</label>
+                        <label><input type="checkbox" value="mo" name="languages" id="lang-mo"> Молдовеняскэ</label>
+                        <label><input type="checkbox" value="be" name="languages" id="lang-be"> Беларуская</label>
+                        <label><input type="checkbox" value="kk" name="languages" id="lang-kk"> Қазақша</label>
+                        <label><input type="checkbox" value="de" name="languages" id="lang-de"> Deutsch</label>
+                        <label><input type="checkbox" value="fr" name="languages" id="lang-fr"> Français</label>
+                        <label><input type="checkbox" value="es" name="languages" id="lang-es"> Español</label>
+                        <label><input type="checkbox" value="other" name="languages" id="lang-other"> Other</label>
+                    </div>
+                </div>
+                <div class="form-element">
+                    <label>Год</label>
+                    <input type="number" id="scenario-year" title="year" class="main-page-input" autocomplete="off" min="1" max="3000">
                 </div>
                 <div class="form-element">
                     <label>Дата загрузки</label>
-                    <input type="text" id="title" title="title" class="main-page-input" autocomplete="off">
+                    <input type="date" id="scenario-upload-date" title="upload-date" class="main-page-input" autocomplete="off">
                 </div>
                 <div class="form-element">
                     <label>Дата обновления</label>
-                    <input type="text" id="title" title="title" class="main-page-input" autocomplete="off">
+                    <input type="date" id="scenario-update-date" title="update-date" class="main-page-input" autocomplete="off">
                 </div>
                 <div class="form-element">
                     <label>Количество провинций</label>
-                    <input type="text" id="title" title="title" class="main-page-input" autocomplete="off">
+                    <input type="number" id="scenario-provinces" title="provinces" class="main-page-input" autocomplete="off" min="1">
                 </div>
                 <div class="form-element">
+                    <label>Статус</label>
+                    <select class="main-page-input">
+                        <option value="completed" name="status" id="status-completed"> Завершён</option>
+                        <option value="early_access" name="status" id="status-early-access"> Ранний доступ</option>
+                        <option value="in_development" name="status" id="status-in-development"> В разработке</option>
+                        <option value="beta" name="status" id="status-beta"> Бета</option>
+                        <option value="alpha" name="status" id="status-alpha"> Альфа</option>
+                        <option value="experimental" name="status" id="status-experimental"> Эксперементальный</option>
+                        <option value="frozen" name="status" id="status-frozen"> Заморожен</option>
+                        <option value="archived" name="status" id="status-archived"> Архивный</option>
+                        <option value="discontinued" name="status" id="status-discontinued"> Заброшен</option>
+                    </select>
+                </div>
+                <div class="form-element">
+                    <label>Период</label>
+                    <select class="main-page-input" id="scenario-period">
+                        <option value="ancient" id="period-ancient"> Довоенный</option>
+                        <option value="ww1" id="period-ww1"> WWI</option>
+                        <option value="interbellum" id="period-interbellum"> Интербеллум</option>
+                        <option value="ww2" id="period-ww2"> WW2</option>
+                        <option value="cw" id="period-cw"> CW</option>
+                        <option value="modern" id="period-modern"> Современность</option>
+                        <option value="alternative" id="period-alternative"> Альтернативный</option>
+                    </select>
+                </div>
+                <div class="form-element">
+                    <label>Тип сценария</label>
+                    <select id="scenario-type" class="main-page-input" autocomplete="off">
+                        <option value="">Выберите тип</option>
+                        <option value="sandbox">Песочница</option>
+                        <option value="historical">Исторический</option>
+                        <option value="lore">Сюжетный</option>
+                        <option value="battle">Одиночный бой</option>
+                        <option value="command-battle">Коммандный бой</option>
+                        <option value="generals">Генералы</option>
+                    </select>
+                </div>
+                <div class="form-element">
+                    <label>Права (Rights)</label>
+                    <select id="scenario-rights" class="main-page-input" autocomplete="off">
+                        <option value="true">Есть</option>
+                        <option value="false">Нету</option>
+                    </select>
+                </div>
+                <div class="form-element">
+                    <label>Скрытый рейтинг</label>
+                    <input type="number" id="scenario-hidden-score" title="hidden-score" class="main-page-input" autocomplete="off" min="0" max="100">
                 </div>
                 <div class="form-element">
                     <label>Экономика</label>
-                    <select id="title" class="main-page-input" autocomplete="off">
+                    <select id="scenario-economy" class="main-page-input" autocomplete="off">
                         <option value="none">Нету</option>
                         <option value="partially">Частично</option>
                         <option value="developing">В разработке</option>
@@ -216,7 +279,7 @@
                 </div>
                 <div class="form-element">
                     <label>Население</label>
-                    <select id="title" class="main-page-input" autocomplete="off">
+                    <select id="scenario-population" class="main-page-input" autocomplete="off">
                         <option value="none">Нету</option>
                         <option value="partially">Частично</option>
                         <option value="developing">В разработке</option>
@@ -225,7 +288,7 @@
                 </div>
                 <div class="form-element">
                     <label>Рессурсы</label>
-                    <select id="title" class="main-page-input" autocomplete="off">
+                    <select id="scenario-resources" class="main-page-input" autocomplete="off">
                         <option value="none">Нету</option>
                         <option value="partially">Частично</option>
                         <option value="developing">В разработке</option>
@@ -234,7 +297,7 @@
                 </div>
                 <div class="form-element">
                     <label>Дипломатия</label>
-                    <select id="title" class="main-page-input" autocomplete="off">
+                    <select id="scenario-diplomacy" class="main-page-input" autocomplete="off">
                         <option value="none">Нету</option>
                         <option value="partially">Частично</option>
                         <option value="developing">В разработке</option>
@@ -243,7 +306,7 @@
                 </div>
                 <div class="form-element">
                     <label>Восстания</label>
-                    <select id="title" class="main-page-input" autocomplete="off">
+                    <select id="scenario-revolts" class="main-page-input" autocomplete="off">
                         <option value="none">Нету</option>
                         <option value="partially">Частично</option>
                         <option value="developing">В разработке</option>
@@ -252,7 +315,7 @@
                 </div>
                 <div class="form-element">
                     <label>Реформы</label>
-                    <select id="title" class="main-page-input" autocomplete="off">
+                    <select id="scenario-reforms" class="main-page-input" autocomplete="off">
                         <option value="none">Нету</option>
                         <option value="partially">Частично</option>
                         <option value="developing">В разработке</option>
@@ -261,24 +324,24 @@
                 </div>
                 <div class="form-element">
                     <label>События</label>
-                    <select id="title" class="main-page-input" autocomplete="off">
-                        <option value="none">Нету</option>
+                    <input id="scenario-events" class="main-page-input" autocomplete="off" type="number">
+                        <!--option value="none">Нету</option>
                         <option value="partially">Частично</option>
                         <option value="developing">В разработке</option>
-                        <option value="yes">Есть</option>
-                    </select>
+                        <option value="yes">Есть</option-->
+                        </input>
                 </div>
             </div>
             <div class="bigform">
-                <image class="screenshoot" src="../../img/library/none.png" alt="screenshoot">
+                <img class="screenshoot" id="scenario-screenshot" src="../../img/library/none.png" alt="screenshot">
                 <div class="description" id="description">
-                    <textarea class="description-text" id="description-text" title="description" placeholder="Описание">
-                        название, автор, описание, дата загрузки, дата обновления, категории (выбор из доступных), язык скриншот, наличие настроенных: экономики, населения, рессурсов, дипломатии, восстаний, реформ, ивентов (выбор в виде dropdown: есть, частично, в разработке, нету), для какой карты предназначен, количество провинций
-                    </textarea>
+                    <textarea class="description-text" id="description-text" title="description" placeholder="Введите описание сценария..."></textarea>
                 </div>
             </div>
         </div>
     </div>
+    <button id="btn-fill">fill</button>
+    <button id="btn-collect">collect</button>
 
 </body>
 </html>

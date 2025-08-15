@@ -20,7 +20,7 @@ const authorsData = {
         color: "#3B83BD"
     },
     kolkhoznik: {
-        name: "@nickolay_batsiev_suleimanov",
+        name: "@kolhoznik",
         link: "https://discord.com/users/1057029940484247682",
         color: "#3B83BD"
     },
@@ -30,7 +30,7 @@ const authorsData = {
         color: "#FF83BD"
     },
     zachary: {
-        name: "@zachary.bachary",
+        name: "@zachary",
         link: "https://discord.com/users/804839006403428423",
         color: "#3B83BD"
     },
@@ -103,5 +103,10 @@ const authorsData = {
         name: "@grimreaper54",
         link: "https://discord.com/users/720328844464357446",
         color: "#3B83BD"
+    },
+    eeditor: {
+        name: "@EEditor",
+        link: "https://discord.gg/s5JgHChaQE",
+        color: "#efe927ff"
     },
 }
