@@ -109,4 +109,24 @@ const authorsData = {
         link: "https://discord.gg/s5JgHChaQE",
         color: "#efe927ff"
     },
+    astroja: {
+        name: "@astroja",
+        link: "https://discord.com/users/714028605188997172",
+        color: "#3B83BD"
+    },
+    argentumm: {
+        name: "@argentumm",
+        link: "https://discord.com/users/1030812623232581674",
+        color: "#3B83BD"
+    },
+    eleven: {
+        name: "@eleven141",
+        link: "https://discord.com/users/913765004325572609",
+        color: "#3B83BD"
+    },
+    dener: {
+        name: "@denerfox",
+        link: "https://discord.com/users/775753842528747581",
+        color: "#3B83BD"
+    },
 }
