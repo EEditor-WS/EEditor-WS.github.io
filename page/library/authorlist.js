@@ -129,4 +129,14 @@ const authorsData = {
         link: "https://discord.com/users/775753842528747581",
         color: "#3B83BD"
     },
+    enotochel: {
+        name: "@enotochel",
+        link: "https://discord.com/users/714176620931448913",
+        color: "#3B83BD"
+    },
+    joker: {
+        name: "@1j0ker3",
+        link: "https://discord.com/users/602798356133052456",
+        color: "#3B83BD"
+    },
 }

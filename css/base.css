@@ -637,3 +637,11 @@ select.main-page-input {
 .requirement-editor.hidden {
     display: none;
 }
+
+.ads {
+    display: none;
+}
+
+.ads.active {
+    display: block;
+}
