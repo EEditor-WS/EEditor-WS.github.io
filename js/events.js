@@ -1119,17 +1119,33 @@ generateUniqueId(minimumID = 0) {
                 // -------------------------------------------
 
                 let tSType;
-                if (typeof item.subtype === "string" && item.subtype.includes("civilization")) {
-                    tSType = window.eventManager.jsonData.lands[item.subtype]?.name ?? item.subtype;
+                if (typeof item.subtype === "string") {
+                    // если value = E + цифры (любое количество)
+                    if (/^E\d+$/.test(item.subtype)) {
+                        tSType = `${item.subtype} - ${window.eventManager.jsonData?.custom_events?.[item.subtype]?.title}` ?? item.subtype;
+                    } else if (item.subtype.includes("civilization")) {
+                        tSType = window.eventManager.jsonData.lands[item.subtype]?.name ?? item.subtype;
+                    } else {
+                        tSType = item.subtype;
+                    }
                 } else {
+                    // если число/булево и т.п.
                     tSType = item.subtype ?? "";
                 }
 
                 let tAction;
-                if (typeof item.action === "string" && item.action.includes("civilization")) {
-                    tAction = window.eventManager.jsonData.lands[item.action]?.name ?? item.action;
+                if (typeof item.action === "string") {
+                    // если value = E + цифры (любое количество)
+                    if (/^E\d+$/.test(item.action)) {
+                        tAction = `${item.action} - ${window.eventManager.jsonData?.custom_events?.[item.action]?.title}` ?? item.action;
+                    } else if (item.action.includes("civilization")) {
+                        tAction = window.eventManager.jsonData.lands[item.action]?.name ?? item.action;
+                    } else {
+                        tAction = item.action;
+                    }
                 } else {
-                    tAction = window.translator.translate(item.action) ?? "";
+                    // если число/булево и т.п.
+                    tAction = item.action ?? "";
                 }
 
                 let tValue;
