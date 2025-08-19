@@ -1133,9 +1133,17 @@ generateUniqueId(minimumID = 0) {
                 }
 
                 let tValue;
-                if (typeof displayValue === "string" && displayValue.includes("civilization")) {
-                    tValue = window.eventManager.jsonData.lands[displayValue]?.name ?? displayValue;
+                if (typeof displayValue === "string") {
+                    // если value = E + цифры (любое количество)
+                    if (/^E\d+$/.test(displayValue)) {
+                        tValue = `${displayValue} - ${window.eventManager.jsonData?.custom_events?.[displayValue]?.title}` ?? displayValue;
+                    } else if (displayValue.includes("civilization")) {
+                        tValue = window.eventManager.jsonData.lands[displayValue]?.name ?? displayValue;
+                    } else {
+                        tValue = displayValue;
+                    }
                 } else {
+                    // если число/булево и т.п.
                     tValue = displayValue ?? "";
                 }
 
