@@ -392,6 +392,19 @@ class ScenarioManager {
                 fileInfo.textContent = window.translator.translate('backup_restored');
             }
 
+                        // Обновляем статус Discord, если есть name в JSON
+                        try {
+                            const jsonData = JSON.parse(text);
+                            if (jsonData.name) {
+                                console.log(jsonData.name);
+                                console.log("discordupd");
+                                updateDiscordStatus(jsonData.name);
+                            }
+                            console.log("loaded")
+                        } catch (e) {
+                            console.warn('Failed to parse JSON for Discord status:', e);
+                        }
+
             return true;
         } catch (e) {
             console.error('Error loading scenario:', e);
@@ -867,19 +880,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         currentFile = file;
                         const text = await file.text();
                         handleFileContent(file.name, text);
-
-                        // Обновляем статус Discord, если есть name в JSON
-                        /*try {
-                            const jsonData = JSON.parse(text);
-                            if (jsonData.name) {
-                                console.log(jsonData.name);
-                                console.log("discordupd");
-                                updateDiscordStatus(jsonData.name);
-                            }
-                            console.log("loaded")
-                        } catch (e) {
-                            console.warn('Failed to parse JSON for Discord status:', e);
-                        }*/
                     }
                 };
                 
@@ -940,6 +940,18 @@ function handleFileContent(fileName, content) {
 
             // Заполняем форму
             fillFormFromJson(jsonData);
+
+                        // Обновляем статус Discord, если есть name в JSON
+                        try {
+                            if (jsonData.name) {
+                                console.log(jsonData.name);
+                                console.log("discordupd");
+                                updateDiscordStatus(`${jsonData.name} - ${jsonData.id}`);
+                            }
+                            console.log("loaded")
+                        } catch (e) {
+                            console.warn('Failed to parse JSON for Discord status:', e);
+                        }
 
         } catch (error) {
             console.error('Ошибка при парсинге JSON:', error);

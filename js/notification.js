@@ -244,6 +244,14 @@ document.addEventListener('DOMContentLoaded', () => {
     window.showInfo = (title, message, options = {}) => {
         return window.notifications.show({ title, message, type: 'info', ...options });
     };
+
+if (window.location.href.includes('https')) {
+
+} else if (window.location.href.includes('http')) {
+
+} else {
+    showWarning('Opened local copy of app')
+}
 });
 
 /*
