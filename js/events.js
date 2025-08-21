@@ -1374,9 +1374,13 @@ generateUniqueId(minimumID = 0) {
                     .sort((a, b) => a.name.toString().toUpperCase().localeCompare(b.name.toString().toUpperCase()));
 
                 // Создаем опции для выпадающего списка
-                select.innerHTML = countries.map(country => 
-                    `<option value="${country.id}">${country.name}</option>`
-                ).join('');
+                select.innerHTML = `
+                    <option value="this">${window.translator.translate('this')}</option>
+                    <option value="any">${window.translator.translate('any')}</option>
+                    ${countries.map(country => 
+                        `<option value="${country.id}">${country.name}</option>`
+                    ).join('')}
+                `;
 
                 // Заменяем оригинальный элемент на новый выпадающий список
                 const actionSelect = document.getElementById('requirement-action');
