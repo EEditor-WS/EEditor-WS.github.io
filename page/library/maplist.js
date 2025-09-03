@@ -237,6 +237,7 @@ mapsData = [
         lastUpdate: "2024-10-07",
         load: "normal",
         hiddenScore: 0,
+        status: "archived",
         rights: true
     },
     {
@@ -688,6 +689,22 @@ mapsData = [
         rights: true
     },
     {
+        id: ["pelo", "euam", "v2"],
+        title: "Europe and North America",
+        author: ["pelo", "jaba"],
+        description: "",
+        type: "continent",
+        region: ["europe", "america", "north_america"],
+        provinces: 1092,
+        features: [],
+        status: "completed",
+        publishDate: "2025-06-02", 
+        lastUpdate: "2025-09-03",
+        load: "mobile",
+        hiddenScore: 0,
+        rights: true
+    },
+    {
         id: ["chitterss", "world", "v3"],
         title: "World by chitterss",
         author: ["chitterss"],
@@ -948,6 +965,37 @@ mapsData = [
         lastUpdate: "2023-09-15",
         load: "normal",
         hiddenScore: 0
+    },
+    {
+        id: ["zloyhoziain", "fareast", "v1"],
+        title: "Far East by Злой ХозяинЪ",
+        author: ["zloyhoziain"],
+        description: "",
+        type: "region",
+        region: [],
+        provinces: 380,
+        features: [],
+        status: "completed",
+        publishDate: "2025-08-22", 
+        lastUpdate: "2025-08-22",
+        load: "normal",
+        hiddenScore: 0
+    },
+    {
+        id: ["zachary", "americas-rem", "v2"],
+        title: "Americas Remastered by Zachary",
+        author: ["zachary"],
+        description: "",
+        type: "continent",
+        region: [],
+        provinces: 1907,
+        features: [],
+        status: "completed",
+        publishDate: "2025-09-03", 
+        lastUpdate: "2025-09-03",
+        load: "normal",
+        hiddenScore: 0,
+        rights: true
     },
 ];
 

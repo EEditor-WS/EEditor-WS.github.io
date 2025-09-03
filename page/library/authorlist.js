@@ -139,4 +139,9 @@ const authorsData = {
         link: "https://discord.com/users/602798356133052456",
         color: "#3B83BD"
     },
+    zloyhoziain: {
+        name: "@zloi_hozain",
+        link: "https://discord.com/users/962955511203000351",
+        color: "#3B83BD"
+    },
 }
