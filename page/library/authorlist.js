@@ -144,4 +144,9 @@ const authorsData = {
         link: "https://discord.com/users/962955511203000351",
         color: "#3B83BD"
     },
+    gray_car: {
+        name: "@gray_car",
+        link: "https://discord.com/users/1260611002240860202",
+        color: "#3B83BD"
+    }
 }
