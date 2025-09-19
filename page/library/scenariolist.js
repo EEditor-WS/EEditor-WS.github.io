@@ -3153,7 +3153,7 @@ const scenariosData = [
         id: [
             "chitterss",
             "world",
-            "v3",
+            "v4",
             "twosides",
         ],
         title: "Two Sides (EVENTS)",
@@ -3166,7 +3166,7 @@ const scenariosData = [
         awards: ["only", "star", "enot"],
         // Hidden parameters
         publishDate: "2025-06-14", 
-        lastUpdate: "2025-08-30",
+        lastUpdate: "2025-09-19",
         hiddenScore: 200,
         type: "lore",
         period: "alternative",
