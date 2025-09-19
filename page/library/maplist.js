@@ -705,7 +705,7 @@ mapsData = [
         rights: true
     },
     {
-        id: ["chitterss", "world", "v3"],
+        id: ["chitterss", "world", "v4"],
         title: "World by chitterss",
         author: ["chitterss"],
         description: "",
@@ -715,7 +715,7 @@ mapsData = [
         features: [],
         status: "completed",
         publishDate: "2023-07-25", 
-        lastUpdate: "2023-07-30",
+        lastUpdate: "2025-09-19",
         load: "hight",
         hiddenScore: 0,
         rights: true
