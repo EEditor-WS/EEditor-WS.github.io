@@ -1018,7 +1018,6 @@ generateUniqueId(minimumID = 0) {
 
                 // Население и культура
                 { value: '', label: '--- ' + window.translator.translate('population_and_culture') + ' ---', disabled: true },
-                { value: 'population_increase', label: window.translator.translate('population_increase') },
                 { value: 'add_random_culture_population', label: window.translator.translate('add_random_culture_population') },
                 { value: 'add_culture_population', label: window.translator.translate('add_culture_population') },
                 { value: 'discontent', label: window.translator.translate('discontent') },
@@ -1073,6 +1072,7 @@ generateUniqueId(minimumID = 0) {
                 { value: 'enemy_near_capital', label: window.translator.translate('enemy_near_capital') },
                 { value: 'independent_land', label: window.translator.translate('independent_land') },
                 { value: 'is_defeated', label: window.translator.translate('is_defeated') },
+                { value: 'is_neighbor', label: window.translator.translate('is_neighbor') },
 
                 // Дипломатия
                 { value: '', label: '--- ' + window.translator.translate('diplomacy') + ' ---', disabled: true },
@@ -1218,7 +1218,7 @@ generateUniqueId(minimumID = 0) {
                 // Получаем доступные действия из конфигурации
                 if (['month', 'num_of_provinces', 'year', 'turn', 'random_value', 'count_of_tasks', 'tax', 'discontent', 'money', 'land_power'].includes(selectedType)) {
                     actions.push('more', 'equal', 'less');
-                } else if (['near_water', 'is_player', 'has_pact', 'has_alliance', 'has_vassal', 'has_sanctions', 'has_war', 'independent_land', 'land_name', 'building_exists', 'land_id', "group_name", 'political_institution', 'enemy_near_capital', 'is_defeated', 'lost_capital', "controls_capital", "received_event"].includes(selectedType)) {
+                } else if (['near_water', 'is_player', 'has_pact', 'has_alliance', 'has_vassal', 'has_sanctions', 'has_war', 'independent_land', 'land_name', 'building_exists', 'land_id', "group_name", 'political_institution', 'enemy_near_capital', 'is_defeated', 'is_neighbor', 'lost_capital', "controls_capital", "received_event"].includes(selectedType)) {
                     actions.push('equal', 'not_equal');
                 } else if (['cooldown'].includes(selectedType)) {
                     actions.push('more', 'less');
@@ -1719,7 +1719,7 @@ generateUniqueId(minimumID = 0) {
                     ).join('');
                     valueContainer.appendChild(select);
                     subtypeGroup.style.display = 'none'; // Скрываем поле subtype
-                } else if (['land_id', 'is_defeated'].includes(selectedType)) {
+                } else if (['land_id', 'is_defeated', 'is_neighbor'].includes(selectedType)) {
                     const select = document.createElement('select');
                     select.id = 'requirement-value';
                     select.className = 'main-page-input';
