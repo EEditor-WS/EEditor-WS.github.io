@@ -152,9 +152,16 @@ function generateScenarioCard(scenario) {
             </div>
         `).join('');
 
-    const tagsHTML = scenario.tags
-        .map(tag => `<a href="#" style="color: #6e8699">#${tag}</a>`)
-        .join('<p>, </p>');
+    let tagsHTML
+    if (JSON.stringify(scenario.tags).includes('RECOMMEND')) {;
+        tagsHTML = scenario.tags
+            .map(tag => `<b style="color: #FF4500">${tag}</b>`)
+            .join('<p>, </p>');
+    } else {
+        tagsHTML = scenario.tags
+            .map(tag => `<a href="#" style="color: #6e8699">#${tag}</a>`)
+            .join('<p>, </p>');
+    }
 
     const mapId = scenario.id.slice(0, 2);
     const mapData = getMapData(scenario.id.slice(0, 3).join('_'));
