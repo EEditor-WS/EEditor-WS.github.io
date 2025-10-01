@@ -711,7 +711,7 @@ mapsData = [
         description: "",
         type: "continent",
         region: ["europe", "america", "north_america", "asia", "africa", "oceania", "middle_east"],
-        provinces: 1091,
+        provinces: 2252,
         features: [],
         status: "completed",
         publishDate: "2023-07-25", 
