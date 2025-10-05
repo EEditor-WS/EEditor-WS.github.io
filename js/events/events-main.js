@@ -215,6 +215,7 @@ class EventManager {
 
             const idCell = document.createElement('td');
             idCell.innerHTML = `<div style="display: inline-flex"><img loading="lazy" class="list-icon" src="event/ico/${event.ico || 'broken'}.png" alt="${event.ico || 'broken'}"><span style:"margin-left: 5px"> ${event.id}</span></div>`;
+            idCell.id = `event-row-${event.id}`;
 
             const groupCell = document.createElement('td');
             groupCell.textContent = event.group;

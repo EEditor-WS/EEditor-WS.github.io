@@ -156,10 +156,19 @@ function convertObjectToReadableString(obj) {
         }
 
         // создаём HTML с подсветкой
-        const htmlType = `<span class="list-req-type">${type}</span>`;
-        const htmlSubtype = subtype ? ` <span class="list-req-subtype">(${subtype})</span>` : "";
-        const htmlAction = `<span class="list-req-action">${action}</span>`;
-        const htmlValue = `<span class="list-req-value">${value}</span>`;
+        let htmlType = `<span class="list-req-type">${type}</span>`;
+        let htmlSubtype = subtype ? ` <span class="list-req-subtype">(${subtype})</span>` : "";
+        if (/^E\d+$/.test(subtype)) {
+            htmlSubtype = subtype ? ` <span class="list-req-subtype" onclick="document.getElementById('event-row-${subtype}').scrollIntoView({ behavior: 'smooth' })">(${subtype})</span>` : "";
+        }
+        let htmlAction = `<span class="list-req-action">${action}</span>`;
+        if (/^E\d+$/.test(action)) {
+            htmlSubtype = action ? ` <span class="list-req-subtype" onclick="document.getElementById('event-row-${action}').scrollIntoView({ behavior: 'smooth' })">(${action})</span>` : "";
+        }
+        let htmlValue = `<span class="list-req-value">${value}</span>`;
+        if (/^E\d+$/.test(value)) {
+            htmlSubtype = value ? ` <span class="list-req-subtype" onclick="document.getElementById('event-row-${value}').scrollIntoView({ behavior: 'smooth' })">(${value})</span>` : "";
+        }
 
         return `${htmlType}${htmlSubtype} ${htmlAction} ${htmlValue}`;
     });
