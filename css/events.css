@@ -936,3 +936,31 @@
 #reqbonback.active {
     display: block;
 }
+
+.requirements-list {
+  font-family: sans-serif;
+  line-height: 1.6;
+  max-width: 45dvw;
+  max-height: 110px;
+}
+.requirement-item {
+  margin: 4px 0;
+  background-color: var(--background-primary);
+  border-radius: var(--br);
+  padding: 0 5px;
+  min-width: max-content;
+}
+.req-type {
+  color: #c3c2aa;
+  font-weight: bold;
+}
+.req-subtype {
+  color: #aaa;
+}
+.req-action {
+  color: #6cf;
+}
+.req-value {
+  color: #ffbdbd;
+  font-weight: 500;
+}

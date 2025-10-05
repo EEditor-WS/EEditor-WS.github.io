@@ -226,7 +226,7 @@ class EventManager {
             titleCell.textContent = event.title;
 
             const requirementsCell = document.createElement('td');
-            requirementsCell.textContent = convertObjectToReadableString(event.requirements);
+            requirementsCell.innerHTML = convertObjectToReadableString(event.requirements);
 
             tr.appendChild(idCell);
             tr.appendChild(groupCell);

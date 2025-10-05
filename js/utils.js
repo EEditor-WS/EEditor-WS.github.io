@@ -119,62 +119,57 @@ const DOMUtils = {
 
 function convertObjectToReadableString(obj) {
     if (!Array.isArray(obj)) {
-      return "Некорректный формат объекта.";
+        return "<span style='color:red'>Некорректный формат объекта.</span>";
     }
-  
-    const translations = {
-      equal: " = ",
-      not_equal: " ≠ ",
-      more: " > ",
-      less: " < ",
-    };
-  
-    /*const results = obj.map((item) => {
-      let type = translations[item.type] || item.type;
-      let action = translations[item.action] || item.action;
-      let value = item.value;*/
-  
-    const results = obj.map((item) => {
-      let type = window.translator.translate(item.type) || item.type;
-      let action = translations[item.action] || item.action;
-      let value = item.value;
 
-      // ---------------------------
-      
+    const translations = {
+        equal: " = ",
+        not_equal: " ≠ ",
+        more: " > ",
+        less: " < ",
+    };
+
+    const results = obj.map((item) => {
+        let type = window.translator?.translate(item.type) || item.type;
+        let action = translations[item.action] || item.action;
+        let value = item.value;
+        let subtype = item.subtype || "";
+
+        // ---------------------------
         try {
-            if (action.includes("civilization")) {
-                action = window.eventManager.jsonData.lands[action].name;
+            if (typeof action === "string" && action.includes("civilization")) {
+                action = window.eventManager.jsonData.lands[action]?.name || action;
             }
-            if (value.includes("civilization")) {
-                value = window.eventManager.jsonData.lands[value].name;
+            if (typeof value === "string" && value.includes("civilization")) {
+                value = window.eventManager.jsonData.lands[value]?.name || value;
             }
-            if (subtype.includes("civilization")) {
-                subtype = window.eventManager.jsonData.lands[subtype].name;
+            if (typeof subtype === "string" && subtype.includes("civilization")) {
+                subtype = window.eventManager.jsonData.lands[subtype]?.name || subtype;
             }
-            alert("всё норм");
         } catch (e) {
             console.error("Ошибка при обработке действия:", e);
         }
+        // ---------------------------
 
-      // ---------------------------
-  
-      if (typeof value === "boolean") {
-        value = value ? "yes" : "no";
-      }
-  
-      if (item.subtype) {
-        const subtype = translations[item.subtype] || item.subtype;
-        return `${type} (${subtype}) ${action} ${value}`;
-      } else {
-        return `${type} ${action} ${value}`;
-      }
+        if (typeof value === "boolean") {
+            value = value ? "yes" : "no";
+        }
+
+        // создаём HTML с подсветкой
+        const htmlType = `<span class="req-type">${type}</span>`;
+        const htmlSubtype = subtype ? ` <span class="req-subtype">(${subtype})</span>` : "";
+        const htmlAction = `<span class="req-action">${action}</span>`;
+        const htmlValue = `<span class="req-value">${value}</span>`;
+
+        return `${htmlType}${htmlSubtype} ${htmlAction} ${htmlValue}`;
     });
 
-    let retres = '[' + results.join('],		\n,[') + ']';
+    // каждая строка отдельным блоком
+    const html = results.map(r => `<div class="requirement-item">${r}</div>`).join("\n");
 
-  
-    return retres;
-  }
+    return `<div class="requirements-list">${html}</div>`;
+}
+
 
 function transformCustomEvents() {
   let data = JSON.parse(previewContent.value);
