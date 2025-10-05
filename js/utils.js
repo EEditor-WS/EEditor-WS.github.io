@@ -156,18 +156,18 @@ function convertObjectToReadableString(obj) {
         }
 
         // создаём HTML с подсветкой
-        const htmlType = `<span class="req-type">${type}</span>`;
-        const htmlSubtype = subtype ? ` <span class="req-subtype">(${subtype})</span>` : "";
-        const htmlAction = `<span class="req-action">${action}</span>`;
-        const htmlValue = `<span class="req-value">${value}</span>`;
+        const htmlType = `<span class="list-req-type">${type}</span>`;
+        const htmlSubtype = subtype ? ` <span class="list-req-subtype">(${subtype})</span>` : "";
+        const htmlAction = `<span class="list-req-action">${action}</span>`;
+        const htmlValue = `<span class="list-req-value">${value}</span>`;
 
         return `${htmlType}${htmlSubtype} ${htmlAction} ${htmlValue}`;
     });
 
     // каждая строка отдельным блоком
-    const html = results.map(r => `<div class="requirement-item">${r}</div>`).join("\n");
+    const html = results.map(r => `<div class="list-requirement-item">${r}</div>`).join("\n");
 
-    return `<div class="requirements-list">${html}</div>`;
+    return `<div class="list-requirements-list">${html}</div>`;
 }
 
 
