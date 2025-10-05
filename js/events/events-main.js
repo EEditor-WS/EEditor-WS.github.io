@@ -150,6 +150,7 @@ class EventManager {
         // Создаем массив событий для сортировки и фильтрации
         let events = Object.entries(this.jsonData.custom_events)
             .map(([id, event]) => ({
+                ico: event.icon || 'broken',
                 id,
                 group: event.group_name || '',
                 name: event.unique_event_name || '',
@@ -213,7 +214,7 @@ class EventManager {
             tr.addEventListener('click', () => this.openEvent(event.id));
 
             const idCell = document.createElement('td');
-            idCell.textContent = event.id;
+            idCell.innerHTML = `<div style="display: inline-flex"><img loading="lazy" class="list-icon" src="event/ico/${event.ico || 'broken'}.png" alt="${event.ico || 'broken'}"><span style:"margin-left: 5px"> ${event.id}</span></div>`;
 
             const groupCell = document.createElement('td');
             groupCell.textContent = event.group;

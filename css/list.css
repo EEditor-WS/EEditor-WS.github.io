@@ -483,3 +483,8 @@ input[type="color"] {
 .list-table {
     width: 100%;
 }
+
+.list-icon {
+    width: 24px;
+    height: 24px;
+}
