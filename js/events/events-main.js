@@ -1981,7 +1981,7 @@ generateUniqueId(minimumID = 0) {
             const index = parseInt(button.dataset.index);
             if (button.classList.contains('edit')) {
                 const item = items[index];
-                editor.style.display = 'visible';
+                editor.style.visibility = 'visible';
                 document.getElementById(`${prefix}requirement-type`).value = item.type;
                 // Сначала обновляем тип, чтобы создались нужные поля
                 updateActions();
