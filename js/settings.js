@@ -91,7 +91,7 @@ class SettingsManager {
 
             .settings-group {
                 background: #1a1a1a;
-                border-radius: 8px;
+                border-radius: var(--br);
                 padding: 16px;
             }
 
@@ -99,7 +99,7 @@ class SettingsManager {
                 background: rgba(231, 76, 60, 0.1);
                 color: #e74c3c;
                 border: none;
-                border-radius: 6px;
+                border-radius: var(--br);
                 padding: 12px 20px;
                 font-size: 14px;
                 cursor: pointer;
@@ -129,7 +129,7 @@ class SettingsManager {
 
             .modal-content {
                 background: #242424;
-                border-radius: 8px;
+                border-radius: var(--br);
                 padding: 24px;
                 max-width: 400px;
                 width: 90%;
@@ -156,7 +156,7 @@ class SettingsManager {
             .modal-button {
                 padding: 8px 16px;
                 border: none;
-                border-radius: 4px;
+                border-radius: var(--br);
                 cursor: pointer;
                 font-size: 14px;
                 transition: all 0.2s;

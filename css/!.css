@@ -1,0 +1,98 @@
+/* Theme colors */
+:root {
+    --background-primary: #323232b0;
+    --background-secondary: #242424b0;
+    --background-secondary-hover: #424242b0;
+    --background-secondary-great: #242424;
+    --background-hover: #2a2a2ab0;
+    --border-color: #1f1f1f;
+    --text-primary: #e0e0e0;
+    --text-secondary: #a0a0a0;
+    --br: 1.2rem;
+    --brs: 0.5rem;
+}
+
+option {
+    background-color: var(--background-secondary-great);
+    color: var(--text-primary);
+    border-radius: var(--br);
+}
+
+/* --- Базовый стиль --- */
+body { font-family: Arial, sans-serif; padding: 24px; background: #f7f7f7; }
+
+.custom-select {
+  position: relative;
+  width: 280px;
+  user-select: none;
+}
+
+/* выбранная панель */
+.custom-select__button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid #bbb;
+  background: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  justify-content: space-between;
+}
+.custom-select__button:focus { outline: 3px solid #cfe8ff; }
+
+/* область с выбранным значением (иконка + текст) */
+.custom-select__current {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.custom-select__current img { width: 24px; height: 24px; object-fit: cover; border-radius: 4px; }
+
+/* стрелка */
+.custom-select__arrow {
+  transition: transform .2s ease;
+}
+.custom-select--open .custom-select__arrow { transform: rotate(180deg); }
+
+/* выпадающий список */
+.custom-select__list {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-top: 6px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.08);
+  z-index: 50;
+  max-height: 220px;
+  overflow: auto;
+  padding: 6px;
+  display: none; /* показываем через JS (или класс) */
+}
+.custom-select--open .custom-select__list { display: block; }
+
+/* элемент списка */
+.custom-select__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.custom-select__item img { width: 20px; height: 20px; object-fit: cover; border-radius: 3px; }
+.custom-select__item:hover,
+.custom-select__item[aria-selected="true"],
+.custom-select__item.custom-select__item--focused {
+  background: #f0f8ff;
+}
+
+/* скрытый input для формы */
+.custom-select__hidden { display:none; }
+
+/* чуть лучше для мобильных */
+@media (max-width:480px){
+  .custom-select { width: 100%; }
+}

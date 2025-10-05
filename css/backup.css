@@ -3,7 +3,7 @@
     font-size: 14px;
     font-weight: 500;
     padding: 8px 16px;
-    border-radius: 5px;
+    border-radius: var(--br);
     cursor: pointer;
     transition: all 0.3s ease;
     margin-right: 8px;
@@ -23,7 +23,7 @@
     font-size: 14px;
     font-weight: 500;
     padding: 8px 16px;
-    border-radius: 5px;
+    border-radius: var(--br);
     cursor: pointer;
     transition: all 0.3s ease;
     margin-right: 8px;
@@ -44,7 +44,7 @@
     font-size: 14px;
     font-weight: 500;
     padding: 8px 16px;
-    border-radius: 5px;
+    border-radius: var(--br);
     cursor: pointer;
     transition: all 0.3s ease;
     margin-right: 8px;

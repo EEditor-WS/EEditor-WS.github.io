@@ -173,7 +173,7 @@ function generateScenarioCard(scenario) {
     if (scenario.rights === true) {
         noRights = "";
     } else {
-        noRights = `<button class="download-download-button" onclick="askDelete()" style="background-color: #945d44ff; border-radius: 15px; width: 45px; height: 45px; border: none; cursor: pointer;">
+        noRights = `<button class="download-download-button" onclick="askDelete()" style="background-color: #945d44ff; border-radius: var(--br); width: 45px; height: 45px; border: none; cursor: pointer;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"role="img" aria-label="Жалоба: предупреждение" focusable="false"><title>Жалоба</title><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
                     </button>`;
     }
@@ -216,7 +216,7 @@ function generateScenarioCard(scenario) {
                 <div class="download-up">
                     <div class="download-image-container">
                         <a href="${detailsLink}">
-                            <img src="${imagePath}" class="download-goto-page">
+                            <img loading="lazy" src="${imagePath}" class="download-goto-page">
                             <div class="gradient-overlay"></div>
                         </a>
                         <div class="download-awards">
@@ -272,7 +272,7 @@ function generateScenarioCard(scenario) {
                     </div>
                     <div style="display:flex;flex-direction:column;align-items:bottom">
                         ${noRights}
-                        <button class="download-download-button" onclick="libDownloadScenario('${scenarioPath}', '${mapId}', '${scenario.id[0]}', '${scenario.id[1]}', '${scenario.id[2]}')" style="background-color: #44944A; border-radius: 15px; width: 45px; height: 45px; border: none; cursor: pointer;">
+                        <button class="download-download-button" onclick="libDownloadScenario('${scenarioPath}', '${mapId}', '${scenario.id[0]}', '${scenario.id[1]}', '${scenario.id[2]}')" style="background-color: #44944A; border-radius: var(--br); width: 45px; height: 45px; border: none; cursor: pointer;">
                             <img src="../../img/library/download.svg" class="download-info-ico" />
                         </button>
                     </div>

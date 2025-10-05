@@ -125,7 +125,7 @@ function createLanguageDialog() {
             transform: translate(-50%, -50%);
             background: #333;
             padding: 20px;
-            border-radius: 8px;
+            border-radius: var(--br);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             z-index: 1000;
             color: white;
@@ -267,7 +267,7 @@ function showNotification(message, type = 'info') {
         background: ${colors[type] || '#2196F3'};
         color: white;
         padding: 10px 20px;
-        border-radius: 4px;
+        border-radius: var(--br);
         z-index: 1001;
     `;
     notification.textContent = message;

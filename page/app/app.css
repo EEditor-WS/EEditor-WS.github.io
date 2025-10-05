@@ -17,7 +17,7 @@
 .requirements-card {
     background-color: #242424;
     border: 1px solid #333;
-    border-radius: 8px;
+    border-radius: var(--br);
     padding: 1.5rem;
     text-align: center;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -43,7 +43,7 @@
     background-color: rgba(52, 152, 219, 0.1);
     color: #3498db;
     text-decoration: none;
-    border-radius: 6px;
+    border-radius: var(--br);
     transition: all 0.2s ease;
     border: none;
     font-size: 0.875rem;
@@ -95,7 +95,7 @@
     padding: 0.75rem 1.5rem;
     background-color: #242424;
     border: 1px solid #333;
-    border-radius: 6px;
+    border-radius: var(--br);
     color: #e0e0e0;
     cursor: pointer;
     transition: all 0.2s ease;

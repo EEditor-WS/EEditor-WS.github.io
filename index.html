@@ -25,7 +25,8 @@
         <script src="js/hello.js"></script>
         <script src="js/head.js"></script>
         <script src="js/countries.js"></script>
-        <script src="js/events.js"></script>
+        <script src="js/events/events-main.js"></script>
+        <script src="js/events/events-draggable.js"></script>
         <script src="js/reforms.js"></script>
         <script src="js/auth.js"></script>
         <script src="js/backup.js"></script>
@@ -38,6 +39,7 @@
         <script src="js/test/ads.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-peer@9.11.1/simplepeer.min.js"></script>
         <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+        <link rel="stylesheet" href="css/!.css">
         <link rel="stylesheet" href="css/base.css">
         <link rel="stylesheet" href="css/countries.css">
         <link rel="stylesheet" href="css/events.css">
@@ -323,9 +325,9 @@
                         <div class="tooltip">Tools</div>
                     </div>
                 </div>
-                <div class="me2ads ads" id="me2ads" style="margin: 3rem auto 0 auto; max-width: 600px; background: #2a2a2a; border-radius: 10px; box-shadow: 0 4px 32px #0004; padding: 2rem 1.5rem 1.5rem 1.5rem; text-align: left;">
+                <div class="me2ads ads" id="me2ads" style="margin: 3rem auto 0 auto; max-width: 600px; background: var(--background-secondary); border-radius: var(--br); box-shadow: 0 4px 32px #0004; padding: 2rem 1.5rem 1.5rem 1.5rem; text-align: left;">
                     <div style="display: flex; align-items: center; gap: 1.2em;">
-                        <img src="img/ads/mapeditor2ico.png" alt="MapEditor2.0 Logo" style="width: 64px; height: 64px; border-radius: 10px; background: #333333; object-fit: contain; box-shadow: 0 2px 8px #0002;">
+                        <img src="img/ads/mapeditor2ico.png" alt="MapEditor2.0 Logo" style="width: 64px; height: 64px; border-radius: var(--br); background: #333333; object-fit: contain; box-shadow: 0 2px 8px #0002;">
                         <div style="flex:1; text-align:center;">
                             <h3 style="margin: 0 0 0.3em 0; text-align:center;">
                                 <a href="https://mapeditor2.netlify.app/" target="_blank" rel="noopener" style="color: #4bb4f7; font-family: 'Orbitron', sans-serif; font-size: 1.3rem; letter-spacing: 1px; text-decoration: none; transition: color 0.2s; display:inline-block;">
@@ -336,12 +338,12 @@
                         </div>
                     </div>
                     <div style="margin-top: 1.5em; text-align: center;">
-                        <img src="img/ads/mapeditor2.png" alt="MapEditor2.0 Screenshot" style="width: 100%; border-radius: 12px; box-shadow: 0 2px 16px #0003; background: #181a1f; object-fit: cover; max-height: 260px;">
+                        <img src="img/ads/mapeditor2.png" alt="MapEditor2.0 Screenshot" style="width: 100%; border-radius: var(--br); box-shadow: 0 2px 16px #0003; background: #181a1f; object-fit: cover; max-height: 260px;">
                     </div>
                 </div>
-                <div class="satads ads" id="satads" style="margin: 3rem auto 0 auto; max-width: 600px; background: #2a2a2a; border-radius: 10px; box-shadow: 0 4px 32px #0004; padding: 2rem 1.5rem 1.5rem 1.5rem; text-align: left;">
+                <div class="satads ads" id="satads" style="margin: 3rem auto 0 auto; max-width: 600px; background: var(--background-secondary); border-radius: var(--br); box-shadow: 0 4px 32px #0004; padding: 2rem 1.5rem 1.5rem 1.5rem; text-align: left;">
                     <div style="display: flex; align-items: center; gap: 1.2em;">
-                        <img src="img/ads/saturnico.png" alt="Saturn Logo" style="width: 64px; height: 64px; border-radius: 10px; background: #333333; object-fit: contain; box-shadow: 0 2px 8px #0002;">
+                        <img src="img/ads/saturnico.png" alt="Saturn Logo" style="width: 64px; height: 64px; border-radius: var(--br); background: #333333; object-fit: contain; box-shadow: 0 2px 8px #0002;">
                         <div style="flex:1; text-align:center;">
                             <h3 style="margin: 0 0 0.3em 0; text-align:center;">
                                 <a href="https://discord.gg/YVDmrzwx3y" target="_blank" rel="noopener" style="color: #6b31ac; font-family: 'Orbitron', sans-serif; font-size: 1.3rem; letter-spacing: 1px; text-decoration: none; transition: color 0.2s; display:inline-block;">
@@ -352,7 +354,7 @@
                         </div>
                     </div>
                     <div style="margin-top: 1.5em; text-align: center;">
-                        <img src="img/ads/saturnscreen.png" alt="saturn Screenshot" style="width: 100%; border-radius: 12px; box-shadow: 0 2px 16px #0003; background: #181a1f; object-fit: cover; max-height: 260px;">
+                        <img src="img/ads/saturnscreen.png" alt="saturn Screenshot" style="width: 100%; border-radius: var(--br); box-shadow: 0 2px 16px #0003; background: #181a1f; object-fit: cover; max-height: 260px;">
                     </div>
                 </div>
             </div>
@@ -737,7 +739,7 @@
                                 <option value="Democracy" data-translate="democracy">Демократия</option>
                                 <option value="Communism" data-translate="communism">Коммунизм</option>
                                 <option value="Monarchy" data-translate="monarchy">Монархия</option>
-                                <option value="Theocracy" data-translate="theocracy">Theocracy</option>
+                                <option value="Theocracy" data-translate="theocracy">Теократия</option>
                                 <option value="Fascism" data-translate="fascism">Фашизм</option>
                                 <option value="trade_republic" data-translate="trade_republic">Торговый республика</option>
                             </select>
@@ -838,12 +840,6 @@
                     </div>
                     <div class="header-actions">
                         <div class="tooltip-container">
-                            <button onclick="try{ changePage('psviazi'); const iframe = document.getElementById('iframe-sviazi'); iframe.contentWindow.postMessage(window.eventManager.jsonData.custom_events, '*');} catch {}" id="show-sviazi" class="icon-action-button clear" title="Show sviazi">
-                                э
-                            </button>
-                            <div class="tooltip">Show sviazi</div>
-                        </div>
-                        <div class="tooltip-container">
                             <button id="clear-events-filters" class="icon-action-button clear" title="Сбросить все фильтры">
                                 <svg viewBox="0 0 24 24">
                                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"></path>
@@ -877,6 +873,14 @@
                                 </svg>
                             </button>
                             <div id="eventsActionsDropdown" class="dropdown-menu">
+                                <a href="#" class="menu-item" id="migrate-groups" onclick="try{ changePage('psviazi'); const iframe = document.getElementById('iframe-sviazi'); iframe.contentWindow.postMessage(window.eventManager.jsonData.custom_events, '*');} catch {}">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 2v6h-6"></path>
+                                        <path d="M3 12a9 9 0 0 1 15-6.7L21 8"></path>
+                                        <path d="M3 22v-6h6"></path>
+                                    </svg>
+                                    <span>Показать связи</span>
+                                </a>
                                 <a href="#" class="menu-item" id="migrate-groups" onclick="transformCustomEvents()">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M21 2v6h-6"></path>
@@ -1038,8 +1042,8 @@
                     </div>
                 </div>
             <form id="event-form" class="event-form">
-                <div class="event-form-container">
-                    <div class="event-main-settings">
+                <div class="event-form-container" id="event-form-container">
+                    <div draggable="true" class="event-main-settings">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="event-image" data-translate="event_image">Картинка события:</label>
@@ -1133,82 +1137,173 @@
                             <label for="event-description" data-translate="event_description">Описание события:</label>
                             <textarea id="event-description" name="event-description" class="event-main-textarea main-page-textarea"></textarea>
                         </div>
+                    </div>
+                        <div class="drag-handle" style="background:#7474747a; cursor:col-resize;"></div>
+                    <div draggable="true" class="event-answers active" id="event-answers">
+                        <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                            <h2 data-translate="answers">Ответы</h2>
+                            <div class="event-answers-controls">
+                                <button class="icon-action-button clear" onclick="document.getElementById('event-answers').classList.toggle('active')" style="transform: rotate(90deg); display: inline-block;">></button>
+                                <button class="icon-action-button clear" onclick="window.eventManager.switchStyle()" style="transform: rotate(0deg); display: inline-block;">></button>
+                            </div>
+                        </div>
+                        <div class="answers-flex">
+                            <div class="answer-block">
+                                <h3 data-translate="answer_1_title">Ответ 1</h3>
+                                <div class="form-group">
+                                    <label for="event-auto-answer1" data-translate="auto_select_if_ignored">Выбирать при игнорировании:</label>
+                                    <select id="event-auto-answer1" name="event-auto-answer1" class="event-answers-item main-page-input">
+                                        <option value="false" data-translate="no">Нет</option>
+                                        <option value="true" data-translate="yes">Да</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="event-answer1" data-translate="answer_text">Текст ответа:</label>
+                                    <input type="text" id="event-answer1" name="event-answer1" class="event-answers-item main-page-input" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <label for="event-description1" data-translate="result_description">Описание результата:</label>
+                                    <textarea id="event-description1" name="event-description1" rows="3" class="event-answers-item main-page-textarea"></textarea>
+                                </div>
+                                <div class="requirements-buttons">
+                                    <button type="button" class="requirements-button" data-answer="1-req" data-translate="requirements">Требования</button>
+                                    <button type="button" class="requirements-button" data-answer="1-bonus" data-translate="bonuses">Бонусы</button>
+                                </div>
+                            </div>
 
-                        <div class="requirements-buttons">
+                            <div class="answer-block">
+                                <h3 data-translate="answer_2_title">Ответ 2</h3>
+                                <div class="form-group">
+                                    <label for="event-answer2-disabled" data-translate="enable_answer">Включить ответ:</label>
+                                    <select id="event-answer2-disabled" name="event-answer2-disabled" class="event-answers-item main-page-input">
+                                        <option value="false" data-translate="yes">Да</option>
+                                        <option value="true" data-translate="no">Нет</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="event-answer2">Текст ответа:</label>
+                                    <input type="text" id="event-answer2" name="event-answer2" class="event-answers-item main-page-input" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <label for="event-description2">Описание результата:</label>
+                                    <textarea id="event-description2" name="event-description2" rows="3" class="event-answers-item main-page-textarea"></textarea>
+                                </div>
+                                <div class="requirements-buttons">
+                                    <button type="button" class="requirements-button" data-answer="2-req" data-translate="requirements">Требования</button>
+                                    <button type="button" class="requirements-button" data-answer="2-bonus" data-translate="bonuses">Бонусы</button>
+                                </div>
+                            </div>
+
+                            <div class="answer-block">
+                                <h3 data-translate="answer_3_title">Ответ 3</h3>
+                                <div class="form-group">
+                                    <label for="event-answer3-disabled" data-translate="enable_answer">Включить ответ:</label>
+                                    <select id="event-answer3-disabled" name="event-answer3-disabled" class="event-answers-item main-page-input">
+                                        <option value="false" data-translate="yes">Да</option>
+                                        <option value="true" data-translate="no">Нет</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="event-answer3" data-translate="answer_text">Текст ответа:</label>
+                                    <input type="text" id="event-answer3" name="event-answer3" class="event-answers-item main-page-input" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <label for="event-description3" data-translate="result_description">Описание результата:</label>
+                                    <textarea id="event-description3" name="event-description3" rows="3" class="event-answers-item main-page-textarea"></textarea>
+                                </div>
+                                <div class="requirements-buttons">
+                                    <button type="button" class="requirements-button" data-answer="3-req" data-translate="requirements">Требования</button>
+                                    <button type="button" class="requirements-button" data-answer="3-bonus" data-translate="bonuses">Бонусы</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div draggable="true" class="event-requirements" id="event-requirements-jakor">
+                        <div class="modal-header reqheader">
+                            <!--button type="button" id="reqbonback" class="icon-action-button back"><span style="transform: rotate(180deg);">></span></button-->
+                            <button type="button" id="reqbonback" class="icon-action-button" onclick="window.eventManager.openRequirementsEditor('mainreq', 'inpage')" style="width: min-content;">Основные</button>
+                            <h2 data-translate="requirements" id="requirements-editor-title">Условия</h2>
+                            <button type="button" id="add-requirement" class="icon-action-button add">
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                                <span class="button-text" data-translate="add">Добавить</span>
+                            </button>
+                        </div>
+
+                        <!--div class="requirements-buttons">
                             <button type="button" class="requirements-button" data-answer="mainreq" data-translate="common_requirements">Общие требования</button>
+                        </div-->
+
+                        <div id="requirements-list" class="requirements-list">
+                            <table class="list-table">
+                                <thead>
+                                    <tr>
+                                        <th data-translate="type"></th>
+                                        <th data-translate="subtype"></th>
+                                        <th data-translate="action"></th>
+                                        <th data-translate="value"></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="requirements-items">
+                                </tbody>
+                            </table>
                         </div>
+                        <div id="requirement-editor" class="requirement-editor hidden">
+                            <div class="form-group">
+                                <label for="requirement-type" data-translate="type"></label>
+                                <select id="requirement-type" class="main-page-input" title="Тип требования">
+                                    <option value="" data-translate="select_type">Выберите тип</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="requirement-duration" data-translate="duration"></label>
+                                <input type="text" id="requirement-duration" class="main-page-input" autocomplete="off" title="Длительность требования" placeholder="Длительность">
+                            </div>
+                            <div class="form-group">
+                                <label for="requirement-subtype" data-translate="subtype"></label>
+                                <input type="text" id="requirement-subtype" class="main-page-input" autocomplete="off" title="Подтип требования" placeholder="Подтип">
+                            </div>
+                            <div class="form-group">
+                                <label for="requirement-action" data-translate="action"></label>
+                                <select id="requirement-action" class="main-page-input" title="Действие требования">
+                                    <option value="" data-translate="select_action">Выберите действие</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="requirement-value" data-translate="value"></label>
+                                <div id="requirement-value-container"></div>
+                            </div>
+                            <div class="info-actions">
+                                <button type="button" id="save-requirement" class="icon-action-button save">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1-2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                                        <polyline points="17 21 17 13 7 13 7 21"/>
+                                        <polyline points="7 3 7 8 15 8"/>
+                                    </svg>
+                                    <span class="button-text" data-translate="save">Сохранить</span>
+                                </button>
+                                <button type="button" id="cancel-requirement" class="icon-action-button delete">
+                                    <svg viewBox="0 0 24 24">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                    <span class="button-text" data-translate="cancel">Отменить</span>
+                                </button>
+                            </div>
+                        </div>
+                        <button type="button" id="add-requirement2" class="icon-action-button add">
+                            <svg viewBox="0 0 24 24">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            <span class="button-text" data-translate="add">Добавить</span>
+                        </button>
                     </div>
-
-                    <div class="event-answers">
-                        <div class="answer-block">
-                            <h3 data-translate="answer_1_title">Ответ 1</h3>
-                            <div class="form-group">
-                                <label for="event-answer1" data-translate="answer_text">Текст ответа:</label>
-                                <input type="text" id="event-answer1" name="event-answer1" class="event-answers-item main-page-input" autocomplete="off">
-                            </div>
-                            <div class="form-group">
-                                <label for="event-description1" data-translate="result_description">Описание результата:</label>
-                                <textarea id="event-description1" name="event-description1" rows="3" class="event-answers-item main-page-textarea"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="event-auto-answer1" data-translate="auto_select_if_ignored">Выбирать при игнорировании:</label>
-                                <select id="event-auto-answer1" name="event-auto-answer1" class="event-answers-item main-page-input">
-                                    <option value="false" data-translate="no">Нет</option>
-                                    <option value="true" data-translate="yes">Да</option>
-                                </select>
-                            </div>
-                            <div class="requirements-buttons">
-                                <button type="button" class="requirements-button" data-answer="1-req" data-translate="requirements">Требования</button>
-                                <button type="button" class="requirements-button" data-answer="1-bonus" data-translate="bonuses">Бонусы</button>
-                            </div>
-                        </div>
-
-                        <div class="answer-block">
-                            <h3 data-translate="answer_2_title">Ответ 2</h3>
-                            <div class="form-group">
-                                <label for="event-answer2-disabled" data-translate="enable_answer">Включить ответ:</label>
-                                <select id="event-answer2-disabled" name="event-answer2-disabled" class="event-answers-item main-page-input">
-                                    <option value="false" data-translate="yes">Да</option>
-                                    <option value="true" data-translate="no">Нет</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="event-answer2">Текст ответа:</label>
-                                <input type="text" id="event-answer2" name="event-answer2" class="event-answers-item main-page-input" autocomplete="off">
-                            </div>
-                            <div class="form-group">
-                                <label for="event-description2">Описание результата:</label>
-                                <textarea id="event-description2" name="event-description2" rows="3" class="event-answers-item main-page-textarea"></textarea>
-                            </div>
-                            <div class="requirements-buttons">
-                                <button type="button" class="requirements-button" data-answer="2-req" data-translate="requirements">Требования</button>
-                                <button type="button" class="requirements-button" data-answer="2-bonus" data-translate="bonuses">Бонусы</button>
-                            </div>
-                        </div>
-
-                        <div class="answer-block">
-                            <h3 data-translate="answer_3_title">Ответ 3</h3>
-                            <div class="form-group">
-                                <label for="event-answer3-disabled" data-translate="enable_answer">Включить ответ:</label>
-                                <select id="event-answer3-disabled" name="event-answer3-disabled" class="event-answers-item main-page-input">
-                                    <option value="false" data-translate="yes">Да</option>
-                                    <option value="true" data-translate="no">Нет</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="event-answer3" data-translate="answer_text">Текст ответа:</label>
-                                <input type="text" id="event-answer3" name="event-answer3" class="event-answers-item main-page-input" autocomplete="off">
-                            </div>
-                            <div class="form-group">
-                                <label for="event-description3" data-translate="result_description">Описание результата:</label>
-                                <textarea id="event-description3" name="event-description3" rows="3" class="event-answers-item main-page-textarea"></textarea>
-                            </div>
-                            <div class="requirements-buttons">
-                                <button type="button" class="requirements-button" data-answer="3-req" data-translate="requirements">Требования</button>
-                                <button type="button" class="requirements-button" data-answer="3-bonus" data-translate="bonuses">Бонусы</button>
-                            </div>
-                        </div>
-                    </div>
+                        <div class="drag-handle" style="background:#aaaaaa00; cursor:col-resize;"></div>
+                    <div draggable="true" class="zaglushka"></div>
                 </div>
             </form>
             </div>
@@ -1247,74 +1342,74 @@
         <div id="requirements-editor-modal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 id="requirements-editor-title" data-translate="requirements_editor"></h3>
-                    <button class="close-modal">&times;</button>
+                    <h3 id="remodal-requirements-editor-title" data-translate="requirements_editor">Requirements Editor</h3>
+                    <button class="close-modal">×</button>
                 </div>
                 <div class="modal-body">
-                    <div id="requirements-list" class="requirements-list">
+                    <div id="remodal-requirements-list" class="requirements-list">
                         <table class="list-table">
                             <thead>
                                 <tr>
-                                    <th data-translate="type"></th>
-                                    <th data-translate="subtype"></th>
-                                    <th data-translate="action"></th>
-                                    <th data-translate="value"></th>
+                                    <th data-translate="type">Type</th>
+                                    <th data-translate="subtype">Subtype</th>
+                                    <th data-translate="action">Action</th>
+                                    <th data-translate="value">Value</th>
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody id="requirements-items">
+                            <tbody id="remodal-requirements-items">
                             </tbody>
                         </table>
                     </div>
-                    <div id="requirement-editor" class="requirement-editor hidden">
+                    <div id="remodal-requirement-editor" class="requirement-editor hidden">
                         <div class="form-group">
-                            <label for="requirement-type" data-translate="type"></label>
-                            <select id="requirement-type" class="main-page-input" title="Тип требования">
-                                <option value="" data-translate="select_type">Выберите тип</option>
+                            <label for="remodal-requirement-type" data-translate="type">Type</label>
+                            <select id="remodal-requirement-type" class="main-page-input" title="Тип требования">
+                                <option value="" data-translate="select_type">select_type</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="requirement-duration" data-translate="duration"></label>
-                            <input type="text" id="requirement-duration" class="main-page-input" autocomplete="off" title="Длительность требования" placeholder="Длительность">
+                            <label for="remodal-requirement-duration" data-translate="duration">Duration (turns)</label>
+                            <input type="text" id="remodal-requirement-duration" class="main-page-input" autocomplete="off" title="Длительность требования" placeholder="Длительность">
                         </div>
                         <div class="form-group">
-                            <label for="requirement-subtype" data-translate="subtype"></label>
-                            <input type="text" id="requirement-subtype" class="main-page-input" autocomplete="off" title="Подтип требования" placeholder="Подтип">
+                            <label for="remodal-requirement-subtype" data-translate="subtype">Subtype</label>
+                            <input type="text" id="remodal-requirement-subtype" class="main-page-input" autocomplete="off" title="Подтип требования" placeholder="Подтип">
                         </div>
                         <div class="form-group">
-                            <label for="requirement-action" data-translate="action"></label>
-                            <select id="requirement-action" class="main-page-input" title="Действие требования">
-                                <option value="" data-translate="select_action">Выберите действие</option>
+                            <label for="remodal-requirement-action" data-translate="action">Action</label>
+                            <select id="remodal-requirement-action" class="main-page-input" title="Действие требования">
+                                <option value="" data-translate="select_action">select_action</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="requirement-value" data-translate="value"></label>
-                            <div id="requirement-value-container"></div>
+                            <label for="remodal-requirement-value" data-translate="value">Value</label>
+                            <div id="remodal-requirement-value-container"></div>
                         </div>
                         <div class="info-actions">
-                            <button type="button" id="save-requirement" class="icon-action-button save">
+                            <button type="button" id="remodal-save-requirement" class="icon-action-button save">
                                 <svg viewBox="0 0 24 24">
-                                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1-2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
-                                    <polyline points="17 21 17 13 7 13 7 21"/>
-                                    <polyline points="7 3 7 8 15 8"/>
+                                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1-2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                                    <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                                    <polyline points="7 3 7 8 15 8"></polyline>
                                 </svg>
-                                <span class="button-text" data-translate="save">Сохранить</span>
+                                <span class="button-text" data-translate="save">Save</span>
                             </button>
-                            <button type="button" id="cancel-requirement" class="icon-action-button delete">
+                            <button type="button" id="remodal-cancel-requirement" class="icon-action-button delete">
                                 <svg viewBox="0 0 24 24">
                                     <line x1="18" y1="6" x2="6" y2="18"></line>
                                     <line x1="6" y1="6" x2="18" y2="18"></line>
                                 </svg>
-                                <span class="button-text" data-translate="cancel">Отменить</span>
+                                <span class="button-text" data-translate="cancel">Cancel</span>
                             </button>
                         </div>
                     </div>
-                    <button type="button" id="add-requirement" class="icon-action-button add">
+                    <button type="button" id="remodal-add-requirement" class="icon-action-button add">
                         <svg viewBox="0 0 24 24">
                             <line x1="12" y1="5" x2="12" y2="19"></line>
                             <line x1="5" y1="12" x2="19" y2="12"></line>
                         </svg>
-                        <span class="button-text" data-translate="add">Добавить</span>
+                        <span class="button-text" data-translate="add">Add</span>
                     </button>
                 </div>
             </div>
@@ -1671,7 +1766,7 @@
                 </div>
                 <div class="coop-mainContent">
                     <div class="data hiden" id="coopSend">
-                        <div id="coopConnectData" class="coopData coopConnectData" style="min-height: 250px; background-color: #181818; border-radius: 8px; margin-bottom: 10px; padding: 10px;">
+                        <div id="coopConnectData" class="coopData coopConnectData" style="min-height: 250px; background-color: #181818; border-radius: var(--br); margin-bottom: 10px; padding: 10px;">
                             <div id="coop-connect-head" class="coop-connect-head">
                                 <h3 data-translate="coop_connect_data">Данные подключения</h3>
                                 <button id="coop-send-connect-button" class="action-button secondary" data-translate="coop_connect">Подключиться</button>
@@ -1689,7 +1784,7 @@
                         </div>
                     </div>
                     <div class="data hiden" id="coopRecive">
-                        <div id="coopConnectData" class="coopData coopConnectData" style="min-height: 250px; background-color: #181818; border-radius: 8px; margin-bottom: 10px; padding: 10px;">
+                        <div id="coopConnectData" class="coopData coopConnectData" style="min-height: 250px; background-color: #181818; border-radius: 8var(--br)px; margin-bottom: 10px; padding: 10px;">
                             <div id="coop-connect-head" class="coop-connect-head">
                                 <h3 data-translate="coop_connect_data">Данные подключения</h3>
                                 <button id="coop-recive-connect-button" class="action-button secondary" data-translate="coop_connect">Подключиться</button>
@@ -1705,7 +1800,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="coopMaintData" class="coopData coopMainData" style="min-height: 750px; background-color: #181818; border-radius: 8px"></div>
+                        <div id="coopMaintData" class="coopData coopMainData" style="min-height: 750px; background-color: #181818; border-radius: var(--br)"></div>
                     </div>
                 </div>
             </div>

@@ -21,7 +21,7 @@ body {
     max-width: 80%;
     padding: 20px;
     background-color: #242424;
-    border-radius: 10px;
+    border-radius: var(--br);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow: auto;
 }
@@ -29,7 +29,7 @@ body {
 .data {
     flex-grow: 1;
     background-color: #242424;
-    border-radius: 10px;
+    border-radius: var(--br);
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
@@ -47,8 +47,8 @@ body {
     justify-content: center;
     text-align: center;
     border: 2px dashed #4a4a4a;
-    border-radius: 10px;
-    background-color: #2a2a2a;
+    border-radius: var(--br);
+    background-color: var(----background-secondary);
     margin: 0 auto;
     transition: all 0.3s ease;
 }
@@ -66,7 +66,7 @@ body {
     padding: 10px 20px;
     background-color: #3498db;
     color: white;
-    border-radius: 5px;
+    border-radius: var(--br);
     cursor: pointer;
     margin-top: 10px;
     transition: background-color 0.3s ease;
@@ -87,9 +87,9 @@ body {
     width: 100%;
     margin: 20px auto;
     border: 1px solid #333;
-    border-radius: 10px;
+    border-radius: var(--br);
     overflow: hidden;
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
 }
 
 .file-header {
@@ -111,7 +111,7 @@ body {
     background-color: #3498db;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: var(--br);
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-size: 14px;
@@ -130,7 +130,7 @@ body {
     font-family: 'Fira Code', 'Consolas', monospace;
     font-size: 14px;
     line-height: 1.6;
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
     color: #e0e0e0;
     outline: none;
 }
@@ -159,8 +159,8 @@ body {
 .form-group select {
     padding: 8px 12px;
     border: 1px solid #404040;
-    border-radius: 5px;
-    background-color: #2a2a2a;
+    border-radius: var(--br);
+    background-color: var(----background-secondary);
     color: #e0e0e0;
     font-size: 14px;
     outline: none;
@@ -186,7 +186,7 @@ body {
 .color-preview {
     width: 30px;
     height: 30px;
-    border-radius: 5px;
+    border-radius: var(--br);
     border: 1px solid #404040;
     background-color: rgb(55, 112, 129);
 }
@@ -197,7 +197,7 @@ body {
     background-color: #3498db;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: var(--br);
     cursor: pointer;
     font-size: 16px;
     font-weight: 500;
@@ -220,7 +220,7 @@ body {
 
 .data::-webkit-scrollbar-thumb {
     background: #404040;
-    border-radius: 4px;
+    border-radius: var(--br);
 }
 
 .data::-webkit-scrollbar-thumb:hover {
@@ -230,7 +230,7 @@ body {
 .file-preview {
     margin-top: 20px;
     background-color: #242424;
-    border-radius: 8px;
+    border-radius: var(--br);
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -251,10 +251,10 @@ body {
     width: 100%;
     min-height: 200px;
     padding: 15px;
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
     color: #e0e0e0;
     border: 1px solid #1f1f1f;
-    border-radius: 5px;
+    border-radius: var(--br);
     font-family: 'Consolas', 'Monaco', monospace;
     font-size: 14px;
     line-height: 1.5;
@@ -281,7 +281,7 @@ body {
     padding: 8px 16px;
     background-color: #4a4a4a;
     border: 1px solid #606060;
-    border-radius: 4px;
+    border-radius: var(--br);
     color: #e0e0e0;
     cursor: pointer;
     font-size: 14px;
@@ -333,11 +333,11 @@ body {
 
 .nav-actions .action-button.save-button {
     height: auto;
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
     color: #e0e0e0;
     border: 1px solid #404040;
     padding: 8px 16px;
-    border-radius: 4px;
+    border-radius: var(--br);
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
@@ -371,13 +371,13 @@ body {
     font-size: 14px;
     font-weight: 500;
     padding: 8px 16px;
-    border-radius: 5px;
+    border-radius: var(--br);
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .nav-button:hover {
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
     color: #e0e0e0;
 }
 
@@ -397,7 +397,7 @@ body {
 .action-button {
     padding: 8px 16px;
     border: none;
-    border-radius: 5px;
+    border-radius: var(--br);
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
@@ -432,7 +432,7 @@ body {
 }
 
 .countries-table tbody tr:hover {
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
 }
 
 .country-name-container {
@@ -459,9 +459,9 @@ body {
 }
 
 .array-list {
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
     border: 1px solid #404040;
-    border-radius: 5px;
+    border-radius: var(--br);
     padding: 10px;
     min-height: 50px;
     max-height: 150px;
@@ -481,7 +481,7 @@ body {
     padding: 8px 12px;
     margin: 5px 0;
     background-color: #333;
-    border-radius: 3px;
+    border-radius: var(--br);
     gap: 10px;
 }
 
@@ -502,9 +502,9 @@ body {
 .relation-turn,
 .relation-duration,
 .relation-initiator {
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
     padding: 2px 6px;
-    border-radius: 3px;
+    border-radius: var(--br);
 }
 
 .relation-controls {
@@ -542,8 +542,8 @@ body {
     width: 100%;
     padding: 6px 10px;
     border: 1px solid #404040;
-    border-radius: 4px;
-    background-color: #2a2a2a;
+    border-radius: var(--br);
+    background-color: var(----background-secondary);
     color: #e0e0e0;
     font-size: 14px;
     outline: none;
@@ -558,7 +558,7 @@ body {
     background-color: #2ecc71;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: var(--br);
     cursor: pointer;
     font-size: 12px;
     margin-top: 5px;
@@ -588,7 +588,7 @@ body {
 
 .modal-content {
     background-color: #242424;
-    border-radius: 8px;
+    border-radius: var(--br);
     width: 90%;
     max-width: 500px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -636,8 +636,8 @@ body {
     width: 100%;
     padding: 8px 12px;
     border: 1px solid #404040;
-    border-radius: 5px;
-    background-color: #2a2a2a;
+    border-radius: var(--br);
+    background-color: var(----background-secondary);
     color: #e0e0e0;
     font-size: 14px;
     outline: none;
@@ -662,8 +662,8 @@ body {
 .turn-input input {
     padding: 8px 12px;
     border: 1px solid #404040;
-    border-radius: 5px;
-    background-color: #2a2a2a;
+    border-radius: var(--br);
+    background-color: var(----background-secondary);
     color: #e0e0e0;
     font-size: 14px;
     outline: none;
@@ -769,16 +769,16 @@ body {
 }
 
 .reforms-list {
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
     border: 1px solid #404040;
-    border-radius: 5px;
+    border-radius: var(--br);
     padding: 10px;
     margin-bottom: 10px;
 }
 
 .reform-item {
     background-color: #333;
-    border-radius: 4px;
+    border-radius: var(--br);
     padding: 15px;
     margin-bottom: 10px;
 }
@@ -816,8 +816,8 @@ body {
 }
 
 .reform-requirements {
-    background-color: #2a2a2a;
-    border-radius: 4px;
+    background-color: var(----background-secondary);
+    border-radius: var(--br);
     padding: 10px;
 }
 
@@ -840,7 +840,7 @@ body {
     background-color: #2ecc71;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: var(--br);
     cursor: pointer;
     font-size: 12px;
     transition: background-color 0.3s ease;
@@ -855,7 +855,7 @@ body {
     background-color: #e74c3c;
     color: white;
     border: none;
-    border-radius: 3px;
+    border-radius: var(--br);
     cursor: pointer;
     font-size: 12px;
     transition: background-color 0.3s ease;
@@ -891,7 +891,7 @@ body {
     border: 1px solid #404040;
     color: #e0e0e0;
     padding: 8px 16px;
-    border-radius: 4px;
+    border-radius: var(--br);
     cursor: pointer;
     font-size: 14px;
     display: flex;
@@ -900,7 +900,7 @@ body {
 }
 
 .lang-button:hover {
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
 }
 
 .lang-button::after {
@@ -915,7 +915,7 @@ body {
     right: 0;
     background-color: #242424;
     border: 1px solid #404040;
-    border-radius: 4px;
+    border-radius: var(--br);
     margin-top: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     z-index: 1000;
@@ -934,7 +934,7 @@ body {
 }
 
 .lang-dropdown a:hover {
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
 }
 
 .header-actions {
@@ -974,7 +974,7 @@ body {
     width: 100%;
     padding: 8px;
     border: 1px solid #404040;
-    border-radius: 4px;
+    border-radius: var(--br);
     font-size: 14px;
 }
 
@@ -993,7 +993,7 @@ body {
     height: 120px;
     object-fit: contain;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: var(--br);
     background: #f5f5f5;
 }
 
@@ -1002,7 +1002,7 @@ body {
     height: 48px;
     object-fit: contain;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: var(--br);
     background: #f5f5f5;
 }
 
@@ -1015,7 +1015,7 @@ body {
 .answer-block {
     background: #f9f9f9;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: var(--br);
     padding: 15px;
     margin-bottom: 20px;
 }
@@ -1031,7 +1031,7 @@ body {
     color: white;
     border: none;
     padding: 8px 16px;
-    border-radius: 4px;
+    border-radius: var(--br);
     cursor: pointer;
     font-size: 14px;
 }
@@ -1054,7 +1054,7 @@ body {
     color: white;
     border: none;
     padding: 10px 20px;
-    border-radius: 4px;
+    border-radius: var(--br);
     cursor: pointer;
     font-size: 14px;
 }
@@ -1068,7 +1068,7 @@ body {
     color: white;
     border: none;
     padding: 10px 20px;
-    border-radius: 4px;
+    border-radius: var(--br);
     cursor: pointer;
     font-size: 14px;
 }
@@ -1092,9 +1092,9 @@ body {
 .form-group textarea {
     resize: vertical;
     min-height: 60px;
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
     border: 1px solid #404040;
-    border-radius: 4px;
+    border-radius: var(--br);
     color: #e0e0e0;
     font-size: 14px;
     width: 100%;
@@ -1171,7 +1171,7 @@ body {
     right: 0;
     background-color: var(--background-color);
     border: 1px solid var(--border-color);
-    border-radius: 4px;
+    border-radius: var(--br);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     z-index: 1000;
     min-width: 120px;
@@ -1200,7 +1200,7 @@ body {
     right: 0;
     background-color: #242424;
     border: 1px solid #404040;
-    border-radius: 8px;
+    border-radius: var(--br);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     min-width: 200px;
     z-index: 1000;
@@ -1247,7 +1247,7 @@ body {
 }
 
 .account-item:hover {
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
 }
 
 .account-item svg {
@@ -1406,7 +1406,7 @@ body {
     color: white;
     font-size: 12px;
     white-space: pre-line;
-    border-radius: 4px;
+    border-radius: var(--br);
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.2s;
@@ -1440,7 +1440,7 @@ body {
     width: 100%;
     border-collapse: collapse;
     background-color: #242424;
-    border-radius: 10px;
+    border-radius: var(--br);
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -1453,7 +1453,7 @@ body {
 }
 
 .countries-table th {
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
     font-weight: 500;
     color: #e0e0e0;
     font-size: 14px;
@@ -1491,13 +1491,13 @@ body {
 }
 
 .countries-table tbody tr:hover {
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
 }
 
 .country-color {
     width: 24px;
     height: 24px;
-    border-radius: 4px;
+    border-radius: var(--br);
     border: 1px solid #404040;
 }
 
@@ -1525,7 +1525,7 @@ body {
 /* Map cards styles */
 .map-card {
     background: var(--background-tertiary);
-    border-radius: 8px;
+    border-radius: var(--br);
     padding: 16px;
     margin-bottom: 16px;
 }
@@ -1558,7 +1558,7 @@ body {
     padding: 4px 8px;
     margin: 4px;
     background: var(--background-secondary);
-    border-radius: 4px;
+    border-radius: var(--br);
     font-size: 12px;
     color: var(--text-secondary);
 }
@@ -1625,7 +1625,7 @@ body {
     display: inline-block;
     padding: 4px 8px;
     background: #2a2a2a;
-    border-radius: 4px;
+    border-radius: var(--br);
     font-size: 12px;
     color: #888;
 }

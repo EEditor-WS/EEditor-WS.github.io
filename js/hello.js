@@ -191,7 +191,7 @@ By clicking "I Accept", you acknowledge that you have read and understood these 
 
             .hello-container {
                 background: #242424;
-                border-radius: 8px;
+                border-radius: var(--br);
                 padding: 20px;
                 width: 80%;
                 max-width: 800px;
@@ -219,7 +219,7 @@ By clicking "I Accept", you acknowledge that you have read and understood these 
                 padding: 8px;
                 background: #333;
                 border: 1px solid #444;
-                border-radius: 4px;
+                border-radius: var(--br);
                 color: #e0e0e0;
                 cursor: pointer;
             }
@@ -228,7 +228,7 @@ By clicking "I Accept", you acknowledge that you have read and understood these 
                 overflow-y: auto;
                 padding: 10px;
                 background: #1a1a1a;
-                border-radius: 4px;
+                border-radius: var(--br);
                 white-space: pre-wrap;
                 color: #e0e0e0;
                 font-size: 14px;
@@ -244,7 +244,7 @@ By clicking "I Accept", you acknowledge that you have read and understood these 
             .hello-button {
                 padding: 10px 20px;
                 border: none;
-                border-radius: 4px;
+                border-radius: var(--br);
                 cursor: pointer;
                 font-size: 14px;
                 transition: all 0.2s;
@@ -293,7 +293,7 @@ By clicking "I Accept", you acknowledge that you have read and understood these 
                 color: white;
                 padding: 12px 24px;
                 border: none;
-                border-radius: 4px;
+                border-radius: var(--br);
                 font-size: 16px;
                 cursor: pointer;
                 display: flex;

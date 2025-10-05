@@ -282,8 +282,8 @@ class EventManager {
         // Обработчики кнопок требований и бонусов
         document.querySelectorAll('.requirements-button').forEach(button => {
             button.addEventListener('click', () => {
-                const answer = button.getAttribute('data-answer') || '';
-                this.openRequirementsEditor(answer);
+                let answer = button.getAttribute('data-answer') || '';
+                this.openRequirementsEditor(answer, 'modal');
             });
         });
 
@@ -607,6 +607,7 @@ generateUniqueId(minimumID = 0) {
 
     openEvent(eventId) {
         if (!this.jsonData?.custom_events?.[eventId]) return;
+        
 
         this.currentEvent = eventId;
         const event = this.jsonData.custom_events[eventId];
@@ -906,6 +907,8 @@ generateUniqueId(minimumID = 0) {
         document.querySelectorAll('.nav-button').forEach(btn => {
             btn.classList.remove('active');
         });
+
+        this.openRequirementsEditor('mainreq', 'inpage');
     }
 
     switchToEventsList() {
@@ -963,26 +966,38 @@ generateUniqueId(minimumID = 0) {
         }
     }
 
-    openRequirementsEditor(answer) {
-        const modal = document.getElementById('requirements-editor-modal');
-        const title = document.getElementById('requirements-editor-title');
-        const list = document.getElementById('requirements-items');
-        const editor = document.getElementById('requirement-editor');
-        const addButton = document.getElementById('add-requirement');
+    openRequirementsEditor(answer, place) {
+        let prefix = '';
+        //if (place === 'modal') {
+        //    prefix = 'remodal-';
+        //}
+        document.getElementById('reqbonback').classList.add('active');
+
+        const modal = document.getElementById(`requirements-editor-modal`);
+        const title = document.getElementById(`${prefix}requirements-editor-title`);
+        const list = document.getElementById(`${prefix}requirements-items`);
+        const editor = document.getElementById(`${prefix}requirement-editor`);
+        const addButton = document.getElementById(`${prefix}add-requirement`);
         const closeButton = modal.querySelector('.close-modal');
-        const saveButton = document.getElementById('save-requirement');
-        const cancelButton = document.getElementById('cancel-requirement');
-        const typeSelect = document.getElementById('requirement-type');
-        const actionSelect = document.getElementById('requirement-action');
-        const subtypeInput = document.getElementById('requirement-subtype');
-        const valueInput = document.getElementById('requirement-value');
-        const durationInput = document.getElementById('requirement-duration');
+        const saveButton = document.getElementById(`${prefix}save-requirement`);
+        const cancelButton = document.getElementById(`${prefix}cancel-requirement`);
+        const typeSelect = document.getElementById(`${prefix}requirement-type`);
+        const actionSelect = document.getElementById(`${prefix}requirement-action`);
+        const subtypeInput = document.getElementById(`${prefix}requirement-subtype`);
+        const valueInput = document.getElementById(`${prefix}requirement-value`);
+        const durationInput = document.getElementById(`${prefix}requirement-duration`);
+        const answersdiv = document.getElementById(`${prefix}remodal-event-answers`);
+
+        if (localStorage.getItem('eeditorEventEditStyle') === 'grid') {
+            document.getElementById('event-form-container').classList.add('oldview');
+        }
 
         // Определяем тип редактора (требования или бонусы)
         const isBonus = answer.includes('bonus');
         this.isEditingBonus = isBonus;
         const listType = isBonus ? 'bonuses' : 'requirements';
-        title.textContent = isBonus ? window.translator.translate('bonus_editor') : window.translator.translate('requirements_editor');
+        //title.textContent = isBonus ? window.translator.translate('bonus_editor') : window.translator.translate('requirements_editor');
+        title.textContent = window.translator.translate(answer);
 
         // Получаем список требований/бонусов
         const items = this.jsonData.custom_events[this.currentEvent][listType + (answer.includes('-') ? answer.split('-')[0] : '')] || [];
@@ -1191,8 +1206,8 @@ generateUniqueId(minimumID = 0) {
 
         // Функция для обновления доступных действий в зависимости от типа
         const updateActions = () => {
-            const actionSelect = document.getElementById('requirement-action');
-            const durationInput = document.getElementById('requirement-duration');
+            const actionSelect = document.getElementById(`${prefix}requirement-action`);
+            const durationInput = document.getElementById(`${prefix}requirement-duration`);
             const selectedType = typeSelect.value;
             const actions = [];
 
@@ -1227,7 +1242,7 @@ generateUniqueId(minimumID = 0) {
                     const subtypeGroup = document.querySelector('[for="requirement-subtype"]').parentElement;
                     subtypeGroup.style.display = 'block';
                     
-                    const subtypeInput = document.getElementById('requirement-subtype');
+                    const subtypeInput = document.getElementById(`${prefix}requirement-subtype`);
                     const select = document.createElement('select');
                     select.id = 'requirement-subtype';
                     select.className = 'main-page-input';
@@ -1250,7 +1265,7 @@ generateUniqueId(minimumID = 0) {
                     subtypeInput.parentNode.replaceChild(select, subtypeInput);
                     
                     // Создаем числовое поле для значения
-                    const valueContainer = document.getElementById('requirement-value-container');
+                    const valueContainer = document.getElementById(`${prefix}requirement-value-container`);
                     valueContainer.innerHTML = '';
                     const input = document.createElement('input');
                     input.type = 'number';
@@ -1265,7 +1280,7 @@ generateUniqueId(minimumID = 0) {
                     const subtypeGroup = document.querySelector('[for="requirement-subtype"]').parentElement;
                     subtypeGroup.style.display = 'block';
                 
-                    const subtypeInput = document.getElementById('requirement-subtype');
+                    const subtypeInput = document.getElementById(`${prefix}requirement-subtype`);
                     const select = document.createElement('select');
                     select.id = 'requirement-subtype';
                     select.className = 'main-page-input';
@@ -1288,7 +1303,7 @@ generateUniqueId(minimumID = 0) {
                     subtypeInput.parentNode.replaceChild(select, subtypeInput);
                 
                     // Создаем выпадающий список для значения (1, 2, 3)
-                    const valueContainer = document.getElementById('requirement-value-container');
+                    const valueContainer = document.getElementById(`${prefix}requirement-value-container`);
                     valueContainer.innerHTML = '';
                 
                     const valueSelect = document.createElement('select');
@@ -1307,7 +1322,7 @@ generateUniqueId(minimumID = 0) {
                     const subtypeGroup = document.querySelector('[for="requirement-subtype"]').parentElement;
                     subtypeGroup.style.display = 'block';
                     
-                    const subtypeInput = document.getElementById('requirement-subtype');
+                    const subtypeInput = document.getElementById(`${prefix}requirement-subtype`);
                     const subtypeSelect = document.createElement('select');
                     subtypeSelect.id = 'requirement-subtype';
                     subtypeSelect.className = 'main-page-input';
@@ -1366,7 +1381,7 @@ generateUniqueId(minimumID = 0) {
                 select.className = 'main-page-input';
 
                 // Получаем список стран и сортируем по имени
-                const countries = Object.entries(JSON.parse(document.getElementById('preview-content').value).lands || {})
+                const countries = Object.entries(JSON.parse(document.getElementById(`${prefix}preview-content`).value).lands || {})
                     .map(([id, country]) => ({
                         id,
                         name: country.name || id
@@ -1383,7 +1398,7 @@ generateUniqueId(minimumID = 0) {
                 `;
 
                 // Заменяем оригинальный элемент на новый выпадающий список
-                const actionSelect = document.getElementById('requirement-action');
+                const actionSelect = document.getElementById(`${prefix}requirement-action`);
                 actionSelect.parentNode.replaceChild(select, actionSelect);
             } else {
                 actionSelect.innerHTML = actions.map(action => `
@@ -1399,11 +1414,11 @@ generateUniqueId(minimumID = 0) {
 
         // Функция для обновления поля значения в зависимости от типа
         const updateValueField = () => {
-            const valueContainer = document.getElementById('requirement-value-container');
+            const valueContainer = document.getElementById(`${prefix}requirement-value-container`);
             const subtypeLabel = document.querySelector('[for="requirement-subtype"]');
             const subtypeGroup = subtypeLabel ? subtypeLabel.parentElement : null;
-            const selectedType = document.getElementById('requirement-type').value;
-            const durationInput = document.getElementById('requirement-duration');
+            const selectedType = document.getElementById(`${prefix}requirement-type`).value;
+            const durationInput = document.getElementById(`${prefix}requirement-duration`);
 
             // Очищаем контейнер
             if (valueContainer) {
@@ -1450,7 +1465,7 @@ generateUniqueId(minimumID = 0) {
                 } else if (selectedType === 'add_culture_population') {
                     // Для добавления населения культуры с подтипом страны
                     subtypeGroup.style.display = 'block';
-                    const subtypeInput = document.getElementById('requirement-subtype');
+                    const subtypeInput = document.getElementById(`${prefix}requirement-subtype`);
 
                     // Создаем выпадающий список для стран
                     const countrySelect = document.createElement('select');
@@ -1495,7 +1510,7 @@ generateUniqueId(minimumID = 0) {
                 } else if (['diplomacy_lift_sanctions', 'diplomacy_sanctions', 'diplomacy_pact', 'diplomacy_become_vassal', 'diplomacy_get_vassal', 'diplomacy_alliance', 'diplomacy_peace', 'diplomacy_war'].includes(selectedType)) {
                     // Для дипломатических действий страна выбирается в subtype
                     subtypeGroup.style.display = 'block';
-                    const subtypeInput = document.getElementById('requirement-subtype');
+                    const subtypeInput = document.getElementById(`${prefix}requirement-subtype`);
                     
                     // Создаем выпадающий список для стран в subtype
                     const countrySelect = document.createElement('select');
@@ -1529,7 +1544,7 @@ generateUniqueId(minimumID = 0) {
                 } else if (['relation_ideology_change'].includes(selectedType)) {
                     // Для изменения идеологии
                     subtypeGroup.style.display = 'block';
-                    const subtypeInput = document.getElementById('requirement-subtype');
+                    const subtypeInput = document.getElementById(`${prefix}requirement-subtype`);
                     // Создаем выпадающий список для идеологий
                     const ideologySelect = document.createElement('select');
                     ideologySelect.id = 'requirement-subtype';
@@ -1557,7 +1572,7 @@ generateUniqueId(minimumID = 0) {
                 } else if (['relation_change'].includes(selectedType)) {
                     // Для изменения отношений
                     subtypeGroup.style.display = 'block';
-                    const subtypeInput = document.getElementById('requirement-subtype');
+                    const subtypeInput = document.getElementById(`${prefix}requirement-subtype`);
                     // Создаем выпадающий список для стран
                     const countrySelect = document.createElement('select');
                     countrySelect.id = 'requirement-subtype';
@@ -1608,7 +1623,7 @@ generateUniqueId(minimumID = 0) {
                 } else if (selectedType === 'resource') {
                     // Для ресурсов - dropdown в subtype и числовое поле в value
                     subtypeGroup.style.display = 'block';
-                    const subtypeInput = document.getElementById('requirement-subtype');
+                    const subtypeInput = document.getElementById(`${prefix}requirement-subtype`);
                     
                     // Создаем выпадающий список для типов ресурсов
                     const resourceSelect = document.createElement('select');
@@ -1776,7 +1791,7 @@ generateUniqueId(minimumID = 0) {
                     valueContainer.appendChild(select);
                     
                     // Заменяем существующий subtype input новым селектом
-                    const subtypeInput = document.getElementById('requirement-subtype');
+                    const subtypeInput = document.getElementById(`${prefix}requirement-subtype`);
                     subtypeInput.parentNode.replaceChild(subtypeSelect, subtypeInput);
                     
                     subtypeGroup.style.display = 'block';
@@ -1881,7 +1896,7 @@ generateUniqueId(minimumID = 0) {
                     subtypeGroup.style.display = 'block';
                     
                     // Создаем выпадающий список для subtype
-                    const subtypeInput = document.getElementById('requirement-subtype');
+                    const subtypeInput = document.getElementById(`${prefix}requirement-subtype`);
                     const subtypeSelect = document.createElement('select');
                     subtypeSelect.id = 'requirement-subtype';
                     subtypeSelect.className = 'main-page-input';
@@ -1950,10 +1965,10 @@ generateUniqueId(minimumID = 0) {
         });
 
         addButton.onclick = () => {
-            editor.style.display = 'block';
-            document.getElementById('requirement-type').value = '';
-            document.getElementById('requirement-action').value = '';
-            document.getElementById('requirement-subtype').value = '';
+            editor.style.visibility = 'visible';
+            document.getElementById(`${prefix}requirement-type`).value = '';
+            document.getElementById(`${prefix}requirement-action`).value = '';
+            document.getElementById(`${prefix}requirement-subtype`).value = '';
             updateActions();
             updateValueField();
         };
@@ -1965,20 +1980,20 @@ generateUniqueId(minimumID = 0) {
             const index = parseInt(button.dataset.index);
             if (button.classList.contains('edit')) {
                 const item = items[index];
-                editor.style.display = 'block';
-                document.getElementById('requirement-type').value = item.type;
+                editor.style.display = 'visible';
+                document.getElementById(`${prefix}requirement-type`).value = item.type;
                 // Сначала обновляем тип, чтобы создались нужные поля
                 updateActions();
                 updateValueField();
                 // Теперь выставляем значения для всех полей (action, subtype, value, duration)
-                const actionInput = document.getElementById('requirement-action');
+                const actionInput = document.getElementById(`${prefix}requirement-action`);
                 if (actionInput && typeof item.action !== 'undefined') actionInput.value = item.action;
-                const subtypeInput = document.getElementById('requirement-subtype');
+                const subtypeInput = document.getElementById(`${prefix}requirement-subtype`);
                 if (subtypeInput && typeof item.subtype !== 'undefined') subtypeInput.value = item.subtype;
-                const valueInput = document.getElementById('requirement-value');
+                const valueInput = document.getElementById(`${prefix}requirement-value`);
                 if (valueInput && typeof item.value !== 'undefined') valueInput.value = item.value;
-                if (isBonus && document.getElementById('requirement-duration')) {
-                    document.getElementById('requirement-duration').value = item.duration || 3;
+                if (isBonus && document.getElementById(`${prefix}requirement-duration`)) {
+                    document.getElementById(`${prefix}requirement-duration`).value = item.duration || 3;
                 }
                 editor.dataset.editIndex = index;
             } else if (button.classList.contains('delete')) {
@@ -1989,17 +2004,17 @@ generateUniqueId(minimumID = 0) {
         };
 
         saveButton.onclick = () => {
-            const type = document.getElementById('requirement-type').value;
-            const action = isBonus ? '' : document.getElementById('requirement-action').value;
-            const subtype = document.getElementById('requirement-subtype').value;
-            let value = document.getElementById('requirement-value').value;
+            const type = document.getElementById(`${prefix}requirement-type`).value;
+            const action = isBonus ? '' : document.getElementById(`${prefix}requirement-action`).value;
+            const subtype = document.getElementById(`${prefix}requirement-subtype`).value;
+            let value = document.getElementById(`${prefix}requirement-value`).value;
             let duration;
             
             // Проверяем конфигурацию бонуса для длительности
             const config = isBonus ? window.reqbonConfig?.bonuses?.[type] : null;
             
             if (isBonus) {
-                const durationElement = document.getElementById('requirement-duration');
+                const durationElement = document.getElementById(`${prefix}requirement-duration`);
                 if (durationElement) {
                     let durationValue = durationElement.value;
                     // Удаляем кавычки и пробелы с начала и конца
@@ -2052,26 +2067,28 @@ generateUniqueId(minimumID = 0) {
                 items.push(item);
             }
 
-            editor.style.display = 'none';
+            editor.style.visibility = 'hidden';
             updateList();
             this.saveChanges();
         };
 
         cancelButton.onclick = () => {
-            editor.style.display = 'none';
+            editor.style.visibility = 'hidden';
             delete editor.dataset.editIndex;
         };
 
-        closeButton.onclick = () => {
+        /*closeButton.onclick = () => {
             modal.classList.remove('active');
-        };
+        };*/
 
         // Инициализация
         updateList();
         updateActions();
         updateValueField();
-        editor.style.display = 'none';
-        modal.classList.add('active');
+        editor.style.visibility = 'hidden';
+        /*if (place === 'modal') {
+            modal.classList.add('active');
+        }*/
     }
 
     loadAvailableImages() {
@@ -2351,6 +2368,16 @@ generateUniqueId(minimumID = 0) {
             ]
         };
     }
+
+    switchStyle() {
+        const element = document.getElementById('event-form-container');
+        element.classList.toggle('oldview');
+        if (element.classList.contains('oldview')) {
+            localStorage.setItem('eeditorEventEditStyle', 'grid');
+        } else {
+            localStorage.setItem('eeditorEventEditStyle', 'flex');
+        }
+    }
 }
 
 // Инициализация при загрузке страницы
@@ -2413,3 +2440,13 @@ function createCountrySelect(countries) {
         .map(country => `<option value="${country.id}">${country.name}</option>`)
         .join('');
 }
+
+document.addEventListener('DOMContentLoaded', () => { 
+    if (window.innerWidth <= 768) {
+        document.querySelectorAll('.requirements-button').forEach(button => {
+            button.onclick = () => {
+                document.getElementById('event-requirements-jakor').scrollIntoView({ behavior: 'smooth' });
+            };
+        });
+    };
+});

@@ -36,7 +36,7 @@
 .nav-button {
     padding: 8px 16px;
     border: none;
-    border-radius: 15px;
+    border-radius: var(--br);
     cursor: pointer;
     font-size: 14px;
     font-weight: 500;
@@ -93,7 +93,7 @@
     border: none;
     color: #e0e0e0;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: var(--br);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -102,7 +102,7 @@
 }
 
 .icon-button:hover {
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
 }
 
 .icon-button svg {
@@ -132,7 +132,7 @@
     right: 0;
     background-color: #242424;
     border: 1px solid #333;
-    border-radius: 4px;
+    border-radius: var(--br);
     padding: 4px 0;
     min-width: 150px;
     display: none;
@@ -149,10 +149,12 @@
     color: #e0e0e0;
     text-decoration: none;
     transition: background-color 0.2s;
+    align-items: center;
+    gap: 5px;
 }
 
 .lang-dropdown a:hover {
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
 }
 
 /* Стили для языкового переключателя */
@@ -172,7 +174,7 @@
     right: 0;
     background-color: #242424;
     border: 1px solid #333;
-    border-radius: 8px;
+    border-radius: var(--br);
     min-width: 200px;
     display: none;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -217,7 +219,7 @@
 }
 
 .account-item:hover {
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
 }
 
 .account-item svg {
@@ -262,7 +264,7 @@
     background-color: #2ecc71;
     color: white;
     padding: 8px 16px;
-    border-radius: 6px;
+    border-radius: var(--br);
     transition: all 0.2s ease;
     min-width: 36px;
     display: inline-flex;
@@ -369,7 +371,7 @@
     color: white;
     font-size: 12px;
     white-space: nowrap;
-    border-radius: 4px;
+    border-radius: var(--br);
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.2s;

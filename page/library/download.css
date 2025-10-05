@@ -19,7 +19,7 @@
     top: 10px;
     right: 10px;
     padding: 4px 8px;
-    border-radius: 15px;
+    border-radius: var(--br);
     font-size: 12px;
     font-weight: 500;
     color: white;
@@ -89,13 +89,13 @@
     flex-direction: column;
     width: 250px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    border-radius: 15px;
+    border-radius: var(--br);
 }
 
 .download-image-container {
     position: relative;
     width: 250px;
-    border-radius: 8px;
+    border-radius: var(--br);
     overflow: hidden;
 }
 
@@ -170,7 +170,7 @@
     gap: 10px;
     padding: 10px;
     background-color: #1e1e1e;
-    border-radius: 15px;
+    border-radius: var(--br);
     width: 100%;
 }
 
@@ -182,7 +182,7 @@
 /* Filter Container */
 .lib-filters {
     background-color: var(--background-secondary);
-    border-radius: 8px;
+    border-radius: var(--br);
     padding: 16px;
     margin-right: 16px;
     width: 280px;
@@ -234,7 +234,7 @@
 .filter-group {
     margin-bottom: 16px;
     border: 1px solid var(--border-color);
-    border-radius: 4px;
+    border-radius: var(--br);
 }
 
 .filter-group-header {
@@ -244,7 +244,7 @@
     padding: 8px 12px;
     cursor: pointer;
     background-color: var(--background-tertiary);
-    border-radius: 4px 4px 0 0;
+    border-radius: var(--br) 4px 0 0;
 }
 
 .filter-group-header label {
@@ -285,7 +285,7 @@
     width: 95%;
     padding: 8px;
     border: 1px solid var(--border-color);
-    border-radius: 4px;
+    border-radius: var(--br);
     background-color: var(--background-primary);
     color: var(--text-primary);
 }
@@ -295,7 +295,7 @@
     width: 100%;
     padding: 8px;
     border: 1px solid var(--border-color);
-    border-radius: 4px;
+    border-radius: var(--br);
     background-color: var(--background-primary);
     color: var(--text-primary);
 }
@@ -328,7 +328,7 @@
     background-color: var(--background-tertiary);
     color: var(--text-primary);
     border: 1px solid var(--border-color);
-    border-radius: 4px;
+    border-radius: var(--br);
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
@@ -398,7 +398,7 @@
 .form-element select {
     padding: 8px;
     border: 1px solid var(--border-color);
-    border-radius: 4px;
+    border-radius: var(--br);
     background-color: var(--background-primary);
     color: var(--text-primary);
 }
@@ -436,7 +436,7 @@
 .modal-content {
     background-color: var(--background-secondary);
     padding: 20px;
-    border-radius: 8px;
+    border-radius: var(--br);
     max-width: 400px;
     width: 100%;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -464,7 +464,7 @@
 
 .modal-button {
     padding: 8px 16px;
-    border-radius: 4px;
+    border-radius: var(--br);
     border: none;
     cursor: pointer;
     font-size: 14px;
@@ -491,7 +491,7 @@
     background-color: rgba(52, 152, 219, 0.2);
     color: #3498db;
     padding: 8px 16px;
-    border-radius: 15px;
+    border-radius: var(--br);
     height: 20px;
 }
 
@@ -510,7 +510,7 @@
     width: 250px; 
     height: 156px; 
     object-fit: cover; 
-    border-radius: 15px 15px 0 0;
+    border-radius: var(--br) 15px 0 0;
 }
 
 
@@ -528,13 +528,13 @@
     .download-goto-page {
         width: 100%; /* Задаем ширину изображения на всю ширину карточки */
         height: auto; /* Высота будет автоматически подстраиваться */
-        border-radius: 15px 15px 0 0; /* Сохраняем радиус скругления */
+        border-radius: var(--br) 15px 0 0; /* Сохраняем радиус скругления */
     }
     
     .download-image-container {
         position: relative;
         width: 100%;
-        border-radius: 8px;
+        border-radius: var(--br);
         overflow: hidden;
     }
 
