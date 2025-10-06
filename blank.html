@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Пример HTML-страницы — много элементов</title>
+  <link rel="stylesheet" href="css/!.css">
+  <link rel="stylesheet" href="css/elib/orange.css">
+</head>
+<body>
+  <header>
+    <h1>Демо-страница с множеством HTML-элементов</h1>
+    <nav>
+      <a href="#forms">Формы</a> | <a href="#tables">Таблицы</a> | <a href="#media">Медиа</a> | <a href="#extras">Прочее</a>
+    </nav>
+  </header>
+
+  <section id="intro">
+    <h2>Введение</h2>
+    <p>Это простая HTML-страница <strong>без CSS</strong>, в которой показаны разные HTML-элементы: поля ввода, формы, таблицы, списки, семантические теги и мультимедиа.</p>
+    <p>Ниже — несколько типичных блоков контента.</p>
+  </section>
+
+  <section id="forms">
+    <h2>Формы и поля ввода</h2>
+
+    <form action="#" method="post">
+      <fieldset>
+        <legend>Личные данные</legend>
+
+        <label for="fullname">ФИО:</label>
+        <input type="text" id="fullname" name="fullname" placeholder="Иван Иванов"><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="name@example.com"><br>
+
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="password"><br>
+
+        <label for="phone">Телефон:</label>
+        <input type="tel" id="phone" name="phone" placeholder="+373 79 123456"><br>
+
+        <label for="age">Возраст (число):</label>
+        <input type="number" id="age" name="age" min="0" max="150"><br>
+
+        <label for="birthday">Дата рождения:</label>
+        <input type="date" id="birthday" name="birthday"><br>
+
+        <label for="appt">Время/дата (другой формат):</label>
+        <input type="datetime-local" id="appt" name="appt"><br>
+
+        <label for="range">Уровень (range):</label>
+        <input type="range" id="range" name="range" min="0" max="10" value="5"><br>
+
+        <label for="color">Любимый цвет:</label>
+        <input type="color" id="color" name="color"><br>
+
+        <label for="search">Поиск:</label>
+        <input type="search" id="search" name="search"><br>
+
+        <label for="website">Сайт:</label>
+        <input type="url" id="website" name="website" placeholder="https://example.com"><br>
+
+        <label>Пол:</label>
+        <input type="radio" id="male" name="gender" value="male"><label for="male">М</label>
+        <input type="radio" id="female" name="gender" value="female"><label for="female">Ж</label><br>
+
+        <label for="subscribe">Подписаться:</label>
+        <input type="checkbox" id="subscribe" name="subscribe" checked><br>
+
+        <label for="country">Страна:</label>
+        <select id="country" name="country">
+          <option value="md">Молдова</option>
+          <option value="ro">Румыния</option>
+          <option value="ru">Россия</option>
+        </select><br>
+
+        <label for="comments">Комментарий:</label><br>
+        <textarea id="comments" name="comments" rows="4" cols="40" placeholder="Напишите здесь..."></textarea><br>
+
+        <label for="file">Файл (загрузить):</label>
+        <input type="file" id="file" name="file"><br>
+
+        <input type="hidden" name="token" value="abc123">
+
+      </fieldset>
+
+      <fieldset>
+        <legend>Данные с автозаполнением и подсказками</legend>
+
+        <label for="city">Город (datalist):</label>
+        <input list="cities" id="city" name="city">
+        <datalist id="cities">
+          <option value="Кишинёв">
+          <option value="Тирасполь">
+          <option value="Бельцы">
+          <option value="Кишинёв-центр">
+        </datalist><br>
+
+        <label for="quantity">Количество (step 0.5):</label>
+        <input type="number" id="quantity" name="quantity" step="0.5"><br>
+
+        <button type="submit">Отправить</button>
+        <button type="reset">Сброс</button>
+
+      </fieldset>
+    </form>
+
+    <details>
+      <summary>Дополнительные опции</summary>
+      <p>Здесь можно положить скрытый текст или дополнительные настройки формы.</p>
+      <label for="opt1">Опция 1</label>
+      <input type="checkbox" id="opt1" name="opt1"><br>
+    </details>
+  </section>
+
+  <section id="tables">
+    <h2>Таблицы</h2>
+
+    <table border="1">
+      <caption>Пример табличных данных</caption>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Имя</th>
+          <th>Роль</th>
+          <th>Активный</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Мария</td>
+          <td>Разработчик</td>
+          <td>Да</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Алексей</td>
+          <td>Тестировщик</td>
+          <td>Нет</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Ольга</td>
+          <td>Дизайнер</td>
+          <td>Да</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4">Итого: 3 пользователя</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <h3>Сложная таблица</h3>
+    <table border="1">
+      <tr>
+        <th rowspan="2">Регион</th>
+        <th colspan="2">Показатели</th>
+      </tr>
+      <tr>
+        <th>В</th>
+        <th>Н</th>
+      </tr>
+      <tr>
+        <td>Север</td>
+        <td>100</td>
+        <td>200</td>
+      </tr>
+    </table>
+  </section>
+
+  <section id="lists">
+    <h2>Списки и цитаты</h2>
+    <ul>
+      <li>Пункт один</li>
+      <li>Пункт два
+        <ol>
+          <li>Вложенный 1</li>
+          <li>Вложенный 2</li>
+        </ol>
+      </li>
+      <li>Пункт три</li>
+    </ul>
+
+    <blockquote cite="#">
+      Это пример цитаты.
+    </blockquote>
+
+    <pre><code>const hello = "Hello, world!";
+console.log(hello);</code></pre>
+  </section>
+
+  <section id="media">
+    <h2>Медиа</h2>
+    <figure>
+      <img src="https://via.placeholder.com/300x100?text=Image" alt="Заглушка">
+      <figcaption>Подпись к картинке</figcaption>
+    </figure>
+
+    <audio controls>
+      <source src="" type="audio/mpeg">
+      Ваш браузер не поддерживает аудио.
+    </audio>
+
+    <video controls width="320">
+      <source src="" type="video/mp4">
+      Ваш браузер не поддерживает видео.
+    </video>
+
+    <div>
+        <progress value="70" max="100">70%</progress>
+        <meter value="0.6">60%</meter>
+    </div>
+  </section>
+
+  <section id="extras">
+    <h2>Дополнительные элементы</h2>
+
+    <article>
+      <header>
+        <h3>Статья</h3>
+        <p><small>Автор: Тестовый</small></p>
+      </header>
+      <p>Содержимое статьи...</p>
+      <footer>Дата публикации: <time datetime="2025-10-06">2025-10-06</time></footer>
+    </article>
+
+    <aside>
+      <h4>Боковая панель</h4>
+      <p>Краткая справка или реклама.</p>
+    </aside>
+
+    <form>
+      <label for="range2">Еще слайдер:</label>
+      <input id="range2" type="range">
+      <button type="button" onclick="alert('Кнопка нажата')">Нажми меня</button>
+    </form>
+
+    <iframe src="about:blank" title="Пустой фрейм" width="300" height="150"></iframe>
+
+    <details>
+      <summary>Развернуть технические данные</summary>
+      <dl>
+        <dt>HTML</dt>
+        <dd>Стандарт разметки страниц</dd>
+        <dt>Version</dt>
+        <dd>Без стилей</dd>
+      </dl>
+    </details>
+  </section>
+
+  <footer>
+    <p>Сгенерировано автоматически — пример страницы с множеством элементов.</p>
+  </footer>
+
+</body>
+<script src="css/!.js"></script>
+</html>

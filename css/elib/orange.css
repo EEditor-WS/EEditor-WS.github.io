@@ -1,0 +1,95 @@
+:root{
+    --fill: var(--accent-color);        /* заполнение (синий) */
+    --empty: #d6d6d6;       /* фон (серый) */
+    --track-h: 12px;        /* высота трека (обычная) */
+    --track-h-active: 18px; /* высота при active/focus */
+    --thumb: 18px;          /* размер ползунка */
+    --thumb-active: 26px;   /* размер при drag/focus */
+    --radius: 999px;
+    --transition: 180ms;
+}
+
+/* общий базовый вид */
+input[type="range"].orange {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  background: transparent;
+  cursor: pointer;
+  margin: 8px 0;
+}
+
+/* стиль .orange */
+input[type="range"].orange {
+  height: var(--track-h);
+  border-radius: var(--radius);
+  background: linear-gradient(90deg, var(--fill) 50%, var(--empty) 50%);
+}
+
+/* WebKit трек */
+input[type="range"].orange::-webkit-slider-runnable-track {
+  height: var(--track-h);
+  border-radius: var(--radius);
+  background: linear-gradient(90deg, var(--fill) 50%, var(--empty) 50%);
+}
+
+/* WebKit кружок */
+input[type="range"].orange::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: var(--thumb-size);
+  height: var(--thumb-size);
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid var(--fill);
+  margin-top: calc((var(--track-h) - var(--thumb-size)) / 2);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* Firefox трек */
+input[type="range"].orange::-moz-range-track {
+  height: var(--track-h);
+  border-radius: var(--radius);
+  background: var(--empty);
+}
+
+/* Firefox заполнение (до ползунка) */
+input[type="range"].orange::-moz-range-progress {
+  height: var(--track-h);
+  border-radius: var(--radius);
+  background: var(--fill);
+}
+
+/* Firefox кружок */
+input[type="range"].orange::-moz-range-thumb {
+  width: var(--thumb-size);
+  height: var(--thumb-size);
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid var(--fill);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* Edge / IE */
+input[type="range"].orange::-ms-track {
+  width: 100%;
+  height: var(--track-h);
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type="range"].orange::-ms-fill-lower {
+  background: var(--fill);
+  border-radius: var(--radius);
+}
+input[type="range"].orange::-ms-fill-upper {
+  background: var(--empty);
+  border-radius: var(--radius);
+}
+input[type="range"].orange::-ms-thumb {
+  width: var(--thumb-size);
+  height: var(--thumb-size);
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid var(--fill);
+}
