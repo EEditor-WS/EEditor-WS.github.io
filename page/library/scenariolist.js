@@ -3151,6 +3151,29 @@ const scenariosData = [
     },
     {
         id: [
+            "pelo",
+            "euam",
+            "v2",
+            "kaiserreich",
+        ],
+        title: "Kaiserreich Euam",
+        author: ["eenot"],
+        year: "1936",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-10-06", 
+        lastUpdate: "2025-10-06",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "alternative",
+        rights: true
+    },
+    {
+        id: [
             "chitterss",
             "world",
             "v4",
