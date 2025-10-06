@@ -1945,13 +1945,32 @@ generateUniqueId(minimumID = 0) {
                     ).join('');
                     
                     valueContainer.appendChild(select);
+                } else if (['month'].includes(selectedType)) {
+                    const select = document.createElement('select');
+                    select.id = 'requirement-value';
+                    select.className = 'main-page-input';
+                    select.innerHTML = `
+                        <option value="1" data-translate="jan">${window.translator.translate('jan')}</option>
+                        <option value="2" data-translate="feb">${window.translator.translate('feb')}</option>
+                        <option value="3" data-translate="mar">${window.translator.translate('mar')}</option>
+                        <option value="4" data-translate="apr">${window.translator.translate('apr')}</option>
+                        <option value="5" data-translate="may">${window.translator.translate('may')}</option>
+                        <option value="6" data-translate="jun">${window.translator.translate('jun')}</option>
+                        <option value="7" data-translate="jul">${window.translator.translate('jul')}</option>
+                        <option value="8" data-translate="aug">${window.translator.translate('aug')}</option>
+                        <option value="9" data-translate="sep">${window.translator.translate('sep')}</option>
+                        <option value="10" data-translate="oct">${window.translator.translate('oct')}</option>
+                        <option value="11" data-translate="nov">${window.translator.translate('nov')}</option>
+                        <option value="12" data-translate="dec">${window.translator.translate('dec')}</option>
+                    `
+                    valueContainer.appendChild(select);
                 } else {
                     const input = document.createElement('input');
                     input.type = 'text';
                     input.id = 'requirement-value';
                     input.className = 'main-page-input';
                     input.placeholder = 
-                        ['month', 'num_of_provinces', 'year', 'turn', 'random_value', 'count_of_tasks', 'tax', 'discontent', 'money', 'land_power'].includes(selectedType) ? window.translator.translate('enter_number') :
+                        ['num_of_provinces', 'year', 'turn', 'random_value', 'count_of_tasks', 'tax', 'discontent', 'money', 'land_power'].includes(selectedType) ? window.translator.translate('enter_number') :
                         ['building_exists'].includes(selectedType) ? window.translator.translate('enter_building_name') :
                         ['political_institution'].includes(selectedType) ? window.translator.translate('enter_institution_name') : window.translator.translate('enter_value');
                         valueContainer.appendChild(input);
