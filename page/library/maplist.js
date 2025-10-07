@@ -997,6 +997,22 @@ mapsData = [
         hiddenScore: 0,
         rights: true
     },
+    {
+        id: ["eenot", "metro2033", "v1"],
+        title: "Metro 2033 by ЕЕнот",
+        author: ["eenot"],
+        description: "",
+        type: "city",
+        region: [],
+        provinces: 424,
+        features: [],
+        status: "completed",
+        publishDate: "2025-09-19",
+        lastUpdate: "2025-09-26",
+        load: "normal",
+        hiddenScore: 0,
+        rights: true
+    },
 ];
 
 const mapTypes = {

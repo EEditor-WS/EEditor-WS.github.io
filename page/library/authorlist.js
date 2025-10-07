@@ -148,5 +148,20 @@ const authorsData = {
         name: "@gray_car",
         link: "https://discord.com/users/1260611002240860202",
         color: "#3B83BD"
-    }
+    },
+    fredstein: {
+        name: "@fred.stein",
+        link: "https://discord.com/users/814856713105965077",
+        color: "#3B83BD"
+    },
+    thefanfinfulo: {
+        name: "@thefanfinfulo_67965",
+        link: "https://discord.com/users/1288264777105408020",
+        color: "#3B83BD"
+    },
+    lurus: {
+        name: "@sfats",
+        link: "https://discord.com/users/764533673512927242",
+        color: "#3B83BD"
+    },
 }
