@@ -257,3 +257,19 @@ meter::-webkit-meter-even-less-good-value { /* низкий уровень */
     height: var(--height);
     border-radius: var(--br);
 }
+
+.hidden {
+    display: none;
+}
+
+.hidden.active {
+    display: block;
+}
+
+.dev_thing {
+    display: none !important;
+}
+
+body.dev_mode .dev_thing {
+    display: flex !important;
+}

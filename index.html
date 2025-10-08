@@ -24,6 +24,7 @@
         <script src="js/translator.js"></script>
         <script src="js/hello.js"></script>
         <script src="js/head.js"></script>
+        <script src="js/map/map-edit.js"></script>
         <script src="js/countries.js"></script>
         <script src="js/events/events-main.js"></script>
         <script src="js/events/events-draggable.js"></script>
@@ -51,6 +52,7 @@
         <link rel="stylesheet" href="css/test/move.css">
         <link rel="stylesheet" href="css/backup.css">
         <link rel="stylesheet" href="css/coop.css">
+        <link rel="stylesheet" href="css/map.css">
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-9HFX1FVLMV"></script>
         <script>
@@ -136,6 +138,12 @@
                         <line x1="3" y1="10" x2="21" y2="10"></line>
                     </svg>
                     <span class="button-text">События</span>
+                </button>
+                <button class="nav-button dev_thing" data-page="map-edit">
+                    <svg class="button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    </svg>
+                    <span class="button-text">Карта</span>
                 </button>
             </div>
             <div class="nav-actions">
@@ -1320,7 +1328,117 @@
             </form>
             </div>
         </div>
-        
+        <div id="map-edit" class="page pmap-edit">
+            <main id="memap_root" class="memap-root-unique">
+                <div id="maphead">
+                    <h1 id="memap_title" class="memap-title-unique">Редактор провинций</h1>
+
+                    <section style="display: inline-flex; gap: 1rem; justify-content: space-between; width: 100%;">
+                        <div class="maplinzes pages">
+                            <button id="mapeditpage-mapload" onclick="window.mapEditMgr.page('mapload')" class="memap-btn-unique memap-btn-page active">Загрузка</button>
+                            <button id="mapeditpage-mapedit" onclick="window.mapEditMgr.page('mapedit')" class="memap-btn-unique memap-btn-page">Провинции</button>
+                        </div>
+                        <div id="mapeditmodes" class="maplinzes mapeditthings">
+                            <button onclick="window.mapEditMgr.setEditMode('edit')" id="mapedit_btn-edit" class="mapedit-btn-editmode active">edit</button>
+                            <button onclick="window.mapEditMgr.setEditMode('paint')" id="mapedit_btn-paint" class="mapedit-btn-editmode">paint</button>
+                        </div>
+                        <div id="mapeditlinzes" class="maplinzes mapeditthings">
+                            <button onclick="window.mapEditMgr.setMapView('countries')" id="mapedit_btn_mode-countries" class="mapedit-btn-mode active">C</button>
+                            <button onclick="window.mapEditMgr.setMapView('diplomacy')" id="mapedit_btn_mode-diplomacy" class="mapedit-btn-mode">D</button>
+                            <button onclick="window.mapEditMgr.setMapView('economic')" id="mapedit_btn_mode-economic" class="mapedit-btn-mode">E</button>
+                            <button onclick="window.mapEditMgr.setMapView('population')" id="mapedit_btn_mode-population" class="mapedit-btn-mode">P</button>
+                            <button onclick="window.mapEditMgr.setMapView('relief')" id="mapedit_btn_mode-relief" class="mapedit-btn-mode">R</button>
+                        </div>
+                    </section>
+                </div>
+                <div id="mapload" class="hidden mapeditpage active">
+                    <section id="memap_upload_section" class="memap-section-unique ">
+                        <label for="memap_file_input" class="memap-label-unique">Загрузить map.json (файл):</label>
+                        <input id="memap_file_input" class="memap-fileinput-unique" type="file" accept=".json" />
+                        <div id="memap_file_status" class="memap-status-unique">Файл не загружен.</div>
+                    </section>
+
+                    <section id="memap_select_section" class="memap-section-unique">
+                        <label for="memap_province_select" class="memap-label-unique">Выбрать провинцию по id (из map.json):</label>
+                        <select id="memap_province_select" class="memap-select-unique">
+                            <option value="">— сначала загрузите map.json —</option>
+                        </select>
+                        <button id="memap_load_from_global_btn" class="memap-btn-unique">Загрузить выборку из window.countryManager</button>
+                        <div id="memap_global_status" class="memap-status-unique"></div>
+                    </section>
+                </div>
+                <div id="mapedit" class="hidden mapeditpage">
+                    <div id="memap_form_section" class="memap-section-unique">
+                        <h2 class="memap-subtitle-unique">Свойства провинции</h2>
+
+                        <form id="memap_form" class="memap-form-unique" autocomplete="off">
+                            <div class="memap-row-unique">
+                                <label for="memap_field_population" class="memap-label-small-unique">population_limit</label>
+                                <input id="memap_field_population" class="memap-input-unique mapedit_input_needsave" type="number" min="0" />
+                            </div>
+
+                            <div class="memap-row-unique">
+                                <label for="memap_field_infra" class="memap-label-small-unique">infrastructure_level</label>
+                                <select id="memap_field_infra" class="memap-input-unique mapedit_input_needsave">
+                                    <option value="none">-</option>
+                                    <option value="1">Countryside</option>
+                                    <option value="2">Village</option>
+                                    <option value="3">Town</option>
+                                    <option value="4">City</option>
+                                    <option value="5">Big City</option>
+                                </select>
+                            </div>
+
+                            <div class="memap-row-unique">
+                                <label for="memap_field_owner" class="memap-label-small-unique">owner</label>
+                                <input id="memap_field_owner" class="memap-input-unique mapedit_input_needsave" type="text" />
+                            </div>
+
+                            <div class="memap-row-unique">
+                                <label for="memap_field_true_owner" class="memap-label-small-unique">true_owner</label>
+                                <input id="memap_field_true_owner" class="memap-input-unique mapedit_input_needsave" type="text" />
+                            </div>
+
+                            <div class="memap-row-unique">
+                                <label for="memap_field_uuid" class="memap-label-small-unique">uuid</label>
+                                <input id="memap_field_uuid" class="memap-input-unique mapedit_input_needsave" type="text" readonly/>
+                            </div>
+
+                            <div class="memap-row-unique">
+                                <label for="memap_field_resources" class="memap-label-small-unique">resource_rule (JSON)</label>
+                                <textarea id="memap_field_resources" class="memap-textarea-unique mapedit_input_needsave" rows="4"></textarea>
+                            </div>
+
+                            <div class="memap-row-unique">
+                                <label for="memap_field_landtype" class="memap-label-small-unique">landtype</label>
+                                <select id="memap_field_landtype" class="memap-input-unique mapedit_input_needsave">
+                                    <option value="1">plains</option>
+                                    <option value="water">water</option>
+                                    <option value="river">river</option>
+                                    <option value="2">mountines</option>
+                                    <option value="3">desert</option>
+                                    <option value="4">snow</option>
+                                </select>
+                            </div>
+
+                            <div class="memap-actions-unique">
+                                <!--button id="memap_save_btn" type="button" class="memap-btn-unique">Сохранить в window.countryManager</button-->
+                                <!--button id="memap_export_btn" type="button" class="memap-btn-unique">Экспортировать провинции (JSON)</button-->
+                                <!--button id="memap_refresh_btn" type="button" class="memap-btn-unique">Обновить данные из глобального объекта</button-->
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="memap_preview_section_true">
+
+                        <div id="memap_message" class="memap-message-unique"></div>
+                        <pre id="memap_preview" class="memap-preview-unique">— ничего не выбрано —</pre>
+                        <div id="memap_preview_section" class="memap-section-unique zoom-container">
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
 
         <!-- Модальное окно для выбора страны -->
         <div id="country-select-modal" class="modal">

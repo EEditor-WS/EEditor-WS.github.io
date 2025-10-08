@@ -203,7 +203,18 @@ function transformCustomEvents() {
   return data;
 }
 
+function saveToPreview(data) {
+    document.getElementById('preview-content').value = JSON.stringify(data, null, 4);
+}
+
 // Экспортируем утилиты
 window.ColorUtils = ColorUtils;
 window.ValidationUtils = ValidationUtils;
 window.DOMUtils = DOMUtils; 
+
+document.addEventListener('DOMContentLoaded', function() {
+    if (new URLSearchParams(window.location.search).get('dev') === 'true') {
+        document.body.classList.add('dev_mode');
+        alert('Режим разработчика включён');
+    }
+});

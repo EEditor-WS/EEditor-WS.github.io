@@ -1,4 +1,43 @@
 class CountryManager {
+    constructor() {
+        this.currentCountry = null;
+        this.jsonData = null;
+        this.undoStack = [];
+        this.redoStack = [];
+        this.maxStackSize = 50;
+        this.isEditing = false;
+        
+        // Добавляем параметры сортировки и фильтрации
+        this.sortColumn = 'name';
+        this.sortDirection = 'asc';
+        this.filters = {
+            color: { operator: null, value: null },
+            name: { operator: null, value: '' },
+            system_name: { operator: null, value: '' },
+            provinces_count: { operator: null, value: '' },
+            capital: { operator: null, value: '' },
+            groups: []
+        };
+        
+        this.currentFilterColumn = null;
+        
+        // Сохраняем ссылки на важные элементы
+        this.previewContent = document.getElementById('preview-content');
+        this.fileInfo = document.getElementById('file-info');
+        
+        // Проверяем наличие необходимых элементов
+        if (!this.previewContent) {
+            console.error('Не найден элемент preview-content');
+            return;
+        }
+        if (!this.fileInfo) {
+            console.error('Не найден элемент file-info');
+            return;
+        }
+        
+        this.init();
+    }
+    
     // Показывает подробности силы страны при наведении на powerCellInList
     showPowerBreakdown(countryId, anchorElement) {
         if (!this.jsonData?.lands?.[countryId]) return;
@@ -85,44 +124,6 @@ class CountryManager {
             anchorElement._powerTooltip.remove();
             anchorElement._powerTooltip = null;
         }
-    }
-    constructor() {
-        this.currentCountry = null;
-        this.jsonData = null;
-        this.undoStack = [];
-        this.redoStack = [];
-        this.maxStackSize = 50;
-        this.isEditing = false;
-        
-        // Добавляем параметры сортировки и фильтрации
-        this.sortColumn = 'name';
-        this.sortDirection = 'asc';
-        this.filters = {
-            color: { operator: null, value: null },
-            name: { operator: null, value: '' },
-            system_name: { operator: null, value: '' },
-            provinces_count: { operator: null, value: '' },
-            capital: { operator: null, value: '' },
-            groups: []
-        };
-        
-        this.currentFilterColumn = null;
-        
-        // Сохраняем ссылки на важные элементы
-        this.previewContent = document.getElementById('preview-content');
-        this.fileInfo = document.getElementById('file-info');
-        
-        // Проверяем наличие необходимых элементов
-        if (!this.previewContent) {
-            console.error('Не найден элемент preview-content');
-            return;
-        }
-        if (!this.fileInfo) {
-            console.error('Не найден элемент file-info');
-            return;
-        }
-        
-        this.init();
     }
 
     init() {
