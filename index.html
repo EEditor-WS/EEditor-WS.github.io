@@ -1064,6 +1064,9 @@
             <form id="event-form" class="event-form">
                 <div class="event-form-container" id="event-form-container">
                     <div draggable="true" class="event-main-settings">
+                        <div draggable="true" class="drag-handle" id="firstheaddrag" style="border: 0;">
+                            drag it
+                        </div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="event-image" data-translate="event_image">Картинка события:</label>
@@ -1158,9 +1161,9 @@
                             <textarea id="event-description" name="event-description" class="event-main-textarea main-page-textarea"></textarea>
                         </div>
                     </div>
-                        <div class="drag-handle" style="background:#7474747a; cursor:col-resize;"></div>
+                        <div class="drag-handle-slider" style="background:#7474747a; cursor:col-resize;"></div>
                     <div draggable="true" class="event-answers active" id="event-answers">
-                        <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                        <div draggable="true" class="drag-handle" style="display: flex; flex-direction: row; justify-content: space-between;">
                             <h2 data-translate="answers">Ответы</h2>
                             <div class="event-answers-controls">
                                 <button class="icon-action-button clear" onclick="document.getElementById('event-answers').classList.toggle('active')" style="transform: rotate(90deg); display: inline-block;">></button>
@@ -1242,7 +1245,7 @@
                         <div class="modal-header reqheader">
                             <!--button type="button" id="reqbonback" class="icon-action-button back"><span style="transform: rotate(180deg);">></span></button-->
                             <button type="button" id="reqbonback" class="icon-action-button" onclick="window.eventManager.openRequirementsEditor('mainreq', 'inpage')" style="width: min-content;">Основные</button>
-                            <h2 data-translate="requirements" id="requirements-editor-title">Условия</h2>
+                            <h2 draggable="true" class="drag-handle" data-translate="requirements" id="requirements-editor-title">Условия</h2>
                             <button type="button" id="add-requirement" class="icon-action-button add">
                                 <svg viewBox="0 0 24 24">
                                     <line x1="12" y1="5" x2="12" y2="19"></line>
