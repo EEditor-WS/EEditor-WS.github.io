@@ -625,10 +625,6 @@ select.main-page-input {
     display: none;
 }
 
-.requirement-editor.hidden {
-    visibility: hidden;
-}
-
 .ads {
     display: none;
 }

@@ -156,12 +156,6 @@
     min-width: 500px;
 }
 
-.reqheader.modal-header {
-    position: sticky;
-    top: 10;
-    z-index: 1000;
-}
-
 .event-requirements {
     background-color: var(--background-secondary);
     padding: 20px;

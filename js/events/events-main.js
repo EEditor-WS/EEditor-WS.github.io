@@ -1986,13 +1986,15 @@ generateUniqueId(minimumID = 0) {
         });
 
         addButton.onclick = () => {
-            editor.style.visibility = 'visible';
+            editor.classList.add('active');
             document.getElementById(`${prefix}requirement-type`).value = '';
             document.getElementById(`${prefix}requirement-action`).value = '';
             document.getElementById(`${prefix}requirement-subtype`).value = '';
             updateActions();
             updateValueField();
         };
+
+        document.getElementById('add-requirement2').onclick = addButton.onclick;
 
         list.onclick = (e) => {
             const button = e.target.closest('button');
@@ -2001,7 +2003,7 @@ generateUniqueId(minimumID = 0) {
             const index = parseInt(button.dataset.index);
             if (button.classList.contains('edit')) {
                 const item = items[index];
-                editor.style.visibility = 'visible';
+                editor.classList.add('active');
                 document.getElementById(`${prefix}requirement-type`).value = item.type;
                 // Сначала обновляем тип, чтобы создались нужные поля
                 updateActions();
@@ -2088,13 +2090,13 @@ generateUniqueId(minimumID = 0) {
                 items.push(item);
             }
 
-            editor.style.visibility = 'hidden';
+            editor.classList.remove('active');
             updateList();
             this.saveChanges();
         };
 
         cancelButton.onclick = () => {
-            editor.style.visibility = 'hidden';
+            editor.classList.add('remove');
             delete editor.dataset.editIndex;
         };
 
@@ -2106,7 +2108,7 @@ generateUniqueId(minimumID = 0) {
         updateList();
         updateActions();
         updateValueField();
-        editor.style.visibility = 'hidden';
+        editor.classList.remove('active');
         /*if (place === 'modal') {
             modal.classList.add('active');
         }*/
