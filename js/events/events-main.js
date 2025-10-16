@@ -1016,7 +1016,7 @@ generateUniqueId(minimumID = 0) {
                 { value: 'population_income', label: window.translator.translate('population_income') },
                 { value: 'population_increase', label: window.translator.translate('population_increase') },
                 // { value: 'add_oil', label: window.translator.translate('add_oil') },
-                { value: 'resource', label: window.translator.translate('resource') },
+                { value: 'add_resource', label: window.translator.translate('resource') },
                 { value: 'recruit_cost', label: window.translator.translate('recruit_cost') },
                 { value: 'accelerated_recruit_cost', label: window.translator.translate('accelerated_recruit_cost') },
                 { value: 'maintaining_army_cost_multiplier', label: window.translator.translate('maintaining_army_cost_multiplier') },
@@ -1622,7 +1622,7 @@ generateUniqueId(minimumID = 0) {
                         input.className = 'main-page-input';
                         input.placeholder = window.translator.translate('enter_number');
                         valueContainer.appendChild(input);
-                } else if (selectedType === 'resource') {
+                } else if (selectedType === 'add_resource') {
                     // Для ресурсов - dropdown в subtype и числовое поле в value
                     subtypeGroup.style.display = 'block';
                     const subtypeInput = document.getElementById(`${prefix}requirement-subtype`);
