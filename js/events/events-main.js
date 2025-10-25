@@ -887,7 +887,7 @@ generateUniqueId(minimumID = 0) {
             const cursorPosition = this.previewContent.selectionStart;
             
             // Обновляем JSON в текстовом поле
-        this.previewContent.value = JSON.stringify(this.jsonData, null, 4);
+            this.previewContent.value = JSON.stringify(this.jsonData, null, 4);
         
             // Восстанавливаем позицию курсора
             this.previewContent.setSelectionRange(cursorPosition, cursorPosition);
@@ -2073,7 +2073,7 @@ generateUniqueId(minimumID = 0) {
                 // Для булевых значений преобразуем строку в булево значение
                 value = value === 'true';
             }
-            if (!isBonus) isBonus = false;
+            try { if (!isBonus) isBonus = false; } catch {};
 
             const item = {
                 type,
