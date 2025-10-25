@@ -2073,13 +2073,14 @@ generateUniqueId(minimumID = 0) {
                 // Для булевых значений преобразуем строку в булево значение
                 value = value === 'true';
             }
+            if (!isBonus) isBonus = false;
 
             const item = {
                 type,
                 action: isBonus ? undefined : action,
                 subtype: subtype || undefined,
                 value,
-                duration: isBonus ? duration : undefined
+                duration: isBonus && reqbonConfig.bonuses[type].hasDuration ? duration : undefined
             };
 
             const editIndex = editor.dataset.editIndex;
@@ -2465,11 +2466,11 @@ function createCountrySelect(countries) {
 }
 
 document.addEventListener('DOMContentLoaded', () => { 
-    if (window.innerWidth <= 768) {
+    //if (window.innerWidth <= 768) {
         document.querySelectorAll('.requirements-button').forEach(button => {
             button.onclick = () => {
                 document.getElementById('event-requirements-jakor').scrollIntoView({ behavior: 'smooth' });
             };
         });
-    };
+    //};
 });
