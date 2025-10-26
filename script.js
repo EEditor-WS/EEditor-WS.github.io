@@ -897,6 +897,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Функция для обработки содержимого файла
 function handleFileContent(fileName, content) {
+    
+
+                    if (JSON.stringify(content).includes('{') && JSON.stringify(content).includes('}')) {
+
+                    } else {
+                        content.custom_events = {};
+                    }
+
     if (previewContent) {
         previewContent.value = content;
     }

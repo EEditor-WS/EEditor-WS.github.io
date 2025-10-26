@@ -1248,7 +1248,7 @@
 }
 
 .form-group textarea {
-    resize: vertical;
+    resize: both;
     min-height: 60px;
     background-color: var(----background-secondary);
     border: 1px solid #404040;
@@ -1257,6 +1257,10 @@
     font-size: 14px;
     width: 100%;
     padding: 8px;
+
+    font-family: ui-monospace;
+    font-size: 28px;
+    width: 432px;
 }
 
 .form-group textarea:focus {

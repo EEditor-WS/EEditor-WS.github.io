@@ -160,7 +160,7 @@ const authorsData = {
         color: "#3B83BD"
     },
     lurus: {
-        name: "@sfats",
+        name: "@lurus",
         link: "https://discord.com/users/764533673512927242",
         color: "#3B83BD"
     },
