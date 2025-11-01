@@ -164,4 +164,9 @@ const authorsData = {
         link: "https://discord.com/users/764533673512927242",
         color: "#3B83BD"
     },
+    vova: {
+        name: "@vova_lifi_19090",
+        link: "https://discord.com/users/1376239281583951965",
+        color: "#3B83BD"
+    },
 }

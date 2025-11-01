@@ -1013,6 +1013,21 @@ mapsData = [
         hiddenScore: 0,
         rights: true
     },
+    {
+        id: ["estebanf259", "euromagnus", "v1"],
+        title: "Euromagnus by Esteban",
+        author: ["estebanf259"],
+        description: "",
+        type: "continent",
+        region: [],
+        provinces: 4096,
+        features: [],
+        status: "completed",
+        publishDate: "2023-09-09",
+        lastUpdate: "2023-09-09",
+        load: "superheavy",
+        hiddenScore: 0
+    },
 ];
 
 const mapTypes = {
