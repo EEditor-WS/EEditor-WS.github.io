@@ -3363,4 +3363,28 @@ const scenariosData = [
         status: "in_development",
         img_special_styles: "height: 100%;",
     },
+    {
+        id: [
+            "estebanf259", 
+            "euromagnus", 
+            "v1",
+            "aotsm-en",
+        ],
+        title: "AotSM (EVENTS)",
+        author: ["vova", "eenot"],
+        year: "1851",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-11-03",
+        lastUpdate: "2025-11-03",
+        hiddenScore: 125,
+        type: "lore",
+        period: "alternative",
+        status: "in_development",
+        img_special_styles: "height: 100%;",
+    },
 ]
