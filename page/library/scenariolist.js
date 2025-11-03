@@ -1594,7 +1594,7 @@ const scenariosData = [
             "v1",
             "2022",
         ],
-        title: "Dead Hand | Aftermath of WW3",
+        title: "Dead Hand (EVENTS)",
         author: ["zachary"],
         year: "2022",
         languages: ["EN"],
@@ -1609,7 +1609,7 @@ const scenariosData = [
         // Hidden parameters
         publishDate: "2025-05-07",
         lastUpdate: "2025-05-07",
-        hiddenScore: 0,
+        hiddenScore: 75,
         type: "historical",
         period: "alternative",
         rights: true
@@ -3181,7 +3181,7 @@ const scenariosData = [
         ],
         title: "Two Sides (EVENTS)",
         author: ["trid"],
-        year: "2025",
+        year: "1934",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["RECOMMENDATION: SET BOTS TO PEACEFUL"],
@@ -3362,6 +3362,7 @@ const scenariosData = [
         period: "alternative",
         status: "in_development",
         img_special_styles: "height: 100%;",
+        rights: true
     },
     {
         id: [
@@ -3386,5 +3387,6 @@ const scenariosData = [
         period: "alternative",
         status: "in_development",
         img_special_styles: "height: 100%;",
+        rights: true
     },
 ]
