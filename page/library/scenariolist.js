@@ -3361,5 +3361,6 @@ const scenariosData = [
         type: "lore",
         period: "alternative",
         status: "in_development",
+        img_special_styles: "height: 100%;",
     },
 ]

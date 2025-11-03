@@ -514,6 +514,10 @@
     border-radius: var(--br) 15px 0 0;
 }
 
+.iss_full {
+    display: flex;
+}
+
 
 @media (max-width: 768px) {
     .download-cards {

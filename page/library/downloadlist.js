@@ -216,7 +216,7 @@ function generateScenarioCard(scenario) {
                 <div class="download-up">
                     <div class="download-image-container">
                         <a href="${detailsLink}">
-                            <img loading="lazy" src="${imagePath}" class="download-goto-page">
+                            <img loading="lazy" src="${imagePath}" class="download-goto-page" style="${scenario.img_special_styles || ''}">
                             <div class="gradient-overlay"></div>
                         </a>
                         <div class="download-awards">
