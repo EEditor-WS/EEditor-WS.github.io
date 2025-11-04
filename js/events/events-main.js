@@ -2047,7 +2047,7 @@ generateUniqueId(minimumID = 0) {
                 }
             }
 
-            if (!type || !value || (isBonus && config?.hasDuration && !duration)) {
+            if (!type /*|| !value*/ || (isBonus && config?.hasDuration && !duration)) {
                 console.warn('Не все обязательные поля заполнены');
                 return;
             }
