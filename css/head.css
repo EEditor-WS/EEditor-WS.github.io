@@ -409,3 +409,9 @@
     stroke-linejoin: round;
     fill: none;
 }
+
+@media (orientation: portrait) {
+    .icon-action-button.settings {
+        display: none;
+    }
+}

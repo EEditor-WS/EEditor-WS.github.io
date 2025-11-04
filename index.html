@@ -28,6 +28,7 @@
         <script src="js/countries.js"></script>
         <script src="js/events/events-main.js"></script>
         <script src="js/events/events-draggable.js"></script>
+        <script src="js/countries-draggable.js"></script>
         <script src="js/reforms.js"></script>
         <script src="js/auth.js"></script>
         <script src="js/backup.js"></script>
@@ -481,6 +482,14 @@
                     </div>
                     <div class="header-actions">
                         <div class="tooltip-container">
+                            <button id="set-columns-countries" class="icon-action-button clear" title="Настроить колонки" onclick="window.countryManager.showMobileSettingsForTable()">
+                                <svg viewBox="0 0 24 24">
+                                    
+                                </svg>
+                            </button>
+                            <div class="tooltip">Настроить колонки</div>
+                        </div>
+                        <div class="tooltip-container">
                             <button id="clear-filters" class="icon-action-button clear" title="Сбросить все фильтры">
                                 <svg viewBox="0 0 24 24">
                                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"></path>
@@ -544,8 +553,8 @@
                 <div class="table-container">
                     <table class="list-table">
                         <thead>
-                            <tr>
-                                <th data-sort="color">
+                            <tr class="countries_head">
+                                <th draggable=true data-sort="color">
                                     <div class="th-content">
                                         <div class="th-title">
                                             <span data-translate="color">Цвет</span>
@@ -557,7 +566,7 @@
                                         </div>
                                     </div>
                                 </th>
-                                <th data-sort="name">
+                                <th draggable=true data-sort="name">
                                     <div class="th-content">
                                         <div class="th-title">
                                             <span data-translate="name">Название</span>
@@ -569,7 +578,7 @@
                                         </div>
                                     </div>
                                 </th>
-                                <th data-sort="system_name">
+                                <th draggable=true data-sort="system_name">
                                     <div class="th-content">
                                         <div class="th-title">
                                             <span data-translate="system_name">Системное название</span>
@@ -581,7 +590,7 @@
                                         </div>
                                     </div>
                                 </th>
-                                <th data-sort="group">
+                                <th draggable=true data-sort="group">
                                     <div class="th-content">
                                         <div class="th-title">
                                             <span data-translate="event_group">Группа</span>
@@ -593,7 +602,7 @@
                                         </div>
                                     </div>
                                 </th>
-                                <th data-sort="provinces_count">
+                                <th draggable=true data-sort="provinces_count">
                                     <div class="th-content">
                                         <div class="th-title">
                                             <span data-translate="provinces_count">Количество провинций</span>
@@ -605,7 +614,7 @@
                                         </div>
                                     </div>
                                 </th>
-                                <th data-sort="capital">
+                                <th draggable=true data-sort="capital">
                                     <div class="th-content">
                                         <div class="th-title">
                                             <span data-translate="capital">Столица</span>
@@ -617,7 +626,7 @@
                                         </div>
                                     </div>
                                 </th>
-                                <th data-sort="power">
+                                <th draggable=true data-sort="power">
                                     <div class="th-content">
                                         <div class="th-title">
                                             <span data-translate="countryPower">Сила страны</span>

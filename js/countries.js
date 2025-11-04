@@ -489,13 +489,31 @@ class CountryManager {
                 this.hidePowerBreakdown(powerCell);
             });
 
-            tr.appendChild(colorCell);
+            /*tr.appendChild(colorCell);
             tr.appendChild(nameCell);
             tr.appendChild(sysNameCell);
             tr.appendChild(groupCell);
             tr.appendChild(provincesCell);
             tr.appendChild(capitalCell);
-            tr.appendChild(powerCell);
+            tr.appendChild(powerCell);*/
+
+            window.currentOrder.forEach((numer, number) => {
+                       if (window.currentOrder[number] === 'color') {
+                    tr.appendChild(colorCell);
+                } else if (window.currentOrder[number] === 'name') {
+                    tr.appendChild(nameCell);
+                } else if (window.currentOrder[number] === 'system_name') {
+                    tr.appendChild(sysNameCell);
+                } else if (window.currentOrder[number] === 'group') {
+                    tr.appendChild(groupCell);
+                } else if (window.currentOrder[number] === 'provinces_count') {
+                    tr.appendChild(provincesCell);
+                } else if (window.currentOrder[number] === 'capital') {
+                    tr.appendChild(capitalCell);
+                } else if (window.currentOrder[number] === 'power') {
+                    tr.appendChild(powerCell);
+                }
+            });
 
             tbody.appendChild(tr);
         });
@@ -2160,6 +2178,108 @@ class CountryManager {
                 window.saveChanges();
             }
         }
+    }
+
+    showMobileUpdatesOnTableHead() {
+
+    }
+
+    showMobileSettingsForTable() {
+        // список всех доступных опций (добавил group и power, а также group_name для совместимости)
+        const options = [
+            { value: undefined, text: window.translator.translate('none') },
+            { value: 'name', text: window.translator.translate('name') },
+            { value: 'system_name', text: window.translator.translate('system_name') },
+            { value: 'color', text: window.translator.translate('color') },
+            { value: 'provinces_count', text: window.translator.translate('provinces_count') },
+            { value: 'capital', text: window.translator.translate('capital') },
+            { value: 'group', text: window.translator.translate('group_name') },
+            { value: 'power', text: window.translator.translate('power') }
+        ];
+
+        // дефолтный порядок — используем копию
+        const defaultOrder = ['color', 'name', 'system_name', 'group', 'provinces_count', 'capital', 'power'];
+
+        // гарантируем, что window.currentOrder — массив (копия, чтобы не мутировать оригинал по ссылке)
+        if (!Array.isArray(window.currentOrder)) {
+            window.currentOrder = defaultOrder.slice();
+        } else {
+            // если длина currentOrder меньше 1 — заполнить дефолтом
+            if (window.currentOrder.length === 0) window.currentOrder = defaultOrder.slice();
+            else window.currentOrder = window.currentOrder.slice(); // копия
+        }
+
+        // Создаём модальное окно
+        const modal = document.createElement('div');
+        modal.className = 'modal active';
+
+        const selectsContainer = document.createElement('div');
+        selectsContainer.className = 'selects-container';
+
+        // Функция, проверяющая валидность значения (есть ли такое в options)
+        const isValidOption = (val) => options.some(o => o.value === val);
+
+        // Создаём селекты по количеству элементов в window.currentOrder
+        window.currentOrder.forEach((currentValue, index) => {
+            const select = document.createElement('select');
+            select.className = 'main-page-input';
+            select.dataset.orderIndex = String(index); // для отладки/использования
+
+            // наполняем опциями
+            options.forEach(opt => {
+                const optionEl = document.createElement('option');
+                optionEl.value = opt.value;
+                optionEl.textContent = opt.text;
+                select.appendChild(optionEl);
+            });
+
+            // если текущее значение валидно — ставим его, иначе ставим первый и обновляем currentOrder
+            if (isValidOption(currentValue)) {
+                select.value = currentValue;
+            } else {
+                select.selectedIndex = 0;
+                window.currentOrder[index] = select.value;
+            }
+
+            // при изменении — синхронизируем window.currentOrder
+            select.addEventListener('change', (e) => {
+                const idx = Number(e.currentTarget.dataset.orderIndex);
+                window.currentOrder[idx] = e.currentTarget.value;
+                window.countryManager.updateCountriesList()
+                // при надобности — можно испустить событие или вызвать функцию-колбэк
+                // например: document.dispatchEvent(new CustomEvent('currentOrderChanged', { detail: window.currentOrder }));
+                console.debug('window.currentOrder updated:', window.currentOrder);
+            });
+
+            selectsContainer.appendChild(select);
+        });
+
+        // соберём тело модального окна
+        modal.innerHTML = `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>${window.translator.translate('table_settings')}</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body" id="table-settings-body"></div>
+            </div>
+        `;
+
+        // добаляем в документ и вставляем селекты
+        document.body.appendChild(modal);
+        document.getElementById('table-settings-body').appendChild(selectsContainer);
+
+        // повесим обработчик закрытия — удаляем модалку из DOM
+        modal.querySelector('.close-modal').addEventListener('click', () => {
+            modal.remove();
+            window.countryManager.updateCountriesList()
+        });
+
+        // опционально: закрывать при клике по фону модалки (если нужно)
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.remove();
+            window.countryManager.updateCountriesList()
+        });
     }
 }
 

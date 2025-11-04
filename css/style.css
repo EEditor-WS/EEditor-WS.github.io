@@ -1258,9 +1258,9 @@
     width: 100%;
     padding: 8px;
 
-    font-family: ui-monospace;
+    /*font-family: ui-monospace;
     font-size: 28px;
-    width: 432px;
+    width: 432px;*/
 }
 
 .form-group textarea:focus {
