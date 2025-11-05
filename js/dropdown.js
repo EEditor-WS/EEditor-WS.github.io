@@ -63,7 +63,8 @@ function createCustomDropdown(container, options = [], config = {}) {
       el.dataset.index = idx;
       el.dataset.value = opt.value;
       el.setAttribute('aria-selected', opt.value === selectedValue ? 'true' : 'false');
-      el.innerHTML = `<span class="custom-dd__text">${opt.label}</span><span class="custom-dd__check" aria-hidden="true"></span>`;
+        const checkmark = (opt.disabled === true) ? '' : `<span class="custom-dd__check" aria-hidden="true"></span>`;
+      el.innerHTML = `<span class="custom-dd__text">${opt.label}</span>${checkmark}`;
       list.appendChild(el);
     });
     updateHighlight();
@@ -139,6 +140,12 @@ function createCustomDropdown(container, options = [], config = {}) {
     renderList();
   }
 
+    root.setOptions = (newOptions) => {
+        if (!Array.isArray(newOptions)) return;
+        options = newOptions.slice(); // обновляем все опции
+        filterBy(searchInput?.value || ''); // применяем фильтр и перерисовываем список
+    };
+
   // Initial render
   renderList();
 
@@ -160,6 +167,7 @@ function createCustomDropdown(container, options = [], config = {}) {
   list.addEventListener('click', (e) => {
     const opt = e.target.closest('.custom-dd__option');
     if (!opt) return;
+    if (opt.disabled === 'true') return;
     selectValue(opt.dataset.value);
   });
 
@@ -283,4 +291,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const cFlag = createCustomDropdown(document.getElementById('flagdiv'), flags, { placeholder: 'Flag', searchable: true });
     cFlag.setValue('');
     window.customDropFlag = cFlag; // for debugging
+
+    const cReqType = createCustomDropdown(document.getElementById('reqTypeDiv'),  [], { placeholder: 'Type', searchable: true });
+    cReqType.setValue('');
+    window.cReqType = cReqType; // for debugging
 });

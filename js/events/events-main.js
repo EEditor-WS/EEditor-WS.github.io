@@ -997,7 +997,8 @@ generateUniqueId(minimumID = 0) {
         const closeButton = modal.querySelector('.close-modal');
         const saveButton = document.getElementById(`${prefix}save-requirement`);
         const cancelButton = document.getElementById(`${prefix}cancel-requirement`);
-        const typeSelect = document.getElementById(`${prefix}requirement-type`);
+        //const typeSelect = document.getElementById(`${prefix}requirement-type`);
+        const typeSelect = window.cReqType;
         const actionSelect = document.getElementById(`${prefix}requirement-action`);
         const subtypeInput = document.getElementById(`${prefix}requirement-subtype`);
         const valueInput = document.getElementById(`${prefix}requirement-value`);
@@ -1019,7 +1020,7 @@ generateUniqueId(minimumID = 0) {
         const items = this.jsonData.custom_events[this.currentEvent][listType + (answer.includes('-') ? answer.split('-')[0] : '')] || [];
 
         // Обновляем список типов в зависимости от режима
-        typeSelect.innerHTML = '';
+        //typeSelect.innerHTML = '';
         if (isBonus) {
             // Для бонусов показываем только бонусы
             const bonusOptions = [
@@ -1074,9 +1075,10 @@ generateUniqueId(minimumID = 0) {
                 { value: 'annex_country', label: window.translator.translate('annex_country') },
                 { value: 'change_country', label: window.translator.translate('change_country') }
             ];
-            typeSelect.innerHTML = bonusOptions.map(opt => 
+            /*typeSelect.innerHTML = bonusOptions.map(opt => 
                 `<option value="${opt.value}" ${opt.disabled ? 'disabled' : ''}>${opt.label}</option>`
-            ).join('');
+            ).join('');*/
+            window.cReqType.setOptions(bonusOptions);
         } else {
             // Для требований показываем только требования
             const requirementOptions = [
@@ -1127,9 +1129,10 @@ generateUniqueId(minimumID = 0) {
                 { value: 'random_value', label: window.translator.translate('random_value') },
                 { value: 'count_of_tasks', label: window.translator.translate('count_of_tasks') }
             ];
-            typeSelect.innerHTML = requirementOptions.map(opt => 
+            /*typeSelect.innerHTML = requirementOptions.map(opt => 
                 `<option value="${opt.value}" ${opt.disabled ? 'disabled' : ''}>${opt.label}</option>`
-            ).join('');
+            ).join('');*/
+            window.cReqType.setOptions(requirementOptions);
         }
 
         // Функция для обновления списка
@@ -1224,7 +1227,8 @@ generateUniqueId(minimumID = 0) {
         const updateActions = () => {
             const actionSelect = document.getElementById(`${prefix}requirement-action`);
             const durationInput = document.getElementById(`${prefix}requirement-duration`);
-            const selectedType = typeSelect.value;
+            //const selectedType = typeSelect.value;
+            const selectedType = window.cReqType.getValue();
             const actions = [];
 
             if (isBonus) {
@@ -1273,9 +1277,12 @@ generateUniqueId(minimumID = 0) {
                     events.sort((a, b) => a.name.localeCompare(b.name));
                     
                     // Создаем опции для выпадающего списка
-                    select.innerHTML = events.map(event => 
-                        `<option value="${event.id}">${event.id} - ${event.name}${event.systemName ? ` (${event.systemName})` : ''}</option>`
-                    ).join('');
+                    select.innerHTML = `
+                        <option value="${this.currentEvent}">This Event ( ${this.currentEvent} )</option>
+                        ${events.map(event => 
+                            `<option value="${event.id}">${event.id} - ${event.name}${event.systemName ? ` (${event.systemName})` : ''}</option>`
+                        ).join('')}
+                    `;
                     
                     // Заменяем текстовое поле на выпадающий список
                     subtypeInput.parentNode.replaceChild(select, subtypeInput);
@@ -1311,9 +1318,12 @@ generateUniqueId(minimumID = 0) {
                     events.sort((a, b) => a.name.localeCompare(b.name));
                 
                     // Создаем опции для выпадающего списка
-                    select.innerHTML = events.map(event =>
-                        `<option value="${event.id}">${event.id} - ${event.name}${event.systemName ? ` (${event.systemName})` : ''}</option>`
-                    ).join('');
+                    select.innerHTML = `
+                        <option value="${this.currentEvent}">This Event ( ${this.currentEvent} )</option>
+                        ${events.map(event => 
+                            `<option value="${event.id}">${event.id} - ${event.name}${event.systemName ? ` (${event.systemName})` : ''}</option>`
+                        ).join('')}
+                    `;
                 
                     // Заменяем текстовое поле на выпадающий список
                     subtypeInput.parentNode.replaceChild(select, subtypeInput);
@@ -1380,9 +1390,12 @@ generateUniqueId(minimumID = 0) {
                     events.sort((a, b) => a.name.localeCompare(b.name));
                     
                     // Создаем опции для выпадающего списка
-                    select.innerHTML = events.map(event => 
-                        `<option value="${event.id}">${event.id} - ${event.name}</option>`
-                    ).join('');
+                    select.innerHTML = `
+                        <option value="${this.currentEvent}">This Event ( ${this.currentEvent} )</option>
+                        ${events.map(event => 
+                            `<option value="${event.id}">${event.id} - ${event.name}${event.systemName ? ` (${event.systemName})` : ''}</option>`
+                        ).join('')}
+                    `;
                     
                     valueContainer.appendChild(select);
                 } else if (['no_enemy'].includes(selectedType)) {
@@ -1433,7 +1446,8 @@ generateUniqueId(minimumID = 0) {
             const valueContainer = document.getElementById(`${prefix}requirement-value-container`);
             const subtypeLabel = document.querySelector('[for="requirement-subtype"]');
             const subtypeGroup = subtypeLabel ? subtypeLabel.parentElement : null;
-            const selectedType = document.getElementById(`${prefix}requirement-type`).value;
+            //const selectedType = document.getElementById(`${prefix}requirement-type`).value;
+            const selectedType = window.cReqType.getValue();
             const durationInput = document.getElementById(`${prefix}requirement-duration`);
 
             // Очищаем контейнер
@@ -2041,7 +2055,8 @@ generateUniqueId(minimumID = 0) {
         };
 
         saveButton.onclick = () => {
-            const type = document.getElementById(`${prefix}requirement-type`).value;
+            //const type = document.getElementById(`${prefix}requirement-type`).value;
+            const type = window.cReqType.getValue();
             const action = isBonus ? '' : document.getElementById(`${prefix}requirement-action`).value;
             const subtype = document.getElementById(`${prefix}requirement-subtype`).value;
             let value = document.getElementById(`${prefix}requirement-value`).value;
