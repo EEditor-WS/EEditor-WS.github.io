@@ -14,6 +14,7 @@
         <link rel="icon" type="image/x-icon" href="img/ico/ico.svg">
         <script src="lands_data.js"></script>
         <script src="js/base.js"></script>
+        <script src="js/dropdown.js"></script>
         <script src="js/notification.js"></script>
         <script src="js/translate/table.js"></script>
         <script src="js/translate/translate.js"></script>
@@ -43,6 +44,7 @@
         <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
         <link rel="stylesheet" href="css/!.css">
         <link rel="stylesheet" href="css/base.css">
+        <link rel="stylesheet" href="css//elib/dropdown.css">
         <link rel="stylesheet" href="css/countries.css">
         <link rel="stylesheet" href="css/events.css">
         <link rel="stylesheet" href="css/reforms.css">
@@ -753,12 +755,12 @@
                             <label for="country-political" data-translate="political_system">Политический строй</label>
                             <select id="country-political" name="political" class="main-page-input">
                                 <option value="" data-translate="">None</option>
-                                <option value="Democracy" data-translate="democracy">Демократия</option>
-                                <option value="Communism" data-translate="communism">Коммунизм</option>
-                                <option value="Monarchy" data-translate="monarchy">Монархия</option>
-                                <option value="Theocracy" data-translate="theocracy">Теократия</option>
-                                <option value="Fascism" data-translate="fascism">Фашизм</option>
-                                <option value="trade_republic" data-translate="trade_republic">Торговый республика</option>
+                                <option value="branch4" data-translate="democracy">Демократия</option>
+                                <option value="branch3" data-translate="communism">Коммунизм</option>
+                                <option value="branch2" data-translate="monarchy">Монархия</option>
+                                <option value="branch1" data-translate="theocracy">Теократия</option>
+                                <option value="branch6" data-translate="fascism">Фашизм</option>
+                                <option value="branch5" data-translate="trade_republic">Торговый республика</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -769,9 +771,9 @@
                             <label data-translate="vassalof">Вассал страны:</label>
                             <input type="text" id="country-vassalof" class="main-page-input" readonly title="Вассал страны">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="flagdiv">
                             <label data-translate="flag">Флаг:</label>
-                            <input type="text" id="country-flag" class="main-page-input" title="flag">
+                            <select type="text" id="country-flag" class="main-page-input" title="flag" style="display: none;"></select>
                         </div>
                     </div>
                     <div class="country-form">

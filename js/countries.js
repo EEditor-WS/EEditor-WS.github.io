@@ -379,11 +379,11 @@ class CountryManager {
             powerCell.textContent = country.power;
 
             // Добавляем обработчики событий
-            const handleClick = (e) => {
+            /*const handleClick = (e) => {
                 if (!e.target.closest('.context-menu')) {
                     this.openCountry(country.id);
                 }
-            };
+            };*/
 
             const handleContextMenu = (e) => {
                 e.preventDefault();
@@ -477,7 +477,7 @@ class CountryManager {
 
             // Добавляем обработчики к каждой ячейке
             [tr, colorCell, nameCell, sysNameCell, groupCell, provincesCell, capitalCell, powerCell].forEach(element => {
-                element.addEventListener('click', handleClick);
+                //element.addEventListener('click', handleClick);
                 element.addEventListener('contextmenu', handleContextMenu);
             });
 
@@ -596,6 +596,10 @@ class CountryManager {
             form.addEventListener('change', (e) => this.handleFormChange(e));
             form.addEventListener('submit', (e) => e.preventDefault());
         }
+        
+        window.customDropFlag.addEventListener('change', (e) => {
+            this.handleFormChange(e);
+        });
 
         // Обработчики отношений
         document.querySelectorAll('.add-country-button').forEach(button => {
@@ -975,13 +979,31 @@ class CountryManager {
             window.countryUtils.updateCountryHeader(country.name);
         }
 
+        let polit;
+        let countryBranch = country.branch || '';
+               if (countryBranch === 'branch3') {
+            polit = "Communism";
+        } else if (countryBranch === 'branch2') {
+            polit = "Monarchy";
+        } else if (countryBranch === 'branch1') {
+            polit = "Theocracy";
+        } else if (countryBranch === 'branch6') {
+            polit = "Fascism";
+        } else if (countryBranch === 'branch5') {
+            polit = "trade_republic";
+        } else if (countryBranch === 'branch4') {
+            polit = "Democracy";
+        } else {
+            
+        };
+
         this.setFormValues({
             'country-name': country.name,
             'country-group': country.group_name || '', // Changed from group_name to group
             'country-capital': country.capital_name || '',
             'country-capital-id': country.capital || '',
             'country-defeated': country.defeated ? 'true' : 'false',
-            'country-political': country.political || '',
+            'country-political': country.branch || '',
             'country-vassalof': country.vassal_of || ''
         });
 
@@ -1018,6 +1040,201 @@ class CountryManager {
         // Заполняем отношения
         this.populateRelationLists(country);
 
+        /*let flagInput = document.getElementById('country-flag');
+        let flags = [
+            "",
+            "haiti",
+            "flag_of_union",
+            "costa_rica",
+            "panama1861",
+            "colombia",
+            "venezuela1861",
+            "equador",
+            "mexic01861",
+            "peru",
+            "chile",
+            "argentine",
+            "bolivia",
+            "paraguay",
+            "uruguay",
+            "second_flag_empire_of_brazil",
+            "union_jack",
+            "confederate_states_of_america",
+            "russian_empire",
+            "guatemala",
+            "spain",
+            "france",
+            "netherlands",
+            "denmark",
+            "el_salvador",
+            "honduras",
+            "nicaragua",
+            "soviet_russia",
+            "ireland",
+            "weimar_republic",
+            "russian_empire2",
+            "serbia",
+            "netherlands",
+            "belgium",
+            "luxembourg",
+            "lithuania",
+            "latvia",
+            "estonia",
+            "finland",
+            "sweden",
+            "norway",
+            "switzerland",
+            "czechoslovakia",
+            "romania",
+            "bulgaria",
+            "greece",
+            "albania",
+            "bavarian_soviet_republic",
+            "sultanate_egypt",
+            "persia",
+            "italy",
+            "ukrainian_peoples_republic",
+            "belarusian_peoples_republic",
+            "spain",
+            "poland",
+            "italy",
+            "montenegro",
+            "german_empire",
+            "ottoman_empire",
+            "portugal",
+            "ukrainian_peoples_republic",
+            "azerbaijan_democratic_republic",
+            "armenia",
+            "democratic_republic_of_georgia",
+            "soviet_union",
+            "ireland",
+            "netherlands",
+            "luxembourg",
+            "lithuania",
+            "latvia",
+            "sweden",
+            "norway",
+            "switzerland",
+            "austria",
+            "romania",
+            "ottoman_empire",
+            "greece",
+            "hungary",
+            "yugoslavia",
+            "italy",
+            "spain",
+            "poland",
+            "montenegro",
+            "german_empire",
+            "azerbaijan",
+            "luxembourg",
+            "ireland",
+            "italy",
+            "switzerland",
+            "yugoslavia",
+            "ukrainian_peoples_republic",
+            "poland",
+            "weimar_republic",
+            "hungary",
+            "free_state_of_bottleneck",
+            "romania",
+            "spain",
+            "sweden",
+            "norway",
+            "ottoman_empire",
+            "persia",
+            "greece",
+            "ukrainian_peoples_republic",
+            "russian_empire2",
+            "northem_corps",
+            "lithuania",
+            "makhnovshchina",
+            "netherlands",
+            "sultanate_egypt",
+            "iceland",
+            "latvian_soviet_republic",
+            "greece",
+            "poland",
+            "norway",
+            "spain",
+            "italy",
+            "sweden",
+            "german_empire",
+            "ottoman_empire",
+            "luxembourg",
+            "austria_hungary",
+            "russian_empire2",
+            "ireland",
+            "latvia",
+            "lithuania",
+            "makhnovshchina",
+            "switzerland",
+            "netherlands",
+            "romania",
+            "serbia",
+            "montenegro",
+            "greece",
+            "poland",
+            "norway",
+            "spain",
+            "italy",
+            "sweden",
+            "german_empire",
+            "ottoman_empire",
+            "luxembourg",
+            "russian_empire2",
+            "ireland",
+            "latvia",
+            "lithuania",
+            "switzerland",
+            "netherlands",
+            "romania",
+            "german_empire",
+            "russian_empire",
+            "ottoman_empire",
+            "sultanate_egypt",
+            "italy",
+            "greece",
+            "netherlands",
+            "ireland",
+            "romania",
+            "mexic01861",
+            "persia",
+            "serbia",
+            "iceland",
+            "netherlands",
+            "second_flag_empire_of_brazil",
+            "peru",
+            "luxembourg",
+            "venezuela1861",
+            "uruguay",
+            "paraguay",
+            "guatemala",
+            "honduras",
+            "nicaragua",
+            "spain",
+            "haiti",
+            "norway",
+            "sweden",
+            "montenegro",
+            "hungary",
+            "switzerland",
+            "poland",
+            "lithuania",
+            "latvia",
+        ];
+
+        // Очищаем select перед добавлением (на случай, если там уже что-то было)
+        flagInput.innerHTML = '';
+        flags.sort((a, b) => a.localeCompare(b));
+        const uniqueFlags = [...new Set(flags)].sort((a, b) => a.localeCompare(b));
+        uniqueFlags.forEach(flag => {
+            const option = document.createElement('option');
+            option.value = flag;
+            option.textContent = flag//.replace(/_/g, ' '); // заменяем подчёркивания на пробелы для красоты
+            flagInput.appendChild(option);
+        });*/
+
         // Переключаемся на страницу редактирования без дополнительных обновлений
         document.querySelectorAll('.page').forEach(page => {
             page.classList.remove('active');
@@ -1027,6 +1244,8 @@ class CountryManager {
         document.querySelectorAll('.nav-button').forEach(btn => {
             btn.classList.remove('active');
         });
+
+        window.customDropFlag.setValue(country.banner || '');
     }
 
     setFormValues(values) {
@@ -1390,15 +1609,43 @@ class CountryManager {
             } else {
                 delete country.capital;
             }
+            country.eenot = 'raccoon';
             
             country.defeated = document.getElementById('country-defeated').value === 'true';
-            country.political = document.getElementById('country-political').value;
+            // from old versions // country.political = document.getElementById('country-political').value;
+            let polit = document.getElementById('country-political').value;
+            if (polit === 'communism') {
+                country.branch = 'branch3';
+                country.opened_institutions = ["institution1"];
+            } else if (polit === 'monarchy') {
+                country.branch = 'branch2';
+                country.opened_institutions = ["institution1"];
+            } else if (polit === 'theocracy') {
+                country.branch = 'branch1';
+                country.opened_institutions = ["institution1"];
+            } else if (polit === 'fascism') {
+                country.branch = 'branch6';
+                country.opened_institutions = ["institution1"];
+            } else if (polit === 'trade_republic') {
+                country.branch = 'branch5';
+                country.opened_institutions = ["institution1"];
+            } else if (polit === 'democracy') {
+                country.branch = 'branch4';
+                country.opened_institutions = ["institution1"];
+            } else {
+                delete country.branch;
+                delete country.opened_institutions;
+            };
+                country.branch = polit;
+                if (polit != '') country.opened_institutions = ["institution1"];
 
             // Обновляем цвет
             const r = parseFloat(document.getElementById('country-color-r').value) || 0;
             const g = parseFloat(document.getElementById('country-color-g').value) || 0;
             const b = parseFloat(document.getElementById('country-color-b').value) || 0;
             country.color = [r, g, b, 255];
+
+            country.banner = window.customDropFlag.getValue();
 
             // Обновляем отношения
             this.updateRelations(country);
