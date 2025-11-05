@@ -1,8 +1,5 @@
 .custom-dd {
     --bg: var(--background-secondary-great);
-    --border: #c9c9c9;
-    --accent: #2b6aed;
-    --radius: 8px;
     --shadow: 0 6px 18px rgba(24,24,24,0.12);
     width: 280px;
     font-family: Inter, system-ui, "Segoe UI", Roboto, Arial;
@@ -19,8 +16,8 @@
     gap: 8px;
     padding: 10px 12px;
     background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
+    border: 1px solid var(--bc);
+    border-radius: var(--br);
     cursor: pointer;
     justify-content: space-between;
 }
@@ -57,9 +54,10 @@
     background: var(--bg);
     border-radius: 10px;
     box-shadow: var(--shadow);
-    border: 1px solid var(--border);
-    max-height: 220px;
-    overflow: auto;
+    border: 1px solid var(--bc);
+    /*max-height: 220px;*/
+    max-height: 500px;
+    overflow: scroll;
     z-index: 1000;
     padding: 6px;
 }
@@ -85,7 +83,7 @@
 }
 .custom-dd__option[aria-selected="true"] {
     background: rgba(43,106,237,0.08);
-    color: var(--accent);
+    color: var(--accent-color);
 }
 .custom-dd__option:hover,
 .custom-dd__option[data-highlight="true"] {
@@ -110,6 +108,12 @@
     background: var(--bg);
 }
 .custom-dd__option[aria-selected="true"] .custom-dd__check {
-    background: var(--accent);
-    border-color: var(--accent);
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.custom-dd__option-img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
 }

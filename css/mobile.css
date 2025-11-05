@@ -1,0 +1,23 @@
+@media (orientation: portrait) {
+    #flagdiv {
+    width: 350%;
+    }
+
+    .info-container {
+        margin: 0;
+    }
+
+    .event-form {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    .image-select-container {
+        flex-direction: column;
+    }
+
+    #firstheaddrag {
+        display: none;
+    }
+}

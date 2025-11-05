@@ -1248,7 +1248,7 @@
 }
 
 .form-group textarea {
-    resize: both;
+    resize: vertical;
     min-height: 60px;
     background-color: var(----background-secondary);
     border: 1px solid #404040;
