@@ -229,11 +229,25 @@ class EventManager {
             const requirementsCell = document.createElement('td');
             requirementsCell.innerHTML = convertObjectToReadableString(event.requirements);
 
-            tr.appendChild(idCell);
+            /*tr.appendChild(idCell);
             tr.appendChild(groupCell);
             tr.appendChild(nameCell);
             tr.appendChild(titleCell);
-            tr.appendChild(requirementsCell);
+            tr.appendChild(requirementsCell);*/
+
+            window.currentOrderEvents.forEach((numer, number) => {
+                       if (window.currentOrderEvents[number] === 'id') {
+                    tr.appendChild(idCell);
+                } else if (window.currentOrderEvents[number] === 'group') {
+                    tr.appendChild(groupCell);
+                } else if (window.currentOrderEvents[number] === 'name') {
+                    tr.appendChild(nameCell);
+                } else if (window.currentOrderEvents[number] === 'title') {
+                    tr.appendChild(titleCell);
+                } else if (window.currentOrderEvents[number] === 'requirements') {
+                    tr.appendChild(requirementsCell);
+                }
+            });
 
             tbody.appendChild(tr);
         });
@@ -2097,7 +2111,7 @@ generateUniqueId(minimumID = 0) {
         };
 
         cancelButton.onclick = () => {
-            editor.classList.add('remove');
+            editor.classList.remove('active');
             delete editor.dataset.editIndex;
         };
 

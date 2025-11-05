@@ -497,20 +497,20 @@ class CountryManager {
             tr.appendChild(capitalCell);
             tr.appendChild(powerCell);*/
 
-            window.currentOrder.forEach((numer, number) => {
-                       if (window.currentOrder[number] === 'color') {
+            window.currentOrderCountries.forEach((numer, number) => {
+                       if (window.currentOrderCountries[number] === 'color') {
                     tr.appendChild(colorCell);
-                } else if (window.currentOrder[number] === 'name') {
+                } else if (window.currentOrderCountries[number] === 'name') {
                     tr.appendChild(nameCell);
-                } else if (window.currentOrder[number] === 'system_name') {
+                } else if (window.currentOrderCountries[number] === 'system_name') {
                     tr.appendChild(sysNameCell);
-                } else if (window.currentOrder[number] === 'group') {
+                } else if (window.currentOrderCountries[number] === 'group') {
                     tr.appendChild(groupCell);
-                } else if (window.currentOrder[number] === 'provinces_count') {
+                } else if (window.currentOrderCountries[number] === 'provinces_count') {
                     tr.appendChild(provincesCell);
-                } else if (window.currentOrder[number] === 'capital') {
+                } else if (window.currentOrderCountries[number] === 'capital') {
                     tr.appendChild(capitalCell);
-                } else if (window.currentOrder[number] === 'power') {
+                } else if (window.currentOrderCountries[number] === 'power') {
                     tr.appendChild(powerCell);
                 }
             });
@@ -2447,13 +2447,13 @@ class CountryManager {
         // дефолтный порядок — используем копию
         const defaultOrder = ['color', 'name', 'system_name', 'group', 'provinces_count', 'capital', 'power'];
 
-        // гарантируем, что window.currentOrder — массив (копия, чтобы не мутировать оригинал по ссылке)
-        if (!Array.isArray(window.currentOrder)) {
-            window.currentOrder = defaultOrder.slice();
+        // гарантируем, что window.currentOrderCountries — массив (копия, чтобы не мутировать оригинал по ссылке)
+        if (!Array.isArray(window.currentOrderCountries)) {
+            window.currentOrderCountries = defaultOrder.slice();
         } else {
-            // если длина currentOrder меньше 1 — заполнить дефолтом
-            if (window.currentOrder.length === 0) window.currentOrder = defaultOrder.slice();
-            else window.currentOrder = window.currentOrder.slice(); // копия
+            // если длина currentOrderCountries меньше 1 — заполнить дефолтом
+            if (window.currentOrderCountries.length === 0) window.currentOrderCountries = defaultOrder.slice();
+            else window.currentOrderCountries = window.currentOrderCountries.slice(); // копия
         }
 
         // Создаём модальное окно
@@ -2466,8 +2466,8 @@ class CountryManager {
         // Функция, проверяющая валидность значения (есть ли такое в options)
         const isValidOption = (val) => options.some(o => o.value === val);
 
-        // Создаём селекты по количеству элементов в window.currentOrder
-        window.currentOrder.forEach((currentValue, index) => {
+        // Создаём селекты по количеству элементов в window.currentOrderCountries
+        window.currentOrderCountries.forEach((currentValue, index) => {
             const select = document.createElement('select');
             select.className = 'main-page-input';
             select.dataset.orderIndex = String(index); // для отладки/использования
@@ -2480,22 +2480,22 @@ class CountryManager {
                 select.appendChild(optionEl);
             });
 
-            // если текущее значение валидно — ставим его, иначе ставим первый и обновляем currentOrder
+            // если текущее значение валидно — ставим его, иначе ставим первый и обновляем currentOrderCountries
             if (isValidOption(currentValue)) {
                 select.value = currentValue;
             } else {
                 select.selectedIndex = 0;
-                window.currentOrder[index] = select.value;
+                window.currentOrderCountries[index] = select.value;
             }
 
-            // при изменении — синхронизируем window.currentOrder
+            // при изменении — синхронизируем window.currentOrderCountries
             select.addEventListener('change', (e) => {
                 const idx = Number(e.currentTarget.dataset.orderIndex);
-                window.currentOrder[idx] = e.currentTarget.value;
+                window.currentOrderCountries[idx] = e.currentTarget.value;
                 window.countryManager.updateCountriesList()
                 // при надобности — можно испустить событие или вызвать функцию-колбэк
-                // например: document.dispatchEvent(new CustomEvent('currentOrderChanged', { detail: window.currentOrder }));
-                console.debug('window.currentOrder updated:', window.currentOrder);
+                // например: document.dispatchEvent(new CustomEvent('currentOrderCountriesChanged', { detail: window.currentOrderCountries }));
+                console.debug('window.currentOrderCountries updated:', window.currentOrderCountries);
             });
 
             selectsContainer.appendChild(select);

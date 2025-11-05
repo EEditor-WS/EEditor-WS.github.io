@@ -30,6 +30,7 @@
         <script src="js/events/events-main.js"></script>
         <script src="js/events/events-draggable.js"></script>
         <script src="js/countries-draggable.js"></script>
+        <script src="js/events-draggable.js"></script>
         <script src="js/reforms.js"></script>
         <script src="js/auth.js"></script>
         <script src="js/backup.js"></script>
@@ -932,7 +933,7 @@
                 <div class="table-container">
                     <table class="list-table">
                         <thead>
-                            <tr>
+                            <tr class="events_head">
                                 <!--th data-sort="ico">
                                     <div class="th-content">
                                         <div class="th-title">
@@ -945,7 +946,7 @@
                                         </div>
                                     </div>
                                 </th-->
-                                <th data-sort="id">
+                                <th draggable=true data-sort="id">
                                     <div class="th-content">
                                         <div class="th-title">
                                             <span data-translate="id">ID</span>
@@ -957,7 +958,7 @@
                                         </div>
                                     </div>
                                 </th>
-                                <th data-sort="group">
+                                <th draggable=true data-sort="group">
                                     <div class="th-content">
                                         <div class="th-title">
                                             <span data-translate="event_group">Группа</span>
@@ -969,7 +970,7 @@
                                         </div>
                                     </div>
                                 </th>
-                                <th data-sort="name">
+                                <th draggable=true data-sort="name">
                                     <div class="th-content">
                                         <div class="th-title">
                                             <span data-translate="name">Название</span>
@@ -981,7 +982,7 @@
                                         </div>
                                     </div>
                                 </th>
-                                <th data-sort="title">
+                                <th draggable="true" data-sort="title">
                                     <div class="th-content">
                                         <div class="th-title">
                                             <span data-translate="title">Заголовок</span>
@@ -993,7 +994,7 @@
                                         </div>
                                     </div>
                                 </th>
-                                <th data-sort="requirements">
+                                <th draggable=true data-sort="requirements">
                                     <div class="th-content">
                                         <div class="th-title">
                                             <span data-translate="requirements">Условия</span>

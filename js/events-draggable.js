@@ -1,18 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const container = document.querySelector('.countries_head');
+  const container = document.querySelector('.events_head');
   if (!container) return;
 
   // Все перетаскиваемые блоки должны иметь attribute draggable="true"
   const draggables = container.querySelectorAll('[draggable]'); 
   let dragged = null;
-  window.currentOrderCountries = []; // сюда записывается текущая последовательность
+  window.currentOrderEvents = []; // сюда записывается текущая последовательность
 
   // Функция для обновления порядка элементов
   function updateOrder() {
-    window.currentOrderCountries = Array.from(container.querySelectorAll('[draggable]'))
+    window.currentOrderEvents = Array.from(container.querySelectorAll('[draggable]'))
       .map(el => el.dataset.sort);
-    console.log('Текущий порядок:', window.currentOrderCountries);
-    window.countryManager.updateCountriesList()
+    console.log('Текущий порядок:', window.currentOrderEvents);
+    window.eventManager.updateEventsList()
   }
 
   function swapElements(a, b) {

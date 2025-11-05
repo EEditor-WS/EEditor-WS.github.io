@@ -937,6 +937,7 @@
   line-height: 1.6;
   max-width: 45dvw;
   max-height: 110px;
+  overflow-y: auto;
 }
 .list-requirement-item {
   margin: 4px 0;
