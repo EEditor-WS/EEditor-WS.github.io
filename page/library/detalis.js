@@ -14,6 +14,13 @@ let scenarioArray;
 let scenarioConent;
 let scenarioMap;
 
+let liblink;
+if (window.location.href.includes('file:///')) {
+    libLink = 'http://192.168.100.18:8081/';
+} else {
+    libLink = 'https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // Убедитесь, что scenariosData объявлена где-то глобально или доступна в этой области видимости
     if (typeof scenariosData === 'undefined' || !Array.isArray(scenariosData)) {
@@ -76,15 +83,15 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         /*if (scenarioConent.description) { document.getElementById('description-text').value = scenarioConent.eeditor.description;
         } else { document.getElementById('description-text').value = 'Описание отсутствует.'; };*/
-        if (scenarioConent.description) { document.getElementById('description').innerHTML = discordMarkdownToHtml(scenarioConent.eeditor.description);
+        if (scenarioConent.eeditor.description) { document.getElementById('description').innerHTML = discordMarkdownToHtml(scenarioConent.eeditor.description);
         } else { document.getElementById('description').innerHTML = 'Описание отсутствует.'; };
 
         //alert(`Найден сценарий: ${foundScenario.title}`);
 
-        document.getElementById('screenshoot').src = `https://raw.githubusercontent.com/EEditor-WS/eeditor-ws-data/refs/heads/main/lib/${foundScenario.id.slice(0, 2).join('/')}/${cleanScenarioId}.png`;
+        document.getElementById('screenshoot').src = `${libLink}lib/${foundScenario.id.slice(0, 2).join('/')}/${cleanScenarioId}.png`;
     }
 
-    fetch(`https://raw.githubusercontent.com/EEditor-WS/eeditor-ws-data/refs/heads/main/lib/${foundScenario.id.slice(0, 2).join('/')}/${rawScenarioId.replace(/\.json$/i, '')}.json`)
+    fetch(`${libLink}lib/${foundScenario.id.slice(0, 2).join('/')}/${rawScenarioId.replace(/\.json$/i, '')}.json`)
     .then(response => {
         // 1. Проверяем статус HTTP
         if (!response.ok) {

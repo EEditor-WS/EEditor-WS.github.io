@@ -1028,6 +1028,66 @@ mapsData = [
         load: "superheavy",
         hiddenScore: 0
     },
+    {
+        id: ["estebanf259", "world-redux", "v1"],
+        title: "World Redux by Esteban",
+        author: ["estebanf259"],
+        description: "",
+        type: "world",
+        region: [],
+        provinces: 1044,
+        features: [],
+        status: "completed",
+        publishDate: "2023-07-03",
+        lastUpdate: "2023-07-09",
+        load: "superheavy",
+        hiddenScore: 0
+    },
+    {
+        id: ["gooby", "syria", "v2"],
+        title: "Syria by Gooby",
+        author: ["gooby", "zachary"],
+        description: "",
+        type: "country",
+        region: [],
+        provinces: 158,
+        features: [],
+        status: "completed",
+        publishDate: "2025-10-04",
+        lastUpdate: "2025-10-05",
+        load: "light",
+        hiddenScore: 0
+    },
+    {
+        id: ["shutkin", "dolina", "v1"],
+        title: "Деймор - Долина",
+        author: ["shutkin"],
+        description: "",
+        type: "region",
+        region: [],
+        provinces: 453,
+        features: [],
+        status: "completed",
+        publishDate: "2025-06-21",
+        lastUpdate: "2025-06-21",
+        load: "normal",
+        hiddenScore: 0
+    },
+    {
+        id: ["shutkin", "vostmond", "v3"],
+        title: "Деймор - Востмонт",
+        author: ["shutkin"],
+        description: "",
+        type: "continent",
+        region: [],
+        provinces: 760,
+        features: [],
+        status: "completed",
+        publishDate: "2023-08-10",
+        lastUpdate: "2025-06-07",
+        load: "normal",
+        hiddenScore: 0
+    },
 ];
 
 const mapTypes = {

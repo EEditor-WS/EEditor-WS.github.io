@@ -169,4 +169,24 @@ const authorsData = {
         link: "https://discord.com/users/1376239281583951965",
         color: "#3B83BD"
     },
+    mat: {
+        name: "@Mat971345",
+        link: "https://discord.com/users/946593397169324094",
+        color: "#3B83BD"
+    },
+    preferablynothing: {
+        name: "@PreferablyNothing",
+        link: "https://discord.com/users/1325022120299860114",
+        color: "#3B83BD"
+    },
+    gooby: {
+        name: "@goobysilly",
+        link: "https://discord.com/users/1362516428242161856",
+        color: "#3B83BD"
+    },
+    shutkin: {
+        name: "@Andrey Shutkin",
+        link: "https://discord.com/users/613275285982281728",
+        color: "#3B83BD"
+    },
 }
