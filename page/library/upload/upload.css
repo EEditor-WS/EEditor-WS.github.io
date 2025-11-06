@@ -1,3 +1,7 @@
+body {
+    min-height: 100dvh;
+}
+
 .form {
     display: block;
     margin-top: 0em;
@@ -19,6 +23,7 @@
     padding: 20px;
     align-items: flex-start;
     justify-items: stretch;
+    padding-top: 0;
 }
 
 .screenshoot {
@@ -42,7 +47,7 @@
     box-sizing: border-box;
     padding: 8px 12px;
     background-color: var(----background-secondary);
-    border: 1px solid #1f1f1f;
+    /*border: 1px solid #1f1f1f;*/
     border-radius: var(--br);
     color: #e0e0e0;
     font-size: 14px;
@@ -53,6 +58,7 @@
     justify-content: space-between;
     gap: 20px;
     padding: 20px;
+    padding-bottom: 0;
 }
 
 .action-button {
@@ -72,4 +78,40 @@
 .uploadThing {
     display: flex;
     flex-direction: row;
+}
+
+.form-element {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 900px) {
+    .mainform {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (orientation: portrait) {
+    .params-scenario-library {
+        flex-direction: column;
+    }
+    
+    input {
+        width: 100%;
+    }
+
+    .mainform {
+        width: calc(100% - 40px);
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (orientation: portrait) and (max-width: 360px) {
+    .mainform {
+        grid-template-columns: repeat(1, 1fr);
+    }    
+}
+
+.description a {
+    color: #7cb7ff;
 }

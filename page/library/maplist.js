@@ -1092,7 +1092,7 @@ function generateMapCard(map) {
     }
 
     return `
-        <div class="download-card" 
+        <div class="download-card map-card" 
             data-title="${map.title}"
             data-author="${authorsData[map.author]?.name}" 
             data-type="${map.type}" 
@@ -1110,7 +1110,7 @@ function generateMapCard(map) {
                 <div class="download-up">
                     <div class="download-image-container">
                         <a href="${detailsLink}">
-                            <img src="${imagePath}" class="download-goto-page" style="width: 250px; height: 156px; object-fit: cover; border-radius: var(--br) 15px 0 0;">
+                            <img src="${imagePath}" class="download-goto-page" style="/*width: 250px; height: 156px; object-fit: cover; border-radius: var(--br) 15px 0 0;*/">
                         </a>
                         <div class="download-awards">
                             ${awardsHTML}

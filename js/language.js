@@ -176,6 +176,7 @@ const translations = {
         "map_hash": "Map Hash",
         "num_of_provinces": "Number of Provinces",
         "min_game_version": "Minimum Game Version",
+        "description_eelib": "Description for EE Lib",
 
         // Dropdown values
         "easy": "Easy",
@@ -1110,6 +1111,7 @@ const translations = {
         "map_hash": "Хэш Карты",
         "num_of_provinces": "Количество Провинций",
         "min_game_version": "Минимальная Версия Игры",
+        "description_eelib": "Описание для EE Lib",
 
         // Значения выпадающих списков
         "easy": "Легко",
@@ -1949,6 +1951,7 @@ const translations = {
         "map_hash": "Хеш карти",
         "num_of_provinces": "Кількість провінцій",
         "min_game_version": "Мінімальна версія гри",
+        "description_eelib": "Опис для EELib",
 
         // Значения выпадающих списков
         "easy": "Легко",
@@ -2593,6 +2596,7 @@ const translations = {
         "fog_of_war": "Туман вайны",
         "map_hash": "Хэш карты",
         "min_game_version": "Мінімальная версія гульні",
+        "description_eelib": "Апісанне гульні для EELib",
 
         // Падзеі
         "event_image": "Малюнак падзеі",
@@ -2701,6 +2705,7 @@ const translations = {
         "fog_of_war": "Соғыс тұманы",
         "map_hash": "Карта хэші",
         "min_game_version": "Минималды ойын нұсқасы",
+        "description_eelib": "EELib үшін ойын сипаттамасы",
 
         // Оқиғалар
         "event_image": "Оқиға суреті",
@@ -2985,6 +2990,7 @@ const translations = {
         "map_hash": "Хаш-ул хэрций",
         "num_of_provinces": "Нумэрул де провинчий",
         "min_game_version": "Версиуня минимэ а жокулуй",
+        "description_eelib": "Дескриеря жокулуй пентру EELib",
 
         // Значения выпадающих списков
         "easy": "Ушор",

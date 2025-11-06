@@ -253,8 +253,10 @@ function fillFormFromJson(jsonData) {
             // Text values
             'name': { type: 'text', id: 'name' },
             'id': { type: 'text', id: 'id' },
-            'player_land': { type: 'select', id: 'player_land' }
+            'player_land': { type: 'select', id: 'player_land' },
         };
+
+        document.getElementById('description_eelib').value = jsonData.eeditor?.description || '';
 
         // Process each field according to mapping
         for (const [key, config] of Object.entries(mappings)) {
@@ -555,6 +557,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
             }
+
+            document.getElementById('description_eelib').value = jsonData.eeditor?.description || '';
             
             // Обновляем содержимое редактора
             previewContent.value = JSON.stringify(jsonData, null, 4);
@@ -610,6 +614,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 'id': { type: 'text', id: 'id' },
                 'player_land': { type: 'select', id: 'player_land' }
             };
+
+            document.getElementById('description_eelib').value = jsonData.eeditor?.description || '';
 
             // Обрабатываем каждое поле согласно маппингу
             for (const [key, config] of Object.entries(mappings)) {
@@ -1036,6 +1042,24 @@ function handleFileContent(fileName, content) {
         const formData = new FormData(settingsForm);
         const data = Object.fromEntries(formData.entries());
         updateJsonEditor(data);
+    });
+
+    document.getElementById('description_eelib').addEventListener('input', (e) => {
+        if (!isJsonFile || !previewContent) return;
+        try {
+            const jsonData = JSON.parse(previewContent.value);
+            jsonData.eeditor = jsonData.eeditor || {};
+            jsonData.eeditor.description = e.target.value;
+            previewContent.value = JSON.stringify(jsonData, null, 4);
+            if (fileInfo) {
+                fileInfo.textContent = window.translator.translate('changes_not_saved');
+            }
+        } catch (error) {
+            console.error('Ошибка при обновлении описания:', error);
+            if (fileInfo) {
+                fileInfo.textContent = window.translator.translate('description_update_error');
+            }
+        }
     });
 
     // Обработчик изменения цвета воды

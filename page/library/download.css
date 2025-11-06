@@ -395,14 +395,14 @@
     font-size: 0.9em;
 }
 
-.form-element input,
+/*.form-element input,
 .form-element select {
     padding: 8px;
     border: 1px solid var(--border-color);
     border-radius: var(--br);
     background-color: var(--background-primary);
     color: var(--text-primary);
-}
+}*/
 
 .form-element input[type="date"] {
     color-scheme: dark;
@@ -519,7 +519,7 @@
 }
 
 
-@media (max-width: 768px) {
+@media (orientation: portrait) or (max-width: 720px) {
     .download-cards {
         flex-direction: column; /* Переключаемся на вертикальное расположение карточек */
         align-items: center; /* Центрируем карточки по горизонтали */
@@ -547,4 +547,8 @@
         width: 50px;
         height: 50px;
     }
+}
+
+#download-cards .map-card {
+    display: none;
 }
