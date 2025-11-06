@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('screenshoot').src = `https://raw.githubusercontent.com/EEditor-WS/eeditor-ws-data/refs/heads/main/lib/${foundScenario.id.slice(0, 2).join('/')}/${cleanScenarioId}.png`;
     }
 
-    fetch(`https://raw.githubusercontent.com/EEditor-WS/eeditor-ws-data/refs/heads/main/lib/${foundScenario.id.slice(0, 2).join('/')}/${rawScenarioId}.json`)
+    fetch(`https://raw.githubusercontent.com/EEditor-WS/eeditor-ws-data/refs/heads/main/lib/${foundScenario.id.slice(0, 2).join('/')}/${rawScenarioId.replace(/\.json$/i, '')}.json`)
     .then(response => {
         // 1. Проверяем статус HTTP
         if (!response.ok) {
