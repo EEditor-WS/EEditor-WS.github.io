@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         /*if (scenarioConent.description) { document.getElementById('description-text').value = scenarioConent.eeditor.description;
         } else { document.getElementById('description-text').value = 'Описание отсутствует.'; };*/
-        if (scenarioConent.eeditor.description) { document.getElementById('description').innerHTML = discordMarkdownToHtml(scenarioConent.eeditor.description);
+        if (scenarioConent.eeditor?.description) { document.getElementById('description').innerHTML = discordMarkdownToHtml(scenarioConent.eeditor.description);
         } else { document.getElementById('description').innerHTML = 'Описание отсутствует.'; };
 
         //alert(`Найден сценарий: ${foundScenario.title}`);

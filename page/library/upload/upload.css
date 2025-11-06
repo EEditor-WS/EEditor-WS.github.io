@@ -115,3 +115,7 @@ body {
 .description a {
     color: #7cb7ff;
 }
+
+.nav-button {
+    padding: 0;
+}

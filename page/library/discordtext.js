@@ -179,19 +179,29 @@ function discordMarkdownToHtml(input) {
   }
 
   // process inline formatting (links, spoilers, bold, italic, underline, strike)
-  function processInlineFormatting(s) {
+  // allowLinks = true/false — when false, link recognition is skipped (used to avoid nested links inside link text)
+  function processInlineFormatting(s, allowLinks = true) {
     if (!s) return '';
 
-    // links [text](url)
-    s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, text, url) => {
-      const safeUrl = escapeHtml(url);
-      return `<a href="${safeUrl}" target="_blank" rel="noopener noreferrer">${text}</a>`;
-    });
+    // We'll extract top-level links first (if allowed), replace them with placeholders,
+    // then run other inline processing, then restore link placeholders.
+    const linkPlaceholders = [];
+    if (allowLinks) {
+      s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, text, url) => {
+        // text is already HTML-escaped upstream; but we want to allow other inline formatting
+        // inside link text — except links themselves. So process the text with allowLinks = false.
+        const processedText = processInlineFormatting(text, false);
+        const safeUrl = escapeHtml(url);
+        const idx = linkPlaceholders.length;
+        // store final anchor HTML to restore after other replacements
+        linkPlaceholders.push(`<a href="${safeUrl}" target="_blank" rel="noopener noreferrer">${processedText}</a>`);
+        return `\u0000LINK${idx}\u0000`;
+      });
+    }
 
     // spoilers ||text|| -> span.spoiler with simple reveal on click
     s = s.replace(/\|\|([\s\S]+?)\|\|/g, (m, inside) => {
       const safeInside = inside; // already escaped
-      // inline onclick reveal (simple): remove blur and change color
       return `<span class="spoiler" style="background:#444;color:#444;filter:blur(4px);cursor:pointer;" onclick="this.style.filter='none';this.style.color='inherit';this.style.background='transparent';">${safeInside}</span>`;
     });
 
@@ -204,6 +214,11 @@ function discordMarkdownToHtml(input) {
     // italic *text* or _text_ (avoid matching ** and __ which are handled)
     s = s.replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '<em>$1</em>');
     s = s.replace(/(?<!_)_([^_]+)_(?!_)/g, '<em>$1</em>');
+
+    // restore link placeholders (if any)
+    if (allowLinks && linkPlaceholders.length > 0) {
+      s = s.replace(/\u0000LINK(\d+)\u0000/g, (_, idx) => linkPlaceholders[Number(idx)] || '');
+    }
 
     return s;
   }
