@@ -178,6 +178,14 @@ const translations = {
         "min_game_version": "Minimum Game Version",
         "description_eelib": "Description for EE Lib",
 
+        "author": "Author",
+        "language": "Language",
+        "dateofupload": "Date of upload",
+        "dateofupdate": "Date of update",
+        "provinces": "Provinces",
+        "economic": "Economy",
+        "resources": "Resources",
+
         // Dropdown values
         "easy": "Easy",
         "standard": "Standard",
@@ -1112,6 +1120,14 @@ const translations = {
         "num_of_provinces": "Количество Провинций",
         "min_game_version": "Минимальная Версия Игры",
         "description_eelib": "Описание для EE Lib",
+
+        "author": "Автор",
+        "language": "Язык",
+        "dateofupload": "Дата загрузки",
+        "dateofupdate": "Дата обновления",
+        "provinces": "Провинции",
+        "economic": "Экономика",
+        "resources": "Ресурсыs",
 
         // Значения выпадающих списков
         "easy": "Легко",
