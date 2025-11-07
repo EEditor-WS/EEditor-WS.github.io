@@ -1213,7 +1213,8 @@ generateUniqueId(minimumID = 0) {
                 `;
                 row.addEventListener('click', () => {
                     // При клике на строку — заполняем форму текущими значениями
-                    if (typeSelect) typeSelect.value = item.type || '';
+                    //if (typeSelect) typeSelect.value = item.type || '';
+                    if (typeSelect) window.cReqType.setValue(item.type || '');
                     if (actionSelect) actionSelect.value = item.action || '';
                     if (subtypeInput) subtypeInput.value = item.subtype || '';
                     if (valueInput) valueInput.value = item.value || '';
