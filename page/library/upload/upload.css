@@ -119,3 +119,11 @@ body {
 .nav-button {
     padding: 0;
 }
+
+.downloadButtonDetalis {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+}

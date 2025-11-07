@@ -1,0 +1,17 @@
+body {
+    min-height: 100dvh;
+}
+
+.action-button.back {
+    height: 36px;
+}
+
+
+/* TEST */
+/*.filter-group-content.collapsed {
+    height: auto;
+}
+
+#lib-filters {
+    display: block;
+}

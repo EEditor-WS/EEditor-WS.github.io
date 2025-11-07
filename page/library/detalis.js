@@ -14,12 +14,12 @@ let scenarioArray;
 let scenarioConent;
 let scenarioMap;
 
-let liblink;
+/*let liblink;
 if (window.location.href.includes('file:///')) {
     libLink = 'http://192.168.100.18:8081/';
 } else {
     libLink = 'https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/';
-}
+}*/
 
 document.addEventListener('DOMContentLoaded', () => {
     // Убедитесь, что scenariosData объявлена где-то глобально или доступна в этой области видимости
@@ -89,6 +89,13 @@ document.addEventListener('DOMContentLoaded', () => {
         //alert(`Найден сценарий: ${foundScenario.title}`);
 
         document.getElementById('screenshoot').src = `${libLink}lib/${foundScenario.id.slice(0, 2).join('/')}/${cleanScenarioId}.png`;
+
+        document.getElementById('downloadScenarioDetalis').onclick = () => {
+            libDownloadScenario(`${libLink}lib/${foundScenario.id.slice(0, 2).join('/')}/${cleanScenarioId}.json`, ' ', `${foundScenario.id[0]}`, `${foundScenario.id[1]}`, `${foundScenario.id[2]}`, true);
+        };
+        document.getElementById('downloadMapDetalis').onclick = () => {
+            downloadMapMap(`${foundScenario.id[0]}_${foundScenario.id[1]}_${foundScenario.id[2]}`);
+        };
     }
 
     fetch(`${libLink}lib/${foundScenario.id.slice(0, 2).join('/')}/${rawScenarioId.replace(/\.json$/i, '')}.json`)

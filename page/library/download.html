@@ -24,10 +24,15 @@
         <link rel="stylesheet" href="../../css/style.css">
         <link rel="stylesheet" href="../../css/head.css">
         <link rel="stylesheet" href="download.css">
+        <link rel="stylesheet" href="modern/general.css">
+        <link rel="stylesheet" href="modern/main.css">
+        <!--script src="download.js"></script-->
         <script src="../../js/fetch.js"></script>
         <script src="authorlist.js"></script>
         <script src="scenariolist.js"></script>
         <script src="maplist.js"></script>
+        <script src="modern/openPage.js"></script>
+        <script src="modern/filters.js"></script>
         <script src="../../js/library.js"></script>
         <script src="../../js/language.js"></script>
         <script src="../../js/translator.js"></script>
@@ -35,7 +40,7 @@
         <script src="../../js/auth.js"></script>
         <script src="../../js/head.js"></script>
         <script src="downloadlist.js"></script>
-        <script src="download.js"></script>
+        <script src="modern/cardgenerator.js"></script>
         <!--script src="../download/download.js"></script-->
         <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -69,6 +74,7 @@
                     <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </button>
+            <button class="nav-button" data-page="main" data-translate="main">Главная</button>
             <button class="nav-button active" data-page="scenarios" data-translate="scenarios">Сценарии</button>
             <button class="nav-button" data-page="maps" data-translate="maps">Карты</button>
             <div class="nav-actions">
@@ -170,7 +176,47 @@
                 </div>
             </nav>
 
-        <div id="scenarios" class="page list active">
+        <div id="main" class="page list active">
+            <div class="main-container">
+                <!--div class="lib-header">
+                    <h1 data-translate="main">Main</h1>
+                    <div class="header-actions">
+                        <div class="tooltip-container">
+                            <button id="filters" class="icon-action-button filters" title="Filters" onclick="libShowFilters()">
+                                <svg viewBox="0 0 24 24" width="14" height="14">
+                                    <path d="M3 4h18l-7 8v8l-4-2v-6z" fill="none" stroke="currentColor" stroke-width="2"></path>
+                                </svg>
+                            </button>
+                            <div class="tooltip tooltip-positioned">Migrate Groups</div>
+                        </div>
+                    </div-->
+                </div-->
+                <div class="lib-modern-down">
+                    <div class="lib-modern-group">
+                        <h1 >With Events</h1>
+                        <div class="lib_modern_grouplist" id="libgroup_events"></div>
+                    </div>
+                    <div class="lib-modern-group">
+                        <h1 >New</h1>
+                        <div class="lib_modern_grouplist" id="libgroup_new"></div>
+                    </div>
+                    <div class="lib-modern-group">
+                        <h1 >Detailed</h1>
+                        <div class="lib_modern_grouplist" id="libgroup_detailed"></div>
+                    </div>
+                    <div class="lib-modern-group">
+                        <h1 >Unusual</h1>
+                        <div class="lib_modern_grouplist" id="libgroup_unusual"></div>
+                    </div>
+                    <div class="lib-modern-group">
+                        <h1 >Alternative History</h1>
+                        <div class="lib_modern_grouplist" id="libgroup_althist"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="scenarios" class="page list">
             <div class="download-container">
                 <div class="lib-header">
                     <h1 data-translate="scenarios">Сценарии</h1>

@@ -313,14 +313,7 @@ async function downloadMap(mapId) {
 
 // Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
-    // Подключаем maplist.js
-    const script = document.createElement('script');
-    script.src = 'maplist.js';
-    script.onload = () => {
-        // После загрузки списка карт, отображаем их
-        displayMaps();
-    };
-    document.head.appendChild(script);
+    displayMaps();
 
     // Добавляем обработчики для кнопок навигации
     document.querySelectorAll('.nav-button').forEach(button => {

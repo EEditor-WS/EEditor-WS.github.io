@@ -119,7 +119,8 @@ function calculateScenarioScore(scenario) {
 
 // Sort scenarios by score
 function getSortedScenarios() {
-    return scenariosData
+//    return scenariosData
+    return window.libFilters.filterScenarios()
         .map(scenario => ({
             ...scenario,
             score: calculateScenarioScore(scenario)
@@ -283,10 +284,12 @@ function generateScenarioCard(scenario) {
 }
 
 // Download handling functions
-async function libDownloadScenario(rawUrl, mapId, autor, map, version) {
+async function libDownloadScenario(rawUrl, mapId, autor, map, version, dontMap = false) {
     try {
         const fileName = rawUrl.split('/').pop();
         await downloadFile(rawUrl, fileName);
+
+        if (dontMap === true) return;
 
         if (mapId && !downloadedMaps.has(mapId) && !inGameMaps.includes(mapId)) {
             const mapData = getMapData(mapId);
