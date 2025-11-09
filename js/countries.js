@@ -1609,7 +1609,7 @@ class CountryManager {
             } else {
                 delete country.capital;
             }
-            country.eenot = 'raccoon';
+            //country.eenot = 'raccoon';
             
             country.defeated = document.getElementById('country-defeated').value === 'true';
             // from old versions // country.political = document.getElementById('country-political').value;
