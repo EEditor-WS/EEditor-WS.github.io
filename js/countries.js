@@ -1614,7 +1614,7 @@ class CountryManager {
             country.defeated = document.getElementById('country-defeated').value === 'true';
             // from old versions // country.political = document.getElementById('country-political').value;
             let polit = document.getElementById('country-political').value;
-            if (polit === 'communism') {
+            /*if (polit === 'communism') {
                 country.branch = 'branch3';
                 country.opened_institutions = ["institution1"];
             } else if (polit === 'monarchy') {
@@ -1635,9 +1635,14 @@ class CountryManager {
             } else {
                 delete country.branch;
                 delete country.opened_institutions;
-            };
+            };*/
+            if (polit != '') {
                 country.branch = polit;
-                if (polit != '') country.opened_institutions = ["institution1"];
+                country.opened_institutions = ["institution1"];
+            } else {
+                delete country.branch;
+                delete country.opened_institutions;
+            }
 
             // Обновляем цвет
             const r = parseFloat(document.getElementById('country-color-r').value) || 0;
@@ -1645,7 +1650,12 @@ class CountryManager {
             const b = parseFloat(document.getElementById('country-color-b').value) || 0;
             country.color = [r, g, b, 255];
 
-            country.banner = window.customDropFlag.getValue();
+            let banner = window.customDropFlag.getValue();
+            if (banner != '') {
+                country.banner = banner
+            } else {
+                delete country.banner;
+            }
 
             // Обновляем отношения
             this.updateRelations(country);
