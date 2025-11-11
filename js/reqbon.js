@@ -44,6 +44,8 @@ const reqbonConfig = {
         add_random_culture_population: { hasDuration: false },
         diplomacy_alliance: { hasDuration: false },
         diplomacy_peace: { hasDuration: false },
+        diplomacy_become_vassal: { hasDuration: false },
+        diplomacy_get_vassal: { hasDuration: false },
         add_shock_infantry: { hasDuration: false },
         annex_country: { hasDuration: false },
         add_tank: { hasDuration: false },
