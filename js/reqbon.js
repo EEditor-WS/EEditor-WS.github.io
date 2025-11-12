@@ -19,7 +19,7 @@ const reqbonConfig = {
         discontent: { hasDuration: true },
 
         // Бонусы без длительности
-        resource: { 
+        add_resource: { 
             hasDuration: false,
             subtypes: [
                 'gold',
@@ -46,6 +46,7 @@ const reqbonConfig = {
         diplomacy_peace: { hasDuration: false },
         diplomacy_become_vassal: { hasDuration: false },
         diplomacy_get_vassal: { hasDuration: false },
+        resource: { hasDuration: false },
         add_shock_infantry: { hasDuration: false },
         annex_country: { hasDuration: false },
         add_tank: { hasDuration: false },
