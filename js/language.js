@@ -1212,7 +1212,7 @@ const translations = {
         "common_requirements": "Условия события",
         "answers": "Ответы",
 
-        "mainreq": "Основные условия",
+        "mainreq": "Условия",
         "1-req": "Условия 1",
         "2-req": "Условия 2",
         "3-req": "Условия 3",

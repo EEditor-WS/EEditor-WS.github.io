@@ -806,6 +806,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Функция для открытия файла
     async function openFile() {
+        document.querySelector('body').classList.add('opened');
         try {
             const isAndroidApp = typeof Android !== 'undefined';
 
@@ -899,10 +900,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             showError('Ошибка', err.message);
         }
+        document.querySelector('body').classList.add('opened');
     }
 
 // Функция для обработки содержимого файла
 function handleFileContent(fileName, content) {
+    document.querySelector('body').classList.add('opened');
     
 
                     if (JSON.stringify(content).includes('{') && JSON.stringify(content).includes('}')) {

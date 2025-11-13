@@ -1,0 +1,157 @@
+@media (orientation: portrait) {
+    #flagdiv {
+    width: 350%;
+    }
+
+    .info-container {
+        margin: 0;
+    }
+
+    .event-form {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    .image-select-container {
+        flex-direction: column;
+    }
+
+    #firstheaddrag {
+        display: none;
+    }
+
+    .nav-header {
+        background: 0;
+        border: 0;
+        box-shadow: none;
+    }
+
+    #data {
+        display: none;
+    }
+    .opened #data {
+        display: block;
+    }
+
+    #samsungzakos .namezone {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+        height: calc(100dvh - 200px - 73px - 48px - 56px - 20px - 20px);
+        transition: all 0.2s ease;
+    }
+
+    .opened #samsungzakos .namezone {
+        height: calc((100dvh - 200px - 73px - 48px - 56px - 20px - 20px) / 2);
+    }
+
+    #samsungzakos .nav-icons {
+        justify-content: flex-end;
+    }
+
+    #mobile-nav {
+        position: fixed;
+        bottom: -1px;
+        background-color: var(--background-secondary-great);
+        padding: 0.5rem 0;
+        width: 100%;
+        height: (--header-height);
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    #mobile-nav .nav-button {
+        aspect-ratio: 0;
+        width: 100px;
+    }
+
+    .page {
+        padding-bottom: 52px;
+    }
+
+    .nav-buttons-container {
+        display: none;
+    }
+
+    .account-button-icon {
+        display: none !important;
+    }
+    .account-button-icon-mobile {
+        display: block;
+    }
+
+    .page {
+        /*max-height: calc(100dvh - 48px - 56px);
+        overflow: hidden;*/
+    }
+
+    .pcountries, .pevents, .preforms {
+        max-height: calc(100dvh - 100px);
+        overflow-y: hidden;
+    }
+    .pcountry-edit {
+        max-height: calc(100dvh - 100px);
+        overflow-y: auto;
+    }
+
+    .description_eelib {
+        padding: 20px;
+    }
+
+    .country-form {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    #country-form .form-group {
+        width: 100%;
+    }
+
+    #country-form .country-form.black-back {
+        grid-template-columns: repeat(2, 1fr);
+        overflow-x: scroll;
+    }
+
+    .event-main-settings {
+        overflow-x: scroll;
+        max-width: calc(100dvw - 80px);
+    }
+
+    #reqbonback {
+        aspect-ratio: 1;
+    }
+
+    #add-requirement {
+        aspect-ratio: 1;
+        min-width: 0;
+        margin: 0;
+    }
+
+    #requirements-editor-title {
+        padding: 0;
+        margin: 0;
+        border: 0;
+    }
+
+    #reqTypeDiv .custom-dd__menu {
+        position: -ms-page;
+        top: -25vh;
+        height: 75dvh;
+    }
+
+    .list-container, .info-container {
+        background: 0;
+    }
+
+    .country-form {
+        background: 0;
+    }
+
+    .country-form.black-back, .array-list {
+        background: var(--background-secondary);
+    }
+}
