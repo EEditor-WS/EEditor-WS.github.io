@@ -544,7 +544,7 @@
                     </div>
                     <div class="header-actions">
                         <div class="tooltip-container">
-                            <button id="set-columns-countries" class="icon-action-button clear" title="Настроить колонки" onclick="window.countryManager.showMobileSettingsForTable()">
+                            <button id="set-columns-countries" class="icon-action-button clear newabtn" title="Настроить колонки" onclick="window.countryManager.showMobileSettingsForTable()">
                                 <svg viewBox="0 0 24 24">
                                     
                                 </svg>
@@ -552,7 +552,7 @@
                             <div class="tooltip">Настроить колонки</div>
                         </div>
                         <div class="tooltip-container">
-                            <button id="clear-filters" class="icon-action-button clear" title="Сбросить все фильтры">
+                            <button id="clear-filters" class="icon-action-button clear newabtn" title="Сбросить все фильтры">
                                 <svg viewBox="0 0 24 24">
                                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"></path>
                                 </svg>
@@ -560,16 +560,13 @@
                             <div class="tooltip">Сбросить все фильтры</div>
                         </div>
                         <div class="tooltip-container">
-                            <button id="add-country" class="icon-action-button add" title="Добавить страну">
-                                <svg viewBox="0 0 24 24">
-                                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                                </svg>
+                            <button id="add-country" class="icon-action-button add newabtn" title="Добавить страну">
+                                <img src="img/ui/add.svg">
                             </button>
                             <div class="tooltip">Добавить страну</div>
                         </div>
                         <div class="tooltip-container">
-                            <button id="countries-actions-button" class="icon-action-button more" title="Действия" onclick="const dropdown = document.getElementById('countriesActionsDropdown'); dropdown.classList.toggle('active');">
+                            <button id="countries-actions-button" class="icon-action-button more newabtn" title="Действия" onclick="const dropdown = document.getElementById('countriesActionsDropdown'); dropdown.classList.toggle('active');">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <circle cx="12" cy="12" r="1"></circle>
                                     <circle cx="12" cy="5" r="1"></circle>
@@ -1532,9 +1529,8 @@
                 </div>
                 <div class="modal-footer">
                     <button id="add-selected-country" class="action-button">
-                        <svg viewBox="0 0 24 24">
-                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15.7499 12.6252H12.6249V15.7502C12.6249 16.1642 12.2889 16.5002 11.8749 16.5002C11.4609 16.5002 11.1249 16.1642 11.1249 15.7502V12.6252H7.99988C7.58588 12.6252 7.24988 12.2892 7.24988 11.8752C7.24988 11.4612 7.58588 11.1252 7.99988 11.1252H11.1249V8.00018C11.1249 7.58618 11.4609 7.25018 11.8749 7.25018C12.2889 7.25018 12.6249 7.58618 12.6249 8.00018V11.1252H15.7499C16.1639 11.1252 16.4999 11.4612 16.4999 11.8752C16.4999 12.2892 16.1639 12.6252 15.7499 12.6252ZM11.8749 3.50018C7.25688 3.50018 3.49988 7.25618 3.49988 11.8752C3.49988 16.4922 7.25688 20.2502 11.8749 20.2502C16.4939 20.2502 20.2499 16.4922 20.2499 11.8752C20.2499 7.25618 16.4939 3.50018 11.8749 3.50018Z" fill="white"/>
                         </svg>
                         <span data-translate="add">Добавить</span>
                     </button>

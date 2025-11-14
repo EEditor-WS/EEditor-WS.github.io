@@ -636,3 +636,15 @@ select.main-page-input {
 textarea {
     background-color: var(----background-secondary);
 }
+
+button.icon-action-button.newabtn {
+    padding: 0;
+    border: 0;
+    color: #33333300;
+    background: 0;
+}
+
+button.icon-action-button.newabtn svg {
+    height: 30px;
+    width: 30px;
+}
