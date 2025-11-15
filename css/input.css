@@ -1,0 +1,5 @@
+input[type="text"] {
+    background-image: url(../img/ui/text.svg);
+    background-repeat: no-repeat;
+    background-position: calc(100% - 0.5rem);
+}

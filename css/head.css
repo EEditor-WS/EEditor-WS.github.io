@@ -410,8 +410,6 @@
     fill: none;
 }
 
-@media (orientation: portrait) {
-    .icon-action-button.settings {
-        display: none;
-    }
+.account-item img {
+    width: 24px;
 }

@@ -183,9 +183,24 @@ const reqbonConfig = {
             actions: ['equal', 'not_equal']
         },
         controls_capital: {
-            subType: 'country', // Changed from true to 'country' to specify the type
+            subType: 'country',
             value: 'country',
             actions: ['equal', 'not_equal']
+        },
+        event_choice: {
+            subType: 'event',
+            value: 'number',
+            actions: 'country'
+        },
+        money: {
+            subType: false,
+            value: 'number',
+            actions: ['more', 'equal', 'less']
+        },
+        discontent: {
+            subType: false,
+            value: 'number',
+            actions: ['more', 'equal', 'less']
         }
     }
 };

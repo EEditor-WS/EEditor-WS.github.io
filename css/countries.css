@@ -267,3 +267,7 @@ select[id^="requirement-subtype"] {
 .tooltip-container {
     position: relative;
 }
+
+.relation-controls img {
+    width: 20px;    
+}

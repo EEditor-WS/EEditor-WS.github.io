@@ -1447,18 +1447,11 @@ class CountryManager {
                 </div>
                 <div class="info-actions">
                     <button class="action-button save-params requirements-editor-button primary">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-                            <polyline points="17 21 17 13 7 13 7 21"></polyline>
-                            <polyline points="7 3 7 8 15 8"></polyline>
-                        </svg>
+                        <img src="img/ui/save.svg">
                         <span>${window.translator.translate('save')}</span>
                     </button>
                     <button class="requirements-editor-button secondary">
-                        <svg viewBox="0 0 24 24">
-                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                        </svg>
+                        <img src="img/ui/block.svg">
                         <span>${window.translator.translate('cancel')}</span>
                     </button>
                 </div>

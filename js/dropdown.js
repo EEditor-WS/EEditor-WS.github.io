@@ -22,9 +22,7 @@ function createCustomDropdown(container, options = [], config = {}) {
     root.innerHTML = `
         <div class="custom-dd__control" tabindex="0">
             <span class="custom-dd__label custom-dd__placeholder">${placeholder}</span>
-            <svg class="custom-dd__chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-                <path fill="currentColor" d="M7 10l5 5 5-5z"/>
-            </svg>
+            <img src="img/ui/arrow/down.svg">
         </div>
         <div class="custom-dd__menu" hidden>
             ${searchable ? '<input type="text" class="custom-dd__search" placeholder="Поиск..."/>' : ''}

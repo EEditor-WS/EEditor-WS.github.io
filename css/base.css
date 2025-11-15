@@ -507,7 +507,7 @@ body {
     display: inline-block;
 }
 
-.nav-button svg {
+.nav-button svg, .nav-button img {
     width: 18px;
     height: 18px;
     stroke: currentColor;
@@ -637,14 +637,14 @@ textarea {
     background-color: var(----background-secondary);
 }
 
-button.icon-action-button.newabtn {
+button.icon-action-button.newabtn, button.add-country-button.newabtn {
     padding: 0;
     border: 0;
     color: #33333300;
     background: 0;
 }
 
-button.icon-action-button.newabtn svg {
+button.icon-action-button.newabtn svg, button.add-country-button.newabtn img {
     height: 30px;
     width: 30px;
 }

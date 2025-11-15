@@ -8,7 +8,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
     width: 100%;
     box-sizing: border-box;
 }
@@ -268,7 +267,7 @@
 }
 
 .event-edit h2 {
-    margin: 0 0 20px 0;
+    margin: 0;
 }
 
 /* Убираем дублирующиеся стили */
@@ -491,10 +490,6 @@
     display: flex;
     gap: 10px;
     justify-content: flex-end;
-    margin-top: 20px;
-}
-
-#add-requirement {
     margin-top: 20px;
 }
 

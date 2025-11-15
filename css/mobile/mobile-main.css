@@ -154,4 +154,13 @@
     .country-form.black-back, .array-list {
         background: var(--background-secondary);
     }
+
+    #force-save.action-button.save-button {
+        border: 0;
+    }
+
+    
+    .icon-action-button.settings {
+        display: none;
+    }
 }

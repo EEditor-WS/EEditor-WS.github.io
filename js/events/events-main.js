@@ -379,12 +379,7 @@ class EventManager {
                         <span>${window.translator.translate('duplicate')}</span>
                     </div>
                     <div class="context-menu-item" id="copy-event-context">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-                            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-                            <line x1="12" y1="11" x2="12" y2="17"></line>
-                            <line x1="9" y1="14" x2="15" y2="14"></line>
-                        </svg>
+                        <img src="img/ui/file/paste.svg">
                         <span>${window.translator.translate('copy-to-clipboard')}</span>
                     </div>
                     <div class="context-menu-item delete" id="delete-event-context">
@@ -1254,6 +1249,16 @@ generateUniqueId(minimumID = 0) {
                 // Получаем доступные действия из конфигурации
                 if (['month', 'num_of_provinces', 'year', 'turn', 'random_value', 'count_of_tasks', 'tax', 'discontent', 'money', 'land_power'].includes(selectedType)) {
                     actions.push('more', 'equal', 'less');
+                    
+                    // Создаем числовое поле для значения
+                    const valueContainer = document.getElementById(`${prefix}requirement-value-container`);
+                    valueContainer.innerHTML = '';
+                    const input = document.createElement('input');
+                    input.type = 'number';
+                    input.id = 'requirement-value';
+                    input.className = 'main-page-input';
+                    input.placeholder = window.translator.translate('enter_number');
+                    valueContainer.appendChild(input);
                 } else if (['near_water', 'is_player', 'has_pact', 'has_alliance', 'has_vassal', 'has_sanctions', 'has_war', 'independent_land', 'land_name', 'building_exists', 'land_id', "group_name", 'political_institution', 'enemy_near_capital', 'is_defeated', 'is_neighbor', 'lost_capital', "controls_capital", "received_event"].includes(selectedType)) {
                     actions.push('equal', 'not_equal');
                 } else if (['cooldown'].includes(selectedType)) {
@@ -1642,15 +1647,6 @@ generateUniqueId(minimumID = 0) {
                         input.className = 'main-page-input';
                         input.placeholder = window.translator.translate('enter_number');
                         valueContainer.appendChild(input);
-                } else if (['cooldown'].includes(selectedType)) {
-                    // Для числовых значений без длительности
-                    subtypeGroup.style.display = 'none';
-                        const input = document.createElement('input');
-                        input.type = 'number';
-                        input.id = 'requirement-value';
-                        input.className = 'main-page-input';
-                        input.placeholder = window.translator.translate('enter_number');
-                        valueContainer.appendChild(input);
                 } else if (selectedType === 'add_resource') {
                     // Для ресурсов - dropdown в subtype и числовое поле в value
                     subtypeGroup.style.display = 'block';
@@ -1699,6 +1695,15 @@ generateUniqueId(minimumID = 0) {
                             </select>
                         `;
                     subtypeGroup.style.display = 'none';
+                } else if (['cooldown'].includes(selectedType)) {
+                    // Для числовых значений без длительности
+                    subtypeGroup.style.display = 'none';
+                        const input = document.createElement('input');
+                        input.type = 'number';
+                        input.id = 'requirement-value';
+                        input.className = 'main-page-input';
+                        input.placeholder = window.translator.translate('enter_number');
+                        valueContainer.appendChild(input);
                 } else if (['political_institution'].includes(selectedType)) {
                     // Для политических институтов
                     const select = document.createElement('select');
@@ -1995,7 +2000,9 @@ generateUniqueId(minimumID = 0) {
                     valueContainer.appendChild(select);
                 } else {
                     const input = document.createElement('input');
-                    input.type = 'text';
+                    if      (window.reqbonConfig?.bonuses?.[selectedType])        { input.type = window.reqbonConfig?.bonuses?.[selectedType].value       }
+                    else if (window.reqbonConfig?.requirements?.[selectedType])   { input.type = window.reqbonConfig?.requirements?.[selectedType].value  }
+                    else    { input.type =  'text'; console.log('no type in reqbon') }
                     input.id = 'requirement-value';
                     input.className = 'main-page-input';
                     input.placeholder = 

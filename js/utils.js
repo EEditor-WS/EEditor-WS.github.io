@@ -215,6 +215,6 @@ window.DOMUtils = DOMUtils;
 document.addEventListener('DOMContentLoaded', function() {
     if (new URLSearchParams(window.location.search).get('dev') === 'true') {
         document.body.classList.add('dev_mode');
-        alert('Режим разработчика включён');
+        window.showInfo('Режим разработчика включён');
     }
 });
