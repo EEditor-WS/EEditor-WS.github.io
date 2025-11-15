@@ -5,24 +5,20 @@
     - config: { placeholder, searchable(boolean) }
 */
 function createCustomDropdown(container, options = [], config = {}) {
-    // Defensive: ensure container element exists before manipulating DOM
-    if (!container) {
-        console.warn('createCustomDropdown: missing container element, aborting.', { container, options, config });
-        return null;
-    }
+    if (!container) return null;
+
     const { placeholder = "Выберите...", searchable = true } = config;
+
     const root = document.createElement('div');
     root.className = 'custom-dd';
-    root.tabIndex = 0;
     root.setAttribute('role', 'combobox');
     root.setAttribute('aria-haspopup', 'listbox');
     root.setAttribute('aria-expanded', 'false');
 
-    // Elements
     root.innerHTML = `
-        <div class="custom-dd__control" tabindex="0">
+        <div class="custom-dd__control" tabindex="-1">
             <span class="custom-dd__label custom-dd__placeholder">${placeholder}</span>
-            <img src="img/ui/arrow/down.svg">
+            <img src="img/ui/arrow/down.svg" alt="">
         </div>
         <div class="custom-dd__menu" hidden>
             ${searchable ? '<input type="text" class="custom-dd__search" placeholder="Поиск..."/>' : ''}
@@ -38,13 +34,12 @@ function createCustomDropdown(container, options = [], config = {}) {
     const label = root.querySelector('.custom-dd__label');
     const searchInput = root.querySelector('.custom-dd__search');
 
-    // State
     let open = false;
-    let highlighted = -1;
     let filtered = options.slice();
     let selectedValue = null;
+    let highlighted = -1;
+    let typingInSearch = false;
 
-    // Helpers
     function renderList() {
         list.innerHTML = '';
         if (filtered.length === 0) {
@@ -61,12 +56,20 @@ function createCustomDropdown(container, options = [], config = {}) {
             el.dataset.index = idx;
             el.dataset.value = opt.value;
             el.setAttribute('aria-selected', opt.value === selectedValue ? 'true' : 'false');
-                const checkmark = (opt.disabled === true) ? '' : `<span class="custom-dd__check" aria-hidden="true"></span>`;
-                const image = opt.img ? `<img src="${opt.img}.png" alt="" class="custom-dd__option-img"/>` : '';
+            const checkmark = (opt.disabled === true) ? '' : `<span class="custom-dd__check" aria-hidden="true"></span>`;
+            const image = opt.img ? `<img src="${opt.img}.png" alt="" class="custom-dd__option-img"/>` : '';
             el.innerHTML = `${image}<span class="custom-dd__text">${opt.label}</span>${checkmark}`;
             list.appendChild(el);
         });
         updateHighlight();
+    }
+
+    function updateHighlight() {
+        const items = Array.from(list.querySelectorAll('.custom-dd__option'));
+        items.forEach((it, i) => {
+            it.dataset.highlight = (i === highlighted) ? 'true' : 'false';
+            if (i === highlighted) it.scrollIntoView({ block: 'nearest' });
+        });
     }
 
     function openMenu() {
@@ -74,16 +77,26 @@ function createCustomDropdown(container, options = [], config = {}) {
         root.classList.add('custom-dd--open');
         menu.hidden = false;
         root.setAttribute('aria-expanded', 'true');
-        if (searchInput) { searchInput.focus(); searchInput.select(); }
-        else { list.focus(); }
+
+        typingInSearch = false;
+
+        // выделяем выбранный элемент или первый
+        if (selectedValue !== null) {
+            const idx = filtered.findIndex(o => o.value === selectedValue);
+            highlighted = idx >= 0 ? idx : (filtered.length ? 0 : -1);
+        } else {
+            highlighted = filtered.length ? 0 : -1;
+        }
+
+        updateHighlight();
     }
-    function closeMenu(focusControl = true) {
+
+    function closeMenu() {
         open = false;
         root.classList.remove('custom-dd--open');
         menu.hidden = true;
         root.setAttribute('aria-expanded', 'false');
-        highlighted = -1;
-        if (focusControl) control.focus();
+        typingInSearch = false;
     }
 
     function toggleMenu() {
@@ -91,31 +104,14 @@ function createCustomDropdown(container, options = [], config = {}) {
         else openMenu();
     }
 
-    function updateHighlight() {
-        const items = Array.from(list.querySelectorAll('.custom-dd__option'));
-        items.forEach((it, i) => {
-            it.dataset.highlight = (i === highlighted) ? 'true' : 'false';
-            // scroll into view when highlighted
-            if (i === highlighted) {
-                it.scrollIntoView({ block: 'nearest' });
-            }
-        });
-    }
+    function filterBy(q) {
+        const qq = (q || '').trim().toLowerCase();
+        if (!qq) filtered = options.slice();
+        else filtered = options.filter(o => o.label.toLowerCase().includes(qq) || String(o.value).toLowerCase().includes(qq));
 
-    function highlightNext(delta = 1) {
-        const n = filtered.length;
-        if (n === 0) return;
-        if (highlighted === -1) {
-            highlighted = delta > 0 ? 0 : n - 1;
-        } else {
-            highlighted = (highlighted + delta + n) % n;
-        }
-        updateHighlight();
-    }
-
-    function selectHighlighted() {
-        if (highlighted < 0 || highlighted >= filtered.length) return;
-        selectValue(filtered[highlighted].value);
+        // после фильтрации выделяем первую видимую опцию
+        highlighted = filtered.length ? 0 : -1;
+        renderList();
     }
 
     function selectValue(val) {
@@ -124,49 +120,62 @@ function createCustomDropdown(container, options = [], config = {}) {
         selectedValue = opt.value;
         label.classList.remove('custom-dd__placeholder');
         label.textContent = opt.label;
-        // dispatch change event from root
-        const evt = new CustomEvent('change', { detail: { value: selectedValue, option: opt }});
-        root.dispatchEvent(evt);
+        root.dispatchEvent(new CustomEvent('change', { detail: { value: selectedValue, option: opt } }));
         renderList();
-        closeMenu(true);
+        closeMenu();
     }
 
-    function filterBy(q) {
-        const qq = (q || '').trim().toLowerCase();
-        if (!qq) filtered = options.slice();
-        else filtered = options.filter(o => o.label.toLowerCase().includes(qq) || String(o.value).toLowerCase().includes(qq));
-        highlighted = filtered.length ? 0 : -1;
-        renderList();
+    function highlightNext(delta = 1) {
+        if (!filtered.length) return;
+        highlighted = (highlighted + delta + filtered.length) % filtered.length;
+        updateHighlight();
     }
 
-        root.setOptions = (newOptions) => {
-                if (!Array.isArray(newOptions)) return;
-                options = newOptions.slice(); // обновляем все опции
-                filterBy(searchInput?.value || ''); // применяем фильтр и перерисовываем список
-        };
+    root.setOptions = (newOptions) => {
+        if (!Array.isArray(newOptions)) return;
+        options = newOptions.slice();
+        if (searchInput && typingInSearch) filterBy(searchInput.value);
+        else renderList();
+    };
 
-    // Initial render
     renderList();
 
-    // Event listeners
-    control.addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleMenu();
-    });
+    // desktop mouse only: prevent scroll
+    control.addEventListener('pointerdown', (e) => { if (e.pointerType === 'mouse') e.preventDefault(); }, { passive: false });
+    control.addEventListener('click', (e) => { e.stopPropagation(); toggleMenu(); });
 
-    control.addEventListener('keydown', (e) => {
-        if (['ArrowDown','ArrowUp','Enter',' '].includes(e.key)) {
-            e.preventDefault();
-            openMenu();
-            if (e.key === 'ArrowDown') highlightNext(0); // ensure first
+    // клавиши для управления
+    root.tabIndex = 0; // теперь root может принимать фокус
+
+    // основной обработчик клавиш
+    root.addEventListener('keydown', (e) => {
+        if (!open) {
+            if (['ArrowDown','ArrowUp','Enter',' '].includes(e.key)) {
+                e.preventDefault();
+                openMenu();
+            }
             return;
+        }
+
+        if (searchable && /^[a-zA-Z0-9]$/.test(e.key)) {
+            typingInSearch = true;
+            searchInput.focus();
+            return;
+        }
+
+        switch (e.key) {
+            case 'ArrowDown': e.preventDefault(); highlightNext(1); break;
+            case 'ArrowUp': e.preventDefault(); highlightNext(-1); break;
+            case 'Home': e.preventDefault(); highlighted = 0; updateHighlight(); break;
+            case 'End': e.preventDefault(); highlighted = filtered.length - 1; updateHighlight(); break;
+            case 'Enter': e.preventDefault(); if (highlighted >= 0) selectValue(filtered[highlighted].value); break;
+            case 'Escape': e.preventDefault(); closeMenu(); break;
         }
     });
 
     list.addEventListener('click', (e) => {
         const opt = e.target.closest('.custom-dd__option');
         if (!opt) return;
-        if (opt.disabled === 'true') return;
         selectValue(opt.dataset.value);
     });
 
@@ -177,33 +186,16 @@ function createCustomDropdown(container, options = [], config = {}) {
         updateHighlight();
     });
 
-    // Keyboard navigation on list/search
-    const keyHandler = (e) => {
-        if (!open) return;
-        switch (e.key) {
-            case 'ArrowDown': e.preventDefault(); highlightNext(1); break;
-            case 'ArrowUp': e.preventDefault(); highlightNext(-1); break;
-            case 'Enter': e.preventDefault(); selectHighlighted(); break;
-            case 'Escape': e.preventDefault(); closeMenu(); break;
-            case 'Home': e.preventDefault(); highlighted = 0; updateHighlight(); break;
-            case 'End': e.preventDefault(); highlighted = filtered.length - 1; updateHighlight(); break;
-        }
-    };
-
-    list.addEventListener('keydown', keyHandler);
+    // тоже на searchInput, чтобы Enter и Esc работали
     if (searchInput) {
-        searchInput.addEventListener('keydown', keyHandler);
-        searchInput.addEventListener('input', (e) => {
-            filterBy(e.target.value);
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') { e.preventDefault(); if (filtered.length) selectValue(filtered[0].value); }
+            else if (e.key === 'Escape') { e.preventDefault(); closeMenu(); }
         });
     }
 
-    // close on outside click
-    document.addEventListener('click', (e) => {
-        if (!root.contains(e.target)) closeMenu(false);
-    });
+    document.addEventListener('click', (e) => { if (!root.contains(e.target)) closeMenu(); });
 
-    // expose API on element
     root.getValue = () => selectedValue;
     root.setValue = (v) => selectValue(v);
     root.open = openMenu;

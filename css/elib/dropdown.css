@@ -89,6 +89,10 @@
 .custom-dd__option[data-highlight="true"] {
     background: rgba(255, 255, 255, 0.04);
 }
+.custom-dd__option.placeholder span {
+    text-align: center;
+    width: 100%;
+}
 
 /* Для групп/подписи */
 .custom-dd__group {
@@ -100,6 +104,7 @@
 /* маленький чек/иконка */
 .custom-dd__check {
     margin-left: auto;
+    min-width: 14px;
     width: 14px;
     height: 14px;
     border-radius: 3px;
