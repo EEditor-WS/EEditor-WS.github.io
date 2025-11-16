@@ -47,7 +47,7 @@
         <script src="page/library/modern/unique.js"></script>
         <link rel="stylesheet" href="css/!.css">
         <link rel="stylesheet" href="css/base.css">
-        <link rel="stylesheet" href="css//elib/dropdown.css">
+        <link rel="stylesheet" href="css/elib/dropdown.css">
         <link rel="stylesheet" href="css/countries.css">
         <link rel="stylesheet" href="css/events.css">
         <link rel="stylesheet" href="css/reforms.css">
@@ -810,15 +810,15 @@
                     </div>
                     <div class="header-actions">
                         <div class="tooltip-container">
+                            <button onclick="window.moveManager.pasteCurrentEvent()" class="newabtn icon-action-button paste" title="Вставить">
+                                <img src="img/ui/file/paste.svg">
+                            </button>
+                        </div>
+                        <div class="tooltip-container">
                             <button id="clear-events-filters" class="newabtn icon-action-button clear" title="Сбросить все фильтры">
                                 <img src="img/ui/block.svg">
                             </button>
                             <div class="tooltip">Сбросить все фильтры</div>
-                        </div>
-                        <div class="tooltip-container">
-                            <button onclick="window.moveManager.pasteCurrentEvent()" class="newabtn icon-action-button paste" title="Вставить">
-                                <img src="img/ui/file/paste.svg">
-                            </button>
                         </div>
                         <div class="tooltip-container">
                             <button id="add-event" class="newabtn icon-action-button add" title="Добавить событие">

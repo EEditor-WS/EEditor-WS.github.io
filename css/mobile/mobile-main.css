@@ -164,3 +164,19 @@
         display: none;
     }
 }
+
+.android_file_div {
+    top: 0;
+    position: fixed;
+    overflow-y: scroll;
+    max-height: calc(100dvh - 2rem);
+    margin: 1rem;
+}
+
+.android_file_btn {
+    background-color: var(--background-secondary-great);
+}
+
+.android_file_close {
+    
+}

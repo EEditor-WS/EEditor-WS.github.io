@@ -693,54 +693,106 @@ document.addEventListener('DOMContentLoaded', function() {
     async function saveChanges() {
         isAndroidApp = typeof Android !== 'undefined';
         
-        if (isAndroidApp) {
+    if (isAndroidApp) {
+        try {
+            // Парсим previewContent и берём id
+            let previewText = previewContent.value;
+            let parsed = null;
             try {
-                // Try Android save method first
-                Android.saveFile(previewContent.value);
-                // If we got here, save was successful
-                showSuccess('Сохранено', 'Файл успешно сохранен');
-            } catch (err) {
-                console.error('Android save failed:', err);
-                // Try fallback method using File System Access API
-                try {
-                    if (hasFileSystemAccess) {
-                        if (!fileHandle) {
-                            fileHandle = await window.showSaveFilePicker({
-                                suggestedName: currentFile?.name || 'scenario.json',
-                                types: [{
-                                    description: 'JSON Files',
-                                    accept: {
-                                        'application/json': ['.json']
-                                    }
-                                }]
-                            });
-                        }
-                        
-                        const writable = await fileHandle.createWritable();
-                        await writable.write(previewContent.value);
-                        await writable.close();
-                        
-                        showSuccess('Сохранено', 'Файл успешно сохранен');
-                    } else {
-                        // Final fallback - download file
-                        const blob = new Blob([previewContent.value], { type: 'application/json' });
-                        const url = URL.createObjectURL(blob);
-                        const a = document.createElement('a');
-                        a.href = url;
-                        a.download = currentFile?.name || 'scenario.json';
-                        document.body.appendChild(a);
-                        a.click();
-                        document.body.removeChild(a);
-                        URL.revokeObjectURL(url);
-                        
-                        showSuccess('Скачано', 'Файл успешно скачан');
-                    }
-                } catch (fallbackErr) {
-                    console.error('Fallback save failed:', fallbackErr);
-                    showError('Ошибка', 'Не удалось сохранить файл');
-                }
+                parsed = JSON.parse(previewText);
+            } catch (e) {
+                throw new Error('Неверный JSON в previewContent.value: ' + (e && e.message ? e.message : e));
             }
-        } else if (hasFileSystemAccess) {
+
+            const id = parsed && (parsed.id !== undefined && parsed.id !== null) ? String(parsed.id) : '';
+            if (!id) throw new Error("Не найдено поле 'id' в previewContent");
+
+            // Формируем относительный путь внутри getExternalFilesDir(null): scenarios/{id}.json
+            const relativePath = 'scenarios/' + id + '.json';
+            // Используем существующий Android.writeFile(relativePath, content, mode)
+            // mode: "text" — запишем как UTF-8
+            const androidResult = typeof Android !== 'undefined' && Android.writeFile
+                ? Android.writeFile(relativePath, previewText, 'text')
+                : null;
+
+            // androidResult должен быть JSON-строкой, распарсим и проверим
+            if (androidResult) {
+                try {
+                    const parsedRes = JSON.parse(androidResult);
+                    if (parsedRes && parsedRes.ok) {
+                        showSuccess('Сохранено', 'Файл успешно сохранен: ' + relativePath);
+                        // Можно дополнительно передать путь в приложение:
+                        // if (Android.onSaved) Android.onSaved(parsedRes.relativePath || relativePath);
+                        return;
+                    } else {
+                        throw new Error(parsedRes && parsedRes.error ? parsedRes.error : 'Неизвестная ошибка Android.save');
+                    }
+                } catch (e) {
+                    // Если ответ не JSON — считаем это ошибкой, но логируем
+                    console.warn('Android.writeFile returned non-JSON or parse failed:', androidResult, e);
+                    throw e;
+                }
+            } else {
+                throw new Error('Android interface или метод writeFile недоступен');
+            }
+        } catch (err) {
+            console.error('Android save failed:', err);
+            // Try fallback method using File System Access API
+            try {
+                if (hasFileSystemAccess) {
+                    if (!fileHandle) {
+                        fileHandle = await window.showSaveFilePicker({
+                            suggestedName: (function () {
+                                try {
+                                    const p = JSON.parse(previewContent.value);
+                                    return (p && p.id ? String(p.id) + '.json' : 'scenario.json');
+                                } catch (e) { return 'scenario.json'; }
+                            })(),
+                            types: [{
+                                description: 'JSON Files',
+                                accept: {
+                                    'application/json': ['.json']
+                                }
+                            }]
+                        });
+                    }
+
+                    const writable = await fileHandle.createWritable();
+                    await writable.write(previewContent.value);
+                    await writable.close();
+
+                    showSuccess('Сохранено', 'Файл успешно сохранен');
+                } else {
+                    // Final fallback - download file
+                    const blob = new Blob([previewContent.value], { type: 'application/json' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    try {
+                        // Предлагаем корректное имя файла по id если возможно
+                        const suggestedName = (function () {
+                            try {
+                                const p = JSON.parse(previewContent.value);
+                                return (p && p.id ? String(p.id) + '.json' : (currentFile?.name || 'scenario.json'));
+                            } catch (e) { return (currentFile?.name || 'scenario.json'); }
+                        })();
+                        a.download = suggestedName;
+                    } catch (e) {
+                        a.download = currentFile?.name || 'scenario.json';
+                    }
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+
+                    showSuccess('Скачано', 'Файл успешно скачан');
+                }
+            } catch (fallbackErr) {
+                console.error('Fallback save failed:', fallbackErr);
+                showError('Ошибка', 'Не удалось сохранить файл');
+            }
+        }
+    } else if (hasFileSystemAccess) {
             if (!fileHandle) {
                 try {
                     // Запрашиваем доступ к файловой системе
@@ -813,7 +865,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
             showSuccess(urlParams, urlParams);
             
-            if (urlParams.has('eval') && urlParams.get('eval') === 'openfile') {
+            /*if (urlParams.has('eval') && urlParams.get('eval') === 'openfile') {
                 const content = Android.getOpenedFileData();
                 if (content.startsWith("ERROR:")) {
                     throw new Error(content.substring(6));
@@ -834,27 +886,99 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 
                 showSuccess('Загружено', 'Готово к редактированию');
-            } else if (isAndroidApp) {
-                const content = Android.readAppSpecificFile();
-                if (content.startsWith("ERROR:")) {
-                    throw new Error(content.substring(6));
-                }
-                
-                const jsonData = JSON.parse(content);
-                isJsonFile = true;
-                
-                handleFileContent('scenario.json', content);
-                fillFormFromJson(jsonData);
-                
-                if (window.countryManager) {
-                    window.countryManager.jsonData = jsonData;
-                    window.countryManager.updateCountriesList();
-                }
-                if (window.eventManager) {
-                    window.eventManager.setJsonData(jsonData);
-                }
-                
-                showSuccess('Загружено', 'Готово к редактированию');
+            } else*/ if (isAndroidApp) {
+                (async function showScenariosModal() {
+                    try {
+                        let fileList
+                        if (isAndroidApp) {
+                        if (typeof Android === 'undefined' || !Android.listFiles) {
+                            throw new Error("Android interface недоступен");
+                        }
+
+                        // Получаем список файлов в папке scenarios
+                        const response = Android.listFiles('scenarios');
+                        try {
+                            const parsed = JSON.parse(response);
+                            if (!parsed.ok) throw new Error(parsed.error || "Unknown error listing files");
+                            fileList = parsed.files || [];
+                        } catch (e) {
+                            throw new Error("Не удалось распарсить список файлов: " + e.message);
+                        }
+
+                        if (!fileList.length) {
+                            alert("Файлы в папке scenarios не найдены");
+                            return;
+                        }
+                        } else {
+                            fileList = ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""];
+                        }
+
+                        // Создаем модальное окно
+                        const modal = document.createElement('div');
+                        modal.classList.add('modal');
+                        modal.classList.add('active');
+
+                        const contentDiv = document.createElement('div');
+                        contentDiv.classList.add('android_file_div');
+
+                        const title = document.createElement('h2');
+                        title.innerText = 'Выберите файл для загрузки';
+                        contentDiv.appendChild(title);
+
+                        fileList.forEach(file => {
+                            if (!file.isDirectory) {
+                                const btn = document.createElement('button');
+                                btn.innerText = file.name;
+                                btn.classList.add('android_file_btn');
+                                btn.style.display = 'block';
+                                btn.style.width = '100%';
+                                btn.style.margin = '5px 0';
+                                btn.style.padding = '10px';
+                                btn.onclick = () => {
+                                    try {
+                                        const content = JSON.parse(Android.readFile('scenarios/' + file.name, 'text')).content;
+                                        if (content.startsWith("ERROR:")) throw new Error(content.substring(6));
+
+                                        const jsonData = JSON.parse(content);
+                                        handleFileContent(file.name, content);
+                                        fillFormFromJson(jsonData);
+
+                                        if (window.countryManager) {
+                                            window.countryManager.jsonData = jsonData;
+                                            window.countryManager.updateCountriesList();
+                                        }
+                                        if (window.eventManager) {
+                                            window.eventManager.setJsonData(jsonData);
+                                        }
+
+                                        showSuccess('Загружено', 'Файл "' + file.name + '" готов к редактированию');
+                                        document.body.removeChild(modal);
+                                    } catch (err) {
+                                        console.error('Ошибка загрузки файла', err);
+                                        alert('Ошибка при загрузке файла: ' + err.message);
+                                    }
+                                };
+                                contentDiv.appendChild(btn);
+                            }
+                        });
+
+                        // Кнопка закрытия
+                        const closeBtn = document.createElement('button');
+                        closeBtn.innerText = 'Закрыть';
+                        closeBtn.classList.add('android_file_close');
+                        closeBtn.style.marginTop = '10px';
+                        closeBtn.style.padding = '10px';
+                        closeBtn.onclick = () => document.body.removeChild(modal);
+                        contentDiv.appendChild(closeBtn);
+
+                        modal.appendChild(contentDiv);
+                        document.body.appendChild(modal);
+
+                    } catch (err) {
+                        console.error('Ошибка при отображении модального окна файлов:', err);
+                        alert('Не удалось загрузить список файлов: ' + err.message);
+                    }
+                })();
             } else if (hasFileSystemAccess) {
                 // Запрашиваем доступ к файлу
                 [fileHandle] = await window.showOpenFilePicker({

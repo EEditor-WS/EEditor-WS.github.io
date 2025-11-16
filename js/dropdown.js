@@ -134,7 +134,8 @@ function createCustomDropdown(container, options = [], config = {}) {
     root.setOptions = (newOptions) => {
         if (!Array.isArray(newOptions)) return;
         options = newOptions.slice();
-        if (searchInput && typingInSearch) filterBy(searchInput.value);
+        filtered = options.slice();
+        if (searchInput && searchInput.value) filterBy(searchInput.value);
         else renderList();
     };
 
@@ -188,6 +189,9 @@ function createCustomDropdown(container, options = [], config = {}) {
 
     // тоже на searchInput, чтобы Enter и Esc работали
     if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            filterBy(e.target.value);
+        });
         searchInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') { e.preventDefault(); if (filtered.length) selectValue(filtered[0].value); }
             else if (e.key === 'Escape') { e.preventDefault(); closeMenu(); }
