@@ -244,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 if (window.location.href.includes('https')) {
 
-} else if (window.location.href.includes('http')) {
+} else if (window.location.href.includes('http') || window.location.href.includes('hello.html')) {
 
 } else {
     showWarning('Opened local copy of app')

@@ -1771,6 +1771,45 @@
                 <iframe id="iframe-sviazi" src="sviazi.html" style="min-height: 88vh;" frameborder="0"></iframe>
             </div>
         </div>
+        <div id="popenfiles" class="page popenfiles">
+            <div id="openfiles_container">
+                <div class="list-header">
+                    <div class="reform-title">
+                        <div class="tooltip-container">
+                            <button id="back-to-main" class="icon-action-button back newabtn" title="Назад" onclick="     const pageId = 'main';     document.querySelectorAll('.page').forEach(page => {     page.classList.remove('active');     });     document.getElementById(pageId)?.classList.add('active');">
+                                <img src="img/ui/back.svg">
+                            </button>
+                            <div class="tooltip" data-translate="back">Назад</div>
+                        </div>
+                        <h2>Выберите файл для загрузки</h2>
+                    </div>
+                    <div class="header-actions">
+                        <!--div class="tooltip-container">
+                            <button onclick="openScenarioFileChoser()" class="icon-action-button add newabtn" title="Получить сценарий">
+                                <img src="img/ui/file/attach.svg">
+                            </button>
+                            <div class="tooltip">Открыть сторонний файл</div>
+                        </div-->
+                        <div class="tooltip-container">
+                            <button id="coop-actions-button" class="icon-action-button more" title="Действия" onclick="const dropdown = document.getElementById('opfileActionsDropdown'); dropdown.classList.toggle('active');">
+                                <img src="img/ui/more.svg">
+                            </button>
+                            <div id="opfileActionsDropdown" class="dropdown-menu">
+                                <a href="#" class="menu-item" id="blank" onclick="openScenarioFileChoser()">
+                                    <img src="img/ui/file/attach.svg">
+                                    <span>Открыть сторонний файл</span>
+                                </a>
+                                <a href="#" class="menu-item" id="blank" onclick="openScenarioLinkChoser()">
+                                    <img src="img/ui/file/attach.svg">
+                                    <span>Открыть файл из интернета</span>
+                                </a>
+                            </div>
+                            <div class="tooltip">Tools</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Модальное окно фильтра -->
         <div id="filter-modal" class="modal">

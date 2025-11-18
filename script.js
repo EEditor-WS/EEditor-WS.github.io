@@ -534,7 +534,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Функция для обновления JSON в редакторе
     function updateJsonEditor(formData) {
-        if (!isJsonFile || !previewContent) return;
+        //if (!isJsonFile || !previewContent) return;
         
         try {
             const jsonData = JSON.parse(previewContent.value);
@@ -692,6 +692,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Функция для сохранения изменений
     async function saveChanges() {
         isAndroidApp = typeof Android !== 'undefined';
+        if (previewContent.value == '' || previewContent.value == undefined) {
+            window.showError('no content');
+            return;
+        }
         
     if (isAndroidApp) {
         try {
@@ -886,54 +890,48 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 
                 showSuccess('Загружено', 'Готово к редактированию');
-            } else*/ if (isAndroidApp) {
+            } else*/ if (isAndroidApp || true) {
                 (async function showScenariosModal() {
                     try {
                         let fileList
                         if (isAndroidApp) {
+                            Android.writeFile('scenarios/blank.txt', [], "text");
+                            Android.writeFile("test.txt", [], "text");
                         if (typeof Android === 'undefined' || !Android.listFiles) {
                             throw new Error("Android interface недоступен");
                         }
 
                         // Получаем список файлов в папке scenarios
-                        const response = Android.listFiles('scenarios');
+                        let response = Android.listFiles('scenarios');
+                            response = Android.listFiles('scenarios');
+                        //alert(JSON.stringify(response));
                         try {
                             const parsed = JSON.parse(response);
                             if (!parsed.ok) throw new Error(parsed.error || "Unknown error listing files");
                             fileList = parsed.files || [];
+                            fileList = fileList.filter(file => file.name.endsWith('.json'));
                         } catch (e) {
-                            throw new Error("Не удалось распарсить список файлов: " + e.message);
+                            throw new Error("Error in getting list of scenarios. Check folder Android/data/com.eenot.eeditor/files/scenarios: " + e.message);
                         }
 
                         if (!fileList.length) {
-                            alert("Файлы в папке scenarios не найдены");
-                            return;
+                            //alert("Files not found in Android/data/com.eenot.eeditor/files/scenarios folder");
+                            window.showWarning("Files not found in Android/data/com.eenot.eeditor/files/scenarios folder");
+                            //return;
                         }
                         } else {
-                            fileList = ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""];
+                            fileList = ["1","2","3","4","5","6","7","8","9","","","","","","5","","","","","0","","","","","5","","","","","0","","","","","5","","","","","0"];
                         }
-
-                        // Создаем модальное окно
-                        const modal = document.createElement('div');
-                        modal.classList.add('modal');
-                        modal.classList.add('active');
+                        const modal = document.getElementById('openfiles_container');
 
                         const contentDiv = document.createElement('div');
                         contentDiv.classList.add('android_file_div');
 
-                        const title = document.createElement('h2');
-                        title.innerText = 'Выберите файл для загрузки';
-                        contentDiv.appendChild(title);
-
                         fileList.forEach(file => {
                             if (!file.isDirectory) {
                                 const btn = document.createElement('button');
-                                btn.innerText = file.name;
+                                btn.innerHTML = `<img src="img/ui/file/file.svg"><p>${file.name}</p>`;
                                 btn.classList.add('android_file_btn');
-                                btn.style.display = 'block';
-                                btn.style.width = '100%';
-                                btn.style.margin = '5px 0';
-                                btn.style.padding = '10px';
                                 btn.onclick = () => {
                                     try {
                                         const content = JSON.parse(Android.readFile('scenarios/' + file.name, 'text')).content;
@@ -952,7 +950,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                         }
 
                                         showSuccess('Загружено', 'Файл "' + file.name + '" готов к редактированию');
-                                        document.body.removeChild(modal);
+                                        //document.body.removeChild(modal);
+                                        changePage('main')
                                     } catch (err) {
                                         console.error('Ошибка загрузки файла', err);
                                         alert('Ошибка при загрузке файла: ' + err.message);
@@ -961,18 +960,9 @@ document.addEventListener('DOMContentLoaded', function() {
                                 contentDiv.appendChild(btn);
                             }
                         });
-
-                        // Кнопка закрытия
-                        const closeBtn = document.createElement('button');
-                        closeBtn.innerText = 'Закрыть';
-                        closeBtn.classList.add('android_file_close');
-                        closeBtn.style.marginTop = '10px';
-                        closeBtn.style.padding = '10px';
-                        closeBtn.onclick = () => document.body.removeChild(modal);
-                        contentDiv.appendChild(closeBtn);
-
+                        
                         modal.appendChild(contentDiv);
-                        document.body.appendChild(modal);
+                        changePage('popenfiles');
 
                     } catch (err) {
                         console.error('Ошибка при отображении модального окна файлов:', err);
@@ -1164,7 +1154,7 @@ function handleFileContent(fileName, content) {
 
     // Обработчик изменений в форме
     settingsForm.addEventListener('change', (e) => {
-        if (!isJsonFile) return;
+        //if (!isJsonFile) return;
         
         const formData = new FormData(settingsForm);
         const data = Object.fromEntries(formData.entries());

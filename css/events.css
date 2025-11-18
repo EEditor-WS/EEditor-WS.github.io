@@ -175,13 +175,19 @@
     border: 1px solid #1f1f1f;
     overflow: auto;
     box-sizing: border-box;
+}
+.event-answers.active {
     min-height: 500px;
 }
 
 .answers-flex {
     display: flex;
+    display: none;
     flex-direction: row;
     gap: 1rem;
+}
+#event-answers.active .answers-flex {
+    display: flex;
 }
 
 .answer-block {

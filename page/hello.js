@@ -9,4 +9,6 @@ function helloWriteSettings() {
     } catch(e) {
         alert(e);
     }
+    //alert(JSON.parse(JSON.parse(Android.readFile('settings.json', 'text')).content).link)
+    window.location.href = JSON.parse(JSON.parse(Android.readFile('settings.json', 'text')).content).link;
 }
