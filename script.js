@@ -890,7 +890,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 
                 showSuccess('Загружено', 'Готово к редактированию');
-            } else*/ if (isAndroidApp || true) {
+            } else*/ if (isAndroidApp) {
                 (async function showScenariosModal() {
                     try {
                         let fileList
