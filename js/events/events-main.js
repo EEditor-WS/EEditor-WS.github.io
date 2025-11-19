@@ -1030,6 +1030,7 @@ generateUniqueId(minimumID = 0) {
                 { value: 'recruit_cost', label: window.translator.translate('recruit_cost') },
                 { value: 'accelerated_recruit_cost', label: window.translator.translate('accelerated_recruit_cost') },
                 { value: 'maintaining_army_cost_multiplier', label: window.translator.translate('maintaining_army_cost_multiplier') },
+                { value: 'change_political_institution', label: window.translator.translate('change_political_institution') },
 
                 // Военное дело
                 { value: '', label: '--- ' + window.translator.translate('military') + ' ---', disabled: true },
@@ -1061,14 +1062,15 @@ generateUniqueId(minimumID = 0) {
                 { value: 'diplomacy_get_vassal', label: window.translator.translate('diplomacy_get_vassal') },
                 { value: 'diplomacy_peace', label: window.translator.translate('diplomacy_peace') },
                 { value: 'diplomacy_war', label: window.translator.translate('diplomacy_war') },
+                { value: 'resurrect_country', label: window.translator.translate('resurrect_country') },
+                { value: 'annex_country', label: window.translator.translate('annex_country') },
+                { value: 'change_country', label: window.translator.translate('change_country') },
+                { value: 'disable_external_diplomacy', label: window.translator.translate('disable_external_diplomacy')},
 
                 // Прочее
                 { value: '', label: '--- ' + window.translator.translate('other') + ' ---', disabled: true },
                 { value: 'prestige', label: window.translator.translate('prestige') },
                 { value: 'science', label: window.translator.translate('science') },
-                { value: 'resurrect_country', label: window.translator.translate('resurrect_country') },
-                { value: 'annex_country', label: window.translator.translate('annex_country') },
-                { value: 'change_country', label: window.translator.translate('change_country') }
             ];
             /*typeSelect.innerHTML = bonusOptions.map(opt => 
                 `<option value="${opt.value}" ${opt.disabled ? 'disabled' : ''}>${opt.label}</option>`
@@ -1110,6 +1112,7 @@ generateUniqueId(minimumID = 0) {
                 { value: 'has_sanctions', label: window.translator.translate('has_sanctions') },
                 { value: 'has_war', label: window.translator.translate('has_war') },
                 { value: 'no_enemy', label: window.translator.translate('no_enemy') },
+                { value: 'num_of_vassals', label: window.translator.translate('num_of_vassals') },
 
                 // Экономика и развитие
                 { value: '', label: '--- ' + window.translator.translate('economy_and_development') + ' ---', disabled: true },
@@ -1247,7 +1250,7 @@ generateUniqueId(minimumID = 0) {
                 }
                 
                 // Получаем доступные действия из конфигурации
-                if (['month', 'num_of_provinces', 'year', 'turn', 'random_value', 'count_of_tasks', 'tax', 'discontent', 'money', 'land_power'].includes(selectedType)) {
+                if (['month', 'num_of_provinces', 'year', 'turn', 'random_value', 'count_of_tasks', 'tax', 'discontent', 'money', 'land_power', 'num_of_vassals'].includes(selectedType)) {
                     actions.push('more', 'equal', 'less');
                     
                     // Создаем числовое поле для значения
@@ -1684,6 +1687,30 @@ generateUniqueId(minimumID = 0) {
                     input.className = 'main-page-input';
                     input.placeholder = window.translator.translate('enter_number');
                     valueContainer.appendChild(input);
+                } else if (selectedType === 'change_political_institution') {
+                    subtypeGroup.style.display = 'none';
+                    const input = document.createElement('select');
+                    input.id = 'requirement-value';
+                    input.innerHTML =   `<select id="country-political" name="political" class="main-page-input">
+                                            <option value="Democracy" data-translate="democracy">🗳️ Демократия</option>
+                                            <option value="Communism" data-translate="communism">🚩 Коммунизм</option>
+                                            <option value="Monarchy" data-translate="monarchy">👑 Монархия</option>
+                                            <option value="Theocracy" data-translate="theocracy">✝️ Теократия</option>
+                                            <option value="Fascism" data-translate="fascism">⚔️ Фашизм</option>
+                                            <option value="Trade Republic" data-translate="trade_republic">💰 Торговая Республика</option>
+                                        </select>`
+                    valueContainer.appendChild(input);
+                } else if (selectedType === 'disable_external_diplomacy') {
+                    subtypeGroup.style.display = 'none';
+                    
+                    const input = document.createElement('input');
+                    input.type = 'number';
+                    input.id = 'requirement-value';
+                    input.className = 'main-page-input';
+                    input.placeholder = window.translator.translate('enter_number');
+                    input.value = 1;
+                    input.style.display = 'none';
+                    valueContainer.appendChild(input);
                 }
             } else {
                 // Для требований оставляем существующую логику
@@ -2006,7 +2033,7 @@ generateUniqueId(minimumID = 0) {
                     input.id = 'requirement-value';
                     input.className = 'main-page-input';
                     input.placeholder = 
-                        ['num_of_provinces', 'year', 'turn', 'random_value', 'count_of_tasks', 'tax', 'discontent', 'money', 'land_power'].includes(selectedType) ? window.translator.translate('enter_number') :
+                        ['num_of_provinces', 'year', 'turn', 'random_value', 'count_of_tasks', 'tax', 'discontent', 'money', 'land_power', 'num_of_vassals'].includes(selectedType) ? window.translator.translate('enter_number') :
                         ['building_exists'].includes(selectedType) ? window.translator.translate('enter_building_name') :
                         ['political_institution'].includes(selectedType) ? window.translator.translate('enter_institution_name') : window.translator.translate('enter_value');
                         valueContainer.appendChild(input);
@@ -2091,7 +2118,7 @@ generateUniqueId(minimumID = 0) {
 
             // Проверяем и обрабатываем числовые значения
             const numericTypes = ['month', 'num_of_provinces', 'year', 'turn', 'random_value', 
-                'count_of_tasks', 'tax', 'discontent', 'money', 'land_power', 'defense', 
+                'count_of_tasks', 'tax', 'discontent', 'money', 'land_power', 'defense', 'num_of_vassals',
                 'attack', 'population_income', 'population_increase', 'building_cost', 'add_oil', 'add_cruiser', 
                 'add_random_culture_population', 'add_shock_infantry', 'add_tank', 'add_artillery',
                 'army_losses', 'prestige', 'add_battleship', 'add_infantry', 'science', 'cooldown'];

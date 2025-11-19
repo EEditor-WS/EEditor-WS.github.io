@@ -115,8 +115,8 @@
         <!-- End Google Tag Manager (noscript) -->
         <nav class="nav-header">
             <div class="logo">
-                <!--img class="logo-icon" src="img/ico/ico.svg" alt="EEditor Logo"-->
-                <img class="logo-icon" src="img/ico/icoRev.png" alt="EEditor Logo">
+                <img class="logo-icon" src="img/ico/ico.svg" alt="EEditor Logo">
+                <!--img class="logo-icon" src="img/ico/icoRev.png" alt="EEditor Logo"-->
                 <h1 class="logo-text">EEditor</h1>
             </div>
             <script>
@@ -523,10 +523,6 @@
                                 <img src="img/ui/more.svg">
                             </button>
                             <div id="countriesActionsDropdown" class="dropdown-menu">
-                                <a href="#" class="menu-item" id="migrate-groups" onclick="migrateGroupToGroupName()">
-                                    <img src="img/ui/sync.svg">
-                                    <span>Migrate Groups</span>
-                                </a>
                                 <a href="#" class="menu-item" id="copy-countries" onclick="copyManyCountries()">
                                     <img src="img/ui/file/copy.svg">
                                     <span>Copy Countries</span>
@@ -534,6 +530,10 @@
                                 <a href="#" class="menu-item" id="paste-countries" onclick="pasteManyCountries()">
                                     <img src="img/ui/file/paste.svg">
                                     <span>Paste Countries</span>
+                                </a>
+                                <a href="#" class="menu-item" id="migrate-groups" onclick="migrateGroupToGroupName()">
+                                    <img src="img/ui/sync.svg">
+                                    <span>Migrate Groups</span>
                                 </a>
                                 <a href="#" class="menu-item" id="remove-invalid-owners" onlick="window.countryManager.removeInvalidOwners()">
                                     <img src="img/ui/file/trash.svg">
@@ -831,14 +831,6 @@
                                 <img src="img/ui/more.svg">
                             </button>
                             <div id="eventsActionsDropdown" class="dropdown-menu">
-                                <a href="#" class="menu-item" id="migrate-groups" onclick="try{ changePage('psviazi'); const iframe = document.getElementById('iframe-sviazi'); iframe.contentWindow.postMessage(window.eventManager.jsonData.custom_events, '*');} catch {}">
-                                    <img src="img/ui/link.svg">
-                                    <span>Показать связи</span>
-                                </a>
-                                <a href="#" class="menu-item" id="migrate-groups" onclick="transformCustomEvents()">
-                                    <img src="img/ui/sync.svg">
-                                    <span>Fix IDs</span>
-                                </a>
                                 <a href="#" class="menu-item" id="copy-events" onclick="copyManyEvents()">
                                     <img src="img/ui/file/copy.svg">
                                     <span>Copy Events</span>
@@ -846,6 +838,14 @@
                                 <a href="#" class="menu-item" id="paste-events" onclick="pasteManyEvents()">
                                     <img src="img/ui/file/paste.svg">
                                     <span>Paste Events</span>
+                                </a>
+                                <a href="#" class="menu-item" id="migrate-groups" onclick="try{ changePage('psviazi'); const iframe = document.getElementById('iframe-sviazi'); iframe.contentWindow.postMessage(window.eventManager.jsonData.custom_events, '*');} catch {}">
+                                    <img src="img/ui/link.svg">
+                                    <span>Показать связи</span>
+                                </a>
+                                <a href="#" class="menu-item" id="migrate-groups" onclick="transformCustomEvents()">
+                                    <img src="img/ui/sync.svg">
+                                    <span>Fix IDs</span>
                                 </a>
                             </div>
                             <div class="tooltip">Tools</div>
@@ -1194,7 +1194,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="requirement-duration" data-translate="duration"></label>
-                                <input type="text" id="requirement-duration" class="main-page-input" autocomplete="off" title="Длительность требования" placeholder="Длительность">
+                                <input type="number" id="requirement-duration" class="main-page-input" autocomplete="off" title="Длительность требования" placeholder="Длительность">
                             </div>
                             <div class="form-group">
                                 <label for="requirement-subtype" data-translate="subtype"></label>

@@ -57,7 +57,9 @@ const reqbonConfig = {
         add_infantry: { hasDuration: false },
         science: { hasDuration: false },
         money: { hasDuration: false },
-        change_country: { hasDuration: false }
+        change_country: { hasDuration: false },
+        change_political_institution: { hasDuration: false },
+        disable_external_diplomacy: { hasDuration: true },
     },
 
     // Конфигурация требований
@@ -198,6 +200,11 @@ const reqbonConfig = {
             actions: ['more', 'equal', 'less']
         },
         discontent: {
+            subType: false,
+            value: 'number',
+            actions: ['more', 'equal', 'less']
+        },
+        num_of_vassals: {
             subType: false,
             value: 'number',
             actions: ['more', 'equal', 'less']

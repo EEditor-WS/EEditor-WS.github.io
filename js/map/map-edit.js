@@ -631,10 +631,6 @@ _highlightProvince(pid) {
         if (!arr[idx]) {
             arr[idx] = {
                 population_limit: 0,
-                resource_rule: [],
-                uuid: '',
-                true_owner: '',
-                owner: '',
                 infrastructure_level: 0,
                 water: false,
                 river: false,
@@ -709,6 +705,7 @@ _highlightProvince(pid) {
                 this._showMessage('resource_rule должен быть массивом. Исправлено автоматически.', 'warn');
                 resourcesVal = Array.isArray(resourcesVal) ? resourcesVal : [];
             }
+            if (resourcesVal == []) resourcesVal = '';
         } catch (err) {
             this._showMessage('Ошибка парсинга resource_rule — исправьте JSON перед сохранением.', 'error');
             return;
@@ -716,12 +713,21 @@ _highlightProvince(pid) {
 
         if (!arr[idx]) arr[idx] = {};
 
-        arr[idx].population_limit = Number(this.fieldPopulation.value) || 0;
-        arr[idx].infrastructure_level = Number(this.fieldInfra.value) || 0;
-        arr[idx].owner = String(this.fieldOwner.value || '');
-        arr[idx].true_owner = String(this.fieldTrueOwner.value || '');
-        arr[idx].uuid = String(this.fieldUUID.value || '');
-        arr[idx].resource_rule = resourcesVal;
+        function setOrDelete(obj, key, val) {
+            if (val === '' || val === null || val === undefined || val == [] || val == {} || val == '[]' || val == '{}') {
+                delete obj[key];
+            } else {
+                obj[key] = val;
+            }
+        }
+
+        setOrDelete(arr[idx], 'population_limit', this.fieldPopulation.value === '' ? '' : Number(this.fieldPopulation.value));
+        setOrDelete(arr[idx], 'infrastructure_level', this.fieldInfra.value === '' ? '' : Number(this.fieldInfra.value));
+        setOrDelete(arr[idx], 'owner', this.fieldOwner.value);
+        setOrDelete(arr[idx], 'true_owner', this.fieldTrueOwner.value);
+        setOrDelete(arr[idx], 'uuid', this.fieldUUID.value);
+        setOrDelete(arr[idx], 'resource_rule', resourcesVal);
+        if (resourcesVal == '') delete arr[idx].resource_rule;
 
         this._renderPreview(arr[idx]);
         this._showMessage(`Провинция id=${this.currentProvinceId} сохранена в window.countryManager.jsonData.provinces[${idx}].`, 'ok');
