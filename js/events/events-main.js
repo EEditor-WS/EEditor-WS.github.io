@@ -1724,7 +1724,7 @@ generateUniqueId(minimumID = 0) {
                     subtypeGroup.style.display = 'none';
                 } else if (['cooldown'].includes(selectedType)) {
                     // Для числовых значений без длительности
-                    subtypeGroup.style.display = 'none';
+                    //subtypeGroup.style.display = 'none';
                         const input = document.createElement('input');
                         input.type = 'number';
                         input.id = 'requirement-value';
