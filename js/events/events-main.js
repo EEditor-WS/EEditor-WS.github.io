@@ -507,7 +507,13 @@ class EventManager {
             requirements: [],
             requirements1: [],
             requirements2: [],
-            requirements3: []
+            requirements3: [],
+            eeditor: {
+                dateAdd: {
+                    user: window.authManager.currentUser.username,
+                    time: Date.now()
+                }
+            }
         };
 
         this.pushToUndoStack();
@@ -773,6 +779,17 @@ generateUniqueId(minimumID = 0) {
                 'event-id', 'event-title',
                 'event-description', 'event-image', 'event-icon'
             ];
+
+            event.eeditor = event.eeditor || {};
+            const eeData = event.eeditor;
+            eeData.dateUpd = {
+                user: window.authManager.currentUser.username,
+                time: Date.now()
+            };
+            eeData.users = eeData.users || [];
+            if (!(eeData.users).includes(window.authManager.currentUser.username)) {
+                eeData.users.push(window.authManager.currentUser.username)
+            }
 
             for (const elementId of requiredElements) {
                 const element = document.getElementById(elementId);
