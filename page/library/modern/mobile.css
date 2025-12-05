@@ -1,0 +1,15 @@
+@media (orientation: portrait) {
+    .download-card.map-card {
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .header-logo-container {
+        display: none;
+    }
+
+    .action-button.back {
+        width: 36px;
+    }
+}
