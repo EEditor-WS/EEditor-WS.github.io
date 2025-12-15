@@ -55,7 +55,7 @@ const authorsData = {
         color: "#3B83BD"
     },
     stewardconstruct: {
-        name: "@honse",
+        name: "@stewardconstruct",
         link: "https://discord.com/users/1114590604668706927",
         color: "#3B83BD"
     },
