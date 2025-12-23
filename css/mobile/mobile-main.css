@@ -240,3 +240,66 @@
     text-align: center;
     width: 100%;
 }
+
+
+
+
+
+
+
+/* landscape styles */
+@media (orientation: landscape) {
+    body.mobile {
+
+        & .logo { 
+            display: none;
+        }
+        & .nav-buttons-container {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            flex-direction: column;
+            & .button-text {
+                display: none;
+            }
+            & .nav-button {
+                aspect-ratio: 1;
+            }
+        }
+        & .opened .nav-buttons-container {
+        }
+
+        & .nav-header {
+            background: 0;
+            border: 0;
+            box-shadow: none;
+        }
+        & #data {
+            display: none;
+        }
+        & .opened #data {
+            display: block;
+        }
+        & #samsungzakos {
+            display: block;
+            width: 100%;
+        }
+        & #samsungzakos .namezone {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            max-height: 90dvh;
+            transition: all 0.2s ease;
+            font-size: 2rem;
+        }
+        & .opened #samsungzakos .namezone {
+            display: none;
+        }
+        & #samsungzakos .nav-icons {
+            justify-content: flex-end;
+        }
+    }
+}
