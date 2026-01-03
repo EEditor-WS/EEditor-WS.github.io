@@ -1379,6 +1379,7 @@ try {
     let minimumCountryID = 0;
 
 if (isAndroidApp) {
+    document.body.classList.add('mobile');
     try {
         openfile();
     } catch (e) {
