@@ -696,6 +696,8 @@ document.addEventListener('DOMContentLoaded', function() {
             window.showError('no content');
             return;
         }
+
+        if (1 == 1) previewContent.value = JSON.stringify(JSON.parse(previewContent.value));
         
     if (isAndroidApp) {
         try {
