@@ -1088,6 +1088,21 @@ mapsData = [
         load: "normal",
         hiddenScore: 0
     },
+    {
+        id: ["vova", "lifia", "v1"],
+        title: "Lifia",
+        author: ["vova"],
+        description: "",
+        type: "world",
+        region: [],
+        provinces: 2820,
+        features: [],
+        status: "completed",
+        publishDate: "2026-01-18",
+        lastUpdate: "2026-01-18",
+        load: "normal",
+        hiddenScore: 20
+    },
 ];
 
 const mapTypes = {

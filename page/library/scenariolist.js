@@ -3504,4 +3504,52 @@ const scenariosData = [
         period: "alternative",
         status: "in_development",
     },
+    {
+        id: [
+            "vova", 
+            "lifia", 
+            "v1",
+            "1847-en",
+        ],
+        title: "Lifia",
+        author: ["vova"],
+        year: "1847",
+        languages: ["EN"],
+        gameMode: "lore",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        awards: [],
+        // Hidden parameters
+        publishDate: "2026-01-18",
+        lastUpdate: "2026-01-18",
+        hiddenScore: 100,
+        type: "lore",
+        period: "alternative",
+        status: "in_development",
+        rights: true
+    },
+    {
+        id: [
+            "vova", 
+            "lifia", 
+            "v1",
+            "1847-ru",
+        ],
+        title: "Лифия",
+        author: ["vova"],
+        year: "1847",
+        languages: ["RU"],
+        gameMode: "lore",
+        tags: [],
+        worldCreator: "ЕЕнот",
+        awards: [],
+        // Hidden parameters
+        publishDate: "2026-01-18",
+        lastUpdate: "2026-01-18",
+        hiddenScore: 100,
+        type: "lore",
+        period: "alternative",
+        status: "in_development",
+        rights: true
+    },
 ]
