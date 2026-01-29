@@ -548,7 +548,7 @@ const createActionButtons = (selectedAction = '', availableActions = ['equal', '
     return container;
 };
 
-const returnPlace = (type, isBonus, place) => {
+const returnPlace = (type, isBonus, place, eventId = '') => {
     const whereReqBon = isBonus ? 'bonuses' : 'requirements';
     const rb = window.reqbonConfig[whereReqBon];
 
@@ -611,10 +611,24 @@ const returnPlace = (type, isBonus, place) => {
             const eventSelect = document.createElement('select');
             eventSelect.id = `requirement-${place}`;
             eventSelect.className = 'main-page-input';
-            const events = Object.entries(window.eventManager?.jsonData?.custom_events || {});
-            eventSelect.innerHTML = events.map(([id, event]) => 
-                `<option value="${id}">${event.title || id}</option>`
-            ).join('');
+
+            let events = Object.entries(window.eventManager?.jsonData?.custom_events || {});
+
+            // Приводим к удобному виду и сортируем по названию
+            const sortedEvents = events.map(([id, event]) => ({
+                id,
+                title: event.title,
+                name: event.title || id
+            }))
+            .sort((a, b) => a.name.toUpperCase().localeCompare(b.name.toUpperCase()));
+
+            eventSelect.innerHTML = `
+                <option value="${eventId}">${window.translator.translate('this')}</option>
+                ${sortedEvents.map(event => 
+                    `<option value="${event.id}">${event.id} - ${event.name} - ${event.title}</option>`
+                ).join('')}
+            `;
+
             console.log('returning from reqbon: ', eventSelect);
             return eventSelect;
         } else if (rb[type][place] instanceof Array) {

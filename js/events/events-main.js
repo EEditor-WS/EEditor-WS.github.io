@@ -164,7 +164,7 @@ class EventManager {
 
             
         const eventsCountEl = document.getElementById('eventsCount');
-        if (eventsCountEl) {
+        if (eventsCountEl && place == 'events-list') {
             eventsCountEl.textContent = events.length;
         } 
 
@@ -1232,7 +1232,7 @@ generateUniqueId(minimumID = 0) {
 
             // Вспомогательная функция для отрисовки секций с прослушивателями
             const renderSection = (type, container, group) => {
-                const element = returnPlace(selectedType, isBonus, type);
+                const element = returnPlace(selectedType, isBonus, type, this.currentEvent);
                 
                 if (!element || !group) {
                     if (group) group.style.display = 'none';
