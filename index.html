@@ -1,117 +1,120 @@
 <!DOCTYPE html>
 <html lang="ru">
-    <!-- Google Tag Manager -->
-        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-T7C5DLXM');</script>
-    <!-- End Google Tag Manager -->
-    <head>
-        <title>EEditor WS | Editor</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!--link rel="icon" type="image/x-icon" href="img/ico/ico.svg"-->
-        <link rel="icon" type="image/x-icon" href="img/ico/ico.svg">
-        <script src="lands_data.js"></script>
-        <script src="js/base.js"></script>
-        <script src="js/dropdown.js"></script>
-        <script src="js/notification.js"></script>
-        <script src="js/translate/table.js"></script>
-        <script src="js/translate/translate.js"></script>
-        <script src="js/test/translate2.js"></script>
-        <script src="js/utils.js"></script>
-        <script src="script.js"></script>
-        <script src="js/language.js"></script>
-        <script src="js/translator.js"></script>
-        <script src="js/hello.js"></script>
-        <script src="js/head.js"></script>
-        <script src="js/map/map-edit.js"></script>
-        <script src="js/countries.js"></script>
-        <script src="js/events/events-main.js"></script>
-        <script src="js/events/events-draggable.js"></script>
-        <script src="js/countries-draggable.js"></script>
-        <script src="js/events-draggable.js"></script>
-        <script src="js/reforms.js"></script>
-        <script src="js/auth.js"></script>
-        <script src="js/backup.js"></script>
-        <script src="js/reqbon.js"></script>
-        <script src="js/migrations.js"></script>
-        <script src="js/test/move.js"></script>
-        <script src="js/test/move2.js"></script>
-        <script src="js/test/copyEcoPopRes.js"></script>
-        <script src="js/coop/coop.js"></script>
-        <script src="js/test/ads.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-peer@9.11.1/simplepeer.min.js"></script>
-        <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-        <script src="page/library/modern/unique.js"></script>
-        <link rel="stylesheet" href="css/!.css">
-        <link rel="stylesheet" href="css/base.css">
-        <link rel="stylesheet" href="css/elib/dropdown.css">
-        <link rel="stylesheet" href="css/countries.css">
-        <link rel="stylesheet" href="css/events.css">
-        <link rel="stylesheet" href="css/reforms.css">
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/head.css">
-        <link rel="stylesheet" href="css/list.css">
-        <link rel="stylesheet" href="css/notification.css">
-        <link rel="stylesheet" href="css/test/move.css">
-        <link rel="stylesheet" href="css/backup.css">
-        <link rel="stylesheet" href="css/coop.css">
-        <link rel="stylesheet" href="css/map.css">
-        <link rel="stylesheet" href="css/input.css">
-        <link rel="stylesheet" href="css/mobile/mobile-main.css">
-        <link rel="stylesheet" href="css/mobile/mobile-desktop.css">
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-9HFX1FVLMV"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'G-9HFX1FVLMV');
-        </script>
-        <!-- End Google tag (gtag.js) -->
-    </head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T7C5DLXM');</script>
+<!-- End Google Tag Manager -->
+<head>
+    <title>EEditor WS | Editor</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--link rel="icon" type="image/x-icon" href="img/ico/ico.svg"-->
+    <link rel="icon" type="image/x-icon" href="img/ico/ico.svg">
+    <script src="eelibs/import.js" type="module"></script>
+    <script src="lands_data.js"></script>
+    <script src="js/base.js"></script>
+    <script src="js/dropdown.js"></script>
+    <script src="js/notification.js"></script>
+    <script src="js/translate/table.js"></script>
+    <script src="js/translate/translate.js"></script>
+    <script src="js/test/translate2.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/language.js"></script>
+    <script src="js/translator.js"></script>
+    <script src="js/hello.js"></script>
+    <script src="js/head.js"></script>
+    <script src="js/map/map-edit.js"></script>
+    <script src="js/countries.js"></script>
+    <script src="js/events/events-main.js"></script>
+    <script src="js/events/events-form.js"></script>
+    <script src="js/events/events-draggable.js"></script>
+    <script src="js/countries-draggable.js"></script>
+    <script src="js/events-draggable.js"></script>
+    <script src="js/reforms.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/backup.js"></script>
+    <script src="js/reqbon.js"></script>
+    <script src="js/migrations.js"></script>
+    <script src="js/test/move.js"></script>
+    <script src="js/test/move2.js"></script>
+    <script src="js/test/copyEcoPopRes.js"></script>
+    <script src="js/coop/coop.js"></script>
+    <script src="js/test/ads.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-peer@9.11.1/simplepeer.min.js"></script>
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+    <script src="page/library/modern/unique.js"></script>
+    <!--link rel="stylesheet" href="css/!.css">
+    <link rel="stylesheet" href="css/elib/dropdown.css"-->
+    <link rel="stylesheet" href="eelibs/import.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/countries.css">
+    <link rel="stylesheet" href="css/events.css">
+    <link rel="stylesheet" href="css/reforms.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!--link rel="stylesheet" href="css/head.css"-->
+    <link rel="stylesheet" href="css/list.css">
+    <link rel="stylesheet" href="css/notification.css">
+    <link rel="stylesheet" href="css/test/move.css">
+    <link rel="stylesheet" href="css/backup.css">
+    <link rel="stylesheet" href="css/coop.css">
+    <link rel="stylesheet" href="css/map.css">
+    <link rel="stylesheet" href="css/input.css">
+    <link rel="stylesheet" href="css/mobile/mobile-main.css">
+    <link rel="stylesheet" href="css/mobile/mobile-desktop.css">
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SWBTV2B19R"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9HFX1FVLMV"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-
-        gtag('config', 'G-SWBTV2B19R');
+        
+        gtag('config', 'G-9HFX1FVLMV');
     </script>
     <!-- End Google tag (gtag.js) -->
-    <!-- FireBase tag -->
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-analytics.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-      
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-        const firebaseConfig = {
-          apiKey: "AIzaSyARKDShVfGzn6K7t5B-NpmEKZ2hNfPbb7A",
-          authDomain: "eeditor-ws.firebaseapp.com",
-          projectId: "eeditor-ws",
-          storageBucket: "eeditor-ws.firebasestorage.app",
-          messagingSenderId: "702031560059",
-          appId: "1:702031560059:web:2939e35c6a03e83decd1de",
-          measurementId: "G-BD85FCJNXX"
-        };
-      
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-    </script>
-    <!-- End FireBase tag -->
-    <body class="dark dark-theme" data-lang="en">
-        <!-- Google Tag Manager (noscript) -->
-            <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7C5DLXM"
-            height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SWBTV2B19R"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    
+    gtag('config', 'G-SWBTV2B19R');
+</script>
+<!-- End Google tag (gtag.js) -->
+<!-- FireBase tag -->
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+    
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+        apiKey: "AIzaSyARKDShVfGzn6K7t5B-NpmEKZ2hNfPbb7A",
+        authDomain: "eeditor-ws.firebaseapp.com",
+        projectId: "eeditor-ws",
+        storageBucket: "eeditor-ws.firebasestorage.app",
+        messagingSenderId: "702031560059",
+        appId: "1:702031560059:web:2939e35c6a03e83decd1de",
+        measurementId: "G-BD85FCJNXX"
+    };
+    
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+</script>
+<!-- End FireBase tag -->
+<body class="dark dark-theme" data-lang="en">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7C5DLXM"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <!-- End Google Tag Manager (noscript) -->
         <nav class="nav-header">
             <div class="logo">
@@ -125,20 +128,24 @@
                 });
             </script>
             <br>
-            <div class="nav-buttons-container">
-                <button class="nav-button active" data-page="main">
+            <div class="navbtns-container">
+                <button class="navbtn active" data-page="main">
                     <img class="button-icon" src="img/ui/home.svg">
                     <span class="button-text">Редактор</span>
                 </button>
-                <button class="nav-button" data-page="countries" onclick="window.countryManager.updateCountriesList()">
+                <button class="navbtn" data-page="countries" onclick="window.countryManager.updateCountriesList()">
                     <img class="button-icon" src="img/ui/flag.svg">
                     <span class="button-text">Страны</span>
                 </button>
-                <button class="nav-button" data-page="events">
+                <button class="navbtn" data-page="events">
                     <img class="button-icon" src="img/ui/calendar.svg">
                     <span class="button-text">События</span>
                 </button>
-                <button class="nav-button dev_thing" data-page="map-edit">
+                <button class="navbtn" data-page="" id="openedPage">
+                    <img class="button-icon" src="img/ui/code.svg">
+                    <span class="button-text">Открыто</span>
+                </button>
+                <button class="navbtn dev_thing" data-page="map-edit">
                     <svg class="button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                     </svg>
@@ -242,12 +249,12 @@
                             <span data-translate="discord">Discord server</span>
                         </a>
                         <!--a href="stable/index.html" target="_blank" class="account-item" data-action="stable">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            <span data-translate="stable_version">Stable version</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span data-translate="stable_version">Stable version</span>
                         </a-->
                         <a onclick="translateAndSaveFile()" target="_blank" class="account-item" data-action="translateFile">
                             <img src="img/ui/translate.svg">
@@ -277,7 +284,7 @@
                 </div>
             </div>
         </nav>
-
+        
         <div id="main" class="page pmain active">
             <div class="file-upload-container">
                 <div id="drop-zone" class="drop-zone">
@@ -337,15 +344,15 @@
                         <img src="img/ads/saturnscreen.png" alt="saturn Screenshot" style="width: 100%; border-radius: var(--br); box-shadow: 0 2px 16px #0003; background: #181a1f; object-fit: cover; max-height: 260px;">
                     </div>
                 </div>
-                <div class="warnament-tournament ads" id="tournamentAds" style="margin: 3rem auto 0 auto; max-width: 650px; background: var(--background-secondary); border-radius: var(--br); box-shadow: 0 4px 32px #0004; padding: 2rem 1.5rem 1.5rem 1.5rem; text-align: center;">
+                <div class="warnament-tournament ads" id="tournamentAds" style="margin: 3rem auto 0 auto; max-width: 650px; border-radius: var(--br); box-shadow: 0 4px 32px #0004; padding: 2rem 1.5rem 1.5rem 1.5rem; text-align: center;">
                     <div style="display: flex; align-items: center; justify-content: center; gap: 1.2em; flex-wrap: wrap;">
                         <img src="img/ads/warnament_logo.jpg" alt="Warnament Logo" style="width: 80px; height: 80px; border-radius: var(--br); background: #1b1b1b; object-fit: contain; box-shadow: 0 2px 8px #0004;">
                         <h2 style="color: #f5d85c; font-family: 'Orbitron', sans-serif; font-size: 1.8rem; letter-spacing: 1px; margin: 0;">
                             ⚔️ WARNAMENT TOURNAMENT ⚔️
                         </h2>
                     </div>
-
-                    <p style="color: #c9daff; margin-top: 1.5em; line-height: 1.6;">
+                    
+                    <p style="color: var(--text-sec); margin-top: 1.5em; line-height: 1.6;">
                         The <b>Warnament Tournament</b>, organized by <b>@Moād</b> and brought to you by 
                         <b>New War Front</b> and <b>Saturn</b>, is now 
                         <span style="color:#f5d85c; font-weight: bold;">OPEN FOR SIGNUP!</span>  
@@ -356,17 +363,17 @@
                         <br><br>
                         This will be a <b>series of games</b> hosted over an extended period — full of strategy, tension, and glory.
                     </p>
-
+                    
                     <!--div style="margin-top: 1.5em;">
-                        <a href="https://discord.gg/YVDmrzwx3y" target="_blank" rel="noopener" style="display:inline-block; background: linear-gradient(90deg, #6b31ac, #b67aff); color: #fff; font-family: 'Orbitron', sans-serif; font-size: 1rem; padding: 0.8em 1.6em; border-radius: var(--br); text-decoration: none; letter-spacing: 1px; transition: transform 0.2s;">
-                            🎮 JOIN & MAKE A TICKET IN ⁠SIGNUP!
-                        </a>
+                    <a href="https://discord.gg/YVDmrzwx3y" target="_blank" rel="noopener" style="display:inline-block; background: linear-gradient(90deg, #6b31ac, #b67aff); color: #fff; font-family: 'Orbitron', sans-serif; font-size: 1rem; padding: 0.8em 1.6em; border-radius: var(--br); text-decoration: none; letter-spacing: 1px; transition: transform 0.2s;">
+                        🎮 JOIN & MAKE A TICKET IN ⁠SIGNUP!
+                    </a>
                     </div-->
-
+                    
                     <!--div style="margin-top: 2em;">
-                        <img src="img/ads/warnament_tournament_banner.png" alt="Warnament Tournament Banner" style="width: 100%; border-radius: var(--br); box-shadow: 0 2px 16px #0003; background: #181a1f; object-fit: cover; max-height: 260px;">
+                    <img src="img/ads/warnament_tournament_banner.png" alt="Warnament Tournament Banner" style="width: 100%; border-radius: var(--br); box-shadow: 0 2px 16px #0003; background: #181a1f; object-fit: cover; max-height: 260px;">
                     </div-->
-
+                    
                     <div style="margin-top: 1.8em; display: flex; justify-content: center; gap: 1em; flex-wrap: wrap;">
                         <a href="https://discord.com/channels/1299836753070395422/1430945114326306876" target="_blank" rel="noopener" style="display:inline-block; background: #2b2d31; color: #ffcc66; font-family: 'Orbitron', sans-serif; font-size: 0.9rem; padding: 0.6em 1.2em; border-radius: var(--br); text-decoration: none; transition: background 0.2s;">
                             🌐 New War Front Server
@@ -388,27 +395,27 @@
                         <label for="name" data-translate="title">Название</label>
                         <input type="text" id="name" name="name" class="main-page-input" autocomplete="off">
                     </div>
-
+                    
                     <div class="form-group">
                         <label for="id" data-translate="id">ID</label>
                         <input type="text" id="id" name="id" class="main-page-input" autocomplete="off">
                     </div>
-
+                    
                     <div class="form-group">
                         <label for="last_turn" data-translate="last_turn">Последний Ход</label>
                         <input type="number" id="last_turn" name="last_turn" class="main-page-input">
                     </div>
-
+                    
                     <div class="form-group">
                         <label for="year" data-translate="year">Год</label>
                         <input type="number" id="year" name="year" class="main-page-input">
                     </div>
-
+                    
                     <div class="form-group">
                         <label for="month" data-translate="month">Месяц</label>
                         <input type="number" id="month" name="month" min="1" max="12" class="main-page-input">
                     </div>
-
+                    
                     <div class="form-group">
                         <label for="play_after_last_turn" data-translate="play_after_last_turn">Игра После Последнего Хода</label>
                         <select id="play_after_last_turn" name="play_after_last_turn" class="main-page-input">
@@ -416,56 +423,56 @@
                             <option value="false" data-translate="no">Нет</option>
                         </select>
                     </div>
-
+                    
                     <div class="form-group">
                         <label for="technology_lvl" data-translate="technology_lvl">Уровень Технологий</label>
                         <input type="number" id="technology_lvl" name="technology_lvl" class="main-page-input">
                     </div>
-
+                    
                     <!-- div class="form-group">
-                        <label for="technologies_are_opened" data-translate="technologies_are_opened">Открыты Все Технологии</label>
-                        <select id="technologies_are_opened" name="technologies_are_opened" class="main-page-input">
-                            <option value="disabled" data-translate="no">Нет</option>
-                            <option value="enabled" data-translate="yes">Да</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="resources_spawn" data-translate="resources_spawn">Спаун Ресурсов</label>
-                        <select id="resources_spawn" name="resources_spawn" class="main-page-input">
-                            <option value="low" data-translate="low">Мало</option>
-                            <option value="standard" data-translate="standard">Стандартно</option>
-                            <option value="many" data-translate="many">Много</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="difficulty" data-translate="difficulty">Сложность</label>
-                        <select id="difficulty" name="difficulty" class="main-page-input">
-                            <option value="easy" data-translate="easy">Легко</option>
-                            <option value="standard" data-translate="standard">Нормально</option>
-                            <option value="hard" data-translate="hard">Сложно</option>
-                            <option value="impossible" data-translate="impossible">Невозможно</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="bots_behavior" data-translate="bots_behavior">Поведение Ботов</label>
-                        <select id="bots_behavior" name="bots_behavior" class="main-page-input">
-                            <option value="peaceful" data-translate="peaceful">Мирные</option>
-                            <option value="standard" data-translate="standard">Стандартные</option>
-                            <option value="aggressive" data-translate="aggressive">Агрессивные</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="no_initial_diplomacy" data-translate="no_initial_diplomacy">Без Стартовой Дипломатии</label>
-                        <select id="no_initial_diplomacy" name="no_initial_diplomacy" class="main-page-input">
-                            <option value="enabled" data-translate="yes">Да</option>
-                            <option value="disabled" data-translate="no">Нет</option>
-                        </select>
+                    <label for="technologies_are_opened" data-translate="technologies_are_opened">Открыты Все Технологии</label>
+                    <select id="technologies_are_opened" name="technologies_are_opened" class="main-page-input">
+                        <option value="disabled" data-translate="no">Нет</option>
+                        <option value="enabled" data-translate="yes">Да</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="resources_spawn" data-translate="resources_spawn">Спаун Ресурсов</label>
+                    <select id="resources_spawn" name="resources_spawn" class="main-page-input">
+                        <option value="low" data-translate="low">Мало</option>
+                        <option value="standard" data-translate="standard">Стандартно</option>
+                        <option value="many" data-translate="many">Много</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="difficulty" data-translate="difficulty">Сложность</label>
+                    <select id="difficulty" name="difficulty" class="main-page-input">
+                        <option value="easy" data-translate="easy">Легко</option>
+                        <option value="standard" data-translate="standard">Нормально</option>
+                        <option value="hard" data-translate="hard">Сложно</option>
+                        <option value="impossible" data-translate="impossible">Невозможно</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="bots_behavior" data-translate="bots_behavior">Поведение Ботов</label>
+                    <select id="bots_behavior" name="bots_behavior" class="main-page-input">
+                        <option value="peaceful" data-translate="peaceful">Мирные</option>
+                        <option value="standard" data-translate="standard">Стандартные</option>
+                        <option value="aggressive" data-translate="aggressive">Агрессивные</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="no_initial_diplomacy" data-translate="no_initial_diplomacy">Без Стартовой Дипломатии</label>
+                    <select id="no_initial_diplomacy" name="no_initial_diplomacy" class="main-page-input">
+                        <option value="enabled" data-translate="yes">Да</option>
+                        <option value="disabled" data-translate="no">Нет</option>
+                    </select>
                     </div-->
-
+                    
                     <div class="form-group">
                         <label for="no_nuclear_weapon" data-translate="no_nuclear_weapon">Без Ядерного Оружия</label>
                         <select id="no_nuclear_weapon" name="no_nuclear_weapon" class="main-page-input">
@@ -473,15 +480,15 @@
                             <option value="disabled" data-translate="no">Нет</option>
                         </select>
                     </div>
-
+                    
                     <!--div class="form-group">
-                        <label for="sandbox" data-translate="sandbox">Sandbox</label>
-                        <select id="sandbox" name="sandbox" class="main-page-input">
-                            <option value="enabled" data-translate="yes">Да</option>
-                            <option value="disabled" data-translate="no">Нет</option>
-                        </select>
+                    <label for="sandbox" data-translate="sandbox">Sandbox</label>
+                    <select id="sandbox" name="sandbox" class="main-page-input">
+                        <option value="enabled" data-translate="yes">Да</option>
+                        <option value="disabled" data-translate="no">Нет</option>
+                    </select>
                     </div-->
-
+                    
                     <div class="form-group">
                         <label for="turn" data-translate="turn">Turn</label>
                         <input type="number" id="turn" name="turn" class="main-page-input">
@@ -552,11 +559,11 @@
                                     <div class="th-content">
                                         <div class="th-title">
                                             <span data-translate="color">Цвет</span>
-                                            <button class="th-filter" title="Фильтр по цвету">
+                                            <!--button class="th-filter" title="Фильтр по цвету">
                                                 <svg viewBox="0 0 24 24" width="14" height="14">
                                                     <path d="M3 4h18l-7 8v8l-4-2v-6z" fill="none" stroke="currentColor" stroke-width="2"/>
                                                 </svg>
-                                            </button>
+                                            </button-->
                                         </div>
                                     </div>
                                 </th>
@@ -685,7 +692,7 @@
                     </div>
                 </div>
                 <form id="country-form" class="">
-                    <div class="black-back country-form">
+                    <div class="country-form black-back">
                         <div class="form-group">
                             <label for="country-name" data-translate="name">Название</label>
                             <input type="text" id="country-name" name="name" class="main-page-input" autocomplete="off">
@@ -749,56 +756,117 @@
                         </div>
                     </div>
                     <div class="country-form">
-                    <div class="form-group">
-                        <label data-translate="allies">Союзники</label>
-                        <div class="array-list" id="country-allies" class="main-page-input"></div>
-                        <button type="button" class="add-country-button newabtn" data-target="allies" title="Добавить страну">
-                            <img src="img/ui/add.svg">
-                        </button>
+                        <div class="form-group">
+                            <label data-translate="allies">Союзники</label>
+                            <div class="array-list" id="country-allies" class="main-page-input"></div>
+                            <button type="button" class="add-country-button newabtn" data-target="allies" title="Добавить страну">
+                                <img src="img/ui/add.svg">
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <label data-translate="enemies">Враги</label>
+                            <div class="array-list" id="country-enemies" class="main-page-input"></div>
+                            <button type="button" class="add-country-button newabtn" data-target="enemies" title="Добавить страну">
+                                <img src="img/ui/add.svg">
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <label data-translate="independence_guarantees">Гарантии независимости</label>
+                            <div class="array-list" id="country-guaranteed" class="main-page-input"></div>
+                            <button type="button" class="add-country-button newabtn" data-target="guaranteed" title="Добавить страну">
+                                <img src="img/ui/add.svg">
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <label data-translate="guaranteed_by">Гарантии от</label>
+                            <div class="array-list" id="country-guaranteed-by" class="main-page-input"></div>
+                            <button type="button" class="add-country-button newabtn" data-target="guaranteed-by" title="Добавить страну">
+                                <img src="img/ui/add.svg">
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <label data-translate="pacts">Пакты</label>
+                            <div class="array-list" id="country-pacts" class="main-page-input"></div>
+                            <button type="button" class="add-country-button newabtn" data-target="pacts" title="Добавить страну">
+                                <img src="img/ui/add.svg">
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <label data-translate="sanctions">Санкции</label>
+                            <div class="array-list" id="country-sanctions" class="main-page-input"></div>
+                            <button type="button" class="add-country-button newabtn" data-target="sanctions" title="Добавить страну">
+                                <img src="img/ui/add.svg">
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <label data-translate="vassals">Вассалы</label>
+                            <div class="array-list" id="country-vassals" class="main-page-input"></div>
+                            <button type="button" class="add-country-button newabtn" data-target="vassals" title="Добавить страну">
+                                <img src="img/ui/add.svg">
+                            </button>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label data-translate="enemies">Враги</label>
-                        <div class="array-list" id="country-enemies" class="main-page-input"></div>
-                        <button type="button" class="add-country-button newabtn" data-target="enemies" title="Добавить страну">
-                            <img src="img/ui/add.svg">
-                        </button>
+                    <div class="black-back">
+                        <div class="table-container">
+                            <table class="list-table" id="countryMentions">
+                                <thead>
+                                    <tr class="mentions_head">
+                                        <th class="sort-asc">
+                                            <div class="th-content">
+                                                <div class="th-title">
+                                                    <span data-translate="id">ID</span>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <th data-sort="group">
+                                            <div class="th-content">
+                                                <div class="th-title">
+                                                    <span data-translate="event_group">Группа</span>
+                                                    <button class="th-filter" title="Фильтр по группе">
+                                                        <svg viewBox="0 0 24 24" width="14" height="14">
+                                                            <path d="M3 4h18l-7 8v8l-4-2v-6z" fill="none" stroke="currentColor" stroke-width="2"></path>
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <th data-sort="name">
+                                            <div class="th-content">
+                                                <div class="th-title">
+                                                    <span data-translate="name">Название</span>
+                                                    <button class="th-filter" title="Фильтр по названию">
+                                                        <svg viewBox="0 0 24 24" width="14" height="14">
+                                                            <path d="M3 4h18l-7 8v8l-4-2v-6z" fill="none" stroke="currentColor" stroke-width="2"></path>
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <th data-sort="title">
+                                            <div class="th-content">
+                                                <div class="th-title">
+                                                    <span data-translate="title">Заголовок</span>
+                                                    <button class="th-filter" title="Фильтр по заголовку">
+                                                        <svg viewBox="0 0 24 24" width="14" height="14">
+                                                            <path d="M3 4h18l-7 8v8l-4-2v-6z" fill="none" stroke="currentColor" stroke-width="2"></path>
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <th data-sort="requirements">
+                                            <div class="th-content">
+                                                <div class="th-title">
+                                                    <span data-translate="requirements">Условия</span>
+                                                </div>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="countryMentionsBody"></tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label data-translate="independence_guarantees">Гарантии независимости</label>
-                        <div class="array-list" id="country-guaranteed" class="main-page-input"></div>
-                        <button type="button" class="add-country-button newabtn" data-target="guaranteed" title="Добавить страну">
-                            <img src="img/ui/add.svg">
-                        </button>
-                    </div>
-                    <div class="form-group">
-                        <label data-translate="guaranteed_by">Гарантии от</label>
-                        <div class="array-list" id="country-guaranteed-by" class="main-page-input"></div>
-                        <button type="button" class="add-country-button newabtn" data-target="guaranteed-by" title="Добавить страну">
-                            <img src="img/ui/add.svg">
-                        </button>
-                    </div>
-                    <div class="form-group">
-                        <label data-translate="pacts">Пакты</label>
-                        <div class="array-list" id="country-pacts" class="main-page-input"></div>
-                        <button type="button" class="add-country-button newabtn" data-target="pacts" title="Добавить страну">
-                            <img src="img/ui/add.svg">
-                        </button>
-                    </div>
-                    <div class="form-group">
-                        <label data-translate="sanctions">Санкции</label>
-                        <div class="array-list" id="country-sanctions" class="main-page-input"></div>
-                        <button type="button" class="add-country-button newabtn" data-target="sanctions" title="Добавить страну">
-                            <img src="img/ui/add.svg">
-                        </button>
-                    </div>
-                    <div class="form-group">
-                        <label data-translate="vassals">Вассалы</label>
-                        <div class="array-list" id="country-vassals" class="main-page-input"></div>
-                        <button type="button" class="add-country-button newabtn" data-target="vassals" title="Добавить страну">
-                            <img src="img/ui/add.svg">
-                        </button>
-                    </div>
-                </div>
                 </form>
             </div>
         </div>
@@ -857,16 +925,16 @@
                         <thead>
                             <tr class="events_head">
                                 <!--th data-sort="ico">
-                                    <div class="th-content">
-                                        <div class="th-title">
-                                            <span data-translate="ico">ico</span>
-                                            <button class="th-filter" title="Фильтр по иконке">
-                                                <svg viewBox="0 0 24 24" width="14" height="14">
-                                                    <path d="M3 4h18l-7 8v8l-4-2v-6z" fill="none" stroke="currentColor" stroke-width="2"/>
-                                                </svg>
-                                            </button>
-                                        </div>
+                                <div class="th-content">
+                                    <div class="th-title">
+                                        <span data-translate="ico">ico</span>
+                                        <button class="th-filter" title="Фильтр по иконке">
+                                            <svg viewBox="0 0 24 24" width="14" height="14">
+                                                <path d="M3 4h18l-7 8v8l-4-2v-6z" fill="none" stroke="currentColor" stroke-width="2"/>
+                                            </svg>
+                                        </button>
                                     </div>
+                                </div>
                                 </th-->
                                 <th draggable=true data-sort="id">
                                     <div class="th-content">
@@ -921,9 +989,9 @@
                                         <div class="th-title">
                                             <span data-translate="requirements">Условия</span>
                                             <!-- button class="th-filter" title="Фильтр по заголовку">
-                                                <svg viewBox="0 0 24 24" width="14" height="14">
-                                                    <path d="M3 4h18l-7 8v8l-4-2v-6z" fill="none" stroke="currentColor" stroke-width="2"/>
-                                                </svg>
+                                            <svg viewBox="0 0 24 24" width="14" height="14">
+                                                <path d="M3 4h18l-7 8v8l-4-2v-6z" fill="none" stroke="currentColor" stroke-width="2"/>
+                                            </svg>
                                             </button-->
                                         </div>
                                     </div>
@@ -975,267 +1043,265 @@
                         </div>
                     </div>
                 </div>
-            <form id="event-form" class="event-form">
-                <div class="event-form-container" id="event-form-container">
-                    <div draggable="true" class="event-main-settings">
-                        <div draggable="true" class="drag-handle" id="firstheaddrag" style="border: 0;">
-                            drag it
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="event-image" data-translate="event_image">Картинка события:</label>
-                                <div class="image-select-container">
-                                    <select id="event-image" name="event-image" class="event-main-input">
-                                        <option value="diplomacy">diplomacy</option>
-                                        <option value="communism">communism</option>
-                                        <option value="paganism">paganism</option>
-                                        <option value="nuclear">nuclear</option>
-                                        <option value="paranoia">paranoia</option>
-                                        <option value="trade_republic">trade_republic</option>
-                                        <option value="monarchy">monarchy</option>
-                                        <option value="theocracy">theocracy</option>
-                                        <option value="burnt_letter">burnt_letter</option>
-                                        <option value="fascism">fascism</option>
-                                        <option value="battleship2">battleship2</option>
-                                        <option value="democracy">democracy</option>
-                                        <option value="theocracy_soldiers">theocracy_soldiers</option>
-                                        <option value="border">border</option>
-                                        <option value="wunderwaffe">wunderwaffe</option>
-                                        <option value="technology">technology</option>
-                                        <option value="empty_square">empty_square</option>
-                                        <option value="political">political</option>
-                                        <option value="battleship">battleship</option>
-                                        <option value="factory">factory</option>
-                                        <option value="fire_in_building">fire_in_building</option>
-                                        <option value="officers_station">officers_station</option>
-                                        <option value="barn">barn</option>
-                                        <option value="deserter">deserter</option>
-                                        <option value="capital_is_down">capital_is_down</option>
-                                    </select>
-                                    <img id="event-image-preview" src="" alt="Предпросмотр картинки" class="image-preview" data-translate="image_preview">
-                                </div>
+                <form id="event-form" class="event-form">
+                    <div class="event-form-container" id="event-form-container">
+                        <div draggable="true" class="event-main-settings">
+                            <div draggable="true" class="drag-handle" id="firstheaddrag" style="border: 0;">
+                                drag it
                             </div>
-                            <div class="form-group">
-                                <label for="event-icon" data-translate="event_icon">Иконка события:</label>
-                                <div class="image-select-container">
-                                    <select id="event-icon" name="event-icon" class="event-main-input">
-                                        <option value="diplomacy">diplomacy</option>
-                                        <option value="political">political</option>
-                                        <option value="industry">industry</option>
-                                        <option value="border">border</option>
-                                        <option value="check">check</option>
-                                        <option value="trade">trade</option>
-                                        <option value="losses">losses</option>
-                                        <option value="discontent">discontent</option>
-                                        <option value="technology">technology</option>
-                                    </select>
-                                    <img id="event-icon-preview" src="" alt="Предпросмотр иконки" class="icon-preview" data-translate="icon_preview">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="event-id" data-translate="event_id">ID:</label>
-                                <input type="text" id="event-id" name="event-id"  class="event-main-input main-page-input">
-                            </div>
-                            <div class="form-group">
-                                <label for="event-group-name" data-translate="event_group">Группа:</label>
-                                <input type="text" id="event-group-name" name="event-group-name" class="event-main-input main-page-input" autocomplete="off">
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="event-unique-name" data-translate="event_unique_name">Системное название:</label>
-                                <input type="text" id="event-unique-name" name="event-unique-name" class="event-main-input main-page-input" autocomplete="off">
-                            </div>
-                            <div class="form-group">
-                                <label for="event-title" data-translate="event_title">Заголовок:</label>
-                                <input type="text" id="event-title" name="event-title" class="event-main-input main-page-input" autocomplete="off">
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="event-hide-later" data-translate="event_hide_later">Прятать позже:</label>
-                                <select id="event-hide-later" name="event-hide-later" class="event-main-input main-page-input">
-                                    <option value="false" data-translate="no">Нет</option>
-                                    <option value="true" data-translate="yes">Да</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="event-delete-turns" data-translate="event_delete_turns">Удалить через (ходов):</label>
-                                <input type="number" id="event-delete-turns" name="event-delete-turns" min="1" value="1" class="event-main-input main-page-input">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="event-description" data-translate="event_description">Описание события:</label>
-                            <textarea id="event-description" name="event-description" class="event-main-textarea main-page-textarea"></textarea>
-                        </div>
-                    </div>
-                        <div class="drag-handle-slider" style="/*background:#7474747a; */cursor:col-resize;"><img src="img/ui/spliter.svg"></div>
-                    <div draggable="true" class="event-answers active" id="event-answers">
-                        <div draggable="true" class="drag-handle" style="display: flex; flex-direction: row; justify-content: space-between;">
-                            <h2 data-translate="answers">Ответы</h2>
-                            <div class="event-answers-controls">
-                                <button class="icon-action-button clear" onclick="document.getElementById('event-answers').classList.toggle('active')"><img src="img/ui/arrow/down.svg"></button>
-                                <button class="icon-action-button clear" onclick="window.eventManager.switchStyle()"><img src="img/ui/arrow/right.svg"></button>
-                            </div>
-                        </div>
-                        <div class="answers-flex">
-                            <div class="answer-block">
-                                <h3 data-translate="answer_1_title">Ответ 1</h3>
+                            <div class="form-row">
                                 <div class="form-group">
-                                    <label for="event-auto-answer1" data-translate="auto_select_if_ignored">Выбирать при игнорировании:</label>
-                                    <select id="event-auto-answer1" name="event-auto-answer1" class="event-answers-item main-page-input">
+                                    <label for="event-image" data-translate="event_image">Картинка события:</label>
+                                    <div class="image-select-container">
+                                        <select id="event-image" name="event-image" class="event-main-input">
+                                            <option value="diplomacy">diplomacy</option>
+                                            <option value="communism">communism</option>
+                                            <option value="paganism">paganism</option>
+                                            <option value="nuclear">nuclear</option>
+                                            <option value="paranoia">paranoia</option>
+                                            <option value="trade_republic">trade_republic</option>
+                                            <option value="monarchy">monarchy</option>
+                                            <option value="theocracy">theocracy</option>
+                                            <option value="burnt_letter">burnt_letter</option>
+                                            <option value="fascism">fascism</option>
+                                            <option value="battleship2">battleship2</option>
+                                            <option value="democracy">democracy</option>
+                                            <option value="theocracy_soldiers">theocracy_soldiers</option>
+                                            <option value="border">border</option>
+                                            <option value="wunderwaffe">wunderwaffe</option>
+                                            <option value="technology">technology</option>
+                                            <option value="empty_square">empty_square</option>
+                                            <option value="political">political</option>
+                                            <option value="battleship">battleship</option>
+                                            <option value="factory">factory</option>
+                                            <option value="fire_in_building">fire_in_building</option>
+                                            <option value="officers_station">officers_station</option>
+                                            <option value="barn">barn</option>
+                                            <option value="deserter">deserter</option>
+                                            <option value="capital_is_down">capital_is_down</option>
+                                        </select>
+                                        <img id="event-image-preview" src="" alt="Предпросмотр картинки" class="image-preview" data-translate="image_preview">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="event-icon" data-translate="event_icon">Иконка события:</label>
+                                    <div class="image-select-container">
+                                        <select id="event-icon" name="event-icon" class="event-main-input">
+                                            <option value="diplomacy">diplomacy</option>
+                                            <option value="political">political</option>
+                                            <option value="industry">industry</option>
+                                            <option value="border">border</option>
+                                            <option value="check">check</option>
+                                            <option value="trade">trade</option>
+                                            <option value="losses">losses</option>
+                                            <option value="discontent">discontent</option>
+                                            <option value="technology">technology</option>
+                                        </select>
+                                        <img id="event-icon-preview" src="" alt="Предпросмотр иконки" class="icon-preview" data-translate="icon_preview">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="event-id" data-translate="event_id">ID:</label>
+                                    <input type="text" id="event-id" name="event-id"  class="event-main-input main-page-input">
+                                </div>
+                                <div class="form-group">
+                                    <label for="event-group-name" data-translate="event_group">Группа:</label>
+                                    <input type="text" id="event-group-name" name="event-group-name" class="event-main-input main-page-input" autocomplete="off">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="event-unique-name" data-translate="event_unique_name">Системное название:</label>
+                                    <input type="text" id="event-unique-name" name="event-unique-name" class="event-main-input main-page-input" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <label for="event-title" data-translate="event_title">Заголовок:</label>
+                                    <input type="text" id="event-title" name="event-title" class="event-main-input main-page-input" autocomplete="off">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="event-hide-later" data-translate="event_hide_later">Прятать позже:</label>
+                                    <select id="event-hide-later" name="event-hide-later" class="event-main-input main-page-input">
                                         <option value="false" data-translate="no">Нет</option>
                                         <option value="true" data-translate="yes">Да</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="event-answer1" data-translate="answer_text">Текст ответа:</label>
-                                    <input type="text" id="event-answer1" name="event-answer1" class="event-answers-item main-page-input" autocomplete="off">
-                                </div>
-                                <div class="form-group">
-                                    <label for="event-description1" data-translate="result_description">Описание результата:</label>
-                                    <textarea id="event-description1" name="event-description1" rows="3" class="event-answers-item main-page-textarea"></textarea>
-                                </div>
-                                <div class="requirements-buttons">
-                                    <button type="button" class="requirements-button" data-answer="1-req" data-translate="requirements">Требования</button>
-                                    <button type="button" class="requirements-button" data-answer="1-bonus" data-translate="bonuses">Бонусы</button>
+                                    <label for="event-delete-turns" data-translate="event_delete_turns">Удалить через (ходов):</label>
+                                    <input type="number" id="event-delete-turns" name="event-delete-turns" min="1" value="1" class="event-main-input main-page-input">
                                 </div>
                             </div>
-
-                            <div class="answer-block">
-                                <h3 data-translate="answer_2_title">Ответ 2</h3>
-                                <div class="form-group">
-                                    <label for="event-answer2-disabled" data-translate="enable_answer">Включить ответ:</label>
-                                    <select id="event-answer2-disabled" name="event-answer2-disabled" class="event-answers-item main-page-input">
-                                        <option value="false" data-translate="yes">Да</option>
-                                        <option value="true" data-translate="no">Нет</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="event-answer2">Текст ответа:</label>
-                                    <input type="text" id="event-answer2" name="event-answer2" class="event-answers-item main-page-input" autocomplete="off">
-                                </div>
-                                <div class="form-group">
-                                    <label for="event-description2">Описание результата:</label>
-                                    <textarea id="event-description2" name="event-description2" rows="3" class="event-answers-item main-page-textarea"></textarea>
-                                </div>
-                                <div class="requirements-buttons">
-                                    <button type="button" class="requirements-button" data-answer="2-req" data-translate="requirements">Требования</button>
-                                    <button type="button" class="requirements-button" data-answer="2-bonus" data-translate="bonuses">Бонусы</button>
+                            
+                            <div class="form-group">
+                                <label for="event-description" data-translate="event_description">Описание события:</label>
+                                <textarea id="event-description" name="event-description" class="event-main-textarea main-page-textarea"></textarea>
+                            </div>
+                        </div>
+                        <div class="drag-handle-slider" style="/*background:#7474747a; */cursor:col-resize;"><img src="img/ui/spliter.svg"></div>
+                        <div draggable="true" class="event-answers active" id="event-answers">
+                            <div draggable="true" class="drag-handle" style="display: flex; flex-direction: row; justify-content: space-between;">
+                                <h2 data-translate="answers">Ответы</h2>
+                                <div class="event-answers-controls">
+                                    <button class="icon-action-button clear" onclick="document.getElementById('event-answers').classList.toggle('active')"><img src="img/ui/arrow/down.svg"></button>
+                                    <button class="icon-action-button clear" onclick="window.eventManager.switchStyle()"><img src="img/ui/arrow/right.svg"></button>
                                 </div>
                             </div>
-
-                            <div class="answer-block">
-                                <h3 data-translate="answer_3_title">Ответ 3</h3>
-                                <div class="form-group">
-                                    <label for="event-answer3-disabled" data-translate="enable_answer">Включить ответ:</label>
-                                    <select id="event-answer3-disabled" name="event-answer3-disabled" class="event-answers-item main-page-input">
-                                        <option value="false" data-translate="yes">Да</option>
-                                        <option value="true" data-translate="no">Нет</option>
-                                    </select>
+                            <div class="answers-flex">
+                                <div class="answer-block">
+                                    <h3 data-translate="answer_1_title">Ответ 1</h3>
+                                    <div class="form-group">
+                                        <label for="event-auto-answer1" data-translate="auto_select_if_ignored">Выбирать при игнорировании:</label>
+                                        <select id="event-auto-answer1" name="event-auto-answer1" class="event-answers-item main-page-input">
+                                            <option value="false" data-translate="no">Нет</option>
+                                            <option value="true" data-translate="yes">Да</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="event-answer1" data-translate="answer_text">Текст ответа:</label>
+                                        <input type="text" id="event-answer1" name="event-answer1" class="event-answers-item main-page-input" autocomplete="off">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="event-description1" data-translate="result_description">Описание результата:</label>
+                                        <textarea id="event-description1" name="event-description1" rows="3" class="event-answers-item main-page-textarea"></textarea>
+                                    </div>
+                                    <div class="requirements-buttons">
+                                        <button type="button" class="requirements-button" data-answer="1-req" data-translate="requirements">Требования</button>
+                                        <button type="button" class="requirements-button" data-answer="1-bonus" data-translate="bonuses">Бонусы</button>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="event-answer3" data-translate="answer_text">Текст ответа:</label>
-                                    <input type="text" id="event-answer3" name="event-answer3" class="event-answers-item main-page-input" autocomplete="off">
+                                
+                                <div class="answer-block">
+                                    <h3 data-translate="answer_2_title">Ответ 2</h3>
+                                    <div class="form-group">
+                                        <label for="event-answer2-disabled" data-translate="enable_answer">Включить ответ:</label>
+                                        <select id="event-answer2-disabled" name="event-answer2-disabled" class="event-answers-item main-page-input">
+                                            <option value="false" data-translate="yes">Да</option>
+                                            <option value="true" data-translate="no">Нет</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="event-answer2">Текст ответа:</label>
+                                        <input type="text" id="event-answer2" name="event-answer2" class="event-answers-item main-page-input" autocomplete="off">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="event-description2">Описание результата:</label>
+                                        <textarea id="event-description2" name="event-description2" rows="3" class="event-answers-item main-page-textarea"></textarea>
+                                    </div>
+                                    <div class="requirements-buttons">
+                                        <button type="button" class="requirements-button" data-answer="2-req" data-translate="requirements">Требования</button>
+                                        <button type="button" class="requirements-button" data-answer="2-bonus" data-translate="bonuses">Бонусы</button>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="event-description3" data-translate="result_description">Описание результата:</label>
-                                    <textarea id="event-description3" name="event-description3" rows="3" class="event-answers-item main-page-textarea"></textarea>
-                                </div>
-                                <div class="requirements-buttons">
-                                    <button type="button" class="requirements-button" data-answer="3-req" data-translate="requirements">Требования</button>
-                                    <button type="button" class="requirements-button" data-answer="3-bonus" data-translate="bonuses">Бонусы</button>
+                                
+                                <div class="answer-block">
+                                    <h3 data-translate="answer_3_title">Ответ 3</h3>
+                                    <div class="form-group">
+                                        <label for="event-answer3-disabled" data-translate="enable_answer">Включить ответ:</label>
+                                        <select id="event-answer3-disabled" name="event-answer3-disabled" class="event-answers-item main-page-input">
+                                            <option value="false" data-translate="yes">Да</option>
+                                            <option value="true" data-translate="no">Нет</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="event-answer3" data-translate="answer_text">Текст ответа:</label>
+                                        <input type="text" id="event-answer3" name="event-answer3" class="event-answers-item main-page-input" autocomplete="off">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="event-description3" data-translate="result_description">Описание результата:</label>
+                                        <textarea id="event-description3" name="event-description3" rows="3" class="event-answers-item main-page-textarea"></textarea>
+                                    </div>
+                                    <div class="requirements-buttons">
+                                        <button type="button" class="requirements-button" data-answer="3-req" data-translate="requirements">Требования</button>
+                                        <button type="button" class="requirements-button" data-answer="3-bonus" data-translate="bonuses">Бонусы</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div draggable="true" class="event-requirements" id="event-requirements-jakor">
-                        <div class="modal-header reqheader">
-                            <button type="button" id="reqbonback" class="icon-action-button newabtn" onclick="window.eventManager.openRequirementsEditor('mainreq', 'inpage')" style="width: min-content;">
-                                <img src="img/ui/back.svg">
-                            </button>
-                            <h2 draggable="true" class="drag-handle" data-translate="requirements" id="requirements-editor-title">Условия</h2>
-                            <button type="button" id="add-requirement" class="icon-action-button add newabtn">
+                        <div draggable="true" class="event-requirements" id="event-requirements-jakor">
+                            <div class="modal-header reqheader">
+                                <button type="button" id="reqbonback" class="icon-action-button newabtn" onclick="window.eventManager.openRequirementsEditor('mainreq', 'inpage')" style="width: min-content;">
+                                    <img src="img/ui/back.svg">
+                                </button>
+                                <h2 draggable="true" class="drag-handle" data-translate="requirements" id="requirements-editor-title">Условия</h2>
+                                <button type="button" id="add-requirement" class="icon-action-button add newabtn">
+                                    <img src="img/ui/add.svg">
+                                </button>
+                            </div>
+                            
+                            <!--div class="requirements-buttons">
+                            <button type="button" class="requirements-button" data-answer="mainreq" data-translate="common_requirements">Общие требования</button>
+                            </div-->
+                            
+                            <div id="requirements-list" class="requirements-list">
+                                <table class="list-table">
+                                    <thead>
+                                        <tr>
+                                            <th data-translate="type"></th>
+                                            <th data-translate="subtype"></th>
+                                            <th data-translate="action"></th>
+                                            <th data-translate="value"></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="requirements-items">
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="requirement-editor" class="requirement-editor hidden_save">
+                                <div class="form-group" id="reqTypeDiv">
+                                    <label for="requirement-type" data-translate="type"></label>
+                                    <select id="requirement-type" class="main-page-input" title="Тип требования" style="display: none;">
+                                        <option value="" data-translate="select_type">Выберите тип</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="requirement-duration" data-translate="duration"></label>
+                                    <input type="number" id="requirement-duration" class="main-page-input" autocomplete="off" title="Длительность требования" placeholder="Длительность">
+                                </div>
+                                <div class="form-group">
+                                    <label for="requirement-subtype" data-translate="subtype"></label>
+                                    <div id="requirement-subtype" class="main-page-input" ></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="requirement-action" data-translate="action"></label>
+                                    <div id="requirement-action" class="main-page-input" title="Действие требования"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="requirement-value" data-translate="value"></label>
+                                    <div id="requirement-value"></div>
+                                </div>
+                                <div class="info-actions">
+                                    <button type="button" id="save-requirement" class="icon-action-button save">
+                                        <img src="img/ui/save.svg">
+                                        <span class="button-text" data-translate="save">Сохранить</span>
+                                    </button>
+                                    <button type="button" id="cancel-requirement" class="icon-action-button delete">
+                                        <img src="img/ui/block.svg">
+                                        <span class="button-text" data-translate="cancel">Отменить</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <button type="button" id="add-requirement2" class="icon-action-button add newabtn">
                                 <img src="img/ui/add.svg">
                             </button>
                         </div>
-
-                        <!--div class="requirements-buttons">
-                            <button type="button" class="requirements-button" data-answer="mainreq" data-translate="common_requirements">Общие требования</button>
-                        </div-->
-
-                        <div id="requirements-list" class="requirements-list">
-                            <table class="list-table">
-                                <thead>
-                                    <tr>
-                                        <th data-translate="type"></th>
-                                        <th data-translate="subtype"></th>
-                                        <th data-translate="action"></th>
-                                        <th data-translate="value"></th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody id="requirements-items">
-                                </tbody>
-                            </table>
-                        </div>
-                        <div id="requirement-editor" class="requirement-editor hidden_save">
-                            <div class="form-group" id="reqTypeDiv">
-                                <label for="requirement-type" data-translate="type"></label>
-                                <select id="requirement-type" class="main-page-input" title="Тип требования" style="display: none;">
-                                    <option value="" data-translate="select_type">Выберите тип</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="requirement-duration" data-translate="duration"></label>
-                                <input type="number" id="requirement-duration" class="main-page-input" autocomplete="off" title="Длительность требования" placeholder="Длительность">
-                            </div>
-                            <div class="form-group">
-                                <label for="requirement-subtype" data-translate="subtype"></label>
-                                <input type="text" id="requirement-subtype" class="main-page-input" autocomplete="off" title="Подтип требования" placeholder="Подтип">
-                            </div>
-                            <div class="form-group">
-                                <label for="requirement-action" data-translate="action"></label>
-                                <select id="requirement-action" class="main-page-input" title="Действие требования">
-                                    <option value="" data-translate="select_action">Выберите действие</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="requirement-value" data-translate="value"></label>
-                                <div id="requirement-value-container"></div>
-                            </div>
-                            <div class="info-actions">
-                                <button type="button" id="save-requirement" class="icon-action-button save">
-                                    <img src="img/ui/save.svg">
-                                    <span class="button-text" data-translate="save">Сохранить</span>
-                                </button>
-                                <button type="button" id="cancel-requirement" class="icon-action-button delete">
-                                    <img src="img/ui/block.svg">
-                                    <span class="button-text" data-translate="cancel">Отменить</span>
-                                </button>
-                            </div>
-                        </div>
-                        <button type="button" id="add-requirement2" class="icon-action-button add newabtn">
-                            <img src="img/ui/add.svg">
-                        </button>
+                        <div class="drag-handle" style="background:#aaaaaa00; cursor:col-resize;"></div>
+                        <div draggable="true" class="zaglushka"></div>
                     </div>
-                    <div class="drag-handle" style="background:#aaaaaa00; cursor:col-resize;"></div>
-                    <div draggable="true" class="zaglushka"></div>
-                </div>
-            </form>
+                </form>
             </div>
         </div>
         <div id="map-edit" class="page pmap-edit">
             <main id="memap_root" class="memap-root-unique">
                 <div id="maphead">
                     <h1 id="memap_title" class="memap-title-unique">Редактор провинций</h1>
-
+                    
                     <section style="display: inline-flex; gap: 1rem; justify-content: space-between; width: 100%;">
                         <div class="maplinzes pages">
                             <button id="mapeditpage-mapload" onclick="window.mapEditMgr.page('mapload')" class="memap-btn-unique memap-btn-page active">Загрузка</button>
@@ -1260,7 +1326,7 @@
                         <input id="memap_file_input" class="memap-fileinput-unique" type="file" accept=".json" />
                         <div id="memap_file_status" class="memap-status-unique">Файл не загружен.</div>
                     </section>
-
+                    
                     <section id="memap_select_section" class="memap-section-unique">
                         <label for="memap_province_select" class="memap-label-unique">Выбрать провинцию по id (из map.json):</label>
                         <select id="memap_province_select" class="memap-select-unique">
@@ -1273,13 +1339,13 @@
                 <div id="mapedit" class="hidden mapeditpage">
                     <div id="memap_form_section" class="memap-section-unique">
                         <h2 class="memap-subtitle-unique">Свойства провинции</h2>
-
+                        
                         <form id="memap_form" class="memap-form-unique" autocomplete="off">
                             <div class="memap-row-unique">
                                 <label for="memap_field_population" class="memap-label-small-unique">population_limit</label>
                                 <input id="memap_field_population" class="memap-input-unique mapedit_input_needsave" type="number" min="0" />
                             </div>
-
+                            
                             <div class="memap-row-unique">
                                 <label for="memap_field_infra" class="memap-label-small-unique">infrastructure_level</label>
                                 <select id="memap_field_infra" class="memap-input-unique mapedit_input_needsave">
@@ -1291,27 +1357,27 @@
                                     <option value="5">Big City</option>
                                 </select>
                             </div>
-
+                            
                             <div class="memap-row-unique">
                                 <label for="memap_field_owner" class="memap-label-small-unique">owner</label>
                                 <input id="memap_field_owner" class="memap-input-unique mapedit_input_needsave" type="text" />
                             </div>
-
+                            
                             <div class="memap-row-unique">
                                 <label for="memap_field_true_owner" class="memap-label-small-unique">true_owner</label>
                                 <input id="memap_field_true_owner" class="memap-input-unique mapedit_input_needsave" type="text" />
                             </div>
-
+                            
                             <div class="memap-row-unique">
                                 <label for="memap_field_uuid" class="memap-label-small-unique">uuid</label>
                                 <input id="memap_field_uuid" class="memap-input-unique mapedit_input_needsave" type="text" readonly/>
                             </div>
-
+                            
                             <div class="memap-row-unique">
                                 <label for="memap_field_resources" class="memap-label-small-unique">resource_rule (JSON)</label>
                                 <textarea id="memap_field_resources" class="memap-textarea-unique mapedit_input_needsave" rows="4"></textarea>
                             </div>
-
+                            
                             <div class="memap-row-unique">
                                 <label for="memap_field_landtype" class="memap-label-small-unique">landtype</label>
                                 <select id="memap_field_landtype" class="memap-input-unique mapedit_input_needsave">
@@ -1323,7 +1389,7 @@
                                     <option value="4">snow</option>
                                 </select>
                             </div>
-
+                            
                             <div class="memap-actions-unique">
                                 <!--button id="memap_save_btn" type="button" class="memap-btn-unique">Сохранить в window.countryManager</button-->
                                 <!--button id="memap_export_btn" type="button" class="memap-btn-unique">Экспортировать провинции (JSON)</button-->
@@ -1331,9 +1397,9 @@
                             </div>
                         </form>
                     </div>
-
+                    
                     <div id="memap_preview_section_true">
-
+                        
                         <div id="memap_message" class="memap-message-unique"></div>
                         <pre id="memap_preview" class="memap-preview-unique">— ничего не выбрано —</pre>
                         <div id="memap_preview_section" class="memap-section-unique zoom-container">
@@ -1342,7 +1408,7 @@
                 </div>
             </main>
         </div>
-
+        
         <!-- Модальное окно для выбора страны -->
         <div id="country-select-modal" class="modal">
             <div class="modal-content">
@@ -1367,84 +1433,7 @@
                 </div>
             </div>
         </div>
-
-        <!-- Модальное окно для редактора требований и бонусов -->
-        <div id="requirements-editor-modal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 id="remodal-requirements-editor-title" data-translate="requirements_editor">Requirements Editor</h3>
-                    <button class="close-modal">×</button>
-                </div>
-                <div class="modal-body">
-                    <div id="remodal-requirements-list" class="requirements-list">
-                        <table class="list-table">
-                            <thead>
-                                <tr>
-                                    <th data-translate="type">Type</th>
-                                    <th data-translate="subtype">Subtype</th>
-                                    <th data-translate="action">Action</th>
-                                    <th data-translate="value">Value</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody id="remodal-requirements-items">
-                            </tbody>
-                        </table>
-                    </div>
-                    <div id="remodal-requirement-editor" class="requirement-editor hidden">
-                        <div class="form-group">
-                            <label for="remodal-requirement-type" data-translate="type">Type</label>
-                            <select id="remodal-requirement-type" class="main-page-input" title="Тип требования">
-                                <option value="" data-translate="select_type">select_type</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="remodal-requirement-duration" data-translate="duration">Duration (turns)</label>
-                            <input type="text" id="remodal-requirement-duration" class="main-page-input" autocomplete="off" title="Длительность требования" placeholder="Длительность">
-                        </div>
-                        <div class="form-group">
-                            <label for="remodal-requirement-subtype" data-translate="subtype">Subtype</label>
-                            <input type="text" id="remodal-requirement-subtype" class="main-page-input" autocomplete="off" title="Подтип требования" placeholder="Подтип">
-                        </div>
-                        <div class="form-group">
-                            <label for="remodal-requirement-action" data-translate="action">Action</label>
-                            <select id="remodal-requirement-action" class="main-page-input" title="Действие требования">
-                                <option value="" data-translate="select_action">select_action</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="remodal-requirement-value" data-translate="value">Value</label>
-                            <div id="remodal-requirement-value-container"></div>
-                        </div>
-                        <div class="info-actions">
-                            <button type="button" id="remodal-save-requirement" class="icon-action-button save">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1-2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-                                    <polyline points="17 21 17 13 7 13 7 21"></polyline>
-                                    <polyline points="7 3 7 8 15 8"></polyline>
-                                </svg>
-                                <span class="button-text" data-translate="save">Save</span>
-                            </button>
-                            <button type="button" id="remodal-cancel-requirement" class="icon-action-button delete">
-                                <svg viewBox="0 0 24 24">
-                                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                                </svg>
-                                <span class="button-text" data-translate="cancel">Cancel</span>
-                            </button>
-                        </div>
-                    </div>
-                    <button type="button" id="remodal-add-requirement" class="icon-action-button add">
-                        <svg viewBox="0 0 24 24">
-                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                        </svg>
-                        <span class="button-text" data-translate="add">Add</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-
+        
         <!-- Модальное окно для бекапов -->
         <div id="backups-modal" class="modal">
             <div class="modal-content">
@@ -1463,7 +1452,7 @@
                 </div>
             </div>
         </div>
-
+        
         <!-- Модальное окно подтверждения восстановления бекапа -->
         <div id="restore-backup-confirm-modal" class="modal">
             <div class="modal-content">
@@ -1479,7 +1468,7 @@
                 </div>
             </div>
         </div>
-
+        
         <div id="reforms" class="page preforms">
             <div class="list-container">
                 <div class="list-header">
@@ -1539,7 +1528,7 @@
                 </div>
             </div>
         </div>
-
+        
         <div id="reform-edit" class="page">
             <div class="reform-edit-container">
                 <div class="reform-header">
@@ -1585,49 +1574,49 @@
                 </div>
                 <form id="reform-form">
                     <div class="black-back">
-                    <div class="form-group">
-                        <label for="reform-name" data-translate="name">Название</label>
-                        <input type="text" id="reform-name" class="main-page-input" required autocomplete="off">
-                    </div>
-                    <div class="form-group">
-                        <label for="reform-color" data-translate="color">Цвет</label>
-                        <div class="color-inputs">
-                            <div id="reform-color-preview" class="color-preview"></div>
-                            <input type="number" id="reform-color-r" min="0" max="255" placeholder="R">
-                            <input type="number" id="reform-color-g" min="0" max="255" placeholder="G">
-                            <input type="number" id="reform-color-b" min="0" max="255" placeholder="B">
-                            <button id="pick-reform-color" class="icon-action-button back" type="button" title="Выбрать цвет">
-                                <img src="img/ui/colors.svg">
-                            </button>
-                            <input type="color" id="reform-color-picker" title="Выбрать цвет">
-                            <button id="random-reform-color" class="icon-action-button back" type="button" title="Случайный цвет">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                                </svg>
-                            </button>
+                        <div class="form-group">
+                            <label for="reform-name" data-translate="name">Название</label>
+                            <input type="text" id="reform-name" class="main-page-input" required autocomplete="off">
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="reform-ideology" data-translate="required_ideology">Требуемая идеология</label>
-                        <select id="reform-ideology" class="main-page-input">
-                            <option value="" data-translate="None"> </option>
-                            <option value="Democracy" data-translate="democracy">Democracy</option>
-                            <option value="Communism" data-translate="communism">Communism</option>
-                            <option value="Monarchy" data-translate="monarchy">Monarchy</option>
-                            <option value="Theocracy" data-translate="theocracy">Theocracy</option>
-                            <option value="Fascism" data-translate="fascism">Фашизм</option>
-                            <option value="Trade Republic" data-translate="trade_republic">Trade Republic</option>
+                        <div class="form-group">
+                            <label for="reform-color" data-translate="color">Цвет</label>
+                            <div class="color-inputs">
+                                <div id="reform-color-preview" class="color-preview"></div>
+                                <input type="number" id="reform-color-r" min="0" max="255" placeholder="R">
+                                <input type="number" id="reform-color-g" min="0" max="255" placeholder="G">
+                                <input type="number" id="reform-color-b" min="0" max="255" placeholder="B">
+                                <button id="pick-reform-color" class="icon-action-button back" type="button" title="Выбрать цвет">
+                                    <img src="img/ui/colors.svg">
+                                </button>
+                                <input type="color" id="reform-color-picker" title="Выбрать цвет">
+                                <button id="random-reform-color" class="icon-action-button back" type="button" title="Случайный цвет">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="reform-ideology" data-translate="required_ideology">Требуемая идеология</label>
+                            <select id="reform-ideology" class="main-page-input">
+                                <option value="" data-translate="None"> </option>
+                                <option value="Democracy" data-translate="democracy">Democracy</option>
+                                <option value="Communism" data-translate="communism">Communism</option>
+                                <option value="Monarchy" data-translate="monarchy">Monarchy</option>
+                                <option value="Theocracy" data-translate="theocracy">Theocracy</option>
+                                <option value="Fascism" data-translate="fascism">Фашизм</option>
+                                <option value="Trade Republic" data-translate="trade_republic">Trade Republic</option>
                             </select>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-
+        
         <div id="move" class="page pmove">
             
         </div>
-
+        
         <div id="pcopy-countries" class="page pcopycountries">
             <div class="list-container">
                 <div class="list-header">
@@ -1652,7 +1641,7 @@
                 </div>
             </div>
         </div>
-
+        
         <div id="pcopy-events" class="page pcopyevents">
             <div class="list-container">
                 <div class="list-header">
@@ -1677,7 +1666,7 @@
                 </div>
             </div>
         </div>
-
+        
         <div id="pcoop" class="page pcoop">
             <div class="list-container">
                 <div class="list-header">
@@ -1739,7 +1728,7 @@
                                 </div>
                                 <p id="coop-send-status" class="coop-status">Введите ник отправителя и присоединитесь</p>
                                 <div class="coopDataContent-right" id="coop-send-debug">
-
+                                    
                                 </div>
                             </div>
                         </div>
@@ -1757,7 +1746,7 @@
                                 </div>
                                 <p id="coop-recive-status" class="coop-status">Введите ник получателя и присоединитесь</p>
                                 <div class="coopDataContent-right" id="coop-recive-debug">
-
+                                    
                                 </div>
                             </div>
                         </div>
@@ -1785,10 +1774,10 @@
                     </div>
                     <div class="header-actions">
                         <!--div class="tooltip-container">
-                            <button onclick="openScenarioFileChoser()" class="icon-action-button add newabtn" title="Получить сценарий">
-                                <img src="img/ui/file/attach.svg">
-                            </button>
-                            <div class="tooltip">Открыть сторонний файл</div>
+                        <button onclick="openScenarioFileChoser()" class="icon-action-button add newabtn" title="Получить сценарий">
+                            <img src="img/ui/file/attach.svg">
+                        </button>
+                        <div class="tooltip">Открыть сторонний файл</div>
                         </div-->
                         <div class="tooltip-container">
                             <button id="coop-actions-button" class="icon-action-button more" title="Действия" onclick="const dropdown = document.getElementById('opfileActionsDropdown'); dropdown.classList.toggle('active');">
@@ -1810,7 +1799,7 @@
                 </div>
             </div>
         </div>
-
+        
         <!-- Модальное окно фильтра -->
         <div id="filter-modal" class="modal">
             <div class="modal-content">
@@ -1840,7 +1829,7 @@
                 </div>
             </div>
         </div>
-
+        
         <!-- Модальное окно фильтра событий -->
         <div id="events-filter-modal" class="modal">
             <div class="modal-content">
@@ -1870,7 +1859,7 @@
                 </div>
             </div>
         </div>
-
+        
         <!-- Модальное окно для фильтра групп -->
         <div id="groups-filter-modal" class="modal">
             <div class="modal-content">
@@ -1891,7 +1880,7 @@
                 </div>
             </div>
         </div>
-
+        
         <!-- Модальное окно для фильтра групп стран -->
         <div id="countries-groups-filter-modal" class="modal">
             <div class="modal-content">
@@ -1954,7 +1943,7 @@
                 </div>
             </div>
         </div>
-
+        
         <!-- Модальное окно для копирования параметров -->
         <div id="param-copy-modal" class="modal">
             <div class="modal-content">
@@ -2041,21 +2030,21 @@
                 </div>
             </div>
         </div>
-
+                            
         <div id="mobile-nav">
-            <button class="nav-button active" data-page="main">
+            <button class="navbtn active" data-page="main">
                 <img src="img/ui/home.svg">
                 <span class="button-text">Редактор</span>
             </button>
-            <button class="nav-button" data-page="countries" onclick="window.countryManager.updateCountriesList()">
+            <button class="navbtn" data-page="countries" onclick="window.countryManager.updateCountriesList()">
                 <img src="img/ui/flag.svg">
                 <span class="button-text">Страны</span>
             </button>
-            <button class="nav-button" data-page="events">
+            <button class="navbtn" data-page="events">
                 <img src="img/ui/calendar.svg">
                 <span class="button-text">События</span>
             </button>
-            <button class="nav-button dev_thing" data-page="map-edit">
+            <button class="navbtn dev_thing" data-page="map-edit">
                 <svg class="button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                 </svg>
@@ -2063,6 +2052,7 @@
             </button>
         </div>
     </body>
-        <script src="js/coop/coop-connect-send.js"></script>
-        <script src="js/coop/coop-connect-recive.js"></script>
+    <script src="js/coop/coop-connect-send.js"></script>
+    <script src="js/coop/coop-connect-recive.js"></script>
+    <link rel="stylesheet" href="css/neo/base.css">
 </html>

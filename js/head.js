@@ -1,28 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Обработчики для кнопок навигации
-    const navButtons = document.querySelectorAll('.nav-button');
+    const navButtons = document.querySelectorAll('.navbtn');
     navButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            navButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
+        if (button.id == 'openedPage') return; else {
+        button.addEventListener('click', function() {
+            if (this.getAttribute('id') == 'openedPage') return; else {
             
-            // Показываем соответствующую страницу
-            const pageId = button.getAttribute('data-page');
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            document.getElementById(pageId)?.classList.add('active');
-        });
+            // Получаем id страницы из атрибута data-page
+            const pageId = this.getAttribute('data-page');
+            window.pages.switch(pageId);
+            this.classList.add('active');
+            }
+        })};
     });
-
-    /*
-    // Обработчик для кнопки "Назад"
-    const backButton = document.getElementById('back-to-reforms');
-    if (backButton) {
-        backButton.addEventListener('click', () => {
-            window.location.href = '/';
-        });
-    } */
 
     // Обработчики для языкового переключателя
     const langChooser = document.getElementById('currentLangChooser');

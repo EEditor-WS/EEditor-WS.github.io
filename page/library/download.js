@@ -316,10 +316,10 @@ document.addEventListener('DOMContentLoaded', () => {
     displayMaps();
 
     // Добавляем обработчики для кнопок навигации
-    document.querySelectorAll('.nav-button').forEach(button => {
+    document.querySelectorAll('.navbtn').forEach(button => {
         button.addEventListener('click', () => {
             // Убираем активный класс у всех кнопок и страниц
-            document.querySelectorAll('.nav-button').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.navbtn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
             
             // Добавляем активный класс нужной кнопке и странице

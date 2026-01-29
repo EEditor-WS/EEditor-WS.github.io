@@ -488,7 +488,7 @@
     color: var(--text-primary);
 }
 
-.nav-button, .back {
+.navbtn, .back {
     background-color: rgba(52, 152, 219, 0.2);
     color: #3498db;
     padding: 8px 16px;

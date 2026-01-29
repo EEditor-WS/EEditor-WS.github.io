@@ -39,7 +39,7 @@ class CoopManager {
     }
 
     coopSettings() {
-        const navButtons = document.querySelectorAll('.nav-button');
+        const navButtons = document.querySelectorAll('.navbtn');
         navButtons.forEach(btn => btn.classList.remove('active'));
         
         // Switch to pcoop page

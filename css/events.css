@@ -34,7 +34,7 @@
 }
 
 .events-table th {
-    background-color: var(----background-secondary);
+    background-color: var(----bg-sec);
     font-weight: 500;
     color: #e0e0e0;
     font-size: 14px;
@@ -71,7 +71,7 @@
 }
 
 .events-table tbody tr:hover {
-    background-color: var(----background-secondary);
+    background-color: var(----bg-sec);
 }
 
 .event-color {
@@ -115,7 +115,7 @@
 }
 
 .event-action-button.copy {
-    background-color: var(----background-secondary);
+    background-color: var(----bg-sec);
     color: #e0e0e0;
 }
 
@@ -146,7 +146,7 @@
 
 .event-main-settings {
     flex: 0 0 calc(70% - 15px);
-    background-color: var(--background-secondary);
+    background-color: var(--bg-sec);
     padding: 20px;
     border-radius: var(--br);
     border: 1px solid #1f1f1f;
@@ -157,7 +157,7 @@
 }
 
 .event-requirements {
-    background-color: var(--background-secondary);
+    background-color: var(--bg-sec);
     padding: 20px;
     border-radius: var(--br);
     border: 1px solid #1f1f1f;
@@ -169,7 +169,7 @@
 
 .event-answers {
     flex: 0 0 calc(30% - 15px);
-    background-color: var(--background-secondary);
+    background-color: var(--bg-sec);
     padding: 20px;
     border-radius: var(--br);
     border: 1px solid #1f1f1f;
@@ -214,9 +214,9 @@
     width: 100%;
     box-sizing: border-box;
     padding: 15px;
-    background: #2a2a2a;
+    background: var(--bg-sec);
     border-radius: var(--br);
-    border: 1px solid #1f1f1f;
+    border: 1px solid var(--bc);
 }
 
 .answers-flex input,
@@ -230,25 +230,23 @@
 .answers-flex h3 {
     margin-top: 0;
     margin-bottom: 15px;
-    color: #e0e0e0;
+    color: var(--text-pri);
     font-size: 16px;
     font-weight: 500;
 }
 
 .event-form {
     flex: 1;
-    overflow: auto;
     padding: 0;
-    width: calc(100% - 40px);
 }
 
 .form-actions {
     position: sticky;
     bottom: 0;
-    background: #242424;
+    background: var(--bg-sec);
     padding: 15px;
     margin-top: 0;
-    border-top: 1px solid #333;
+    border-top: 1px solid var(--bc);
     z-index: 10;
 }
 
@@ -269,7 +267,6 @@
     flex-direction: column;
     height: 100%;
     overflow: hidden;
-    padding: 20px;
     width: 100%;
 }
 
@@ -294,87 +291,13 @@
 .pevents .preview-content,
 .pevent-edit .preview-content {
     flex: 0 0 calc(70% - 15px);
-    background: #242424;
+    background: var(--bg-sec);
 }
 
 .pevents .file-info,
 .pevent-edit .file-info {
     flex: 0 0 calc(30% - 15px);
-    background: #242424;
-}
-
-.event-main-input {
-    width: calc(100% - 2px);
-    box-sizing: border-box;
-    padding: 8px 12px;
-    background-color: var(----background-secondary);
-    border: 1px solid #1f1f1f;
-    border-radius: var(--br);
-    color: #e0e0e0;
-    font-size: 14px;
-}
-
-.event-main-input:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    background-color: #242424;
-}
-
-.event-main-input:focus {
-    outline: none;
-    border-color: #3a80d2;
-}
-
-.event-main-textarea {
-    width: calc(100% - 2px);
-    box-sizing: border-box;
-    padding: 8px 12px;
-    background-color: var(----background-secondary);
-    border: 1px solid #1f1f1f;
-    border-radius: var(--br);
-    color: #e0e0e0;
-    font-size: 14px;
-    resize: vertical;
-    min-height: 100px;
-}
-
-.event-main-textarea:focus {
-    outline: none;
-    border-color: #3a80d2;
-}
-
-.main-page-input {
-    width: calc(100% - 2px);
-    box-sizing: border-box;
-    padding: 8px 12px;
-    background-color: var(----background-secondary);
-    border: 1px solid #1f1f1f;
-    border-radius: var(--br);
-    color: #e0e0e0;
-    font-size: 14px;
-}
-
-.main-page-input:focus {
-    outline: none;
-    border-color: #3a80d2;
-}
-
-.main-page-textarea {
-    width: calc(100% - 2px);
-    box-sizing: border-box;
-    padding: 8px 12px;
-    background-color: var(----background-secondary);
-    border: 1px solid #1f1f1f;
-    border-radius: var(--br);
-    color: #e0e0e0;
-    font-size: 14px;
-    resize: vertical;
-    min-height: 100px;
-}
-
-.main-page-textarea:focus {
-    outline: none;
-    border-color: #3a80d2;
+    background: var(--bg-sec);
 }
 
 .requirements-buttons {
@@ -387,18 +310,18 @@
 .requirements-buttons .requirements-button {
     flex: 1;
     padding: 8px 12px;
-    background-color: var(----background-secondary);
-    border: 1px solid #404040;
+    background-color: var(--bg-sec);
+    border: 1px solid var(--bc);
     border-radius: var(--br);
-    color: #e0e0e0;
+    color: var(--text-pri);
     font-size: 14px;
     cursor: pointer;
-    transition: background-color 0.2s, border-color 0.2s;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .requirements-buttons .requirements-button:hover {
-    background-color: #333;
-    border-color: #3a80d2;
+    background-color: var(--bg-sec-hover);
+    border-color: var(--ac-bg);
 }
 
 .image-select-container {
@@ -442,7 +365,7 @@
 }
 
 .requirements-table th {
-    background-color: var(----background-secondary);
+    background-color: var(----bg-sec);
     font-weight: 500;
     color: #e0e0e0;
 }
@@ -452,7 +375,7 @@
 }
 
 .requirements-table tbody tr:hover {
-    background-color: var(----background-secondary);
+    background-color: var(----bg-sec);
 }
 
 .requirements-table .action-button {
@@ -461,7 +384,7 @@
 }
 
 .requirement-editor {
-    background-color: var(----background-secondary);
+    background-color: var(----bg-sec);
     padding: 20px;
     border-radius: var(--br);
     margin-bottom: 20px;
@@ -477,21 +400,6 @@
     color: #e0e0e0;
 }
 
-.requirement-editor select,
-.requirement-editor input {
-    width: 100%;
-    padding: 8px 12px;
-    background-color: #242424;
-    border: 1px solid #333;
-    border-radius: var(--br);
-    color: #e0e0e0;
-}
-
-.requirement-editor select:focus,
-.requirement-editor input:focus {
-    outline: none;
-    border-color: #3a80d2;
-}
 
 .requirement-editor .form-actions {
     display: flex;
@@ -526,24 +434,6 @@
 .requirement-actions {
     display: flex;
     gap: 5px;
-}
-
-.requirement-actions button {
-    padding: 4px 8px;
-    background: none;
-    border: none;
-    color: #e0e0e0;
-    cursor: pointer;
-    font-size: 16px;
-    transition: color 0.2s;
-}
-
-.requirement-actions button:hover {
-    color: #3a80d2;
-}
-
-.requirement-actions button.delete:hover {
-    color: #e74c3c;
 }
 
 #requirements-editor-modal .modal-content {
@@ -739,7 +629,7 @@
 }
 
 .group-checkbox-item:hover {
-    background-color: var(----background-secondary);
+    background-color: var(----bg-sec);
 }
 
 .group-checkbox-item input[type="checkbox"] {
@@ -788,45 +678,6 @@
     border-color: #255c9e;
 }
 
-/* Стили для контекстного меню */
-.context-menu {
-    position: fixed;
-    background: #2a2a2a;
-    border: 1px solid #333;
-    border-radius: var(--br);
-    padding: 8px 0;
-    min-width: 160px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-}
-
-.context-menu-item {
-    padding: 8px 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #e0e0e0;
-    cursor: pointer;
-    user-select: none;
-}
-
-.context-menu-item:hover {
-    background: #3a3a3a;
-}
-
-.context-menu-item svg {
-    width: 16px;
-    height: 16px;
-}
-
-.context-menu-item.delete {
-    color: #ff4444;
-}
-
-.context-menu-item.delete:hover {
-    background: #4a2a2a;
-}
-
 .input-group {
     display: flex;  /* Включаем flexbox */
     flex-direction: row;  /* Элементы располагаются в строку */
@@ -854,7 +705,7 @@
 }
 
 .modal .modal-content {
-    background-color: var(----background-secondary);
+    background-color: var(----bg-sec);
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #1f1f1f;
@@ -905,7 +756,7 @@
 .oldview {
     flex-direction: row;
     flex-wrap: wrap;
-    display: grid;
+    display: grid !important;
     grid-template-columns: 60% 5px 29%;
 }
 
@@ -943,23 +794,24 @@
 }
 .list-requirement-item {
   margin: 4px 0;
-  background-color: var(--background-primary);
+  background-color: var(--bg-pri);
   border-radius: var(--br);
   padding: 0 5px;
   min-width: max-content;
 }
 .list-req-type {
-  color: #c3c2aa;
+  color: var(--text-sec);
   font-weight: bold;
 }
 .list-req-subtype {
-  color: #aaa;
+  color: var(--ac-text);
 }
 .list-req-action {
   color: #6cf;
+  font-weight: 900;
 }
 .list-req-value {
-  color: #ffbdbd;
+  color: var(--text-pri);
   font-weight: 500;
 }
 

@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Get the sections and nav elements
     const scenariosSection = document.getElementById('scenarios');
     const mapsSection = document.getElementById('maps');
-    const navButtons = document.querySelectorAll('.nav-button[data-page]');
+    const navButtons = document.querySelectorAll('.navbtn[data-page]');
     
     // Function to update page title
     function updatePageTitle(section) {

@@ -4,8 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Пример HTML-страницы — много элементов</title>
-  <link rel="stylesheet" href="css/!.css">
-  <link rel="stylesheet" href="css/elib/orange.css">
+  <link rel="stylesheet" href="eelibs/import.css">
 </head>
 <body>
   <header>
@@ -66,7 +65,10 @@
         <input type="radio" id="female" name="gender" value="female"><label for="female">Ж</label><br>
 
         <label for="subscribe">Подписаться:</label>
-        <input type="checkbox" id="subscribe" name="subscribe" checked><br>
+        <label for="subscribe" class="oneui-switch">
+            <input type="checkbox" id="subscribe" name="subscribe">
+            <span class="slider"></span>
+        </label>
 
         <label for="country">Страна:</label>
         <select id="country" name="country">
@@ -107,10 +109,15 @@
     </form>
 
     <details>
-      <summary>Дополнительные опции</summary>
-      <p>Здесь можно положить скрытый текст или дополнительные настройки формы.</p>
-      <label for="opt1">Опция 1</label>
-      <input type="checkbox" id="opt1" name="opt1"><br>
+        <summary>Дополнительные опции</summary>
+        <p>Здесь можно положить скрытый текст или дополнительные настройки формы.</p>
+        <label for="opt1">Опция 1</label>
+        <input type="checkbox" id="opt1" name="opt1"><br>
+        <label for="opt2">Опция 2</label>
+        <label for="opt2" class="oneui-switch">
+            <input type="checkbox" id="opt2" name="opt2">
+            <span class="slider"></span>
+        </label>
     </details>
   </section>
 

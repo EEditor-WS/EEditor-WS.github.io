@@ -1,6 +1,13 @@
 @media (orientation: portrait) {
+    #main {
+        flex-direction: column !important;
+        padding: 0;
+        max-width: unset;
+        width: 100dvw;
+    }
+
     #flagdiv {
-    width: 350%;
+        width: 350%;
     }
 
     .info-container {
@@ -22,7 +29,7 @@
     }
 
     .nav-header {
-        background: 0;
+        background: none !important;
         border: 0;
         box-shadow: none;
     }
@@ -55,7 +62,7 @@
     #mobile-nav {
         position: fixed;
         bottom: -1px;
-        background-color: var(--background-secondary-great);
+        background-color: var(--bg-sec-great);
         padding: 0.5rem 0;
         width: 100%;
         height: (--header-height);
@@ -65,7 +72,7 @@
         justify-content: space-around;
     }
 
-    #mobile-nav .nav-button {
+    #mobile-nav .navbtn {
         aspect-ratio: 0;
         width: 100px;
     }
@@ -74,7 +81,7 @@
         padding-bottom: 52px;
     }
 
-    .nav-buttons-container {
+    .navbtns-container {
         display: none;
     }
 
@@ -254,7 +261,7 @@
         & .logo { 
             display: none;
         }
-        & .nav-buttons-container {
+        & .navbtns-container {
             position: absolute;
             top: 1rem;
             left: 1rem;
@@ -262,15 +269,15 @@
             & .button-text {
                 display: none;
             }
-            & .nav-button {
+            & .navbtn {
                 aspect-ratio: 1;
             }
         }
-        & .opened .nav-buttons-container {
+        & .opened .navbtns-container {
         }
 
         & .nav-header {
-            background: 0;
+            background: none;
             border: 0;
             box-shadow: none;
         }

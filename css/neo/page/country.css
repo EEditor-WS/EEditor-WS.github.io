@@ -1,0 +1,27 @@
+.color-inputs .color-preview {
+    aspect-ratio: 1;
+    width: unset;
+}
+
+.color-inputs input {
+    width: 100%;
+}
+
+.country-form .table-container {
+    width: 100%;
+}
+
+.groupsInCellDiv {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    .group-item {
+        padding: var(--dss);
+        background-color: var(--bg-pri);
+        border-radius: var(--br);
+        margin-right: 1px;
+    }
+    .group-item:hover {
+        background-color: var(--ac-bg);
+    }
+}

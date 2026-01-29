@@ -91,7 +91,7 @@
     max-width: 1200px;
 }
 
-.section-nav .nav-button {
+.section-nav .navbtn {
     padding: 0.75rem 1.5rem;
     background-color: #242424;
     border: 1px solid #333;
@@ -101,11 +101,11 @@
     transition: all 0.2s ease;
 }
 
-.section-nav .nav-button:hover {
+.section-nav .navbtn:hover {
     background-color: #2c2c2c;
 }
 
-.section-nav .nav-button.active {
+.section-nav .navbtn.active {
     background-color: #3498db;
     border-color: #3498db;
     color: #fff;

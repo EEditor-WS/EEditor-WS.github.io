@@ -1,0 +1,127 @@
+/* Стили для уведомлений */
+.notification-container {
+    position: fixed;
+    bottom: 58px;
+    left: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.notification {
+    background-color: var(--background-secondary-great);
+    border-radius: var(--br);
+    border: 1px solid var(--border-color);
+    padding: 12px;
+    min-width: 300px;
+    max-width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    animation: slideIn 0.3s ease-out;
+    pointer-events: auto;
+    border-left: 4px solid;
+}
+
+@media (orientation: portrait) {
+    .notification-container {
+        max-width: calc(100dvw - 49px) !important;
+        overflow-x: scroll;
+    }    
+}
+
+.notification.success {
+    border-color: #2ecc71;
+}
+
+.notification.error {
+    border-color: #e74c3c;
+}
+
+.notification.warning {
+    border-color: #f1c40f;
+}
+
+.notification.info {
+    border-color: #3498db;
+}
+
+.notification-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.notification-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.notification-content {
+    flex-grow: 1;
+}
+
+.notification-title {
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: var(--text-primary);
+}
+
+.notification-text {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    flex-shrink: 0;
+}
+
+.notification-close:hover {
+    opacity: 1;
+}
+
+.notification-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 0 0 4px 4px;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
+
+.notification.closing {
+    animation: slideOut 0.3s ease-out forwards;
+}

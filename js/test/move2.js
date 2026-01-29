@@ -3,7 +3,7 @@ let enot;
 
 // Страны
 function copyManyCountries() {
-    const navButtons = document.querySelectorAll('.nav-button');
+    const navButtons = document.querySelectorAll('.navbtn');
     navButtons.forEach(btn => btn.classList.remove('active'));
     
     // Switch to pcopy-countries page
@@ -167,7 +167,7 @@ async function pasteManyCountries() {
 
 // События
 function copyManyEvents() {
-    const navButtons = document.querySelectorAll('.nav-button');
+    const navButtons = document.querySelectorAll('.navbtn');
     navButtons.forEach(btn => btn.classList.remove('active'));
     
     // Switch to pcopy-events page

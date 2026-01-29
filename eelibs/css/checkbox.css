@@ -1,0 +1,65 @@
+/* Контейнер */
+.oneui-switch {
+    --switch-width: 46px;
+    --switch-height: 26px;
+    --thumb-size: 18px;
+    --thumb-active-size: 21px; /* Чуть больше при включении */
+    --bg-off: var(--text-pri);
+    --bg-on: var(--ac-text); /* Фирменный синий Samsung */
+    
+    position: relative;
+    display: inline-block;
+    width: var(--switch-width);
+    height: var(--switch-height);
+
+    display: block;
+}
+
+/* Скрываем дефолтный чекбокс */
+.oneui-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Фон переключателя */
+.oneui-switch .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: var(--bg-off);
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 34px;
+}
+
+/* Ползунок (шарик) */
+.oneui-switch .slider:before {
+    content: "";
+    position: absolute;
+    height: var(--thumb-size);
+    width: var(--thumb-size);
+    left: 4px;
+    bottom: 4px;
+    background-color: #8c8c8c; /* Серый в выключенном состоянии */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 50%;
+}
+
+/* Состояние: Включено (Меняем фон) */
+.oneui-switch input:checked + .slider {
+    background-color: var(--bg-on);
+}
+
+/* Состояние: Включено (Двигаем и увеличиваем шарик) */
+.oneui-switch input:checked + .slider:before {
+    background-color: white;
+    transform: translateX(calc(var(--switch-width) - var(--thumb-active-size) - 8px));
+    height: var(--thumb-active-size);
+    width: var(--thumb-active-size);
+    bottom: 2.5px; /* Корректируем центровку из-за размера */
+}
+
+/* Эффект нажатия (Active state) */
+.oneui-switch:active .slider:before {
+    width: 24px; /* Шарик немного растягивается при тапе */
+}

@@ -43,6 +43,7 @@ body {
 
 .action-button .button-text {
     display: block;
+    color: var(--text-pri)
 }
 
 @media (max-width: 768px) {
@@ -372,8 +373,8 @@ body {
 /* Действия сохранения */
 .icon-action-button[id*="save"],
 .icon-action-button.save {
-    background-color: rgba(241, 196, 15, 0.1);
-    color: #f1c40f;
+    background-color: var(--ac-text);
+    color: var(--text-pri);
 }
 
 .icon-action-button[id*="save"]:hover,
@@ -482,7 +483,7 @@ body {
     display: none !important;
 }
 
-.nav-button {
+.navbtn {
     padding: 8px 16px;
     background: rgba(52, 152, 219, 0.1);
     border: none;
@@ -499,25 +500,25 @@ body {
     min-height: 36px;
 }
 
-.nav-button:hover {
+.navbtn:hover {
     background-color: rgba(52, 152, 219, 0.2);
 }
 
-.nav-button.active {
+.navbtn.active {
     background-color: rgba(52, 152, 219, 0.2);
 }
 
-.nav-button .button-icon {
+.navbtn .button-icon {
     display: none;
     width: 18px;
     height: 18px;
 }
 
-.nav-button .button-text {
+.navbtn .button-text {
     display: inline-block;
 }
 
-.nav-button svg, .nav-button img {
+.navbtn svg, .navbtn img {
     width: 18px;
     height: 18px;
     stroke: currentColor;
@@ -527,8 +528,8 @@ body {
     fill: none;
 }
 
-/* Тултипы для nav-button */
-.nav-button[data-tooltip]::before {
+/* Тултипы для navbtn */
+.navbtn[data-tooltip]::before {
     content: attr(data-tooltip);
     position: absolute;
     bottom: 100%;
@@ -549,22 +550,22 @@ body {
     display: none;
 }
 
-/* Медиа-запросы для nav-button */
+/* Медиа-запросы для navbtn */
 @media (max-width: 768px) {
-    .nav-button {
+    .navbtn {
         padding: 8px;
         min-width: 36px;
     }
 
-    .nav-button .button-icon {
+    .navbtn .button-icon {
         display: block;
     }
 
-    .nav-button .button-text {
+    .navbtn .button-text {
         display: none;
     }
 
-    .nav-button[data-tooltip]:hover::before {
+    .navbtn[data-tooltip]:hover::before {
         display: block;
         opacity: 1;
     }
@@ -589,11 +590,7 @@ body {
 select.main-page-input {
     width: 100%;
     padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: var(--br);
-    background-color: var(--background-secondary);
-    color: var(--text-primary);
+    /*margin-bottom: 10px;*/
 }
 
 /* Специальные стили для select элементов */
@@ -606,6 +603,7 @@ select.main-page-input {
     background-repeat: no-repeat;
     background-position: right 8px center;
     padding-right: 30px;
+    max-width: unset;
 }
 
 /* Logo and avatar styles */
@@ -641,10 +639,6 @@ select.main-page-input {
 
 .ads.active {
     display: block;
-}
-
-textarea {
-    background-color: var(----background-secondary);
 }
 
 button.icon-action-button.newabtn, button.add-country-button.newabtn {

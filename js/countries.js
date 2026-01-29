@@ -94,10 +94,10 @@ class CountryManager {
         tooltip.innerHTML = html;
         tooltip.style.position = 'fixed';
         tooltip.style.zIndex = 10000;
-        tooltip.style.background = '#222';
-        tooltip.style.color = '#fff';
-        tooltip.style.border = '1px solid #888';
-        tooltip.style.borderRadius = '6px';
+        tooltip.style.background = 'var(--bg-sec-great';
+        tooltip.style.color = 'var(--text-pri)';
+        tooltip.style.border = '1px solid var(--bc)';
+        tooltip.style.borderRadius = 'var(--br)';
         tooltip.style.padding = '8px 12px';
         tooltip.style.fontSize = '13px';
         tooltip.style.boxShadow = '0 2px 8px rgba(0,0,0,0.2)';
@@ -328,8 +328,8 @@ class CountryManager {
                 }
                 if (typeof valueA === 'string') {
                     return this.sortDirection === 'asc' 
-                        ? valueA.localeCompare(valueB)
-                        : valueB.localeCompare(valueA);
+                        ? valueA.localeCompare(valueB, undefined, { numeric: true, sensitivity: 'base' })
+                        : valueB.localeCompare(valueA, undefined, { numeric: true, sensitivity: 'base' });
                 } else {
                     return this.sortDirection === 'asc'
                         ? valueA - valueB
@@ -340,6 +340,42 @@ class CountryManager {
 
         // Создаем строки таблицы
         countries.forEach(country => {
+            function makeGroups() {
+                groupCell.innerHTML = '';
+                const groupCellDiv = document.createElement('div');
+                groupCellDiv.className = 'groupsInCellDiv';
+                groupCell.appendChild(groupCellDiv);
+
+                if (country.group_name) {
+                    // 1. Разбиваем строку по запятой, игнорируя любые пробелы вокруг неё
+                    // 2. Убираем пустые элементы (если строка заканчивалась запятой)
+                    const groupNames = country.group_name
+                        .split(/\s*,\s*/)
+                        .filter(name => name.length > 0);
+
+                    // 3. Отрисовываем каждый элемент
+                    groupNames.forEach(name => {
+                        const span = document.createElement('span');
+                        span.textContent = name;
+                        span.className = 'group-item'; // Можно добавить стили (например, рамку или фон)
+                        span.addEventListener('click', () => {
+                            const grs = window.countryManager.filters;
+                            if (!grs || !grs.groups) grs.groups = [];
+                            if (grs.groups[0] == name) {
+                                grs.groups = [];
+                            } else {
+                                grs.groups = [];
+                                grs.groups.push(name);
+                            }
+                            window.countryManager.updateCountriesList();
+                        });
+                        
+                        // Если нужно просто через запятую, но красиво:
+                        groupCellDiv.appendChild(span);
+                    });
+                }
+            }
+
             const tr = document.createElement('tr');
             tr.setAttribute('data-country-id', country.id);
             tr.style.cursor = 'pointer';
@@ -362,7 +398,9 @@ class CountryManager {
 
             const groupCell = document.createElement('td');
             groupCell.setAttribute('data-country-id', country.id);
-            groupCell.textContent = country.group_name;
+            // groupCell.textContent = country.group_name;
+            makeGroups();
+            groupCell.className = 'groupsInCell';
 
             const provincesCell = document.createElement('td');
             provincesCell.setAttribute('data-country-id', country.id);
@@ -372,18 +410,10 @@ class CountryManager {
             capitalCell.setAttribute('data-country-id', country.id);
             capitalCell.textContent = country.capital_name;
 
-            // Новая ячейка: сила страны
             const powerCell = document.createElement('td');
             powerCell.setAttribute('data-country-id', country.id);
             powerCell.setAttribute('id', 'powerCellInList');
             powerCell.textContent = country.power;
-
-            // Добавляем обработчики событий
-            /*const handleClick = (e) => {
-                if (!e.target.closest('.context-menu')) {
-                    this.openCountry(country.id);
-                }
-            };*/
 
             const handleContextMenu = (e) => {
                 e.preventDefault();
@@ -488,14 +518,6 @@ class CountryManager {
             powerCell.addEventListener('mouseleave', (e) => {
                 this.hidePowerBreakdown(powerCell);
             });
-
-            /*tr.appendChild(colorCell);
-            tr.appendChild(nameCell);
-            tr.appendChild(sysNameCell);
-            tr.appendChild(groupCell);
-            tr.appendChild(provincesCell);
-            tr.appendChild(capitalCell);
-            tr.appendChild(powerCell);*/
 
             window.currentOrderCountries.forEach((numer, number) => {
                        if (window.currentOrderCountries[number] === 'color') {
@@ -1040,212 +1062,24 @@ class CountryManager {
         // Заполняем отношения
         this.populateRelationLists(country);
 
-        /*let flagInput = document.getElementById('country-flag');
-        let flags = [
-            "",
-            "haiti",
-            "flag_of_union",
-            "costa_rica",
-            "panama1861",
-            "colombia",
-            "venezuela1861",
-            "equador",
-            "mexic01861",
-            "peru",
-            "chile",
-            "argentine",
-            "bolivia",
-            "paraguay",
-            "uruguay",
-            "second_flag_empire_of_brazil",
-            "union_jack",
-            "confederate_states_of_america",
-            "russian_empire",
-            "guatemala",
-            "spain",
-            "france",
-            "netherlands",
-            "denmark",
-            "el_salvador",
-            "honduras",
-            "nicaragua",
-            "soviet_russia",
-            "ireland",
-            "weimar_republic",
-            "russian_empire2",
-            "serbia",
-            "netherlands",
-            "belgium",
-            "luxembourg",
-            "lithuania",
-            "latvia",
-            "estonia",
-            "finland",
-            "sweden",
-            "norway",
-            "switzerland",
-            "czechoslovakia",
-            "romania",
-            "bulgaria",
-            "greece",
-            "albania",
-            "bavarian_soviet_republic",
-            "sultanate_egypt",
-            "persia",
-            "italy",
-            "ukrainian_peoples_republic",
-            "belarusian_peoples_republic",
-            "spain",
-            "poland",
-            "italy",
-            "montenegro",
-            "german_empire",
-            "ottoman_empire",
-            "portugal",
-            "ukrainian_peoples_republic",
-            "azerbaijan_democratic_republic",
-            "armenia",
-            "democratic_republic_of_georgia",
-            "soviet_union",
-            "ireland",
-            "netherlands",
-            "luxembourg",
-            "lithuania",
-            "latvia",
-            "sweden",
-            "norway",
-            "switzerland",
-            "austria",
-            "romania",
-            "ottoman_empire",
-            "greece",
-            "hungary",
-            "yugoslavia",
-            "italy",
-            "spain",
-            "poland",
-            "montenegro",
-            "german_empire",
-            "azerbaijan",
-            "luxembourg",
-            "ireland",
-            "italy",
-            "switzerland",
-            "yugoslavia",
-            "ukrainian_peoples_republic",
-            "poland",
-            "weimar_republic",
-            "hungary",
-            "free_state_of_bottleneck",
-            "romania",
-            "spain",
-            "sweden",
-            "norway",
-            "ottoman_empire",
-            "persia",
-            "greece",
-            "ukrainian_peoples_republic",
-            "russian_empire2",
-            "northem_corps",
-            "lithuania",
-            "makhnovshchina",
-            "netherlands",
-            "sultanate_egypt",
-            "iceland",
-            "latvian_soviet_republic",
-            "greece",
-            "poland",
-            "norway",
-            "spain",
-            "italy",
-            "sweden",
-            "german_empire",
-            "ottoman_empire",
-            "luxembourg",
-            "austria_hungary",
-            "russian_empire2",
-            "ireland",
-            "latvia",
-            "lithuania",
-            "makhnovshchina",
-            "switzerland",
-            "netherlands",
-            "romania",
-            "serbia",
-            "montenegro",
-            "greece",
-            "poland",
-            "norway",
-            "spain",
-            "italy",
-            "sweden",
-            "german_empire",
-            "ottoman_empire",
-            "luxembourg",
-            "russian_empire2",
-            "ireland",
-            "latvia",
-            "lithuania",
-            "switzerland",
-            "netherlands",
-            "romania",
-            "german_empire",
-            "russian_empire",
-            "ottoman_empire",
-            "sultanate_egypt",
-            "italy",
-            "greece",
-            "netherlands",
-            "ireland",
-            "romania",
-            "mexic01861",
-            "persia",
-            "serbia",
-            "iceland",
-            "netherlands",
-            "second_flag_empire_of_brazil",
-            "peru",
-            "luxembourg",
-            "venezuela1861",
-            "uruguay",
-            "paraguay",
-            "guatemala",
-            "honduras",
-            "nicaragua",
-            "spain",
-            "haiti",
-            "norway",
-            "sweden",
-            "montenegro",
-            "hungary",
-            "switzerland",
-            "poland",
-            "lithuania",
-            "latvia",
-        ];
-
-        // Очищаем select перед добавлением (на случай, если там уже что-то было)
-        flagInput.innerHTML = '';
-        flags.sort((a, b) => a.localeCompare(b));
-        const uniqueFlags = [...new Set(flags)].sort((a, b) => a.localeCompare(b));
-        uniqueFlags.forEach(flag => {
-            const option = document.createElement('option');
-            option.value = flag;
-            option.textContent = flag//.replace(/_/g, ' '); // заменяем подчёркивания на пробелы для красоты
-            flagInput.appendChild(option);
-        });*/
-
         // Переключаемся на страницу редактирования без дополнительных обновлений
         document.querySelectorAll('.page').forEach(page => {
             page.classList.remove('active');
         });
         document.getElementById('country-edit')?.classList.add('active');
 
-        document.querySelectorAll('.nav-button').forEach(btn => {
+        document.querySelectorAll('.navbtn').forEach(btn => {
             btn.classList.remove('active');
         });
 
         window.customDropFlag.setValue(country.banner || '');
+
+        this.showMentionsInEvents(countryId);
+
+        
+        const opage = document.getElementById('openedPage');
+        opage.setAttribute('data-pre', opage.getAttribute('data-now'));
+        opage.setAttribute('data-now', 'country-edit');
     }
 
     setFormValues(values) {
@@ -1422,6 +1256,7 @@ class CountryManager {
                 <div class="modal-body">
                     <div class="form-group">
                         <label>${window.translator.translate('select_country')}</label>
+                        <div id="customSelectRelations"></div>
                         <select class="param-country main-page-input">
                             <option value="">${window.translator.translate('select_country_placeholder')}</option>
                             ${this.generateCountryOptions()}
@@ -1516,10 +1351,10 @@ class CountryManager {
         return Object.entries(this.jsonData.lands)
             .filter(([id]) => id !== 'provinces' && id !== this.currentCountry)
             .sort(([, a], [, b]) => a.name.localeCompare(b.name))
-            .map(([id, country]) => {
-                return `<option value="${id}">${country.name} - ${id}</option>`;
-            })
-            .join('');
+            //.map(([id, country]) => {
+            //    return `<option value="${id}">${country.name} - ${id}</option>`;
+            //})
+            //.join('');
     }
 
     updateReciprocatedRelation(targetCountryId, relationType, params) {
@@ -1741,7 +1576,7 @@ class CountryManager {
         });
         document.getElementById('country-edit')?.classList.add('active');
 
-        document.querySelectorAll('.nav-button').forEach(btn => {
+        document.querySelectorAll('.navbtn').forEach(btn => {
             btn.classList.remove('active');
         });
     }
@@ -1752,7 +1587,7 @@ class CountryManager {
         });
         document.getElementById('countries')?.classList.add('active');
 
-        document.querySelectorAll('.nav-button').forEach(btn => {
+        document.querySelectorAll('.navbtn').forEach(btn => {
             if (btn.getAttribute('data-page') === 'countries') {
                 btn.classList.add('active');
             } else {
@@ -2530,6 +2365,13 @@ class CountryManager {
             if (e.target === modal) modal.remove();
             window.countryManager.updateCountriesList()
         });
+    }
+
+    showMentionsInEvents(countryId) {
+        let exit = window.getLandUniquenessById(this.jsonData, countryId, true);
+        exit = Object.assign(exit[1], exit[2]);
+        console.log(exit);
+        window.eventManager.updateEventsList(exit, 'countryMentionsBody')
     }
 }
 

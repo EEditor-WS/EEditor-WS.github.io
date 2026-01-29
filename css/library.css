@@ -364,7 +364,7 @@ body {
     align-items: center;
 }
 
-.nav-button {
+.navbtn {
     background: none;
     border: none;
     color: #888;
@@ -376,12 +376,12 @@ body {
     transition: all 0.3s ease;
 }
 
-.nav-button:hover {
+.navbtn:hover {
     background-color: var(----background-secondary);
     color: #e0e0e0;
 }
 
-.nav-button.active {
+.navbtn.active {
     background-color: #3498db;
     color: white;
 }
@@ -694,7 +694,7 @@ body {
         gap: 10px;
     }
 
-    .nav-button {
+    .navbtn {
         width: 100%;
     }
 }
@@ -713,7 +713,7 @@ body {
 /* Улучшение доступности */
 .form-group input:focus,
 .form-group select:focus,
-.nav-button:focus,
+.navbtn:focus,
 .action-button:focus {
     outline: 2px solid #3498db;
     outline-offset: 2px;
@@ -724,18 +724,18 @@ body {
     color: #ffffff;
 }
 
-.nav-button {
+.navbtn {
     color: #ffffff;
 }
 
 /* Анимации для интерактивных элементов */
-.nav-button,
+.navbtn,
 .action-button,
 .file-input-label {
     transition: all 0.2s ease-in-out;
 }
 
-.nav-button:active,
+.navbtn:active,
 .action-button:active,
 .file-input-label:active {
     transform: scale(0.98);

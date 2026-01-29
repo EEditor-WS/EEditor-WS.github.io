@@ -95,7 +95,7 @@ class Translator {
         };
 
         for (const [pageId, translationKey] of Object.entries(navButtons)) {
-            const button = document.querySelector(`.nav-button[data-page="${pageId}"]`);
+            const button = document.querySelector(`.navbtn[data-page="${pageId}"]`);
             if (button) {
                 const textSpan = button.querySelector('.button-text');
                 if (textSpan) {

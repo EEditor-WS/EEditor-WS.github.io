@@ -1,0 +1,4 @@
+#main.pmain.active {
+    flex-direction: row-reverse;
+    align-items: unset;
+}

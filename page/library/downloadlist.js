@@ -32,7 +32,7 @@ console.log('Library downloadlist.js loaded');
 //const libLink = 'https://ee-lib-data.netlify.app/'
 
 let liblink;
-if (window.location.href.includes('file:///')) {
+if (window.location.href.includes('file:///') || window.location.href.includes('8080')) {
     libLink = 'http://192.168.100.18:8081/';
 } else {
     libLink = 'https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/';

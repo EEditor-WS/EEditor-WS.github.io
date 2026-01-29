@@ -4,7 +4,6 @@ const GITHUB_REPO = 'EEditor-WS/eeditor-ws-data';
 const COOKIE_NAME = 'ee_auth';
 const COOKIE_EXPIRES_DAYS = 30;
 
-// Разбиваем токен на части
 const GITHUB_TOKEN_PARTS = [
     'github_pat_11A6XWVIA0',
     'sUVgIIS3uO64_0T8BMfz0',

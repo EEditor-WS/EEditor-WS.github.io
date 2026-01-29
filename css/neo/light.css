@@ -1,0 +1,31 @@
+.light-theme {
+    --bg-pri: #ffffffb0;               /* Очень светлый, полупрозрачный фон */
+    --bg-pri-hover: #f0f0f0b0;         /* Чуть темнее при наведении */
+    --bg-sec: #f5f5f5b0;               /* Вторичный фон, матовый белый */
+    --bg-sec-hover: #e8e8e8b0;
+    --bg-sec-great: #ffffff;           /* Основной плотный белый фон */
+    --bg-sec-great-hover: #fcfcfc;
+    --bg-hover: #eeeeee80;             /* Общий цвет наведения */
+    --bg-input: #ffffffb0;             /* Фон инпутов */
+    --bg-input-hover: #fdfdfdb0;
+    --bg-input-great: #ffffff;
+    --bg-input-great-hover: #f9f9f9;
+
+    --text-pri: #1a1a1a;               /* Почти черный для основного текста */
+    --text-pri-hover: #000000;         /* Чистый черный при наведении */
+    --text-sec: #666666;               /* Серый для второстепенного текста */
+    --text-sec-hover: #333333;
+    
+    .action-button, .navbtn, .icon-action-button, .account-item, .menu-item {
+        img {
+            filter: invert(1);
+        }
+    }
+    #event-icon-preview, .list-icon {
+        filter: invert(1);
+    }
+}
+
+body.light-theme {
+    background: linear-gradient(135deg, #e7e7bb, #aecde6, #ddebe4) !important;
+}

@@ -179,6 +179,121 @@ function convertObjectToReadableString(obj) {
     return `<div class="list-requirements-list">${html}</div>`;
 }
 
+function convertObjectToReadableDOM(obj) {
+    if (!Array.isArray(obj)) {
+        const error = document.createElement("span");
+        error.style.color = "red";
+        error.textContent = "Некорректный формат объекта.";
+        return error;
+    }
+
+    const translations = {
+        equal: " = ",
+        not_equal: " ≠ ",
+        more: " > ",
+        less: " < ",
+    };
+
+    const root = document.createElement("div");
+    root.className = "list-requirements-list";
+
+    obj.forEach(item => {
+        const row = document.createElement("div");
+        row.className = "list-requirement-item";
+
+        let type = window.translator?.translate(item.type) || item.type;
+        let action = translations[item.action] || item.action;
+        let value = item.value;
+        let subtype = item.subtype || "";
+
+        if (typeof value === "boolean") {
+            value = value ? "yes" : "no";
+        }
+
+        /* ===== TYPE ===== */
+        const typeEl = document.createElement("span");
+        typeEl.className = "list-req-type";
+        typeEl.textContent = type;
+        row.appendChild(typeEl);
+
+        /* ===== SUBTYPE ===== */
+        if (subtype) {
+            const subtypeEl = document.createElement("span");
+            subtypeEl.className = "list-req-subtype";
+            subtypeEl.textContent = `(${subtype})`;
+
+            if (typeof subtype === "string" && subtype.includes("civilization")) {
+                const id = item.subtype;
+                subtypeEl.textContent =
+                    window.eventManager.jsonData.lands[id]?.name || subtype;
+                subtypeEl.addEventListener("click", () => window.countryManager.openCountry(id));
+            }
+
+            if (/^E\d+$/.test(subtype)) {
+                subtypeEl.addEventListener("click", () => {
+                    document
+                        .getElementById(`event-row-${subtype}`)
+                        ?.scrollIntoView({ behavior: "smooth" });
+                });
+            }
+
+            row.append(" ");
+            row.appendChild(subtypeEl);
+        }
+
+        row.append(" ");
+
+        /* ===== ACTION ===== */
+        const actionEl = document.createElement("span");
+        actionEl.className = "list-req-action";
+        actionEl.textContent = action;
+
+        if (typeof item.action === "string" && item.action.includes("civilization")) {
+            const id = item.action;
+            actionEl.textContent =
+                window.eventManager?.jsonData?.lands?.[id]?.name || action;
+            actionEl.addEventListener("click", () => window.countryManager.openCountry(id));
+        }
+
+        if (/^E\d+$/.test(item.action)) {
+            actionEl.addEventListener("click", () => {
+                document
+                    .getElementById(`event-row-${item.action}`)
+                    ?.scrollIntoView({ behavior: "smooth" });
+            });
+        }
+
+        row.appendChild(actionEl);
+        row.append(" ");
+
+        /* ===== VALUE ===== */
+        const valueEl = document.createElement("span");
+        valueEl.className = "list-req-value";
+        valueEl.textContent = value;
+
+        if (typeof item.value === "string" && item.value.includes("civilization")) {
+            const id = item.value;
+            valueEl.textContent =
+                window.eventManager?.jsonData?.lands?.[id]?.name || value;
+            valueEl.addEventListener("click", () => window.countryManager.openCountry(id));
+        }
+
+        if (/^E\d+$/.test(item.value)) {
+            valueEl.addEventListener("click", () => {
+                document
+                    .getElementById(`event-row-${item.value}`)
+                    ?.scrollIntoView({ behavior: "smooth" });
+            });
+        }
+
+        row.appendChild(valueEl);
+
+        root.appendChild(row);
+    });
+
+    return root;
+}
+
 
 function transformCustomEvents() {
   let data = JSON.parse(previewContent.value);

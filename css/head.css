@@ -24,7 +24,7 @@
 }
 
 /* Контейнер для навигационных кнопок */
-.nav-buttons-container {
+.navbtns-container {
     display: flex;
     gap: 8px;
     flex-shrink: 1;
@@ -33,7 +33,7 @@
 }
 
 /* Кнопки навигации */
-.nav-button {
+.navbtn {
     padding: 8px 16px;
     border: none;
     border-radius: var(--br);
@@ -51,21 +51,21 @@
     min-width: 36px;
 }
 
-.nav-button .button-icon {
+.navbtn .button-icon {
     width: 18px;
     height: 18px;
     display: block;
 }
 
-.nav-button .button-text {
+.navbtn .button-text {
     display: block;
 }
 
-.nav-button:hover {
+.navbtn:hover {
     background-color: rgba(52, 152, 219, 0.2);
 }
 
-.nav-button.active {
+.navbtn.active {
     background-color: rgba(52, 152, 219, 0.2);
 }
 
@@ -306,11 +306,11 @@
         gap: 4px;
     }
 
-    .nav-buttons-container {
+    .navbtns-container {
         gap: 4px;
     }
 
-    .nav-button,
+    .navbtn,
     .save-button {
         padding: 8px;
         width: 36px;
@@ -319,12 +319,12 @@
         aspect-ratio: 1;
     }
 
-    .nav-button .button-text,
+    .navbtn .button-text,
     .save-button .button-text {
         display: none;
     }
 
-    .nav-button .button-icon,
+    .navbtn .button-icon,
     .save-button .button-icon {
         display: block;
         width: 18px;

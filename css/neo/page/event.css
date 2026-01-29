@@ -1,0 +1,31 @@
+.drag-handle-slider {
+    display: none;
+}
+.oldview .drag-handle-slider {
+    display: block;
+}
+
+#event-description {
+    resize: vertical;
+    min-height: 60px;
+    font-size: 14px;
+    width: calc(100% - var(--dss) * 2);
+}
+
+.requirement-actions {
+    justify-content: center;
+    gap: var(--ds);
+    button {
+        aspect-ratio: 1;
+        height: 30px;
+        border-radius: var(--brs);
+    }
+}
+
+.list-requirements-list {
+    max-width: calc(45dvw - 5rem);
+}
+
+p.eventReqEvent {
+    margin: 0;
+}
