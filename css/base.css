@@ -652,3 +652,7 @@ button.icon-action-button.newabtn svg, button.add-country-button.newabtn img {
     height: 30px;
     width: 30px;
 }
+
+img.lang-flag {
+    width: 30px;
+}
