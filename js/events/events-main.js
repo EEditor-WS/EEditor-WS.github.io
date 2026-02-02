@@ -1096,11 +1096,13 @@ generateUniqueId(minimumID = 0) {
                 { value: 'discontent', label: window.translator.translate('discontent') },
                 { value: 'building_exists', label: window.translator.translate('building_exists') },
                 { value: 'political_institution', label: window.translator.translate('political_institution') },
+                { value: 'has_resource', label: window.translator.translate('has_resource') },
 
                 // Прочее
                 { value: '', label: '--- ' + window.translator.translate('other') + ' ---', disabled: true },
                 { value: 'random_value', label: window.translator.translate('random_value') },
-                { value: 'count_of_tasks', label: window.translator.translate('count_of_tasks') }
+                { value: 'count_of_tasks', label: window.translator.translate('count_of_tasks') },
+                { value: 'num_of_players', label: window.translator.translate('num_of_players') },
             ];
             window.cReqType.setOptions(requirementOptions);
         }
@@ -1517,7 +1519,7 @@ generateUniqueId(minimumID = 0) {
                 'count_of_tasks', 'tax', 'discontent', 'money', 'land_power', 'defense', 'num_of_vassals',
                 'attack', 'population_income', 'population_increase', 'building_cost', 'add_oil', 'add_cruiser', 
                 'add_random_culture_population', 'add_shock_infantry', 'add_tank', 'add_artillery',
-                'army_losses', 'prestige', 'add_battleship', 'add_infantry', 'science', 'cooldown'];
+                'army_losses', 'prestige', 'add_battleship', 'add_infantry', 'science', 'cooldown', 'num_of_players', 'has_resource'];
 
             const booleanTypes = ['near_water', 'is_player', 'independent_land', 'no_enemy', 'enemy_near_capital', 'lost_capital'];
 

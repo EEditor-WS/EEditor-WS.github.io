@@ -224,7 +224,7 @@ const reqbonConfig = {
     requirements: {
         building_exists: {
             subType: false,
-            value: 'building',
+            value: 'string',
             action: ['equal', 'not_equal']
         },
         controls_capital: {
@@ -249,7 +249,7 @@ const reqbonConfig = {
         },
         enemy_near_capital: {
             subType: false,
-            value: 'boolean',
+            value: [true, false],
             action: ['equal', 'not_equal']
         },
         event_choice: {
@@ -369,7 +369,7 @@ const reqbonConfig = {
         },
         random_value: {
             subType: false,
-            value: 'zerosto',
+            value: 'number',
             action: ['less']
         },
         received_event: {
@@ -389,6 +389,27 @@ const reqbonConfig = {
         },
         year: {
             subType: false,
+            value: 'number',
+            action: ['more', 'equal', 'less']
+        },
+        num_of_players: {
+            subType: false,
+            value: 'number',
+            action: ['more', 'equal', 'less']
+        },
+        has_resource: {
+            subType: [
+                'gold',
+                'iron',
+                'oil',
+                'steel',
+                'uranium',
+                'wood',
+                'cartridges',
+                'chemical_weapon',
+                'heavy_water',
+                'nuclear_weapon'
+            ],
             value: 'number',
             action: ['more', 'equal', 'less']
         }
