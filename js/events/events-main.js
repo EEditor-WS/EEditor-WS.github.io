@@ -1097,6 +1097,8 @@ generateUniqueId(minimumID = 0) {
                 { value: 'building_exists', label: window.translator.translate('building_exists') },
                 { value: 'political_institution', label: window.translator.translate('political_institution') },
                 { value: 'has_resource', label: window.translator.translate('has_resource') },
+                { value: 'has_prestige', label: window.translator.translate('has_prestige') },
+                { value: 'has_science', label: window.translator.translate('has_science') },
 
                 // Прочее
                 { value: '', label: '--- ' + window.translator.translate('other') + ' ---', disabled: true },
@@ -1519,7 +1521,7 @@ generateUniqueId(minimumID = 0) {
                 'count_of_tasks', 'tax', 'discontent', 'money', 'land_power', 'defense', 'num_of_vassals',
                 'attack', 'population_income', 'population_increase', 'building_cost', 'add_oil', 'add_cruiser', 
                 'add_random_culture_population', 'add_shock_infantry', 'add_tank', 'add_artillery',
-                'army_losses', 'prestige', 'add_battleship', 'add_infantry', 'science', 'cooldown', 'num_of_players', 'has_resource'];
+                'army_losses', 'prestige', 'add_battleship', 'add_infantry', 'science', 'cooldown', 'num_of_players', 'has_resource', 'has_prestige', 'has_science'];
 
             const booleanTypes = ['near_water', 'is_player', 'independent_land', 'no_enemy', 'enemy_near_capital', 'lost_capital'];
 

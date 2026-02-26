@@ -412,7 +412,17 @@ const reqbonConfig = {
             ],
             value: 'number',
             action: ['more', 'equal', 'less']
-        }
+        },
+        has_prestige: {
+            subType: false,
+            value: 'number',
+            action: ['more', 'equal', 'less']
+        },
+        has_science: {
+            subType: false,
+            value: 'number',
+            action: ['more', 'equal', 'less']
+        },
     }
 };
 
