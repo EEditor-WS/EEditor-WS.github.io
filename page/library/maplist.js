@@ -1103,6 +1103,21 @@ mapsData = [
         load: "normal",
         hiddenScore: 20
     },
+    {
+        id: ["eenot", "asia", "v1"],
+        title: "Asia",
+        author: ["eenot"],
+        description: "The best map of Asia for Warnament. Detalied borders, many rivers, many provinces, good optimization.",
+        type: "continent",
+        region: ['Asia','Oceania','Australia','Middle East'],
+        provinces: 1579,
+        features: [],
+        status: "completed",
+        publishDate: "2026-03-17",
+        lastUpdate: "2026-03-17",
+        load: "normal",
+        hiddenScore: 100
+    },
 ];
 
 const mapTypes = {

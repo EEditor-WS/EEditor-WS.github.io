@@ -12,7 +12,6 @@ const scenariosData = [
         languages: ["EN", "RU"],
         gameMode: "Sandbox",
         tags: ["World", "For Phones", "Recommended", "without events", "without reforms", "Modern Day"],
-        worldCreator: "ЕЕнот",
         awards: ["star", "enot"],
         // Hidden parameters
         publishDate: "2025-01-19",
@@ -36,7 +35,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["Europe", "For Phones", "Recommended", "without events", "without reforms", "Alternative History"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Standart Europe",
             id: "jalhund_europe_vg"
@@ -64,7 +62,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "For Phones", "Recommended", "without events", "without reforms", "Historical", "WW2"],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-01-24",
@@ -87,7 +84,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "For Phones", "without events", "without reforms", "Historical", "Cold War"],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-01-24",
@@ -110,7 +106,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "For Phones", "Recommended", "without events", "without reforms", "Alternative History", "1984"],
-        worldCreator: "ЕЕнот",
         awards: ["enot"],
         // Hidden parameters
         publishDate: "2025-01-31",
@@ -133,7 +128,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Medieval", "without events", "without reforms"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "EuroMagnus by Estebanf259",
             id: "estebanf259_euromagnus_v1"
@@ -160,7 +154,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Roman Empire", "Ancient"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Euro4 Standart",
             id: "parkourcat_euro4_vg"
@@ -187,7 +180,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "Alternative History", "Half-Life", "Post-apocalyptic"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "World Plus",
             id: "shahz0d_world_v1"
@@ -214,7 +206,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Eurasia", "Alternative History", "WW1", "Kaiserreich"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Eurasia by Zachary",
             id: "zachary_eurasia_v1"
@@ -241,7 +232,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Eurasia", "Modern Day", "2020s"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Eurasia by Zachary",
             id: "zachary_eurasia_v1"
@@ -268,7 +258,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Eurasia", "Alternative History", "WW2", "The New Order", "Cold War"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Eurasia by Zachary",
             id: "zachary_eurasia_v1"
@@ -295,7 +284,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "Historical", "WW2", "1936"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "World by Zachary",
             id: "zachary_world_v1"
@@ -322,7 +310,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Battle",
         tags: ["PvP", "Battle", "1v1", "Competitive"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "PvP map by Енотий",
             id: "enotochel_pvp_v1"
@@ -349,7 +336,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Battle",
         tags: ["PvP", "Battle", "1v1", "Competitive", "Spectator"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "PvP map by Енотий",
             id: "enotochel_pvp_v1"
@@ -376,7 +362,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "Historical", "Cold War", "Redux"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "World Map Redux",
             id: "estebanf259_world-redux_v2"
@@ -403,7 +388,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "Modern Day", "Redux", "2000s"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "World Map Redux",
             id: "estebanf259_world-redux_v2"
@@ -430,7 +414,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "WW2", "Hearts of Iron", "Formable Nations", "Redux"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "World Map Redux",
             id: "estebanf259_world-redux_v2"
@@ -457,7 +440,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "Historical", "Medieval", "Redux", "13th Century"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "World Map Redux",
             id: "estebanf259_world-redux_v2"
@@ -484,7 +466,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "Historical", "18th Century", "Redux"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "World Map Redux",
             id: "estebanf259_world-redux_v2"
@@ -511,7 +492,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "Historical", "Prehistoric", "Geology", "Continents"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "World Map (3 billion years ago)",
             id: "zachary_world-3ga_v1"
@@ -538,7 +518,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Eurasia", "Historical", "Napoleonic Era", "19th Century"],
-        worldCreator: "Zachary",
         map: {
             name: "Eurasia by Zachary",
             id: "zachary_eurasia_v2"
@@ -564,7 +543,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Eurasia", "Historical", "Napoleonic Wars", "19th Century"],
-        worldCreator: "Zachary",
         map: {
             name: "Eurasia by Zachary",
             id: "zachary_eurasia_v2"
@@ -590,7 +568,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Eurasia", "Historical", "WW2", "20th Century"],
-        worldCreator: "Zachary",
         map: {
             name: "Eurasia by Zachary",
             id: "zachary_eurasia_v2"
@@ -616,7 +593,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Eurasia", "Alternative History", "Future", "Episode 2"],
-        worldCreator: "Zachary",
         map: {
             name: "Eurasia by Zachary",
             id: "zachary_eurasia_v2"
@@ -642,7 +618,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Eurasia", "Alternative History", "Future", "Episode 3"],
-        worldCreator: "Zachary",
         map: {
             name: "Eurasia by Zachary",
             id: "zachary_eurasia_v2"
@@ -668,7 +643,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Eurasia", "Alternative History", "Future", "Episode 4"],
-        worldCreator: "Zachary",
         map: {
             name: "Eurasia by Zachary",
             id: "zachary_eurasia_v2"
@@ -694,7 +668,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Eurasia", "Post-apocalyptic", "Fallout", "Alternative History"],
-        worldCreator: "Zachary",
         map: {
             name: "Eurasia by Zachary",
             id: "zachary_eurasia_v2"
@@ -720,7 +693,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Eurasia", "Historical", "WW1", "20th Century"],
-        worldCreator: "Zachary",
         map: {
             name: "Eurasia by Zachary",
             id: "zachary_eurasia_v2"
@@ -746,7 +718,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Eurasia", "Alternative History", "Nuclear War", "Post-apocalyptic"],
-        worldCreator: "Zachary",
         map: {
             name: "Eurasia by Zachary",
             id: "zachary_eurasia_v2"
@@ -772,7 +743,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "Historical", "Islam", "7th Century", "Medieval"],
-        worldCreator: "Zachary",
         map: {
             name: "World by Zachary",
             id: "zachary_world_v1"
@@ -798,7 +768,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "Historical", "American Revolution", "18th Century"],
-        worldCreator: "Zachary",
         map: {
             name: "World by Zachary",
             id: "zachary_world_v1"
@@ -824,7 +793,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "Historical", "WW1", "20th Century"],
-        worldCreator: "Zachary",
         map: {
             name: "World by Zachary",
             id: "zachary_world_v1"
@@ -850,7 +818,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "Alternative History", "WW2", "Zombies"],
-        worldCreator: "Zachary",
         map: {
             name: "World by Zachary",
             id: "zachary_world_v1"
@@ -876,7 +843,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["USA", "Modern Day", "2025"],
-        worldCreator: "Zachary",
         map: {
             name: "USA by Zachary",
             id: "zachary_usa_v1"
@@ -902,7 +868,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["USA", "Historical", "Civil War", "19th Century"],
-        worldCreator: "Zachary",
         map: {
             name: "USA by Zachary",
             id: "zachary_usa_v1"
@@ -928,7 +893,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["USA", "Modern Day", "Ethnic Groups", "Demographics"],
-        worldCreator: "Zachary",
         map: {
             name: "USA by Zachary",
             id: "zachary_usa_v1"
@@ -954,7 +918,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "Alternative History", "Kaiserreich"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "World by Zachary",
             id: "zachary_world_v1"
@@ -981,7 +944,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "Alternative History", "Kalterkrieg"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "World by Zachary",
             id: "zachary_world_v1"
@@ -1008,7 +970,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "WW2", "1941"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Standart Europe",
             id: "jalhund_europe_vg"
@@ -1035,7 +996,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Modern", "2020"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Standart Europe",
             id: "jalhund_europe_vg"
@@ -1062,7 +1022,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Modern", "2020"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Standart Europe",
             id: "jalhund_europe_vg"
@@ -1089,7 +1048,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Standart Europe",
             id: "jalhund_europe_vg"
@@ -1116,7 +1074,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Standart Europe",
             id: "jalhund_europe_vg"
@@ -1143,7 +1100,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Standart Europe",
             id: "jalhund_europe_vg"
@@ -1170,7 +1126,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Ancient"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Euro4 Standart",
             id: "parkourcat_euro4_vg"
@@ -1197,7 +1152,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "For Phones", "Recommended", "without events", "without reforms"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "World by ЕЕнот",
             id: "eenot_arstotzka_v2"
@@ -1276,7 +1230,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["For Phones", "without events", "without reforms", "Modern Day"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Moldavia by ЕЕнот",
             id: "eenot_moldavia_v1"
@@ -1304,7 +1257,6 @@ const scenariosData = [
         languages: ["EN","RU"],
         gameMode: "Sandbox",
         tags: ["For Phones", "without events", "without reforms", "Modern Day"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Moldavia by ЕЕнот",
             id: "eenot_moldavia_v1"
@@ -1332,7 +1284,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["For Phones", "without events", "without reforms", "World War 2"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Moldavia by ЕЕнот",
             id: "eenot_moldavia_v1"
@@ -1360,7 +1311,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["For Phones", "without events", "without reforms", "World War 2"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Moldavia by ЕЕнот",
             id: "eenot_moldavia_v1"
@@ -1388,7 +1338,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "Historical", "WW1"],
-        worldCreator: "ЕЕнот",
         awards: ["star","enot"],
         // Hidden parameters
         publishDate: "2025-05-01",
@@ -1411,7 +1360,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Europe+ by BluePum",
             id: "bluepum_enaatme_v2"
@@ -1438,7 +1386,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Europe+ by BluePum",
             id: "bluepum_enaatme_v5"
@@ -1465,7 +1412,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Europe+ by BluePum",
             id: "bluepum_enaatme_v2"
@@ -1492,7 +1438,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Europe+ by BluePum",
             id: "bluepum_enaatme_v4"
@@ -1519,7 +1464,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Europe+ by BluePum",
             id: "bluepum_enaatme_v5"
@@ -1546,7 +1490,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Europe+ by BluePum",
             id: "bluepum_enaatme_v1"
@@ -1573,7 +1516,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Europe+ by BluePum",
             id: "bluepum_enaatme_v2"
@@ -1600,7 +1542,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Historical",
         tags: [],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Dead Hand by BluePum",
             id: "zachary_deadhand_v1"
@@ -1627,7 +1568,6 @@ const scenariosData = [
         languages: ["EN", "RU"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Europe+ by BluePum",
             id: "bluepum_enaatme_v2"
@@ -1654,7 +1594,6 @@ const scenariosData = [
         languages: ["EN", "RU"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Europe+ by BluePum",
             id: "bluepum_enaatme_v5"
@@ -1681,7 +1620,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-05-07",
@@ -1704,7 +1642,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-06-05",
@@ -1727,7 +1664,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Europe (Our Empire)",
             id: "stewardconstruct_europe_v1"
@@ -1754,7 +1690,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Europe (Our Empire)",
             id: "stewardconstruct_europe_v1"
@@ -1781,7 +1716,6 @@ const scenariosData = [
         languages: ["other"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-03-15",
@@ -1804,7 +1738,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-03-19",
@@ -1828,7 +1761,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Ancient"],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-06-09",
@@ -1851,7 +1783,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Ancient"],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-06-09",
@@ -1874,7 +1805,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Ancient"],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-06-07",
@@ -1897,7 +1827,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Ancient"],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-06-07",
@@ -1920,7 +1849,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Ancient"],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-06-29",
@@ -1943,7 +1871,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Ancient"],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-06-29",
@@ -1966,7 +1893,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Ancient"],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-06-08",
@@ -1989,7 +1915,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Ancient"],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-06-08",
@@ -2012,7 +1937,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Ancient"],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-12-17",
@@ -2035,7 +1959,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Ancient"],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-12-17",
@@ -2058,7 +1981,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["Russia", "Modern Day", "Archangelsk"],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-02-04",
@@ -2081,7 +2003,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2023-11-21",
@@ -2104,7 +2025,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-02-24",
@@ -2127,7 +2047,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-02-23",
@@ -2150,7 +2069,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-03-19",
@@ -2173,7 +2091,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-03-19",
@@ -2196,7 +2113,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-04-22",
@@ -2219,7 +2135,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2023-06-12",
@@ -2242,7 +2157,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: ["enot", "star"],
         // Hidden parameters
         publishDate: "2024-03-27",
@@ -2265,7 +2179,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: ["enot", "star"],
         // Hidden parameters
         publishDate: "2024-03-27",
@@ -2288,7 +2201,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: ["enot", "star"],
         // Hidden parameters
         publishDate: "2024-03-27",
@@ -2311,7 +2223,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-03-27",
@@ -2334,7 +2245,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-03-27",
@@ -2357,7 +2267,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: ["enot"],
         // Hidden parameters
         publishDate: "2024-03-27",
@@ -2380,7 +2289,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-03-27",
@@ -2403,7 +2311,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-03-27",
@@ -2426,7 +2333,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-04-05",
@@ -2449,7 +2355,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-04-21",
@@ -2472,7 +2377,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-05-29",
@@ -2495,7 +2399,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2023-03-29",
@@ -2518,7 +2421,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2023-10-01",
@@ -2541,7 +2443,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: ["star", "enot"],
         // Hidden parameters
         publishDate: "2024-09-15",
@@ -2564,7 +2465,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-09-15",
@@ -2587,7 +2487,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: ["star", "enot"],
         // Hidden parameters
         publishDate: "2024-12-04",
@@ -2610,7 +2509,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2023-10-19",
@@ -2633,7 +2531,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2023-10-19",
@@ -2656,7 +2553,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2023-10-19",
@@ -2679,7 +2575,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2023-10-19",
@@ -2702,7 +2597,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2023-10-13",
@@ -2725,7 +2619,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2023-10-13",
@@ -2748,7 +2641,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-02-09",
@@ -2771,7 +2663,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-02-10",
@@ -2794,7 +2685,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-02-10",
@@ -2817,7 +2707,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-02-10",
@@ -2840,7 +2729,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: ["star", "enot"],
         // Hidden parameters
         publishDate: "2024-02-10",
@@ -2863,7 +2751,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: ["star", "enot"],
         // Hidden parameters
         publishDate: "2025-01-17",
@@ -2886,7 +2773,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-04-13",
@@ -2909,7 +2795,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-04-13",
@@ -2932,7 +2817,6 @@ const scenariosData = [
         languages: ["EN", "RU"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-05-26", 
@@ -2955,7 +2839,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-05-31", 
@@ -2978,7 +2861,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: ["star"],
         // Hidden parameters
         publishDate: "2025-06-02", 
@@ -3001,7 +2883,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: ["star"],
         // Hidden parameters
         publishDate: "2025-06-02", 
@@ -3024,7 +2905,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: ["star"],
         // Hidden parameters
         publishDate: "2025-06-12", 
@@ -3048,7 +2928,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: ["star"],
         // Hidden parameters
         publishDate: "2025-09-02", 
@@ -3071,7 +2950,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: ["star"],
         // Hidden parameters
         publishDate: "2025-09-02", 
@@ -3094,7 +2972,6 @@ const scenariosData = [
         languages: ["UK"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-09-02", 
@@ -3117,7 +2994,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-08-28", 
@@ -3139,7 +3015,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-08-27", 
@@ -3162,7 +3037,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-10-06", 
@@ -3185,7 +3059,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["RECOMMENDATION: SET BOTS TO PEACEFUL"],
-        worldCreator: "ЕЕнот",
         awards: ["only", "star", "enot"],
         // Hidden parameters
         publishDate: "2025-06-14", 
@@ -3209,7 +3082,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: ["only", "star", "enot"],
         // Hidden parameters
         publishDate: "2024-01-11", 
@@ -3233,7 +3105,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: ["only", "star", "enot"],
         // Hidden parameters
         publishDate: "2024-01-11", 
@@ -3257,7 +3128,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-09-03", 
@@ -3281,7 +3151,6 @@ const scenariosData = [
         languages: ["EN", "RU"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-09-19",
@@ -3305,7 +3174,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-12-16",
@@ -3328,7 +3196,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-10-24",
@@ -3352,7 +3219,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-06-30",
@@ -3377,7 +3243,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-11-03",
@@ -3402,7 +3267,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-10-17",
@@ -3425,7 +3289,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-10-16",
@@ -3448,7 +3311,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-10-05",
@@ -3471,7 +3333,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2023-08-10",
@@ -3494,7 +3355,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-06-21",
@@ -3517,7 +3377,6 @@ const scenariosData = [
         languages: ["EN"],
         gameMode: "lore",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2026-01-18",
@@ -3541,7 +3400,6 @@ const scenariosData = [
         languages: ["RU"],
         gameMode: "lore",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2026-01-18",
@@ -3552,4 +3410,119 @@ const scenariosData = [
         status: "in_development",
         rights: true
     },
+    {
+        id: [
+            "eenot", 
+            "asia", 
+            "v1",
+            "ironorder",
+        ],
+        title: "Iron Order Asia",
+        author: ["totoska"],
+        year: "1919",
+        languages: ["EN"],
+        gameMode: "sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2026-03-17",
+        lastUpdate: "2026-03-17",
+        hiddenScore: 100,
+        type: "sandbox",
+        period: "alternative",
+        status: "complated",
+        rights: true
+    },
+    {
+        id: [
+            "eenot", 
+            "asia", 
+            "v1",
+            "1444",
+        ],
+        title: "1444 Asia",
+        author: ["totoska"],
+        year: "1444",
+        languages: ["EN"],
+        gameMode: "sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2026-03-17",
+        lastUpdate: "2026-03-17",
+        hiddenScore: 100,
+        type: "sandbox",
+        period: "ancient",
+        status: "complated",
+        rights: true
+    },
+    /*{
+        id: [
+            "eenot", 
+            "asia", 
+            "v1",
+            "tno",
+        ],
+        title: "The New Order Asia",
+        author: ["totoska"],
+        year: "1962",
+        languages: ["EN"],
+        gameMode: "sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2026-03-17",
+        lastUpdate: "2026-03-17",
+        hiddenScore: 100,
+        type: "sandbox",
+        period: "alternative",
+        status: "complated",
+        rights: true
+    },
+    {
+        id: [
+            "eenot", 
+            "asia", 
+            "v1",
+            "kaiserreich",
+        ],
+        title: "Kaiserreich Asia",
+        author: ["eenot"],
+        year: "1936",
+        languages: ["EN"],
+        gameMode: "sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2026-03-17",
+        lastUpdate: "2026-03-17",
+        hiddenScore: 100,
+        type: "sandbox",
+        period: "alternative",
+        status: "complated",
+        rights: true
+    },
+    {
+        id: [
+            "eenot", 
+            "asia", 
+            "v1",
+            "cw",
+        ],
+        title: "Cold War Asia",
+        author: ["totoska"],
+        year: "1956",
+        languages: ["EN"],
+        gameMode: "sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2026-03-17",
+        lastUpdate: "2026-03-17",
+        hiddenScore: 100,
+        type: "sandbox",
+        period: "cw",
+        status: "complated",
+        rights: true
+    },*/
 ]
