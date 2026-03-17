@@ -3456,7 +3456,7 @@ const scenariosData = [
         status: "complated",
         rights: true
     },
-    /*{
+    {
         id: [
             "eenot", 
             "asia", 
@@ -3479,7 +3479,7 @@ const scenariosData = [
         status: "complated",
         rights: true
     },
-    {
+    /*{
         id: [
             "eenot", 
             "asia", 
