@@ -3498,7 +3498,30 @@ const scenariosData = [
         lastUpdate: "2026-03-18",
         hiddenScore: 100,
         type: "sandbox",
-        period: "alternative",
+        period: "modern",
+        status: "in_development",
+        rights: true
+    },
+    {
+        id: [
+            "eenot", 
+            "asia", 
+            "v1",
+            "ww1",
+        ],
+        title: "World War 1 Asia",
+        author: ["eenot"],
+        year: "1914",
+        languages: ["EN"],
+        gameMode: "sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2026-03-18",
+        lastUpdate: "2026-03-18",
+        hiddenScore: 100,
+        type: "sandbox",
+        period: "ww1",
         status: "in_development",
         rights: true
     },
