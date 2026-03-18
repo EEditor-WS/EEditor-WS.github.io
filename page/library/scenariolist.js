@@ -3479,6 +3479,29 @@ const scenariosData = [
         status: "complated",
         rights: true
     },
+    {
+        id: [
+            "eenot", 
+            "asia", 
+            "v1",
+            "modern",
+        ],
+        title: "Modern Asia",
+        author: ["trid"],
+        year: "2010",
+        languages: ["EN"],
+        gameMode: "sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2026-03-18",
+        lastUpdate: "2026-03-18",
+        hiddenScore: 100,
+        type: "sandbox",
+        period: "alternative",
+        status: "in_development",
+        rights: true
+    },
     /*{
         id: [
             "eenot", 
