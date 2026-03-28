@@ -44,6 +44,8 @@
     <script src="js/test/copyEcoPopRes.js"></script>
     <script src="js/coop/coop.js"></script>
     <script src="js/test/ads.js"></script>
+    <script src="js/scenario-utils.js"></script>
+    <script src="js/scenario-inputs.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-peer@9.11.1/simplepeer.min.js"></script>
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     <script src="page/library/modern/unique.js"></script>
@@ -289,7 +291,7 @@
             <div class="file-upload-container">
                 <div id="drop-zone" class="drop-zone">
                     <p data-translate="drag_file_here_or">Перетащите файл сюда или</p>
-                    <input type="file" id="file-input" class="file-input">
+                    <input type="file" id="file-input" class="file-input" accept="json">
                     <label for="file-input" class="file-input-label" data-translate="choose_file">Выберите файл</label>
                 </div>
                 <div id="prewi">
@@ -375,11 +377,11 @@
                     </div-->
                     
                     <div style="margin-top: 1.8em; display: flex; justify-content: center; gap: 1em; flex-wrap: wrap;">
-                        <a href="https://discord.com/channels/1299836753070395422/1430945114326306876" target="_blank" rel="noopener" style="display:inline-block; background: #2b2d31; color: #ffcc66; font-family: 'Orbitron', sans-serif; font-size: 0.9rem; padding: 0.6em 1.2em; border-radius: var(--br); text-decoration: none; transition: background 0.2s;">
-                            🌐 New War Front Server
-                        </a>
                         <a href="https://discord.com/channels/1194999547571744888/1437182510546292806" target="_blank" rel="noopener" style="display:inline-block; background: #2b2d31; color: #a985ff; font-family: 'Orbitron', sans-serif; font-size: 0.9rem; padding: 0.6em 1.2em; border-radius: var(--br); text-decoration: none; transition: background 0.2s;">
                             🪐 Saturn Server
+                        </a>
+                        <a href="https://discord.com/channels/1299836753070395422/1430945114326306876" target="_blank" rel="noopener" style="display:inline-block; background: #2b2d31; color: #ffcc66; font-family: 'Orbitron', sans-serif; font-size: 0.9rem; padding: 0.6em 1.2em; border-radius: var(--br); text-decoration: none; transition: background 0.2s;">
+                            🌐 New War Front Server
                         </a>
                     </div>
                 </div>
@@ -498,13 +500,36 @@
                     <label for="description_eelib" data-translate="description_eelib">Описание для EE Lib</label>
                     <textarea id="description_eelib" name="description_eelib" class="main-page-input"></textarea>
                 </div>
+                <div class="form-group scenariobtns">
+                    <div id="pasteparams">
+                        <h2>Paste params</h2>
+                        <b>from other scenario</b>
+                        <div class="pasteparamcheck pop"><input type="checkbox"><p>Population</p></div>
+                        <div class="pasteparamcheck inf"><input type="checkbox"><p>Infrastructure</p></div>
+                        <div class="pasteparamcheck res"><input type="checkbox"><p>Resources</p></div>
+                        <div class="pasteparamcheck rel"><input type="checkbox"><p>Relief</p></div>
+                        <div class="pasteparamcheck h2o"><input type="checkbox"><p>Water</p></div>
+                        
+                        <div id="drop-zone-pp" class="drop-zone">
+                            <p data-translate="drag_file_here_or">Перетащите файл сюда или</p>
+                            <input type="file" id="file-input-pp" class="file-input" accept="json">
+                            <label for="file-input-pp" class="file-input-label" data-translate="choose_file">Выберите файл</label>
+                        </div>
+
+                        <p id="openedForCopyFile"></p>
+
+                        <progress id="pp-progressbar" value="0" max="100"></progress>
+
+                        <button id="apply-paste-params">Apply</button>
+                    </div>
+                </div>
             </div>
         </div>
         <div id="countries" class="page pcountries">
             <div class="list-container">
                 <div class="list-header">
                     <div style="display: inline-flex;">
-                        <h2 data-translate="countries">Страны</h2><h2> - </h2><h2 id="countryCount"></h2>
+                        <h2 data-translate="countries">Страны</h2><h2 class="openScoboshka"> ( </h2><h2 id="countryCount"><h2 class="openScoboshka"> ) </h2></h2>
                     </div>
                     <div class="header-actions">
                         <div class="tooltip-container">
@@ -874,7 +899,7 @@
             <div class="list-container">
                 <div class="list-header">
                     <div style="display: inline-flex;">
-                        <h2 data-translate="events">События</h2><h2> - </h2><h2 id="eventsCount"></h2>
+                        <h2 data-translate="events">События</h2><h2 class="openScoboshka"> ( </h2><h2 id="eventsCount"><h2 class="openScoboshka"> ) </h2></h2>
                     </div>
                     <div class="header-actions">
                         <div class="tooltip-container">
@@ -2054,5 +2079,8 @@
     </body>
     <script src="js/coop/coop-connect-send.js"></script>
     <script src="js/coop/coop-connect-recive.js"></script>
+    <script>
+        window.previewContent = document.getElementById('preview-content')
+    </script>
     <link rel="stylesheet" href="css/neo/base.css">
 </html>

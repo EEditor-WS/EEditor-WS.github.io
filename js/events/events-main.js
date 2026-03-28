@@ -215,10 +215,11 @@ class EventManager {
             tr.style.cursor = 'pointer';
             tr.setAttribute('data-event-id', event.id);
             tr.addEventListener('click', (clicked) => {
-                if (clicked.target.closest('.reqs')) {
+                if (clicked.target.closest('.reqs') || clicked.target.closest('.groupsInCell')) {
                     console.log('Клик проигнорирован');
                     return; // Выходим из функции, ничего не делая
                 }
+
                 this.openEvent(event.id)
             });
 
@@ -227,7 +228,31 @@ class EventManager {
             idCell.id = `event-row-${event.id}`;
 
             const groupCell = document.createElement('td');
-            groupCell.textContent = event.group;
+            groupCell.className = 'groupsInCell';
+            //groupCell.textContent = event.group;
+
+            let groups = event.group.split(',')
+            if (groups.length == 1 && groups[0] == '') groups = []
+            groups.forEach(name => {
+                const span = document.createElement('span');
+                span.textContent = name;
+                span.className = 'group-item';
+                span.addEventListener('click', () => {
+                    const grs = window.eventManager.filters;
+                    if (!grs || !grs.groups) grs.groups = [];
+                    if (grs.groups[0] == name) {
+                        grs.groups = []
+                        delete grs.groups
+                    } else {
+                        grs.groups = [];
+                        grs.groups.push(name);
+                    }
+                    window.eventManager.updateEventsList();
+                });
+                
+                // Если нужно просто через запятую, но красиво:
+                groupCell.appendChild(span);
+            });
 
             const nameCell = document.createElement('td');
             nameCell.textContent = event.name;
@@ -237,7 +262,7 @@ class EventManager {
 
             const requirementsCell = document.createElement('td');
             requirementsCell.innerHTML = '';
-            requirementsCell.appendChild(convertObjectToReadableDOM(event.requirements));
+            requirementsCell.appendChild(convertObjectToReadableDOM(event.requirements, event.id));
             requirementsCell.className = 'reqs';
 
             window.currentOrderEvents.forEach((numer, number) => {

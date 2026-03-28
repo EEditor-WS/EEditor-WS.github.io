@@ -357,7 +357,7 @@ class CountryManager {
                     groupNames.forEach(name => {
                         const span = document.createElement('span');
                         span.textContent = name;
-                        span.className = 'group-item'; // Можно добавить стили (например, рамку или фон)
+                        span.className = 'group-item';
                         span.addEventListener('click', () => {
                             const grs = window.countryManager.filters;
                             if (!grs || !grs.groups) grs.groups = [];

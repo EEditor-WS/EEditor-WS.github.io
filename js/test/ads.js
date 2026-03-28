@@ -1,5 +1,6 @@
 const adslist = [
-//    'me2ads', 'satads'
+//    'me2ads', 
+    'satads',
     'tournamentAds'
 ];
 

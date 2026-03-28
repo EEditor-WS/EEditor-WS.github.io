@@ -3,7 +3,7 @@
     width: unset;
 }
 
-.color-inputs input {
+.color-inputs input:not(input[type="color"]) {
     width: 100%;
 }
 
@@ -15,13 +15,19 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+}
+.groupsInCell, .groupsInCellDiv {
     .group-item {
         padding: var(--dss);
         background-color: var(--bg-pri);
-        border-radius: var(--br);
-        margin-right: 1px;
+        border-radius: 99999px;
+        margin: 0 2px 2px 0;
     }
     .group-item:hover {
         background-color: var(--ac-bg);
     }
+}
+
+.list-header h2.openScoboshka {
+    margin: 0 var(--ds);
 }

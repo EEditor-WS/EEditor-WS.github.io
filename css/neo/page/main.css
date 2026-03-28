@@ -2,3 +2,48 @@
     flex-direction: row-reverse;
     align-items: unset;
 }
+
+div.form-group.scenariobtns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+#pasteparams {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-sec);
+    padding: var(--ds);
+    border-radius: var(--br);
+}
+#pasteparams h2 {
+    margin: 0;
+}
+.pasteparamcheck {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ds);
+}
+
+#apply-paste-params {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    color: var(--text-pri);
+    transition: all 0.2s ease-in-out;
+    border: none;
+    border-radius: var(--br);
+    padding: 10px 20px;
+    background-color: var(--ac-bg);
+    &:hover {
+        background-color: var(--ac-bg-hover);
+    }
+}
+
+#openedForCopyFile {
+    text-align: center;
+}
+
+#pp-progressbar {
+    margin-bottom: var(--ds);
+}

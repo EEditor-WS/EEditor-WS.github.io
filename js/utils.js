@@ -27,9 +27,9 @@ const ColorUtils = {
 
     // Проверяет корректность цвета
     isValidColor(color) {
-        return Array.isArray(color) && 
-               color.length >= 3 && 
-               color.every(c => typeof c === 'number' && c >= 0 && c <= 255);
+        return Array.isArray(color) &&
+            color.length >= 3 &&
+            color.every(c => typeof c === 'number' && c >= 0 && c <= 255);
     },
 
     // Преобразует hex в RGB массив
@@ -179,7 +179,7 @@ function convertObjectToReadableString(obj) {
     return `<div class="list-requirements-list">${html}</div>`;
 }
 
-function convertObjectToReadableDOM(obj) {
+function convertObjectToReadableDOM(obj, id) {
     if (!Array.isArray(obj)) {
         const error = document.createElement("span");
         error.style.color = "red";
@@ -236,6 +236,8 @@ function convertObjectToReadableDOM(obj) {
                         ?.scrollIntoView({ behavior: "smooth" });
                 });
             }
+
+            if (subtype == id) subtypeEl.textContent = 'this'
 
             row.append(" ");
             row.appendChild(subtypeEl);
@@ -296,26 +298,46 @@ function convertObjectToReadableDOM(obj) {
 
 
 function transformCustomEvents() {
-  let data = JSON.parse(previewContent.value);
-  let oldEvents = data.custom_events;
-  let newEvents = {};
+    let data = JSON.parse(previewContent.value);
+    let oldEvents = data.custom_events;
+    let newEvents = {};
 
-  for (let key in oldEvents) {
-    let event = oldEvents[key];
-    if (event.id) {
-      newEvents[event.id] = event;
-    } else {
-      console.log("Пропущено событие без id:", key, event);
+    for (let key in oldEvents) {
+        let event = oldEvents[key];
+        if (event.id) {
+            newEvents[event.id] = event;
+        } else {
+            console.log("Пропущено событие без id:", key, event);
+        }
     }
-  }
 
-  data.custom_events = newEvents;
+    data.custom_events = newEvents;
 
-  previewContent.value = JSON.stringify(data, null, 2);
-  window.eventManager.syncronizeWithPreview();
-  showSuccess("ID Роздан чётенько!");
+    previewContent.value = JSON.stringify(data, null, 2);
+    window.eventManager.syncronizeWithPreview();
+    showSuccess("ID Роздан чётенько!");
 
-  return data;
+    return data;
+}
+
+async function getFileContent(id) {
+    const fileInput = document.getElementById(id);
+
+    // Проверяем, что файл действительно выбран
+    if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+
+        try {
+            // Прямое чтение текста из объекта File
+            const content = await file.text();
+            console.log("Содержимое:", content);
+            return content;
+        } catch (err) {
+            console.error("Ошибка чтения:", err);
+        }
+    } else {
+        console.warn("Файл еще не выбран!");
+    }
 }
 
 function saveToPreview(data) {
@@ -325,9 +347,10 @@ function saveToPreview(data) {
 // Экспортируем утилиты
 window.ColorUtils = ColorUtils;
 window.ValidationUtils = ValidationUtils;
-window.DOMUtils = DOMUtils; 
+window.DOMUtils = DOMUtils;
+window.getFileContent = getFileContent;
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     if (new URLSearchParams(window.location.search).get('dev') === 'true') {
         document.body.classList.add('dev_mode');
         window.showInfo('Режим разработчика включён');
