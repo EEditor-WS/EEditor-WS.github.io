@@ -293,6 +293,20 @@ function convertObjectToReadableDOM(obj, id) {
         root.appendChild(row);
     });
 
+    if (obj.length > 4) {
+        const morebtn = document.createElement('button')
+        morebtn.className = 'eventsReqsMoreBtn'
+        const morebtnIco = document.createElement('img')
+        morebtnIco.src = 'img/ui/arrow/down.svg'
+        morebtn.appendChild(morebtnIco)
+
+        morebtn.addEventListener('click', () => {
+            root.classList.toggle('active')
+        })
+
+        root.appendChild(morebtn)
+    }
+
     return root;
 }
 

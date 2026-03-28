@@ -29,3 +29,24 @@
 p.eventReqEvent {
     margin: 0;
 }
+
+.list-requirements-list {
+    position: relative;
+    &.active {
+        max-height: unset;
+    }
+}
+.eventsReqsMoreBtn {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background-color: var(--bg-sec-great);
+    &:hover {
+    background-color: var(--bg-sec-great-hover);
+    }
+
+    img {
+        margin: 0;
+        aspect-ratio: 1;
+    }
+}
