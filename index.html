@@ -274,11 +274,11 @@
                             <img src="img/ui/social/peoples.svg">
                             <span data-translate="coopSync">Синхронизация совместного</span>
                         </a>
-                        <a onclick="document.getElementById('param-copy-modal').classList.add('active')" target="_blank" class="account-item">
+                        <a onclick="document.getElementById('param-copy-modal').classList.add('active')" target="_blank" class="account-item dev_thing">
                             <img src="img/ui/file/copy.svg">
                             <span data-translate="transfer_params">Перенести параметры</span>
                         </a>
-                        <a onclick="setPageZoom(parseFloat(prompt('Enter scale for zoom', localStorage.pageZoom || 100)))" target="_blank" class="account-item">
+                        <a onclick="setPageZoom(parseFloat(prompt('Enter scale for zoom', localStorage.pageZoom || 100)))" target="_blank" class="account-item dev_thing">
                             <img src="img/ui/zoom.svg">
                             <span data-translate="setPageZoom">Масштаб страницы</span>
                         </a>
@@ -521,6 +521,22 @@
                         <progress id="pp-progressbar" value="0" max="100"></progress>
 
                         <button id="apply-paste-params">Apply</button>
+                    </div>
+                    <div id="randomInputs">
+                        <h2>Join EEditor on socials</h2>
+                        <div id="social">
+                            <a href="https://discord.gg/s5JgHChaQE"><img src="img/ui/social/discord.svg"></a>
+                            <a href="https://t.me/eeditor_chanel"><img src="img/ui/social/telegram.svg"></a>
+                        </div>
+                        <div class="ricontent">
+                            <h3 data-translate="min_event_id">Minimal event ID</h3>
+                            <input type="number" id="minimalIdInput" onchange="minimumEventID = Number(document.getElementById('minimalIdInput').value)">
+                        </div>
+                        <button id="dangerZoneOpen" onclick="document.getElementById('dangerZone').classList.toggle('active')">Danger Zone</button>
+                        <div id="dangerZone">
+                            <textarea id="evalText"></textarea>
+                            <button id="evalBtn" onclick="eval(document.getElementById('evalText').value)">Run code</button>
+                        </div>
                     </div>
                 </div>
             </div>
