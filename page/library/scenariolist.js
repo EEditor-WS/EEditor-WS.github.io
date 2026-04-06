@@ -2237,7 +2237,7 @@ const scenariosData = [
             "trid",
             "eurosat",
             "v5",
-            "interbellum",
+            "interwar",
         ],
         title: "After Great War",
         author: ["trid"],
@@ -2251,7 +2251,7 @@ const scenariosData = [
         lastUpdate: "2024-03-27",
         hiddenScore: 0,
         type: "sandbox",
-        period: "interbellum",
+        period: "interwar",
         rights: true
     },
     {
@@ -3088,7 +3088,7 @@ const scenariosData = [
         lastUpdate: "2025-07-31",
         hiddenScore: 250,
         type: "historical",
-        period: "interbellum",
+        period: "interwar",
         status: "in_development",
         rights: true
     },
@@ -3111,7 +3111,7 @@ const scenariosData = [
         lastUpdate: "2025-07-31",
         hiddenScore: 250,
         type: "historical",
-        period: "interbellum",
+        period: "interwar",
         status: "in_development",
         rights: true
     },
@@ -3548,7 +3548,7 @@ const scenariosData = [
         status: "complated",
         rights: true
     },
-    /*{
+    {
         id: [
             "eenot", 
             "asia", 
@@ -3570,5 +3570,51 @@ const scenariosData = [
         period: "cw",
         status: "complated",
         rights: true
-    },*/
+    },
+    {
+        id: [
+            "eenot", 
+            "asia", 
+            "v1",
+            "mongol",
+        ],
+        title: "1279 Asia",
+        author: ["greg"],
+        year: "1279",
+        languages: ["EN"],
+        gameMode: "sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2026-04-06",
+        lastUpdate: "2026-04-06",
+        hiddenScore: 100,
+        type: "sandbox",
+        period: "ancient",
+        status: "in_development",
+        rights: true
+    },
+    {
+        id: [
+            "eenot", 
+            "asia", 
+            "v1",
+            "interwar",
+        ],
+        title: "Interwar Asia",
+        author: ["greg"],
+        year: "1919",
+        languages: ["EN"],
+        gameMode: "sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2026-04-06",
+        lastUpdate: "2026-04-06",
+        hiddenScore: 100,
+        type: "sandbox",
+        period: "interwar",
+        status: "in_development",
+        rights: true
+    },
 ]

@@ -189,4 +189,9 @@ const authorsData = {
         link: "https://discord.com/users/613275285982281728",
         color: "#3B83BD"
     },
+    greg: {
+        name: "@greg👍",
+        link: "https://discord.com/users/1395745707247407124",
+        color: "#3B83BD"
+    },
 }
