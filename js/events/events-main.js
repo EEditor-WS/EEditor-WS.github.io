@@ -938,6 +938,182 @@ generateUniqueId(minimumID = 0) {
         }
     }
 
+    // Функция сохранения требования или бонуса
+    saveRequirementOrBonus(params) {
+        const { 
+            type, 
+            isBonus, 
+            prefix = '', 
+            items = [], 
+            editor = null, 
+            updateListFn = null,
+            data = null,  // ← НОВЫЙ параметр: готовые данные {action, subtype, value, duration}
+            isClose = true,
+        } = params;
+        
+        if (!type) {
+            console.warn('Тип требования не выбран');
+            return null;
+        }
+
+        // Получаем конфигурацию типа
+        const whereReqBon = isBonus ? 'bonuses' : 'requirements';
+        const config = window.reqbonConfig[whereReqBon]?.[type];
+        
+        if (!config) {
+            console.warn(`Конфигурация не найдена для типа ${type}`);
+            return null;
+        }
+
+        // === ЧТЕНИЕ ЗНАЧЕНИЙ: приоритет у data, иначе читаем из DOM ===
+        
+        // 1. Action
+        let action = '';
+        if (!isBonus && config.action) {
+            if (data?.action !== undefined) {
+                action = data.action;
+            } else {
+                const actionEl = document.getElementById(`${prefix}requirement-action`);
+                if (actionEl) {
+                    const activeBtn = actionEl.querySelector('.action-button.active');
+                    if (activeBtn) {
+                        action = activeBtn.dataset.value;
+                    } else if (actionEl.tagName === 'SELECT' || actionEl.tagName === 'INPUT') {
+                        action = actionEl.value || '';
+                    } else {
+                        const nestedInput = actionEl.querySelector('select, input');
+                        if (nestedInput) {
+                            action = nestedInput.value || '';
+                        } else {
+                            const hiddenInput = actionEl.querySelector('.action-value');
+                            action = hiddenInput ? hiddenInput.value : '';
+                        }
+                    }
+                }
+            }
+        }
+
+        // 2. Subtype
+        let subtype = '';
+        if (config.subType !== false) {
+            if (data?.subtype !== undefined) {
+                subtype = data.subtype;
+            } else {
+                const subtypeEl = document.getElementById(`${prefix}requirement-subtype`);
+                if (subtypeEl) {
+                    if (subtypeEl.tagName === 'SELECT' || subtypeEl.tagName === 'INPUT') {
+                        subtype = subtypeEl.value || '';
+                    } else if (subtypeEl.querySelector('select, input')) {
+                        const input = subtypeEl.querySelector('select, input');
+                        subtype = input ? input.value || '' : '';
+                    } else {
+                        subtype = subtypeEl.textContent || '';
+                    }
+                }
+            }
+        }
+
+        // 3. Value
+        let value = '';
+        if (config.value !== false) {
+            if (data?.value !== undefined) {
+                value = data.value;
+            } else {
+                const valueEl = document.getElementById(`${prefix}requirement-value`);
+                if (valueEl) {
+                    if (valueEl.tagName === 'SELECT' || valueEl.tagName === 'INPUT') {
+                        value = valueEl.value || '';
+                    } else if (valueEl.querySelector('select, input')) {
+                        const input = valueEl.querySelector('select, input');
+                        value = input ? input.value || '' : '';
+                    } else {
+                        value = valueEl.textContent || '';
+                    }
+                }
+            }
+        }
+
+        // 4. Duration (только для бонусов)
+        let duration;
+        if (isBonus && config.hasDuration) {
+            if (data?.duration !== undefined) {
+                duration = data.duration;
+            } else {
+                const actualDurationInput = document.getElementById(`${prefix}requirement-duration`);
+                if (actualDurationInput) {
+                    let durationValue = actualDurationInput.value.replace(/^["']|["']$/g, '').trim();
+                    duration = parseInt(durationValue) || config?.defaultDuration || 3;
+                }
+            }
+        }
+
+        // === ВАЛИДАЦИЯ ===
+        if (!type) {
+            console.warn('Тип требования обязателен');
+            return null;
+        }
+        if (!isBonus && config.action && Array.isArray(config.action) && !action) {
+            console.warn('Action обязателен для этого типа требования', config.action);
+            return null;
+        }
+        if (config.value !== false && value === '' && value !== 0 && value !== false) {
+            console.warn('Value обязателен для этого типа требования');
+            return null;
+        }
+        if (isBonus && config.hasDuration && duration === undefined) {
+            console.warn('Duration обязателен для этого типа бонуса');
+            return null;
+        }
+
+        // === ОБРАБОТКА ТИПОВ ЗНАЧЕНИЙ ===
+        const numericTypes = ['month', 'num_of_provinces', 'year', 'turn', 'random_value', 
+            'count_of_tasks', 'tax', 'discontent', 'money', 'land_power', 'defense', 'num_of_vassals',
+            'attack', 'population_income', 'population_increase', 'building_cost', 'add_oil', 'add_cruiser', 
+            'add_random_culture_population', 'add_shock_infantry', 'add_tank', 'add_artillery',
+            'army_losses', 'prestige', 'add_battleship', 'add_infantry', 'science', 'cooldown', 
+            'num_of_players', 'has_resource', 'has_prestige', 'has_science'];
+
+        const booleanTypes = ['near_water', 'is_player', 'independent_land', 'no_enemy', 'enemy_near_capital', 'lost_capital'];
+
+        if (numericTypes.includes(type)) {
+            value = (value || '').toString().replace(/^["']|["']$/g, '').trim();
+            if (!isNaN(value) && value !== '') {
+                value = Number(value);
+            }
+        } else if (booleanTypes.includes(type)) {
+            value = value === 'true' || value === true;
+        }
+
+        // === СОЗДАНИЕ ОБЪЕКТА ===
+        const item = {
+            type,
+            ...(action && { action }),
+            ...(subtype && { subtype }),
+            value,
+            ...(isBonus && config.hasDuration && duration !== undefined && { duration })
+        };
+
+        // === ДОБАВЛЕНИЕ/ОБНОВЛЕНИЕ В МАССИВЕ ===
+        if (items && editor) {
+            const editIndex = editor.dataset.editIndex;
+            if (editIndex !== undefined) {
+                items[editIndex] = item;
+                delete editor.dataset.editIndex;
+            } else {
+                items.push(item);
+            }
+            
+            // Закрываем редактор и обновляем список
+            if (isClose) editor.classList.remove('active');
+            if (updateListFn) {
+                updateListFn();
+            }
+            this.saveChanges();
+        }
+
+        return item;
+    }
+
     updateJsonInPreview() {
         if (!this.previewContent || !this.jsonData) return;
         
@@ -1205,6 +1381,7 @@ generateUniqueId(minimumID = 0) {
                 list.appendChild(row);
             });
         };
+        window.eventManager.updateList = updateList;
 
         // Функция для обновления полей через returnPlace
         const updateValueField = () => {
@@ -1429,157 +1606,14 @@ generateUniqueId(minimumID = 0) {
         saveButton.onclick = () => {
             const type = window.cReqType.getValue();
             
-            if (!type) {
-                console.warn('Тип требования не выбран');
-                return;
-            }
-
-            // Получаем конфигурацию типа
-            const whereReqBon = isBonus ? 'bonuses' : 'requirements';
-            const config = window.reqbonConfig[whereReqBon]?.[type];
-            
-            if (!config) {
-                console.warn(`Конфигурация не найдена для типа ${type}`);
-                return;
-            }
-
-            // Получаем action
-            let action = '';
-            if (!isBonus && config.action) {
-                const actionEl = document.getElementById(`${prefix}requirement-action`);
-                if (actionEl) {
-                    // Проверяем, это кнопки или обычный input/select
-                    const activeBtn = actionEl.querySelector('.action-button.active');
-                    if (activeBtn) {
-                        // Это кнопки сравнения
-                        action = activeBtn.dataset.value;
-                        console.log('Action from button:', action);
-                    } else if (actionEl.tagName === 'SELECT' || actionEl.tagName === 'INPUT') {
-                        // Это обычный input/select
-                        action = actionEl.value || '';
-                        console.log('Action from direct element:', action, 'tagName:', actionEl.tagName);
-                    } else {
-                        // Проверяем вложенный select/input (для контейнеров)
-                        const nestedInput = actionEl.querySelector('select, input');
-                        if (nestedInput) {
-                            action = nestedInput.value || '';
-                            console.log('Action from nested element:', action, 'tagName:', nestedInput.tagName);
-                        } else {
-                            // Fallback для скрытого input (старый формат кнопок)
-                            const hiddenInput = actionEl.querySelector('.action-value');
-                            action = hiddenInput ? hiddenInput.value : '';
-                            console.log('Action from hidden input:', action);
-                        }
-                    }
-                }
-                console.log('Final action value:', action, 'config.action:', config.action);
-            }
-
-            // Получаем subtype
-            let subtype = '';
-            if (config.subType !== false) {
-                const subtypeEl = document.getElementById(`${prefix}requirement-subtype`);
-                if (subtypeEl) {
-                    // Для селектов, инпутов и других элементов
-                    if (subtypeEl.tagName === 'SELECT' || subtypeEl.tagName === 'INPUT') {
-                        subtype = subtypeEl.value || '';
-                    } else if (subtypeEl.querySelector('select, input')) {
-                        const input = subtypeEl.querySelector('select, input');
-                        subtype = input ? input.value || '' : '';
-                    } else {
-                        subtype = subtypeEl.textContent || '';
-                    }
-                }
-            }
-
-            // Получаем value
-            let value = '';
-            if (config.value !== false) {
-                const valueEl = document.getElementById(`${prefix}requirement-value`);
-                if (valueEl) {
-                    // Для селектов, инпутов и других элементов
-                    if (valueEl.tagName === 'SELECT' || valueEl.tagName === 'INPUT') {
-                        value = valueEl.value || '';
-                    } else if (valueEl.querySelector('select, input')) {
-                        const input = valueEl.querySelector('select, input');
-                        value = input ? input.value || '' : '';
-                    } else {
-                        value = valueEl.textContent || '';
-                    }
-                }
-            }
-
-            console.log('Form values:', { type, action, subtype, value, config });
-
-            // Получаем duration (только для бонусов)
-            let duration;
-            if (isBonus && config.hasDuration) {
-                const actualDurationInput = document.getElementById(`${prefix}requirement-duration`);
-                if (actualDurationInput) {
-                    let durationValue = actualDurationInput.value.replace(/^["']|["']$/g, '').trim();
-                    duration = parseInt(durationValue) || config?.defaultDuration || 3;
-                    console.log('Duration value:', duration);
-                }
-            }
-
-            // Проверяем обязательные поля
-            if (!type) {
-                console.warn('Тип требования обязателен');
-                return;
-            }
-            // Action обязателен только если это массив символов сравнения (equal, not_equal, etc)
-            if (!isBonus && config.action && Array.isArray(config.action) && !action) {
-                console.warn('Action обязателен для этого типа требования', config.action);
-                return;
-            }
-            if (config.value !== false && !value) {
-                console.warn('Value обязателен для этого типа требования. config.value:', config.value, 'value:', value);
-                return;
-            }
-            if (isBonus && config.hasDuration && !duration) {
-                console.warn('Duration обязателен для этого типа бонуса');
-                return;
-            }
-
-            // Обработка числовых и булевых типов
-            const numericTypes = ['month', 'num_of_provinces', 'year', 'turn', 'random_value', 
-                'count_of_tasks', 'tax', 'discontent', 'money', 'land_power', 'defense', 'num_of_vassals',
-                'attack', 'population_income', 'population_increase', 'building_cost', 'add_oil', 'add_cruiser', 
-                'add_random_culture_population', 'add_shock_infantry', 'add_tank', 'add_artillery',
-                'army_losses', 'prestige', 'add_battleship', 'add_infantry', 'science', 'cooldown', 'num_of_players', 'has_resource', 'has_prestige', 'has_science'];
-
-            const booleanTypes = ['near_water', 'is_player', 'independent_land', 'no_enemy', 'enemy_near_capital', 'lost_capital'];
-
-            if (numericTypes.includes(type)) {
-                value = (value || '').toString().replace(/^["']|["']$/g, '').trim();
-                if (!isNaN(value)) {
-                    value = Number(value);
-                }
-            } else if (booleanTypes.includes(type)) {
-                value = value === 'true';
-            }
-
-            const item = {
+            window.eventManager.saveRequirementOrBonus({
                 type,
-                ...(action && { action }),
-                ...(subtype && { subtype }),
-                value,
-                ...(isBonus && config.hasDuration && { duration })
-            };
-
-            console.log('Saving item:', item);
-
-            const editIndex = editor.dataset.editIndex;
-            if (editIndex !== undefined) {
-                items[editIndex] = item;
-                delete editor.dataset.editIndex;
-            } else {
-                items.push(item);
-            }
-
-            editor.classList.remove('active');
-            updateList();
-            this.saveChanges();
+                isBonus,
+                prefix,
+                items,
+                editor,
+                updateListFn: updateList
+            });
         };
 
         cancelButton.onclick = () => {

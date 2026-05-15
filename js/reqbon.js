@@ -9,7 +9,7 @@ const reqbonConfig = {
         },
         add_resource: { 
             hasDuration: false,
-            subtype: [
+            subType: [
                 'gold',
                 'iron',
                 'oil',
@@ -20,7 +20,8 @@ const reqbonConfig = {
                 'chemical_weapon',
                 'heavy_water',
                 'nuclear_weapon'
-            ]
+            ],
+            value: 'number'
         },
         add_artillery: {
             subType: false,
@@ -153,6 +154,11 @@ const reqbonConfig = {
             hasDuration: false,
             value: false
         },
+        diplomacy_get_vassal: {
+            subType: 'country',
+            hasDuration: false,
+            value: false
+        },
         diplomacy_break_alliance: {
             subType: 'country',
             hasDuration: false,
@@ -194,7 +200,7 @@ const reqbonConfig = {
             value: 'number'
         },
         relation_change: {
-            subType: false,
+            subType: 'country',
             hasDuration: true,
             value: 'number'
         },
@@ -235,7 +241,8 @@ const reqbonConfig = {
         cooldown: {
             subType: 'event',
             value: 'number',
-            action: ['more', 'less']
+            action: ['more', 'less'],
+            rightAction: ['cooldownRecivedEvent', 'cooldownNoRepeat']
         },
         count_of_tasks: {
             subType: false,
@@ -528,27 +535,118 @@ function updateValueField(type, currentValue = '') {
     // Остальная логика для других типов...
 }
 
+let additionalActions = {};
+additionalActions.addRecivedEvent = (params = {}) => {
+    const { 
+        prefix = '', 
+        answer = '',
+        eventId = window.eventManager?.currentEvent,
+        // Готовые данные (приоритет над полями формы)
+        action = 'equal',
+        subtype = 'this',    // страна
+        value = document.querySelector('select#requirement-subType').value      // событие
+    } = params;
+    
+    // Получаем массив требований ИЗ ДАННЫХ
+    const listKey = `requirements${answer ? `-${answer}` : ''}`;
+    const items = window.eventManager?.jsonData?.custom_events?.[eventId]?.[listKey] || [];
+    
+    // Получаем редактор и функцию обновления
+    const editor = document.getElementById(`${prefix}requirement-editor`);
+    const updateListFn = window.eventManager?.updateList;
+    
+    // Вызываем сохранение с готовыми данными
+    const result = window.eventManager?.saveRequirementOrBonus({
+        type: 'received_event',
+        isBonus: false,
+        prefix,
+        items,
+        editor,
+        updateListFn,
+        data: { action, subtype, value },  // ← ПЕРЕДАЁМ ДАННЫЕ НАПРЯМУЮ
+        isClose: false
+    });
+    
+    if (!result) {
+        console.warn('Не удалось сохранить received_event');
+        return null;
+    }
+    
+    return result;
+};
+additionalActions.noRepeat = (params = {}) => {
+    const { 
+        prefix = '', 
+        answer = '',
+        eventId = window.eventManager?.currentEvent,
+        // Готовые данные (приоритет над полями формы)
+        /*action = 'less',
+        subtype = document.querySelector('select#requirement-subType').value,    // событие
+        value = Number(document.querySelector('input#requirement-value').value) + 2      // длительность*/
+        action = 'not_equal',
+        subtype = 'this',
+        value = window.eventManager?.currentEvent
+    } = params;
+    
+    // Получаем массив требований ИЗ ДАННЫХ
+    const listKey = `requirements${answer ? `-${answer}` : ''}`;
+    const items = window.eventManager?.jsonData?.custom_events?.[eventId]?.[listKey] || [];
+    
+    // Получаем редактор и функцию обновления
+    const editor = document.getElementById(`${prefix}requirement-editor`);
+    const updateListFn = window.eventManager?.updateList;
+    
+    // Вызываем сохранение с готовыми данными
+    const result = window.eventManager?.saveRequirementOrBonus({
+        //type: 'cooldown',
+        type: 'received_event',
+        isBonus: false,
+        prefix,
+        items,
+        editor,
+        updateListFn,
+        data: { action, subtype, value },  // ← ПЕРЕДАЁМ ДАННЫЕ НАПРЯМУЮ
+        isClose: false
+    });
+    
+    if (!result) {
+        console.warn('Не удалось сохранить cooldown');
+        return null;
+    }
+    
+    return result;
+}
+
 
 
 // number, false, event, ideology, string
 
 // Функция для создания кнопок выбора action
-const createActionButtons = (selectedAction = '', availableActions = ['equal', 'not_equal', 'more', 'less']) => {
+const createActionButtons = (selectedAction = '', availableActions = ['equal', 'not_equal', 'more', 'less'], eventType) => {
+    const containerGreat = document.createElement('div');
+    containerGreat.id = 'requirement-actions-container';
+
     const container = document.createElement('div');
     container.className = 'action-buttons-group';
-    container.id = 'requirement-action';
+    container.id = 'requirement-action-left';
+
+    const container2 = document.createElement('div');
+    container2.className = 'action-buttons-group';
+    container2.id = 'requirement-action-right';
     
     const allActions = [
         { value: 'equal', icon: '=', title: 'Equal' },
         { value: 'not_equal', icon: '≠', title: 'Not Equal' },
         { value: 'more', icon: '>', title: 'Greater' },
-        { value: 'less', icon: '<', title: 'Less' }
+        { value: 'less', icon: '<', title: 'Less' },
+        { value: 'cooldownRecivedEvent', icon: 'Rec', title: 'Recived event', function: 'addRecivedEvent' },
+        { value: 'cooldownNoRepeat', icon: 'NR', title: 'No repeat', function: 'noRepeat' },
     ];
     
     // Фильтруем только доступные actions
     const filteredActions = allActions.filter(a => availableActions.includes(a.value));
-    
-    filteredActions.forEach(action => {
+
+    function returnActionBtn(action, isRight = false) {
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'action-button';
@@ -562,12 +660,32 @@ const createActionButtons = (selectedAction = '', availableActions = ['equal', '
         
         btn.addEventListener('click', (e) => {
             e.preventDefault();
-            container.querySelectorAll('.action-button').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+            if (isRight) {
+                additionalActions[action.function]()
+            } else {
+                container.querySelectorAll('.action-button').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            }
         });
+
+        return(btn)
+    }
+    window.returnActionBtn = returnActionBtn;
+    
+    filteredActions.forEach(action => {
+        const btn = returnActionBtn(action)
         
         container.appendChild(btn);
     });
+
+    if (eventType && reqbonConfig.requirements?.[eventType]?.rightAction) {
+        const rightFiltredActions = allActions.filter(a => reqbonConfig.requirements?.[eventType]?.rightAction.includes(a.value));
+        rightFiltredActions.forEach(action => {
+            const btn = returnActionBtn(action, true)
+            
+            container2.appendChild(btn);
+        });
+    }
     
     // Добавляем скрытый input для хранения значения
     const hiddenInput = document.createElement('input');
@@ -575,8 +693,11 @@ const createActionButtons = (selectedAction = '', availableActions = ['equal', '
     hiddenInput.className = 'action-value';
     hiddenInput.value = selectedAction;
     container.appendChild(hiddenInput);
+
+    containerGreat.appendChild(container)
+    containerGreat.appendChild(container2)
     
-    return container;
+    return containerGreat;
 };
 
 const returnPlace = (type, isBonus, place, eventId = '') => {
@@ -593,7 +714,7 @@ const returnPlace = (type, isBonus, place, eventId = '') => {
                    rb[type][place].every(v => ['equal', 'not_equal', 'more', 'less'].includes(v))) {
             // Создаем кнопки для action только если это массив символов сравнения
             console.log('Creating action buttons for:', rb[type][place]);
-            return createActionButtons('', rb[type][place]);
+            return createActionButtons('', rb[type][place], type);
         } else if (rb[type][place] == 'string') {
             // Создаем текстовое поле
             const input = document.createElement('input');
@@ -725,3 +846,6 @@ const returnPlace = (type, isBonus, place, eventId = '') => {
         }
     }
 }
+
+// Экспортируем returnPlace в глобальный объект
+window.returnPlace = returnPlace;
