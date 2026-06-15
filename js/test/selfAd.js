@@ -42,9 +42,11 @@ if (localStorage.getItem('isSelfadShowed') != true) {
     btnOpen.href = 'https://eenot-eenot.github.io/'
 
     btnClose.addEventListener('click', () => {
+        localStorage.setItem('isSelfadShowed', true)
         selfAd.remove()
     })
     headerClose.addEventListener('click', () => {
+        localStorage.setItem('isSelfadShowed', true)
         selfAd.remove()
     })
 
