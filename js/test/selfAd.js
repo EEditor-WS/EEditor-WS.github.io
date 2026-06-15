@@ -1,4 +1,4 @@
-if (localStorage.getItem('isSelfadShowed') != true) {
+if (localStorage.getItem('isSelfadShowed') != 'true') {
     const selfAd = document.createElement('div')
     const content = document.createElement('div')
     const mheader = document.createElement('div')
