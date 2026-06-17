@@ -20,7 +20,7 @@ const authorsData = {
         color: "#3B83BD"
     },
     kolkhoznik: {
-        name: "@nickolay_batsiev_suleimanov",
+        name: "@kolhoznik",
         link: "https://discord.com/users/1057029940484247682",
         color: "#3B83BD"
     },
@@ -30,7 +30,7 @@ const authorsData = {
         color: "#FF83BD"
     },
     zachary: {
-        name: "@zachary.bachary",
+        name: "@zachary",
         link: "https://discord.com/users/804839006403428423",
         color: "#3B83BD"
     },
@@ -55,7 +55,7 @@ const authorsData = {
         color: "#3B83BD"
     },
     stewardconstruct: {
-        name: "@stewardconstruct.",
+        name: "@stewardconstruct",
         link: "https://discord.com/users/1114590604668706927",
         color: "#3B83BD"
     },
@@ -69,7 +69,7 @@ const authorsData = {
         link: "https://discord.com/users/921793805915668520",
         color: "#3B83BD"
     },
-    parkourfox: {
+    parkourcat: {
         name: "@parkourfox",
         link: "https://discord.com/users/921793805915668520",
         color: "#3B83BD"
@@ -102,6 +102,96 @@ const authorsData = {
     grimreaper: {
         name: "@grimreaper54",
         link: "https://discord.com/users/720328844464357446",
+        color: "#3B83BD"
+    },
+    eeditor: {
+        name: "@EEditor",
+        link: "https://discord.gg/s5JgHChaQE",
+        color: "#efe927ff"
+    },
+    astroja: {
+        name: "@astroja",
+        link: "https://discord.com/users/714028605188997172",
+        color: "#3B83BD"
+    },
+    argentumm: {
+        name: "@argentumm",
+        link: "https://discord.com/users/1030812623232581674",
+        color: "#3B83BD"
+    },
+    eleven: {
+        name: "@eleven141",
+        link: "https://discord.com/users/913765004325572609",
+        color: "#3B83BD"
+    },
+    dener: {
+        name: "@denerfox",
+        link: "https://discord.com/users/775753842528747581",
+        color: "#3B83BD"
+    },
+    enotochel: {
+        name: "@enotochel",
+        link: "https://discord.com/users/714176620931448913",
+        color: "#3B83BD"
+    },
+    joker: {
+        name: "@1j0ker3",
+        link: "https://discord.com/users/602798356133052456",
+        color: "#3B83BD"
+    },
+    zloyhoziain: {
+        name: "@zloi_hozain",
+        link: "https://discord.com/users/962955511203000351",
+        color: "#3B83BD"
+    },
+    gray_car: {
+        name: "@gray_car",
+        link: "https://discord.com/users/1260611002240860202",
+        color: "#3B83BD"
+    },
+    fredstein: {
+        name: "@fred.stein",
+        link: "https://discord.com/users/814856713105965077",
+        color: "#3B83BD"
+    },
+    thefanfinfulo: {
+        name: "@thefanfinfulo_67965",
+        link: "https://discord.com/users/1288264777105408020",
+        color: "#3B83BD"
+    },
+    lurus: {
+        name: "@lurus",
+        link: "https://discord.com/users/764533673512927242",
+        color: "#3B83BD"
+    },
+    vova: {
+        name: "@vova_lifi_19090",
+        link: "https://discord.com/users/1376239281583951965",
+        color: "#3B83BD"
+    },
+    mat: {
+        name: "@Mat971345",
+        link: "https://discord.com/users/946593397169324094",
+        color: "#3B83BD"
+    },
+    preferablynothing: {
+        name: "@PreferablyNothing",
+        link: "https://discord.com/users/1325022120299860114",
+        color: "#3B83BD"
+    },
+    gooby: {
+        name: "@goobysilly",
+        link: "https://discord.com/users/1362516428242161856",
+        color: "#3B83BD"
+    },
+    shutkin: {
+        name: "@Andrey Shutkin",
+        link: "https://discord.com/users/613275285982281728",
+        color: "#3B83BD"
+    },
+    greg: {
+        name: "@greg👍",
+        link: "https://discord.com/users/1395745707247407124",
         color: "#3B83BD"
     },
 }

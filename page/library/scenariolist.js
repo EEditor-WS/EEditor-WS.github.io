@@ -1,31 +1,3 @@
-const inGameMaps = [
-    "jalhund_europe_vg",
-    "jaba_america_vg",
-    "parcoucat_euro4_vg",
-    "jalhund_europe",
-    "jaba_america",
-    "parcoucat_euro4",
-];
-
-const statusScores = {
-    "complate": 40,
-    "early_access": 30,
-    "in_development": 20,
-    "beta": 15,
-    "alpha": 10,
-    "experimental": 5,
-    "frozen": 0,
-    "archived": -30,
-    "discontinued": -50,
-};
-
-const awardScores = {
-    "star": 25,
-    "enot": 50,
-    "50": 25,
-    "only": 100,
-};
-
 const scenariosData = [
     {
         id: [
@@ -35,20 +7,20 @@ const scenariosData = [
             "modern-world",
         ],
         title: "Modern World",
-        author: "eenot",
+        author: ["eenot"],
         year: "2015",
         languages: ["EN", "RU"],
         gameMode: "Sandbox",
         tags: ["World", "For Phones", "Recommended", "without events", "without reforms", "Modern Day"],
-        worldCreator: "ЕЕнот",
         awards: ["star", "enot"],
         // Hidden parameters
         publishDate: "2025-01-19",
         lastUpdate: "2025-01-19",
-        hiddenScore: 50,
+        hiddenScore: 0,
         type: "sandbox",
         period: "modern",
         status: "archived",
+        rights: true
     },
     {
         id: [
@@ -58,12 +30,11 @@ const scenariosData = [
             "new-revolution",
         ],
         title: "New Revolution",
-        author: "eenot",
+        author: ["eenot"],
         year: "2022",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["Europe", "For Phones", "Recommended", "without events", "without reforms", "Alternative History"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Standart Europe",
             id: "jalhund_europe_vg"
@@ -76,6 +47,7 @@ const scenariosData = [
         type: "sandbox",
         period: "alternative",
         status: "discontinued",
+        rights: true
     },
     {
         id: [
@@ -85,12 +57,11 @@ const scenariosData = [
             "ww2",
         ],
         title: "World War 2",
-        author: "theman_the_myth_the_legend",
+        author: ["theman_the_myth_the_legend"],
         year: "1936",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "For Phones", "Recommended", "without events", "without reforms", "Historical", "WW2"],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-01-24",
@@ -98,6 +69,7 @@ const scenariosData = [
         hiddenScore: 0,
         type: "sandbox",
         period: "ww2",
+        rights: true
     },
     {
         id: [
@@ -107,12 +79,11 @@ const scenariosData = [
             "cw",
         ],
         title: "The Cold War",
-        author: "theman_the_myth_the_legend",
+        author: ["theman_the_myth_the_legend"],
         year: "1965",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "For Phones", "without events", "without reforms", "Historical", "Cold War"],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-01-24",
@@ -120,6 +91,7 @@ const scenariosData = [
         hiddenScore: 0,
         type: "sandbox",
         period: "cw",
+        rights: true
     },
     {
         id: [
@@ -129,19 +101,19 @@ const scenariosData = [
             "1984",
         ],
         title: "1984",
-        author: "helvetic_brutalisation",
+        author: ["helvetic_brutalisation"],
         year: "1984",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "For Phones", "Recommended", "without events", "without reforms", "Alternative History", "1984"],
-        worldCreator: "ЕЕнот",
         awards: ["enot"],
         // Hidden parameters
         publishDate: "2025-01-31",
         lastUpdate: "2025-01-31",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -151,12 +123,11 @@ const scenariosData = [
             "1444",
         ],
         title: "1444",
-        author: "totoska",
+        author: ["totoska"],
         year: "1444",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Medieval", "without events", "without reforms"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "EuroMagnus by Estebanf259",
             id: "estebanf259_euromagnus_v1"
@@ -167,7 +138,8 @@ const scenariosData = [
         lastUpdate: "2024-11-17",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -177,12 +149,11 @@ const scenariosData = [
             "pick-roman-empire",
         ],
         title: "The peak of the Roman Empire",
-        author: "totoska",
+        author: ["totoska"],
         year: "1177",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Roman Empire", "Ancient"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Euro4 Standart",
             id: "parkourcat_euro4_vg"
@@ -193,7 +164,8 @@ const scenariosData = [
         lastUpdate: "2024-11-20",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -203,12 +175,11 @@ const scenariosData = [
             "shw",
         ],
         title: "The Seven Hours War",
-        author: "totoska",
+        author: ["totoska"],
         year: "2000",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "Alternative History", "Half-Life", "Post-apocalyptic"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "World Plus",
             id: "shahz0d_world_v1"
@@ -219,7 +190,8 @@ const scenariosData = [
         lastUpdate: "2024-11-21",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -229,12 +201,11 @@ const scenariosData = [
             "kaiserreich",
         ],
         title: "Kaiserreich",
-        author: "totoska",
+        author: ["totoska"],
         year: "1936",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Eurasia", "Alternative History", "WW1", "Kaiserreich"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Eurasia by Zachary",
             id: "zachary_eurasia_v1"
@@ -245,7 +216,8 @@ const scenariosData = [
         lastUpdate: "2025-04-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -255,12 +227,11 @@ const scenariosData = [
             "modern",
         ],
         title: "Modern Day",
-        author: "totoska",
+        author: ["totoska"],
         year: "2020",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Eurasia", "Modern Day", "2020s"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Eurasia by Zachary",
             id: "zachary_eurasia_v1"
@@ -271,7 +242,8 @@ const scenariosData = [
         lastUpdate: "2025-04-30",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -281,12 +253,11 @@ const scenariosData = [
             "tno",
         ],
         title: "The New Order",
-        author: "totoska",
+        author: ["totoska"],
         year: "1962",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Eurasia", "Alternative History", "WW2", "The New Order", "Cold War"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Eurasia by Zachary",
             id: "zachary_eurasia_v1"
@@ -297,7 +268,8 @@ const scenariosData = [
         lastUpdate: "2024-12-17",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -307,12 +279,11 @@ const scenariosData = [
             "ww2",
         ],
         title: "World War 2",
-        author: "totoska",
+        author: ["totoska"],
         year: "1936",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "Historical", "WW2", "1936"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "World by Zachary",
             id: "zachary_world_v1"
@@ -323,7 +294,8 @@ const scenariosData = [
         lastUpdate: "2025-03-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww2"
+        period: "ww2",
+        rights: true
     },
     {
         id: [
@@ -333,12 +305,11 @@ const scenariosData = [
             "1-1",
         ],
         title: "1v1 Warnament",
-        author: "totoska",
+        author: ["totoska"],
         year: "0",
         languages: ["EN"],
         gameMode: "Battle",
         tags: ["PvP", "Battle", "1v1", "Competitive"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "PvP map by Енотий",
             id: "enotochel_pvp_v1"
@@ -349,7 +320,8 @@ const scenariosData = [
         lastUpdate: "2024-12-23",
         hiddenScore: 0,
         type: "battle",
-        period: ""
+        period: "",
+        rights: true
     },
     {
         id: [
@@ -359,12 +331,11 @@ const scenariosData = [
             "1-1-watcher",
         ],
         title: "1v1 Warnament (+Watcher)",
-        author: "totoska",
+        author: ["totoska"],
         year: "0",
         languages: ["EN"],
         gameMode: "Battle",
         tags: ["PvP", "Battle", "1v1", "Competitive", "Spectator"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "PvP map by Енотий",
             id: "enotochel_pvp_v1"
@@ -375,7 +346,8 @@ const scenariosData = [
         lastUpdate: "2024-12-23",
         hiddenScore: 0,
         type: "battle",
-        period: ""
+        period: "",
+        rights: true
     },
     {
         id: [
@@ -385,12 +357,11 @@ const scenariosData = [
             "cw",
         ],
         title: "The Cold War",
-        author: "esteban",
+        author: ["esteban"],
         year: "1949",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "Historical", "Cold War", "Redux"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "World Map Redux",
             id: "estebanf259_world-redux_v2"
@@ -401,7 +372,8 @@ const scenariosData = [
         lastUpdate: "2023-07-03",
         hiddenScore: 0,
         type: "sandbox",
-        period: "cw"
+        period: "cw",
+        rights: true
     },
     {
         id: [
@@ -411,12 +383,11 @@ const scenariosData = [
             "modern",
         ],
         title: "Modern Day",
-        author: "esteban",
+        author: ["esteban"],
         year: "2000",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "Modern Day", "Redux", "2000s"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "World Map Redux",
             id: "estebanf259_world-redux_v2"
@@ -427,7 +398,8 @@ const scenariosData = [
         lastUpdate: "2023-07-03",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -437,12 +409,11 @@ const scenariosData = [
             "hoi4-formables",
         ],
         title: "Hoi4 Formables",
-        author: "esteban",
+        author: ["esteban"],
         year: "1936",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "WW2", "Hearts of Iron", "Formable Nations", "Redux"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "World Map Redux",
             id: "estebanf259_world-redux_v2"
@@ -453,7 +424,8 @@ const scenariosData = [
         lastUpdate: "2023-11-10",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww2"
+        period: "ww2",
+        rights: true
     },
     {
         id: [
@@ -463,12 +435,11 @@ const scenariosData = [
             "1218",
         ],
         title: "1218",
-        author: "esteban",
+        author: ["esteban"],
         year: "1218",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "Historical", "Medieval", "Redux", "13th Century"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "World Map Redux",
             id: "estebanf259_world-redux_v2"
@@ -479,7 +450,8 @@ const scenariosData = [
         lastUpdate: "2023-07-03",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -489,12 +461,11 @@ const scenariosData = [
             "1756",
         ],
         title: "1756",
-        author: "esteban",
+        author: ["esteban"],
         year: "1756",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "Historical", "18th Century", "Redux"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "World Map Redux",
             id: "estebanf259_world-redux_v2"
@@ -505,7 +476,8 @@ const scenariosData = [
         lastUpdate: "2023-07-03",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -515,12 +487,11 @@ const scenariosData = [
             "continents",
         ],
         title: "World 3g ago",
-        author: "zachary",
+        author: ["zachary"],
         year: "-3000000000",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "Historical", "Prehistoric", "Geology", "Continents"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "World Map (3 billion years ago)",
             id: "zachary_world-3ga_v1"
@@ -531,7 +502,8 @@ const scenariosData = [
         lastUpdate: "2025-04-09",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -541,12 +513,11 @@ const scenariosData = [
             "1800"
         ],
         title: "Europe 1800",
-        author: "zachary",
+        author: ["zachary"],
         year: "1800",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Eurasia", "Historical", "Napoleonic Era", "19th Century"],
-        worldCreator: "Zachary",
         map: {
             name: "Eurasia by Zachary",
             id: "zachary_eurasia_v2"
@@ -556,7 +527,8 @@ const scenariosData = [
         lastUpdate: "2025-03-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -566,12 +538,11 @@ const scenariosData = [
             "1812"
         ],
         title: "Napoleonic Wars",
-        author: "zachary",
+        author: ["zachary"],
         year: "1812",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Eurasia", "Historical", "Napoleonic Wars", "19th Century"],
-        worldCreator: "Zachary",
         map: {
             name: "Eurasia by Zachary",
             id: "zachary_eurasia_v2"
@@ -581,7 +552,8 @@ const scenariosData = [
         lastUpdate: "2025-03-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -591,12 +563,11 @@ const scenariosData = [
             "1939"
         ],
         title: "World War 2 Start",
-        author: "zachary",
+        author: ["zachary"],
         year: "1939",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Eurasia", "Historical", "WW2", "20th Century"],
-        worldCreator: "Zachary",
         map: {
             name: "Eurasia by Zachary",
             id: "zachary_eurasia_v2"
@@ -606,7 +577,8 @@ const scenariosData = [
         lastUpdate: "2025-03-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww2"
+        period: "ww2",
+        rights: true
     },
     {
         id: [
@@ -616,12 +588,11 @@ const scenariosData = [
             "ep2"
         ],
         title: "Episode 2",
-        author: "zachary",
+        author: ["zachary"],
         year: "2025",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Eurasia", "Alternative History", "Future", "Episode 2"],
-        worldCreator: "Zachary",
         map: {
             name: "Eurasia by Zachary",
             id: "zachary_eurasia_v2"
@@ -631,7 +602,8 @@ const scenariosData = [
         lastUpdate: "2025-03-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -641,12 +613,11 @@ const scenariosData = [
             "ep3"
         ],
         title: "Episode 3",
-        author: "zachary",
+        author: ["zachary"],
         year: "2025",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Eurasia", "Alternative History", "Future", "Episode 3"],
-        worldCreator: "Zachary",
         map: {
             name: "Eurasia by Zachary",
             id: "zachary_eurasia_v2"
@@ -656,7 +627,8 @@ const scenariosData = [
         lastUpdate: "2025-03-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -666,12 +638,11 @@ const scenariosData = [
             "ep4"
         ],
         title: "Episode 4",
-        author: "zachary",
+        author: ["zachary"],
         year: "2025",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Eurasia", "Alternative History", "Future", "Episode 4"],
-        worldCreator: "Zachary",
         map: {
             name: "Eurasia by Zachary",
             id: "zachary_eurasia_v2"
@@ -681,7 +652,8 @@ const scenariosData = [
         lastUpdate: "2025-03-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -691,12 +663,11 @@ const scenariosData = [
             "fac"
         ],
         title: "Fall of Constantinople",
-        author: "zachary",
+        author: ["zachary"],
         year: "2077",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Eurasia", "Post-apocalyptic", "Fallout", "Alternative History"],
-        worldCreator: "Zachary",
         map: {
             name: "Eurasia by Zachary",
             id: "zachary_eurasia_v2"
@@ -706,7 +677,8 @@ const scenariosData = [
         lastUpdate: "2025-03-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "future"
+        period: "future",
+        rights: true
     },
     {
         id: [
@@ -716,12 +688,11 @@ const scenariosData = [
             "ww1"
         ],
         title: "World War 1",
-        author: "zachary",
+        author: ["zachary"],
         year: "1914",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Eurasia", "Historical", "WW1", "20th Century"],
-        worldCreator: "Zachary",
         map: {
             name: "Eurasia by Zachary",
             id: "zachary_eurasia_v2"
@@ -731,7 +702,8 @@ const scenariosData = [
         lastUpdate: "2025-03-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww1"
+        period: "ww1",
+        rights: true
     },
     {
         id: [
@@ -741,12 +713,11 @@ const scenariosData = [
             "nw"
         ],
         title: "Napoleonic War",
-        author: "zachary",
+        author: ["zachary"],
         year: "2025",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Eurasia", "Alternative History", "Nuclear War", "Post-apocalyptic"],
-        worldCreator: "Zachary",
         map: {
             name: "Eurasia by Zachary",
             id: "zachary_eurasia_v2"
@@ -756,7 +727,8 @@ const scenariosData = [
         lastUpdate: "2025-03-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -766,12 +738,11 @@ const scenariosData = [
             "islam"
         ],
         title: "Islamic World",
-        author: "zachary",
+        author: ["zachary"],
         year: "632",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "Historical", "Islam", "7th Century", "Medieval"],
-        worldCreator: "Zachary",
         map: {
             name: "World by Zachary",
             id: "zachary_world_v1"
@@ -781,7 +752,8 @@ const scenariosData = [
         lastUpdate: "2025-03-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -791,12 +763,11 @@ const scenariosData = [
             "revolutionary-war"
         ],
         title: "American Revolution",
-        author: "zachary",
+        author: ["zachary"],
         year: "1776",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "Historical", "American Revolution", "18th Century"],
-        worldCreator: "Zachary",
         map: {
             name: "World by Zachary",
             id: "zachary_world_v1"
@@ -806,7 +777,8 @@ const scenariosData = [
         lastUpdate: "2025-03-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -816,12 +788,11 @@ const scenariosData = [
             "ww1"
         ],
         title: "World War 1",
-        author: "zachary",
+        author: ["zachary"],
         year: "1914",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "Historical", "WW1", "20th Century"],
-        worldCreator: "Zachary",
         map: {
             name: "World by Zachary",
             id: "zachary_world_v1"
@@ -831,7 +802,8 @@ const scenariosData = [
         lastUpdate: "2025-03-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww1"
+        period: "ww1",
+        rights: true
     },
     {
         id: [
@@ -841,12 +813,11 @@ const scenariosData = [
             "ww2z"
         ],
         title: "World War 2",
-        author: "zachary",
+        author: ["zachary"],
         year: "1936",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "Alternative History", "WW2", "Zombies"],
-        worldCreator: "Zachary",
         map: {
             name: "World by Zachary",
             id: "zachary_world_v1"
@@ -856,7 +827,8 @@ const scenariosData = [
         lastUpdate: "2025-03-27",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww2"
+        period: "ww2",
+        rights: true
     },
     {
         id: [
@@ -866,12 +838,11 @@ const scenariosData = [
             "2025"
         ],
         title: "USA 2025",
-        author: "zachary",
+        author: ["zachary"],
         year: "2025",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["USA", "Modern Day", "2025"],
-        worldCreator: "Zachary",
         map: {
             name: "USA by Zachary",
             id: "zachary_usa_v1"
@@ -881,7 +852,8 @@ const scenariosData = [
         lastUpdate: "2025-01-21",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -891,12 +863,11 @@ const scenariosData = [
             "civil"
         ],
         title: "American Civil War",
-        author: "zachary",
+        author: ["zachary"],
         year: "1861",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["USA", "Historical", "Civil War", "19th Century"],
-        worldCreator: "Zachary",
         map: {
             name: "USA by Zachary",
             id: "zachary_usa_v1"
@@ -906,7 +877,8 @@ const scenariosData = [
         lastUpdate: "2025-02-02",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -916,12 +888,11 @@ const scenariosData = [
             "ethnic"
         ],
         title: "USA Ethnic Map",
-        author: "zachary",
+        author: ["zachary"],
         year: "2020",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["USA", "Modern Day", "Ethnic Groups", "Demographics"],
-        worldCreator: "Zachary",
         map: {
             name: "USA by Zachary",
             id: "zachary_usa_v1"
@@ -931,7 +902,8 @@ const scenariosData = [
         lastUpdate: "2025-01-23",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -941,12 +913,11 @@ const scenariosData = [
             "kaiserreich",
         ],
         title: "Kaiserreich",
-        author: "totska",
+        author: ["totska"],
         year: "1936",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "Alternative History", "Kaiserreich"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "World by Zachary",
             id: "zachary_world_v1"
@@ -957,7 +928,8 @@ const scenariosData = [
         lastUpdate: "2025-04-14",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -967,12 +939,11 @@ const scenariosData = [
             "kalterkrieg",
         ],
         title: "Kalterkrieg",
-        author: "totska",
+        author: ["totska"],
         year: "1948",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "Alternative History", "Kalterkrieg"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "World by Zachary",
             id: "zachary_world_v1"
@@ -983,7 +954,8 @@ const scenariosData = [
         lastUpdate: "2025-04-14",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -993,12 +965,11 @@ const scenariosData = [
             "1941",
         ],
         title: "Великая Отечественная Война",
-        author: "pelo",
+        author: ["pelo"],
         year: "1941",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "WW2", "1941"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Standart Europe",
             id: "jalhund_europe_vg"
@@ -1009,7 +980,8 @@ const scenariosData = [
         lastUpdate: "2024-07-01",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww2"
+        period: "ww2",
+        rights: true
     },
     {
         id: [
@@ -1019,12 +991,11 @@ const scenariosData = [
             "modern-ru",
         ],
         title: "Современный Мир",
-        author: "pelo",
+        author: ["pelo"],
         year: "2020",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Modern", "2020"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Standart Europe",
             id: "jalhund_europe_vg"
@@ -1035,7 +1006,8 @@ const scenariosData = [
         lastUpdate: "2024-06-14",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -1045,12 +1017,11 @@ const scenariosData = [
             "modern-en",
         ],
         title: "Modern World",
-        author: "pelo",
+        author: ["pelo"],
         year: "2020",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Modern", "2020"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Standart Europe",
             id: "jalhund_europe_vg"
@@ -1061,7 +1032,8 @@ const scenariosData = [
         lastUpdate: "2024-06-14",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -1071,12 +1043,11 @@ const scenariosData = [
             "1985",
         ],
         title: "Холодная Война",
-        author: "pelo",
+        author: ["pelo"],
         year: "1985",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Standart Europe",
             id: "jalhund_europe_vg"
@@ -1087,7 +1058,8 @@ const scenariosData = [
         lastUpdate: "2024-07-01",
         hiddenScore: 0,
         type: "sandbox",
-        period: "cw"
+        period: "cw",
+        rights: true
     },
     {
         id: [
@@ -1097,12 +1069,11 @@ const scenariosData = [
             "nw-ru",
         ],
         title: "Северная Война",
-        author: "pelo",
+        author: ["pelo"],
         year: "1700",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Standart Europe",
             id: "jalhund_europe_vg"
@@ -1113,7 +1084,8 @@ const scenariosData = [
         lastUpdate: "2024-04-12",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1123,12 +1095,11 @@ const scenariosData = [
             "nw-en",
         ],
         title: "Northern War",
-        author: "pelo",
+        author: ["pelo"],
         year: "1700",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Standart Europe",
             id: "jalhund_europe_vg"
@@ -1139,7 +1110,8 @@ const scenariosData = [
         lastUpdate: "2024-04-12",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1149,12 +1121,11 @@ const scenariosData = [
             "hsb",
         ],
         title: "Эллада наносит ответный удар",
-        author: "pelo",
+        author: ["pelo"],
         year: "-323",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Ancient"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Euro4 Standart",
             id: "parkourcat_euro4_vg"
@@ -1165,7 +1136,8 @@ const scenariosData = [
         lastUpdate: "2024-02-03",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1175,12 +1147,11 @@ const scenariosData = [
             "1996",
         ],
         title: "Arstotzka World - 1996",
-        author: "eenot",
+        author: ["eenot"],
         year: "1996",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "For Phones", "Recommended", "without events", "without reforms"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "World by ЕЕнот",
             id: "eenot_arstotzka_v2"
@@ -1192,6 +1163,7 @@ const scenariosData = [
         hiddenScore: 0,
         type: "sandbox",
         period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -1201,7 +1173,7 @@ const scenariosData = [
             "modern",
         ],
         title: "World According to Americans",
-        author: "zachary",
+        author: ["zachary"],
         year: "2026",
         languages: ["EN"],
         gameMode: "Sandbox",
@@ -1216,7 +1188,8 @@ const scenariosData = [
         lastUpdate: "2025-02-21",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -1226,7 +1199,7 @@ const scenariosData = [
             "ru",
         ],
         title: "Мир, со слов русских",
-        author: "eenot",
+        author: ["eenot"],
         year: "2026",
         languages: ["RU"],
         gameMode: "Sandbox",
@@ -1241,7 +1214,8 @@ const scenariosData = [
         lastUpdate: "2025-03-26",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -1251,12 +1225,11 @@ const scenariosData = [
             "1990",
         ],
         title: "Moldavia - 1990",
-        author: "eenot",
+        author: ["eenot"],
         year: "1990",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["For Phones", "without events", "without reforms", "Modern Day"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Moldavia by ЕЕнот",
             id: "eenot_moldavia_v1"
@@ -1269,6 +1242,7 @@ const scenariosData = [
         type: "sandbox",
         period: "modern",
         status: "in_development",
+        rights: true
     },
     {
         id: [
@@ -1278,12 +1252,11 @@ const scenariosData = [
             "2025",
         ],
         title: "Moldavia - 2025",
-        author: "eenot",
+        author: ["eenot"],
         year: "2025",
         languages: ["EN","RU"],
         gameMode: "Sandbox",
         tags: ["For Phones", "without events", "without reforms", "Modern Day"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Moldavia by ЕЕнот",
             id: "eenot_moldavia_v1"
@@ -1296,6 +1269,7 @@ const scenariosData = [
         type: "sandbox",
         period: "modern",
         status: "in_development",
+        rights: true
     },
     {
         id: [
@@ -1305,12 +1279,11 @@ const scenariosData = [
             "1941",
         ],
         title: "Moldavia - 1941",
-        author: "eenot",
+        author: ["eenot"],
         year: "1941",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["For Phones", "without events", "without reforms", "World War 2"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Moldavia by ЕЕнот",
             id: "eenot_moldavia_v1"
@@ -1323,6 +1296,7 @@ const scenariosData = [
         type: "sandbox",
         period: "ww2",
         status: "in_development",
+        rights: true
     },
     {
         id: [
@@ -1332,12 +1306,11 @@ const scenariosData = [
             "1944",
         ],
         title: "Moldavia - 1944",
-        author: "eenot",
+        author: ["eenot"],
         year: "1944",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["For Phones", "without events", "without reforms", "World War 2"],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Moldavia by ЕЕнот",
             id: "eenot_moldavia_v1"
@@ -1350,6 +1323,7 @@ const scenariosData = [
         type: "sandbox",
         period: "ww2",
         status: "in_development",
+        rights: true
     },
     {
         id: [
@@ -1359,19 +1333,19 @@ const scenariosData = [
             "ww1",
         ],
         title: "World War 1",
-        author: "totoska",
+        author: ["totoska"],
         year: "1914",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["World", "Historical", "WW1"],
-        worldCreator: "ЕЕнот",
         awards: ["star","enot"],
         // Hidden parameters
         publishDate: "2025-05-01",
         lastUpdate: "2025-05-01",
         hiddenScore: 10,
         type: "sandbox",
-        period: "ww1"
+        period: "ww1",
+        rights: true
     },
     {
         id: [
@@ -1381,12 +1355,11 @@ const scenariosData = [
             "1444-atharva",
         ],
         title: "1444",
-        author: "atharva",
+        author: ["atharva"],
         year: "1444",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Europe+ by BluePum",
             id: "bluepum_enaatme_v2"
@@ -1397,7 +1370,8 @@ const scenariosData = [
         lastUpdate: "2025-04-30",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1407,12 +1381,11 @@ const scenariosData = [
             "modern-atharva",
         ],
         title: "Modern",
-        author: "atharva",
+        author: ["atharva"],
         year: "2025",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Europe+ by BluePum",
             id: "bluepum_enaatme_v5"
@@ -1423,7 +1396,8 @@ const scenariosData = [
         lastUpdate: "2025-05-20",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -1433,12 +1407,11 @@ const scenariosData = [
             "fc",
         ],
         title: "First coalition of france",
-        author: "atharva",
+        author: ["atharva"],
         year: "1792",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Europe+ by BluePum",
             id: "bluepum_enaatme_v2"
@@ -1449,7 +1422,8 @@ const scenariosData = [
         lastUpdate: "2025-04-30",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1459,12 +1433,11 @@ const scenariosData = [
             "1991",
         ],
         title: "1991",
-        author: "atharva",
+        author: ["atharva"],
         year: "2025",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Europe+ by BluePum",
             id: "bluepum_enaatme_v4"
@@ -1475,7 +1448,8 @@ const scenariosData = [
         lastUpdate: "2025-05-03",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -1485,12 +1459,11 @@ const scenariosData = [
             "ww1",
         ],
         title: "World War 1",
-        author: "bluepum",
+        author: ["bluepum"],
         year: "1914",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Europe+ by BluePum",
             id: "bluepum_enaatme_v5"
@@ -1501,7 +1474,8 @@ const scenariosData = [
         lastUpdate: "2025-05-15",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww1"
+        period: "ww1",
+        rights: true
     },
     {
         id: [
@@ -1511,12 +1485,11 @@ const scenariosData = [
             "ww2",
         ],
         title: "World War 2",
-        author: "radardev",
+        author: ["radardev"],
         year: "1936",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Europe+ by BluePum",
             id: "bluepum_enaatme_v1"
@@ -1527,7 +1500,8 @@ const scenariosData = [
         lastUpdate: "2025-04-27",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww2"
+        period: "ww2",
+        rights: true
     },
     {
         id: [
@@ -1537,12 +1511,11 @@ const scenariosData = [
             "cw",
         ],
         title: "Cold War",
-        author: "zachary",
+        author: ["zachary"],
         year: "1964",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Europe+ by BluePum",
             id: "bluepum_enaatme_v2"
@@ -1553,7 +1526,8 @@ const scenariosData = [
         lastUpdate: "2025-04-29",
         hiddenScore: 0,
         type: "sandbox",
-        period: "cw"
+        period: "cw",
+        rights: true
     },
     {
         id: [
@@ -1562,13 +1536,12 @@ const scenariosData = [
             "v1",
             "2022",
         ],
-        title: "Dead Hand | Aftermath of WW3",
-        author: "zachary",
+        title: "Dead Hand (EVENTS)",
+        author: ["zachary"],
         year: "2022",
         languages: ["EN"],
         gameMode: "Historical",
         tags: [],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Dead Hand by BluePum",
             id: "zachary_deadhand_v1"
@@ -1577,9 +1550,10 @@ const scenariosData = [
         // Hidden parameters
         publishDate: "2025-05-07",
         lastUpdate: "2025-05-07",
-        hiddenScore: 0,
+        hiddenScore: 75,
         type: "historical",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -1589,12 +1563,11 @@ const scenariosData = [
             "ww2",
         ],
         title: "World War 2",
-        author: "bluepum",
+        author: ["bluepum"],
         year: "1936",
         languages: ["EN", "RU"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Europe+ by BluePum",
             id: "bluepum_enaatme_v2"
@@ -1605,7 +1578,8 @@ const scenariosData = [
         lastUpdate: "2025-05-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww2"
+        period: "ww2",
+        rights: true
     },
     {
         id: [
@@ -1615,12 +1589,11 @@ const scenariosData = [
             "1683",
         ],
         title: "Great Turkish War",
-        author: "bluepum",
+        author: ["bluepum"],
         year: "1683",
         languages: ["EN", "RU"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Europe+ by BluePum",
             id: "bluepum_enaatme_v5"
@@ -1631,7 +1604,8 @@ const scenariosData = [
         lastUpdate: "2025-05-16",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1641,19 +1615,19 @@ const scenariosData = [
             "ww1",
         ],
         title: "World War 1",
-        author: "stewardconstruct",
+        author: ["stewardconstruct"],
         year: "1914",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-05-07",
         lastUpdate: "2025-05-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww1"
+        period: "ww1",
+        rights: true
     },
     {
         id: [
@@ -1663,19 +1637,19 @@ const scenariosData = [
             "1941",
         ],
         title: "1941",
-        author: "bluepum",
+        author: ["bluepum"],
         year: "1914",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-06-05",
         lastUpdate: "2025-06-05",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww2"
+        period: "ww2",
+        rights: true
     },
     {
         id: [
@@ -1685,12 +1659,11 @@ const scenariosData = [
             "ww2",
         ],
         title: "World War 2",
-        author: "stewardconstruct",
+        author: ["stewardconstruct"],
         year: "1936",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Europe (Our Empire)",
             id: "stewardconstruct_europe_v1"
@@ -1701,7 +1674,8 @@ const scenariosData = [
         lastUpdate: "2025-05-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww2"
+        period: "ww2",
+        rights: true
     },
     {
         id: [
@@ -1711,12 +1685,11 @@ const scenariosData = [
             "napoleon",
         ],
         title: "Napoleonic Wars",
-        author: "stewardconstruct",
+        author: ["stewardconstruct"],
         year: "1812",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         map: {
             name: "Europe (Our Empire)",
             id: "stewardconstruct_europe_v1"
@@ -1727,7 +1700,8 @@ const scenariosData = [
         lastUpdate: "2025-05-14",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1737,19 +1711,19 @@ const scenariosData = [
             "regions",
         ],
         title: "Regions of Serbia",
-        author: "stewardconstruct",
+        author: ["stewardconstruct"],
         year: "2025",
         languages: ["other"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-03-15",
         lastUpdate: "2025-03-15",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -1759,12 +1733,11 @@ const scenariosData = [
             "modern",
         ],
         title: "West Balkans / Yugoslavia",
-        author: "stewardconstruct",
+        author: ["stewardconstruct"],
         year: "2025",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-03-19",
@@ -1772,7 +1745,8 @@ const scenariosData = [
         hiddenScore: -250,
         type: "sandbox",
         period: "modern",
-        status: "discontinued"
+        status: "discontinued",
+        rights: true
     },
     {
         id: [
@@ -1782,19 +1756,19 @@ const scenariosData = [
             "corinthian-war",
         ],
         title: "Коринфская война",
-        author: "pelo",
+        author: ["pelo"],
         year: "-395",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Ancient"],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-06-09",
         lastUpdate: "2024-06-09",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1804,19 +1778,19 @@ const scenariosData = [
             "corinthian-war-en",
         ],
         title: "Corinthian War",
-        author: "pelo",
+        author: ["pelo"],
         year: "-395",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Ancient"],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-06-09",
         lastUpdate: "2024-06-09",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1826,19 +1800,19 @@ const scenariosData = [
             "persiainvasion-war",
         ],
         title: "Греко-Персидская война",
-        author: "pelo",
+        author: ["pelo"],
         year: "-480",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Ancient"],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-06-07",
         lastUpdate: "2024-06-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1848,19 +1822,19 @@ const scenariosData = [
             "persiainvasion-war-en",
         ],
         title: "Greek-Persian war",
-        author: "pelo",
+        author: ["pelo"],
         year: "-480",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Ancient"],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-06-07",
         lastUpdate: "2024-06-07",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1870,19 +1844,19 @@ const scenariosData = [
             "macedonia",
         ],
         title: "Начало возвышения Македонии",
-        author: "pelo",
+        author: ["pelo"],
         year: "-355",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Ancient"],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-06-29",
         lastUpdate: "2024-06-29",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1892,19 +1866,19 @@ const scenariosData = [
             "macedonia-en",
         ],
         title: "Rise of Macedonia",
-        author: "pelo",
+        author: ["pelo"],
         year: "-355",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Ancient"],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-06-29",
         lastUpdate: "2024-06-29",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1914,19 +1888,19 @@ const scenariosData = [
             "peloponessian-war",
         ],
         title: "Пелопонесская война",
-        author: "pelo",
+        author: ["pelo"],
         year: "-431",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Ancient"],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-06-08",
         lastUpdate: "2024-06-08",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1936,19 +1910,19 @@ const scenariosData = [
             "peloponessian-war-en",
         ],
         title: "Peloponese War",
-        author: "pelo",
+        author: ["pelo"],
         year: "-431",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Ancient"],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-06-08",
         lastUpdate: "2024-06-08",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1958,19 +1932,19 @@ const scenariosData = [
             "latins",
         ],
         title: "Rule of Latins",
-        author: "grimreaper",
+        author: ["grimreaper"],
         year: "1204",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Ancient"],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-12-17",
         lastUpdate: "2024-12-17",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -1980,19 +1954,19 @@ const scenariosData = [
             "latins-ru",
         ],
         title: "Господство Латинов",
-        author: "eenot",
+        author: ["eenot"],
         year: "1204",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["Europe", "Historical", "Ancient"],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-12-17",
         lastUpdate: "2024-12-17",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -2002,19 +1976,19 @@ const scenariosData = [
             "!",
         ],
         title: "Archangelsk",
-        author: "trid",
+        author: ["trid"],
         year: "2009",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: ["Russia", "Modern Day", "Archangelsk"],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-02-04",
         lastUpdate: "2024-02-04",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -2024,19 +1998,19 @@ const scenariosData = [
             "1328",
         ],
         title: "1328",
-        author: "chuckcha",
+        author: ["chuckcha"],
         year: "1328",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2023-11-21",
         lastUpdate: "2023-11-21",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -2046,19 +2020,19 @@ const scenariosData = [
             "1444",
         ],
         title: "1444",
-        author: "jaba",
+        author: ["jaba"],
         year: "1444",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-02-24",
         lastUpdate: "2024-02-24",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -2068,19 +2042,19 @@ const scenariosData = [
             "1444",
         ],
         title: "1444 Asia",
-        author: "jaba",
+        author: ["jaba"],
         year: "1444",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-02-23",
         lastUpdate: "2024-02-23",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -2090,19 +2064,19 @@ const scenariosData = [
             "1904",
         ],
         title: "Russo-Japanese War (generals)",
-        author: "jaba",
+        author: ["jaba"],
         year: "1904",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-03-19",
         lastUpdate: "2024-03-19",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -2112,19 +2086,19 @@ const scenariosData = [
             "1945",
         ],
         title: "1945 Asia",
-        author: "jaba",
+        author: ["jaba"],
         year: "1945",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-03-19",
         lastUpdate: "2024-03-19",
         hiddenScore: 0,
         type: "sandbox",
-        period: "cw"
+        period: "cw",
+        rights: true
     },
     {
         id: [
@@ -2134,19 +2108,19 @@ const scenariosData = [
             "ww2",
         ],
         title: "World War 2 in Asia",
-        author: "jaba",
+        author: ["jaba"],
         year: "1936",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-04-22",
         lastUpdate: "2024-04-22",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww2"
+        period: "ww2",
+        rights: true
     },
     {
         id: [
@@ -2156,19 +2130,19 @@ const scenariosData = [
             "!",
         ],
         title: "LP-16 by Jalhund",
-        author: "jalhund",
+        author: ["jalhund"],
         year: "0",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2023-06-12",
         lastUpdate: "2023-06-12",
         hiddenScore: 0,
         type: "sandbox",
-        period: "other"
+        period: "other",
+        rights: true
     },
     {
         id: [
@@ -2178,19 +2152,19 @@ const scenariosData = [
             "modern",
         ],
         title: "Modern Europe",
-        author: "trid",
+        author: ["trid"],
         year: "2023",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: ["enot", "star"],
         // Hidden parameters
         publishDate: "2024-03-27",
         lastUpdate: "2024-04-06",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -2200,19 +2174,19 @@ const scenariosData = [
             "ww1",
         ],
         title: "World War I",
-        author: "trid",
+        author: ["trid"],
         year: "1914",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: ["enot", "star"],
         // Hidden parameters
         publishDate: "2024-03-27",
         lastUpdate: "2024-04-06",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww1"
+        period: "ww1",
+        rights: true
     },
     {
         id: [
@@ -2222,19 +2196,19 @@ const scenariosData = [
             "ww2",
         ],
         title: "World War II",
-        author: "trid",
+        author: ["trid"],
         year: "1936",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: ["enot", "star"],
         // Hidden parameters
         publishDate: "2024-03-27",
         lastUpdate: "2024-04-06",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ww2"
+        period: "ww2",
+        rights: true
     },
     {
         id: [
@@ -2244,41 +2218,41 @@ const scenariosData = [
             "1444",
         ],
         title: "1444",
-        author: "trid",
+        author: ["trid"],
         year: "1444",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-03-27",
         lastUpdate: "2024-03-27",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
             "trid",
             "eurosat",
             "v5",
-            "interbellum",
+            "interwar",
         ],
         title: "After Great War",
-        author: "trid",
+        author: ["trid"],
         year: "1917",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-03-27",
         lastUpdate: "2024-03-27",
         hiddenScore: 0,
         type: "sandbox",
-        period: "interbellum"
+        period: "interwar",
+        rights: true
     },
     {
         id: [
@@ -2288,19 +2262,19 @@ const scenariosData = [
             "tno",
         ],
         title: "The New Order",
-        author: "trid",
+        author: ["trid"],
         year: "1950",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: ["enot"],
         // Hidden parameters
         publishDate: "2024-03-27",
         lastUpdate: "2024-03-27",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2310,19 +2284,19 @@ const scenariosData = [
             "cw",
         ],
         title: "Iron Certains",
-        author: "trid",
+        author: ["trid"],
         year: "1955",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-03-27",
         lastUpdate: "2024-03-27",
         hiddenScore: 0,
         type: "sandbox",
-        period: "cw"
+        period: "cw",
+        rights: true
     },
     {
         id: [
@@ -2332,19 +2306,19 @@ const scenariosData = [
             "kaizerreich",
         ],
         title: "Kaizerreich",
-        author: "trid",
+        author: ["trid"],
         year: "1914",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-03-27",
         lastUpdate: "2024-03-27",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2354,19 +2328,19 @@ const scenariosData = [
             "kaizerreich",
         ],
         title: "Kaizerreich",
-        author: "trid",
+        author: ["trid"],
         year: "1914",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-04-05",
         lastUpdate: "2024-04-05",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2376,19 +2350,19 @@ const scenariosData = [
             "eor",
         ],
         title: "Era of Reborn",
-        author: "trid",
+        author: ["trid"],
         year: "1959",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-04-21",
         lastUpdate: "2024-04-21",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2398,19 +2372,19 @@ const scenariosData = [
             "1000",
         ],
         title: "The thousands of Europe",
-        author: "jaba",
+        author: ["jaba"],
         year: "1000",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-05-29",
         lastUpdate: "2024-05-29",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -2420,19 +2394,19 @@ const scenariosData = [
             "1950",
         ],
         title: "Korea 1950",
-        author: "jaba",
+        author: ["jaba"],
         year: "1950",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2023-03-29",
         lastUpdate: "2023-10-01",
         hiddenScore: 0,
         type: "sandbox",
-        period: "cw"
+        period: "cw",
+        rights: true
     },
     {
         id: [
@@ -2442,19 +2416,19 @@ const scenariosData = [
             "1953",
         ],
         title: "Korea 1953",
-        author: "esteban",
+        author: ["esteban"],
         year: "1953",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2023-10-01",
         lastUpdate: "2023-10-01",
         hiddenScore: 0,
         type: "sandbox",
-        period: "cw"
+        period: "cw",
+        rights: true
     },
     {
         id: [
@@ -2464,19 +2438,19 @@ const scenariosData = [
             "2021",
         ],
         title: "Ukraine 2021",
-        author: "trid",
+        author: ["trid"],
         year: "2021",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: ["star", "enot"],
         // Hidden parameters
         publishDate: "2024-09-15",
         lastUpdate: "2024-09-15",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -2486,19 +2460,19 @@ const scenariosData = [
             "2024",
         ],
         title: "Ukraine 2024",
-        author: "trid",
+        author: ["trid"],
         year: "2024",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-09-15",
         lastUpdate: "2024-09-15",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -2508,19 +2482,19 @@ const scenariosData = [
             "holoborodko",
         ],
         title: "Ukraine Слуга Народа",
-        author: "kolkhoznik",
+        author: ["kolkhoznik"],
         year: "2023",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: ["star", "enot"],
         // Hidden parameters
         publishDate: "2024-12-04",
         lastUpdate: "2024-12-04",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2530,19 +2504,19 @@ const scenariosData = [
             "1862",
         ],
         title: "1862 America",
-        author: "jaba",
+        author: ["jaba"],
         year: "1862",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2023-10-19",
         lastUpdate: "2023-10-19",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -2552,19 +2526,19 @@ const scenariosData = [
             "modern",
         ],
         title: "Modern America",
-        author: "jaba",
+        author: ["jaba"],
         year: "2023",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2023-10-19",
         lastUpdate: "2023-10-19",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -2574,19 +2548,19 @@ const scenariosData = [
             "modern",
         ],
         title: "Modern America",
-        author: "jaba",
+        author: ["jaba"],
         year: "2023",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2023-10-19",
         lastUpdate: "2023-10-19",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
@@ -2596,19 +2570,19 @@ const scenariosData = [
             "1492",
         ],
         title: "1492 America",
-        author: "jaba",
+        author: ["jaba"],
         year: "1492",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2023-10-19",
         lastUpdate: "2023-10-19",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -2618,19 +2592,19 @@ const scenariosData = [
             "civilwar",
         ],
         title: "Тигерленд",
-        author: "chuckcha",
+        author: ["chuckcha"],
         year: "2024",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2023-10-13",
         lastUpdate: "2023-10-28",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2640,19 +2614,19 @@ const scenariosData = [
             "civilwar-en",
         ],
         title: "Tigerland",
-        author: "chuckcha",
+        author: ["chuckcha"],
         year: "2024",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2023-10-13",
         lastUpdate: "2023-10-16",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2662,19 +2636,19 @@ const scenariosData = [
             "civilwar-expanded",
         ],
         title: "Expanded Tigerland",
-        author: "chuckcha",
+        author: ["chuckcha"],
         year: "2024",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-02-09",
         lastUpdate: "2024-10-16",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2684,19 +2658,19 @@ const scenariosData = [
             "civilwar-jalhund-en",
         ],
         title: "Tigerland by Jalhund",
-        author: "jalhund",
+        author: ["jalhund"],
         year: "2024",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-02-10",
         lastUpdate: "2024-02-10",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2706,19 +2680,19 @@ const scenariosData = [
             "civilwar-jalhund",
         ],
         title: "Тигерленд by Jalhund",
-        author: "jalhund",
+        author: ["jalhund"],
         year: "2024",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-02-10",
         lastUpdate: "2024-02-10",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2728,19 +2702,19 @@ const scenariosData = [
             "civilwar-jalhund-en",
         ],
         title: "Tigerland by Jalhund",
-        author: "jalhund",
+        author: ["jalhund"],
         year: "2024",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2024-02-10",
         lastUpdate: "2024-11-18",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2750,19 +2724,19 @@ const scenariosData = [
             "civilwar-jalhund-en",
         ],
         title: "Tigerland by Jalhund",
-        author: "jalhund",
+        author: ["jalhund"],
         year: "2024",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [""],
-        worldCreator: "ЕЕнот",
         awards: ["star", "enot"],
         // Hidden parameters
         publishDate: "2024-02-10",
         lastUpdate: "2024-12-08",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2772,19 +2746,19 @@ const scenariosData = [
             "civilwar",
         ],
         title: "Classic Tigerland",
-        author: "trid",
+        author: ["trid"],
         year: "2024",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: ["star", "enot"],
         // Hidden parameters
         publishDate: "2025-01-17",
         lastUpdate: "2025-01-17",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2794,19 +2768,19 @@ const scenariosData = [
             "!",
         ],
         title: "Centaura",
-        author: "mapmancer",
+        author: ["mapmancer"],
         year: "1910",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-04-13",
         lastUpdate: "2025-04-13",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2816,19 +2790,19 @@ const scenariosData = [
             "dystopian",
         ],
         title: "Centaura 1984",
-        author: "radardev",
+        author: ["radardev"],
         year: "1994",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-04-13",
         lastUpdate: "2025-04-13",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2838,19 +2812,19 @@ const scenariosData = [
             "!",
         ],
         title: "World with Lost Continents",
-        author: "bluepum",
+        author: ["bluepum"],
         year: "0",
         languages: ["EN", "RU"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-05-26", 
         lastUpdate: "2025-05-27",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
@@ -2860,63 +2834,63 @@ const scenariosData = [
             "regions",
         ],
         title: "Atlantis",
-        author: "bluepum",
+        author: ["bluepum"],
         year: "2025",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
         publishDate: "2025-05-31", 
         lastUpdate: "2025-05-31",
         hiddenScore: 0,
         type: "sandbox",
-        period: "alternative"
+        period: "alternative",
+        rights: true
     },
     {
         id: [
             "pelo",
             "euam",
-            "v1",
+            "v2",
             "1492",
         ],
-        title: "Завоевание рая - Europe and America",
-        author: "pelo",
+        title: "Завоевание рая",
+        author: ["pelo", "jaba"],
         year: "1492",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: ["star"],
         // Hidden parameters
         publishDate: "2025-06-02", 
-        lastUpdate: "2025-06-19",
+        lastUpdate: "2025-09-03",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
             "pelo",
             "euam",
-            "v1",
+            "v2",
             "1492-en",
         ],
-        title: "Conquest of Paradise - Europe and America",
-        author: "pelo",
+        title: "Conquest of Paradise",
+        author: ["pelo", "jaba"],
         year: "1492",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: ["star"],
         // Hidden parameters
         publishDate: "2025-06-02", 
-        lastUpdate: "2025-06-11",
+        lastUpdate: "2025-09-03",
         hiddenScore: 0,
         type: "sandbox",
-        period: "ancient"
+        period: "ancient",
+        rights: true
     },
     {
         id: [
@@ -2925,88 +2899,722 @@ const scenariosData = [
             "v1",
             "modern-en",
         ],
-        title: "Modern - Europe and America",
-        author: "zachary",
+        title: "Modern Europe and America (old)",
+        author: ["zachary"],
         year: "2025",
         languages: ["EN"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: ["star"],
         // Hidden parameters
         publishDate: "2025-06-12", 
         lastUpdate: "2025-06-12",
-        hiddenScore: 0,
+        hiddenScore: -50,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        status: "archived", 
+        rights: true
     },
     {
         id: [
             "pelo",
             "euam",
-            "v1",
-            "modern-ru2",
+            "v2",
+            "modern-en",
         ],
-        title: "Современность - Europe and America",
-        author: "eenot",
+        title: "Modern Europe and America",
+        author: ["trid", "eenot", "eeditor"],
+        year: "2025",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        awards: ["star"],
+        // Hidden parameters
+        publishDate: "2025-09-02", 
+        lastUpdate: "2025-09-03",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "modern",
+        rights: true
+    },
+    {
+        id: [
+            "pelo",
+            "euam",
+            "v2",
+            "modern-ru",
+        ],
+        title: "Современность Europe and America",
+        author: ["trid"],
         year: "2025",
         languages: ["RU"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: ["star"],
         // Hidden parameters
-        publishDate: "2025-06-12", 
-        lastUpdate: "2025-06-12",
+        publishDate: "2025-09-02", 
+        lastUpdate: "2025-09-03",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
     },
     {
         id: [
             "pelo",
             "euam",
-            "v1",
+            "v2",
             "modern-uk",
         ],
-        title: "Сучасність - Europe and America",
-        author: "eenot",
+        title: "Сучасність Europe and America",
+        author: ["trid", "eenot", "eeditor"],
         year: "2025",
         languages: ["UK"],
         gameMode: "Sandbox",
         tags: [],
-        worldCreator: "ЕЕнот",
         awards: [],
         // Hidden parameters
-        publishDate: "2025-06-12", 
-        lastUpdate: "2025-06-24",
+        publishDate: "2025-09-02", 
+        lastUpdate: "2025-09-03",
         hiddenScore: 0,
         type: "sandbox",
-        period: "modern"
+        period: "modern",
+        rights: true
+    },
+    {
+        id: [
+            "pelo",
+            "euam",
+            "v2",
+            "1789",
+        ],
+        title: "Французская Революция",
+        author: ["gray_car"],
+        year: "1789",
+        languages: ["RU"],
+        gameMode: "Sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-08-28", 
+        lastUpdate: "2025-09-03",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ancient"
+    },
+    {
+        id: [
+            "pelo",
+            "euam",
+            "v2",
+            "1799",
+        ],
+        title: "Приход Наполеона",
+        author: ["jaba"],
+        year: "1799",
+        languages: ["RU"],
+        gameMode: "Sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-08-27", 
+        lastUpdate: "2025-09-03",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "ancient",
+        rights: true
+    },
+    {
+        id: [
+            "pelo",
+            "euam",
+            "v2",
+            "kaiserreich",
+        ],
+        title: "Kaiserreich Euam",
+        author: ["eenot"],
+        year: "1936",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-10-06", 
+        lastUpdate: "2025-10-06",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "alternative",
+        rights: true
     },
     {
         id: [
             "chitterss",
             "world",
-            "v3",
+            "v4",
             "twosides",
         ],
-        title: "Two Sides",
-        author: "trid",
-        year: "2025",
+        title: "Two Sides (EVENTS)",
+        author: ["trid"],
+        year: "1934",
         languages: ["EN"],
         gameMode: "Sandbox",
-        tags: [],
-        worldCreator: "ЕЕнот",
+        tags: ["RECOMMENDATION: SET BOTS TO PEACEFUL"],
         awards: ["only", "star", "enot"],
         // Hidden parameters
         publishDate: "2025-06-14", 
-        lastUpdate: "2025-06-14",
-        hiddenScore: 200,
+        lastUpdate: "2025-11-07",
+        hiddenScore: 250,
         type: "lore",
         period: "alternative",
-        status: "archived"
+        status: "in_development",
+        rights: true
     },
-];
-
-console.log("Данные сценариев загружены");
+    {
+        id: [
+            "parkourcat", 
+            "euro4", 
+            "vg",
+            "interwar",
+        ],
+        title: "Интербеллум (ИВЕНТЫ)",
+        author: ["pelo"],
+        year: "1919",
+        languages: ["RU"],
+        gameMode: "Sandbox",
+        tags: [],
+        awards: ["only", "star", "enot"],
+        // Hidden parameters
+        publishDate: "2024-01-11", 
+        lastUpdate: "2025-07-31",
+        hiddenScore: 250,
+        type: "historical",
+        period: "interwar",
+        status: "in_development",
+        rights: true
+    },
+    {
+        id: [
+            "parkourcat", 
+            "euro4", 
+            "vg",
+            "interwar",
+        ],
+        title: "Interwar (EVENTS)",
+        author: ["pelo"],
+        year: "1919",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        awards: ["only", "star", "enot"],
+        // Hidden parameters
+        publishDate: "2024-01-11", 
+        lastUpdate: "2025-07-31",
+        hiddenScore: 250,
+        type: "historical",
+        period: "interwar",
+        status: "in_development",
+        rights: true
+    },
+    {
+        id: [
+            "zachary", 
+            "americas-rem", 
+            "v2",
+            "civilwar",
+        ],
+        title: "American Civil War",
+        author: ["zachary"],
+        year: "1861",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-09-03", 
+        lastUpdate: "2025-09-03",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "anciaent",
+        status: "complated",
+        rights: true
+    },
+    {
+        id: [
+            "eenot", 
+            "metro2033", 
+            "v1",
+            "!",
+        ],
+        title: "Metro 2033",
+        author: ["eenot"],
+        year: "2033",
+        languages: ["EN", "RU"],
+        gameMode: "Sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-09-19",
+        lastUpdate: "2025-09-26",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "alternative",
+        status: "complated",
+        rights: true
+    },
+    {
+        id: [
+            "parkourcat", 
+            "euro4", 
+            "vg",
+            "kaiserreich",
+        ],
+        title: "Kaiserreich",
+        author: ["fredstein", "thefanfinfulo"],
+        year: "1936",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2024-12-16",
+        lastUpdate: "2025-09-07",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "alternative",
+        status: "complated",
+    },
+    {
+        id: [
+            "parkourcat", 
+            "euro4", 
+            "vg",
+            "cwlurus",
+        ],
+        title: "Cold War by Lurus",
+        author: ["lurus"],
+        year: "1956",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-10-24",
+        lastUpdate: "2025-10-24",
+        hiddenScore: 0,
+        type: "sandbox",
+        period: "cw",
+        status: "in_development",
+        rights: true,
+    },
+    {
+        id: [
+            "estebanf259", 
+            "euromagnus", 
+            "v1",
+            "aotsm",
+        ],
+        title: "AotSM (ИВЕНТЫ)",
+        author: ["vova"],
+        year: "1851",
+        languages: ["RU"],
+        gameMode: "Sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-06-30",
+        lastUpdate: "2025-11-01",
+        hiddenScore: 125,
+        type: "lore",
+        period: "alternative",
+        status: "in_development",
+        img_special_styles: "height: 100%;",
+        rights: true
+    },
+    {
+        id: [
+            "estebanf259", 
+            "euromagnus", 
+            "v1",
+            "aotsm-en",
+        ],
+        title: "AotSM (EVENTS)",
+        author: ["vova", "eenot"],
+        year: "1851",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-11-03",
+        lastUpdate: "2025-11-03",
+        hiddenScore: 125,
+        type: "lore",
+        period: "alternative",
+        status: "in_development",
+        img_special_styles: "height: 100%;",
+        rights: true
+    },
+    {
+        id: [
+            "parkourcat", 
+            "euro4", 
+            "vg",
+            "kaiserredux",
+        ],
+        title: "Kaiserredux (EVENTS)",
+        author: ["mat"],
+        year: "1936",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-10-17",
+        lastUpdate: "2025-10-17",
+        hiddenScore: 100,
+        type: "lore",
+        period: "alternative",
+        status: "in_development",
+    },
+    {
+        id: [
+            "estebanf259", 
+            "world-redux", 
+            "v1",
+            "redstorm",
+        ],
+        title: "The Red Storm (EVENTS)",
+        author: ["preferablynothing"],
+        year: "1954",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-10-16",
+        lastUpdate: "2025-10-16",
+        hiddenScore: 100,
+        type: "lore",
+        period: "alternative",
+        status: "in_development",
+    },
+    {
+        id: [
+            "gooby", 
+            "syria", 
+            "v2",
+            "2025",
+        ],
+        title: "Syria (EVENTS)",
+        author: ["zachary"],
+        year: "1954",
+        languages: ["EN"],
+        gameMode: "Sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-10-05",
+        lastUpdate: "2025-10-05",
+        hiddenScore: 100,
+        type: "lore",
+        period: "modern",
+        status: "in_development",
+    },
+    {
+        id: [
+            "shutkin", 
+            "vostmond", 
+            "v3",
+            "!",
+        ],
+        title: "Востмонд (ИВЕНТЫ)",
+        author: ["shutkin"],
+        year: "4356",
+        languages: ["RU"],
+        gameMode: "Sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2023-08-10",
+        lastUpdate: "2025-06-11",
+        hiddenScore: 100,
+        type: "lore",
+        period: "alternative",
+        status: "complated",
+    },
+    {
+        id: [
+            "shutkin", 
+            "dolina", 
+            "v1",
+            "!",
+        ],
+        title: "Долина (ИВЕНТЫ)",
+        author: ["shutkin"],
+        year: "4356",
+        languages: ["RU"],
+        gameMode: "Sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2025-06-21",
+        lastUpdate: "2025-06-21",
+        hiddenScore: 100,
+        type: "lore",
+        period: "alternative",
+        status: "in_development",
+    },
+    {
+        id: [
+            "vova", 
+            "lifia", 
+            "v1",
+            "1847-en",
+        ],
+        title: "Lifia (EVENTS)",
+        author: ["vova"],
+        year: "1847",
+        languages: ["EN"],
+        gameMode: "lore",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2026-01-18",
+        lastUpdate: "2026-03-07",
+        hiddenScore: 100,
+        type: "lore",
+        period: "alternative",
+        status: "in_development",
+        rights: true
+    },
+    {
+        id: [
+            "vova", 
+            "lifia", 
+            "v1",
+            "1847-ru",
+        ],
+        title: "Лифия (ИВЕНТЫ)",
+        author: ["vova"],
+        year: "1847",
+        languages: ["RU"],
+        gameMode: "lore",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2026-01-18",
+        lastUpdate: "2026-03-07",
+        hiddenScore: 100,
+        type: "lore",
+        period: "alternative",
+        status: "in_development",
+        rights: true
+    },
+    {
+        id: [
+            "eenot", 
+            "asia", 
+            "v1",
+            "ironorder",
+        ],
+        title: "Iron Order Asia",
+        author: ["totoska"],
+        year: "1919",
+        languages: ["EN"],
+        gameMode: "sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2026-03-17",
+        lastUpdate: "2026-03-17",
+        hiddenScore: 100,
+        type: "sandbox",
+        period: "alternative",
+        status: "complated",
+        rights: true
+    },
+    {
+        id: [
+            "eenot", 
+            "asia", 
+            "v1",
+            "1444",
+        ],
+        title: "1444 Asia",
+        author: ["totoska"],
+        year: "1444",
+        languages: ["EN"],
+        gameMode: "sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2026-03-17",
+        lastUpdate: "2026-03-17",
+        hiddenScore: 100,
+        type: "sandbox",
+        period: "ancient",
+        status: "complated",
+        rights: true
+    },
+    {
+        id: [
+            "eenot", 
+            "asia", 
+            "v1",
+            "tno",
+        ],
+        title: "The New Order Asia",
+        author: ["totoska"],
+        year: "1962",
+        languages: ["EN"],
+        gameMode: "sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2026-03-17",
+        lastUpdate: "2026-03-17",
+        hiddenScore: 100,
+        type: "sandbox",
+        period: "alternative",
+        status: "complated",
+        rights: true
+    },
+    {
+        id: [
+            "eenot", 
+            "asia", 
+            "v1",
+            "modern",
+        ],
+        title: "Modern Asia",
+        author: ["trid"],
+        year: "2010",
+        languages: ["EN"],
+        gameMode: "sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2026-03-18",
+        lastUpdate: "2026-03-18",
+        hiddenScore: 100,
+        type: "sandbox",
+        period: "modern",
+        status: "in_development",
+        rights: true
+    },
+    {
+        id: [
+            "eenot", 
+            "asia", 
+            "v1",
+            "ww1",
+        ],
+        title: "World War 1 Asia",
+        author: ["eenot"],
+        year: "1914",
+        languages: ["EN"],
+        gameMode: "sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2026-03-18",
+        lastUpdate: "2026-03-18",
+        hiddenScore: 100,
+        type: "sandbox",
+        period: "ww1",
+        status: "in_development",
+        rights: true
+    },
+    {
+        id: [
+            "eenot", 
+            "asia", 
+            "v1",
+            "kaiserreich",
+        ],
+        title: "Kaiserreich Asia",
+        author: ["eenot"],
+        year: "1936",
+        languages: ["EN"],
+        gameMode: "sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2026-03-17",
+        lastUpdate: "2026-03-17",
+        hiddenScore: 100,
+        type: "sandbox",
+        period: "alternative",
+        status: "complated",
+        rights: true
+    },
+    {
+        id: [
+            "eenot", 
+            "asia", 
+            "v1",
+            "cw",
+        ],
+        title: "Cold War Asia",
+        author: ["totoska"],
+        year: "1956",
+        languages: ["EN"],
+        gameMode: "sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2026-03-17",
+        lastUpdate: "2026-03-17",
+        hiddenScore: 100,
+        type: "sandbox",
+        period: "cw",
+        status: "complated",
+        rights: true
+    },
+    {
+        id: [
+            "eenot", 
+            "asia", 
+            "v1",
+            "mongol",
+        ],
+        title: "1279 Asia",
+        author: ["greg"],
+        year: "1279",
+        languages: ["EN"],
+        gameMode: "sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2026-04-06",
+        lastUpdate: "2026-04-06",
+        hiddenScore: 100,
+        type: "sandbox",
+        period: "ancient",
+        status: "in_development",
+        rights: true
+    },
+    {
+        id: [
+            "eenot", 
+            "asia", 
+            "v1",
+            "interwar",
+        ],
+        title: "Interwar Asia",
+        author: ["greg"],
+        year: "1919",
+        languages: ["EN"],
+        gameMode: "sandbox",
+        tags: [],
+        awards: [],
+        // Hidden parameters
+        publishDate: "2026-04-06",
+        lastUpdate: "2026-04-06",
+        hiddenScore: 100,
+        type: "sandbox",
+        period: "interwar",
+        status: "in_development",
+        rights: true
+    },
+]

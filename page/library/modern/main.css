@@ -1,0 +1,23 @@
+.lib-modern-down {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.lib_modern_grouplist {
+    display: inline-flex;
+    flex-direction: row;
+    gap: 1rem;
+    max-width: 100%;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    background-color: var(--background-secondary);
+    border-radius: var(--br);
+    width: calc(100% - 20px);
+}

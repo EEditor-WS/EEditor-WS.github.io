@@ -1,10 +1,38 @@
+const inGameMaps = [
+    "jalhund_europe_vg",
+    "jaba_america_vg",
+    "parcoucat_euro4_vg",
+    "jalhund_europe",
+    "jaba_america",
+    "parcoucat_euro4",
+];
+
+const statusScores = {
+    "complate": 40,
+    "early_access": 30,
+    "in_development": 20,
+    "beta": 15,
+    "alpha": 10,
+    "experimental": 5,
+    "frozen": 0,
+    "archived": -30,
+    "discontinued": -50,
+};
+
+const awardScores = {
+    "star": 25,
+    "enot": 50,
+    "50": 25,
+    "only": 100,
+};
+
 console.log('Library downloadlist.js loaded');
 //const libLink = 'https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/';
 //const libLink = 'http://192.168.100.18:8081/'
 //const libLink = 'https://ee-lib-data.netlify.app/'
 
 let liblink;
-if (window.location.href.includes('file:///')) {
+if (window.location.href.includes('file:///') || window.location.href.includes('8080')) {
     libLink = 'http://192.168.100.18:8081/';
 } else {
     libLink = 'https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/';
@@ -91,7 +119,8 @@ function calculateScenarioScore(scenario) {
 
 // Sort scenarios by score
 function getSortedScenarios() {
-    return scenariosData
+//    return scenariosData
+    return window.libFilters.filterScenarios()
         .map(scenario => ({
             ...scenario,
             score: calculateScenarioScore(scenario)
@@ -124,9 +153,16 @@ function generateScenarioCard(scenario) {
             </div>
         `).join('');
 
-    const tagsHTML = scenario.tags
-        .map(tag => `<a href="#" style="color: #6e8699">#${tag}</a>`)
-        .join('<p>, </p>');
+    let tagsHTML
+    if (JSON.stringify(scenario.tags).includes('RECOMMEND')) {;
+        tagsHTML = scenario.tags
+            .map(tag => `<b style="color: #FF4500">${tag}</b>`)
+            .join('<p>, </p>');
+    } else {
+        tagsHTML = scenario.tags
+            .map(tag => `<a href="#" style="color: #6e8699">#${tag}</a>`)
+            .join('<p>, </p>');
+    }
 
     const mapId = scenario.id.slice(0, 2);
     const mapData = getMapData(scenario.id.slice(0, 3).join('_'));
@@ -134,6 +170,14 @@ function generateScenarioCard(scenario) {
     const scenarioPath = generateScenarioPath(scenario.id);
     const detailsLink = generateDetailsLink(scenario.id);
     const score = calculateScenarioScore(scenario);
+    let noRights;
+    if (scenario.rights === true) {
+        noRights = "";
+    } else {
+        noRights = `<button class="download-download-button" onclick="askDelete()" style="background-color: #945d44ff; border-radius: var(--br); width: 45px; height: 45px; border: none; cursor: pointer;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"role="img" aria-label="Жалоба: предупреждение" focusable="false"><title>Жалоба</title><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                    </button>`;
+    }
 
     const status = scenario.status || "completed";
     const statusLabel = {
@@ -167,12 +211,14 @@ function generateScenarioCard(scenario) {
             data-update-date="${scenario.lastUpdate}"
             data-mechanics='${JSON.stringify(scenario.mechanics || {})}'
             data-score="${score}"
+            data-full-id="${scenario.id.join('_')}"
         >
             <div class="download-info">
                 <div class="download-up">
                     <div class="download-image-container">
                         <a href="${detailsLink}">
-                            <img src="${imagePath}" class="download-goto-page" style="width: 250px; height: 156px; object-fit: cover; border-radius: 15px 15px 0 0;">
+                            <img loading="lazy" src="${imagePath}" class="download-goto-page" style="${scenario.img_special_styles || ''}">
+                            <div class="gradient-overlay"></div>
                         </a>
                         <div class="download-awards">
                             ${awardsHTML}
@@ -187,7 +233,17 @@ function generateScenarioCard(scenario) {
                     <div class="download-row-big">
                         <div class="download-row">
                             <img src="../../img/library/autor.svg" class="download-info-ico" />
-                            <a href="${authorsData[scenario.author]?.link}" style="color: ${authorsData[scenario.author]?.color}">${truncateAuthorName(authorsData[scenario.author]?.name)}</a>
+                            <div class="authors" style="display:flex; flex-direction:column">
+                            ${
+                                scenario.author
+                                    ?.map(authorId => {
+                                        const author = authorsData[authorId];
+                                        return `<a href="${author?.link}" style="color: ${author?.color}">${truncateAuthorName(author?.name)}</a>`;
+                                    })
+                                    .join("")
+                            }
+                            </div>
+                            <!--a href="${authorsData[scenario.author]?.link}" style="color: ${authorsData[scenario.author]?.color}">${truncateAuthorName(authorsData[scenario.author]?.name)}</a-->
                         </div>
                         <div class="download-row">
                             <p>${scenario.year}</p>
@@ -200,7 +256,7 @@ function generateScenarioCard(scenario) {
                             <p>${scenario.languages.join(", ")}</p>
                         </div>
                         <div class="download-row">
-                            <a href="#" style="color: #6e8699">${scenario.gameMode}</a>
+                            <a href="#" style="color: #6e8699">${scenario.type}</a>
                             <img src="../../img/library/gamemode.svg" class="download-info-ico" />
                         </div>
                     </div>
@@ -215,9 +271,12 @@ function generateScenarioCard(scenario) {
                         <img src="../../img/library/world.svg" class="download-info-ico" />
                         <p>${mapData ? mapData.title : scenario.map.name}</p>
                     </div>
-                    <button class="download-download-button" onclick="libDownloadScenario('${scenarioPath}', '${mapId}', '${scenario.id[0]}', '${scenario.id[1]}', '${scenario.id[2]}')" style="background-color: #44944A; border-radius: 15px; width: 45px; height: 45px; border: none; cursor: pointer;">
-                        <img src="../../img/library/download.svg" class="download-info-ico" />
-                    </button>
+                    <div style="display:flex;flex-direction:column;align-items:bottom">
+                        ${noRights}
+                        <button class="download-download-button" onclick="libDownloadScenario('${scenarioPath}', '${mapId}', '${scenario.id[0]}', '${scenario.id[1]}', '${scenario.id[2]}')" style="background-color: #44944A; border-radius: var(--br); width: 45px; height: 45px; border: none; cursor: pointer;">
+                            <img src="../../img/library/download.svg" class="download-info-ico" />
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -225,10 +284,12 @@ function generateScenarioCard(scenario) {
 }
 
 // Download handling functions
-async function libDownloadScenario(rawUrl, mapId, autor, map, version) {
+async function libDownloadScenario(rawUrl, mapId, autor, map, version, dontMap = false) {
     try {
         const fileName = rawUrl.split('/').pop();
         await downloadFile(rawUrl, fileName);
+
+        if (dontMap === true) return;
 
         if (mapId && !downloadedMaps.has(mapId) && !inGameMaps.includes(mapId)) {
             const mapData = getMapData(mapId);
@@ -369,3 +430,13 @@ document.addEventListener('DOMContentLoaded', () => {
     
     loadScenarios();
 });
+
+function askDelete() {
+    const modal = document.getElementById('askModal');
+    modal.classList.add('active');
+}
+
+function closeAskDeleteModal() {
+    const modal = document.getElementById('askModal');
+    modal.classList.remove('active');
+}

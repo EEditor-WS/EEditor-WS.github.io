@@ -1,3 +1,7 @@
+body {
+    min-height: 100dvh;
+}
+
 .form {
     display: block;
     margin-top: 0em;
@@ -19,11 +23,12 @@
     padding: 20px;
     align-items: flex-start;
     justify-items: stretch;
+    padding-top: 0;
 }
 
 .screenshoot {
     width: 100%;
-    border-radius: 15px;
+    border-radius: var(--br);
 }
 
 .description-text {
@@ -31,9 +36,9 @@
     height: 100%;
     max-height: 100%;
     min-height: 200px;
-    border-radius: 15px;
+    border-radius: var(--br);
     resize: vertical;
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
     color: #e0e0e0;
 }
 
@@ -41,9 +46,9 @@
     width: 200px;
     box-sizing: border-box;
     padding: 8px 12px;
-    background-color: #2a2a2a;
-    border: 1px solid #1f1f1f;
-    border-radius: 4px;
+    background-color: var(----background-secondary);
+    /*border: 1px solid #1f1f1f;*/
+    border-radius: var(--br);
     color: #e0e0e0;
     font-size: 14px;
 }
@@ -53,13 +58,72 @@
     justify-content: space-between;
     gap: 20px;
     padding: 20px;
+    padding-bottom: 0;
 }
 
 .action-button {
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
     transition: background-color 0.3s ease;
 }
 
 .action-button:hover {
     background-color: var(--hover-color);
+}
+
+.uplOne {
+    display: flex;
+    flex-direction: column;
+}
+
+.uploadThing {
+    display: flex;
+    flex-direction: row;
+}
+
+.form-element {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 900px) {
+    .mainform {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (orientation: portrait) {
+    .params-scenario-library {
+        flex-direction: column;
+    }
+    
+    input {
+        width: 100%;
+    }
+
+    .mainform {
+        width: calc(100% - 40px);
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (orientation: portrait) and (max-width: 360px) {
+    .mainform {
+        grid-template-columns: repeat(1, 1fr);
+    }    
+}
+
+.description a {
+    color: #7cb7ff;
+}
+
+.navbtn {
+    padding: 0;
+}
+
+.downloadButtonDetalis {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 1rem;
 }

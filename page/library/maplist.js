@@ -2,7 +2,7 @@ mapsData = [
     {
         id: ["eenot", "world", "v1"],
         title: "World by ЕЕнот",
-        author: "eenot",
+        author: ["eenot"],
         description: "The best world map for normal and low devices. Very optimized. By developer of EEditor",
         type: "world",
         region: ["europe", "north_africa", "middle_east", "asia", "americas", "africa", "oceania"],
@@ -13,11 +13,12 @@ mapsData = [
         lastUpdate: "2025-01-19",
         load: "light",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["eenot", "moldavia", "v1"],
         title: "Moldavia by ЕЕнот",
-        author: "eenot",
+        author: ["eenot"],
         description: "Map of Republic of Moldova, Pridnestrovian Moldavian Rupublic and Odesska Oblast of Ukraine",
         type: "country",
         region: ["europe"],
@@ -28,11 +29,12 @@ mapsData = [
         lastUpdate: "2025-04-28",
         load: "ultralight",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["bluepum", "enaatme", "v5"],
         title: "Europe+ by Bluepum",
-        author: "bluepum",
+        author: ["bluepum"],
         description: "Map of Europe, North Africa and Middle East",
         type: "continent",
         region: ["europe", "north_africa", "middle_east"],
@@ -43,11 +45,12 @@ mapsData = [
         lastUpdate: "2025-05-14",
         load: "light",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["bluepum", "germany", "v1"],
         title: "Germany by Bluepum",
-        author: "bluepum",
+        author: ["bluepum"],
         description: "This is the administrative division of Germany",
         type: "country",
         region: ["europe"],
@@ -58,11 +61,12 @@ mapsData = [
         lastUpdate: "2025-04-24",
         load: "mobile",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["eenot", "arstotzka", "v2"],
         title: "Arstotzka World by ЕЕнот",
-        author: "eenot",
+        author: ["eenot"],
         description: "Unofficial world map of Paper's Please world",
         type: "world",
         region: ["other"],
@@ -73,11 +77,12 @@ mapsData = [
         lastUpdate: "2025-04-21",
         load: "mobile",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["zachary", "world-3ga", "v1"],
         title: "World 3b years ago by Zachary",
-        author: "zachary",
+        author: ["zachary"],
         description: "Unofficial world map of Paper's Please world",
         type: "world",
         region: ["other"],
@@ -88,11 +93,12 @@ mapsData = [
         lastUpdate: "2025-04-09",
         load: "mobile",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["zachary", "authun", "v1"],
         title: "Austria-Hungaria by Zachary",
-        author: "zachary",
+        author: ["zachary"],
         description: "Map of Austro-Hungarian Empire",
         type: "region",
         region: ["europe","balkans"],
@@ -103,11 +109,12 @@ mapsData = [
         lastUpdate: "2025-01-31",
         load: "normal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["zachary", "world-am", "v1"],
         title: "World according to America",
-        author: "zachary",
+        author: ["zachary"],
         description: "World according to America",
         type: "world",
         region: ["europe","asia", "africa", "oceania", "america"],
@@ -118,11 +125,12 @@ mapsData = [
         lastUpdate: "2025-01-28",
         load: "normal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["zachary", "panem", "v2"],
         title: "Panem v2 by Zachary",
-        author: "zachary",
+        author: ["zachary"],
         description: "Map of Panem from Hunger Games",
         type: "country",
         region: ["america"],
@@ -133,11 +141,12 @@ mapsData = [
         lastUpdate: "2025-01-27",
         load: "light",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["zachary", "eurasia", "v2"],
         title: "Terra Eurasia by Zachary",
-        author: "zachary",
+        author: ["zachary"],
         description: "Big detalized map of Eurasia",
         type: "continent",
         region: ["europe", "asia", "north_africa"],
@@ -148,11 +157,12 @@ mapsData = [
         lastUpdate: "2024-11-29",
         load: "superheavy",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["zachary", "mars", "v1"],
         title: "Terraformed Mars by Zachary",
-        author: "zachary",
+        author: ["zachary"],
         description: "Map of Mars with terraformed areas",
         type: "world",
         region: ["other"],
@@ -163,11 +173,12 @@ mapsData = [
         lastUpdate: "2025-01-20",
         load: "light",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["zachary", "florida", "v1"],
         title: "Florida by Zachary",
-        author: "zachary",
+        author: ["zachary"],
         description: "Florida",
         type: "oblast",
         region: ["america"],
@@ -178,11 +189,12 @@ mapsData = [
         lastUpdate: "2024-10-31",
         load: "ultralight",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["zachary", "africa", "v3"],
         title: "Terra Africa by Zachary",
-        author: "zachary",
+        author: ["zachary"],
         description: "Welcome to Terra Africa! This map was built to be as big as possible which is why its my new highest province map",
         type: "continent",
         region: ["africa", "middle_east", "mediterranean"],
@@ -193,11 +205,12 @@ mapsData = [
         lastUpdate: "2024-10-29",
         load: "normal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["zachary", "australia", "v1"],
         title: "Terra Australis by Zachary",
-        author: "zachary",
+        author: ["zachary"],
         description: "I guess i decided that my maps should follow a naming convention so... After Terra Novus we have Terra Australis! This is a map of south east Asia and Oceania!",
         type: "continent",
         region: ["australia", "oceania", "south_east_asia"],
@@ -208,11 +221,12 @@ mapsData = [
         lastUpdate: "2024-10-07",
         load: "light",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["zachary", "america", "v2"],
         title: "Terra Novus by Zachary",
-        author: "zachary",
+        author: ["zachary"],
         description: "This is meine magnum opus, the Americas! This is a remake of my previous map called the Americas, this one has 2x the detail and better provinces that allow more historical boundaries.",
         type: "continent",
         region: ["americas", "north_america", "south_america", "central_america"],
@@ -223,11 +237,13 @@ mapsData = [
         lastUpdate: "2024-10-07",
         load: "normal",
         hiddenScore: 0,
+        status: "archived",
+        rights: true
     },
     {
         id: ["zachary", "europe1815", "v2"],
         title: "Europe 1815 by Zachary",
-        author: "zachary",
+        author: ["zachary"],
         description: "Thankfully the German Confederation has much less chaos then the Holy Roman Empire. I hope its accurate.",
         type: "continent",
         region: ["europe"],
@@ -238,11 +254,12 @@ mapsData = [
         lastUpdate: "2024-07-26",
         load: "light",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["zachary", "usa", "v1"],
         title: "USA by Zachary",
-        author: "zachary",
+        author: ["zachary"],
         description: "Three maps in 3 days.",
         type: "country",
         region: ["north_america"],
@@ -253,11 +270,12 @@ mapsData = [
         lastUpdate: "2025-01-21",
         load: "mobile",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["zachary", "deadhand", "v1"],
         title: "Dead Hand | Aftermath of WW3",
-        author: "zachary",
+        author: ["zachary"],
         description: "The year is 2024, 60 years after nuclear bombs were detonated in WW3! Explore the post nuclear 'paradise' that has everything from Soviet warlords to Khagantes all in the good old USA, this has events and tons of lore.",
         type: "region",
         region: ["north_america"],
@@ -268,11 +286,12 @@ mapsData = [
         lastUpdate: "2025-05-07",
         load: "normal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["pelo", "greece", "v1"],
         title: "Aegean Sea by Pelo",
-        author: "pelo",
+        author: ["pelo"],
         description: "Thankfully the German Confederation has much less chaos then the Holy Roman Empire. I hope its accurate.",
         type: "country",
         region: ["europe"],
@@ -283,11 +302,12 @@ mapsData = [
         lastUpdate: "2024-07-26",
         load: "light",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["jaba", "america", "vg"],
         title: "America standart",
-        author: "jaba",
+        author: ["jaba"],
         description: "Standart map of America",
         type: "continent",
         region: ["america", "north_america", "south_america", "central_america"],
@@ -298,11 +318,12 @@ mapsData = [
         lastUpdate: "2023-08-19",
         load: "light",
         hiddenScore: 0,
+        rights: true
     },
     {
-        id: ["parkourfox", "euro4", "vg"],
+        id: ["parkourcat", "euro4", "vg"],
         title: "Euro4 standart",
-        author: "parkourfox",
+        author: ["parkourcat"],
         description: "Standart map of America",
         type: "continent",
         region: ["europe", "north_africa", "middle_east"],
@@ -313,11 +334,12 @@ mapsData = [
         lastUpdate: "2023-08-05",
         load: "light",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["zachary", "world", "v1"],
         title: "World by Zachary",
-        author: "zachary",
+        author: ["zachary"],
         description: "One of the bestest world maps",
         type: "world",
         region: ["water_provinces", "islands", "straits", "rivers", "shores"],
@@ -328,11 +350,12 @@ mapsData = [
         lastUpdate: "2025-02-10",
         load: "normal",
         hiddenScore: 150,
+        rights: true
     },
     {
         id: ["jalhund", "europe", "vg"],
         title: "Europe Standart",
-        author: "jalhund",
+        author: ["jalhund"],
         description: "Builded-in map of Europe by game developer",
         type: "continent",
         region: ["europe"],
@@ -343,11 +366,12 @@ mapsData = [
         lastUpdate: "2077-01-01",
         load: "mobile",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["stewardconstruct", "europe", "v2"],
         title: "Europe (Our Empire)",
-        author: "stewardconstruct",
+        author: ["stewardconstruct"],
         description: "A map of Europe, north Africa and middle east, province map from game our empire with minor changes",
         type: "region",
         region: ["europe", "north_africa", "middle_east"],
@@ -358,11 +382,12 @@ mapsData = [
         lastUpdate: "2025-06-04",
         load: "mobile",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["stewardconstruct", "serbia", "v1"],
         title: "Serbia",
-        author: "stewardconstruct",
+        author: ["stewardconstruct"],
         description: "",
         type: "country",
         region: ["europe", "balcans"],
@@ -373,11 +398,12 @@ mapsData = [
         lastUpdate: "2025-03-15",
         load: "mobile",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["stewardconstruct", "yugoslavia", "v1"],
         title: "Yugoslavia",
-        author: "stewardconstruct",
+        author: ["stewardconstruct"],
         description: "",
         type: "region",
         region: ["europe", "balcans"],
@@ -388,11 +414,12 @@ mapsData = [
         lastUpdate: "2025-03-19",
         load: "light",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["trid", "archangelsk", "v1"],
         title: "Archangelsk",
-        author: "trid",
+        author: ["trid"],
         description: "",
         type: "oblast",
         region: ["europe", "russia"],
@@ -403,11 +430,12 @@ mapsData = [
         lastUpdate: "2024-02-04",
         load: "ultralight",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["chuckcha", "europe", "v1"],
         title: "Crusader Kings 3 Europe, Africa and Middle East",
-        author: "chuckcha",
+        author: ["chuckcha"],
         description: "",
         type: "continent",
         region: ["europe", "africa", "middle_east"],
@@ -418,11 +446,12 @@ mapsData = [
         lastUpdate: "2023-01-29",
         load: "normal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["jalhund", "euro5l", "v1"],
         title: "Euro5 Lite by jalhund",
-        author: "jalhund",
+        author: ["jalhund"],
         description: "",
         type: "continent",
         region: ["europe", "africa", "middle_east"],
@@ -433,11 +462,12 @@ mapsData = [
         lastUpdate: "2024-03-16",
         load: "normal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["jaba", "asia", "v1"],
         title: "Asia and Oceania EU4",
-        author: "jaba",
+        author: ["jaba"],
         description: "",
         type: "continent",
         region: ["middle_east", "asia", "oceania"],
@@ -448,11 +478,12 @@ mapsData = [
         lastUpdate: "2024-02-20",
         load: "normal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["jaba", "world", "v1"],
         title: "World EU4 by Jaba",
-        author: "jaba",
+        author: ["jaba"],
         description: "",
         type: "world",
         region: ["middle_east", "asia", "europe", "north_africa", "americas", "africa", "oceania", "world"],
@@ -463,11 +494,12 @@ mapsData = [
         lastUpdate: "2024-04-03",
         load: "superheavy",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["jalhund", "lp16", "v1"],
         title: "LP-16 by Jalhund",
-        author: "jalhund",
+        author: ["jalhund"],
         description: "",
         type: "custom",
         region: ["other"],
@@ -478,11 +510,12 @@ mapsData = [
         lastUpdate: "2023-06-12",
         load: "ultralight",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["trid", "eurosat", "v5"],
         title: "EuroSat by Trid",
-        author: "trid",
+        author: ["trid"],
         description: "",
         type: "continent",
         region: ["europe", "africa", "middle_east"],
@@ -493,11 +526,12 @@ mapsData = [
         lastUpdate: "2024-03-27",
         load: "norlmal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["trid", "euro5l+", "v1"],
         title: "Euro5 Lite+ by Trid",
-        author: "trid",
+        author: ["trid"],
         description: "",
         type: "continent",
         region: ["europe", "africa", "middle_east"],
@@ -508,11 +542,12 @@ mapsData = [
         lastUpdate: "2024-07-22",
         load: "norlmal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["jaba", "korea", "v2"],
         title: "Korea by Jaba",
-        author: "jaba",
+        author: ["jaba"],
         description: "",
         type: "country",
         region: ["asia", "korea"],
@@ -523,11 +558,12 @@ mapsData = [
         lastUpdate: "2024-10-01",
         load: "norlmal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["trid", "ukraine", "v2"],
         title: "Ukraine by Trid",
-        author: "trid",
+        author: ["trid"],
         description: "",
         type: "country",
         region: ["ukraine"],
@@ -538,11 +574,12 @@ mapsData = [
         lastUpdate: "2024-09-15",
         load: "norlmal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["chuckcha", "tigerland", "v1"],
         title: "Tigerland by Chuckcha",
-        author: "chuckcha",
+        author: ["chuckcha"],
         description: "",
         type: "country",
         region: ["alternative"],
@@ -553,11 +590,12 @@ mapsData = [
         lastUpdate: "2024-09-15",
         load: "norlmal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["chuckcha", "tigerland", "v2"],
         title: "Tigerland v2",
-        author: "jalhund",
+        author: ["jalhund"],
         description: "",
         type: "country",
         region: ["alternative"],
@@ -568,11 +606,12 @@ mapsData = [
         lastUpdate: "2024-11-17",
         load: "norlmal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["chuckcha", "tigerland", "v3"],
         title: "Tigerland v3",
-        author: "jalhund",
+        author: ["jalhund"],
         description: "",
         type: "country",
         region: ["alternative"],
@@ -583,11 +622,12 @@ mapsData = [
         lastUpdate: "2024-11-17",
         load: "norlmal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["mapmancer", "centaura", "v1"],
         title: "Centaura by Mapmancer",
-        author: "mapmancer",
+        author: ["mapmancer"],
         description: "",
         type: "continent",
         region: ["alternative"],
@@ -598,11 +638,12 @@ mapsData = [
         lastUpdate: "2025-04-13",
         load: "norlmal",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["bluepum", "world", "v2"],
         title: "Easy World by Bluepum",
-        author: "bluepum",
+        author: ["bluepum"],
         description: "World with «lost» continents",
         type: "world",
         region: ["world", "europe", "north_africa", "middle_east", "asia", "americas", "africa", "oceania", "atlantida", "mu", "lemuria", "antarctica"],
@@ -613,11 +654,12 @@ mapsData = [
         lastUpdate: "2025-05-27",
         load: "mobile",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["bluepum", "atlantis", "v2"],
         title: "Atlantis by Bluepum",
-        author: "bluepum",
+        author: ["bluepum"],
         description: "This is a map of the legendary mythical Atlantis!",
         type: "continent",
         region: ["atlantis", "atlantida", "other", "custom"],
@@ -628,11 +670,12 @@ mapsData = [
         lastUpdate: "2025-05-27",
         load: "light",
         hiddenScore: 0,
+        rights: true
     },
     {
         id: ["pelo", "euam", "v1"],
-        title: "Europe and North America by Pelo",
-        author: "pelo",
+        title: "Europe and North America",
+        author: ["pelo", "jaba"],
         description: "",
         type: "continent",
         region: ["europe", "america", "north_america"],
@@ -643,21 +686,437 @@ mapsData = [
         lastUpdate: "2025-06-23",
         load: "mobile",
         hiddenScore: 0,
+        rights: true
     },
     {
-        id: ["chitterss", "world", "v3"],
+        id: ["pelo", "euam", "v2"],
+        title: "Europe and North America",
+        author: ["pelo", "jaba"],
+        description: "",
+        type: "continent",
+        region: ["europe", "america", "north_america"],
+        provinces: 1092,
+        features: [],
+        status: "completed",
+        publishDate: "2025-06-02", 
+        lastUpdate: "2025-09-03",
+        load: "mobile",
+        hiddenScore: 0,
+        rights: true
+    },
+    {
+        id: ["chitterss", "world", "v4"],
         title: "World by chitterss",
-        author: "chitterss",
+        author: ["chitterss"],
         description: "",
         type: "continent",
         region: ["europe", "america", "north_america", "asia", "africa", "oceania", "middle_east"],
-        provinces: 1091,
+        provinces: 2252,
         features: [],
         status: "completed",
         publishDate: "2023-07-25", 
-        lastUpdate: "2023-07-30",
+        lastUpdate: "2025-09-19",
         load: "hight",
         hiddenScore: 0,
+        rights: true
+    },
+    {
+        id: ["argentumm", "euromax", "v2"],
+        title: "Euromacks by Argentumm",
+        author: ["argentumm"],
+        description: "",
+        type: "continent",
+        region: ["europe"],
+        provinces: 2163,
+        features: [],
+        status: "completed",
+        publishDate: "2023-05-09", 
+        lastUpdate: "2023-11-14",
+        load: "hight",
+        hiddenScore: 0
+    },
+    {
+        id: ["astroja", "turkey", "v1"],
+        title: "Turkey by Astroja",
+        author: ["astroja"],
+        description: "",
+        type: "country",
+        region: ["europe"],
+        provinces: 99999,
+        features: [],
+        status: "completed",
+        publishDate: "2023-07-30", 
+        lastUpdate: "2023-07-30",
+        load: "normal",
+        hiddenScore: 0
+    },
+    {
+        id: ["bluepum", "calradia", "v1"],
+        title: "Calradia by Bluepum",
+        author: ["bluepum"],
+        description: "",
+        type: "continent",
+        region: [],
+        provinces: 426,
+        features: [],
+        status: "completed",
+        publishDate: "2025-06-09", 
+        lastUpdate: "2025-06-09",
+        load: "normal",
+        hiddenScore: 0,
+        rights: true
+    },
+    {
+        id: ["bluepum", "oldcalradia", "v1"],
+        title: "Old Calradia by Bluepum",
+        author: ["bluepum"],
+        description: "",
+        type: "continent",
+        region: [],
+        provinces: 99999,
+        features: [],
+        status: "completed",
+        publishDate: "2025-06-09", 
+        lastUpdate: "2025-06-09",
+        load: "normal",
+        hiddenScore: 0,
+        rights: true
+    },
+    {
+        id: ["bluepum", "poland", "v1"],
+        title: "Poland by Bluepum",
+        author: ["bluepum"],
+        description: "",
+        type: "country",
+        region: [],
+        provinces: 393,
+        features: [],
+        status: "completed",
+        publishDate: "2025-07-07", 
+        lastUpdate: "2025-07-07",
+        load: "normal",
+        hiddenScore: 0,
+        rights: true
+    },
+    {
+        id: ["bluepum", "pvp", "v1"],
+        title: "PVP by Bluepum",
+        author: ["bluepum"],
+        description: "",
+        type: "country",
+        region: [],
+        provinces: 494,
+        features: [],
+        status: "completed",
+        publishDate: "2025-06-30", 
+        lastUpdate: "2025-06-30",
+        load: "normal",
+        hiddenScore: 0,
+        rights: true
+    },
+    {
+        id: ["bluepum", "su", "v1"],
+        title: "Soviet Union by Bluepum",
+        author: ["bluepum"],
+        description: "",
+        type: "country",
+        region: [],
+        provinces: 580,
+        features: [],
+        status: "completed",
+        publishDate: "2025-06-14", 
+        lastUpdate: "2025-06-14",
+        load: "normal",
+        hiddenScore: 0,
+        rights: true
+    },
+    {
+        id: ["bluepum", "tajikistan", "v1"],
+        title: "Tajikistan by Bluepum",
+        author: ["bluepum"],
+        description: "",
+        type: "country",
+        region: [],
+        provinces: 59,
+        features: [],
+        status: "completed",
+        publishDate: "2025-06-08", 
+        lastUpdate: "2025-06-08",
+        load: "ultralight",
+        hiddenScore: 0,
+        rights: true
+    },
+    {
+        id: ["dener", "france", "v1"],
+        title: "France by Dener",
+        author: ["dener"],
+        description: "",
+        type: "country",
+        region: [],
+        provinces: 580,
+        features: [],
+        status: "completed",
+        publishDate: "2023-10-06", 
+        lastUpdate: "2023-10-06",
+        load: "normal",
+        hiddenScore: 0
+    },
+    {
+        id: ["eleven", "east-asia", "v1"],
+        title: "East Asia by Eleven",
+        author: ["eleven"],
+        description: "",
+        type: "region",
+        region: [],
+        provinces: 99999,
+        features: [],
+        status: "completed",
+        publishDate: "2023-03-25", 
+        lastUpdate: "2023-03-25",
+        load: "normal",
+        hiddenScore: 0
+    },
+    {
+        id: ["eleven", "israel", "v1"],
+        title: "Israel by Eleven",
+        author: ["eleven"],
+        description: "",
+        type: "region",
+        region: [],
+        provinces: 99999,
+        features: [],
+        status: "completed",
+        publishDate: "2023-07-22", 
+        lastUpdate: "2023-07-22",
+        load: "normal",
+        hiddenScore: 0
+    },
+    {
+        id: ["eleven", "switzerland", "v1"],
+        title: "Switzerland by Eleven",
+        author: ["eleven"],
+        description: "",
+        type: "country",
+        region: [],
+        provinces: 99999,
+        features: [],
+        status: "completed",
+        publishDate: "2023-07-21", 
+        lastUpdate: "2023-07-21",
+        load: "normal",
+        hiddenScore: 0
+    },
+    {
+        id: ["enotochel", "malta", "v1"],
+        title: "Malta by Енотий",
+        author: ["enotochel", "joker"],
+        description: "",
+        type: "country",
+        region: [],
+        provinces: 1629,
+        features: [],
+        status: "completed",
+        publishDate: "2023-05-08", 
+        lastUpdate: "2023-05-08",
+        load: "normal",
+        hiddenScore: 0
+    },
+    {
+        id: ["estebanf259", "balkans", "v3"],
+        title: "Balkans by Este",
+        author: ["estebanf259"],
+        description: "",
+        type: "region",
+        region: [],
+        provinces: 825,
+        features: [],
+        status: "completed",
+        publishDate: "2023-06-15", 
+        lastUpdate: "2023-09-10",
+        load: "normal",
+        hiddenScore: 0
+    },
+    {
+        id: ["estebanf259", "british", "v1"],
+        title: "British Isles by Este",
+        author: ["estebanf259"],
+        description: "",
+        type: "region",
+        region: [],
+        provinces: 151,
+        features: [],
+        status: "completed",
+        publishDate: "2024-12-17", 
+        lastUpdate: "2024-12-17",
+        load: "normal",
+        hiddenScore: 0
+    },
+    {
+        id: ["estebanf259", "chess", "v1"],
+        title: "Chess by Este",
+        author: ["estebanf259"],
+        description: "",
+        type: "region",
+        region: [],
+        provinces: 64,
+        features: [],
+        status: "completed",
+        publishDate: "2023-09-15", 
+        lastUpdate: "2023-09-15",
+        load: "normal",
+        hiddenScore: 0
+    },
+    {
+        id: ["zloyhoziain", "fareast", "v1"],
+        title: "Far East by Злой ХозяинЪ",
+        author: ["zloyhoziain"],
+        description: "",
+        type: "region",
+        region: [],
+        provinces: 380,
+        features: [],
+        status: "completed",
+        publishDate: "2025-08-22", 
+        lastUpdate: "2025-08-22",
+        load: "normal",
+        hiddenScore: 0
+    },
+    {
+        id: ["zachary", "americas-rem", "v2"],
+        title: "Americas Remastered by Zachary",
+        author: ["zachary"],
+        description: "",
+        type: "continent",
+        region: [],
+        provinces: 1907,
+        features: [],
+        status: "completed",
+        publishDate: "2025-09-03", 
+        lastUpdate: "2025-09-03",
+        load: "normal",
+        hiddenScore: 0,
+        rights: true
+    },
+    {
+        id: ["eenot", "metro2033", "v1"],
+        title: "Metro 2033 by ЕЕнот",
+        author: ["eenot"],
+        description: "",
+        type: "city",
+        region: [],
+        provinces: 424,
+        features: [],
+        status: "completed",
+        publishDate: "2025-09-19",
+        lastUpdate: "2025-09-26",
+        load: "normal",
+        hiddenScore: 0,
+        rights: true
+    },
+    {
+        id: ["estebanf259", "euromagnus", "v1"],
+        title: "Euromagnus by Esteban",
+        author: ["estebanf259"],
+        description: "",
+        type: "continent",
+        region: [],
+        provinces: 4096,
+        features: [],
+        status: "completed",
+        publishDate: "2023-09-09",
+        lastUpdate: "2023-09-09",
+        load: "superheavy",
+        hiddenScore: 0
+    },
+    {
+        id: ["estebanf259", "world-redux", "v1"],
+        title: "World Redux by Esteban",
+        author: ["estebanf259"],
+        description: "",
+        type: "world",
+        region: [],
+        provinces: 1044,
+        features: [],
+        status: "completed",
+        publishDate: "2023-07-03",
+        lastUpdate: "2023-07-09",
+        load: "superheavy",
+        hiddenScore: 0
+    },
+    {
+        id: ["gooby", "syria", "v2"],
+        title: "Syria by Gooby",
+        author: ["gooby", "zachary"],
+        description: "",
+        type: "country",
+        region: [],
+        provinces: 158,
+        features: [],
+        status: "completed",
+        publishDate: "2025-10-04",
+        lastUpdate: "2025-10-05",
+        load: "light",
+        hiddenScore: 0
+    },
+    {
+        id: ["shutkin", "dolina", "v1"],
+        title: "Деймор - Долина",
+        author: ["shutkin"],
+        description: "",
+        type: "region",
+        region: [],
+        provinces: 453,
+        features: [],
+        status: "completed",
+        publishDate: "2025-06-21",
+        lastUpdate: "2025-06-21",
+        load: "normal",
+        hiddenScore: 0
+    },
+    {
+        id: ["shutkin", "vostmond", "v3"],
+        title: "Деймор - Востмонт",
+        author: ["shutkin"],
+        description: "",
+        type: "continent",
+        region: [],
+        provinces: 760,
+        features: [],
+        status: "completed",
+        publishDate: "2023-08-10",
+        lastUpdate: "2025-06-07",
+        load: "normal",
+        hiddenScore: 0
+    },
+    {
+        id: ["vova", "lifia", "v1"],
+        title: "Lifia",
+        author: ["vova"],
+        description: "",
+        type: "world",
+        region: [],
+        provinces: 2820,
+        features: [],
+        status: "completed",
+        publishDate: "2026-01-18",
+        lastUpdate: "2026-01-18",
+        load: "normal",
+        hiddenScore: 20
+    },
+    {
+        id: ["eenot", "asia", "v1"],
+        title: "Asia",
+        author: ["eenot"],
+        description: "The best map of Asia for Warnament. Detalied borders, many rivers, many provinces, good optimization.",
+        type: "continent",
+        region: ['Asia','Oceania','Australia','Middle East'],
+        provinces: 1579,
+        features: [],
+        status: "completed",
+        publishDate: "2026-03-17",
+        lastUpdate: "2026-03-17",
+        load: "normal",
+        hiddenScore: 100
     },
 ];
 
@@ -713,9 +1172,17 @@ function generateMapCard(map) {
     const awardsHTML = ''; // Can be implemented later if needed
     const status = map.status || 'completed';
     const statusLabel = status.charAt(0).toUpperCase() + status.slice(1);
+    let noRights;
+    if (map.rights === true) {
+        noRights = "";
+    } else {
+        noRights = `<button class="download-download-button" onclick="askDelete()" style="background-color: #945d44ff; border-radius: var(--br); width: 45px; height: 45px; border: none; cursor: pointer;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"role="img" aria-label="Жалоба: предупреждение" focusable="false"><title>Жалоба</title><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                    </button>`;
+    }
 
     return `
-        <div class="download-card" 
+        <div class="download-card map-card" 
             data-title="${map.title}"
             data-author="${authorsData[map.author]?.name}" 
             data-type="${map.type}" 
@@ -733,7 +1200,7 @@ function generateMapCard(map) {
                 <div class="download-up">
                     <div class="download-image-container">
                         <a href="${detailsLink}">
-                            <img src="${imagePath}" class="download-goto-page" style="width: 250px; height: 156px; object-fit: cover; border-radius: 15px 15px 0 0;">
+                            <img src="${imagePath}" class="download-goto-page" style="/*width: 250px; height: 156px; object-fit: cover; border-radius: var(--br) 15px 0 0;*/">
                         </a>
                         <div class="download-awards">
                             ${awardsHTML}
@@ -748,7 +1215,16 @@ function generateMapCard(map) {
                     <div class="download-row-big">
                         <div class="download-row">
                             <img src="../../img/library/autor.svg" class="download-info-ico" />
-                            <a href="${authorsData[map.author]?.link}" style="color: ${authorsData[map.author]?.color}">${truncateAuthorName(authorsData[map.author]?.name)}</a>
+                            <div class="authors" style="display:flex; flex-direction:column">
+                            ${
+                                map.author
+                                    ?.map(authorId => {
+                                        const author = authorsData[authorId];
+                                        return `<a href="${author?.link}" style="color: ${author?.color}">${truncateAuthorName(author?.name)}</a>`;
+                                    })
+                                    .join("")
+                            }
+                            </div>
                         </div>
                         <div class="download-row">
                             <p>${map.provinces}</p>
@@ -784,9 +1260,12 @@ function generateMapCard(map) {
                             <img src="../../img/library/calendar.svg" class="download-info-ico" />
                         <p title="Last Update">${new Date(map.lastUpdate).toLocaleDateString()}</p>
                     </div>
-                    <button class="download-download-button" onclick="downloadMapMap('${map.id.join('_')}')" style="background-color: #44944A; border-radius: 15px; width: 45px; height: 45px; border: none; cursor: pointer;">
-                        <img src="../../img/library/download.svg" class="download-info-ico" />
-                    </button>
+                    <div style="display:flex;flex-direction:column;align-items:bottom">
+                        ${noRights}
+                        <button class="download-download-button" onclick="downloadMapMap('${map.id.join('_')}')" style="background-color: #44944A; border-radius: var(--br); width: 45px; height: 45px; border: none; cursor: pointer;">
+                            <img src="../../img/library/download.svg" class="download-info-ico" />
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

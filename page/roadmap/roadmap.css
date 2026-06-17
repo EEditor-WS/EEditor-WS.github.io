@@ -17,7 +17,7 @@ body {
     background-color: #3498db;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: var(--br);
     cursor: pointer;
     font-size: 14px;
     margin-bottom: 20px;
@@ -40,7 +40,7 @@ h1 {
     width: 100%;
     border-collapse: collapse;
     background-color: #242424;
-    border-radius: 10px;
+    border-radius: var(--br);
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -53,7 +53,7 @@ h1 {
 }
 
 .roadmap-table th {
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
     font-weight: 500;
     color: #e0e0e0;
     font-size: 14px;
@@ -70,12 +70,12 @@ h1 {
 
 .roadmap-table tbody th {
     text-align: left;
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
 }
 
 .roadmap-card {
     padding: 15px;
-    border-radius: 10px;
+    border-radius: var(--br);
     color: white;
     font-size: 14px;
     text-align: center;
