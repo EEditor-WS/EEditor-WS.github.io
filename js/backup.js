@@ -1,3 +1,18 @@
+if (window.chrome?.webview?.hostObjects?.backupManager) {
+    listBackups = async function () {
+        return await window.chrome.webview.hostObjects.backupManager.GetBackupFiles();
+    };
+
+    saveBackup = async function (name, content) {
+        await window.chrome.webview.hostObjects.backupManager.SaveBackupFile(name, content);
+    };
+
+    readBackup = async function (name) {
+        return await window.chrome.webview.hostObjects.backupManager.ReadBackupFile(name);
+    };
+}
+
+
 class BackupManager {
     constructor() {
         this.backups = [];
@@ -24,14 +39,20 @@ class BackupManager {
         localStorage.setItem('backup_settings', JSON.stringify(this.settings));
     }
 
-    loadBackups() {
-        const savedBackups = localStorage.getItem('scenario_backups');
-        if (savedBackups) {
-            try {
-                this.backups = JSON.parse(savedBackups);
-            } catch (e) {
-                console.error('Error loading backups:', e);
-                this.backups = [];
+    async loadBackups() {
+        let savedBackups;
+        if (window.chrome?.webview?.hostObjects?.backupManager) {
+            savedBackups = await listBackups();
+        } else {
+            savedBackups = localStorage.getItem('scenario_backups');
+
+            if (savedBackups) {
+                try {
+                    this.backups = JSON.parse(savedBackups);
+                } catch (e) {
+                    console.error('Error loading backups:', e);
+                    this.backups = [];
+                }
             }
         }
     }
@@ -61,44 +82,66 @@ class BackupManager {
     }
 
     async createBackup() {
-        setTimeout(() => {
-        }, 1000);
-        
-        const scenarioData = this.getCurrentScenario();
-        if (!scenarioData) return; // Don't create backup if no scenario data
+        try {
+            const scenarioData = this.getCurrentScenario();
+            if (!scenarioData) return;
 
-        const currentData = {
-            scenarioData,
-            timestamp: new Date().toISOString(),
-            fileName: this.getCurrentFileName(),
-            size: 0,
-            charCount: 0
-        };
+            const currentData = {
+                scenarioData,
+                timestamp: new Date().toISOString(),
+                fileName: this.getCurrentFileName(),
+                size: 0,
+                charCount: 0
+            };
 
-        // Convert to string to get size and char count
-        const dataStr = JSON.stringify(currentData.scenarioData);
-        currentData.size = new Blob([dataStr]).size;
-        currentData.charCount = dataStr.length;
+            const dataStr = JSON.stringify(currentData.scenarioData);
+            currentData.size = new Blob([dataStr]).size;
+            currentData.charCount = dataStr.length;
 
-        // Add to beginning of array
-        this.backups.unshift(currentData);
+            this.backups.unshift(currentData);
 
-        // Enforce limit
-        if (this.backups.length > this.settings.limit) {
-            this.backups = this.backups.slice(0, this.settings.limit);
+            if (this.backups.length > this.settings.limit) {
+                this.backups = this.backups.slice(0, this.settings.limit);
+            }
+
+            // Генерируем безопасное имя файла
+            const safeFileName = `${currentData.fileName.replace('.json', '').replace(/\./g, '-')}-${currentData.timestamp.replace(/[:.]/g, '-')}.json`;
+
+            if (window.chrome?.webview?.hostObjects?.backupManager) {
+                console.log('Creating backup (app):', currentData.scenarioData);
+                await saveBackup(safeFileName, JSON.stringify(currentData.scenarioData));
+                // Optional: обновляем список
+                await this.loadBackups();
+            } else {
+                console.log('Creating backup (browser):', currentData);
+                localStorage.setItem('scenario_backups', JSON.stringify(this.backups));
+            }
+
+        } catch (e) {
+            showError(`Backup Ошибка/Error: ${e}`);
         }
-
-        // Save to localStorage
-        console.log('Creating backup:', currentData);
-        localStorage.setItem('scenario_backups', JSON.stringify(this.backups));
     }
 
     async restoreBackup(index) {
-        if (index >= 0 && index < this.backups.length) {
-            const backup = this.backups[index];
-            if (window.scenarioManager && typeof window.scenarioManager.loadScenario === 'function') {
-                await window.scenarioManager.loadScenario(backup.scenarioData);
-                return true;
+        let allBackups = '';
+        if (window.chrome?.webview?.hostObjects?.backupManager) {
+            allBackups = await listBackups();
+        }
+
+        if (window.chrome?.webview?.hostObjects?.backupManager) {
+            let fileContent;
+            //alert(allBackups[index]);
+            fileContent = await readBackup(allBackups[index]);
+            fileContent = JSON.parse(fileContent);
+            //alert(fileContent);
+            await window.scenarioManager.loadScenario(fileContent);
+        } else {
+            if (index >= 0 && index < this.backups.length) {
+                const backup = this.backups[index];
+                if (window.scenarioManager && typeof window.scenarioManager.loadScenario === 'function') {
+                    await window.scenarioManager.loadScenario(backup.scenarioData);
+                    return true;
+                }
             }
         }
         return false;
@@ -117,7 +160,7 @@ class BackupManager {
         return false;
     }
 
-    updateBackupList() {
+    /*updateBackupList() {
         const backupList = document.getElementById('backup-list');
         if (!backupList) return;
 
@@ -147,9 +190,9 @@ class BackupManager {
 
             backupList.appendChild(backupItem);
         });
-    }
+    }*/
 
-    initAutoBackup() {
+    /*initAutoBackup() {
         // Initial delay to wait for scenarioManager to be available
         setTimeout(() => {
             if (this.hasUnsavedChanges()) {
@@ -159,7 +202,7 @@ class BackupManager {
             this.startAutoBackup();
             console.log('Initial backup triggered');
         }, 2000); // 2 second initial delay
-    }
+    }*/
 
     startAutoBackup() {
         console.log('Auto backup started with interval:', this.settings.interval, 'seconds');
@@ -171,31 +214,57 @@ class BackupManager {
         }, this.settings.interval * 1000); // Convert seconds to milliseconds
     }
 
-    showBackupModal() {
+    async showBackupModal() {
         const modal = document.getElementById('backups-modal');
         const listContainer = document.getElementById('backup-list');
         listContainer.innerHTML = '';
 
-        this.backups.forEach((backup, index) => {
-            const date = new Date(backup.timestamp);
-            const formattedDate = date.toLocaleString();
-            const size = (backup.size / 1024).toFixed(2); // Convert to KB
+        if (window.chrome?.webview?.hostObjects?.backupManager) {
+            let allBackups
+            allBackups = await listBackups();
 
-            const backupItem = document.createElement('div');
-            backupItem.className = 'backup-item';
-            backupItem.innerHTML = `
-                <div class="backup-info">
-                    <div class="backup-name">${backup.fileName}</div>
-                    <div class="backup-meta">${formattedDate} • ${size}KB • ${backup.charCount} chars</div>
-                </div>
-                <div class="backup-size">${size}KB</div>
-                <div class="backup-actions">
-                    <button class="restore-backup" onclick="window.backupManager.confirmRestore(${index})" data-translate="restore">Восстановить</button>
-                    <button class="delete-backup" onclick="window.backupManager.deleteBackup(${index})" data-translate="delete">Удалить</button>
-                </div>
-            `;
-            listContainer.appendChild(backupItem);
-        });
+            allBackups.forEach((backup, index) => {
+                //const date = new Date(backup.timestamp);
+                //const formattedDate = date.toLocaleString();
+                //const size = (backup.size / 1024).toFixed(2); // Convert to KB
+                const backupFile = allBackups[index];
+
+                const backupItem = document.createElement('div');
+                backupItem.className = 'backup-item';
+                backupItem.innerHTML = `
+                    <div class="backup-info">
+                        <div class="backup-name">${backupFile}</div>
+                        <div class="backup-meta"> </div>
+                    </div>
+                    <div class="backup-actions">
+                        <button class="restore-backup" onclick="window.backupManager.confirmRestore(${index})" data-translate="restore">Восстановить</button>
+                        <button class="delete-backup" onclick="window.backupManager.deleteBackup(${index})" data-translate="delete">Удалить</button>
+                    </div>
+                `;
+                listContainer.appendChild(backupItem);
+            });
+        } else {
+            this.backups.forEach((backup, index) => {
+                const date = new Date(backup.timestamp);
+                const formattedDate = date.toLocaleString();
+                const size = (backup.size / 1024).toFixed(2); // Convert to KB
+
+                const backupItem = document.createElement('div');
+                backupItem.className = 'backup-item';
+                backupItem.innerHTML = `
+                    <div class="backup-info">
+                        <div class="backup-name">${backup.fileName}</div>
+                        <div class="backup-meta">${formattedDate} • ${size}KB • ${backup.charCount} chars</div>
+                    </div>
+                    <div class="backup-size">${size}KB</div>
+                    <div class="backup-actions">
+                        <button class="restore-backup" onclick="window.backupManager.confirmRestore(${index})" data-translate="restore">Восстановить</button>
+                        <button class="delete-backup" onclick="window.backupManager.deleteBackup(${index})" data-translate="delete">Удалить</button>
+                    </div>
+                `;
+                listContainer.appendChild(backupItem);
+            });
+        }
 
         modal.classList.add('active');
     }

@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Инициализация переменных
-    const navButtons = document.querySelectorAll('.nav-button[data-page]');
+    const navButtons = document.querySelectorAll('.navbtn[data-page]');
     const navLinks = document.querySelectorAll('.docs-nav a');
     const searchInput = document.getElementById('docs-search');
     const pages = document.querySelectorAll('.page');

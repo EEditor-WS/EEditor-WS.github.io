@@ -27,9 +27,9 @@ const ColorUtils = {
 
     // Проверяет корректность цвета
     isValidColor(color) {
-        return Array.isArray(color) && 
-               color.length >= 3 && 
-               color.every(c => typeof c === 'number' && c >= 0 && c <= 255);
+        return Array.isArray(color) &&
+            color.length >= 3 &&
+            color.every(c => typeof c === 'number' && c >= 0 && c <= 255);
     },
 
     // Преобразует hex в RGB массив
@@ -119,87 +119,254 @@ const DOMUtils = {
 
 function convertObjectToReadableString(obj) {
     if (!Array.isArray(obj)) {
-      return "Некорректный формат объекта.";
+        return "<span style='color:red'>Некорректный формат объекта.</span>";
     }
-  
-    const translations = {
-      equal: " = ",
-      not_equal: " ≠ ",
-      more: " > ",
-      less: " < ",
-    };
-  
-    /*const results = obj.map((item) => {
-      let type = translations[item.type] || item.type;
-      let action = translations[item.action] || item.action;
-      let value = item.value;*/
-  
-    const results = obj.map((item) => {
-      let type = window.translator.translate(item.type) || item.type;
-      let action = translations[item.action] || item.action;
-      let value = item.value;
 
-      // ---------------------------
-      
+    const translations = {
+        equal: " = ",
+        not_equal: " ≠ ",
+        more: " > ",
+        less: " < ",
+    };
+
+    const results = obj.map((item) => {
+        let type = window.translator?.translate(item.type) || item.type;
+        let action = translations[item.action] || item.action;
+        let value = item.value;
+        let subtype = item.subtype || "";
+
+        // ---------------------------
         try {
-            if (action.includes("civilization")) {
-                action = window.eventManager.jsonData.lands[action].name;
+            if (typeof action === "string" && action.includes("civilization")) {
+                action = window.eventManager.jsonData.lands[action]?.name || action;
             }
-            if (value.includes("civilization")) {
-                value = window.eventManager.jsonData.lands[value].name;
+            if (typeof value === "string" && value.includes("civilization")) {
+                value = window.eventManager.jsonData.lands[value]?.name || value;
             }
-            if (subtype.includes("civilization")) {
-                subtype = window.eventManager.jsonData.lands[subtype].name;
+            if (typeof subtype === "string" && subtype.includes("civilization")) {
+                subtype = window.eventManager.jsonData.lands[subtype]?.name || subtype;
             }
-            alert("всё норм");
         } catch (e) {
             console.error("Ошибка при обработке действия:", e);
         }
+        // ---------------------------
 
-      // ---------------------------
-  
-      if (typeof value === "boolean") {
-        value = value ? "yes" : "no";
-      }
-  
-      if (item.subtype) {
-        const subtype = translations[item.subtype] || item.subtype;
-        return `${type} (${subtype}) ${action} ${value}`;
-      } else {
-        return `${type} ${action} ${value}`;
-      }
+        if (typeof value === "boolean") {
+            value = value ? "yes" : "no";
+        }
+
+        // создаём HTML с подсветкой
+        let htmlType = `<span class="list-req-type">${type}</span>`;
+        let htmlSubtype = subtype ? ` <span class="list-req-subtype">(${subtype})</span>` : "";
+        if (/^E\d+$/.test(subtype)) {
+            htmlSubtype = subtype ? ` <span class="list-req-subtype" onclick="document.getElementById('event-row-${subtype}').scrollIntoView({ behavior: 'smooth' })">(${subtype})</span>` : "";
+        }
+        let htmlAction = `<span class="list-req-action">${action}</span>`;
+        if (/^E\d+$/.test(action)) {
+            htmlSubtype = action ? ` <span class="list-req-subtype" onclick="document.getElementById('event-row-${action}').scrollIntoView({ behavior: 'smooth' })">(${action})</span>` : "";
+        }
+        let htmlValue = `<span class="list-req-value">${value}</span>`;
+        if (/^E\d+$/.test(value)) {
+            htmlSubtype = value ? ` <span class="list-req-subtype" onclick="document.getElementById('event-row-${value}').scrollIntoView({ behavior: 'smooth' })">(${value})</span>` : "";
+        }
+
+        return `${htmlType}${htmlSubtype} ${htmlAction} ${htmlValue}`;
     });
 
-    let retres = '[' + results.join('],		\n,[') + ']';
+    // каждая строка отдельным блоком
+    const html = results.map(r => `<div class="list-requirement-item">${r}</div>`).join("\n");
 
-  
-    return retres;
-  }
+    return `<div class="list-requirements-list">${html}</div>`;
+}
+
+function convertObjectToReadableDOM(obj, id) {
+    if (!Array.isArray(obj)) {
+        const error = document.createElement("span");
+        error.style.color = "red";
+        error.textContent = "Некорректный формат объекта.";
+        return error;
+    }
+
+    const translations = {
+        equal: " = ",
+        not_equal: " ≠ ",
+        more: " > ",
+        less: " < ",
+    };
+
+    const root = document.createElement("div");
+    root.className = "list-requirements-list";
+
+    obj.forEach(item => {
+        const row = document.createElement("div");
+        row.className = "list-requirement-item";
+
+        let type = window.translator?.translate(item.type) || item.type;
+        let action = translations[item.action] || item.action;
+        let value = item.value;
+        let subtype = item.subtype || "";
+
+        if (typeof value === "boolean") {
+            value = value ? "yes" : "no";
+        }
+
+        /* ===== TYPE ===== */
+        const typeEl = document.createElement("span");
+        typeEl.className = "list-req-type";
+        typeEl.textContent = type;
+        row.appendChild(typeEl);
+
+        /* ===== SUBTYPE ===== */
+        if (subtype) {
+            const subtypeEl = document.createElement("span");
+            subtypeEl.className = "list-req-subtype";
+            subtypeEl.textContent = `(${subtype})`;
+
+            if (typeof subtype === "string" && subtype.includes("civilization")) {
+                const id = item.subtype;
+                subtypeEl.textContent =
+                    window.eventManager.jsonData.lands[id]?.name || subtype;
+                subtypeEl.addEventListener("click", () => window.countryManager.openCountry(id));
+            }
+
+            if (/^E\d+$/.test(subtype)) {
+                subtypeEl.addEventListener("click", () => {
+                    document
+                        .getElementById(`event-row-${subtype}`)
+                        ?.scrollIntoView({ behavior: "smooth" });
+                });
+            }
+
+            if (subtype == id) subtypeEl.textContent = 'this'
+
+            row.append(" ");
+            row.appendChild(subtypeEl);
+        }
+
+        row.append(" ");
+
+        /* ===== ACTION ===== */
+        const actionEl = document.createElement("span");
+        actionEl.className = "list-req-action";
+        actionEl.textContent = action;
+
+        if (typeof item.action === "string" && item.action.includes("civilization")) {
+            const id = item.action;
+            actionEl.textContent =
+                window.eventManager?.jsonData?.lands?.[id]?.name || action;
+            actionEl.addEventListener("click", () => window.countryManager.openCountry(id));
+        }
+
+        if (/^E\d+$/.test(item.action)) {
+            actionEl.addEventListener("click", () => {
+                document
+                    .getElementById(`event-row-${item.action}`)
+                    ?.scrollIntoView({ behavior: "smooth" });
+            });
+        }
+
+        row.appendChild(actionEl);
+        row.append(" ");
+
+        /* ===== VALUE ===== */
+        const valueEl = document.createElement("span");
+        valueEl.className = "list-req-value";
+        valueEl.textContent = value;
+
+        if (typeof item.value === "string" && item.value.includes("civilization")) {
+            const id = item.value;
+            valueEl.textContent =
+                window.eventManager?.jsonData?.lands?.[id]?.name || value;
+            valueEl.addEventListener("click", () => window.countryManager.openCountry(id));
+        }
+
+        if (/^E\d+$/.test(item.value)) {
+            valueEl.addEventListener("click", () => {
+                document
+                    .getElementById(`event-row-${item.value}`)
+                    ?.scrollIntoView({ behavior: "smooth" });
+            });
+        }
+
+        row.appendChild(valueEl);
+
+        root.appendChild(row);
+    });
+
+    if (obj.length > 4) {
+        const morebtn = document.createElement('button')
+        morebtn.className = 'eventsReqsMoreBtn'
+        const morebtnIco = document.createElement('img')
+        morebtnIco.src = 'img/ui/arrow/down.svg'
+        morebtn.appendChild(morebtnIco)
+
+        morebtn.addEventListener('click', () => {
+            root.classList.toggle('active')
+        })
+
+        root.appendChild(morebtn)
+    }
+
+    return root;
+}
+
 
 function transformCustomEvents() {
-  let data = JSON.parse(previewContent.value);
-  let oldEvents = data.custom_events;
-  let newEvents = {};
+    let data = JSON.parse(previewContent.value);
+    let oldEvents = data.custom_events;
+    let newEvents = {};
 
-  for (let key in oldEvents) {
-    let event = oldEvents[key];
-    if (event.id) {
-      newEvents[event.id] = event;
-    } else {
-      console.log("Пропущено событие без id:", key, event);
+    for (let key in oldEvents) {
+        let event = oldEvents[key];
+        if (event.id) {
+            newEvents[event.id] = event;
+        } else {
+            console.log("Пропущено событие без id:", key, event);
+        }
     }
-  }
 
-  data.custom_events = newEvents;
+    data.custom_events = newEvents;
 
-  previewContent.value = JSON.stringify(data, null, 2);
-  window.eventManager.syncronizeWithPreview();
-  showSuccess("ID Роздан чётенько!");
+    previewContent.value = JSON.stringify(data, null, 2);
+    window.eventManager.syncronizeWithPreview();
+    showSuccess("ID Роздан чётенько!");
 
-  return data;
+    return data;
+}
+
+async function getFileContent(id) {
+    const fileInput = document.getElementById(id);
+
+    // Проверяем, что файл действительно выбран
+    if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+
+        try {
+            // Прямое чтение текста из объекта File
+            const content = await file.text();
+            console.log("Содержимое:", content);
+            return content;
+        } catch (err) {
+            console.error("Ошибка чтения:", err);
+        }
+    } else {
+        console.warn("Файл еще не выбран!");
+    }
+}
+
+function saveToPreview(data) {
+    document.getElementById('preview-content').value = JSON.stringify(data, null, 4);
 }
 
 // Экспортируем утилиты
 window.ColorUtils = ColorUtils;
 window.ValidationUtils = ValidationUtils;
-window.DOMUtils = DOMUtils; 
+window.DOMUtils = DOMUtils;
+window.getFileContent = getFileContent;
+
+document.addEventListener('DOMContentLoaded', function () {
+    if (new URLSearchParams(window.location.search).get('dev') === 'true') {
+        document.body.classList.add('dev_mode');
+        window.showInfo('Режим разработчика включён');
+    }
+});

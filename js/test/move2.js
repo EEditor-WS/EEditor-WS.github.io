@@ -1,6 +1,9 @@
+let enot;
+
+
 // Страны
 function copyManyCountries() {
-    const navButtons = document.querySelectorAll('.nav-button');
+    const navButtons = document.querySelectorAll('.navbtn');
     navButtons.forEach(btn => btn.classList.remove('active'));
     
     // Switch to pcopy-countries page
@@ -164,7 +167,7 @@ async function pasteManyCountries() {
 
 // События
 function copyManyEvents() {
-    const navButtons = document.querySelectorAll('.nav-button');
+    const navButtons = document.querySelectorAll('.navbtn');
     navButtons.forEach(btn => btn.classList.remove('active'));
     
     // Switch to pcopy-events page
@@ -285,4 +288,68 @@ async function pasteManyEvents() {
         showError(window.translator.translate('error'), window.translator.translate('paste_failed') + ': ' + (err && err.message ? err.message : err));
         alert('Paste failed: ' + (err && err.message ? err.message : err));
     }
+}
+
+// Вспомогательная функция для получения вложенного значения
+function getNestedValue(obj, path) {
+    return path.split('.').reduce((acc, key) => acc?.[key], obj);
+}
+
+// Вспомогательная функция для установки вложенного значения
+function setNestedValue(obj, path, value) {
+    const keys = path.split('.');
+    const lastKey = keys.pop();
+    const target = keys.reduce((acc, key) => {
+        if (!(key in acc)) acc[key] = {};
+        return acc[key];
+    }, obj);
+    target[lastKey] = value;
+}
+
+function copyParam(param1, param2, param3, param4, param5) {
+    const params = [param1, param2, param3, param4, param5].filter(Boolean); // исключаем undefined
+    alert('Копирование параметров: ' + params.join(', '));
+    
+    const provPop = window.countryManager.jsonData.provinces.map(province => {
+        const entry = {};
+        for (const key of params) {
+            const value = getNestedValue(province, key);
+            setNestedValue(entry, key, value);
+        }
+        return entry;
+    });
+
+    localStorage.setItem("copyParam", JSON.stringify(provPop));
+    //enot = JSON.stringify(provPop);
+}
+
+function pasteParam(param1, param2, param3, param4, param5) {
+    const params = [param1, param2, param3, param4, param5].filter(Boolean); // исключаем пустые
+    let updates;
+    alert(params.join(', '));
+
+    try {
+        updates = JSON.parse(localStorage.copyParam || "[]");
+        //updates = JSON.parse(enot || "[]");
+    } catch (e) {
+        console.error("Ошибка парсинга данных из localStorage:", e);
+        return;
+    }
+
+    const provinces = window.countryManager.jsonData.provinces;
+
+    provinces.forEach((province, idx) => {
+        const update = updates[idx];
+        if (!update) return;
+
+        for (const key of params) {
+            const value = getNestedValue(update, key);
+            if (value !== undefined) {
+                setNestedValue(province, key, value);
+            }
+        }
+    });
+
+    // Показываем результат
+    previewContent.value = JSON.stringify(window.countryManager.jsonData, null, 2);
 }

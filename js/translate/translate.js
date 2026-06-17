@@ -125,7 +125,7 @@ function createLanguageDialog() {
             transform: translate(-50%, -50%);
             background: #333;
             padding: 20px;
-            border-radius: 8px;
+            border-radius: var(--br);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             z-index: 1000;
             color: white;
@@ -171,16 +171,24 @@ function createLanguageDialog() {
 
 async function translateParameters(data, sourceLang, targetLang, isCapitals = true) {
     window.showInfo('Перевод', 'Начинаем перевод параметров...');
+
     const fieldsToTranslate = isCapitals
-        ? ['name', 'capital_name', 'title', 'answer1', 'answer2', 'answer3', 'description1', 'description2', 'description3']
-        : ['name', 'title', 'answer1', 'answer2', 'answer3', 'description1', 'description2', 'description3'];
+        ? ['name', 'capital_name', 'title', 'answer1', 'answer2', 'answer3', 'description', 'description1', 'description2', 'description3']
+        : ['name', 'title', 'answer1', 'answer2', 'answer3', 'description', 'description1', 'description2', 'description3'];
+
+    // Регулярки для определения алфавита
+    const hasCyrillic = text => /[а-яёА-ЯЁ]/.test(text);
+    const hasLatin = text => /[a-zA-Z]/.test(text);
+
     async function translateObject(obj) {
         if (!obj || typeof obj !== 'object') return obj;
         if (Array.isArray(obj)) {
             return await Promise.all(obj.map(item => translateObject(item)));
         }
+
         const translatedObj = { ...obj };
         const translationTasks = [];
+
         for (const [key, value] of Object.entries(obj)) {
             if (typeof value === 'object' && value !== null) {
                 translationTasks.push(
@@ -189,24 +197,36 @@ async function translateParameters(data, sourceLang, targetLang, isCapitals = tr
                     })
                 );
             } else if (typeof value === 'string' && fieldsToTranslate.includes(key) && value.trim()) {
+                const shouldTranslate =
+                    (sourceLang === 'ru' && hasCyrillic(value)) ||
+                    (sourceLang === 'en' && hasLatin(value)) ||
+                    (sourceLang !== 'ru' && sourceLang !== 'en'); // если не ru/en — всегда переводим
+
+                if (!shouldTranslate) continue;
+
                 translationTasks.push(
-                    translateText(value, sourceLang, targetLang).then(translated => {
-                        translatedObj[key] = translated;
-                        window.showSuccess('Перевод', `Переведено: ${key}`);
-                    }).catch(error => {
-                        console.error(`Ошибка перевода ${key}:`, error);
-                        window.showError('Перевод', `Ошибка перевода: ${key}`);
-                    })
+                    translateText(value, sourceLang, targetLang)
+                        .then(translated => {
+                            translatedObj[key] = translated;
+                            window.showSuccess('Перевод', `Переведено: ${key}`);
+                        })
+                        .catch(error => {
+                            console.error(`Ошибка перевода ${key}:`, error);
+                            window.showError('Перевод', `Ошибка перевода: ${key}`);
+                        })
                 );
             }
         }
+
         await Promise.all(translationTasks);
         return translatedObj;
     }
+
     const result = await translateObject(data);
     window.showSuccess('Перевод', 'Перевод параметров завершён');
     return result;
 }
+
 
 async function translateCurrentFile() {
     const { sourceLang, targetLang, isCapitals } = await createLanguageDialog();
@@ -247,7 +267,7 @@ function showNotification(message, type = 'info') {
         background: ${colors[type] || '#2196F3'};
         color: white;
         padding: 10px 20px;
-        border-radius: 4px;
+        border-radius: var(--br);
         z-index: 1001;
     `;
     notification.textContent = message;

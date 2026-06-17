@@ -1,4 +1,43 @@
 class CountryManager {
+    constructor() {
+        this.currentCountry = null;
+        this.jsonData = null;
+        this.undoStack = [];
+        this.redoStack = [];
+        this.maxStackSize = 50;
+        this.isEditing = false;
+        
+        // Добавляем параметры сортировки и фильтрации
+        this.sortColumn = 'name';
+        this.sortDirection = 'asc';
+        this.filters = {
+            color: { operator: null, value: null },
+            name: { operator: null, value: '' },
+            system_name: { operator: null, value: '' },
+            provinces_count: { operator: null, value: '' },
+            capital: { operator: null, value: '' },
+            groups: []
+        };
+        
+        this.currentFilterColumn = null;
+        
+        // Сохраняем ссылки на важные элементы
+        this.previewContent = document.getElementById('preview-content');
+        this.fileInfo = document.getElementById('file-info');
+        
+        // Проверяем наличие необходимых элементов
+        if (!this.previewContent) {
+            console.error('Не найден элемент preview-content');
+            return;
+        }
+        if (!this.fileInfo) {
+            console.error('Не найден элемент file-info');
+            return;
+        }
+        
+        this.init();
+    }
+    
     // Показывает подробности силы страны при наведении на powerCellInList
     showPowerBreakdown(countryId, anchorElement) {
         if (!this.jsonData?.lands?.[countryId]) return;
@@ -55,10 +94,10 @@ class CountryManager {
         tooltip.innerHTML = html;
         tooltip.style.position = 'fixed';
         tooltip.style.zIndex = 10000;
-        tooltip.style.background = '#222';
-        tooltip.style.color = '#fff';
-        tooltip.style.border = '1px solid #888';
-        tooltip.style.borderRadius = '6px';
+        tooltip.style.background = 'var(--bg-sec-great';
+        tooltip.style.color = 'var(--text-pri)';
+        tooltip.style.border = '1px solid var(--bc)';
+        tooltip.style.borderRadius = 'var(--br)';
         tooltip.style.padding = '8px 12px';
         tooltip.style.fontSize = '13px';
         tooltip.style.boxShadow = '0 2px 8px rgba(0,0,0,0.2)';
@@ -85,44 +124,6 @@ class CountryManager {
             anchorElement._powerTooltip.remove();
             anchorElement._powerTooltip = null;
         }
-    }
-    constructor() {
-        this.currentCountry = null;
-        this.jsonData = null;
-        this.undoStack = [];
-        this.redoStack = [];
-        this.maxStackSize = 50;
-        this.isEditing = false;
-        
-        // Добавляем параметры сортировки и фильтрации
-        this.sortColumn = 'name';
-        this.sortDirection = 'asc';
-        this.filters = {
-            color: { operator: null, value: null },
-            name: { operator: null, value: '' },
-            system_name: { operator: null, value: '' },
-            provinces_count: { operator: null, value: '' },
-            capital: { operator: null, value: '' },
-            groups: []
-        };
-        
-        this.currentFilterColumn = null;
-        
-        // Сохраняем ссылки на важные элементы
-        this.previewContent = document.getElementById('preview-content');
-        this.fileInfo = document.getElementById('file-info');
-        
-        // Проверяем наличие необходимых элементов
-        if (!this.previewContent) {
-            console.error('Не найден элемент preview-content');
-            return;
-        }
-        if (!this.fileInfo) {
-            console.error('Не найден элемент file-info');
-            return;
-        }
-        
-        this.init();
     }
 
     init() {
@@ -236,6 +237,10 @@ class CountryManager {
             });
 
         console.log('Найдено стран:', countries.length);
+        const countryCountEl = document.getElementById('countryCount');
+        if (countryCountEl) {
+            countryCountEl.textContent = countries.length;
+        }
 
         // Применяем фильтры
         countries = countries.filter(country => {
@@ -323,8 +328,8 @@ class CountryManager {
                 }
                 if (typeof valueA === 'string') {
                     return this.sortDirection === 'asc' 
-                        ? valueA.localeCompare(valueB)
-                        : valueB.localeCompare(valueA);
+                        ? valueA.localeCompare(valueB, undefined, { numeric: true, sensitivity: 'base' })
+                        : valueB.localeCompare(valueA, undefined, { numeric: true, sensitivity: 'base' });
                 } else {
                     return this.sortDirection === 'asc'
                         ? valueA - valueB
@@ -335,6 +340,42 @@ class CountryManager {
 
         // Создаем строки таблицы
         countries.forEach(country => {
+            function makeGroups() {
+                groupCell.innerHTML = '';
+                const groupCellDiv = document.createElement('div');
+                groupCellDiv.className = 'groupsInCellDiv';
+                groupCell.appendChild(groupCellDiv);
+
+                if (country.group_name) {
+                    // 1. Разбиваем строку по запятой, игнорируя любые пробелы вокруг неё
+                    // 2. Убираем пустые элементы (если строка заканчивалась запятой)
+                    const groupNames = country.group_name
+                        .split(/\s*,\s*/)
+                        .filter(name => name.length > 0);
+
+                    // 3. Отрисовываем каждый элемент
+                    groupNames.forEach(name => {
+                        const span = document.createElement('span');
+                        span.textContent = name;
+                        span.className = 'group-item';
+                        span.addEventListener('click', () => {
+                            const grs = window.countryManager.filters;
+                            if (!grs || !grs.groups) grs.groups = [];
+                            if (grs.groups[0] == name) {
+                                grs.groups = [];
+                            } else {
+                                grs.groups = [];
+                                grs.groups.push(name);
+                            }
+                            window.countryManager.updateCountriesList();
+                        });
+                        
+                        // Если нужно просто через запятую, но красиво:
+                        groupCellDiv.appendChild(span);
+                    });
+                }
+            }
+
             const tr = document.createElement('tr');
             tr.setAttribute('data-country-id', country.id);
             tr.style.cursor = 'pointer';
@@ -357,7 +398,9 @@ class CountryManager {
 
             const groupCell = document.createElement('td');
             groupCell.setAttribute('data-country-id', country.id);
-            groupCell.textContent = country.group_name;
+            // groupCell.textContent = country.group_name;
+            makeGroups();
+            groupCell.className = 'groupsInCell';
 
             const provincesCell = document.createElement('td');
             provincesCell.setAttribute('data-country-id', country.id);
@@ -367,18 +410,10 @@ class CountryManager {
             capitalCell.setAttribute('data-country-id', country.id);
             capitalCell.textContent = country.capital_name;
 
-            // Новая ячейка: сила страны
             const powerCell = document.createElement('td');
             powerCell.setAttribute('data-country-id', country.id);
             powerCell.setAttribute('id', 'powerCellInList');
             powerCell.textContent = country.power;
-
-            // Добавляем обработчики событий
-            const handleClick = (e) => {
-                if (!e.target.closest('.context-menu')) {
-                    this.openCountry(country.id);
-                }
-            };
 
             const handleContextMenu = (e) => {
                 e.preventDefault();
@@ -472,7 +507,7 @@ class CountryManager {
 
             // Добавляем обработчики к каждой ячейке
             [tr, colorCell, nameCell, sysNameCell, groupCell, provincesCell, capitalCell, powerCell].forEach(element => {
-                element.addEventListener('click', handleClick);
+                //element.addEventListener('click', handleClick);
                 element.addEventListener('contextmenu', handleContextMenu);
             });
 
@@ -484,13 +519,23 @@ class CountryManager {
                 this.hidePowerBreakdown(powerCell);
             });
 
-            tr.appendChild(colorCell);
-            tr.appendChild(nameCell);
-            tr.appendChild(sysNameCell);
-            tr.appendChild(groupCell);
-            tr.appendChild(provincesCell);
-            tr.appendChild(capitalCell);
-            tr.appendChild(powerCell);
+            window.currentOrderCountries.forEach((numer, number) => {
+                       if (window.currentOrderCountries[number] === 'color') {
+                    tr.appendChild(colorCell);
+                } else if (window.currentOrderCountries[number] === 'name') {
+                    tr.appendChild(nameCell);
+                } else if (window.currentOrderCountries[number] === 'system_name') {
+                    tr.appendChild(sysNameCell);
+                } else if (window.currentOrderCountries[number] === 'group') {
+                    tr.appendChild(groupCell);
+                } else if (window.currentOrderCountries[number] === 'provinces_count') {
+                    tr.appendChild(provincesCell);
+                } else if (window.currentOrderCountries[number] === 'capital') {
+                    tr.appendChild(capitalCell);
+                } else if (window.currentOrderCountries[number] === 'power') {
+                    tr.appendChild(powerCell);
+                }
+            });
 
             tbody.appendChild(tr);
         });
@@ -573,6 +618,10 @@ class CountryManager {
             form.addEventListener('change', (e) => this.handleFormChange(e));
             form.addEventListener('submit', (e) => e.preventDefault());
         }
+        
+        window.customDropFlag.addEventListener('change', (e) => {
+            this.handleFormChange(e);
+        });
 
         // Обработчики отношений
         document.querySelectorAll('.add-country-button').forEach(button => {
@@ -952,13 +1001,31 @@ class CountryManager {
             window.countryUtils.updateCountryHeader(country.name);
         }
 
+        let polit;
+        let countryBranch = country.branch || '';
+               if (countryBranch === 'branch3') {
+            polit = "Communism";
+        } else if (countryBranch === 'branch2') {
+            polit = "Monarchy";
+        } else if (countryBranch === 'branch1') {
+            polit = "Theocracy";
+        } else if (countryBranch === 'branch6') {
+            polit = "Fascism";
+        } else if (countryBranch === 'branch5') {
+            polit = "trade_republic";
+        } else if (countryBranch === 'branch4') {
+            polit = "Democracy";
+        } else {
+            
+        };
+
         this.setFormValues({
             'country-name': country.name,
             'country-group': country.group_name || '', // Changed from group_name to group
             'country-capital': country.capital_name || '',
             'country-capital-id': country.capital || '',
             'country-defeated': country.defeated ? 'true' : 'false',
-            'country-political': country.political || '',
+            'country-political': country.branch || '',
             'country-vassalof': country.vassal_of || ''
         });
 
@@ -1001,9 +1068,18 @@ class CountryManager {
         });
         document.getElementById('country-edit')?.classList.add('active');
 
-        document.querySelectorAll('.nav-button').forEach(btn => {
+        document.querySelectorAll('.navbtn').forEach(btn => {
             btn.classList.remove('active');
         });
+
+        window.customDropFlag.setValue(country.banner || '');
+
+        this.showMentionsInEvents(countryId);
+
+        
+        const opage = document.getElementById('openedPage');
+        opage.setAttribute('data-pre', opage.getAttribute('data-now'));
+        opage.setAttribute('data-now', 'country-edit');
     }
 
     setFormValues(values) {
@@ -1180,6 +1256,7 @@ class CountryManager {
                 <div class="modal-body">
                     <div class="form-group">
                         <label>${window.translator.translate('select_country')}</label>
+                        <div id="customSelectRelations"></div>
                         <select class="param-country main-page-input">
                             <option value="">${window.translator.translate('select_country_placeholder')}</option>
                             ${this.generateCountryOptions()}
@@ -1205,18 +1282,11 @@ class CountryManager {
                 </div>
                 <div class="info-actions">
                     <button class="action-button save-params requirements-editor-button primary">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-                            <polyline points="17 21 17 13 7 13 7 21"></polyline>
-                            <polyline points="7 3 7 8 15 8"></polyline>
-                        </svg>
+                        <img src="img/ui/save.svg">
                         <span>${window.translator.translate('save')}</span>
                     </button>
                     <button class="requirements-editor-button secondary">
-                        <svg viewBox="0 0 24 24">
-                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                        </svg>
+                        <img src="img/ui/block.svg">
                         <span>${window.translator.translate('cancel')}</span>
                     </button>
                 </div>
@@ -1281,10 +1351,10 @@ class CountryManager {
         return Object.entries(this.jsonData.lands)
             .filter(([id]) => id !== 'provinces' && id !== this.currentCountry)
             .sort(([, a], [, b]) => a.name.localeCompare(b.name))
-            .map(([id, country]) => {
-                return `<option value="${id}">${country.name} - ${id}</option>`;
-            })
-            .join('');
+            //.map(([id, country]) => {
+            //    return `<option value="${id}">${country.name} - ${id}</option>`;
+            //})
+            //.join('');
     }
 
     updateReciprocatedRelation(targetCountryId, relationType, params) {
@@ -1367,15 +1437,53 @@ class CountryManager {
             } else {
                 delete country.capital;
             }
+            //country.eenot = 'raccoon';
             
             country.defeated = document.getElementById('country-defeated').value === 'true';
-            country.political = document.getElementById('country-political').value;
+            // from old versions // country.political = document.getElementById('country-political').value;
+            let polit = document.getElementById('country-political').value;
+            /*if (polit === 'communism') {
+                country.branch = 'branch3';
+                country.opened_institutions = ["institution1"];
+            } else if (polit === 'monarchy') {
+                country.branch = 'branch2';
+                country.opened_institutions = ["institution1"];
+            } else if (polit === 'theocracy') {
+                country.branch = 'branch1';
+                country.opened_institutions = ["institution1"];
+            } else if (polit === 'fascism') {
+                country.branch = 'branch6';
+                country.opened_institutions = ["institution1"];
+            } else if (polit === 'trade_republic') {
+                country.branch = 'branch5';
+                country.opened_institutions = ["institution1"];
+            } else if (polit === 'democracy') {
+                country.branch = 'branch4';
+                country.opened_institutions = ["institution1"];
+            } else {
+                delete country.branch;
+                delete country.opened_institutions;
+            };*/
+            if (polit != '') {
+                country.branch = polit;
+                country.opened_institutions = ["institution1"];
+            } else {
+                delete country.branch;
+                delete country.opened_institutions;
+            }
 
             // Обновляем цвет
             const r = parseFloat(document.getElementById('country-color-r').value) || 0;
             const g = parseFloat(document.getElementById('country-color-g').value) || 0;
             const b = parseFloat(document.getElementById('country-color-b').value) || 0;
             country.color = [r, g, b, 255];
+
+            let banner = window.customDropFlag.getValue();
+            if (banner != '') {
+                country.banner = banner
+            } else {
+                delete country.banner;
+            }
 
             // Обновляем отношения
             this.updateRelations(country);
@@ -1468,7 +1576,7 @@ class CountryManager {
         });
         document.getElementById('country-edit')?.classList.add('active');
 
-        document.querySelectorAll('.nav-button').forEach(btn => {
+        document.querySelectorAll('.navbtn').forEach(btn => {
             btn.classList.remove('active');
         });
     }
@@ -1479,7 +1587,7 @@ class CountryManager {
         });
         document.getElementById('countries')?.classList.add('active');
 
-        document.querySelectorAll('.nav-button').forEach(btn => {
+        document.querySelectorAll('.navbtn').forEach(btn => {
             if (btn.getAttribute('data-page') === 'countries') {
                 btn.classList.add('active');
             } else {
@@ -2155,6 +2263,115 @@ class CountryManager {
                 window.saveChanges();
             }
         }
+    }
+
+    showMobileUpdatesOnTableHead() {
+
+    }
+
+    showMobileSettingsForTable() {
+        // список всех доступных опций (добавил group и power, а также group_name для совместимости)
+        const options = [
+            { value: undefined, text: window.translator.translate('none') },
+            { value: 'name', text: window.translator.translate('name') },
+            { value: 'system_name', text: window.translator.translate('system_name') },
+            { value: 'color', text: window.translator.translate('color') },
+            { value: 'provinces_count', text: window.translator.translate('provinces_count') },
+            { value: 'capital', text: window.translator.translate('capital') },
+            { value: 'group', text: window.translator.translate('group_name') },
+            { value: 'power', text: window.translator.translate('power') }
+        ];
+
+        // дефолтный порядок — используем копию
+        const defaultOrder = ['color', 'name', 'system_name', 'group', 'provinces_count', 'capital', 'power'];
+
+        // гарантируем, что window.currentOrderCountries — массив (копия, чтобы не мутировать оригинал по ссылке)
+        if (!Array.isArray(window.currentOrderCountries)) {
+            window.currentOrderCountries = defaultOrder.slice();
+        } else {
+            // если длина currentOrderCountries меньше 1 — заполнить дефолтом
+            if (window.currentOrderCountries.length === 0) window.currentOrderCountries = defaultOrder.slice();
+            else window.currentOrderCountries = window.currentOrderCountries.slice(); // копия
+        }
+
+        // Создаём модальное окно
+        const modal = document.createElement('div');
+        modal.className = 'modal active';
+
+        const selectsContainer = document.createElement('div');
+        selectsContainer.className = 'selects-container';
+
+        // Функция, проверяющая валидность значения (есть ли такое в options)
+        const isValidOption = (val) => options.some(o => o.value === val);
+
+        // Создаём селекты по количеству элементов в window.currentOrderCountries
+        window.currentOrderCountries.forEach((currentValue, index) => {
+            const select = document.createElement('select');
+            select.className = 'main-page-input';
+            select.dataset.orderIndex = String(index); // для отладки/использования
+
+            // наполняем опциями
+            options.forEach(opt => {
+                const optionEl = document.createElement('option');
+                optionEl.value = opt.value;
+                optionEl.textContent = opt.text;
+                select.appendChild(optionEl);
+            });
+
+            // если текущее значение валидно — ставим его, иначе ставим первый и обновляем currentOrderCountries
+            if (isValidOption(currentValue)) {
+                select.value = currentValue;
+            } else {
+                select.selectedIndex = 0;
+                window.currentOrderCountries[index] = select.value;
+            }
+
+            // при изменении — синхронизируем window.currentOrderCountries
+            select.addEventListener('change', (e) => {
+                const idx = Number(e.currentTarget.dataset.orderIndex);
+                window.currentOrderCountries[idx] = e.currentTarget.value;
+                window.countryManager.updateCountriesList()
+                // при надобности — можно испустить событие или вызвать функцию-колбэк
+                // например: document.dispatchEvent(new CustomEvent('currentOrderCountriesChanged', { detail: window.currentOrderCountries }));
+                console.debug('window.currentOrderCountries updated:', window.currentOrderCountries);
+            });
+
+            selectsContainer.appendChild(select);
+        });
+
+        // соберём тело модального окна
+        modal.innerHTML = `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>${window.translator.translate('table_settings')}</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body" id="table-settings-body"></div>
+            </div>
+        `;
+
+        // добаляем в документ и вставляем селекты
+        document.body.appendChild(modal);
+        document.getElementById('table-settings-body').appendChild(selectsContainer);
+
+        // повесим обработчик закрытия — удаляем модалку из DOM
+        modal.querySelector('.close-modal').addEventListener('click', () => {
+            modal.remove();
+            window.countryManager.updateCountriesList()
+        });
+
+        // опционально: закрывать при клике по фону модалки (если нужно)
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.remove();
+            window.countryManager.updateCountriesList()
+        });
+    }
+
+    showMentionsInEvents(countryId) {
+        let exit = window.getLandUniquenessById(this.jsonData, countryId, true);
+        exit = Object.assign(exit[1], exit[2]);
+        console.log(exit);
+        window.eventManager.updateEventsList(exit, 'countryMentionsBody')
     }
 }
 
