@@ -24,7 +24,7 @@
 }
 
 /* Контейнер для навигационных кнопок */
-.nav-buttons-container {
+.navbtns-container {
     display: flex;
     gap: 8px;
     flex-shrink: 1;
@@ -33,10 +33,10 @@
 }
 
 /* Кнопки навигации */
-.nav-button {
+.navbtn {
     padding: 8px 16px;
     border: none;
-    border-radius: 15px;
+    border-radius: var(--br);
     cursor: pointer;
     font-size: 14px;
     font-weight: 500;
@@ -51,21 +51,21 @@
     min-width: 36px;
 }
 
-.nav-button .button-icon {
+.navbtn .button-icon {
     width: 18px;
     height: 18px;
     display: block;
 }
 
-.nav-button .button-text {
+.navbtn .button-text {
     display: block;
 }
 
-.nav-button:hover {
+.navbtn:hover {
     background-color: rgba(52, 152, 219, 0.2);
 }
 
-.nav-button.active {
+.navbtn.active {
     background-color: rgba(52, 152, 219, 0.2);
 }
 
@@ -93,7 +93,7 @@
     border: none;
     color: #e0e0e0;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: var(--br);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -102,7 +102,7 @@
 }
 
 .icon-button:hover {
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
 }
 
 .icon-button svg {
@@ -132,7 +132,7 @@
     right: 0;
     background-color: #242424;
     border: 1px solid #333;
-    border-radius: 4px;
+    border-radius: var(--br);
     padding: 4px 0;
     min-width: 150px;
     display: none;
@@ -149,10 +149,12 @@
     color: #e0e0e0;
     text-decoration: none;
     transition: background-color 0.2s;
+    align-items: center;
+    gap: 5px;
 }
 
 .lang-dropdown a:hover {
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
 }
 
 /* Стили для языкового переключателя */
@@ -172,11 +174,13 @@
     right: 0;
     background-color: #242424;
     border: 1px solid #333;
-    border-radius: 8px;
+    border-radius: var(--br);
     min-width: 200px;
     display: none;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     z-index: 1000;
+    overflow-y: scroll;
+    max-height: calc(100dvh - 52px);
 }
 
 .account-dropdown.active {
@@ -217,7 +221,7 @@
 }
 
 .account-item:hover {
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
 }
 
 .account-item svg {
@@ -262,7 +266,7 @@
     background-color: #2ecc71;
     color: white;
     padding: 8px 16px;
-    border-radius: 6px;
+    border-radius: var(--br);
     transition: all 0.2s ease;
     min-width: 36px;
     display: inline-flex;
@@ -302,11 +306,11 @@
         gap: 4px;
     }
 
-    .nav-buttons-container {
+    .navbtns-container {
         gap: 4px;
     }
 
-    .nav-button,
+    .navbtn,
     .save-button {
         padding: 8px;
         width: 36px;
@@ -315,12 +319,12 @@
         aspect-ratio: 1;
     }
 
-    .nav-button .button-text,
+    .navbtn .button-text,
     .save-button .button-text {
         display: none;
     }
 
-    .nav-button .button-icon,
+    .navbtn .button-icon,
     .save-button .button-icon {
         display: block;
         width: 18px;
@@ -369,7 +373,7 @@
     color: white;
     font-size: 12px;
     white-space: nowrap;
-    border-radius: 4px;
+    border-radius: var(--br);
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.2s;
@@ -406,4 +410,8 @@
     stroke-linecap: round;
     stroke-linejoin: round;
     fill: none;
+}
+
+.account-item img {
+    width: 24px;
 }

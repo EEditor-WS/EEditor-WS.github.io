@@ -1,0 +1,14 @@
+.coop-connect-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.hiden {
+    display: none;
+}
+
+.hiden.active {
+    display: block;
+}

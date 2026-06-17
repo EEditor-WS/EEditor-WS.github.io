@@ -1,0 +1,107 @@
+
+
+/* Стили для контекстного меню */
+.context-menu {
+    position: fixed;
+    background-color: var(--bg-sec-great);
+    border: 1px solid #333;
+    border-radius: var(--br);
+    padding: 4px;
+    min-width: 160px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    opacity: 0;
+    transform: scale(0.95);
+    animation: contextMenuShow 0.1s ease forwards;
+}
+
+@keyframes contextMenuShow {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.context-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    color: var(--text-pri);
+    cursor: pointer;
+    border-radius: var(--br);
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.context-menu-item:hover {
+    background: var(--bg-sec-great-hover);
+}
+
+.context-menu-item.delete {
+    color: #e74c3c;
+}
+
+.context-menu-item.delete:hover {
+    background: rgba(231, 76, 60, 0.1);
+}
+
+.context-menu-item svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    flex-shrink: 0;
+}
+
+.context-menu-item span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--bg-sec-great);
+    border: 1px solid var(--bc);
+    border-radius: var(--br);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    display: none;
+    z-index: 1000;
+    min-width: 200px;
+}
+
+.dropdown-menu.active {
+    display: block;
+}
+
+.dropdown-menu .menu-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    color: var(--text-pri);
+    text-decoration: none;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.dropdown-menu .menu-item:hover {
+    background-color: var(--background-modifier-hover);
+}
+
+.dropdown-menu .menu-item svg {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+.dropdown-menu .menu-item span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

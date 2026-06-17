@@ -1,0 +1,17 @@
+@media (orientation: landscape) {
+    #samsungzakos {
+        display: none;
+    }
+
+    #mobile-nav {
+        display: none;
+    }
+
+    .account-button-icon-mobile {
+        display: none;
+    }
+
+    #add-requirement .button-text {
+        aspect-ratio: 5;
+    }
+}

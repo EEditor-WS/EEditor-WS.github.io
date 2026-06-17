@@ -1,0 +1,389 @@
+@import url("compibality.css");
+@import url("orange.css");
+
+/* Theme colors */
+:root {
+    --bg-pri: #00000045;
+    --bg-pri-hover: #27272745;
+    --bg-sec: #242424b0;
+    --bg-sec-hover: #424242b0;
+    --bg-sec-great: #242424;
+    --bg-sec-great-hover: #2a2a2a;
+    --bg-hover: #2a2a2ab0;
+    --bg-input: #313131b0;
+    --bg-input-hover: #353535b0;
+    --bg-input-great: #313131;
+    --bg-input-great-hover: #353535;
+
+    --text-pri: #e0e0e0;
+    --text-pri-hover: #ffffff;
+    --text-sec: #a0a0a0;
+    --text-sec-hover: #d6d6d6;
+
+    --br: 1.2rem;
+    --brs: 0.5rem;
+    --bc: #404040;
+    --ds: 1rem;
+    --dss: 0.5rem;
+
+    --ac-text: #3498db;
+    --ac-text-hover: #6bacd8;
+    --ac-bg: #3498dbb0;
+    --ac-bg-hover: #6bacd8b0;
+    --ac-bg-light: #5e819962;
+    --ac-bg-great: #3498db;
+    --ac-bg-great-hover: #6bacd8;
+    --ac-bg-great-light: #5e8199;
+
+    --transitions: 0.3 ease;
+    --transition: all var(--transitions);
+
+    --height: 16px;
+}
+
+* {
+    transition: background-color 0.3s ease, color 0.3s ease;
+    scrollbar-width: thin;
+    scrollbar-color: var(--text-sec) var(--bg-sec);
+    color: var(--text-pri);
+}
+
+
+option {
+    background-color: var(--bg-sec-great);
+    color: var(--text-pri);
+    border-radius: var(--br);
+}
+
+@font-face {
+    font-family: 'onesans';
+    src: url(../../../../res/fonts/sans.ttf);
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'onesans2';
+    src: url(../../style/onesans.ttf);
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* --- Базовый стиль --- */
+body {
+    margin: 0;
+    /*padding: 24px;*/
+    color: #f7f7f7;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #303027, #1C2125, #1F2120);
+    /*min-height: 100dvh;*/
+    font-family: 'onesans2', 'onesans', 'Inter', sans-serif !important;
+    min-height: 100dvh;
+}
+
+a {
+  color: var(--text-pri);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--text-sec);
+}
+
+fieldset {
+    border-radius: var(--br);
+}
+
+button {
+    border-radius: var(--br);
+    background-color: var(--bg-sec);
+    border: 1px solid var(--bc);
+    color: var(--text-pri);
+    padding: 5px;
+}
+
+button:hover {
+    background-color: var(--bg-sec-hover);
+    border-color: var(--text-sec);
+    color: var(--text-sec);
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+video {
+    border-radius: var(--br);
+}
+
+/* -------------------------
+   Input (HTML <input>)
+   ------------------------- */
+
+:where(input, textarea, select) {
+    padding: var(--dss);
+    margin: 0;
+    border: 1px solid var(--bc);
+    border-radius: var(--br);
+    font-size: 14px;
+    background-color: var(--bg-input);
+    color: var(--text-pri);
+    min-height: 20px;
+    transition: var(--transition);
+
+    &:hover:not(:disabled) {
+        background-color: var(--bg-input-hover);
+    }
+
+    &:focus {
+        outline: none;
+        border-color: var(--ac-text);
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        background-color: #242424;
+    }
+}
+
+input[type="range"] {
+    accent-color: var(--ac-text);
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 300px;
+    height: 10px;
+    background: #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: var(--transition);
+    margin: 8px 0;
+    padding: 0;
+  }
+
+/* При наведении */
+input[type="range"]:hover {
+    background: var(--text-pri-hover);
+}
+
+/* Ползунок (ползущий кружок) для Chrome, Edge, Safari */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 15px;
+    background: var(--ac-text);
+    border: 2px solid var(--bc);
+    border-radius: var(--brs);
+    cursor: pointer;
+    border-radius: 0;
+    margin: 0;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    background: var(--ac-bg-hover);
+    border: 0;
+}
+
+input::file-selector-button {
+    border-radius: var(--br);
+    background-color: var(--ac-bg);
+    border: 1px solid var(--bc);
+    color: var(--text-pri);
+    padding: 5px;
+}
+
+input::file-selector-button:hover {
+    background-color: var(--ac-bg-hover);
+    border-color: var(--text-sec);
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    width: 25px;
+    border: 2px solid var(--bc);
+    border-radius: 6px;
+    background-color: var(--text-pri);
+    display: inline-block;
+    vertical-align: middle;
+    aspect-ratio: 1;
+    transition: background-color 0.25s, border-color 0.25s, box-shadow 0.2s;
+    min-height: 10px;
+}
+
+/* При наведении */
+input[type="checkbox"]:hover,
+input[type="radio"]:hover {
+    box-shadow: 0 0 6px var(--ac-bg-great-hover);
+}
+
+/* Активное состояние */
+input[type="checkbox"]:checked {
+    background-color: var(--ac-bg-great-light);
+    border-color: var(--bc);
+    background-image: url("data:image/svg+xml,%3Csvg width='14' height='10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 5l4 4 8-8' stroke='%23433323' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 12px;
+}
+
+/* Радиокнопки — круглые */
+input[type="radio"] {
+    border-radius: 50%;
+}
+
+input[type="radio"]:checked {
+    background-color: var(--ac-bg-hover);
+    border-color: var(--bc);
+    box-shadow: inset 0 0 0 6px #fff, inset 0 0 0 9px #433323;
+}
+
+input, select {
+    margin: 0;
+    margin: var(--dss) 0;
+}
+
+select {
+    appearance: none;
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding: 0.5rem;
+    background-image: url("data:image/svg+xml width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='#ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'");
+}
+
+textarea {
+    border-radius: var(--br) var(--br) 0 var(--br);
+}
+
+/* -------------------------
+   Progress (HTML <progress>)
+   ------------------------- */
+
+progress {
+    width: 100%;
+    height: var(--height);
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent; /* браузерные элементы стилизуем ниже */
+    border: none;
+    border-radius: var(--br);
+    overflow: hidden; /* чтобы округлость работала */
+}
+
+/* WebKit / Blink: общий трек */
+progress::-webkit-progress-bar {
+    background: var(--bg-sec);
+    border-radius: var(--br);
+    height: var(--height);
+    box-shadow: inset 0 1px 0 rgba(0,0,0,0.03);
+}
+
+/* WebKit / Blink: заполненная часть */
+progress::-webkit-progress-value {
+    background: linear-gradient(90deg, var(--ac-text), color-mix(in srgb, var(--ac-text) 75%, black 10%));
+    height: var(--height);
+    border-radius: var(--br);
+    transition: width 220ms ease;
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,0.08);
+}
+
+/* Небольшая тень вокруг для более "плоского" материала */
+.progress-wrap{
+    padding: 8px 0;
+}
+
+/* вариант тонкого трека */
+.progress-slim progress { height: 8px; --height: 8px; }
+
+/* -------------------------
+      Meter (HTML <meter>)
+   ------------------------- */
+
+/* Сбросим appearance и настроим контейнер */
+meter {
+    width: 100%;
+    height: var(--height);
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--bg-sec);
+    border-radius: var(--br);
+    overflow: hidden;
+    display: block;
+    box-shadow: inset 0 1px 0 rgba(0,0,0,0.03);
+}
+
+meter::-webkit-meter-bar {
+    background: var(--bg-sec);
+    border-radius: var(--br);
+}
+
+meter::-webkit-meter-optimum-value {
+    background: linear-gradient(90deg, var(--ac-text), color-mix(in srgb, var(--ac-text) 75%, black 10%));
+    height: var(--height);
+    border-radius: var(--br);
+    transition: width 220ms ease;
+}
+meter::-webkit-meter-suboptimum-value {
+    background: linear-gradient(90deg, #ffb84d, #ff8a00);
+    height: var(--height);
+    border-radius: var(--br);
+}
+meter::-webkit-meter-even-less-good-value { /* низкий уровень */
+    background: linear-gradient(90deg, var(--danger), #b71c1c);
+    height: var(--height);
+    border-radius: var(--br);
+}
+
+.hidden {
+    display: none;
+}
+
+.hidden.active {
+    display: block;
+}
+
+.hidden_save {
+    visibility: hidden;
+}
+
+.hidden_save.active {
+    visibility: visible;
+}
+
+.dev_thing {
+    display: none !important;
+}
+
+body.dev_mode .dev_thing {
+    display: flex !important;
+}
+
+html body .page {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    max-height: 100dvh;
+    overflow-y: auto;
+}
+
+.page {
+    display: none;
+}
+.page.active {
+    display: inline-flex;
+}
+
+fieldset {
+    background-color: var(--bg-pri);
+}
+legend {
+    font-size: 1.5rem;
+    font-weight: 700;
+}

@@ -1,0 +1,312 @@
+@media (orientation: portrait) {
+    #main {
+        flex-direction: column !important;
+        padding: 0;
+        max-width: unset;
+        width: 100dvw;
+    }
+
+    #flagdiv {
+        width: 350%;
+    }
+
+    .info-container {
+        margin: 0;
+    }
+
+    .event-form {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    .image-select-container {
+        flex-direction: column;
+    }
+
+    #firstheaddrag {
+        display: none;
+    }
+
+    .nav-header {
+        background: none !important;
+        border: 0;
+        box-shadow: none;
+    }
+
+    #data {
+        display: none;
+    }
+    .opened #data {
+        display: block;
+    }
+
+    #samsungzakos .namezone {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+        height: calc(100dvh - 200px - 73px - 48px - 56px - 20px - 20px);
+        transition: all 0.2s ease;
+    }
+
+    .opened #samsungzakos .namezone {
+        height: calc((100dvh - 200px - 73px - 48px - 56px - 20px - 20px) / 2);
+    }
+
+    #samsungzakos .nav-icons {
+        justify-content: flex-end;
+    }
+
+    #mobile-nav {
+        position: fixed;
+        bottom: -1px;
+        background-color: var(--bg-sec-great);
+        padding: 0.5rem 0;
+        width: 100%;
+        height: (--header-height);
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    #mobile-nav .navbtn {
+        aspect-ratio: 0;
+        width: 100px;
+    }
+
+    .page {
+        padding-bottom: 52px;
+    }
+
+    .navbtns-container {
+        display: none;
+    }
+
+    .account-button-icon {
+        display: none !important;
+    }
+    .account-button-icon-mobile {
+        display: block;
+    }
+
+    .page {
+        /*max-height: calc(100dvh - 48px - 56px);
+        overflow: hidden;*/
+    }
+
+    .pcountries, .pevents, .preforms {
+        max-height: calc(100dvh - 100px);
+        overflow-y: hidden;
+    }
+    .pcountry-edit {
+        max-height: calc(100dvh - 100px);
+        overflow-y: auto;
+    }
+
+    .description_eelib {
+        padding: 20px;
+    }
+
+    .country-form {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    #country-form .form-group {
+        width: 100%;
+    }
+
+    #country-form .country-form.black-back {
+        grid-template-columns: 150px 300px;
+        overflow-x: scroll;
+    }
+
+    .event-main-settings {
+        overflow-x: scroll;
+        max-width: calc(100dvw - 80px);
+    }
+
+    #reqbonback {
+        aspect-ratio: 1;
+    }
+
+    #add-requirement {
+        aspect-ratio: 1;
+        min-width: 0;
+        margin: 0;
+    }
+
+    #requirements-editor-title {
+        padding: 0;
+        margin: 0;
+        border: 0;
+    }
+
+    #reqTypeDiv .custom-dd__menu {
+        position: -ms-page;
+        top: -25vh;
+        height: 75dvh;
+    }
+
+    .list-container, .info-container {
+        background: 0;
+    }
+
+    .country-form {
+        background: 0;
+    }
+
+    .country-form.black-back, .array-list {
+        background: var(--background-secondary);
+    }
+
+    #force-save.action-button.save-button {
+        border: 0;
+    }
+
+    
+    .icon-action-button.settings {
+        display: none;
+    }
+
+    #settings-form {
+            grid-template-columns: repeat(2, 1fr);
+    }
+
+    .drag-handle-slider {
+        display: none;
+    }
+
+    #event-form {
+        padding: 0;
+        margin: 0;
+        border-radius: 0;
+    }
+
+    .event-edit {
+        padding: 0;
+        margin: 0;
+    }
+
+    #requirement-editor {
+        padding: 20px 0;
+    }
+
+    #event-answers {
+        padding: 0;
+        border-radius: 0;
+        background: none;
+    }
+}
+
+/* старые стили от модала
+.android_file_div {
+    top: 0;
+    position: fixed;
+    overflow-y: scroll;
+    max-height: calc(100dvh - 2rem);
+    margin: 1rem;
+}*/
+
+.android_file_div {
+    margin: 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    justify-content: center;
+    justify-items: center;
+}
+
+@media (max-width: 450px) {
+    .android_file_div {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .android_file_div .android_file_btn {
+        max-width: 500px;
+        width: 100%;
+    }
+}
+
+.android_file_btn {
+    background-color: var(--background-secondary-great);
+    display: inline-flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 10px;
+    max-width: 250px;
+}
+
+.android_file_close {
+    background-color: var(--background-secondary-great);
+}
+
+#openfiles_container {
+    text-align: center;
+    width: 100%;
+}
+
+
+
+
+
+
+
+/* landscape styles */
+@media (orientation: landscape) {
+    body.mobile {
+
+        & .logo { 
+            display: none;
+        }
+        & .navbtns-container {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            flex-direction: column;
+            & .button-text {
+                display: none;
+            }
+            & .navbtn {
+                aspect-ratio: 1;
+            }
+        }
+        & .opened .navbtns-container {
+        }
+
+        & .nav-header {
+            background: none;
+            border: 0;
+            box-shadow: none;
+        }
+        & #data {
+            display: none;
+        }
+        & .opened #data {
+            display: block;
+        }
+        & #samsungzakos {
+            display: block;
+            width: 100%;
+        }
+        & #samsungzakos .namezone {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            max-height: 90dvh;
+            transition: all 0.2s ease;
+            font-size: 2rem;
+        }
+        & .opened #samsungzakos .namezone {
+            display: none;
+        }
+        & #samsungzakos .nav-icons {
+            justify-content: flex-end;
+        }
+    }
+}

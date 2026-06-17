@@ -1,0 +1,129 @@
+#main.pmain.active {
+    flex-direction: row-reverse;
+    align-items: unset;
+}
+
+div.form-group.scenariobtns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--ds);
+}
+
+#pasteparams {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-sec);
+    padding: var(--ds);
+    border-radius: var(--br);
+}
+#pasteparams h2 {
+    margin: 0;
+}
+.pasteparamcheck {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ds);
+}
+
+#apply-paste-params {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    color: var(--text-pri);
+    transition: all 0.2s ease-in-out;
+    border: none;
+    border-radius: var(--br);
+    padding: 10px 20px;
+    background-color: var(--ac-bg);
+    &:hover {
+        background-color: var(--ac-bg-hover);
+    }
+}
+
+#openedForCopyFile {
+    text-align: center;
+}
+
+#pp-progressbar {
+    margin-bottom: var(--ds);
+}
+
+#randomInputs {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-sec);
+    padding: var(--ds);
+    border-radius: var(--br);
+
+    h2 {
+        margin: 0;
+        text-align: center;
+    }
+
+    #social {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        gap: var(--dss);
+
+        img {
+            width: 35px;
+        }
+    }
+
+    input {
+        width: calc(100% - var(--dss) * 2);
+    }
+}
+
+#dangerZoneOpen {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    color: var(--text-pri);
+    transition: all 0.2s ease-in-out;
+    border: none;
+    border-radius: var(--br);
+    padding: 10px 20px;
+    background-color: #db3434b0;
+
+    margin-top: var(--ds);
+}
+
+#dangerZone {
+    min-height: 0;
+    height: 0;
+    border: 1px solid #ffffff00;
+    border-radius: var(--br);
+    transition: height 0.6s ease, border 0.6s ease, padding 0.6s ease;
+    margin-top: var(--dss);
+    overflow-y: hidden;
+    padding: 0;
+
+    textarea {
+        width: calc(100% - var(--dss) * 2);
+    }
+
+    #evalBtn {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        font-size: 14px;
+        color: var(--text-pri);
+        transition: all 0.2s ease-in-out;
+        border: none;
+        border-radius: var(--br);
+        padding: 10px 20px;
+        background-color: var(--ac-bg);
+
+        width: 100%;
+    }
+
+    &.active {
+        height: 500px;
+        border: 1px solid var(--text-pri);
+    padding: var(--dss);
+    }
+}

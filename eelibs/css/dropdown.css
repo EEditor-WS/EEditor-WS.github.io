@@ -1,0 +1,125 @@
+.custom-dd {
+    --bg: var(--bg-input);
+    --shadow: 0 6px 18px rgba(24,24,24,0.12);
+    width: 280px;
+    font-family: Inter, system-ui, "Segoe UI", Roboto, Arial;
+    font-size: 14px;
+    color: var(--text-primary);
+    position: relative;
+    user-select: none;
+    width: 100%;
+}
+
+.custom-dd__control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background: var(--bg);
+    border: 1px solid var(--bc);
+    border-radius: var(--br);
+    cursor: pointer;
+    justify-content: space-between;
+}
+
+.custom-dd__control:focus {
+    outline: 2px solid rgba(43,106,237,0.18);
+    box-shadow: 0 0 0 4px rgba(43,106,237,0.06);
+}
+
+.custom-dd__label {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 70%;
+    font-weight: 400;
+}
+
+.custom-dd__placeholder {
+    color: var(--text-primary);
+}
+
+.custom-dd__chev {
+    transition: transform .18s ease;
+    margin-left: 8px;
+}
+.custom-dd--open .custom-dd__chev { transform: rotate(180deg); }
+
+.custom-dd__menu {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin-top: 8px;
+    background: var(--bg-input-great);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--bc);
+    /*max-height: 220px;*/
+    max-height: 500px;
+    overflow: scroll;
+    z-index: 1000;
+    padding: 6px;
+}
+
+/* Поиск / input внутри */
+.custom-dd__search {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px 10px;
+    margin-bottom: 6px;
+    border-radius: 6px;
+    border: 1px solid #e6e6e6;
+}
+
+/* Список опций */
+.custom-dd__option {
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.custom-dd__option[aria-selected="true"] {
+    background: rgba(43,106,237,0.08);
+    color: var(--accent-color);
+}
+.custom-dd__option:hover,
+.custom-dd__option[data-highlight="true"] {
+    background: rgba(255, 255, 255, 0.04);
+}
+.custom-dd__option.placeholder span {
+    text-align: center;
+    width: 100%;
+}
+
+/* Для групп/подписи */
+.custom-dd__group {
+    font-size: 12px;
+    color: var(--text-primary);
+    padding: 6px 8px;
+}
+
+/* маленький чек/иконка */
+.custom-dd__check {
+    margin-left: auto;
+    min-width: 14px;
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    display: inline-block;
+    border: 1px solid #d1d1d1;
+    background: var(--bg);
+}
+.custom-dd__option[aria-selected="true"] .custom-dd__check {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.custom-dd__option-img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}

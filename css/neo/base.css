@@ -1,0 +1,88 @@
+@import url('page/main.css');
+@import url('page/country.css');
+@import url('page/event.css');
+@import url('light.css');
+@import url(menus.css);
+
+.nav-header {
+    margin: 0;
+    padding: 0 var(--ds);
+    background-color: var(--bg-sec-great);
+}
+
+.logo-text {
+    margin: var(--ds);
+    color: var(--text-pri)
+}
+
+@media (max-width: 820px) {
+    .navbtn .button-icon {
+        display: block;
+    }
+    .navbtn .button-text {
+        display: none;
+    }
+    .logo {
+        display: none;
+    }
+}
+@media (min-width: 820px) and (max-width: 900px) {
+    .navbtn .button-icon {
+        display: none;
+    }
+    .navbtn .button-text {
+        display: block;
+    }
+    .logo {
+        display: flex;
+    }
+}
+@media (min-width: 900px) {
+    .navbtn .button-icon {
+        display: block;
+    }
+    .navbtn .button-text {
+        display: block;
+    }
+    .logo {
+        display: flex;
+    }
+}
+
+html body .page.active {
+    height: unset;
+    max-height: unset;
+    padding: var(--ds);
+    max-width: calc(100% - 2rem);
+}
+
+.page.a {
+    max-width: calc(100% - 2rem);
+}
+
+.account-item img {
+    width: 24px;
+}
+
+.main-page-input {
+    max-width: calc(100% - 16px);
+    min-width: calc(100% - 16px);
+}
+
+#accountDropdown {
+    padding: 0;
+    margin-right: var(--ds);
+    margin-top: var(--dss);
+}
+
+.navbtn {
+    background-color: var(--ac-bg-light);
+}
+
+.navbtn:hover {
+    background-color: var(--ac-bg-hover);
+}
+
+.navbtn.active {
+    background-color: var(--ac-bg);
+}

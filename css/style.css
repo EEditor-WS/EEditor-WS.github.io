@@ -1,11 +1,3 @@
-body {
-    margin: 0;
-    padding: 0;
-    background-color: #1a1a1a;
-    color: #e0e0e0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-}
-
 /* Статика */
 .pmain {
     display: flex;
@@ -18,19 +10,20 @@ body {
 
 .data {
     flex-grow: 1;
-    background-color: #242424;
-    border-radius: 10px;
+    background-color: var(--bg-pri);
+    border-radius: var(--br);
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
+    box-shadow: #1a1a1a 10px;
 }
 
 .file-upload-container {
     width: 30%;
     min-width: 300px;
     padding: 20px;
-    background-color: #242424;
-    border-radius: 10px;
+    background-color: var(--bg-pri);
+    border-radius: var(--br);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -100,16 +93,18 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-    border: 2px dashed #4a4a4a;
-    border-radius: 10px;
-    background-color: #2a2a2a;
+    border: 2px dashed var(--bc);
+    border-radius: var(--br);
+    background-color: var(--bg-sec);
+    background: none;
     transition: all 0.3s ease;
     box-sizing: border-box;
+    color: var(--text-pri)
 }
 
 .drop-zone.dragover {
-    border-color: #3498db;
-    background-color: #2c3e50;
+    border-color: var(--ac-text);
+    background-color: var(--ac-bg);
 }
 
 .file-input {
@@ -118,9 +113,9 @@ body {
 
 .file-input-label {
     padding: 10px 20px;
-    background-color: #3498db;
+    background-color: var(--ac-bg);
     color: white;
-    border-radius: 5px;
+    border-radius: var(--br);
     cursor: pointer;
     margin-top: 10px;
     transition: background-color 0.3s ease;
@@ -129,7 +124,7 @@ body {
 }
 
 .file-input-label:hover {
-    background-color: #2980b9;
+    background-color: var(--ac-bg-hover);
 }
 
 #file-info {
@@ -141,9 +136,9 @@ body {
     width: 100%;
     margin: 20px auto;
     border: 1px solid #333;
-    border-radius: 10px;
+    border-radius: var(--br);
     overflow: hidden;
-    background-color: #2a2a2a;
+    background-color: var(--bg-sec);
 }
 
 .file-header {
@@ -152,7 +147,7 @@ body {
     align-items: center;
     padding: 15px;
     background-color: #333;
-    border-bottom: 1px solid #404040;
+    border-bottom: 1px solid var(--bc);
 }
 
 .file-header span {
@@ -162,17 +157,17 @@ body {
 
 .file-header button {
     padding: 8px 16px;
-    background-color: #3498db;
+    background-color: var(--ac-text);
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: var(--br);
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-size: 14px;
 }
 
 .file-header button:hover {
-    background-color: #2980b9;
+    background-color: var(--ac-text-hover);
 }
 
 .file-editor {
@@ -184,7 +179,7 @@ body {
     font-family: 'Fira Code', 'Consolas', monospace;
     font-size: 14px;
     line-height: 1.6;
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
     color: #e0e0e0;
     outline: none;
 }
@@ -204,20 +199,7 @@ body {
 .form-group label {
     font-size: 14px;
     font-weight: 500;
-    color: #e0e0e0;
-}
-
-.form-group input[type="text"],
-.form-group input[type="number"],
-.form-group select {
-    padding: 8px 12px;
-    border: 1px solid #404040;
-    border-radius: 5px;
-    background-color: #2a2a2a;
-    color: #e0e0e0;
-    font-size: 14px;
-    outline: none;
-    transition: border-color 0.3s ease;
+    color: var(--text-pri);
 }
 
 .form-group input[type="text"]:focus,
@@ -239,8 +221,8 @@ body {
 .color-preview {
     width: 175px;
     height: 30px;
-    border-radius: 5px;
-    border: 1px solid #404040;
+    border-radius: var(--br);
+    border: 1px solid var(--bc);
     background-color: rgb(55, 112, 129);
 }
 
@@ -250,7 +232,7 @@ body {
     background-color: #3498db;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: var(--br);
     cursor: pointer;
     font-size: 16px;
     font-weight: 500;
@@ -272,8 +254,8 @@ body {
 }
 
 .data::-webkit-scrollbar-thumb {
-    background: #404040;
-    border-radius: 4px;
+    background: var(--bc);
+    border-radius: var(--br);
 }
 
 .data::-webkit-scrollbar-thumb:hover {
@@ -290,8 +272,8 @@ body {
 }
 
 .preview-content::-webkit-scrollbar-thumb {
-    background: #404040;
-    border-radius: 4px;
+    background: var(--bc);
+    border-radius: var(--br);
 }
 
 .preview-content::-webkit-scrollbar-thumb:hover {
@@ -300,8 +282,7 @@ body {
 
 .file-preview {
     margin-top: 20px;
-    background-color: #242424;
-    border-radius: 8px;
+    border-radius: var(--br);
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -309,10 +290,13 @@ body {
 }
 
 .preview-header {
+    display: flex;
+    justify-content: space-between;
     padding: 10px 15px;
-    background-color: #333;
-    border-bottom: 1px solid #404040;
+    background-color: var(--bg-sec);
+    box-shadow: 0 4px 32px #0004;
     flex-shrink: 0;
+    color: var(--text-pri)
 }
 
 .preview-content {
@@ -321,10 +305,10 @@ body {
     width: 100%;
     min-height: 200px;
     padding: 15px;
-    background-color: #2a2a2a;
+    background-color: var(--bg-sec);
     color: #e0e0e0;
     border: 1px solid #1f1f1f;
-    border-radius: 5px;
+    border-radius: 0 0 var(--br) var(--br);
     font-family: 'Consolas', 'Monaco', monospace;
     font-size: 14px;
     line-height: 1.5;
@@ -342,28 +326,9 @@ body {
 .preview-footer {
     padding: 12px 16px;
     background-color: #333;
-    border-top: 1px solid #404040;
+    border-top: 1px solid var(--bc);
     display: flex;
     justify-content: flex-end;
-}
-
-.action-button {
-    padding: 8px 16px;
-    background-color: #4a4a4a;
-    border: 1px solid #606060;
-    border-radius: 4px;
-    color: #e0e0e0;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.2s;
-}
-
-.action-button:hover {
-    background-color: #555;
-}
-
-.action-button:active {
-    background-color: #444;
 }
 
 .main-preview {
@@ -387,6 +352,7 @@ body {
     z-index: 100;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     align-items: center;
+    padding: 0 8px;
 }
 
 .nav-actions {
@@ -399,11 +365,11 @@ body {
 
 .nav-actions .action-button.save-button {
     height: auto;
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
     color: #e0e0e0;
-    border: 1px solid #404040;
+    border: 1px solid var(--bc);
     padding: 8px 16px;
-    border-radius: 4px;
+    border-radius: var(--br);
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
@@ -430,26 +396,26 @@ body {
     align-items: center;
 }
 
-.nav-button {
+.navbtn {
     background: none;
     border: none;
     color: #888;
     font-size: 14px;
     font-weight: 500;
     padding: 8px 16px;
-    border-radius: 5px;
+    border-radius: var(--br);
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
-.nav-button:hover {
-    background-color: #2a2a2a;
-    color: #e0e0e0;
+.navbtn:hover {
+    background-color: var(----background-secondary);
+    color: var(--text-pri);
 }
 
-.nav-button.active {
+.navbtn.active {
     background-color: #3498db;
-    color: white;
+    color: var(--text-pri);
 }
 
 .page {
@@ -458,22 +424,23 @@ body {
 
 .page.active {
     display: flex;
+    justify-content: center;
 }
 
 .action-button {
     padding: 8px 16px;
     border: none;
-    border-radius: 5px;
+    border-radius: var(--brs);
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
-    background-color: #3498db;
-    color: white;
+    background-color: var(--ac-text);
+    color: var(--text-pri);
 }
 
 .action-button:hover {
-    background-color: #2980b9;
+    background-color: var(--ac-text-hover);
 }
 
 .action-button.delete {
@@ -498,7 +465,7 @@ body {
 }
 
 .countries-table tbody tr:hover {
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
 }
 
 .country-name-container {
@@ -525,9 +492,9 @@ body {
 }
 
 .array-list {
-    background-color: #2a2a2a;
-    border: 1px solid #404040;
-    border-radius: 5px;
+    background-color: var(----background-secondary);
+    border: 1px solid var(--bc);
+    border-radius: var(--br);
     padding: 10px;
     min-height: 50px;
     max-height: 150px;
@@ -536,7 +503,7 @@ body {
 }
 
 .array-list:empty::after {
-    content: 'Нет элементов';
+    content: 'None /  Пусто';
     color: #666;
     font-style: italic;
 }
@@ -548,7 +515,7 @@ body {
     padding: 8px 12px;
     margin: 5px 0;
     background-color: #333;
-    border-radius: 3px;
+    border-radius: var(--br);
     gap: 10px;
     cursor: pointer;
     transition: background-color 0.2s;
@@ -584,9 +551,9 @@ body {
 .relation-turn,
 .relation-duration,
 .relation-initiator {
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
     padding: 2px 6px;
-    border-radius: 3px;
+    border-radius: var(--br);
 }
 
 .relation-controls {
@@ -623,9 +590,9 @@ body {
 .array-item-input {
     width: 100%;
     padding: 6px 10px;
-    border: 1px solid #404040;
-    border-radius: 4px;
-    background-color: #2a2a2a;
+    border: 1px solid var(--bc);
+    border-radius: var(--br);
+    background-color: var(----background-secondary);
     color: #e0e0e0;
     font-size: 14px;
     outline: none;
@@ -645,7 +612,7 @@ body {
     background-color: rgba(46, 204, 113, 0.1);
     color: #2ecc71;
     border: none;
-    border-radius: 6px;
+    border-radius: var(--br);
     cursor: pointer;
     transition: all 0.2s ease;
     display: flex;
@@ -686,10 +653,12 @@ body {
 
 .modal-content {
     background-color: #242424;
-    border-radius: 8px;
+    border-radius: var(--br);
     width: 90%;
     max-width: 500px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    margin: 0;
 }
 
 .modal-header {
@@ -737,7 +706,7 @@ body {
     gap: 8px;
     padding: 8px 16px;
     border: none;
-    border-radius: 4px;
+    border-radius: var(--br);
     cursor: pointer;
     font-size: 14px;
     transition: all 0.2s ease;
@@ -796,8 +765,8 @@ body {
 .relation-edit-modal select {
     width: 100%;
     padding: 8px 12px;
-    border: 1px solid #404040;
-    border-radius: 4px;
+    border: 1px solid var(--bc);
+    border-radius: var(--br);
     background: #2a2a2a;
     color: #e0e0e0;
     font-size: 14px;
@@ -812,7 +781,7 @@ body {
 
 .modal-footer .action-button {
     padding: 8px 16px;
-    border-radius: 6px;
+    border-radius: var(--br);
     font-size: 14px;
     font-weight: 500;
     transition: all 0.2s;
@@ -821,11 +790,11 @@ body {
 .modal-footer .action-button.secondary {
     background: #333;
     color: #e0e0e0;
-    border: 1px solid #404040;
+    border: 1px solid var(--bc);
 }
 
 .modal-footer .action-button.secondary:hover {
-    background: #404040;
+    background: var(--bc);
     border-color: #4a4a4a;
 }
 
@@ -843,9 +812,9 @@ body {
 .country-select {
     width: 100%;
     padding: 8px 12px;
-    border: 1px solid #404040;
-    border-radius: 5px;
-    background-color: #2a2a2a;
+    border: 1px solid var(--bc);
+    border-radius: var(--br);
+    background-color: var(----background-secondary);
     color: #e0e0e0;
     font-size: 14px;
     outline: none;
@@ -869,9 +838,9 @@ body {
 
 .turn-input input {
     padding: 8px 12px;
-    border: 1px solid #404040;
-    border-radius: 5px;
-    background-color: #2a2a2a;
+    border: 1px solid var(--bc);
+    border-radius: var(--br);
+    background-color: var(----background-secondary);
     color: #e0e0e0;
     font-size: 14px;
     outline: none;
@@ -893,32 +862,18 @@ body {
     margin-top: 4px;
 }
 
-/* Улучшение доступности */
-.form-group input:focus,
-.form-group select:focus,
-.nav-button:focus,
-.action-button:focus {
-    outline: 2px solid #3498db;
-    outline-offset: 2px;
-}
-
-/* Улучшение контрастности */
-.form-group label {
-    color: #ffffff;
-}
-
-.nav-button {
-    color: #ffffff;
+.navbtn {
+    color: var(--text-pri);
 }
 
 /* Анимации для интерактивных элементов */
-.nav-button,
+.navbtn,
 .action-button,
 .file-input-label {
     transition: all 0.2s ease-in-out;
 }
 
-.nav-button:active,
+.navbtn:active,
 .action-button:active,
 .file-input-label:active {
     transform: scale(0.98);
@@ -952,16 +907,16 @@ body {
 }
 
 .reforms-list {
-    background-color: #2a2a2a;
-    border: 1px solid #404040;
-    border-radius: 5px;
+    background-color: var(----background-secondary);
+    border: 1px solid var(--bc);
+    border-radius: var(--br);
     padding: 10px;
     margin-bottom: 10px;
 }
 
 .reform-item {
     background-color: #333;
-    border-radius: 4px;
+    border-radius: var(--br);
     padding: 15px;
     margin-bottom: 10px;
 }
@@ -999,8 +954,8 @@ body {
 }
 
 .reform-requirements {
-    background-color: #2a2a2a;
-    border-radius: 4px;
+    background-color: var(----background-secondary);
+    border-radius: var(--br);
     padding: 10px;
 }
 
@@ -1023,7 +978,7 @@ body {
     background-color: #2ecc71;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: var(--br);
     cursor: pointer;
     font-size: 12px;
     transition: background-color 0.3s ease;
@@ -1038,7 +993,7 @@ body {
     background-color: #e74c3c;
     color: white;
     border: none;
-    border-radius: 3px;
+    border-radius: var(--br);
     cursor: pointer;
     font-size: 12px;
     transition: background-color 0.3s ease;
@@ -1071,10 +1026,10 @@ body {
 
 .lang-button {
     background: none;
-    border: 1px solid #404040;
+    border: 1px solid var(--bc);
     color: #e0e0e0;
     padding: 8px 16px;
-    border-radius: 4px;
+    border-radius: var(--br);
     cursor: pointer;
     font-size: 14px;
     display: flex;
@@ -1083,7 +1038,7 @@ body {
 }
 
 .lang-button:hover {
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
 }
 
 .lang-button::after {
@@ -1098,7 +1053,7 @@ body {
     right: 0;
     background-color: var(--background-color);
     border: 1px solid var(--border-color);
-    border-radius: 4px;
+    border-radius: var(--br);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     z-index: 1000;
     min-width: 120px;
@@ -1117,20 +1072,13 @@ body {
 }
 
 .lang-dropdown a:hover {
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
 }
 
 .header-actions {
     display: flex;
     gap: 10px;
     align-items: center;
-}
-
-/* Стили для страницы редактирования событий */
-.event-form {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
 .form-row {
@@ -1150,17 +1098,6 @@ body {
     font-weight: bold;
 }
 
-.form-group input[type="text"],
-.form-group input[type="number"],
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #404040;
-    border-radius: 4px;
-    font-size: 14px;
-}
-
 .image-select-container {
     display: flex;
     gap: 10px;
@@ -1176,8 +1113,8 @@ body {
     height: 120px;
     object-fit: cover;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    background: #333333;
+    border-radius: var(--br);
+    background: var(--bg-sec);
 }
 
 .icon-preview {
@@ -1185,8 +1122,8 @@ body {
     height: 48px;
     object-fit: contain;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    background: #333333;
+    border-radius: var(--br);
+    background: var(--bg-sec);
 }
 
 .answers-section {
@@ -1196,21 +1133,20 @@ body {
 }
 
 .answer-block {
-    background: #2a2a2a;
-    border: 1px solid #404040;
-    border-radius: 8px;
+    background: var(--bg-sec);
+    border: 1px solid var(--bc);
+    border-radius: var(--br);
     padding: 15px;
-    margin-bottom: 20px;
 }
 
 .answer-block h3 {
     margin-top: 0;
     margin-bottom: 15px;
-    color: #e0e0e0;
+    color: var(--text-pri);
     font-size: 16px;
     font-weight: 500;
     padding-bottom: 10px;
-    border-bottom: 1px solid #404040;
+    border-bottom: 1px solid var(--bc);
 }
 
 .requirements-button {
@@ -1218,7 +1154,7 @@ body {
     color: white;
     border: none;
     padding: 8px 16px;
-    border-radius: 4px;
+    border-radius: var(--br);
     cursor: pointer;
     font-size: 14px;
 }
@@ -1241,7 +1177,7 @@ body {
     color: white;
     border: none;
     padding: 10px 20px;
-    border-radius: 4px;
+    border-radius: var(--br);
     cursor: pointer;
     font-size: 14px;
 }
@@ -1255,7 +1191,7 @@ body {
     color: white;
     border: none;
     padding: 10px 20px;
-    border-radius: 4px;
+    border-radius: var(--br);
     cursor: pointer;
     font-size: 14px;
 }
@@ -1278,23 +1214,6 @@ body {
 .answer-block[data-disabled="true"] select[id$="-disabled"] {
     opacity: 1;
     pointer-events: all;
-}
-
-.form-group textarea {
-    resize: vertical;
-    min-height: 60px;
-    background-color: #2a2a2a;
-    border: 1px solid #404040;
-    border-radius: 4px;
-    color: #e0e0e0;
-    font-size: 14px;
-    width: 100%;
-    padding: 8px;
-}
-
-.form-group textarea:focus {
-    outline: none;
-    border-color: #4a90e2;
 }
 
 .with-checkmark {
@@ -1346,7 +1265,7 @@ body {
     right: 0;
     background-color: var(--background-color);
     border: 1px solid var(--border-color);
-    border-radius: 4px;
+    border-radius: var(--br);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     z-index: 1000;
     min-width: 120px;
@@ -1373,9 +1292,10 @@ body {
     position: absolute;
     top: calc(100% + 4px);
     right: 0;
-    background-color: #242424;
-    border: 1px solid #404040;
-    border-radius: 8px;
+    background-color: var(--bg-sec-great);
+    color: var(--text-pri);
+    border: 1px solid var(--bc);
+    border-radius: var(--br);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     min-width: 200px;
     z-index: 1000;
@@ -1388,14 +1308,14 @@ body {
 
 .account-info {
     padding: 12px 16px;
-    border-bottom: 1px solid #404040;
+    border-bottom: 1px solid var(--bc);
     margin-bottom: 8px;
 }
 
 .account-name {
     font-weight: 500;
     font-size: 14px;
-    color: #e0e0e0;
+    color: var(--text-sec);
 }
 
 .account-id {
@@ -1406,7 +1326,7 @@ body {
 
 .account-divider {
     height: 1px;
-    background-color: #404040;
+    background-color: var(--bc);
     margin: 8px 0;
 }
 
@@ -1422,7 +1342,7 @@ body {
 }
 
 .account-item:hover {
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
 }
 
 .account-item svg {
@@ -1466,6 +1386,7 @@ body {
     --background-color: #1e1e1e;
     --border-color: #333;
     --hover-color: rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, #303027, #1C2125, #1F2120);;
 }
 
 /* Светлая тема */
@@ -1536,7 +1457,7 @@ body {
     border-radius: 50%;
     margin-right: 8px;
     object-fit: cover;
-    border: 2px solid #404040;
+    border: 2px solid var(--bc);
     transition: border-color 0.2s;
 }
 
@@ -1551,44 +1472,9 @@ body {
     line-height: 1.2;
 }
 
-.account-name {
-    font-weight: 500;
-    color: #ffffff;
-}
-
 .account-id {
     font-size: 12px;
     color: #999999;
-}
-
-/* Кнопки с иконками */
-.icon-action-button {
-    width: 32px;
-    height: 32px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
-    position: relative;
-}
-
-.icon-action-button svg {
-    width: 18px;
-    height: 18px;
-    stroke: currentColor;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    fill: none;
-}
-
-/* Общие стили для всех кнопок-иконок при наведении */
-.icon-action-button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Стили для кнопок в модальных окнах */
@@ -1608,7 +1494,7 @@ body {
     color: var(--text-color);
     text-align: center;
     padding: 4px 8px;
-    border-radius: 4px;
+    border-radius: var(--br);
     font-size: 12px;
     white-space: nowrap;
     pointer-events: none;
@@ -1653,26 +1539,13 @@ body {
 }
 
 /* Стили для основных кнопок навигации */
-.nav-button {
-    background-color: rgba(52, 152, 219, 0.1);
-    color: #3498db;
-}
-
-.nav-button:hover {
-    background-color: rgba(52, 152, 219, 0.2);
-}
-
-.nav-button.active {
-    background-color: rgba(52, 152, 219, 0.2);
-    color: #3498db;
-}
 
 /* Стили для кнопок действий */
 .icon-action-button {
     width: 32px;
     height: 32px;
     border: none;
-    border-radius: 6px;
+    border-radius: var(--brs);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -1698,14 +1571,14 @@ body {
 .icon-action-button[id*="delete"],
 .icon-action-button[id*="remove"],
 .icon-action-button.delete {
-    background-color: rgba(231, 76, 60, 0.1);
-    color: #e74c3c;
+    background-color: rgba(168 87 78);
+    color: var(--text-pri);
 }
 
 .icon-action-button[id*="delete"]:hover,
 .icon-action-button[id*="remove"]:hover,
 .icon-action-button.delete:hover {
-    background-color: rgba(231, 76, 60, 0.2);
+    background-color: rgb(193, 109, 100);
 }
 
 /* Действия копирования */
@@ -1747,13 +1620,13 @@ body {
 /* Действия сохранения */
 .icon-action-button[id*="save"],
 .icon-action-button.save {
-    background-color: rgba(241, 196, 15, 0.1);
-    color: #f1c40f;
+    background-color: var(--ac-text);
+    color: var(--text-pri);
 }
 
 .icon-action-button[id*="save"]:hover,
 .icon-action-button.save:hover {
-    background-color: rgba(241, 196, 15, 0.2);
+    background-color: var(--ac-text-hover);
 }
 
 /* Действия настроек */
@@ -1834,7 +1707,7 @@ body {
 
 .groups-list::-webkit-scrollbar-thumb {
     background: #333;
-    border-radius: 4px;
+    border-radius: var(--br);
 }
 
 .groups-list::-webkit-scrollbar-thumb:hover {
@@ -1882,7 +1755,7 @@ body {
     font-size: 14px;
     font-weight: 500;
     padding: 8px 16px;
-    border-radius: 5px;
+    border-radius: var(--br);
     cursor: pointer;
     transition: all 0.3s ease;
     margin-right: 8px;
@@ -1898,26 +1771,26 @@ body {
 }
 
 .requirements-editor-button:hover {
-    background-color: #2a2a2a;
+    background-color: var(----background-secondary);
     color: #e0e0e0;
 }
 
 .requirements-editor-button.primary {
-    background-color: rgba(52, 152, 219, 0.1);
-    color: #3498db;
+    background-color: var(--ac-text);
+    color: var(--text-pri);
 }
 
 .requirements-editor-button.primary:hover {
-    background-color: rgba(52, 152, 219, 0.2);
+    background-color: var(--ac-text-hover);
 }
 
 .requirements-editor-button.secondary {
-    background-color: rgba(231, 76, 60, 0.1);
-    color: #e74c3c;
+    background-color: rgba(231, 76, 60);
+    color: var(--text-pri);
 }
 
 .requirements-editor-button.secondary:hover {
-    background-color: rgba(231, 76, 60, 0.2);
+    background-color: rgb(229, 94, 79);
 }
 
 #add-requirement,
@@ -1927,6 +1800,7 @@ body {
     align-items: center;
     justify-content: center;
     min-width: 100px;
+    border-radius: vaR(--br);
 }
 
 .preview-content {
@@ -1937,7 +1811,128 @@ body {
     display: flex
 }
 
-.preview-header {
+
+.custom-select {
+  position: relative;
+  width: 280px;
+  user-select: none;
+}
+
+/* выбранная панель */
+.custom-select__button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid #bbb;
+  background: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  justify-content: space-between;
+}
+.custom-select__button:focus { outline: 3px solid #cfe8ff; }
+
+/* область с выбранным значением (иконка + текст) */
+.custom-select__current {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.custom-select__current img { width: 24px; height: 24px; object-fit: cover; border-radius: 4px; }
+
+/* стрелка */
+.custom-select__arrow {
+  transition: transform .2s ease;
+}
+.custom-select--open .custom-select__arrow { transform: rotate(180deg); }
+
+/* выпадающий список */
+.custom-select__list {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-top: 6px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.08);
+  z-index: 50;
+  max-height: 220px;
+  overflow: auto;
+  padding: 6px;
+  display: none; /* показываем через JS (или класс) */
+}
+.custom-select--open .custom-select__list { display: block; }
+
+/* элемент списка */
+.custom-select__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.custom-select__item img { width: 20px; height: 20px; object-fit: cover; border-radius: 3px; }
+.custom-select__item:hover,
+.custom-select__item[aria-selected="true"],
+.custom-select__item.custom-select__item--focused {
+  background: #f0f8ff;
+}
+
+/* скрытый input для формы */
+.custom-select__hidden { display:none; }
+
+/* чуть лучше для мобильных */
+@media (max-width:480px){
+  .custom-select { width: 100%; }
+}
+
+.description_eelib {
+    padding: 20px;
+    padding-top: 0;
+}
+
+/* Стили для кнопок action в редакторе требований/бонусов */
+.action-buttons-group {
     display: flex;
-    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.action-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 2px solid var(--border-color, #ccc);
+    border-radius: 4px;
+    background-color: var(--bg-sec, #f5f5f5);
+    color: var(--text-primary, #333);
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.action-button:hover {
+    border-color: var(--accent-color, #007bff);
+    background-color: var(--accent-light, #e7f1ff);
+}
+
+.action-button.active {
+    background-color: var(--accent-color, #007bff);
+    color: white;
+    border-color: var(--accent-color, #007bff);
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+}
+
+.action-button:active {
+    transform: scale(0.95);
+}
+
+.action-value {
+    display: none;
 }
