@@ -1,10 +1,10 @@
 const inGameMaps = [
     "jalhund_europe_vg",
     "jaba_america_vg",
-    "parcoucat_euro4_vg",
+    "parkourcat_euro4_vg",
     "jalhund_europe",
     "jaba_america",
-    "parcoucat_euro4",
+    "parkourcat_euro4",
 ];
 
 const statusScores = {
@@ -27,16 +27,6 @@ const awardScores = {
 };
 
 console.log('Library downloadlist.js loaded');
-//const libLink = 'https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/';
-//const libLink = 'http://192.168.100.18:8081/'
-//const libLink = 'https://ee-lib-data.netlify.app/'
-
-let liblink;
-if (window.location.href.includes('file:///') || window.location.href.includes('8080')) {
-    libLink = 'http://192.168.100.18:8081/';
-} else {
-    libLink = 'https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/';
-}
 
 // Award score values задаються в другом файле.
 
@@ -56,7 +46,7 @@ function generateImagePath(id) {
     }
     const mapId = generateMapId(id, '/', 2);
     //console.log(`Image ID: ${libLink}lib/${mapId}/${id.join('_')}.png`); // Debugging line
-    return `${libLink}lib/${mapId}/${id.join('_')}.png`;
+    return `${libLink}lib/${mapId}/${id.join('_')}.webp`;
 }
 
 function generateScenarioPath(id) {
@@ -76,7 +66,6 @@ function generateMapPath(id) {
     }
     const mapId = generateMapId(id, '/', 2);
     const mapFileId = generateMapId(id, '_', 3);
-    //console.log(`Map ID: ${libLink}lib/${mapId}/${mapFileId}_!.map`); // Debugging line
     return `${libLink}lib/${mapId}/${mapFileId}_!.map`;
 }
 
@@ -134,8 +123,8 @@ function truncateAuthorName(name, maxLength = 10) {
         if (name.length <= maxLength) return name;
         return name.substring(0, maxLength) + '...';
     } catch (error) {
-        console.error('Error truncating author name:', error);
-        return name; // Fallback to original name if error occurs
+        console.error('Error truncating author name:', error, name);
+        return ' '; // Fallback to original name if error occurs
     }
 }
 
@@ -154,17 +143,17 @@ function generateScenarioCard(scenario) {
             </div>
         `).join('');
 
-    const mapId = scenario.id.slice(0, 2);
+    const mapId = scenario.id.slice(0, 2).join('_');
     const mapData = getMapDataNew(scenario.id.slice(0, 2).join('_'));
     const imagePath = generateImagePath(scenario.id);
     const scenarioPath = generateScenarioPath(scenario.id);
     const detailsLink = generateDetailsLink(scenario.id);
     const score = calculateScenarioScore(scenario);
     let noRights;
-    if (scenario.rights === true) {
+    if (authorsData[scenario.author]?.rights === true) {
         noRights = "";
     } else {
-        noRights = `<button class="download-download-button" onclick="askDelete()" style="background-color: #945d44ff; border-radius: var(--br); width: 45px; height: 45px; border: none; cursor: pointer;">
+        noRights = `<button class="download-download-button" onclick="askDelete()" style="background-color: #945d44ff; border-radius: 0; width: 45px; height: 45px; border: none; cursor: pointer;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"role="img" aria-label="Жалоба: предупреждение" focusable="false"><title>Жалоба</title><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
                     </button>`;
     }
@@ -213,7 +202,7 @@ function generateScenarioCard(scenario) {
                         <div class="download-awards">
                             ${awardsHTML}
                         </div>
-                        <div class="download-status status-${status}">
+                        <div class="download-status status-${status}" ${status == 'completed' ? 'style="display: none"' : ''}>
                             ${statusLabel}
                         </div>
                     </div>
@@ -250,20 +239,25 @@ function generateScenarioCard(scenario) {
                             <img src="././img/library/gamemode.svg" class="download-info-ico" />
                         </div>
                     </div>
-                    <!--div class="download-tags">
-                        
-                    </div-->
+                    <div class="download-row-big">
+                        <div class="download-row">
+                        </div>
+                        <div class="download-row">
+                            <a href="?category=scenarios&period=${scenario.period}" style="color: #6e8699">${scenario.period}</a>
+                            <img src="././img/library/calendar.svg" class="download-info-ico" />
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="download-down">
-                <div class="download-row-big">
-                    <div class="download-row">
+                <div class="download-row-big" style="min-height: 90px; position: relative;">
+                    <div class="download-row" style="max-width: calc(100% - 45px)">
                         <img src="././img/library/world.svg" class="download-info-ico" />
                         <p>${mapData ? mapData.title + ' ' + scenario.id[2] : scenario.map.name + ' ' + scenario.id[2]}</p>
                     </div>
-                    <div style="display:flex;flex-direction:column;align-items:bottom;gap:1rem">
+                    <div style="display:flex;flex-direction:column;align-items:bottom;border-radius:var(--br);overflow:hidden;position:absolute;right:0;bottom:0;">
                         ${noRights}
-                        <button class="download-download-button" onclick="libDownloadScenario('${scenarioPath}', '${mapId}', '${scenario.id[0]}', '${scenario.id[1]}', '${scenario.id[2]}')" style="background-color: #44944A; border-radius: var(--br); width: 45px; height: 45px; border: none; cursor: pointer;">
+                        <button class="download-download-button" onclick="libDownloadScenario('${scenarioPath}', '${mapId}', '${scenario.id[0]}', '${scenario.id[1]}', '${scenario.id[2]}')" style="background-color: #44944A; border-radius: 0; width: 45px; height: 45px; border: none; cursor: pointer;">
                             <img src="././img/library/download.svg" class="download-info-ico" />
                         </button>
                     </div>

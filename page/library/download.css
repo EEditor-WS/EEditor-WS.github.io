@@ -422,7 +422,7 @@
 }
 
 .modal-content {
-    background-color: var(--background-secondary);
+    background-color: var(--bg-sec-great);
     padding: 20px;
     border-radius: var(--br);
     max-width: 400px;

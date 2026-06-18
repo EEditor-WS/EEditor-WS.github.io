@@ -56,22 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return String(aw).toLowerCase().includes('star');
   }
 
-  // isUnusual: tags contains "unusual" (case-insensitive)
-  function isUnusual(scenario) {
-  /*  if (!scenario) return false;
-    const tags = scenario.tags || scenario.labels || scenario.categories || [];
-    if (Array.isArray(tags)) {
-      return tags.some(t => {
-        if (!t) return false;
-        return String(t).toLowerCase() === 'unusual' || String(t).toLowerCase().includes('unusual');
-      });
-    }
-    if (typeof tags === 'string') {
-      return tags.toLowerCase().split(/[,;\s]+/).some(x => x === 'unusual' || x.includes('unusual'));
-    }
-    */
-    return false;
-  }
+  function isUnusual(scenario) { return false }
 
   // Сортировка массива по lastUpdate (новые сверху)
   function sortByLastUpdateDesc(arr) {

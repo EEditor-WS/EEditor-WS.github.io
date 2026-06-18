@@ -1,5 +1,5 @@
 function libShowFilters() {
-    const filtersElement = document.querySelector('.lib-filters');
+    const filtersElement = document.querySelector('#lib-filters');
     if (filtersElement) {
         filtersElement.classList.toggle('active');
     }

@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         //alert(`Найден сценарий: ${foundScenario.title}`);
 
-        document.getElementById('screenshoot').src = `${libLink}lib/${foundScenario.id.slice(0, 2).join('/')}/${cleanScenarioId}.png`;
+        document.getElementById('screenshoot').src = `${libLink}lib/${foundScenario.id.slice(0, 2).join('/')}/${cleanScenarioId}.webp`;
 
         document.getElementById('downloadScenarioDetalis').onclick = () => {
             libDownloadScenario(`${libLink}lib/${foundScenario.id.slice(0, 2).join('/')}/${cleanScenarioId}.json`, ' ', `${foundScenario.id[0]}`, `${foundScenario.id[1]}`, `${foundScenario.id[2]}`, true);

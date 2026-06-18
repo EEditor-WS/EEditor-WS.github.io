@@ -36,16 +36,30 @@ function useUrlParams() {
         } else {
             document.getElementById('downloadMapVersionsBtn').classList.add('noVersions')
         }
+
+        document.getElementById('filterHeaderLinkBtn').addEventListener('click', () => {
+            navigator.clipboard.writeText(`${window.location.protocol}\/\/${window.location.host}\/library.html?category=scenarios&map=${currentMap}`)
+            window.notification.success('Copied', 'Sucessfuly copied link to map to clipboard')
+        })
+    } else if (params.get('period')) {
+        const period = params.get('period') + ''
+        title.textContent = period.charAt(0).toUpperCase() + period.slice(1)
+
+        document.getElementById('downloadMapBtn').style.display = 'none'
+
+        document.getElementById('filterHeaderLinkBtn').addEventListener('click', () => {
+            navigator.clipboard.writeText(`${window.location.protocol}\/\/${window.location.host}\/library.html?category=scenarios&period=${period}`)
+            window.notification.success('Copied', 'Sucessfuly copied link to map to clipboard')
+        })
+    } else {
+        document.getElementById('filterHeader').style.display = 'none'
     }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('filterHeaderResetBtn').addEventListener('click', () => {
         document.getElementById('filterHeader').style.display = 'none'
-    })
-    document.getElementById('filterHeaderLinkBtn').addEventListener('click', () => {
-        navigator.clipboard.writeText(`${window.location.protocol}\/\/${window.location.host}\/library.html?category=scenarios&map=`)
-        window.notification.success('Copied', 'Sucessfuly copied link to map to clipboard')
+        libResetFilters()
     })
     document.getElementById('downloadMapVersionsBtn').addEventListener('click', () => {
         document.getElementById('filterHeaderDownload').classList.toggle('active')

@@ -1,5 +1,27 @@
-body {
-    min-height: 100dvh;
+
+
+html {
+    overflow: unset;
+    max-height: unset;
+
+    body {
+        min-height: 100dvh;
+        overflow: unset;
+        max-height: unset;
+
+        &.dark-theme {
+            background: #1e1e1e;
+
+            .nav-header {
+                background: #1e1e1e;
+            }
+        }
+
+        .page.active {
+            max-height: unset;
+            overflow: unset;
+        }
+    }
 }
 
 .action-button.back {

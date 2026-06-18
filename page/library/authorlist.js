@@ -2,27 +2,32 @@ const authorsData = {
     eenot: {
         name: "@eenot",
         link: "https://discord.com/users/794675642037567491",
-        color: "#3B83BD"
+        color: "#3B83BD",
+        rights: true
     },
     theman_the_myth_the_legend: {
         name: "@theman_the_myth_the_legend",
         link: "https://discord.com/users/1083919275951149118",
-        color: "#3B83BD"
+        color: "#3B83BD",
+        rights: true
     },
     helvetic_brutalisation: {
         name: "@helvetic_brutalisation",
         link: "https://discord.com/users/1280887382920532073",
-        color: "#3B83BD"
+        color: "#3B83BD",
+        rights: true
     },
     totoska: {
         name: "@totoska",
         link: "https://discord.com/users/820194328201920524",
-        color: "#3B83BD"
+        color: "#3B83BD",
+        rights: true
     },
     kolkhoznik: {
         name: "@kolhoznik",
         link: "https://discord.com/users/1057029940484247682",
-        color: "#3B83BD"
+        color: "#3B83BD",
+        rights: true
     },
     esteban: {
         name: "@deleted_user",
@@ -32,12 +37,14 @@ const authorsData = {
     zachary: {
         name: "@zachary",
         link: "https://discord.com/users/804839006403428423",
-        color: "#3B83BD"
+        color: "#3B83BD",
+        rights: true
     },
     pelo: {
         name: "@pelo3918",
         link: "https://discord.com/users/1071700840492056717",
-        color: "#3B83BD"
+        color: "#3B83BD",
+        rights: true
     },
     atharva: {
         name: "@atharva04303",
@@ -47,22 +54,26 @@ const authorsData = {
     bluepum: {
         name: "@blue_pum_67269",
         link: "https://discord.com/users/1260558860796825610",
-        color: "#3B83BD"
+        color: "#3B83BD",
+        rights: true
     },
     radardev: {
         name: "@radardev",
         link: "https://discord.com/users/951467148063158324",
-        color: "#3B83BD"
+        color: "#3B83BD",
+        rights: true
     },
     stewardconstruct: {
         name: "@stewardconstruct",
         link: "https://discord.com/users/1114590604668706927",
-        color: "#3B83BD"
+        color: "#3B83BD",
+        rights: true
     },
     trid: {
         name: "@trid9505",
         link: "https://discord.com/users/993585215358386306",
-        color: "#3B83BD"
+        color: "#3B83BD",
+        rights: true
     },
     jaba: {
         name: "@jaba4275",
@@ -77,7 +88,8 @@ const authorsData = {
     jalhund: {
         name: "@jalhund",
         link: "https://discord.com/users/277053272959008768",
-        color: "#3B83BD"
+        color: "#3B83BD",
+        rights: true
     },
     chuckcha: {
         name: "@chuckha",
@@ -92,7 +104,8 @@ const authorsData = {
     mapmancer: {
         name: "@stilltrex",
         link: "https://discord.com/users/950707094229766174",
-        color: "#3B83BD"
+        color: "#3B83BD",
+        rights: true
     },
     chitterss: {
         name: "@deleted_user",
@@ -107,7 +120,8 @@ const authorsData = {
     eeditor: {
         name: "@EEditor",
         link: "https://discord.gg/s5JgHChaQE",
-        color: "#efe927ff"
+        color: "#efe927ff",
+        rights: true
     },
     astroja: {
         name: "@astroja",
@@ -139,15 +153,17 @@ const authorsData = {
         link: "https://discord.com/users/602798356133052456",
         color: "#3B83BD"
     },
-    zloyhoziain: {
+    zloy: {
         name: "@zloi_hozain",
         link: "https://discord.com/users/962955511203000351",
-        color: "#3B83BD"
+        color: "#3B83BD",
+        rights: true
     },
     gray_car: {
         name: "@gray_car",
         link: "https://discord.com/users/1260611002240860202",
-        color: "#3B83BD"
+        color: "#3B83BD",
+        rights: true
     },
     fredstein: {
         name: "@fred.stein",
@@ -157,17 +173,20 @@ const authorsData = {
     thefanfinfulo: {
         name: "@thefanfinfulo_67965",
         link: "https://discord.com/users/1288264777105408020",
-        color: "#3B83BD"
+        color: "#3B83BD",
+        rights: true
     },
     lurus: {
         name: "@lurus",
         link: "https://discord.com/users/764533673512927242",
-        color: "#3B83BD"
+        color: "#3B83BD",
+        rights: true
     },
     vova: {
         name: "@vova_lifi_19090",
         link: "https://discord.com/users/1376239281583951965",
-        color: "#3B83BD"
+        color: "#3B83BD",
+        rights: true
     },
     mat: {
         name: "@Mat971345",
@@ -192,6 +211,7 @@ const authorsData = {
     greg: {
         name: "@greg👍",
         link: "https://discord.com/users/1395745707247407124",
-        color: "#3B83BD"
+        color: "#3B83BD",
+        rights: true
     },
 }

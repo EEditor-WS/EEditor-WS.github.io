@@ -30,12 +30,21 @@
         <link rel="stylesheet" href="/page/library/modern/headers.css">
         <link rel="stylesheet" href="/page/library/modern/mobile.css">
         
+        <script>
+            let libLink;
+            if (window.location.href.includes('file:///') || window.location.port == '5500') {
+                libLink = 'http://95.153.88.229:8081/';
+            } else {
+                libLink = 'https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/';
+            }
+        </script>
         <script src="/page/library/authorlist.js"></script>
         <script src="/page/library/scenariolist.js"></script>
+        <script src="/page/library/maplist.js"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 useUrlParams()
-                applyUrlParams();
+                //applyUrlParams();
             });
         </script>
         <!-- Google tag (gtag.js) -->
@@ -796,11 +805,9 @@
             </div>
         </div>
         
-        <!--script src="download.js"></script-->
-        <script src="https://ee-apps.github.io/framework/eelibs/import.js" type="module"></script>
+        <script src="/eelibs/import.js" type="module"></script>
         <script src="/page/library/modern/pages.js"></script>
         <script src="/js/fetch.js"></script>
-        <script src="/page/library/maplist.js"></script>
         <script src="/page/library/modern/openPage.js"></script>
         <script src="/page/library/modern/filters.js"></script>
         <script src="/js/library.js"></script>

@@ -23,16 +23,17 @@
         // Get all filter values
         const searchText = (document.getElementById('lib-search') || { value: '' }).value.toLowerCase();
         const authorFilter = (document.getElementById('lib-autor-filter') || { value: '' }).value.toLowerCase();
-        //const mapFilter = (document.getElementById('lib-map-filter') || { value: '' }).value.toLowerCase();
         const mapFilter = window.params.get('map');
         const typeFilter = (document.getElementById('lib-type-filter') || { value: '' }).value;
         const languageFilter = (document.getElementById('lib-language-filter') || { value: '' }).value;
         const rawFull = (document.getElementById('lib-full-id-filter') || { value: '' }).value;
         const fullIdFilter = rawFull ? rawFull.replace(/\.json$/i, '').trim().toLowerCase() : '';
 
-        // Get status, period and mechanics filters
+        // Чистый фильтр периода из window.params (без привязки к HTML)
+        const periodFilter = window.params.get('period'); 
+
+        // Get status and mechanics filters
         const statusFilter = getCheckedValues('status');
-        const timePeriods = Array.from(document.querySelectorAll('.checkbox-list input[type="checkbox"]:not([name="status"]):not([name^="mechanics"])')).map(cb => cb.value);
 
         const mechanicsFilters = {
             economy: getCheckedValues('economy'),
@@ -64,7 +65,6 @@
                 const searchAuthor = authorFilter.toLowerCase().replace(/^@/, '');
                 const authorMatch = scenarioAuthor.includes(searchAuthor) || scenarioAuthor.replace(/^@/, '').includes(searchAuthor);
                 visible = visible && authorMatch;
-                console.log('Author filter:', { scenarioAuthor, searchAuthor, authorMatch });
             }
 
             // Map filter
@@ -72,7 +72,6 @@
                 const scenarioMap = String(`${scenario.id[0]}_${scenario.id[1]}` || '');
                 const mapMatch = scenarioMap.includes(mapFilter);
                 visible = visible && mapMatch;
-                console.log('Map filter:', { scenarioMap, mapFilter, mapMatch });
             }
 
             // Type filter
@@ -88,7 +87,6 @@
                     Array.isArray(scenario.languages) ? scenario.languages : [];
                 const langMatch = langs.some(l => l.toLowerCase() === languageFilter.toLowerCase());
                 visible = visible && langMatch;
-                console.log('Language filter:', { langs, languageFilter, langMatch });
             }
 
             // Status filter
@@ -96,9 +94,10 @@
                 visible = visible && statusFilter.includes(scenario.status);
             }
 
-            // Period filter (эпоха)
-            if (timePeriods.length > 0) {
-                visible = visible && timePeriods.includes(scenario.era || scenario.period);
+            // === Фильтр по периоду из window.params ===
+            if (periodFilter) {
+                const scenarioPeriod = String(scenario.era || scenario.period || '').toLowerCase();
+                visible = visible && scenarioPeriod === periodFilter.toLowerCase();
             }
 
             // Full ID filter
@@ -122,7 +121,7 @@
             (parseFloat(b.score) || 0) - (parseFloat(a.score) || 0)
         );
 
-        return sortedScenariosList; // Return for convenience
+        return sortedScenariosList;
     }
 
     // Expose the module
@@ -131,12 +130,51 @@
 })(window);
 
 function libApplyFilters() {
-    getSortedScenarios()
+    loadScenarios()
+}
+
+function libResetFilters() {
+    // 1. Сбрасываем параметры в window.params (если это URLSearchParams или подобный объект)
+    if (window.params && typeof window.params.delete === 'function') {
+        window.params.delete('map');
+        window.params.delete('period');
+        
+        // Если нужно, чтобы изменения отразились в адресной строке браузера без перезагрузки:
+        if (window.history && window.history.replaceState) {
+            const newUrl = window.location.pathname + (window.params.toString() ? '?' + window.params.toString() : '');
+            window.history.replaceState({}, '', newUrl);
+        }
+    }
+
+    // 2. Очищаем текстовые поля ввода и селекты
+    const inputsToClear = ['lib-search', 'lib-autor-filter', 'lib-type-filter', 'lib-language-filter', 'lib-full-id-filter'];
+    inputsToClear.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.value = ''; // Сбрасываем значение
+        }
+    });
+
+    // 3. Снимаем галочки со всех чекбоксов (status, mechanics и т.д.)
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(cb => {
+        cb.checked = false;
+    });
+
+    // 4. Перезапускаем фильтрацию, чтобы отобразить полный список сценариев
+    if (window.libFilters && typeof window.libFilters.filterScenarios === 'function') {
+        window.libFilters.filterScenarios();
+    }
+    
+    // Если у вас на странице за вывод отвечает функция libApplyFilters, вызываем её:
+    if (typeof libApplyFilters === 'function') {
+        libApplyFilters();
+    }
 }
 
 class LibraryFilters {
     constructor() {
-        filters: {}
+        this.filters = {};
     }
 
     init() {
