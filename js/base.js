@@ -9,3 +9,6 @@
         });
         document.getElementById(pageId)?.classList.add('active');
     }
+
+    window.pages = {}
+    window.pages.switch = changePage

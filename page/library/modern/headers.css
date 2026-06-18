@@ -1,0 +1,126 @@
+#filterHeader {
+    padding: var(--ds);
+    border-radius: var(--br);
+    background-color: var(--bg-pri);
+    position: relative;
+    margin-bottom: var(--ds);
+
+    #filterHeaderBtns {
+        position: absolute;
+        top: var(--ds);
+        right: var(--ds);
+        display: flex;
+        flex-direction: row;
+        gap: var(--ds);
+
+        #button {
+            border: none;
+            z-index: 100;
+
+            padding: var(--dss);
+            font-size: large;
+        }
+
+        #filterHeaderResetBtn {
+            background-color: rgba(231, 60, 60, 0.12);
+        }
+        #filterHeaderLinkBtn {
+            background-color: rgba(60, 86, 231, 0.12);
+        }
+    }
+
+    #filterHeaderDownload {
+        position: absolute;
+        bottom: var(--ds);
+        right: var(--ds);
+        display: flex;
+        flex-direction: row;
+        gap: var(--ds);
+
+        #downloadMapBtn {
+            background-color: #44944a;
+            border-radius: var(--br) var(--br) 0 0;
+            overflow: hidden;
+            transition: border-radius 0.6s ease-in-out;
+
+            button {
+                display: inline-flex;
+                flex-direction: row;
+                align-items: center;
+                gap: var(--ds);
+
+                border: none;
+                border-radius: 0;
+                transform: none;
+                transition: none;
+                background: none;
+                
+                transition: background 0.3s ease, border-radius 0.3s ease;
+
+                &:hover {
+                    background-color: #49c053;
+                    color: white;
+                }
+
+                &#downloadMapVersionsBtn {
+                    overflow: hidden;
+                    max-width: 34px;
+                    border-radius: var(--br);
+
+                    &.noVersions {
+                        max-width: 0;
+                        padding: 0;
+                        border-radius: 0;
+                    }
+                }
+            }
+        }
+
+        &:not(.active) {
+            #downloadMapBtn {
+                border-radius: var(--br);
+            }
+
+            #downloadMapVersions {
+                max-height: 0;
+                overflow: hidden;
+
+                .downloadVersion {
+                    padding: 0 var(--ds);
+                }
+            }
+        }
+
+        #downloadMapVersions {
+            position: absolute;
+            top: 34px;
+            left: 0;
+            right: 0;
+
+            display: inline-flex;
+            flex-direction: column;
+            z-index: 100;
+            background-color: #44944a;
+            border-radius: 0 0 var(--br) var(--br);
+            transition: max-height 0.3s ease;
+            max-height: 250px;
+
+            .downloadVersion {
+                width: 100%;
+                padding: var(--ds);
+
+                border: none;
+                transform: none;
+                transition: none;
+                background: none;
+                
+                transition: background 0.3s ease, padding 0.3s ease;
+
+                &:hover {
+                    background-color: #49c053;
+                    color: white;
+                }
+            }
+        }
+    }
+}

@@ -1,7 +1,8 @@
 const adslist = [
 //    'me2ads', 
-    'satads',
-    'tournamentAds'
+//    'satads',
+//    'tournamentAds',
+    'selfAd',
 ];
 
 function adsShowRandomEditor() {

@@ -1,10 +1,10 @@
 @import url("compibality.css");
-@import url("orange.css");
 
 /* Theme colors */
 :root {
     --bg-pri: #00000045;
     --bg-pri-hover: #27272745;
+    --bg-pri-great: #0e0f0e;
     --bg-sec: #242424b0;
     --bg-sec-hover: #424242b0;
     --bg-sec-great: #242424;
@@ -25,6 +25,9 @@
     --bc: #404040;
     --ds: 1rem;
     --dss: 0.5rem;
+	
+	--ds2: calc(var(--ds) * 2);
+	--dss2: calc(var(--dss) * 2);
 
     --ac-text: #3498db;
     --ac-text-hover: #6bacd8;
@@ -35,17 +38,22 @@
     --ac-bg-great-hover: #6bacd8;
     --ac-bg-great-light: #5e8199;
 
-    --transitions: 0.3 ease;
-    --transition: all var(--transitions);
+    --transitions: 0.3s ease;
+    --tr-out: 0.25s cubic-bezier(0.2, 0.0, 0.0, 1);
+    --tr-in: 0.25s cubic-bezier(0.4, 0.0, 1, 1);
+    --tr-in-out: 0.25s cubic-bezier(0.4, 0.0, 0.2, 1);
+    --tr: all var(--transitions);
 
     --height: 16px;
 }
+
 
 * {
     transition: background-color 0.3s ease, color 0.3s ease;
     scrollbar-width: thin;
     scrollbar-color: var(--text-sec) var(--bg-sec);
     color: var(--text-pri);
+    transition: var(--tr);
 }
 
 
@@ -57,14 +65,7 @@ option {
 
 @font-face {
     font-family: 'onesans';
-    src: url(../../../../res/fonts/sans.ttf);
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'onesans2';
-    src: url(../../style/onesans.ttf);
+    src: url(././fonts/oneuisans.ttf);
     font-weight: normal;
     font-style: normal;
 }
@@ -74,11 +75,16 @@ body {
     margin: 0;
     /*padding: 24px;*/
     color: #f7f7f7;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'onesans', BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     background: linear-gradient(135deg, #303027, #1C2125, #1F2120);
     /*min-height: 100dvh;*/
-    font-family: 'onesans2', 'onesans', 'Inter', sans-serif !important;
+    font-family: 'onesans', 'Inter', sans-serif !important;
     min-height: 100dvh;
+    overflow-y: hidden;
+}
+
+html {
+    overflow-y: hidden;
 }
 
 a {
@@ -101,6 +107,7 @@ button {
     border: 1px solid var(--bc);
     color: var(--text-pri);
     padding: 5px;
+    transition: transform var(--tr-out);
 }
 
 button:hover {
@@ -109,6 +116,7 @@ button:hover {
     color: var(--text-sec);
     cursor: pointer;
     text-decoration: underline;
+    transform: scale(1.05);
 }
 
 video {
@@ -128,7 +136,11 @@ video {
     background-color: var(--bg-input);
     color: var(--text-pri);
     min-height: 20px;
-    transition: var(--transition);
+    background-image: none;
+    background-repeat: no-repeat;
+    background-position-y: center;
+    background-position-x: right;
+    background-position-x: calc(100% - 0.5rem);
 
     &:hover:not(:disabled) {
         background-color: var(--bg-input-hover);
@@ -137,6 +149,10 @@ video {
     &:focus {
         outline: none;
         border-color: var(--ac-text);
+        background-repeat: no-repeat;
+        background-position-y: center;
+        background-position-x: right;
+        background-position-x: calc(100% - 0.5rem);
     }
 
     &:disabled {
@@ -146,44 +162,72 @@ video {
     }
 }
 
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, textarea:focus {
+    background-image: url(././img/ui/text.svg);
+}
+
+input[type="number"]:focus {
+    background-image: url(././img/ui/number.svg);
+}
+
 input[type="range"] {
     accent-color: var(--ac-text);
 }
 
 input[type="range"] {
     -webkit-appearance: none;
-    width: 300px;
-    height: 10px;
-    background: #ccc;
-    border-radius: 5px;
+    width: min(300px, 100%);
+    min-height: 1px;
+    height: 5px;
+    background: var(--text-sec);
+    border-radius: var(--br);
     outline: none;
-    transition: var(--transition);
-    margin: 8px 0;
+    transition: var(--tr);
+    margin: 12.5px 0;
     padding: 0;
+    &.vertical {
+        width: 5px;
+        height: min(300px, 80dvw);
+        margin: 0 12.5px;
+    }
   }
 
 /* При наведении */
 input[type="range"]:hover {
-    background: var(--text-pri-hover);
+    background: var(--text-sec-hover);
+}
+input[type="range"]:hover:focus:not(.def) {
+    &:not(.vertical) {
+        margin: 5px 0;
+        height: 20px;
+    }
+    &.vertical {
+        margin: 0 5px;
+        width: 20px;
+    }
 }
 
 /* Ползунок (ползущий кружок) для Chrome, Edge, Safari */
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 10px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
     background: var(--ac-text);
     border: 2px solid var(--bc);
     border-radius: var(--brs);
     cursor: pointer;
-    border-radius: 0;
     margin: 0;
+    transition: var(--tr-in);
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
-    background: var(--ac-bg-hover);
+    background: var(--ac-bg-great-hover);
     border: 0;
+    aspect-ratio: 1;
+    width: 10px;
+    height: 10px;
+    transform: scale(2.5);
 }
 
 input::file-selector-button {
@@ -221,7 +265,7 @@ input[type="radio"] {
 /* При наведении */
 input[type="checkbox"]:hover,
 input[type="radio"]:hover {
-    box-shadow: 0 0 6px var(--ac-bg-great-hover);
+    box-shadow: 0 0 1px var(--ac-bg-great-hover);
 }
 
 /* Активное состояние */
@@ -242,7 +286,7 @@ input[type="radio"] {
 input[type="radio"]:checked {
     background-color: var(--ac-bg-hover);
     border-color: var(--bc);
-    box-shadow: inset 0 0 0 6px #fff, inset 0 0 0 9px #433323;
+    box-shadow: inset 0 0 0 1px #fff, inset 0 0 0 2px #433323;
 }
 
 input, select {
@@ -365,7 +409,7 @@ body.dev_mode .dev_thing {
     display: flex !important;
 }
 
-html body .page {
+html body .page.active {
     width: 100%;
     height: 100%;
     padding: 0;
@@ -373,11 +417,8 @@ html body .page {
     overflow-y: auto;
 }
 
-.page {
-    display: none;
-}
-.page.active {
-    display: inline-flex;
+body {
+    background: #0e0f0e;
 }
 
 fieldset {
@@ -386,4 +427,27 @@ fieldset {
 legend {
     font-size: 1.5rem;
     font-weight: 700;
+}
+
+.bg {
+    background-color: var(--bg-sec);
+    padding: var(--ds);
+    border-radius: var(--br);
+    margin: var(--ds) 0;
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds);
+    &.land {
+        flex-direction: row;
+    }
+}
+
+
+.vertical {
+    &:not(input[type="range"]) {
+        transform: rotate(90deg);
+    }
 }

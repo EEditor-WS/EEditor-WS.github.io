@@ -20,8 +20,6 @@
     --height: 16px;
 }
 
-@import url("elib/orange.css");
-
 option {
     background-color: var(--background-secondary-great);
     color: var(--text-primary);

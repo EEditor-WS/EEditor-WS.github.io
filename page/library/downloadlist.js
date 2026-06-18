@@ -55,7 +55,7 @@ function generateImagePath(id) {
         return '';
     }
     const mapId = generateMapId(id, '/', 2);
-    console.log(`Image ID: ${libLink}lib/${mapId}/${id.join('_')}.png`); // Debugging line
+    //console.log(`Image ID: ${libLink}lib/${mapId}/${id.join('_')}.png`); // Debugging line
     return `${libLink}lib/${mapId}/${id.join('_')}.png`;
 }
 
@@ -65,7 +65,7 @@ function generateScenarioPath(id) {
         return '';
     }
     const mapId = generateMapId(id, '/', 2);
-    console.log(`Scenario ID: ${libLink}lib/${mapId}/${id.join('_')}.json`); // Debugging line
+    //console.log(`Scenario ID: ${libLink}lib/${mapId}/${id.join('_')}.json`); // Debugging line
     return `${libLink}lib/${mapId}/${id.join('_')}.json`;
 }
 
@@ -76,7 +76,7 @@ function generateMapPath(id) {
     }
     const mapId = generateMapId(id, '/', 2);
     const mapFileId = generateMapId(id, '_', 3);
-    console.log(`Map ID: ${libLink}lib/${mapId}/${mapFileId}_!.map`); // Debugging line
+    //console.log(`Map ID: ${libLink}lib/${mapId}/${mapFileId}_!.map`); // Debugging line
     return `${libLink}lib/${mapId}/${mapFileId}_!.map`;
 }
 
@@ -85,7 +85,7 @@ function generateDetailsLink(id) {
         console.error('ID is not an array:', id);
         return '';
     }
-    return `detalis.html?type=scenario&scenario=${id.join('_')}.json`;
+    return `/page/library/detalis.html?type=scenario&scenario=${id.join('_')}.json`;
 }
 
 // Sort awards by weight
@@ -113,7 +113,7 @@ function calculateScenarioScore(scenario) {
     const updateAge = (new Date() - new Date(scenario.lastUpdate)) / (1000 * 60 * 60 * 24);
     score += Math.max(0, 50 - updateAge/30); // Lose 1 point per month, max 50 points
 
-    console.log(`Scenario: ${scenario.title}, Score: ${score}`); // Debugging line
+    //console.log(`Scenario: ${scenario.title}, Score: ${score}`); // Debugging line
     return score;
 }
 
@@ -129,7 +129,7 @@ function getSortedScenarios() {
 }
 
 // Helper function to truncate author name
-function truncateAuthorName(name, maxLength = 13) {
+function truncateAuthorName(name, maxLength = 10) {
     try {
         if (name.length <= maxLength) return name;
         return name.substring(0, maxLength) + '...';
@@ -147,9 +147,10 @@ let currentMapDownload = null;
 function generateScenarioCard(scenario) {
     const sortedAwards = sortAwardsByWeight(scenario.awards || []);
     const awardsHTML = sortedAwards
+        .filter(award => award !== "enot") // Отсекаем "enot" на взлете
         .map(award => `
             <div class="download-award">
-                <img src="temporarily/awards/${award}.svg" class="download-award-img" title="${award === "enot" ? "EEnot recommends" : award}">
+                <img src="/page/library/temporarily/awards/${award}.svg" class="download-award-img" title="${award}">
             </div>
         `).join('');
 
@@ -165,7 +166,7 @@ function generateScenarioCard(scenario) {
     }
 
     const mapId = scenario.id.slice(0, 2);
-    const mapData = getMapData(scenario.id.slice(0, 3).join('_'));
+    const mapData = getMapDataNew(scenario.id.slice(0, 2).join('_'));
     const imagePath = generateImagePath(scenario.id);
     const scenarioPath = generateScenarioPath(scenario.id);
     const detailsLink = generateDetailsLink(scenario.id);
@@ -192,10 +193,10 @@ function generateScenarioCard(scenario) {
         "experimental": "Experimental",
         "frozen": "Frozen"
     }[status] || "";
-    console.log('--------------------');
+    /*console.log('--------------------');
     console.log(`Scenario: ${scenario.title}, Status: ${statusLabel}`);
     console.log(scenario.id.slice(0, 2).join('_'));
-    console.log('--------------------');
+    console.log('--------------------');*/
 
     return `
         <div class="download-card" 
@@ -232,7 +233,7 @@ function generateScenarioCard(scenario) {
                     <a href="${detailsLink}" class="download-title download-goto-page">${scenario.title}</a>
                     <div class="download-row-big">
                         <div class="download-row">
-                            <img src="../../img/library/autor.svg" class="download-info-ico" />
+                            <img src="././img/library/autor.svg" class="download-info-ico" />
                             <div class="authors" style="display:flex; flex-direction:column">
                             ${
                                 scenario.author
@@ -247,17 +248,17 @@ function generateScenarioCard(scenario) {
                         </div>
                         <div class="download-row">
                             <p>${scenario.year}</p>
-                            <img src="../../img/library/calendar.svg" class="download-info-ico" />
+                            <img src="././img/library/calendar.svg" class="download-info-ico" />
                         </div>
                     </div>
                     <div class="download-row-big">
                         <div class="download-row">
-                            <img src="../../img/library/flag.svg" class="download-info-ico" />
+                            <img src="././img/library/flag.svg" class="download-info-ico" />
                             <p>${scenario.languages.join(", ")}</p>
                         </div>
                         <div class="download-row">
                             <a href="#" style="color: #6e8699">${scenario.type}</a>
-                            <img src="../../img/library/gamemode.svg" class="download-info-ico" />
+                            <img src="././img/library/gamemode.svg" class="download-info-ico" />
                         </div>
                     </div>
                     <div class="download-tags">
@@ -268,13 +269,13 @@ function generateScenarioCard(scenario) {
             <div class="download-down">
                 <div class="download-row-big">
                     <div class="download-row">
-                        <img src="../../img/library/world.svg" class="download-info-ico" />
-                        <p>${mapData ? mapData.title : scenario.map.name}</p>
+                        <img src="././img/library/world.svg" class="download-info-ico" />
+                        <p>${mapData ? mapData.title + ' ' + scenario.id[2] : scenario.map.name + ' ' + scenario.id[2]}</p>
                     </div>
-                    <div style="display:flex;flex-direction:column;align-items:bottom">
+                    <div style="display:flex;flex-direction:column;align-items:bottom;gap:1rem">
                         ${noRights}
                         <button class="download-download-button" onclick="libDownloadScenario('${scenarioPath}', '${mapId}', '${scenario.id[0]}', '${scenario.id[1]}', '${scenario.id[2]}')" style="background-color: #44944A; border-radius: var(--br); width: 45px; height: 45px; border: none; cursor: pointer;">
-                            <img src="../../img/library/download.svg" class="download-info-ico" />
+                            <img src="././img/library/download.svg" class="download-info-ico" />
                         </button>
                     </div>
                 </div>
@@ -292,7 +293,7 @@ async function libDownloadScenario(rawUrl, mapId, autor, map, version, dontMap =
         if (dontMap === true) return;
 
         if (mapId && !downloadedMaps.has(mapId) && !inGameMaps.includes(mapId)) {
-            const mapData = getMapData(mapId);
+            const mapData = getMapDataNew(`${autor}_${map}`);
             currentMapDownload = {
                 mapId: mapId,
                 mapUrl: `${libLink}lib/${autor}/${map}/${autor}_${map}_${version}_!.map`,

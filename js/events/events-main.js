@@ -15,38 +15,42 @@ class EventManager {
             this.sortColumn = 'id'; // По умолчанию сортируем по ID
             this.sortDirection = 'asc'; // По умолчанию по возрастанию
             
-            // Сохраняем ссылки на важные элементы
+            // Сохраняем ссылки на важные элементы (если они существуют)
             this.previewContent = document.getElementById('preview-content');
             this.fileInfo = document.getElementById('file-info');
             
-            // Проверяем наличие необходимых элементов
+            // Проверяем наличие необходимых элементов - только логируем, не выбрасываем ошибку
             if (!this.previewContent) {
-                throw new Error('Не найден элемент preview-content');
+                console.warn('Не найден элемент preview-content - это нормально для editor.html');
             }
             if (!this.fileInfo) {
-                throw new Error('Не найден элемент file-info');
+                console.warn('Не найден элемент file-info - это нормально для editor.html');
             }
             
-            // Пытаемся загрузить начальные данные из preview-content
-            try {
-                const initialData = JSON.parse(this.previewContent.value);
-                this.setJsonData(initialData);
-            } catch (error) {
-                console.warn('Не удалось загрузить начальные данные:', error);
-                console.warn("Если эта ошибка появилась до загрузки файла, то это нормально, просто нет данных для отображения");
-            }
-            
-            // Подписываемся на изменения в preview-content
-            this.previewContent.addEventListener('input', () => {
-                if (this.isEditing) return; // Игнорируем событие, если мы сами его вызвали
+            // Пытаемся загрузить начальные данные из preview-content только если он существует
+            if (this.previewContent) {
                 try {
-                    const jsonData = JSON.parse(this.previewContent.value);
-                    this.setJsonData(jsonData);
+                    const initialData = JSON.parse(this.previewContent.value);
+                    this.setJsonData(initialData);
                 } catch (error) {
-                    console.error('Ошибка при парсинге JSON:', error);
-                    this.fileInfo.textContent = window.translator.translate('file_parse_error');
+                    console.warn('Не удалось загрузить начальные данные:', error);
+                    console.warn("Если эта ошибка появилась до загрузки файла, то это нормально, просто нет данных для отображения");
                 }
-            });
+                
+                // Подписываемся на изменения в preview-content
+                this.previewContent.addEventListener('input', () => {
+                    if (this.isEditing) return; // Игнорируем событие, если мы сами его вызвали
+                    try {
+                        const jsonData = JSON.parse(this.previewContent.value);
+                        this.setJsonData(jsonData);
+                    } catch (error) {
+                        console.error('Ошибка при парсинге JSON:', error);
+                        if (this.fileInfo) {
+                            this.fileInfo.textContent = window.translator.translate('file_parse_error');
+                        }
+                    }
+                });
+            }
             
             this.init();
         } catch (error) {
@@ -134,7 +138,6 @@ class EventManager {
     }
 
     updateEventsList(eventsRaw = 'fillIt', place = 'events-list') {
-        console.log('Обновление списка событий...');
         if (!this.jsonData?.custom_events) {
             console.warn('Нет данных о событиях');
             return;
@@ -150,7 +153,6 @@ class EventManager {
 
         // Создаем массив событий для сортировки и фильтрации
         if (eventsRaw == 'fillIt') eventsRaw = this.jsonData.custom_events;
-        console.log(eventsRaw);
         let events = Object.entries(eventsRaw)
             .map(([id, event]) => ({
                 ico: event.icon || 'broken',
@@ -216,7 +218,6 @@ class EventManager {
             tr.setAttribute('data-event-id', event.id);
             tr.addEventListener('click', (clicked) => {
                 if (clicked.target.closest('.reqs') || clicked.target.closest('.groupsInCell')) {
-                    console.log('Клик проигнорирован');
                     return; // Выходим из функции, ничего не делая
                 }
 
@@ -383,8 +384,6 @@ class EventManager {
                 const eventId = tr.getAttribute('data-event-id');
                 if (!eventId) return;
 
-                console.log('Открытие контекстного меню для события:', eventId);
-
                 // Удаляем старое меню, если оно есть
                 const oldMenu = document.querySelector('.context-menu');
                 if (oldMenu) {
@@ -447,13 +446,11 @@ class EventManager {
 
                 // Добавляем обработчики для пунктов меню
                 document.getElementById('duplicate-event-context')?.addEventListener('click', () => {
-                    console.log('Дублирование события:', eventId);
                     this.copyCurrentEvent(eventId);
                     document.body.removeChild(contextMenu);
                 });
 
                 document.getElementById('delete-event-context')?.addEventListener('click', () => {
-                    console.log('Удаление события:', eventId);
                     this.deleteCurrentEvent(eventId);
                     document.body.removeChild(contextMenu);
                 });
@@ -1448,7 +1445,6 @@ generateUniqueId(minimumID = 0) {
                 group.style.display = 'block';
                 if (container) {
                     container.appendChild(element);
-                    console.log(`Appending ${type} input:`, element);
                     
                     // Добавляем прослушиватели для изменений
                     if (type === 'subType') {
@@ -1588,7 +1584,6 @@ generateUniqueId(minimumID = 0) {
                         const currentDurationInput = document.getElementById(`${prefix}requirement-duration`);
                         if (currentDurationInput) {
                             currentDurationInput.value = item.duration;
-                            console.log('Duration loaded:', item.duration);
                         } else {
                             console.warn('Duration input not found');
                         }
@@ -1665,7 +1660,6 @@ generateUniqueId(minimumID = 0) {
     }
 
     showGroupFilterModal() {
-        console.log('Открытие модального окна фильтра групп');
         const modal = document.getElementById('groups-filter-modal');
         if (!modal) {
             console.error('Модальное окно фильтра групп не найдено');
@@ -1702,7 +1696,6 @@ generateUniqueId(minimumID = 0) {
         // Создаем чекбоксы для каждой группы
         groupsList.innerHTML = sortedGroups.map(group => {
             const isChecked = this.filters.groups?.includes(group);
-            console.log(`Группа ${group}, выбрана: ${isChecked}`);
             return `
                 <div class="group-checkbox-item">
                     <input type="checkbox" id="group-${group}" value="${group}"
@@ -1731,15 +1724,12 @@ generateUniqueId(minimumID = 0) {
             const checkedGroups = Array.from(groupsList.querySelectorAll('input[type="checkbox"]:checked'))
                 .map(checkbox => checkbox.value);
             
-            console.log('Выбранные группы:', checkedGroups);
-            
             if (checkedGroups.length > 0) {
                 this.filters.groups = checkedGroups;
             } else {
                 delete this.filters.groups;
             }
             
-            console.log('Обновленные фильтры:', this.filters);
             this.updateEventsList();
             modal.classList.remove('active');
         });

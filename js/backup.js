@@ -105,7 +105,7 @@ class BackupManager {
             }
 
             // Генерируем безопасное имя файла
-            const safeFileName = `${currentData.fileName.replace('.json', '').replace(/\./g, '-')}-${currentData.timestamp.replace(/[:.]/g, '-')}.json`;
+            const safeFileName = `${currentData.fileName.replace('.json', '').replace(/\/g, '-')}-${currentData.timestamp.replace(/[:.]/g, '-')}.json`;
 
             if (window.chrome?.webview?.hostObjects?.backupManager) {
                 console.log('Creating backup (app):', currentData.scenarioData);

@@ -6,6 +6,23 @@ body {
     height: 36px;
 }
 
+.navbtn {
+    background-color: var(--ac-bg);
+    color: var(--text-pri);
+
+    &:hover {
+        background-color: var(--ac-bg-hover);
+    }
+    
+    &.active {
+        background-color: var(--ac-bg-light);
+    }
+}
+
+.page.active {
+    max-height: calc(100dvh - 68px) !important;
+}
+
 
 /* TEST */
 /*.filter-group-content.collapsed {

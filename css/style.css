@@ -194,6 +194,9 @@
 .form-group {
     position: relative;
     margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 .form-group label {
@@ -340,19 +343,6 @@
 .main-preview .preview-content {
     height: 0;
     overflow-y: auto;
-}
-
-.nav-header {
-    background-color: #242424;
-    padding: 15px 20px;
-    display: flex;
-    gap: 20px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    align-items: center;
-    padding: 0 8px;
 }
 
 .nav-actions {
@@ -1386,7 +1376,7 @@
     --background-color: #1e1e1e;
     --border-color: #333;
     --hover-color: rgba(255, 255, 255, 0.1);
-    background: linear-gradient(135deg, #303027, #1C2125, #1F2120);;
+    background: linear-gradient(135deg, #303027, #272f34, #3b403e);;
 }
 
 /* Светлая тема */

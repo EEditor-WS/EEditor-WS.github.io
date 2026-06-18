@@ -4,7 +4,7 @@
 // По умолчанию: project_id = "1234567", user = "ExampleUsername"
 //
 // Usage:
-// import CloudWebSocket from './cloud-websocket.js';
+// import CloudWebSocket from '/cloud-websocket.js';
 // const cws = new CloudWebSocket(); // использует defaults
 // await cws.connect(); // или cws.connect({ project_id: '...', user: '...' });
 // cws.sendSet('test', '5513845...', { encode: true });

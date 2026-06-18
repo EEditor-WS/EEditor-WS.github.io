@@ -44,7 +44,6 @@
     color: #3498db;
     text-decoration: none;
     border-radius: var(--br);
-    transition: all 0.2s ease;
     border: none;
     font-size: 0.875rem;
     cursor: pointer;
@@ -98,7 +97,6 @@
     border-radius: var(--br);
     color: #e0e0e0;
     cursor: pointer;
-    transition: all 0.2s ease;
 }
 
 .section-nav .navbtn:hover {

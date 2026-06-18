@@ -1,4 +1,30 @@
-const scenariosData = [
+let scenariosData;
+
+async function loadJson() {
+  try {
+    const url = 'https://raw.githubusercontent.com/EEditor-WS/eeditor-ws-data/refs/heads/main/scenarios.json';
+    
+    // Запрашиваем файл по сети
+    const response = await fetch(url);
+    
+    // Проверяем, успешный ли ответ (статус 200-299)
+    if (!response.ok) {
+      throw new Error(`Ошибка сети: ${response.status}`);
+    }
+    
+    // Метод .json() сам прочитает тело ответа и превратит его в JS-объект
+    scenariosData = await response.json(); 
+    
+    // Выводим результат в консоль браузера
+    console.log(scenariosData);
+  } catch (error) {
+    console.error('Не удалось загрузить JSON:', error);
+  }
+}
+
+loadJson();
+
+/*const scenariosData = [
     {
         id: [
             "eenot",
@@ -3617,4 +3643,4 @@ const scenariosData = [
         status: "in_development",
         rights: true
     },
-]
+]*/

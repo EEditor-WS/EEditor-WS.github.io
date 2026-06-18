@@ -1,0 +1,90 @@
+.dark.dark-theme {
+    background: var(--background-color);
+}
+
+.nav-header {
+    position: relative;
+    padding: var(--ds);
+
+    .logo-text {
+        display: none;
+    }
+}
+
+.home-zone {
+
+    .bgh {
+    }
+    &.bgh {
+
+    }
+}
+
+.bgh {
+    background-color: var(--bg-sec);
+    padding: var(--ds);
+    border-radius: var(--br);
+}
+
+#samsungzakos {
+    display: block;
+    width: 100%;
+    max-height: 400px;
+
+    .namezone {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+        height: calc(100dvh - 200px - 73px - 48px - 56px - 20px - 20px);
+    }
+}
+
+#main {
+    overflow-x: hidden;
+}
+
+#left-home-zone {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#searchFileDiv {
+    background-color: var(--bg-input-great);
+    border-radius: 99999px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    max-width: min(1000px, 80%);
+    width: 100%;
+
+    margin-bottom: 10dvh;
+
+    #searchFileBtn, #searchFileInput {
+        background: none;
+        border-radius: 99999px;
+        border: none;
+    }
+
+    #searchFileBtn {
+        width: 30px;
+        height: 30px;
+        margin: 10px;
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+    #searchFileInput {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+    }
+}

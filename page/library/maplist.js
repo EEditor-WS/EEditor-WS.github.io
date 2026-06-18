@@ -1,4 +1,28 @@
-mapsData = [
+async function loadJson() {
+  try {
+    const url = 'https://raw.githubusercontent.com/EEditor-WS/eeditor-ws-data/refs/heads/main/maps.json';
+    
+    // Запрашиваем файл по сети
+    const response = await fetch(url);
+    
+    // Проверяем, успешный ли ответ (статус 200-299)
+    if (!response.ok) {
+      throw new Error(`Ошибка сети: ${response.status}`);
+    }
+    
+    // Метод .json() сам прочитает тело ответа и превратит его в JS-объект
+    mapsData = await response.json(); 
+    
+    // Выводим результат в консоль браузера
+    console.log(mapsData);
+  } catch (error) {
+    console.error('Не удалось загрузить JSON:', error);
+  }
+}
+
+loadJson();
+
+/*mapsData = [
     {
         id: ["eenot", "world", "v1"],
         title: "World by ЕЕнот",
@@ -514,6 +538,9 @@ mapsData = [
     },
     {
         id: ["trid", "eurosat", "v5"],
+        versions: [
+            'v5',
+        ],
         title: "EuroSat by Trid",
         author: ["trid"],
         description: "",
@@ -578,6 +605,11 @@ mapsData = [
     },
     {
         id: ["chuckcha", "tigerland", "v1"],
+        versions: [
+            'v1',
+            'v2',
+            'v3',
+        ],
         title: "Tigerland by Chuckcha",
         author: ["chuckcha"],
         description: "",
@@ -1118,7 +1150,7 @@ mapsData = [
         load: "normal",
         hiddenScore: 100
     },
-];
+];*/
 
 const mapTypes = {
     "world": "World",
@@ -1167,7 +1199,8 @@ function generateDetailsLinkMap(mapId) {
 
 // Функция для генерации HTML карточки карты
 function generateMapCard(map) {
-    const detailsLink = generateDetailsLinkMap(map.id.join('_'));
+    // const detailsLink = generateDetailsLinkMap(map.id.join('_'));
+    const detailsLink = `${window.location.protocol}\/\/${window.location.host}\/library.html?category=scenarios&map=${map.id[0]}_${map.id[1]}`
     const imagePath = `${libLink}lib/${map.id.slice(0, 2).join('/')}/${map.id.join('_')}_!.png`;
     const awardsHTML = ''; // Can be implemented later if needed
     const status = map.status || 'completed';
@@ -1214,7 +1247,7 @@ function generateMapCard(map) {
                     <a href="${detailsLink}" class="download-title download-goto-page" target="_blank">${map.title}</a>
                     <div class="download-row-big">
                         <div class="download-row">
-                            <img src="../../img/library/autor.svg" class="download-info-ico" />
+                            <img src="././img/library/autor.svg" class="download-info-ico" />
                             <div class="authors" style="display:flex; flex-direction:column">
                             ${
                                 map.author
@@ -1228,17 +1261,17 @@ function generateMapCard(map) {
                         </div>
                         <div class="download-row">
                             <p>${map.provinces}</p>
-                            <img src="../../img/library/world.svg" class="download-info-ico" />
+                            <img src="././img/library/world.svg" class="download-info-ico" />
                         </div>
                     </div>
                     <div class="download-row-big">
                         <div class="download-row">
-                            <img src="../../img/library/mass.svg" class="download-info-ico" />
+                            <img src="././img/library/mass.svg" class="download-info-ico" />
                             <p>${mapLoads[map.load]}</p>
                         </div>
                         <div class="download-row">
                             <p>${mapTypes[map.type] || map.type}</p>
-                            <img src="../../img/library/world.svg" class="download-info-ico" />
+                            <img src="././img/library/world.svg" class="download-info-ico" />
                         </div>
                     </div>
                     <div class="download-row-big">
@@ -1257,13 +1290,13 @@ function generateMapCard(map) {
                 </div>
                 <div class="download-row-big">
                     <div class="download-row">
-                            <img src="../../img/library/calendar.svg" class="download-info-ico" />
+                            <img src="././img/library/calendar.svg" class="download-info-ico" />
                         <p title="Last Update">${new Date(map.lastUpdate).toLocaleDateString()}</p>
                     </div>
-                    <div style="display:flex;flex-direction:column;align-items:bottom">
+                    <div style="display:flex;flex-direction:column;align-items:bottom;gap:1rem">
                         ${noRights}
                         <button class="download-download-button" onclick="downloadMapMap('${map.id.join('_')}')" style="background-color: #44944A; border-radius: var(--br); width: 45px; height: 45px; border: none; cursor: pointer;">
-                            <img src="../../img/library/download.svg" class="download-info-ico" />
+                            <img src="././img/library/download.svg" class="download-info-ico" />
                         </button>
                     </div>
                 </div>
@@ -1391,6 +1424,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function getMapData(map) {
     const mapInfo = mapsData.find(m => m.id.join('_') === map);
+    if (!mapInfo) {
+        console.error(`Map with ID ${map} not found`);
+        return null;
+    }
+    return mapInfo;
+}
+
+function getMapDataNew(map) {
+    const mapInfo = mapsData.find(m => `${m.id[0]}_${m.id[1]}` === map);
     if (!mapInfo) {
         console.error(`Map with ID ${map} not found`);
         return null;

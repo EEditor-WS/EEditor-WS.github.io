@@ -2243,6 +2243,8 @@ class CountryManager {
             
             // Update the UI
             this.updateCountriesList();
+
+            console.log('scenario loaded to countries mgr')
             
             return true;
         } catch (error) {

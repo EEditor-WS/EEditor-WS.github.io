@@ -51,36 +51,17 @@ class SettingsManager {
             this.createSettingsContent();
             this.bindEvents();
         });
+
+        document.getElementById('clearDataBtn').innerHTML = `
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 6H5H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M8 6V4C8 3.46957 8.21071 2.96086 8.58579 2.58579C8.96086 2.21071 9.46957 2 10 2H14C14.5304 2 15.0391 2.21071 15.4142 2.58579C15.7893 2.96086 16 3.46957 16 4V6M19 6V20C19 20.5304 18.7893 21.0391 18.4142 21.4142C18.0391 21.7893 17.5304 22 17 22H7C6.46957 22 5.96086 21.7893 5.58579 21.4142C5.21071 21.0391 5 20.5304 5 20V6H19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            ${this.translations[this.currentLang].clear_data}
+        `
     }
 
     createSettingsContent() {
-        /*const content = document.querySelector('.settings-content');
-        if (!content) return;
-
-        content.innerHTML = `
-            <div class="settings-section">
-                <div class="settings-group">
-                    <button class="settings-danger-button" id="clearDataBtn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M3 6H5H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M8 6V4C8 3.46957 8.21071 2.96086 8.58579 2.58579C8.96086 2.21071 9.46957 2 10 2H14C14.5304 2 15.0391 2.21071 15.4142 2.58579C15.7893 2.96086 16 3.46957 16 4V6M19 6V20C19 20.5304 18.7893 21.0391 18.4142 21.4142C18.0391 21.7893 17.5304 22 17 22H7C6.46957 22 5.96086 21.7893 5.58579 21.4142C5.21071 21.0391 5 20.5304 5 20V6H19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        ${this.translations[this.currentLang].clear_data}
-                    </button>
-                </div>
-                <h3 data-translate="backup_settings">Настройки бекапов</h3>
-                <div class="backup-settings">
-                    <div class="backup-interval-setting">
-                        <label for="backup-interval" data-translate="backup_interval">Интервал автосохранения (минут):</label>
-                        <input type="number" id="backup-interval" value="5" min="1" max="60">
-                    </div>
-                    <div class="backup-limit-setting">
-                        <label for="backup-limit" data-translate="backup_limit">Максимальное количество бекапов:</label>
-                        <input type="number" id="backup-limit" value="20" min="1" max="100">
-                    </div>
-                </div>
-            </div>
-        `;*/
 
         // Добавляем стили
         const style = document.createElement('style');
@@ -232,7 +213,10 @@ class SettingsManager {
             document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
         }
     }
+
 }
 
 // Создаем экземпляр при загрузке страницы
-window.settingsManager = new SettingsManager(); 
+window.addEventListener('DOMContentLoaded', () => {
+    window.settingsManager = new SettingsManager()
+})

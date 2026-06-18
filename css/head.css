@@ -1,7 +1,7 @@
 /* Базовые переменные */
 :root {
     --header-height: 48px;
-    --header-padding: 0 20px;
+    --header-padding: var(--ds);
     --icon-size: 24px;
 }
 
@@ -10,9 +10,7 @@
     display: flex;
     align-items: center;
     padding: var(--header-padding);
-    background-color: #242424;
-    border-bottom: 1px solid #333;
-    height: var(--header-height);
+    height: auto;
     position: sticky;
     top: 0;
     z-index: 1000;

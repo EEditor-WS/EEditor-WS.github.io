@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         openScenariosPage(category);
     } else if (fullId) {
         openScenariosPage('scenarios');
-        window.location.href = window.location.href.replace('download.html?fullid', 'detalis.html?type=scenario&scenario');
+        window.location.href = window.location.href.replace('download.html?fullid', '/page/library/detalis.html?type=scenario&scenario');
     } else {
         openScenariosPage('main');
     }

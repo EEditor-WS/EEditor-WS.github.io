@@ -311,18 +311,6 @@ body {
     overflow-y: auto;
 }
 
-.nav-header {
-    background-color: #242424;
-    padding: 15px 20px;
-    display: flex;
-    gap: 20px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    align-items: center;
-}
-
 .nav-actions {
     display: flex;
     align-items: center;

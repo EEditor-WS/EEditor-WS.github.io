@@ -133,3 +133,17 @@
 function libApplyFilters() {
     getSortedScenarios()
 }
+
+class LibraryFilters {
+    constructor() {
+        filters: {}
+    }
+
+    init() {
+
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    window.LibraryFilters = LibraryFilters
+})

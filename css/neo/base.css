@@ -4,10 +4,21 @@
 @import url('light.css');
 @import url(menus.css);
 
+html {
+    overflow: auto;
+}
+
 .nav-header {
     margin: 0;
     padding: 0 var(--ds);
-    background-color: var(--bg-sec-great);
+    background: none;
+
+    background: none;
+    box-shadow: none;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .logo-text {
@@ -54,6 +65,12 @@ html body .page.active {
     max-height: unset;
     padding: var(--ds);
     max-width: calc(100% - 2rem);
+    width: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
 }
 
 .page.a {

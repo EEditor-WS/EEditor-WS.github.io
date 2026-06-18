@@ -20,6 +20,9 @@ const urlParams = new URLSearchParams(window.location.search);
 // Глобальная переменная для хранения данных из lands.json
 let markedCountries = new Set();
 
+// Инициализируем массив порядка колонок событий (по умолчанию)
+window.currentOrderEvents = ['id', 'group', 'name', 'title', 'requirements'];
+
 // Создаем глобальный объект для утилит работы со странами
 window.countryUtils = {
     // Функция для проверки, нужна ли галочка
@@ -394,18 +397,18 @@ class ScenarioManager {
                 fileInfo.textContent = window.translator.translate('backup_restored');
             }
 
-                        // Обновляем статус Discord, если есть name в JSON
-                        try {
-                            const jsonData = JSON.parse(text);
-                            if (jsonData.name) {
-                                console.log(jsonData.name);
-                                console.log("discordupd");
-                                updateDiscordStatus(jsonData.name);
-                            }
-                            console.log("loaded")
-                        } catch (e) {
-                            console.warn('Failed to parse JSON for Discord status:', e);
-                        }
+            // Обновляем статус Discord, если есть name в JSON
+            try {
+                const jsonData = JSON.parse(text);
+                if (jsonData.name) {
+                    console.log(jsonData.name);
+                    console.log("discordupd");
+                    updateDiscordStatus(jsonData.name);
+                }
+                console.log("loaded")
+            } catch (e) {
+                console.warn('Failed to parse JSON for Discord status:', e);
+            }
 
             return true;
         } catch (e) {
@@ -835,6 +838,8 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector('body').classList.add('opened');
         try {
             const isAndroidApp = typeof Android !== 'undefined';
+            // Проверяем, находимся ли в index.html
+            const isIndexPage = window.location.pathname.includes('index.html') || window.location.pathname.endsWith('/');
 
             const urlParams = new URLSearchParams(window.location.search);
             showSuccess(urlParams, urlParams);
@@ -909,18 +914,22 @@ document.addEventListener('DOMContentLoaded', function() {
                                         if (content.startsWith("ERROR:")) throw new Error(content.substring(6));
 
                                         const jsonData = JSON.parse(content);
-                                        handleFileContent(file.name, content);
-                                        fillFormFromJson(jsonData);
+                                        if (isIndexPage) {
+                                            redirectToEditorWithFile(file.name, content);
+                                        } else {
+                                            handleFileContent(file.name, content);
+                                            fillFormFromJson(jsonData);
 
-                                        if (window.countryManager) {
-                                            window.countryManager.jsonData = jsonData;
-                                            window.countryManager.updateCountriesList();
-                                        }
-                                        if (window.eventManager) {
-                                            window.eventManager.setJsonData(jsonData);
-                                        }
+                                            if (window.countryManager) {
+                                                window.countryManager.jsonData = jsonData;
+                                                window.countryManager.updateCountriesList();
+                                            }
+                                            if (window.eventManager) {
+                                                window.eventManager.setJsonData(jsonData);
+                                            }
 
-                                        showSuccess('Загружено', 'Файл "' + file.name + '" готов к редактированию');
+                                            showSuccess('Загружено', 'Файл "' + file.name + '" готов к редактированию');
+                                        }
                                         //document.body.removeChild(modal);
                                         changePage('main')
                                     } catch (err) {
@@ -958,8 +967,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 const text = await currentFile.text();
                 console.log('File content:', text.substring(0, 200) + '...'); // Показываем первые 200 символов
                 
-                handleFileContent(currentFile.name, text);
-                showSuccess('Загружено', 'Готово к редактированию');
+                if (isIndexPage) {
+                    redirectToEditorWithFile(currentFile.name, text);
+                } else {
+                    handleFileContent(currentFile.name, text);
+                    showSuccess('Загружено', 'Готово к редактированию');
+                }
             } else {
                 // Для браузеров без поддержки File System Access API
                 const input = document.createElement('input');
@@ -971,7 +984,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (file) {
                         currentFile = file;
                         const text = await file.text();
-                        handleFileContent(file.name, text);
+                        if (isIndexPage) {
+                            redirectToEditorWithFile(file.name, text);
+                        } else {
+                            handleFileContent(file.name, text);
+                        }
                     }
                 };
                 
@@ -988,80 +1005,118 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector('body').classList.add('opened');
     }
 
-// Функция для обработки содержимого файла
-function handleFileContent(fileName, content) {
-    document.querySelector('body').classList.add('opened');
-    
-
-                    if (JSON.stringify(content).includes('{') && JSON.stringify(content).includes('}')) {
-
-                    } else {
-                        content.custom_events = {};
-                    }
-
-    if (previewContent) {
-        previewContent.value = content;
+// Функция для перенаправления на editor.html с открытием файла
+function redirectToEditorWithFile(fileName, fileContent) {
+    // Сохраняем файл в sessionStorage
+    const pendingFile = {
+        name: fileName,
+        content: fileContent,
+        timestamp: Date.now()
+    };
+    try {
+        sessionStorage.setItem('pendingFile', JSON.stringify(pendingFile));
+        console.log('File saved to sessionStorage:', fileName);
+        // Перенаправляем на editor.html
+        window.location.href = 'editor.html';
+    } catch (e) {
+        console.error('Error saving file to sessionStorage:', e);
+        showError('Ошибка', 'Не удалось сохранить файл. Размер файла может быть слишком большим.');
     }
-    if (previewFilename) {
-        previewFilename.textContent = fileName;
-    }
-    if (fileInfo) {
-        fileInfo.textContent = `Файл: ${fileName}`;
-    }
-    
-    // Проверяем JSON
-    isJsonFile = fileName.toLowerCase().endsWith('.json');
-    if (isJsonFile) {
-        try {
-            const jsonData = JSON.parse(content);
-            console.log('Parsed JSON data:', jsonData);
-            
-            // Обновляем состояние ScenarioManager
-            if (window.scenarioManager) {
-                window.scenarioManager.currentFileName = fileName;
-                window.scenarioManager.originalContent = content;
-                window.scenarioManager.hasChanges = false;
-            }
+}
 
-            // Обновляем данные в менеджере стран
-            if (window.countryManager) {
-                console.log('Updating CountryManager...');
-                window.countryManager.jsonData = jsonData;
-                window.countryManager.updateCountriesList();
-            } else {
-                console.warn('CountryManager not initialized');
-            }
+// Функция для обработки содержимого файла (универсальная для обеих страниц)
+function handleFileContent(fileName, content, filePath) {
+    try {
+        document.querySelector('body').classList.add('opened');
 
-            // Обновляем данные в менеджере событий
-            if (window.eventManager) {
-                console.log('Updating EventManager...');
-                window.eventManager.setJsonData(jsonData);
-            } else {
-                console.warn('EventManager not initialized');
-            }
+        // Для index.html - заполнение превью
+        const previewContentEl = document.getElementById('preview-content');
+        const previewFilenameEl = document.getElementById('preview-filename');
+        const fileInfoEl = document.getElementById('file-info');
 
-            // Заполняем форму
-            fillFormFromJson(jsonData);
-
-                        // Обновляем статус Discord, если есть name в JSON
-                        try {
-                            if (jsonData.name) {
-                                console.log(jsonData.name);
-                                console.log("discordupd");
-                                updateDiscordStatus(`${jsonData.name} - ${jsonData.id}`);
-                            }
-                            console.log("loaded")
-                        } catch (e) {
-                            console.warn('Failed to parse JSON for Discord status:', e);
-                        }
-
-        } catch (error) {
-            console.error('Ошибка при парсинге JSON:', error);
-            if (fileInfo) {
-                fileInfo.textContent = window.translator.translate('file_parse_error');
-            }
-            showError('Ошибка', 'Не удалось загрузить файл. Проверьте консоль для деталей.');
+        if (previewContentEl) {
+            previewContentEl.value = content;
         }
+        if (previewFilenameEl) {
+            previewFilenameEl.textContent = fileName;
+        }
+        if (fileInfoEl) {
+            fileInfoEl.textContent = `Файл: ${fileName}`;
+        }
+
+        // Для editor.html - заполнение редактора
+        const fileNameEl = document.getElementById('file-name');
+        const filePathEl = document.getElementById('file-path');
+
+        if (fileNameEl) {
+            fileNameEl.textContent = fileName;
+        }
+        if (filePathEl && filePath) {
+            filePathEl.textContent = filePath;
+        }
+
+        // Если есть ACE editor, обновляем его (для editor.html)
+        if (typeof editor !== 'undefined' && editor && typeof editor.setValue === 'function') {
+            editor.setValue(content);
+        }
+
+        // Парсим и обрабатываем JSON если это JSON файл
+        isJsonFile = fileName.toLowerCase().endsWith('.json');
+        if (isJsonFile) {
+            try {
+                const jsonData = JSON.parse(content);
+                console.log('Parsed JSON data:', jsonData);
+
+                // Обновляем состояние ScenarioManager
+                if (window.scenarioManager) {
+                    window.scenarioManager.currentFileName = fileName;
+                    window.scenarioManager.originalContent = content;
+                    window.scenarioManager.hasChanges = false;
+                }
+                    console.log('Updating CountryManager...');
+                    window.countryManager.loadScenario(jsonData);
+                
+                
+                // Также используем countryUtils если данные есть в JSON
+                if (jsonData.lands && window.countryUtils && typeof window.countryUtils.updateCountriesList === 'function') {
+                    window.countryUtils.updateCountriesList(jsonData.lands);
+                }
+
+                // Обновляем данные в менеджере событий (для index.html)
+                if (window.eventManager && typeof window.eventManager.setJsonData === 'function') {
+                    console.log('Updating EventManager...');
+                    window.eventManager.setJsonData(jsonData);
+                }
+
+                // Заполняем форму (для index.html)
+                if (typeof fillFormFromJson === 'function' && previewContentEl) {
+                    fillFormFromJson(jsonData);
+                }
+
+                // Обновляем статус Discord
+                try {
+                    if (jsonData.name) {
+                        console.log(jsonData.name);
+                        if (typeof updateDiscordStatus === 'function') {
+                            updateDiscordStatus(`${jsonData.name} - ${jsonData.id}`);
+                        }
+                    }
+                    console.log("loaded");
+                } catch (e) {
+                    console.warn('Failed to update Discord status:', e);
+                }
+
+            } catch (error) {
+                console.error('Ошибка при парсинге JSON:', error);
+                if (fileInfoEl) {
+                    fileInfoEl.textContent = 'file_parse_error';
+                }
+            }
+        }
+
+        window.scenarioManager.loadScenario(JSON.parse(content))
+    } catch (error) {
+        console.error('Error in handleFileContent:', error);
     }
 }
 
@@ -1075,7 +1130,9 @@ function handleFileContent(fileName, content) {
     });
 
     // Обработчик кнопки принудительного сохранения
-    forceSaveButton.addEventListener('click', saveChanges);
+    try {
+        forceSaveButton.addEventListener('click', saveChanges);
+    } catch(e) {}
 
     // Обработчик выбора файла через input
     fileInput.addEventListener('click', (e) => {
@@ -1097,17 +1154,24 @@ function handleFileContent(fileName, content) {
         e.preventDefault();
         dropZone.classList.remove('dragover');
 
+        // Проверяем, находимся ли в index.html
+        const isIndexPage = window.location.pathname.includes('index.html') || window.location.pathname.endsWith('/');
+
         // Получаем перетащенные файлы
         if (hasFileSystemAccess) {
-        const items = [...e.dataTransfer.items];
-        for (const item of items) {
-            if (item.kind === 'file') {
-                const handle = await item.getAsFileSystemHandle();
-                if (handle.kind === 'file') {
-                    fileHandle = handle;
-                    currentFile = await fileHandle.getFile();
-                    const text = await currentFile.text();
-                        handleFileContent(currentFile.name, text);
+            const items = [...e.dataTransfer.items];
+            for (const item of items) {
+                if (item.kind === 'file') {
+                    const handle = await item.getAsFileSystemHandle();
+                    if (handle.kind === 'file') {
+                        fileHandle = handle;
+                        currentFile = await fileHandle.getFile();
+                        const text = await currentFile.text();
+                        if (isIndexPage) {
+                            redirectToEditorWithFile(currentFile.name, text);
+                        } else {
+                            handleFileContent(currentFile.name, text);
+                        }
                         break;
                     }
                 }
@@ -1118,99 +1182,45 @@ function handleFileContent(fileName, content) {
                 const file = files[0];
                 currentFile = file;
                 const text = await file.text();
-                handleFileContent(file.name, text);
+                if (isIndexPage) {
+                    redirectToEditorWithFile(file.name, text);
+                } else {
+                    handleFileContent(file.name, text);
+                }
             }
         }
     });
 
     // Обработчик изменений в форме
-    settingsForm.addEventListener('change', (e) => {
-        //if (!isJsonFile) return;
-        
-        const formData = new FormData(settingsForm);
-        const data = Object.fromEntries(formData.entries());
-        updateJsonEditor(data);
-    });
+    if (settingsForm) {
+        settingsForm.addEventListener('change', (e) => {
+            //if (!isJsonFile) return;
+            
+            const formData = new FormData(settingsForm);
+            const data = Object.fromEntries(formData.entries());
+            updateJsonEditor(data);
+        });
+    }
 
-    document.getElementById('description_eelib').addEventListener('input', (e) => {
-        if (!isJsonFile || !previewContent) return;
-        try {
-            const jsonData = JSON.parse(previewContent.value);
-            jsonData.eeditor = jsonData.eeditor || {};
-            jsonData.eeditor.description = e.target.value;
-            previewContent.value = JSON.stringify(jsonData, null, 4);
-            if (fileInfo) {
-                fileInfo.textContent = window.translator.translate('changes_not_saved');
-            }
-        } catch (error) {
-            console.error('Ошибка при обновлении описания:', error);
-            if (fileInfo) {
-                fileInfo.textContent = window.translator.translate('description_update_error');
-            }
-        }
-    });
-
-    // Обработчик изменения цвета воды
-    const waterColorInputs = ['water_color_r', 'water_color_g', 'water_color_b'].map(id => 
-        document.getElementById(id)
-    );
-
-    waterColorInputs.forEach(input => {
-        if (!input) return;
-        
-        input.addEventListener('input', () => {
+    if (document.getElementById('description_eelib')) {
+        document.getElementById('description_eelib').addEventListener('input', (e) => {
             if (!isJsonFile || !previewContent) return;
-
             try {
                 const jsonData = JSON.parse(previewContent.value);
-                
-                // Получаем значения RGB
-            const r = Math.round(parseFloat(waterColorInputs[0].value) || 0);
-            const g = Math.round(parseFloat(waterColorInputs[1].value) || 0);
-            const b = Math.round(parseFloat(waterColorInputs[2].value) || 0);
-
-            // Обновляем предпросмотр цвета
-            const colorPreview = document.getElementById('water_color_preview');
-            if (colorPreview) {
-                colorPreview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-            }
-
-                // Обновляем значение в JSON
-                jsonData.water_color = [r, g, b, 255];
-                
-                // Обновляем содержимое редактора
+                jsonData.eeditor = jsonData.eeditor || {};
+                jsonData.eeditor.description = e.target.value;
                 previewContent.value = JSON.stringify(jsonData, null, 4);
-                
                 if (fileInfo) {
                     fileInfo.textContent = window.translator.translate('changes_not_saved');
                 }
             } catch (error) {
-                console.error('Ошибка при обновлении цвета воды:', error);
+                console.error('Ошибка при обновлении описания:', error);
                 if (fileInfo) {
-                    fileInfo.textContent = window.translator.translate('water_color_update_error');
+                    fileInfo.textContent = window.translator.translate('description_update_error');
                 }
             }
         });
-    });
-
-    // Обработчик горячих клавиш
-    document.addEventListener('keydown', (e) => {
-        // Ctrl/Cmd + Z - отмена
-        if ((e.ctrlKey || e.metaKey) && e.key === 'z' && !e.shiftKey) {
-            e.preventDefault();
-            if (window.countryManager) {
-                window.countryManager.undo();
-            }
-        }
-        
-        // Ctrl/Cmd + Shift + Z или Ctrl/Cmd + Y - возврат
-        if ((e.ctrlKey || e.metaKey) && ((e.key === 'z' && e.shiftKey) || e.key === 'y')) {
-            e.preventDefault();
-            if (window.countryManager) {
-                window.countryManager.redo();
-            }
-        }
-    });
+    }
 
     // Загружаем данные при старте
     loadLandsJson();
@@ -1227,15 +1237,45 @@ function handleFileContent(fileName, content) {
         });
     });
 
-    document.getElementById('openedPage').addEventListener('click', () => {
-        const opg = document.getElementById('openedPage');
-        if (opg.getAttribute('data-now') == document.querySelector('.page.active').id) {
-            window.pages.switch(opg.getAttribute('data-pre'));
-        } else {
-            window.pages.switch(opg.getAttribute('data-now'));
+    const opg = document.getElementById('openedPage')
+    if (opg) {
+        opg.addEventListener('click', () => {
+            if (opg.getAttribute('data-now') == document.querySelector('.page.active').id) {
+                window.pages.switch(opg.getAttribute('data-pre'))
+            } else {
+                window.pages.switch(opg.getAttribute('data-now'))
+            }
+            opg.classList.add('active')
+        })
+    }
+
+    // Инициализация для загрузки файла из sessionStorage (для editor.html)
+    // Запускается после полной инициализации DOMContentLoaded
+    try {
+        const isEditorPage = window.location.pathname.includes('editor.html');
+        if (isEditorPage) {
+            const pendingFileStr = sessionStorage.getItem('pendingFile');
+            if (pendingFileStr) {
+                const pendingFile = JSON.parse(pendingFileStr);
+                
+                // Проверяем timestamp (защита от кэша старых файлов)
+                const timeDiff = Date.now() - pendingFile.timestamp;
+                if (timeDiff < 60000) { // 60 секунд для загрузки
+                    console.log('Loading pending file from sessionStorage:', pendingFile.name);
+                    handleFileContent(pendingFile.name, pendingFile.content);
+                    sessionStorage.removeItem('pendingFile');
+                } else {
+                    console.warn('Pending file expired, removing from sessionStorage');
+                    sessionStorage.removeItem('pendingFile');
+                }
+
+                window.scenarioManager.loadScenario(JSON.parse(pendingFile.content))
+                window.countryManager.jsonData = JSON.parse(pendingFile.content)
+            }
         }
-        opg.classList.add('active');
-    });
+    } catch (e) {
+        console.error('Error loading pending file:', e);
+    }
 });
 
 function changeApplicationLanguage(lang) {
@@ -1315,37 +1355,9 @@ function loadFileViaScheme() {
     }, 1500); // Увеличим начальную задержку
 }
 
-function handleFileContent(fileName, content, filePath) {
-    console.log('Received file:', {
-        name: fileName,
-        path: filePath,
-        content: content
-    });
-    
-    // Обновляем интерфейс
-    document.getElementById('file-name').textContent = fileName;
-    document.getElementById('file-path').textContent = filePath;
-    editor.setValue(content);
-}
 
-function loadFileViaScheme() {
-    fetch('filedata://current')
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                showError('Error', data.error);
-            } else {
-                handleFileContent(
-                    data.fileName,
-                    data.content,
-                    data.filePath // Передаем новый параметр
-                );
-            }
-        })
-        .catch(error => {
-            setTimeout(loadFileViaScheme, 500);
-        });
-}
+
+
 
 try {
     if (urlParams.has('eval') && urlParams.get('eval') === 'openfile') {
@@ -1358,6 +1370,8 @@ try {
 
     let minimumEventID = 0;
     let minimumCountryID = 0;
+
+
 
 if (isAndroidApp) {
     document.body.classList.add('mobile');

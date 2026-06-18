@@ -10,7 +10,7 @@ body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: var(--background-primary);
+    background-color: var(--bg-pri);
     margin: 0;
     padding: 0;
     color: #e0e0e0;
@@ -24,7 +24,7 @@ body {
     padding: 8px 16px;
     background: none;
     border: none;
-    color: var(--text-primary);
+    color: var(--text-pri);
     cursor: pointer;
     display: inline-flex;
     align-items: center;
@@ -63,7 +63,7 @@ body {
 }
 
 .action-button:hover {
-    background-color: var(--background-hover);
+    background-color: var(--bg-pri-hover);
 }
 
 .action-button svg {
@@ -83,8 +83,8 @@ body {
     left: 50%;
     transform: translateX(-50%);
     padding: 5px 10px;
-    background: var(--background-secondary);
-    color: var(--text-primary);
+    background: var(--bg-sec);
+    color: var(--text-pri);
     font-size: 14px;
     white-space: pre;
     border-radius: var(--br);
@@ -92,7 +92,7 @@ body {
     opacity: 0;
     transition: opacity 0.2s;
     margin-bottom: 5px;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--bc);
     z-index: 1000;
 }
 
@@ -115,16 +115,16 @@ body {
 .form-group label {
     display: block;
     margin-bottom: 5px;
-    color: var(--text-primary);
+    color: var(--text-pri);
 }
 
 .form-input {
     width: 100%;
     padding: 8px 12px;
-    background-color: var(--background-secondary);
-    border: 1px solid var(--border-color);
+    background-color: var(--bg-sec);
+    border: 1px solid var(--bc);
     border-radius: var(--br);
-    color: var(--text-primary);
+    color: var(--text-pri);
     font-size: 14px;
     font-family: inherit;
 }
@@ -157,7 +157,7 @@ body {
     height: 20px;
     margin: -10px 0 0 -10px;
     border: 2px solid transparent;
-    border-top-color: var(--text-primary);
+    border-top-color: var(--text-pri);
     border-radius: 50%;
     animation: loading-spinner 0.8s linear infinite;
 }
@@ -175,7 +175,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--background-secondary);
+    background: var(--bg-sec);
     border-radius: var(--br);
 }
 
@@ -196,14 +196,14 @@ body {
 /* Firefox */
 * {
     scrollbar-width: thin;
-    scrollbar-color: var(--scrollbar-thumb) var(--background-secondary);
+    scrollbar-color: var(--scrollbar-thumb) var(--bg-sec);
 }
 
 /* Common table styles */
 .common-table {
     width: 100%;
     border-collapse: collapse;
-    background-color: var(----background-secondary);
+    background-color: var(----bg-sec);
     border-radius: var(--br);
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -217,7 +217,7 @@ body {
 }
 
 .common-table th {
-    background-color: var(----background-secondary);
+    background-color: var(----bg-sec);
     font-weight: 500;
     color: #e0e0e0;
     font-size: 14px;
@@ -254,7 +254,7 @@ body {
 }
 
 .common-table tbody tr:hover {
-    background-color: var(----background-secondary);
+    background-color: var(----bg-sec);
 }
 
 /* Common form styles */
@@ -295,7 +295,7 @@ body {
     justify-content: center;
     transition: all 0.2s ease;
     position: relative;
-    background-color: var(--background-secondary);
+    background-color: var(--bg-sec);
 }
 
 .icon-action-button svg {
@@ -536,8 +536,8 @@ body {
     left: 50%;
     transform: translateX(-50%);
     padding: 6px 10px;
-    background: var(--background-secondary);
-    color: var(--text-primary);
+    background: var(--bg-sec);
+    color: var(--text-pri);
     font-size: 12px;
     white-space: nowrap;
     border-radius: var(--br);
