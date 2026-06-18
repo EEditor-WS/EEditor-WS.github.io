@@ -154,17 +154,6 @@ function generateScenarioCard(scenario) {
             </div>
         `).join('');
 
-    let tagsHTML
-    if (JSON.stringify(scenario.tags).includes('RECOMMEND')) {;
-        tagsHTML = scenario.tags
-            .map(tag => `<b style="color: #FF4500">${tag}</b>`)
-            .join('<p>, </p>');
-    } else {
-        tagsHTML = scenario.tags
-            .map(tag => `<a href="#" style="color: #6e8699">#${tag}</a>`)
-            .join('<p>, </p>');
-    }
-
     const mapId = scenario.id.slice(0, 2);
     const mapData = getMapDataNew(scenario.id.slice(0, 2).join('_'));
     const imagePath = generateImagePath(scenario.id);
@@ -261,9 +250,9 @@ function generateScenarioCard(scenario) {
                             <img src="././img/library/gamemode.svg" class="download-info-ico" />
                         </div>
                     </div>
-                    <div class="download-tags">
-                        ${tagsHTML}
-                    </div>
+                    <!--div class="download-tags">
+                        
+                    </div-->
                 </div>
             </div>
             <div class="download-down">
