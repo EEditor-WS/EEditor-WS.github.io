@@ -304,6 +304,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Отображаем карты
         displayMaps();
+    } catch(e) {
+        
     }
 });
 
