@@ -1235,6 +1235,7 @@ generateUniqueId(minimumID = 0) {
                 { value: 'diplomacy_sanctions', label: window.translator.translate('diplomacy_sanctions') },
                 { value: 'diplomacy_pact', label: window.translator.translate('diplomacy_pact') },
                 { value: 'diplomacy_alliance', label: window.translator.translate('diplomacy_alliance') },
+                { value: 'diplomacy_break_alliance', label: window.translator.translate('diplomacy_break_alliance') },
                 { value: 'diplomacy_become_vassal', label: window.translator.translate('diplomacy_become_vassal') },
                 { value: 'diplomacy_get_vassal', label: window.translator.translate('diplomacy_get_vassal') },
                 { value: 'diplomacy_peace', label: window.translator.translate('diplomacy_peace') },

@@ -4,27 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scenario Info | EEditor</title>
-    <!--link rel="icon" type="image/x-icon" href="././img/ico/ico.svg"-->
-        <link rel="icon" type="image/x-icon" href="././img/library/icon.svg">
-        <link rel="stylesheet" href="././css/!.css">
-        <link rel="stylesheet" href="././css/base.css">
-        <link rel="stylesheet" href="././css/library.css">
-        <link rel="stylesheet" href="././css/head.css">
-        <link rel="stylesheet" href="././css/list.css">
-        <link rel="stylesheet" href="././css/style.css">
-        <link rel="stylesheet" href="././css/head.css">
-        <link rel="stylesheet" href="download.css">
-        <link rel="stylesheet" href="upload/upload.css">
-        <link rel="stylesheet" href="././css/notification.css">
-    <script src="././js/language.js"></script>
-    <script src="././js/translator.js"></script>
+    <!--link rel="icon" type="image/x-icon" href="/img/ico/ico.svg"-->
+    <link rel="icon" type="image/x-icon" href="/img/library/icon.svg">
+    <link rel="stylesheet" href="/css/!.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/library.css">
+    <link rel="stylesheet" href="/css/head.css">
+    <link rel="stylesheet" href="/css/list.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/head.css">
+    <link rel="stylesheet" href="download.css">
+    <link rel="stylesheet" href="upload/upload.css">
+    <link rel="stylesheet" href="/css/notification.css">
+    
+    <script>
+        let libLink;
+        if (window.location.href.includes('file:///') || window.location.port == '5500') {
+            libLink = 'http://95.153.88.229:8081/';
+        } else {
+            libLink = 'https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/';
+        }
+    </script>
+    <script src="/js/data/language.js"></script>
     <script src="scenariolist.js"></script>
     <script src="authorlist.js"></script>
     <script src="maplist.js"></script>
+    <script src="/js/translator.js"></script>
     <script src="downloadlist.js"></script>
-    <script src="././js/head.js"></script>
-    <script src="././js/auth.js"></script>
-    <script src="././js/notification.js"></script>
+    <script src="/js/head.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/notification.js"></script>
     <script src="discordtext.js"></script>
     <!--script src="upload/upload.js"></script-->
     <script src="detalis.js"></script>
@@ -32,57 +41,57 @@
 <body>
     <nav class="nav-header">
         <div class="header-logo-container">
-            <img class="header-logo" src="././img/library/icon.svg" alt="EEditor Lib">
+            <img class="header-logo" src="/img/library/icon.svg" alt="EEditor Lib">
             <h class="header-title">EEditor Lib</h>
         </div>
         <br>
-        <button href="././index.html" id="back-to-reforms" class="action-button back" title="Return to editor" data-tooltip="Вернуться к редактору" onclick="window.location.href = '././index.html'">
-            <img src="././img/ui/back.svg">
+        <button href="/index.html" id="back-to-reforms" class="action-button back" title="Return to editor" data-tooltip="Вернуться к редактору" onclick="window.location.href = '/index.html'">
+            <img src="/img/ui/back.svg">
         </button>
-        <a href="download.html?category=scenarios" class="navbtn" data-page="scenarios" data-translate="scenarios">Сценарии</a>
-        <a href="download.html?category=maps" class="navbtn" data-page="maps" data-translate="maps">Карты</a>
+        <a href="/library.html?category=scenarios" class="navbtn" data-page="scenarios" data-translate="scenarios">Сценарии</a>
+        <a href="/library.html?category=maps" class="navbtn" data-page="maps" data-translate="maps">Карты</a>
         <div class="nav-actions">
             <div class="nav-icons">
                 <button id="settings-button" class="icon-action-button settings" title="Настройки">
-                    <img src="././img/ui/settings.svg">
+                    <img src="/img/ui/settings.svg">
                 </button>
                 <div class="language-switcher">
                     <button id="currentLangChooser" class="icon-action-button lang" title="Language">
                         <span class="lang-icon">
-                            <img src="././img/ui/world.svg">
+                            <img src="/img/ui/world.svg">
                         </span>
                     </button>
                     <div id="currentLang" class="void"></div>
                     <div id="langDropdown" class="lang-dropdown">
                         <a href="#" data-lang="en">
-                            <img src="././img/lang/en.svg" class="lang-flag" alt="English">
+                            <img src="/img/lang/en.svg" class="lang-flag" alt="English">
                                 English
                         </a>
                         <a href="#" data-lang="ru">
-                            <img src="././img/lang/ru.svg" class="lang-flag" alt="Русский">
+                            <img src="/img/lang/ru.svg" class="lang-flag" alt="Русский">
                                 Русский
                         </a>
                         <a href="#" data-lang="uk">
-                            <img src="././img/lang/uk.svg" class="lang-flag" alt="Українська">
+                            <img src="/img/lang/uk.svg" class="lang-flag" alt="Українська">
                                 Українська
                         </a>
                         <a href="#" data-lang="mo">
-                            <img src="././img/lang/mo.svg" class="lang-flag" alt="Молдовеняскэ">
+                            <img src="/img/lang/mo.svg" class="lang-flag" alt="Молдовеняскэ">
                                 Молдовеняскэ
                         </a>
                         <a href="#" data-lang="be">
-                            <img src="././img/lang/be.svg" class="lang-flag" alt="Беларуская">
+                            <img src="/img/lang/be.svg" class="lang-flag" alt="Беларуская">
                                 Беларуская (часткова)
                         </a>
                         <a href="#" data-lang="kk">
-                            <img src="././img/lang/kk.svg" class="lang-flag" alt="Қазақша">
+                            <img src="/img/lang/kk.svg" class="lang-flag" alt="Қазақша">
                                 Қазақша (ішінара)
                         </a>
                     </div>
                 </div>
                 <button id="account-button" class="icon-action-button account" title="Аккаунт">
                     <img class="account-button-avatar" src="" alt="" style="display: none; width: 24px; height: 24px; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-                    <img src="././img/ui/user.svg">
+                    <img src="/img/ui/user.svg">
                 </button>
                 <div id="accountDropdown" class="account-dropdown">
                     <div class="account-info">
@@ -112,7 +121,7 @@
                     </a>
                     <div class="account-divider"></div>
                     <a href="#" class="account-item" data-action="settings">
-                        <img src="././img/ui/settings.svg">
+                        <img src="/img/ui/settings.svg">
                         <span data-translate="settings">Настройки</span>
                     </a>
                     <a href="#" class="account-item" data-action="logout">
@@ -144,11 +153,11 @@
             <div class="nav-icons">
                 <button class="downloadButtonDetalis" id="downloadMapDetalis">
                     Map
-                    <img src="././img/ui/file/download.svg" class="download-info-ico">
+                    <img src="/img/ui/file/download.svg" class="download-info-ico">
                 </button>
                 <button class="downloadButtonDetalis" id="downloadScenarioDetalis">
                     Scenario
-                    <img src="././img/ui/file/download.svg" class="download-info-ico">
+                    <img src="/img/ui/file/download.svg" class="download-info-ico">
                 </button>
             </div>
         </div>
@@ -255,7 +264,7 @@
                 </div>
             </div>
             <div class="bigform">
-                <image id="screenshoot" class="screenshoot" src="././img/library/none.png" alt="screenshoot">
+                <image id="screenshoot" class="screenshoot" src="/img/library/none.png" alt="screenshoot">
                 <div class="description" id="description">
                     <!--textarea readonly class="description-text" id="description-text" title="description" placeholder="Описание">
                         название, автор, описание, дата загрузки, дата обновления, категории (выбор из доступных), язык скриншот, наличие настроенных: экономики, населения, рессурсов, дипломатии, восстаний, реформ, ивентов (выбор в виде dropdown: есть, частично, в разработке, нету), для какой карты предназначен, количество провинций

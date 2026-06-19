@@ -172,7 +172,7 @@ function generateMapCard(map) {
                     </div>
                 </div>
                 <div class="download-row-big" style="min-height: 90px; position: relative;">
-                    <div class="download-row">
+                    <div class="download-row" style="max-width: calc(100% - 45px)">
                             <img src="././img/library/calendar.svg" class="download-info-ico" />
                         <p title="Last Update">${new Date(map.lastUpdate).toLocaleDateString()}</p>
                     </div>
@@ -292,17 +292,19 @@ function applyMapFilters() {
 
 // Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
-    // Создаем контейнер для карт, если его нет
-    const mapsDiv = document.querySelector('#maps .download-container');
-    if (!mapsDiv.querySelector('#map-cards')) {
-        const cardsContainer = document.createElement('div');
-        cardsContainer.id = 'map-cards';
-        cardsContainer.className = 'download-cards';
-        mapsDiv.appendChild(cardsContainer);
-    }
+    try {
+        // Создаем контейнер для карт, если его нет
+        const mapsDiv = document.querySelector('#maps .download-container');
+        if (!mapsDiv.querySelector('#map-cards')) {
+            const cardsContainer = document.createElement('div');
+            cardsContainer.id = 'map-cards';
+            cardsContainer.className = 'download-cards';
+            mapsDiv.appendChild(cardsContainer);
+        }
 
-    // Отображаем карты
-    displayMaps();
+        // Отображаем карты
+        displayMaps();
+    }
 });
 
 function getMapData(map) {
