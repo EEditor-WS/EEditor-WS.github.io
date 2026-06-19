@@ -79,9 +79,9 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('scenarioReforms').value = contentString.includes('reforms') ? 'yes' : 'no';
         
         // Рендеринг интерактивного описания (eeditor)
-        if (scenarioConent.eeditor?.description) { 
-            const targetDiv = document.getElementById('description');
+        const targetDiv = document.getElementById('description');
 
+        if (scenarioConent.eeditor?.description) { 
             // 1. Вставляем отрендеренную Markdown-разметку с сохранением HTML-тегов
             targetDiv.innerHTML = discordMarkdownToHtml(scenarioConent.eeditor.description, true);
 
@@ -103,7 +103,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         } else { 
-            document.getElementById('description').innerHTML = 'Описание отсутствует.'; 
+            targetDiv.innerHTML = 'Описание отсутствует.'; 
+        }
+
+        // НОВЫЙ МЕХАНИЗМ: Добавление iframe в конец описания без перезаписи innerHTML
+        if (scenarioConent && scenarioConent.eeditor.iframe) {
+            const iframeUrl = `${libLink}lib/${foundScenario.id.slice(0, 2).join('/')}/${rawScenarioId.replace(/\.json$/i, '')}.html`;
+            
+            const iframeHTML = `
+                <div class="scenario-iframe-container" style="margin-top: 20px;">
+                    <iframe src="${iframeUrl}" style="width: 100%; height: 600px; border: none;" allowfullscreen></iframe>
+                </div>
+            `;
+            
+            // Вставляем строго перед закрывающим тегом #description, сохраняя все скрипты и текст
+            targetDiv.insertAdjacentHTML('beforeend', iframeHTML);
         }
 
         // Подгрузка превью-изображения (скриншота) карты
