@@ -15,19 +15,22 @@ Features in this version:
 - Proper HTML-escaping and preventing inline formatting inside code blocks
 
 Usage:
-  const html = discordMarkdownToHtml(markdownText);
+  const html = discordMarkdownToHtml(markdownText, true); // if second argument is true, HTML won't be escaped
 */
 
-function discordMarkdownToHtml(input) {
+function discordMarkdownToHtml(input, skipEscapeHtml = false) {
   if (input == null) return '';
 
   // === Helpers ===
-  const escapeHtml = (s) => String(s)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
+  const escapeHtml = (s) => {
+    if (skipEscapeHtml) return String(s);
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  };
 
   // placeholders for code blocks / inline code to avoid processing markup inside them
   const codeBlockPlaceholders = [];
@@ -44,15 +47,18 @@ function discordMarkdownToHtml(input) {
   text = escapeHtml(text);
 
   // 3) extract inline code `...` (any number of backticks)
-  text = text.replace(/(`+)([\s\S]*?)\1/g, (m, ticks, inner) => {
+  // 3) extract inline code `...` (убеждаемся, что мы не парсим бэктики внутри HTML-атрибутов)
+  text = text.replace(/(`+)([\s\S]*?)\1(?=(?:[^>]*<|[^<>]*$))/g, (m, ticks, inner) => {
     const idx = inlineCodePlaceholders.length;
     inlineCodePlaceholders.push('<code>' + escapeHtml(inner) + '</code>');
     return `\u0000INLINECODE${idx}\u0000`;
   });
 
   // split into lines for block-level processing
-  const lines = text.split(/\r?\n/);
-  let out = '';
+    const lines = text.split(/\r?\n/);
+    let out = '';
+    let inStyleBlock = false;
+    let inScriptBlock = false;
 
   // stack for lists — elements: {type: 'ul'|'ol', depth: number}
   const listStack = [];
@@ -99,8 +105,8 @@ function discordMarkdownToHtml(input) {
     }
 
     // single-line blockquote: > ... (may be nested like >> but treat > as 1 level)
-    const bqMatch = line.match(/^(\s*)&gt;?&gt;?\s*(.*)$/) || line.match(/^(\s*)>+\s*(.*)$/);
-    if (bqMatch && /^\s*>/.test(line) || /^\s*&gt;/.test(line)) {
+    const bqMatch = line.match(/^\s*&gt;?&gt;?\s*(.*)$/) || line.match(/^\s*>+\s*(.*)$/);
+    if ((bqMatch && /^\s*>/.test(line)) || /^\s*&gt;/.test(line)) {
       // determine how many leading > characters (we already escaped > to &gt; earlier)
       const raw = line.replace(/^\s*/, '');
       const gtCount = (raw.match(/^(&gt;|>)+/) || [''])[0].replace(/(&gt;)/g, '>').length;
@@ -126,23 +132,21 @@ function discordMarkdownToHtml(input) {
     }
 
     // Lists (unordered and ordered). Count leading spaces to compute depth: 2 spaces = 1 level
-    const listMatch = line.match(/^(\s*)([-*+])\s+(.*)$/);
-    const olMatch = line.match(/^(\s*)(\d+)\.\s+(.*)$/);
+    const listMatch = line.match(/^\s*([-*+])\s+(.*)$/);
+    const olMatch = line.match(/^\s*(\d+)\.\s+(.*)$/);
     if (listMatch || olMatch) {
-      const spaces = (listMatch ? listMatch[1] : olMatch[1]).length;
+      const spaces = (listMatch ? line.match(/^\s*/)[0].length : line.match(/^\s*/)[0].length);
       const depth = Math.floor(spaces / 2);
       const isUl = !!listMatch;
-      const itemText = (listMatch ? listMatch[3] : olMatch[3]).trim();
+      const itemText = (listMatch ? listMatch[2] : olMatch[2]).trim();
 
       // synchronize stack depth
-      // If current stack deeper than needed -> close
       while (listStack.length > 0 && listStack[listStack.length - 1].depth > depth) {
         closeListsToDepth(listStack.length - 1);
       }
 
       // If need to open new lists to reach depth
       while (listStack.length <= depth) {
-        // if we need one more level and previous top has same type, reuse; else create new
         const newType = isUl ? 'ul' : 'ol';
         pushList(newType, listStack.length);
       }
@@ -157,9 +161,25 @@ function discordMarkdownToHtml(input) {
       continue;
     }
 
-    // Normal paragraph
     closeListsToDepth(0);
-    out += '<p>' + processInlineFormatting(restoreInlinePlaceholders(line.trim())) + '</p>';
+    const trimmedLine = line.trim();
+
+    // Флаг-состояние (вынесите эти две переменные в самый верх функции, где объявляются out и listStack):
+    // let inStyleBlock = false;
+    // let inScriptBlock = false;
+
+    if (trimmedLine.toLowerCase().startsWith('<style')) inStyleBlock = true;
+    if (trimmedLine.toLowerCase().startsWith('<script')) inScriptBlock = true;
+
+    // Если мы внутри блока стилей или скриптов, либо строка является блочным HTML-тегом
+    if (inStyleBlock || inScriptBlock || /^<\/?(div|style|script|ol|ul|li|h[1-6]|blockquote|p)/i.test(trimmedLine)) {
+        out += processInlineFormatting(restoreInlinePlaceholders(trimmedLine));
+    } else {
+        out += '<p>' + processInlineFormatting(restoreInlinePlaceholders(trimmedLine)) + '</p>';
+    }
+
+    if (trimmedLine.toLowerCase().includes('</style>')) inStyleBlock = false;
+    if (trimmedLine.toLowerCase().includes('</script>')) inScriptBlock = false;
   }
 
   // close any remaining lists
@@ -179,43 +199,35 @@ function discordMarkdownToHtml(input) {
   }
 
   // process inline formatting (links, spoilers, bold, italic, underline, strike)
-  // allowLinks = true/false — when false, link recognition is skipped (used to avoid nested links inside link text)
   function processInlineFormatting(s, allowLinks = true) {
     if (!s) return '';
 
-    // We'll extract top-level links first (if allowed), replace them with placeholders,
-    // then run other inline processing, then restore link placeholders.
     const linkPlaceholders = [];
     if (allowLinks) {
       s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, text, url) => {
-        // text is already HTML-escaped upstream; but we want to allow other inline formatting
-        // inside link text — except links themselves. So process the text with allowLinks = false.
         const processedText = processInlineFormatting(text, false);
         const safeUrl = escapeHtml(url);
         const idx = linkPlaceholders.length;
-        // store final anchor HTML to restore after other replacements
         linkPlaceholders.push(`<a href="${safeUrl}" target="_blank" rel="noopener noreferrer">${processedText}</a>`);
         return `\u0000LINK${idx}\u0000`;
       });
     }
 
-    // spoilers ||text|| -> span.spoiler with simple reveal on click
+    // spoilers
     s = s.replace(/\|\|([\s\S]+?)\|\|/g, (m, inside) => {
-      const safeInside = inside; // already escaped
-      return `<span class="spoiler" style="background:#444;color:#444;filter:blur(4px);cursor:pointer;" onclick="this.style.filter='none';this.style.color='inherit';this.style.background='transparent';">${safeInside}</span>`;
+      return `<span class="spoiler" style="background:#444;color:#444;filter:blur(4px);cursor:pointer;" onclick="this.style.filter='none';this.style.color='inherit';this.style.background='transparent';">${inside}</span>`;
     });
 
     // strikethrough
     s = s.replace(/~~([\s\S]+?)~~/g, '<del>$1</del>');
-    // bold **text**
+    // bold
     s = s.replace(/\*\*([\s\S]+?)\*\*/g, '<strong>$1</strong>');
-    // underline __text__
+    // underline
     s = s.replace(/__([\s\S]+?)__/g, '<u>$1</u>');
-    // italic *text* or _text_ (avoid matching ** and __ which are handled)
+    // italic
     s = s.replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '<em>$1</em>');
     s = s.replace(/(?<!_)_([^_]+)_(?!_)/g, '<em>$1</em>');
 
-    // restore link placeholders (if any)
     if (allowLinks && linkPlaceholders.length > 0) {
       s = s.replace(/\u0000LINK(\d+)\u0000/g, (_, idx) => linkPlaceholders[Number(idx)] || '');
     }
@@ -224,5 +236,4 @@ function discordMarkdownToHtml(input) {
   }
 }
 
-// Export for environments like Node or browsers
 if (typeof module !== 'undefined' && module.exports) module.exports = { discordMarkdownToHtml };
