@@ -59,6 +59,11 @@
     background-color: #9b59b6;
 }
 
+.status-INGAME {
+    background-color: #27ae60;
+    border: 2px solid gold;
+}
+
 .download-award {
     width: 25px;
     height: 25px;

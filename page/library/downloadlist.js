@@ -5,6 +5,7 @@ const inGameMaps = [
     "jalhund_europe",
     "jaba_america",
     "parkourcat_euro4",
+    "zachary_world"
 ];
 
 const statusScores = {
@@ -56,7 +57,7 @@ function generateScenarioPath(id) {
     }
     const mapId = generateMapId(id, '/', 2);
     //console.log(`Scenario ID: ${libLink}lib/${mapId}/${id.join('_')}.json`); // Debugging line
-    return `${libLink}lib/${mapId}/${id.join('_')}.json`;
+    return `${libLink}lib/${mapId}/${id.join('_')}`;
 }
 
 function generateMapPath(id) {
@@ -257,7 +258,7 @@ function generateScenarioCard(scenario) {
                     </div>
                     <div style="display:flex;flex-direction:column;align-items:bottom;border-radius:var(--br);overflow:hidden;position:absolute;right:0;bottom:0;">
                         ${noRights}
-                        <button class="download-download-button" onclick="libDownloadScenario('${scenarioPath}', '${mapId}', '${scenario.id[0]}', '${scenario.id[1]}', '${scenario.id[2]}')" style="background-color: #44944A; border-radius: 0; width: 45px; height: 45px; border: none; cursor: pointer;">
+                        <button class="download-download-button" onclick="libDownloadScenario('${scenarioPath}', '${scenario.id.join('_')}')" style="background-color: #44944A; border-radius: 0; width: 45px; height: 45px; border: none; cursor: pointer;">
                             <img src="././img/library/download.svg" class="download-info-ico" />
                         </button>
                     </div>
@@ -268,10 +269,20 @@ function generateScenarioCard(scenario) {
 }
 
 // Download handling functions
-async function libDownloadScenario(rawUrl, mapId, autor, map, version, dontMap = false) {
+async function libDownloadScenario(rawUrl, scenarioId, /*mapId, autor, map, version,*/ dontMap = false) {
     try {
+        const scenarioData = findScenario(scenarioId)
+        console.log(scenarioData)
+
+        const mapId = `${scenarioData.id[0]}_${scenarioData.id[1]}`
+        const author = scenarioData[0]
+        const map = scenarioData[1]
+
+
+
         const fileName = rawUrl.split('/').pop();
-        await downloadFile(rawUrl, fileName);
+        const fileNameEnd = scenarioData.languages.length > 1 ? `-${prompt('type lang: ' + scenarioData.languages[0] + ' or ' + scenarioData.languages[1])}` : ''
+        await downloadFile(`${rawUrl}${fileNameEnd}.json`, `${fileName}${fileNameEnd}.json`);
 
         if (dontMap === true) return;
 

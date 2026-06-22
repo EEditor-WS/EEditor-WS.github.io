@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Логика обработчиков клика для кнопок скачивания
         document.getElementById('downloadScenarioDetalis').onclick = () => {
-            libDownloadScenario(`${libLink}lib/${foundScenario.id.slice(0, 2).join('/')}/${cleanScenarioId}.json`, ' ', `${foundScenario.id[0]}`, `${foundScenario.id[1]}`, `${foundScenario.id[2]}`, true);
+            libDownloadScenario(`${libLink}lib/${foundScenario.id.slice(0, 2).join('/')}/${cleanScenarioId}`, foundScenario, true);
         };
         document.getElementById('downloadMapDetalis').onclick = () => {
             downloadMapMap(`${foundScenario.id[0]}_${foundScenario.id[1]}_${foundScenario.id[2]}`);

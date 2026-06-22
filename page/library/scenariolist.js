@@ -25,3 +25,11 @@ async function loadJson() {
 }
 
 loadJson();
+
+function findScenario(id) {
+    return scenariosData.find(item => {
+        const fullId = item.id.join('_');
+        
+        return fullId === id || fullId.startsWith(id);
+    });
+}

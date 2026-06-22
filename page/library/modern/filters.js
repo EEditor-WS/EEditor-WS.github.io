@@ -70,7 +70,7 @@
             // Map filter
             if (mapFilter) {
                 const scenarioMap = String(`${scenario.id[0]}_${scenario.id[1]}` || '');
-                const mapMatch = scenarioMap.includes(mapFilter);
+                const mapMatch = scenarioMap == mapFilter;
                 visible = visible && mapMatch;
             }
 

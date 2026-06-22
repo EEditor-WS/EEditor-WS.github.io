@@ -214,4 +214,69 @@ const authorsData = {
         color: "#3B83BD",
         rights: true
     },
+    manstein: {
+        name: "@Manstein",
+        link: "https://discord.com/users/1098662845647945808",
+        color: "#3B83BD"
+    },
+    manstein: {
+        name: "@theHardEngineer",
+        link: "https://discord.com/users/1088785354699575366",
+        color: "#3B83BD"
+    },
+    hamod: {
+        name: "@Hamod_2032",
+        link: "https://discord.com/users/1347239235530391552",
+        color: "#3B83BD"
+    },
+    nghe: {
+        name: "@nghe_",
+        link: "https://discord.com/users/1051046487813013514",
+        color: "#3B83BD"
+    },
+    mooned: {
+        name: "@Mooned",
+        link: "https://discord.com/users/1203679089182122037",
+        color: "#3B83BD"
+    },
+    kaschby: {
+        name: "@Kaschby",
+        link: "https://discord.com/users/858627085940424735",
+        color: "#3B83BD"
+    },
+    inka: {
+        name: "@Inka",
+        link: "https://discord.com/users/1050563653394505728",
+        color: "#3B83BD"
+    },
+    dairygal: {
+        name: "@DairyGal",
+        link: "https://discord.com/users/1300064159320506368",
+        color: "#3B83BD"
+    },
+    blasha: {
+        name: "@BlashaSmasha",
+        link: "https://discord.com/users/1201248166746538098",
+        color: "#3B83BD"
+    },
+    paris06778: {
+        name: "@paris06778",
+        link: "https://discord.com/users/1509636971855872102",
+        color: "#3B83BD"
+    },
+    stanczyk: {
+        name: "@stanczyk",
+        link: "https://discord.com/users/1416759554271875182",
+        color: "#3B83BD"
+    },
+    titanium: {
+        name: "@thetitaniumguyithink ✝",
+        link: "https://discord.com/users/1253980363424923680",
+        color: "#3B83BD"
+    },
+    grim: {
+        name: "@GrimReaper54",
+        link: "https://discord.com/users/720328844464357446",
+        color: "#3B83BD"
+    },
 }
