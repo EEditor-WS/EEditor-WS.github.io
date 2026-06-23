@@ -3,6 +3,7 @@
 html {
     overflow: unset;
     max-height: unset;
+    overflow-x: hidden;
 
     body {
         min-height: 100dvh;

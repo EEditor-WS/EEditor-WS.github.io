@@ -24,7 +24,7 @@ function useUrlParams() {
 
                 let date = ''
                 if (num == 'v1') date = mapData.publishDate + ' -';
-                if (num == mapData.versions[mapData.versions.length - 1]) date = mapData.lastUpdate + ' -';
+                if (num == mapData.versions[mapData.versions.length - 1][0]) date = mapData.lastUpdate + ' -';
 
                 el.textContent = `${num} - ${date} ${countOfScenarios}`
 
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const mapData = getMapDataNew(currentMap)
         let lastVersion;
         if (mapData.versions) {
-            lastVersion = mapData.versions[mapData.versions.length - 1]
+            lastVersion = mapData.versions[mapData.versions.length - 1][0]
         } else {
             lastVersion = mapData.id[2]
         }

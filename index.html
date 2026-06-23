@@ -14,6 +14,16 @@
     <meta name="google-site-verification" content="n8rchQ7jBXcGsX4XQ4KmUBQdKH849HGErkrtPgW2zi0">
     <!--link rel="icon" type="image/x-icon" href="img/ico/ico.svg"-->
     <link rel="icon" type="image/x-icon" href="img/ico/ico.svg">
+        
+    <script>
+        let libLink;
+        if (window.location.href.includes('file:///') || window.location.port == '5500') {
+            libLink = 'http://95.153.88.229:8081/';
+        } else {
+            libLink = 'https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/';
+        }
+    </script>
+
     <script src="/js/files/files-desktop.js"></script>
     <script src="eelibs/import.js" type="module"></script>
     <script src="js/base.js"></script>
@@ -89,6 +99,7 @@
             <section id="nav-left-btns-main">
                 <a class="active" href="#home"><img src="img/ui/home.svg">Home</a>
                 <a href="#backups"><img src="img/ui/file/folder.svg">Backups</a>
+                <a href="#files"><img src="img/ui/file/folder.svg">Downloaded</a>
             </section>
             <div class="line"></div>
             <section id="nav-left-btns-editors">
@@ -224,7 +235,7 @@
             </div>
         </nav>
         
-        <div id="main" class="page pmain active">
+        <div id="main" class="page pmain">
             <div class="home-zone bgh">
                 <div id="drop-zone" class="drop-zone" style="display: none;">
                     <p data-translate="drag_file_here_or">Перетащите файл сюда или</p>
@@ -377,6 +388,22 @@
                 </div>
             </div>
         </div>
+        <div id="files" class="page pfiles active">
+            <div class="home-zone" id="filesPage-zone">
+                <div id="samsungzakos">
+                    <div class="namezone">
+                        <h1>Files</h1>
+                    </div>
+                </div>
+                <div id="searchFileDiv">
+                    <button id="searchFileBtn"><img src="img/ui/search.svg"></button>
+                    <input id="searchFileInput" type="search" placeholder="Search">
+                </div>
+                <div id="filesList">
+
+                </div>
+            </div>
+        </div>
     </div>
     
     <!-- Модальное окно для бекапов -->
@@ -419,5 +446,7 @@
             <span class="button-text">Редактор</span>
         </button-->
     </div>
+
+    <script src="/js/files/listInGame.js"></script>
 </body>
 </html>

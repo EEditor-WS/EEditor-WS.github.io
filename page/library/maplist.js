@@ -73,7 +73,7 @@ function generateDetailsLinkMap(mapId) {
 function generateMapCard(map) {
     // const detailsLink = generateDetailsLinkMap(map.id.join('_'));
     const detailsLink = `${window.location.protocol}\/\/${window.location.host}\/library.html?category=scenarios&map=${map.id[0]}_${map.id[1]}`
-    const lastVersion = map.versions? '_' + map.versions[map.versions.length - 1] : ''
+    const lastVersion = map.versions? '_' + map.versions[map.versions.length - 1][0] : ''
     const imagePath = `${libLink}lib/${map.id.slice(0, 2).join('/')}/${map.id.join('_')}${lastVersion}_!.webp`;
     const awardsHTML = ''; // Can be implemented later if needed
     const status = map.status || 'completed';

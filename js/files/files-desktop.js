@@ -48,6 +48,34 @@ async function writeJsonFile(relativePath, data) {
     }
 }
 
+async function loadGroupedMaps() {
+    try {
+        // Вызываем метод C# через WebView2 Host Object
+        const jsonString = await window.chrome.webview.hostObjects.fileSystem.GetGroupedMapsAsync(libLink);
+        
+        // Парсим строку в JS-объект
+        const groupedMaps = JSON.parse(jsonString);
+        
+        console.log(groupedMaps);
+        /* Пример вывода:
+        {
+            "jalhund_europe_vg": ["jalhund_europe_vg_interwar", "jalhund_europe_vg_ww1"],
+            "eenot_asia_v1": ["eenot_asia_v1_modern"],
+            "eenot_asia_v2": ["eenot_asia_v2_tno", "eenot_asia_v2_ww2"]
+        }
+        */
+        
+        return groupedMaps;
+    } catch (error) {
+        console.error("Ошибка при получении списка карт:", error);
+    }
+}
+
+/* // Использование
+loadGroupedMaps().then(maps => {
+    // Работаем с объектом maps
+});
+
 // Пример использования:
 async function example() {
     // Читаем JSON
@@ -58,6 +86,6 @@ async function example() {
         // Сохраняем обратно
         await writeJsonFile("maps/level1.json", config);
     }
-}
+}*/
 
 getMapAndJsonFiles()
