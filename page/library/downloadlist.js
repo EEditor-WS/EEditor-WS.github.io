@@ -271,9 +271,10 @@ function generateScenarioCard(scenario) {
 // Download handling functions
 async function libDownloadScenario(rawUrl, scenarioId, /*mapId, autor, map, version,*/ dontMap = false) {
     try {
+
+        console.log('id ' + JSON.stringify(scenarioId))
         const scenarioData = findScenario(scenarioId)
         console.log(scenarioData)
-
         const mapId = `${scenarioData.id[0]}_${scenarioData.id[1]}`
         const author = scenarioData[0]
         const map = scenarioData[1]
