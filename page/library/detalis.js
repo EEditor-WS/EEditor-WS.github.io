@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // НОВЫЙ МЕХАНИЗМ: Добавление iframe в конец описания без перезаписи innerHTML
-        if (scenarioConent && scenarioConent.eeditor.iframe) {
+        if (scenarioConent && scenarioConent?.eeditor?.iframe) {
             const iframeUrl = `${libLink}lib/${foundScenario.id.slice(0, 2).join('/')}/${rawScenarioId.replace(/\.json$/i, '')}.html`;
             
             const iframeHTML = `
