@@ -1198,118 +1198,66 @@ generateUniqueId(minimumID = 0) {
         // Получаем список требований/бонусов
         const items = this.jsonData.custom_events[this.currentEvent][listType + (answer.includes('-') ? answer.split('-')[0] : '')] || [];
 
+        // Функция для построения опций бонусов
+        function buildBonusOptions() {
+            const options = [];
+            const config = window.reqbonConfig?.bonuses || {};
+            const categories = window.bonusCategories || {};
+
+            for (const [categoryKey, keys] of Object.entries(categories)) {
+                // Добавляем разделитель с переводом
+                const label = window.translator.translate(categoryKey);
+                options.push({
+                    value: '',
+                    label: `--- ${label} ---`,
+                    disabled: true
+                });
+
+                // Добавляем каждый ключ из категории, если он есть в конфиге и не скрыт
+                for (const key of keys) {
+                    const bonus = config[key];
+                    if (bonus && !bonus.hidden) {
+                        options.push({
+                            value: key,
+                            label: window.translator.translate(key)
+                        });
+                    }
+                }
+            }
+            return options;
+        }
+
+        // Функция для построения опций требований
+        function buildRequirementOptions() {
+            const options = [];
+            const config = window.reqbonConfig?.requirements || {};
+            const categories = window.requirementCategories || {};
+
+            for (const [categoryKey, keys] of Object.entries(categories)) {
+                const label = window.translator.translate(categoryKey);
+                options.push({
+                    value: '',
+                    label: `--- ${label} ---`,
+                    disabled: true
+                });
+
+                for (const key of keys) {
+                    if (config[key]) { // требования не имеют hidden, но для единообразия проверяем наличие
+                        options.push({
+                            value: key,
+                            label: window.translator.translate(key)
+                        });
+                    }
+                }
+            }
+            return options;
+        }
+
         // Обновляем список типов в зависимости от режима
         if (isBonus) {
-            const bonusOptions = [
-                // Экономика
-                { value: '', label: '--- ' + window.translator.translate('economy') + ' ---', disabled: true },
-                { value: 'money', label: window.translator.translate('money') },
-                { value: 'building_cost', label: window.translator.translate('building_cost') },
-                { value: 'population_income', label: window.translator.translate('population_income') },
-                { value: 'population_increase', label: window.translator.translate('population_increase') },
-                { value: 'add_resource', label: window.translator.translate('resource') },
-                { value: 'recruit_cost', label: window.translator.translate('recruit_cost') },
-                { value: 'accelerated_recruit_cost', label: window.translator.translate('accelerated_recruit_cost') },
-                { value: 'maintaining_army_cost_multiplier', label: window.translator.translate('maintaining_army_cost_multiplier') },
-                { value: 'change_political_institution', label: window.translator.translate('change_political_institution') },
-
-                // Военное дело
-                { value: '', label: '--- ' + window.translator.translate('military') + ' ---', disabled: true },
-                { value: 'defense', label: window.translator.translate('defense') },
-                { value: 'attack', label: window.translator.translate('attack') },
-                { value: 'army_losses', label: window.translator.translate('army_losses') },
-                { value: 'add_infantry', label: window.translator.translate('add_infantry') },
-                { value: 'add_shock_infantry', label: window.translator.translate('add_shock_infantry') },
-                { value: 'add_artillery', label: window.translator.translate('add_artillery') },
-                { value: 'add_tank', label: window.translator.translate('add_tank') },
-                { value: 'add_cruiser', label: window.translator.translate('add_cruiser') },
-                { value: 'add_battleship', label: window.translator.translate('add_battleship') },
-
-                // Население и культура
-                { value: '', label: '--- ' + window.translator.translate('population_and_culture') + ' ---', disabled: true },
-                { value: 'add_random_culture_population', label: window.translator.translate('add_random_culture_population') },
-                { value: 'add_culture_population', label: window.translator.translate('add_culture_population') },
-                { value: 'discontent', label: window.translator.translate('discontent') },
-
-                // Дипломатия
-                { value: '', label: '--- ' + window.translator.translate('diplomacy') + ' ---', disabled: true },
-                { value: 'relation_change', label: window.translator.translate('relation_change') },
-                { value: 'relation_ideology_change', label: window.translator.translate('relation_ideology_change') },
-                { value: 'diplomacy_lift_sanctions', label: window.translator.translate('diplomacy_lift_sanctions') },
-                { value: 'diplomacy_sanctions', label: window.translator.translate('diplomacy_sanctions') },
-                { value: 'diplomacy_pact', label: window.translator.translate('diplomacy_pact') },
-                { value: 'diplomacy_alliance', label: window.translator.translate('diplomacy_alliance') },
-                { value: 'diplomacy_break_alliance', label: window.translator.translate('diplomacy_break_alliance') },
-                { value: 'diplomacy_become_vassal', label: window.translator.translate('diplomacy_become_vassal') },
-                { value: 'diplomacy_get_vassal', label: window.translator.translate('diplomacy_get_vassal') },
-                { value: 'diplomacy_peace', label: window.translator.translate('diplomacy_peace') },
-                { value: 'diplomacy_war', label: window.translator.translate('diplomacy_war') },
-                { value: 'resurrect_country', label: window.translator.translate('resurrect_country') },
-                { value: 'annex_country', label: window.translator.translate('annex_country') },
-                { value: 'change_country', label: window.translator.translate('change_country') },
-                { value: 'disable_external_diplomacy', label: window.translator.translate('disable_external_diplomacy')},
-
-                // Прочее
-                { value: '', label: '--- ' + window.translator.translate('other') + ' ---', disabled: true },
-                { value: 'prestige', label: window.translator.translate('prestige') },
-                { value: 'science', label: window.translator.translate('science') },
-            ];
-            window.cReqType.setOptions(bonusOptions);
+            window.cReqType.setOptions(buildBonusOptions());
         } else {
-            const requirementOptions = [
-                // Временные условия
-                { value: '', label: '--- ' + window.translator.translate('time_conditions') + ' ---', disabled: true },
-                { value: 'year', label: window.translator.translate('year') },
-                { value: 'month', label: window.translator.translate('month') },
-                { value: 'turn', label: window.translator.translate('turn') },
-                { value: 'cooldown', label: window.translator.translate('cooldown') },
-                { value: 'event_choice', label: window.translator.translate('event_choice') },
-                { value: 'received_event', label: window.translator.translate('received_event' ) },
-
-                // Страны и территории
-                { value: '', label: '--- ' + window.translator.translate('countries_and_territories') + ' ---', disabled: true },
-                { value: 'land_id', label: window.translator.translate('land_id') },
-                { value: 'land_name', label: window.translator.translate('land_name') },
-                { value: 'group_name', label: window.translator.translate('group_name') },
-                { value: 'land_power', label: window.translator.translate('land_power') },
-                { value: 'num_of_provinces', label: window.translator.translate('num_of_provinces') },
-                { value: 'near_water', label: window.translator.translate('near_water') },
-                { value: 'is_player', label: window.translator.translate('is_player') },
-                { value: 'controls_capital', label: window.translator.translate('controls_capital') },
-                { value: 'lost_capital', label: window.translator.translate('lost_capital') },
-                { value: 'enemy_near_capital', label: window.translator.translate('enemy_near_capital') },
-                { value: 'independent_land', label: window.translator.translate('independent_land') },
-                { value: 'is_defeated', label: window.translator.translate('is_defeated') },
-                { value: 'is_neighbor', label: window.translator.translate('is_neighbor') },
-
-                // Дипломатия
-                { value: '', label: '--- ' + window.translator.translate('diplomacy') + ' ---', disabled: true },
-                { value: 'has_pact', label: window.translator.translate('has_pact') },
-                { value: 'has_alliance', label: window.translator.translate('has_alliance') },
-                { value: 'has_vassal', label: window.translator.translate('has_vassal') },
-                { value: 'has_sanctions', label: window.translator.translate('has_sanctions') },
-                { value: 'has_war', label: window.translator.translate('has_war') },
-                { value: 'no_enemy', label: window.translator.translate('no_enemy') },
-                { value: 'num_of_vassals', label: window.translator.translate('num_of_vassals') },
-
-                // Экономика и развитие
-                { value: '', label: '--- ' + window.translator.translate('economy_and_development') + ' ---', disabled: true },
-                { value: 'money', label: window.translator.translate('money') },
-                { value: 'tax', label: window.translator.translate('tax') },
-                { value: 'discontent', label: window.translator.translate('discontent') },
-                { value: 'building_exists', label: window.translator.translate('building_exists') },
-                { value: 'political_institution', label: window.translator.translate('political_institution') },
-                { value: 'has_resource', label: window.translator.translate('has_resource') },
-                { value: 'has_prestige', label: window.translator.translate('has_prestige') },
-                { value: 'has_science', label: window.translator.translate('has_science') },
-
-                // Прочее
-                { value: '', label: '--- ' + window.translator.translate('other') + ' ---', disabled: true },
-                { value: 'random_value', label: window.translator.translate('random_value') },
-                { value: 'count_of_tasks', label: window.translator.translate('count_of_tasks') },
-                { value: 'num_of_players', label: window.translator.translate('num_of_players') },
-            ];
-            window.cReqType.setOptions(requirementOptions);
+            window.cReqType.setOptions(buildRequirementOptions());
         }
 
         // Функция для обновления списка

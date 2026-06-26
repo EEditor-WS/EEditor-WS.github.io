@@ -109,7 +109,7 @@ const reqbonConfig = {
             hasDuration: false,
             value: 'country'
         },
-        change_political_institute: {
+        change_political_institution: {
             subType: false,
             hasDuration: false,
             value: 'ideology'
@@ -433,8 +433,65 @@ const reqbonConfig = {
     }
 };
 
+// Конфигурация категорий для бонусов
+const bonusCategories = {
+    economy: [
+        'money', 'building_cost', 'population_income', 'population_increase',
+        'add_resource', 'recruit_cost', 'accelerated_recruit_cost',
+        'maintaining_army_cost_multiplier', 'change_political_institution'
+    ],
+    military: [
+        'defense', 'attack', 'army_losses', 'add_infantry', 'add_shock_infantry',
+        'add_artillery', 'add_tank', 'add_cavalary', 'add_cruiser', 'add_battleship', 'add_submarine'
+    ],
+    population_and_culture: [
+        'add_random_culture_population', 'add_culture_population', 'discontent'
+    ],
+    diplomacy: [
+        'relation_change', 'relation_ideology_change', 'resurrect_country', 'annex_country',
+        'change_country', 'disable_external_diplomacy', 'transfer_provinces'
+    ],
+    diplomacy_actions: [
+        'diplomacy_lift_sanctions', 'diplomacy_sanctions', 'diplomacy_pact', 'diplomacy_alliance',
+        'diplomacy_break_alliance', 'diplomacy_become_vassal', 'diplomacy_get_vassal',
+        'diplomacy_peace', 'diplomacy_war'
+    ],
+    other: [
+        'prestige', 'science'
+    ]
+};
+
+// Конфигурация категорий для требований
+const requirementCategories = {
+    time_conditions: [
+        'year', 'month', 'turn', 'cooldown', 'event_choice', 'received_event'
+    ],
+    countries: [
+        'land_id', 'land_name', 'group_name', 'land_power', 'is_player', 'independent_land', 
+        'is_defeated'
+    ],
+    territory: [
+        'num_of_provinces', 'near_water', 'controls_capital', 'lost_capital', 'enemy_near_capital',
+        'is_neighbor', 'has_provinces'
+    ],
+    diplomacy: [
+        'has_pact', 'has_alliance', 'has_vassal', 'has_sanctions', 'has_war', 'no_enemy', 
+        'num_of_vassals'
+    ],
+    economy_and_development: [
+        'money', 'tax', 'discontent', 'building_exists', 'political_institution',
+        'has_resource', 'has_prestige', 'has_science'
+    ],
+    other: [
+        'random_value', 'count_of_tasks', 'num_of_players'
+    ]
+};
+
+
 // Экспортируем конфигурацию
 window.reqbonConfig = reqbonConfig;
+window.bonusCategories = bonusCategories;
+window.requirementCategories = requirementCategories;
 
 window.requirementsManager = {
     // Get requirements/bonuses from a specific section
