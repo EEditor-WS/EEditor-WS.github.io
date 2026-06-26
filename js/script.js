@@ -376,7 +376,7 @@ class ScenarioManager {
 
     async loadScenario(scenarioData) {
         try {
-            if (scenarioData.custom_events || scenarioData.custom_events == []) {
+            if (!scenarioData.custom_events || scenarioData.custom_events === []) {
                 scenarioData.custom_events = {};
             }
             //const content = JSON.stringify(scenarioData, null, 4);
@@ -919,7 +919,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                                         let jsonData = JSON.parse(content);
                                         
-                                        if (jsonData.custom_events || jsonData.custom_events == []) {
+                                        if (!jsonData.custom_events || jsonData.custom_events === []) {
                                             jsonData.custom_events = {};
                                         }
 
@@ -1074,7 +1074,7 @@ function handleFileContent(fileName, content, filePath) {
         if (isJsonFile) {
             try {
                 let jsonData = JSON.parse(content);
-                if (jsonData.custom_events || jsonData.custom_events == []) {
+                if (!jsonData.custom_events || jsonData.custom_events === []) {
                     jsonData.custom_events = {};
                 }
                 console.log('Parsed JSON data:', jsonData);

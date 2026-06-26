@@ -70,7 +70,7 @@ class EventManager {
     async loadScenario(content) {
         try {
             this.jsonData = JSON.parse(content);
-            if (!this.jsonData.custom_events) {
+            if (!this.jsonData.custom_events || this.jsonData.custom_events === []) {
                 this.jsonData.custom_events = {};
             }
             this.updateEventsList();
@@ -83,7 +83,7 @@ class EventManager {
 
     setJsonData(jsonData) {
         this.jsonData = jsonData;
-        if (!this.jsonData.custom_events || this.jsonData.custom_events == []) {
+        if (!this.jsonData.custom_events || this.jsonData.custom_events === []) {
             this.jsonData.custom_events = {};
         }
         this.updateEventsList();
@@ -502,7 +502,7 @@ class EventManager {
             }
         }
         
-        if (!this.jsonData.custom_events) {
+        if (!this.jsonData.custom_events || this.jsonData.custom_events === []) {
             this.jsonData.custom_events = {};
         }
 
@@ -800,8 +800,8 @@ generateUniqueId(minimumID = 0) {
             console.warn('Нет текущего события или данных для сохранения');
             return;
         }
-        
-        if (!this.jsonData.custom_events || this.jsonData.custom_events == []) {
+
+        if (!this.jsonData.custom_events || this.jsonData.custom_events === []) {
             this.jsonData.custom_events = {};
         }
 
