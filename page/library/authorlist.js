@@ -18,19 +18,24 @@ const authorsData = {
         rights: true
     },
     totoska: {
-        name: "@totoska",
+        name: "@Totoska",
         link: "https://discord.com/users/820194328201920524",
         color: "#3B83BD",
         rights: true
     },
     kolkhoznik: {
-        name: "@kolhoznik",
+        name: "@Колхозник",
         link: "https://discord.com/users/1057029940484247682",
         color: "#3B83BD",
         rights: true
     },
     esteban: {
-        name: "@deleted_user",
+        name: "@Esteban",
+        link: "https://discord.com/users/456226577798135808",
+        color: "#FF83BD"
+    },
+    esteban259: {
+        name: "@Esteban259",
         link: "https://discord.com/users/456226577798135808",
         color: "#FF83BD"
     },
@@ -70,9 +75,9 @@ const authorsData = {
         rights: true
     },
     trid: {
-        name: "@trid9505",
+        name: "@Trid",
         link: "https://discord.com/users/993585215358386306",
-        color: "#3B83BD",
+        color: "#FF83BD",
         rights: true
     },
     jaba: {
@@ -108,14 +113,9 @@ const authorsData = {
         rights: true
     },
     chitterss: {
-        name: "@deleted_user",
+        name: "@Chitteress",
         link: "https://discord.com/users/611870107970568214",
-        color: "#3B83BD"
-    },
-    grimreaper: {
-        name: "@grimreaper54",
-        link: "https://discord.com/users/720328844464357446",
-        color: "#3B83BD"
+        color: "#FF83BD"
     },
     eeditor: {
         name: "@EEditor",
@@ -279,4 +279,34 @@ const authorsData = {
         link: "https://discord.com/users/720328844464357446",
         color: "#3B83BD"
     },
+    pinguenis: {
+        name: "@What?",
+        link: "https://discord.com/users/754688516935516162",
+        color: "#3B83BD"
+    },
+    lizardmaker: {
+        name: "@deteled_user",
+        link: "https://discord.com/users/754688516935516162",
+        color: "#FF83BD"
+    },
+    youmix: {
+        name: "@YouMix",
+        link: "https://discord.com/users/997134387537784932",
+        color: "#3B83BD"
+    },
+    shine: {
+        name: "@.sh1ne",
+        link: "https://discord.com/users/670287522701639681",
+        color: "#3B83BD"
+    },
+    carolus: {
+        name: "@Carolus",
+        link: "https://discord.com/users/899727759335628850",
+        color: "#3B83BD"
+    },
+    hitaroko: {
+        name: "@Hitaroko",
+        link: "https://discord.com/users/611870107970568214",
+        color: "#3B83BD"
+    }
 }
