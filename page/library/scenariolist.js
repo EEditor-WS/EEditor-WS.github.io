@@ -1,6 +1,6 @@
 let scenariosData;
 
-async function loadJson() {
+async function loadJsonScenarios() {
   try {
     const url = `${libLink}scenarios.json`
     
@@ -24,7 +24,7 @@ async function loadJson() {
   }
 }
 
-loadJson();
+loadJsonScenarios();
 
 function findScenario(id) {
     return scenariosData.find(item => {

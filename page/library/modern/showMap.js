@@ -5,7 +5,7 @@ function useUrlParams() {
     const title = document.getElementById('filterHeaderTitle')
 
     if (params.get('map')) {
-        const mapData = getMapDataNew(params.get('map'))
+        const mapData = getMapDataSync(params.get('map'))
         title.textContent = mapData.title
 
         currentMap = `${mapData.id[0]}_${mapData.id[1]}`
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('filterHeaderDownload').classList.toggle('active')
     })
     document.getElementById('downloadMapLastBtn').addEventListener('click', () => {
-        const mapData = getMapDataNew(currentMap)
+        const mapData = getMapDataSync(currentMap)
         let lastVersion;
         if (mapData.versions) {
             lastVersion = mapData.versions[mapData.versions.length - 1][0]

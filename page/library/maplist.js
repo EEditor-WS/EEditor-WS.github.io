@@ -1,28 +1,71 @@
-async function loadJson() {
-  try {
-    const url = `${libLink}maps.json`
-    
-    // Запрашиваем файл по сети
-    const response = await fetch(url, {
-        cache: 'reload' // или 'reload'
-    });
-    
-    // Проверяем, успешный ли ответ (статус 200-299)
-    if (!response.ok) {
-      throw new Error(`Ошибка сети: ${response.status}`);
-    }
-    
-    // Метод .json() сам прочитает тело ответа и превратит его в JS-объект
-    mapsData = await response.json(); 
-    
-    // Выводим результат в консоль браузера
-    console.log(mapsData);
-  } catch (error) {
-    console.error('Не удалось загрузить JSON:', error);
-  }
+let mapsData = null
+let loadingPromise = null
+
+async function loadJsonMaps() {
+    if (mapsData) return mapsData;           // уже загружено
+    if (loadingPromise) return loadingPromise; // уже в процессе
+    loadingPromise = (async () => {
+        const url = `${libLink}maps.json`;
+        const response = await fetch(url, { cache: 'reload' });
+        if (!response.ok) throw new Error(`Ошибка: ${response.status}`);
+        mapsData = await response.json();
+        console.log(mapsData);
+        document.dispatchEvent(new CustomEvent('mapDataLoaded', { detail: mapsData }));
+        return mapsData;
+    })();
+    return loadingPromise;
 }
 
-loadJson();
+function normalizeMapIdForComparison(input) {
+    if (Array.isArray(input)) {
+        // Если массив, берём первые два элемента и склеиваем
+        return input.slice(0, 2).join('_');
+    }
+    if (typeof input === 'string') {
+        let cleaned = input.trim();
+        // Убираем кавычки, если строка была обёрнута в JSON.stringify
+        if ((cleaned.startsWith('"') && cleaned.endsWith('"')) || 
+            (cleaned.startsWith("'") && cleaned.endsWith("'"))) {
+            cleaned = cleaned.slice(1, -1);
+        }
+        return cleaned;
+    }
+    return String(input);
+}
+
+async function getMapData(map) {
+    await loadJsonMaps();
+    const normalized = normalizeMapIdForComparison(map);
+    const mapInfo = mapsData.find(m => m.id.slice(0, 2).join('_') === normalized);
+    if (!mapInfo) console.error(`Map with ID ${map} (${normalized}) not found`);
+    return mapInfo;
+}
+
+function getMapDataSync(mapId) {
+    // mapId может быть массивом или строкой, приводим к строке первых двух частей
+    const key = Array.isArray(mapId) ? mapId.slice(0, 2).join('_') : mapId;
+    return mapsData?.find(m => m.id.slice(0, 2).join('_') === key) || null;
+}
+
+/*function getMapData(map) {
+    const mapInfo = mapsData.find(m => m.id.join('_') === map);
+    if (!mapInfo) {
+        console.error(`Map with ID ${map} not found`);
+        return null;
+    }
+    return mapInfo;
+}
+
+function getMapData(map) {
+    const mapInfo = mapsData.find(m => `${m.id[0]}_${m.id[1]}` === map);
+    if (!mapInfo) {
+        console.error(`Map with ID ${map} not found`);
+        return null;
+    }
+    return mapInfo;
+}*/
+
+loadJsonMaps();
 
 const mapTypes = {
     "world": "World",
@@ -308,21 +351,3 @@ document.addEventListener('DOMContentLoaded', () => {
         
     }
 });
-
-function getMapData(map) {
-    const mapInfo = mapsData.find(m => m.id.join('_') === map);
-    if (!mapInfo) {
-        console.error(`Map with ID ${map} not found`);
-        return null;
-    }
-    return mapInfo;
-}
-
-function getMapDataNew(map) {
-    const mapInfo = mapsData.find(m => `${m.id[0]}_${m.id[1]}` === map);
-    if (!mapInfo) {
-        console.error(`Map with ID ${map} not found`);
-        return null;
-    }
-    return mapInfo;
-}

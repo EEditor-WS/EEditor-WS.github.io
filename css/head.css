@@ -9,7 +9,7 @@
 .nav-header {
     display: flex;
     align-items: center;
-    padding: var(--header-padding);
+    padding: var(--ds);
     height: auto;
     position: sticky;
     top: 0;

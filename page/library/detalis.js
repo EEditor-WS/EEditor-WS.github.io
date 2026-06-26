@@ -11,7 +11,7 @@ let scenarioMap;
 /* ==========================================================================
    2. ИНИЦИАЛИЗАЦИЯ И ИЗВЛЕЧЕНИЕ ДАННЫХ ИЗ URL
    ========================================================================== */
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     // Проверяем, что глобальный массив данных о сценариях доступен
     if (typeof scenariosData === 'undefined' || !Array.isArray(scenariosData)) {
         console.error('Ошибка: Массив scenariosData не найден или объявлен некорректно.');
@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!Array.isArray(scenario.id)) return false;
         return JSON.stringify(scenarioArray) === JSON.stringify(scenario.id);
     });
+    const foundScenarioData = await getMapData(foundScenario.id.slice(0, 2).join('_'));
 
     // Если метаданные сценария не найдены в maplist.js / scenariosData
     if (!foundScenario) {
@@ -49,16 +50,17 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ==========================================================================
        3. ФУНКЦИЯ ОТРИСОВКИ ИНТЕРФЕЙСА (ПОСЛЕ ЗАГРУЗКИ JSON)
        ========================================================================== */
-    function setOtherParams() {
+    async function setOtherParams() {
         console.log('Сценарий успешно сопоставлен:', foundScenario.title);
         console.log('Данные метаструктуры:', foundScenario);
         
         // Заполнение текстовых узлов и инпутов данными метаструктуры
         document.getElementById('scenario-name').textContent = foundScenario.title;
-        document.getElementById('scenarioTitle').value = foundScenario.title;
-        document.getElementById('scenarioAuthor').value = Array.isArray(foundScenario.author) ? foundScenario.author.join(', ') : foundScenario.author;
-        document.getElementById('scenarioMap').value = foundScenario.id.slice(0, 2).join('_');
-        document.getElementById('scenarioLang').value = foundScenario.languages ? foundScenario.languages[0] : '';
+        document.getElementById('scenarioAuthor').textContent = Array.isArray(foundScenario.author) ? foundScenario.author.join(', ') : foundScenario.author;
+        document.getElementById('scenarioMap').textContent = foundScenarioData.title;
+        document.getElementById('scenarioMap').href = `/library.html?category=scenarios&map=${foundScenario.id.slice(0, 2).join('_')}`
+        document.getElementById('scenarioMap').title = foundScenario.id.slice(0, 2).join('_');
+        document.getElementById('scenarioLang').textContent = foundScenario.languages ? foundScenario.languages.join(", ") : '';
         document.getElementById('scenarioPublish').value = foundScenario.publishDate;
         document.getElementById('scenarioUpdate').value = foundScenario.lastUpdate;
         
@@ -136,7 +138,25 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ==========================================================================
        4. ЗАПРОС ТЕЛА СЦЕНАРИЯ С СЕРВЕРА / ИЗ РЕПОЗИТОРИЯ
        ========================================================================== */
-    fetch(`${libLink}lib/${foundScenario.id.slice(0, 2).join('/')}/${rawScenarioId.replace(/\.json$/i, '')}.json`)
+    const userLangs = (navigator.languages || [navigator.language || 'EN']).map(lang => lang.slice(0, 2).toUpperCase());
+
+    let langSuffix = '';
+
+    // 2. Проверяем массив языков сценария
+    if (foundScenario.languages.length > 1) {
+        // Ищем первый язык пользователя, который поддерживается в scenario.languages
+        const matchedLang = userLangs.find(lang => foundScenario.languages.includes(lang));
+        
+        if (matchedLang) {
+            langSuffix = `-${matchedLang.toLowerCase()}`;
+        } else {
+            langSuffix = `-${foundScenario.languages[0].toLowerCase()}`;
+        }
+    }
+
+    const baseFileName = rawScenarioId.replace(/\.json$/i, '');
+
+    fetch(`${libLink}lib/${foundScenario.id.slice(0, 2).join('/')}/${baseFileName}${langSuffix}.json`)
     .then(response => {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);

@@ -6,16 +6,21 @@
     <title>Scenario Info | EEditor</title>
     <!--link rel="icon" type="image/x-icon" href="/img/ico/ico.svg"-->
     <link rel="icon" type="image/x-icon" href="/img/library/icon.svg">
-    <link rel="stylesheet" href="/css/!.css">
-    <link rel="stylesheet" href="/css/base.css">
-    <link rel="stylesheet" href="/css/library.css">
-    <link rel="stylesheet" href="/css/head.css">
-    <link rel="stylesheet" href="/css/list.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/head.css">
-    <link rel="stylesheet" href="download.css">
-    <link rel="stylesheet" href="modern/detalis.css">
-    <link rel="stylesheet" href="upload/upload.css">
+        <link rel="stylesheet" href="/eelibs/import.css">
+        <link rel="stylesheet" href="/css/!.css">
+        <link rel="stylesheet" href="/css/base.css">
+        <link rel="stylesheet" href="/css/library.css">
+        <link rel="stylesheet" href="/css/head.css">
+        <link rel="stylesheet" href="/css/list.css">
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/css/head.css">
+        <link rel="stylesheet" href="/page/library/download.css">
+        <link rel="stylesheet" href="/page/library/modern/general.css">
+        <link rel="stylesheet" href="/page/library/modern/main.css">
+        <link rel="stylesheet" href="/page/library/modern/headers.css">
+        <link rel="stylesheet" href="/page/library/modern/mobile.css">
+    <link rel="stylesheet" href="/page/library/upload/upload.css">
+    <link rel="stylesheet" href="/page/library/modern/detalis.css">
     <link rel="stylesheet" href="/css/notification.css">
     
     <script>
@@ -28,17 +33,17 @@
     </script>
     <script src="/js/data/language.js"></script>
     <script src="scenariolist.js"></script>
-    <script src="authorlist.js"></script>
     <script src="maplist.js"></script>
+    <script src="authorlist.js"></script>
 </head>
-<body>
+<body class="dark dark-theme">
     <nav class="nav-header">
         <div class="header-logo-container">
             <img class="header-logo" src="/img/library/icon.svg" alt="EEditor Lib">
             <h class="header-title">EEditor Lib</h>
         </div>
         <br>
-        <button href="/index.html" id="back-to-reforms" class="action-button back" title="Return to editor" data-tooltip="Вернуться к редактору" onclick="window.location.href = '/index.html'">
+        <button href="/index.html" id="back-to-reforms" class="navbtn" title="Return to editor" data-tooltip="Вернуться к редактору" onclick="window.location.href = '/index.html'">
             <img src="/img/ui/back.svg">
         </button>
         <a href="/library.html?category=scenarios" class="navbtn" data-page="scenarios" data-translate="scenarios">Сценарии</a>
@@ -132,7 +137,7 @@
 
     <div class="content-library-scenario">
         <div class="header-scenario">
-            <h1 id="scenario-name">Scenario name</h1>
+            <h1><b id="scenario-name">Scenario name</b><b> by </b><b id="scenarioAuthor">Author</b></h1>
             <!--div class="nav-icons">
                 <input type="file" id="scenario-file" accept=".json" style="display: none;">
                 <input type="file" id="image-file" accept="image/*" style="display: none;">
@@ -157,20 +162,12 @@
         <div class="params-scenario-library">
             <div class="mainform">
                 <div class="form-element">
-                    <label data-translate="name">Name</label>
-                    <input readonly type="text" id="scenarioTitle" title="title" autocomplete="off">
-                </div>
-                <div class="form-element">
-                    <label data-translate="author">Author</label>
-                    <input readonly type="text" id="scenarioAuthor" title="title" autocomplete="off">
-                </div>
-                <div class="form-element">
                     <label data-translate="map">Map</label>
-                    <input readonly type="text" id="scenarioMap" title="title" autocomplete="off">
+                    <a id="scenarioMap" title="title"></a>
                 </div>
                 <div class="form-element">
-                    <label data-translate="language">Language</label>
-                    <select id="scenarioLang" autocomplete="off">
+                    <label data-translate="languages">Languages</label>
+                    <!--select id="scenarioLang" autocomplete="off">
                         <option value="EN">English</option>
                         <option value="RU">Русский</option>
                         <option value="UK">Українська</option>
@@ -181,7 +178,8 @@
                         <option value="fr">Français</option>
                         <option value="es">Español</option>
                         <option value="other">Other</option>
-                    </select>
+                    </select-->
+                    <p id="scenarioLang"></p>
                 </div>
                 <div class="form-element">
                     <label data-translate="dateofupload">Date of upload</label>

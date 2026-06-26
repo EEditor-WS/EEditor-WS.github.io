@@ -376,7 +376,11 @@ class ScenarioManager {
 
     async loadScenario(scenarioData) {
         try {
-            const content = JSON.stringify(scenarioData, null, 4);
+            if (scenarioData.custom_events || scenarioData.custom_events == []) {
+                scenarioData.custom_events = {};
+            }
+            //const content = JSON.stringify(scenarioData, null, 4);
+            const content = JSON.stringify(scenarioData);
             if (previewContent) {
                 previewContent.value = content;
                 this.originalContent = content;
@@ -913,7 +917,12 @@ document.addEventListener('DOMContentLoaded', function() {
                                         const content = JSON.parse(Android.readFile('scenarios/' + file.name, 'text')).content;
                                         if (content.startsWith("ERROR:")) throw new Error(content.substring(6));
 
-                                        const jsonData = JSON.parse(content);
+                                        let jsonData = JSON.parse(content);
+                                        
+                                        if (jsonData.custom_events || jsonData.custom_events == []) {
+                                            jsonData.custom_events = {};
+                                        }
+
                                         if (isIndexPage) {
                                             redirectToEditorWithFile(file.name, content);
                                         } else {
@@ -1064,7 +1073,10 @@ function handleFileContent(fileName, content, filePath) {
         isJsonFile = fileName.toLowerCase().endsWith('.json');
         if (isJsonFile) {
             try {
-                const jsonData = JSON.parse(content);
+                let jsonData = JSON.parse(content);
+                if (jsonData.custom_events || jsonData.custom_events == []) {
+                    jsonData.custom_events = {};
+                }
                 console.log('Parsed JSON data:', jsonData);
 
                 // Обновляем состояние ScenarioManager

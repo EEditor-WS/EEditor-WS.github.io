@@ -121,6 +121,7 @@ function getSortedScenarios() {
 // Helper function to truncate author name
 function truncateAuthorName(name, maxLength = 10) {
     try {
+        if (name == null) return '';
         if (name.length <= maxLength) return name;
         return name.substring(0, maxLength) + '...';
     } catch (error) {
@@ -145,7 +146,7 @@ function generateScenarioCard(scenario) {
         `).join('');
 
     const mapId = scenario.id.slice(0, 2).join('_');
-    const mapData = getMapDataNew(scenario.id.slice(0, 2).join('_'));
+    const mapData = getMapDataSync(scenario.id.slice(0, 2).join('_'));
     const imagePath = generateImagePath(scenario.id);
     const scenarioPath = generateScenarioPath(scenario.id);
     const detailsLink = generateDetailsLink(scenario.id);
@@ -279,16 +280,51 @@ async function libDownloadScenario(rawUrl, scenarioId, /*mapId, autor, map, vers
         const author = scenarioData[0]
         const map = scenarioData[1]
 
+        function choseScenarioLang(langs) {
+            return new Promise((resolve) => {
+                const modal = document.createElement('div')
+                const content = document.createElement('div')
+                const mHeader = document.createElement('div')
+                const mBody = document.createElement('div')
+                const mFooter = document.createElement('div')
 
+                modal.className = 'modal-overlay active'
+                content.className = 'modal-content'
+                mHeader.className = 'modal-header'
+                mBody.className = 'modal-body'
+                mFooter.className = 'modal-footer langsScenario'
+
+                document.body.appendChild(modal)
+                modal.appendChild(content)
+                content.appendChild(mHeader)
+                content.appendChild(mBody)
+                content.appendChild(mFooter)
+
+                mHeader.innerHTML = `<h3 data-translate="chose_lang_of_download">${window.translator.translate('chose_lang_of_download')}</h3>`
+                mBody.innerHTML = `<h3 data-translate="chose_lang_of_download_info">${window.translator.translate('chose_lang_of_download_info')}</h3>`
+                
+                langs.forEach(lang => {
+                    const langBtn = document.createElement('button')
+                    langBtn.textContent = lang
+                    mFooter.appendChild(langBtn)
+
+                    langBtn.addEventListener('click', () => {
+                        modal.remove()
+                        resolve('-' + lang.toLowerCase())
+                    })
+                })
+            })
+        }
 
         const fileName = rawUrl.split('/').pop();
-        const fileNameEnd = scenarioData.languages.length > 1 ? `-${prompt('type lang: ' + scenarioData.languages[0] + ' or ' + scenarioData.languages[1])}` : ''
+        //const fileNameEnd = scenarioData.languages.length > 1 ? `-${prompt('type lang: ' + scenarioData.languages[0] + ' or ' + scenarioData.languages[1])}` : ''
+        const fileNameEnd = scenarioData.languages.length > 1 ? await choseScenarioLang(scenarioData.languages) : '';
         await downloadFile(`${rawUrl}${fileNameEnd}.json`, `${fileName}${fileNameEnd}.json`);
 
         if (dontMap === true) return;
 
         if (mapId && !downloadedMaps.has(mapId) && !inGameMaps.includes(mapId)) {
-            const mapData = getMapDataNew(`${autor}_${map}`);
+            const mapData = getMapDataSync(`${autor}_${map}`);
             currentMapDownload = {
                 mapId: mapId,
                 mapUrl: `${libLink}lib/${autor}/${map}/${autor}_${map}_${version}_!.map`,
@@ -368,12 +404,17 @@ async function downloadFile(url, fileName) {
 }
 
 // Load scenarios
-function loadScenarios() {
+async function loadScenarios() {
     const container = document.getElementById('download-cards');
     if (!container) return;
 
+    // Гарантируем, что данные карт загружены
+    await loadJsonMaps(); // функция из maplist.js
+
     const sortedScenarios = getSortedScenarios();
-    container.innerHTML = sortedScenarios.map(generateScenarioCard).join('');
+    // Теперь generateScenarioCard синхронная, просто маппим
+    const htmlScenarios = sortedScenarios.map(generateScenarioCard).join('');
+    container.innerHTML = htmlScenarios;
 }
 
 // Функция для заполнения списка авторов
@@ -419,12 +460,12 @@ function populateMapFilter() {
 }
 
 // Initialize when the page loads
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     // Populate filters
     populateAuthorFilter();
     populateMapFilter();
     
-    loadScenarios();
+    await loadScenarios();
 });
 
 function askDelete() {

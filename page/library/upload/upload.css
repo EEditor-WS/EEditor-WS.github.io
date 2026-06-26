@@ -61,15 +61,6 @@ body {
     padding-bottom: 0;
 }
 
-.action-button {
-    background-color: var(----background-secondary);
-    transition: background-color 0.3s ease;
-}
-
-.action-button:hover {
-    background-color: var(--hover-color);
-}
-
 .uplOne {
     display: flex;
     flex-direction: column;
@@ -83,6 +74,7 @@ body {
 .form-element {
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 @media (max-width: 900px) {
@@ -114,10 +106,6 @@ body {
 
 .description a {
     color: #7cb7ff;
-}
-
-.navbtn {
-    padding: 0;
 }
 
 .downloadButtonDetalis {

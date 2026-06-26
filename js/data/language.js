@@ -397,12 +397,6 @@ const translations = {
         "relation_initiator_short": "Initiator",
         "select_country": "Select country",
 
-        // Country names
-        "country_civilization_13": "Great Britain",
-        "country_civilization_21": "France",
-        "country_civilization_22": "Russian Empire",
-        "country_undeveloped_land": "Undeveloped Land",
-
         // File upload section
         "drag_file_here_or": "Drag file here or",
         "choose_file": "Choose file",

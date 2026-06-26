@@ -83,7 +83,7 @@ class EventManager {
 
     setJsonData(jsonData) {
         this.jsonData = jsonData;
-        if (!this.jsonData.custom_events) {
+        if (!this.jsonData.custom_events || this.jsonData.custom_events == []) {
             this.jsonData.custom_events = {};
         }
         this.updateEventsList();
@@ -799,6 +799,10 @@ generateUniqueId(minimumID = 0) {
         if (!this.currentEvent || !this.jsonData?.custom_events?.[this.currentEvent]) {
             console.warn('Нет текущего события или данных для сохранения');
             return;
+        }
+        
+        if (!this.jsonData.custom_events || this.jsonData.custom_events == []) {
+            this.jsonData.custom_events = {};
         }
 
         this.isEditing = true;

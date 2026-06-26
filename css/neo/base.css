@@ -91,6 +91,10 @@ body {
     padding: 0;
     margin-right: var(--ds);
     margin-top: var(--dss);
+
+    &.active {
+        top: calc(73px + var(--dss));
+    }
 }
 
 .navbtn {
