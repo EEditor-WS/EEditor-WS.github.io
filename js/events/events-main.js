@@ -1,3 +1,5 @@
+// events-main.js — обновлённая версия с поддержкой кастомных выпадающих списков для поля value (объект-группы)
+
 class EventManager {
     constructor() {
         try {
@@ -7,19 +9,16 @@ class EventManager {
             this.redoStack = [];
             this.maxStackSize = 50;
             this.isEditing = false;
-            this.filters = {};  // Добавляем инициализацию фильтров
-            this.eventListeners = []; // Добавляем инициализацию массива eventListeners
+            this.filters = {};
+            this.eventListeners = [];
             this.eventData;
             
-            // Добавляем параметры сортировки
-            this.sortColumn = 'id'; // По умолчанию сортируем по ID
-            this.sortDirection = 'asc'; // По умолчанию по возрастанию
+            this.sortColumn = 'id';
+            this.sortDirection = 'asc';
             
-            // Сохраняем ссылки на важные элементы (если они существуют)
             this.previewContent = document.getElementById('preview-content');
             this.fileInfo = document.getElementById('file-info');
             
-            // Проверяем наличие необходимых элементов - только логируем, не выбрасываем ошибку
             if (!this.previewContent) {
                 console.warn('Не найден элемент preview-content - это нормально для editor.html');
             }
@@ -27,19 +26,16 @@ class EventManager {
                 console.warn('Не найден элемент file-info - это нормально для editor.html');
             }
             
-            // Пытаемся загрузить начальные данные из preview-content только если он существует
             if (this.previewContent) {
                 try {
                     const initialData = JSON.parse(this.previewContent.value);
                     this.setJsonData(initialData);
                 } catch (error) {
                     console.warn('Не удалось загрузить начальные данные:', error);
-                    console.warn("Если эта ошибка появилась до загрузки файла, то это нормально, просто нет данных для отображения");
                 }
                 
-                // Подписываемся на изменения в preview-content
                 this.previewContent.addEventListener('input', () => {
-                    if (this.isEditing) return; // Игнорируем событие, если мы сами его вызвали
+                    if (this.isEditing) return;
                     try {
                         const jsonData = JSON.parse(this.previewContent.value);
                         this.setJsonData(jsonData);
@@ -90,13 +86,9 @@ class EventManager {
     }
 
     init() {
-        // Инициализация обработчиков событий
         this.initEventListeners();
-        
-        // Инициализация сортировки
         this.initSortHandlers();
 
-        // Добавляем обработчики для предпросмотра изображений
         const imageSelect = document.getElementById('event-image');
         const imagePreview = document.getElementById('event-image-preview');
         const iconSelect = document.getElementById('event-icon');
@@ -107,7 +99,6 @@ class EventManager {
                 const selectedImage = imageSelect.value;
                 imagePreview.src = `event/img/${selectedImage}.png`;
             });
-            // Инициализируем предпросмотр для текущего значения
             imagePreview.src = `event/img/${imageSelect.value}.png`;
         }
 
@@ -116,7 +107,6 @@ class EventManager {
                 const selectedIcon = iconSelect.value;
                 iconPreview.src = `event/ico/${selectedIcon}.png`;
             });
-            // Инициализируем предпросмотр для текущего значения
             iconPreview.src = `event/ico/${iconSelect.value}.png`;
         }
     }
@@ -151,7 +141,6 @@ class EventManager {
 
         tbody.innerHTML = '';
 
-        // Создаем массив событий для сортировки и фильтрации
         if (eventsRaw == 'fillIt') eventsRaw = this.jsonData.custom_events;
         let events = Object.entries(eventsRaw)
             .map(([id, event]) => ({
@@ -164,26 +153,20 @@ class EventManager {
                 ...event
             }));
 
-            
         const eventsCountEl = document.getElementById('eventsCount');
         if (eventsCountEl && place == 'events-list') {
             eventsCountEl.textContent = events.length;
         } 
 
-        // Применяем фильтры
         if (this.filters.groups) {
             events = events.filter(event => {
-                // event.group может содержать несколько групп через запятую
                 const eventGroups = (event.group || '').split(/\s*,\s*/).filter(Boolean);
-                // Если хотя бы одна из групп события есть в фильтре, событие показываем
                 return eventGroups.some(group => this.filters.groups.includes(group));
             });
         }
 
-        // Сортировка
         if (this.sortColumn === 'id') {
             events.sort((a, b) => {
-                // Извлекаем числа из ID (например, из 'E1' получаем 1)
                 const numA = parseInt(a.id.replace('E', ''));
                 const numB = parseInt(b.id.replace('E', ''));
                 return this.sortDirection === 'asc' ? numA - numB : numB - numA;
@@ -198,7 +181,6 @@ class EventManager {
             });
         }
 
-        // Обновляем индикаторы сортировки и фильтрации
         const headers = document.querySelectorAll('#events .list-table th[data-sort]');
         headers.forEach(header => {
             const column = header.getAttribute('data-sort');
@@ -211,16 +193,14 @@ class EventManager {
             }
         });
 
-        // Отображаем события
         events.forEach(event => {
             const tr = document.createElement('tr');
             tr.style.cursor = 'pointer';
             tr.setAttribute('data-event-id', event.id);
             tr.addEventListener('click', (clicked) => {
                 if (clicked.target.closest('.reqs') || clicked.target.closest('.groupsInCell')) {
-                    return; // Выходим из функции, ничего не делая
+                    return;
                 }
-
                 this.openEvent(event.id)
             });
 
@@ -230,8 +210,6 @@ class EventManager {
 
             const groupCell = document.createElement('td');
             groupCell.className = 'groupsInCell';
-            //groupCell.textContent = event.group;
-
             let groups = event.group.split(',')
             if (groups.length == 1 && groups[0] == '') groups = []
             groups.forEach(name => {
@@ -250,8 +228,6 @@ class EventManager {
                     }
                     window.eventManager.updateEventsList();
                 });
-                
-                // Если нужно просто через запятую, но красиво:
                 groupCell.appendChild(span);
             });
 
@@ -287,28 +263,23 @@ class EventManager {
     }
 
     initEventListeners() {
-        // Обработчик добавления нового события
         document.getElementById('add-event')?.addEventListener('click', () => this.createNewEvent());
 
-        // Обработчики действий с событием
         document.getElementById('copy-event')?.addEventListener('click', () => this.copyCurrentEvent());
         document.getElementById('delete-event')?.addEventListener('click', () => this.deleteCurrentEvent());
 
-        // Обработчики формы редактирования
         const form = document.getElementById('event-form');
         if (form) {
             form.addEventListener('change', (e) => this.handleFormChange(e));
             form.addEventListener('submit', (e) => e.preventDefault());
         }
 
-        // Закрываем меню действий ивентов при клике вне его
         document.addEventListener('click', (e) => {
             if (!e.target.closest('#event-actions-button')) {
                 document.getElementById('eventActionsDropdown')?.classList.remove('active');
             }
         });
 
-        // Обработчики изображений
         document.getElementById('event-image')?.addEventListener('change', (e) => {
             this.updateImagePreview(e.target.value);
         });
@@ -317,7 +288,6 @@ class EventManager {
             this.updateIconPreview(e.target.value);
         });
 
-        // Обработчики состояния ответов
         document.getElementById('event-answer2-disabled')?.addEventListener('change', () => {
             this.updateAnswerBlocksState();
         });
@@ -326,7 +296,6 @@ class EventManager {
             this.updateAnswerBlocksState();
         });
 
-        // Обработчики кнопок требований и бонусов
         document.querySelectorAll('.requirements-button').forEach(button => {
             button.addEventListener('click', () => {
                 let answer = button.getAttribute('data-answer') || '';
@@ -334,7 +303,6 @@ class EventManager {
             });
         });
 
-        // Обработчики сохранения и отмены
         document.getElementById('save-event')?.addEventListener('click', () => {
             this.saveChanges();
         });
@@ -343,18 +311,15 @@ class EventManager {
             this.switchToEventsList();
         });
 
-        // Обработчики фильтров
         document.querySelectorAll('#events .th-filter').forEach(button => {
             button.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const column = button.closest('th').getAttribute('data-sort');
                 
-                // Закрываем все модальные окна
                 document.querySelectorAll('.modal').forEach(modal => {
                     modal.classList.remove('active');
                 });
 
-                // Показываем соответствующее модальное окно
                 if (column === 'group') {
                     this.showGroupFilterModal();
                 } else {
@@ -363,15 +328,12 @@ class EventManager {
             });
         });
 
-        // Кнопка очистки всех фильтров
         document.getElementById('clear-events-filters')?.addEventListener('click', () => {
             this.clearAllFilters();
         });
 
-        // Обработчик для кнопки возврата к списку событий
         document.getElementById('back-to-events-list')?.addEventListener('click', () => this.backToEventsList());
 
-        // Добавляем обработчик контекстного меню для таблицы событий
         const tbody = document.getElementById('events-list');
         if (tbody) {
             tbody.addEventListener('contextmenu', (e) => {
@@ -384,21 +346,17 @@ class EventManager {
                 const eventId = tr.getAttribute('data-event-id');
                 if (!eventId) return;
 
-                // Удаляем старое меню, если оно есть
                 const oldMenu = document.querySelector('.context-menu');
                 if (oldMenu) {
                     document.body.removeChild(oldMenu);
                 }
 
-                // Создаем новое контекстное меню
                 const contextMenu = document.createElement('div');
                 contextMenu.className = 'context-menu';
                 
-                // Получаем размеры окна
                 const windowWidth = window.innerWidth;
                 const windowHeight = window.innerHeight;
 
-                // Добавляем пункты меню
                 contextMenu.innerHTML = `
                     <div class="context-menu-item" id="duplicate-event-context">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -422,29 +380,22 @@ class EventManager {
 
                 document.body.appendChild(contextMenu);
 
-                // Получаем размеры меню
                 const menuRect = contextMenu.getBoundingClientRect();
                 
-                // Позиционируем меню
                 let x = e.clientX;
                 let y = e.clientY;
 
-                // Проверяем правую границу
                 if (x + menuRect.width > windowWidth) {
                     x = windowWidth - menuRect.width;
                 }
-                
-                // Проверяем нижнюю границу
                 if (y + menuRect.height > windowHeight) {
                     y = windowHeight - menuRect.height;
                 }
 
-                // Устанавливаем позицию меню
                 contextMenu.style.position = 'fixed';
                 contextMenu.style.left = x + 'px';
                 contextMenu.style.top = y + 'px';
 
-                // Добавляем обработчики для пунктов меню
                 document.getElementById('duplicate-event-context')?.addEventListener('click', () => {
                     this.copyCurrentEvent(eventId);
                     document.body.removeChild(contextMenu);
@@ -460,7 +411,6 @@ class EventManager {
                     document.body.removeChild(contextMenu);
                 });
 
-                // Закрываем меню при клике вне его
                 const closeMenu = (e) => {
                     if (!contextMenu.contains(e.target)) {
                         document.body.removeChild(contextMenu);
@@ -474,7 +424,6 @@ class EventManager {
             });
         }
 
-        // Обработчики удаления требований и бонусов
         const deleteButtons = document.querySelectorAll('.delete');
         deleteButtons.forEach(button => {
             const listener = (e) => {
@@ -550,28 +499,25 @@ class EventManager {
         this.openEvent(newId);
     }
 
-generateUniqueId(minimumID = 0) {
-    if (!this.jsonData || !this.jsonData.custom_events) {
-        // Вернём ID, который больше minimumID
-        return `E${Math.max(1, minimumID + 1)}`;
+    generateUniqueId(minimumID = 0) {
+        if (!this.jsonData || !this.jsonData.custom_events) {
+            return `E${Math.max(1, minimumID + 1)}`;
+        }
+
+        const existingIds = new Set(
+            Object.keys(this.jsonData.custom_events)
+                .filter(id => /^E\d+$/.test(id))
+                .map(id => parseInt(id.substring(1), 10))
+                .filter(num => !isNaN(num))
+        );
+
+        let newId = minimumEventID + 1;
+        while (existingIds.has(newId)) {
+            newId++;
+        }
+
+        return `E${newId}`;
     }
-
-    // Извлекаем существующие числовые ID
-    const existingIds = new Set(
-        Object.keys(this.jsonData.custom_events)
-            .filter(id => /^E\d+$/.test(id))
-            .map(id => parseInt(id.substring(1), 10))
-            .filter(num => !isNaN(num))
-    );
-
-    // Начинаем с первого подходящего ID
-    let newId = minimumEventID + 1;
-    while (existingIds.has(newId)) {
-        newId++;
-    }
-
-    return `E${newId}`;
-}
 
     copyCurrentEvent(eventId) {
         try {
@@ -589,10 +535,8 @@ generateUniqueId(minimumID = 0) {
             
             this.pushToUndoStack();
             
-            // Создаем глубокую копию события
             const eventCopy = JSON.parse(JSON.stringify(sourceEvent));
 
-            // Рекурсивно заменить все вхождения старого ID на новый во всех полях
             function replaceIdDeep(obj, oldId, newId) {
                 if (Array.isArray(obj)) {
                     return obj.map(item => replaceIdDeep(item, oldId, newId));
@@ -609,23 +553,18 @@ generateUniqueId(minimumID = 0) {
                 }
                 return obj;
             }
-            // Заменяем во всех requirements/bonuses и вложенных
             ['requirements','requirements1','requirements2','requirements3','bonuses','bonuses1','bonuses2','bonuses3'].forEach(field => {
                 if (Array.isArray(eventCopy[field])) {
                     eventCopy[field] = replaceIdDeep(eventCopy[field], sourceId, newId);
                 }
             });
 
-            // Устанавливаем правильный id и обновляем название
             eventCopy.id = newId;
-            // Добавляем '_copy' только если уникальное имя не пустое
             eventCopy.unique_event_name = sourceEvent.unique_event_name ? `${sourceEvent.unique_event_name}_copy` : '';
             eventCopy.title = `${sourceEvent.title || ''} ${window.translator.translate("(copy)")}`;
 
-            // Сохраняем копию в общий список
             this.jsonData.custom_events[newId] = eventCopy;
 
-            // Обновляем все за один раз
             this.updateJsonInPreview();
             this.updateEventsList();
             this.openEvent(newId);
@@ -656,7 +595,6 @@ generateUniqueId(minimumID = 0) {
         this.currentEvent = eventId;
         const event = this.jsonData.custom_events[eventId];
 
-        // Заполняем основные поля
         const titleHeader = document.getElementById('event-name-header');
         if (titleHeader) {
             titleHeader.textContent = event.title || window.translator.translate("without_name");
@@ -683,10 +621,8 @@ generateUniqueId(minimumID = 0) {
             'event-hide-later': event.hide_later ? 'true' : 'false'
         });
 
-        // Заполняем бонусы и требования
         this.populateRequirementsAndBonuses(event);
 
-        // Переключаемся на страницу редактирования
         this.switchToEditPage();
 
         const opage = document.getElementById('openedPage');
@@ -700,7 +636,6 @@ generateUniqueId(minimumID = 0) {
             if (element) {
                 if (element.tagName === 'SELECT') {
                     element.value = value;
-                    // Обновляем предпросмотр для изображений
                     if (id === 'event-image') {
                         this.updateImagePreview(value);
                     } else if (id === 'event-icon') {
@@ -712,7 +647,6 @@ generateUniqueId(minimumID = 0) {
             }
         });
 
-        // Обновляем состояние блоков ответов
         this.updateAnswerBlocksState();
     }
 
@@ -731,14 +665,12 @@ generateUniqueId(minimumID = 0) {
     }
 
     updateAnswerBlocksState() {
-        // Обновляем состояние второго ответа
         const answer2Block = document.querySelector('.answer-block:nth-child(2)');
         const answer2Disabled = document.getElementById('event-answer2-disabled').value === 'true';
         if (answer2Block) {
             answer2Block.setAttribute('data-disabled', answer2Disabled);
         }
 
-        // Обновляем состояние третьего ответа
         const answer3Block = document.querySelector('.answer-block:nth-child(3)');
         const answer3Disabled = document.getElementById('event-answer3-disabled').value === 'true';
         if (answer3Block) {
@@ -747,7 +679,6 @@ generateUniqueId(minimumID = 0) {
     }
 
     populateRequirementsAndBonuses(event) {
-        // Очищаем существующие списки
         ['requirements', 'requirements1', 'requirements2', 'requirements3',
          'bonuses', 'bonuses1', 'bonuses2', 'bonuses3'].forEach(listType => {
             const container = document.getElementById(`event-${listType}`);
@@ -765,7 +696,6 @@ generateUniqueId(minimumID = 0) {
 
         const isRequirement = container.id.includes('requirements');
         
-        // Список бонусов без длительности
         const bonusesWithoutDuration = [
             'add_oil', 'add_cruiser', 'add_random_culture_population', 
             'add_shock_infantry', 'discontent', 'add_tank', 'add_artillery', 'army_losses', 
@@ -793,7 +723,7 @@ generateUniqueId(minimumID = 0) {
         if (this.isEditing) return;
         this.pushToUndoStack();
         this.saveChanges();
-            }
+    }
 
     saveChanges() {
         if (!this.currentEvent || !this.jsonData?.custom_events?.[this.currentEvent]) {
@@ -809,7 +739,6 @@ generateUniqueId(minimumID = 0) {
         try {
             const event = this.jsonData.custom_events[this.currentEvent];
 
-            // Проверяем наличие всех необходимых элементов формы
             const requiredElements = [
                 'event-id', 'event-title',
                 'event-description', 'event-image', 'event-icon'
@@ -833,7 +762,6 @@ generateUniqueId(minimumID = 0) {
                 }
             }
 
-            // Обновляем основные данные
             event.id = document.getElementById('event-id').value;
             event.group_name = document.getElementById('event-group-name').value;
             event.unique_event_name = document.getElementById('event-unique-name').value;
@@ -842,18 +770,14 @@ generateUniqueId(minimumID = 0) {
             event.image = document.getElementById('event-image').value;
             event.icon = document.getElementById('event-icon').value;
 
-            // Валидация обязательных полей
             if (!event.id || !event.title) {
                 throw new Error('ID и заголовок события обязательны');
             }
 
-            // Обновляем ответы
             this.updateEventAnswers(event);
 
-            // Обновляем JSON и интерфейс
             this.updateJsonInPreview();
             
-            // Обновляем заголовок
             const titleHeader = document.getElementById('event-name-header');
             if (titleHeader) {
                 titleHeader.textContent = event.title || window.translator.translate("without_name");
@@ -861,7 +785,6 @@ generateUniqueId(minimumID = 0) {
 
             this.updateEventsList();
             
-            // Показываем сообщение об успешном сохранении
             this.fileInfo.textContent = window.translator.translate('changes_saved');
         } catch (error) {
             console.error('Ошибка при сохранении изменений:', error);
@@ -898,8 +821,6 @@ generateUniqueId(minimumID = 0) {
 
             const items = [];
             container.querySelectorAll('.array-list-item').forEach(item => {
-                // Здесь нужно добавить логику извлечения данных из элементов списка
-                // В зависимости от того, как хранятся данные в DOM
                 const itemData = this.parseItemData(item, listType.includes('requirements'));
                 if (itemData) {
                     items.push(itemData);
@@ -939,7 +860,7 @@ generateUniqueId(minimumID = 0) {
         }
     }
 
-    // Функция сохранения требования или бонуса
+    // Изменённая функция saveRequirementOrBonus с поддержкой кастомного dropdown для value
     saveRequirementOrBonus(params) {
         const { 
             type, 
@@ -948,7 +869,7 @@ generateUniqueId(minimumID = 0) {
             items = [], 
             editor = null, 
             updateListFn = null,
-            data = null,  // ← НОВЫЙ параметр: готовые данные {action, subtype, value, duration}
+            data = null,
             isClose = true,
         } = params;
         
@@ -957,7 +878,6 @@ generateUniqueId(minimumID = 0) {
             return null;
         }
 
-        // Получаем конфигурацию типа
         const whereReqBon = isBonus ? 'bonuses' : 'requirements';
         const config = window.reqbonConfig[whereReqBon]?.[type];
         
@@ -966,9 +886,6 @@ generateUniqueId(minimumID = 0) {
             return null;
         }
 
-        // === ЧТЕНИЕ ЗНАЧЕНИЙ: приоритет у data, иначе читаем из DOM ===
-        
-        // 1. Action
         let action = '';
         if (!isBonus && config.action) {
             if (data?.action !== undefined) {
@@ -994,7 +911,6 @@ generateUniqueId(minimumID = 0) {
             }
         }
 
-        // 2. Subtype
         let subtype = '';
         if (config.subType !== false) {
             if (data?.subtype !== undefined) {
@@ -1014,7 +930,7 @@ generateUniqueId(minimumID = 0) {
             }
         }
 
-        // 3. Value
+        // --- ИЗМЕНЕНИЕ: получение value с учётом кастомного dropdown ---
         let value = '';
         if (config.value !== false) {
             if (data?.value !== undefined) {
@@ -1022,7 +938,10 @@ generateUniqueId(minimumID = 0) {
             } else {
                 const valueEl = document.getElementById(`${prefix}requirement-value`);
                 if (valueEl) {
-                    if (valueEl.tagName === 'SELECT' || valueEl.tagName === 'INPUT') {
+                    // Проверяем, есть ли кастомный dropdown (сохранённый в _dropdown)
+                    if (valueEl._dropdown) {
+                        value = valueEl._dropdown.getValue();
+                    } else if (valueEl.tagName === 'SELECT' || valueEl.tagName === 'INPUT') {
                         value = valueEl.value || '';
                     } else if (valueEl.querySelector('select, input')) {
                         const input = valueEl.querySelector('select, input');
@@ -1034,7 +953,6 @@ generateUniqueId(minimumID = 0) {
             }
         }
 
-        // 4. Duration (только для бонусов)
         let duration;
         if (isBonus && config.hasDuration) {
             if (data?.duration !== undefined) {
@@ -1048,7 +966,6 @@ generateUniqueId(minimumID = 0) {
             }
         }
 
-        // === ВАЛИДАЦИЯ ===
         if (!type) {
             console.warn('Тип требования обязателен');
             return null;
@@ -1066,7 +983,6 @@ generateUniqueId(minimumID = 0) {
             return null;
         }
 
-        // === ОБРАБОТКА ТИПОВ ЗНАЧЕНИЙ ===
         const numericTypes = ['month', 'num_of_provinces', 'year', 'turn', 'random_value', 
             'count_of_tasks', 'tax', 'discontent', 'money', 'land_power', 'defense', 'num_of_vassals',
             'attack', 'population_income', 'population_increase', 'building_cost', 'add_oil', 'add_cruiser', 
@@ -1085,7 +1001,6 @@ generateUniqueId(minimumID = 0) {
             value = value === 'true' || value === true;
         }
 
-        // === СОЗДАНИЕ ОБЪЕКТА ===
         const item = {
             type,
             ...(action && { action }),
@@ -1094,7 +1009,6 @@ generateUniqueId(minimumID = 0) {
             ...(isBonus && config.hasDuration && duration !== undefined && { duration })
         };
 
-        // === ДОБАВЛЕНИЕ/ОБНОВЛЕНИЕ В МАССИВЕ ===
         if (items && editor) {
             const editIndex = editor.dataset.editIndex;
             if (editIndex !== undefined) {
@@ -1104,7 +1018,6 @@ generateUniqueId(minimumID = 0) {
                 items.push(item);
             }
             
-            // Закрываем редактор и обновляем список
             if (isClose) editor.classList.remove('active');
             if (updateListFn) {
                 updateListFn();
@@ -1120,18 +1033,15 @@ generateUniqueId(minimumID = 0) {
         
         this.isEditing = true;
         try {
-            // Сохраняем текущую позицию курсора
             const cursorPosition = this.previewContent.selectionStart;
             
-            // Обновляем JSON в текстовом поле
             this.previewContent.value = JSON.stringify(this.jsonData, null, 4);
         
-            // Восстанавливаем позицию курсора
             this.previewContent.setSelectionRange(cursorPosition, cursorPosition);
 
-        if (this.fileInfo) {
-            this.fileInfo.textContent = window.translator.translate("changes_not_saved");
-        }
+            if (this.fileInfo) {
+                this.fileInfo.textContent = window.translator.translate("changes_not_saved");
+            }
         } finally {
             this.isEditing = false;
         }
@@ -1171,6 +1081,7 @@ generateUniqueId(minimumID = 0) {
 
     redo() {}
 
+    // Изменённый метод openRequirementsEditor с поддержкой кастомного dropdown для value
     openRequirementsEditor(answer, place) {
         let prefix = '';
         document.getElementById('reqbonback').classList.add('active');
@@ -1189,23 +1100,19 @@ generateUniqueId(minimumID = 0) {
             document.getElementById('event-form-container').classList.add('oldview');
         }
 
-        // Определяем тип редактора (требования или бонусы)
         const isBonus = answer.includes('bonus');
         this.isEditingBonus = isBonus;
         const listType = isBonus ? 'bonuses' : 'requirements';
         title.textContent = window.translator.translate(answer);
 
-        // Получаем список требований/бонусов
         const items = this.jsonData.custom_events[this.currentEvent][listType + (answer.includes('-') ? answer.split('-')[0] : '')] || [];
 
-        // Функция для построения опций бонусов
         function buildBonusOptions() {
             const options = [];
             const config = window.reqbonConfig?.bonuses || {};
             const categories = window.bonusCategories || {};
 
             for (const [categoryKey, keys] of Object.entries(categories)) {
-                // Добавляем разделитель с переводом
                 const label = window.translator.translate(categoryKey);
                 options.push({
                     value: '',
@@ -1213,7 +1120,6 @@ generateUniqueId(minimumID = 0) {
                     disabled: true
                 });
 
-                // Добавляем каждый ключ из категории, если он есть в конфиге и не скрыт
                 for (const key of keys) {
                     const bonus = config[key];
                     if (bonus && !bonus.hidden) {
@@ -1227,7 +1133,6 @@ generateUniqueId(minimumID = 0) {
             return options;
         }
 
-        // Функция для построения опций требований
         function buildRequirementOptions() {
             const options = [];
             const config = window.reqbonConfig?.requirements || {};
@@ -1242,7 +1147,7 @@ generateUniqueId(minimumID = 0) {
                 });
 
                 for (const key of keys) {
-                    if (config[key]) { // требования не имеют hidden, но для единообразия проверяем наличие
+                    if (config[key]) {
                         options.push({
                             value: key,
                             label: window.translator.translate(key)
@@ -1253,28 +1158,24 @@ generateUniqueId(minimumID = 0) {
             return options;
         }
 
-        // Обновляем список типов в зависимости от режима
         if (isBonus) {
             window.cReqType.setOptions(buildBonusOptions());
         } else {
             window.cReqType.setOptions(buildRequirementOptions());
         }
 
-        // Функция для обновления списка
         const updateList = () => {
             list.innerHTML = '';
             items.forEach((item, index) => {
                 const row = document.createElement('tr');
                 const config = isBonus ? window.reqbonConfig?.bonuses?.[item.type] : null;
                 
-                // Форматируем значение в зависимости от типа
                 const booleanTypes = ['near_water', 'is_player', 'independent_land', 'no_enemy', 'enemy_near_capital', 'lost_capital'];
                 let displayValue = item.value;
                 if (booleanTypes.includes(item.type)) {
                     displayValue = item.value ? window.translator.translate('yes') : window.translator.translate('no');
                 }
 
-                // Форматируем subtype
                 let tSType = '';
                 if (typeof item.subtype === "string") {
                     if (/^E\d+$/.test(item.subtype)) {
@@ -1288,7 +1189,6 @@ generateUniqueId(minimumID = 0) {
                     tSType = String(item.subtype);
                 }
 
-                // Форматируем action
                 let tAction = '';
                 if (typeof item.action === "string") {
                     if (/^E\d+$/.test(item.action)) {
@@ -1302,7 +1202,6 @@ generateUniqueId(minimumID = 0) {
                     tAction = String(item.action);
                 }
 
-                // Форматируем value
                 let tValue = '';
                 if (typeof displayValue === "string") {
                     if (/^E\d+$/.test(displayValue)) {
@@ -1333,10 +1232,10 @@ generateUniqueId(minimumID = 0) {
         };
         window.eventManager.updateList = updateList;
 
-        // Функция для обновления полей через returnPlace
+        // --- ИЗМЕНЁННАЯ функция updateValueField с поддержкой кастомного dropdown для value ---
         const updateValueField = () => {
-            // 1. Поиск контейнеров с учетом префикса
-            const valueContainer = document.getElementById(`${prefix}requirement-value`);
+            // Получаем контейнеры
+            let valueContainer = document.getElementById(`${prefix}requirement-value`);
             const subtypeContainer = document.getElementById(`${prefix}requirement-subtype`);
             const actionContainer = document.getElementById(`${prefix}requirement-action`);
 
@@ -1356,17 +1255,22 @@ generateUniqueId(minimumID = 0) {
                 return;
             }
 
-            // Очищаем основные контейнеры перед добавлением новых элементов
-            [valueContainer, subtypeContainer, actionContainer].forEach(el => {
-                if (el) el.innerHTML = '';
-            });
+            // --- КРИТИЧЕСКОЕ ИСПРАВЛЕНИЕ: заменяем valueContainer на новый элемент, чтобы сбросить все обработчики и _dropdown ---
+            const parent = valueContainer.parentNode;
+            const newValueContainer = document.createElement('div');
+            newValueContainer.id = valueContainer.id;
+            newValueContainer.className = valueContainer.className;
+            parent.replaceChild(newValueContainer, valueContainer);
+            valueContainer = newValueContainer; // теперь используем новый
 
-            // 2. Управление длительностью (Duration)
+            // Очищаем остальные контейнеры (они не имеют обработчиков, но для чистоты)
+            if (subtypeContainer) subtypeContainer.innerHTML = '';
+            if (actionContainer) actionContainer.innerHTML = '';
+
+            // Управление длительностью (без изменений)
             if (durationInput?.parentElement) {
                 const hasDuration = !!window.reqbonConfig?.bonuses?.[selectedType]?.hasDuration;
                 durationInput.parentElement.style.display = hasDuration ? 'block' : 'none';
-                
-                // Добавляем прослушиватель на изменение duration
                 if (hasDuration) {
                     const changeHandler = () => {
                         const actualDurationInput = document.getElementById(`${prefix}requirement-duration`);
@@ -1374,46 +1278,36 @@ generateUniqueId(minimumID = 0) {
                             this.onRequirementFieldChange('duration', actualDurationInput.value);
                         }
                     };
-                    // Удаляем старые обработчики чтобы не было дублей
                     const newDurationInput = durationInput.cloneNode(true);
                     durationInput.parentNode.replaceChild(newDurationInput, durationInput);
                     newDurationInput.addEventListener('change', changeHandler);
                     newDurationInput.addEventListener('input', changeHandler);
                 }
             }
-
-            if (!isBonus) {
+            if (!isBonus && durationInput?.parentElement) {
                 durationInput.parentElement.style.display = 'none';
             }
 
-            // Вспомогательная функция для отрисовки секций с прослушивателями
+            // Вспомогательная функция рендеринга секций (без изменений)
             const renderSection = (type, container, group) => {
                 const element = returnPlace(selectedType, isBonus, type, this.currentEvent);
-                
                 if (!element || !group) {
                     if (group) group.style.display = 'none';
                     return;
                 }
-
                 group.style.display = 'block';
                 if (container) {
                     container.appendChild(element);
-                    
-                    // Добавляем прослушиватели для изменений
                     if (type === 'subType') {
                         const input = container.querySelector('select, input[type="text"], input[type="number"]');
                         if (input) {
-                            const changeHandler = () => {
-                                this.onRequirementFieldChange('subtype', input.value);
-                            };
+                            const changeHandler = () => this.onRequirementFieldChange('subtype', input.value);
                             input.addEventListener('change', changeHandler);
                             input.addEventListener('input', changeHandler);
                         }
                     } else if (type === 'action') {
-                        // Для кнопок action
                         const buttons = container.querySelectorAll('.action-button');
                         if (buttons.length > 0) {
-                            // Это кнопки сравнения
                             buttons.forEach(btn => {
                                 btn.addEventListener('click', (e) => {
                                     e.preventDefault();
@@ -1428,12 +1322,9 @@ generateUniqueId(minimumID = 0) {
                                 });
                             });
                         } else {
-                            // Это обычный input/select (например, для country, event, etc)
                             const input = container.querySelector('select, input[type="text"], input[type="number"]');
                             if (input) {
-                                const changeHandler = () => {
-                                    this.onRequirementFieldChange('action', input.value);
-                                };
+                                const changeHandler = () => this.onRequirementFieldChange('action', input.value);
                                 input.addEventListener('change', changeHandler);
                                 input.addEventListener('input', changeHandler);
                             }
@@ -1441,9 +1332,7 @@ generateUniqueId(minimumID = 0) {
                     } else if (type === 'value') {
                         const input = container.querySelector('select, input[type="text"], input[type="number"]');
                         if (input) {
-                            const changeHandler = () => {
-                                this.onRequirementFieldChange('value', input.value);
-                            };
+                            const changeHandler = () => this.onRequirementFieldChange('value', input.value);
                             input.addEventListener('change', changeHandler);
                             input.addEventListener('input', changeHandler);
                         }
@@ -1451,21 +1340,39 @@ generateUniqueId(minimumID = 0) {
                 }
             };
 
-            // 3. Рендерим Subtype
+            // Рендерим subtype
             renderSection('subType', subtypeContainer, subtypeGroup);
 
-            // 4. Рендерим Action (доп. проверка на isBonus)
+            // Рендерим action (только для требований)
             if (isBonus) {
                 if (actionGroup) actionGroup.style.display = 'none';
             } else {
                 renderSection('action', actionContainer, actionGroup);
             }
 
-            // 5. Рендерим Value
-            renderSection('value', valueContainer, valueContainer); // Здесь контейнер и есть группа (судя по коду)
+            // --- Рендерим value с проверкой на объект ---
+            const config = window.reqbonConfig[isBonus ? 'bonuses' : 'requirements']?.[selectedType];
+            if (config && config.value && typeof config.value === 'object' && !Array.isArray(config.value)) {
+                // Это объект групп -> создаём кастомный dropdown
+                const options = [];
+                for (const [groupKey, items] of Object.entries(config.value)) {
+                    options.push({ value: groupKey, label: window.translator.translate(groupKey), group: groupKey, disabled: true });
+                    for (const item of items) {
+                        options.push({ value: item, label: window.translator.translate(item), group: groupKey });
+                    }
+                }
+                const dropdown = createCustomDropdown(valueContainer, options, { placeholder: 'Выберите...', searchable: true });
+                valueContainer._dropdown = dropdown;
+                // Обработчик изменения dropdown
+                valueContainer.addEventListener('change', (e) => {
+                    this.onRequirementFieldChange('value', e.detail.value);
+                });
+            } else {
+                // Обычный рендеринг через returnPlace
+                renderSection('value', valueContainer, valueContainer);
+            }
         };
 
-        // Обработчики событий
         typeSelect.addEventListener('change', updateValueField);
 
         addButton.onclick = () => {
@@ -1487,30 +1394,23 @@ generateUniqueId(minimumID = 0) {
                 window.cReqType.setValue(item.type);
                 updateValueField();
                 
-                // Устанавливаем значения после создания элементов
                 setTimeout(() => {
-                    // Action - проверяем тип (кнопки или обычный input)
                     const actionContainer = document.getElementById(`${prefix}requirement-action`);
                     if (actionContainer && item.action !== undefined) {
-                        // Проверяем, это кнопки или обычный input/select
                         const btn = actionContainer.querySelector(`[data-value="${item.action}"]`);
                         if (btn) {
-                            // Это кнопки сравнения
                             actionContainer.querySelectorAll('.action-button').forEach(b => b.classList.remove('active'));
                             btn.classList.add('active');
                             const hiddenInput = actionContainer.querySelector('.action-value');
                             if (hiddenInput) hiddenInput.value = item.action;
                         } else if (actionContainer.tagName === 'SELECT' || actionContainer.tagName === 'INPUT') {
-                            // Это обычный input/select
                             actionContainer.value = item.action;
                         } else if (actionContainer.querySelector('select, input')) {
-                            // Это контейнер с input/select внутри
                             const input = actionContainer.querySelector('select, input');
                             if (input) input.value = item.action;
                         }
                     }
                     
-                    // Subtype - ищем input/select внутри контейнера
                     const subtypeContainer = document.getElementById(`${prefix}requirement-subtype`);
                     if (subtypeContainer && item.subtype !== undefined) {
                         const subtypeInput = subtypeContainer.querySelector('select, input[type="text"], input[type="number"]');
@@ -1521,24 +1421,25 @@ generateUniqueId(minimumID = 0) {
                         }
                     }
                     
-                    // Value - ищем input/select внутри контейнера
+                    // --- ИЗМЕНЕНИЕ: установка значения в кастомный dropdown или обычный input ---
                     const valueContainer = document.getElementById(`${prefix}requirement-value`);
                     if (valueContainer && item.value !== undefined) {
-                        const valueInput = valueContainer.querySelector('select, input[type="text"], input[type="number"]');
-                        if (valueInput) {
-                            valueInput.value = item.value;
-                        } else if (valueContainer.tagName === 'SELECT' || valueContainer.tagName === 'INPUT') {
-                            valueContainer.value = item.value;
+                        if (valueContainer._dropdown) {
+                            valueContainer._dropdown.setValue(item.value);
+                        } else {
+                            const valueInput = valueContainer.querySelector('select, input[type="text"], input[type="number"]');
+                            if (valueInput) {
+                                valueInput.value = item.value;
+                            } else if (valueContainer.tagName === 'SELECT' || valueContainer.tagName === 'INPUT') {
+                                valueContainer.value = item.value;
+                            }
                         }
                     }
                     
-                    // Duration - переполучаем актуальный элемент (он может быть пересоздан в updateValueField)
                     if (isBonus && item.duration !== undefined) {
                         const currentDurationInput = document.getElementById(`${prefix}requirement-duration`);
                         if (currentDurationInput) {
                             currentDurationInput.value = item.duration;
-                        } else {
-                            console.warn('Duration input not found');
                         }
                     }
                 }, 50);
@@ -1569,28 +1470,20 @@ generateUniqueId(minimumID = 0) {
             delete editor.dataset.editIndex;
         };
 
-        // Инициализация
         updateList();
         updateValueField();
         editor.classList.remove('active');
     }
 
-    // Обработчик изменений полей требований/бонусов
     onRequirementFieldChange(fieldName, value) {
         console.log(`Requirement field changed: ${fieldName} = ${value}`);
-        // Здесь можно добавить логику для сохранения изменений в реальном времени
-        // Например, обновление превью или синхронизацию с данными
-        // Пример:
-        // this.updateJsonInPreview();
     }
 
     loadAvailableImages() {
-        // TODO: Загрузить список доступных изображений и иконок
         const imageSelect = document.getElementById('event-image');
         const iconSelect = document.getElementById('event-icon');
 
         if (imageSelect) {
-            // Временный список изображений
             const images = ['diplomacy', 'war', 'economy', 'culture'];
             imageSelect.innerHTML = images.map(img => 
                 `<option value="${img}">${img}</option>`
@@ -1598,7 +1491,6 @@ generateUniqueId(minimumID = 0) {
         }
 
         if (iconSelect) {
-            // Временный список иконок
             const icons = ['diplomacy', 'war', 'economy', 'culture'];
             iconSelect.innerHTML = icons.map(icon => 
                 `<option value="${icon}">${icon}</option>`
@@ -1607,7 +1499,6 @@ generateUniqueId(minimumID = 0) {
     }
 
     backToEventsList() {
-        // Переключаемся на страницу списка событий
         document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
         document.getElementById('events').classList.add('active');
     }
@@ -1625,7 +1516,6 @@ generateUniqueId(minimumID = 0) {
             return;
         }
 
-        // Получаем все уникальные группы
         const groups = new Set();
         if (!this.jsonData?.custom_events) {
             console.warn('Нет данных о событиях');
@@ -1634,7 +1524,6 @@ generateUniqueId(minimumID = 0) {
 
         Object.values(this.jsonData.custom_events).forEach(event => {
             if (event.group_name) {
-                // Разбиваем по запятым с любым количеством пробелов вокруг
                 event.group_name.split(/\s*,\s*/).forEach(group => {
                     if (group) groups.add(group);
                 });
@@ -1643,10 +1532,8 @@ generateUniqueId(minimumID = 0) {
 
         console.log('Найдено групп:', groups.size);
 
-        // Сортируем группы по алфавиту
         const sortedGroups = Array.from(groups).sort();
 
-        // Создаем чекбоксы для каждой группы
         groupsList.innerHTML = sortedGroups.map(group => {
             const isChecked = this.filters.groups?.includes(group);
             return `
@@ -1658,12 +1545,10 @@ generateUniqueId(minimumID = 0) {
             `;
         }).join('');
 
-        // Обработчики кнопок
         const applyButton = modal.querySelector('#groups-filter-apply');
         const clearButton = modal.querySelector('#groups-filter-clear');
         const closeButton = modal.querySelector('.close-modal');
 
-        // Удаляем старые обработчики
         const newApplyButton = applyButton.cloneNode(true);
         const newClearButton = clearButton.cloneNode(true);
         const newCloseButton = closeButton.cloneNode(true);
@@ -1672,7 +1557,6 @@ generateUniqueId(minimumID = 0) {
         clearButton.parentNode.replaceChild(newClearButton, clearButton);
         closeButton.parentNode.replaceChild(newCloseButton, closeButton);
 
-        // Добавляем новые обработчики
         newApplyButton.addEventListener('click', () => {
             const checkedGroups = Array.from(groupsList.querySelectorAll('input[type="checkbox"]:checked'))
                 .map(checkbox => checkbox.value);
@@ -1697,7 +1581,6 @@ generateUniqueId(minimumID = 0) {
             modal.classList.remove('active');
         });
 
-        // Добавляем обработчик клавиши Escape
         const handleEscape = (e) => {
             if (e.key === 'Escape') {
                 modal.classList.remove('active');
@@ -1706,7 +1589,6 @@ generateUniqueId(minimumID = 0) {
         };
         document.addEventListener('keydown', handleEscape);
 
-        // Показываем модальное окно
         modal.classList.add('active');
     }
 
@@ -1716,21 +1598,17 @@ generateUniqueId(minimumID = 0) {
         const operatorSelect = document.getElementById('events-filter-operator');
         const valueContainer = document.getElementById('events-filter-value-container');
 
-        // Устанавливаем заголовок
         title.textContent = `${window.translator.translate('filter')}: ${this.getColumnTitle(column)}`;
 
-        // Настраиваем операторы
         operatorSelect.innerHTML = `
             <option value="equals">${window.translator.translate('filter_equals')}</option>
             <option value="not_equals">${window.translator.translate('filter_not_equals')}</option>
             <option value="contains">${window.translator.translate('filter_contains')}</option>
         `;
 
-        // Создаем поле ввода в зависимости от типа колонки
-        let inputType = 'text'; // По умолчанию текстовое поле
+        let inputType = 'text';
         let placeholder = 'filter_text_value';
         
-        // Числовые колонки
         if (['order', 'year', 'duration'].includes(column)) {
             inputType = 'number';
             placeholder = 'filter_number_value';
@@ -1742,18 +1620,15 @@ generateUniqueId(minimumID = 0) {
                    ${inputType === 'number' ? 'min="0"' : ''}>
         `;
 
-        // Устанавливаем текущие значения фильтра, если они есть
         if (this.filters[column]) {
             operatorSelect.value = this.filters[column].operator;
             document.getElementById('events-filter-value').value = this.filters[column].value;
         }
 
-        // Обработчики кнопок
         const applyButton = modal.querySelector('#events-filter-apply');
         const clearButton = modal.querySelector('#events-filter-clear');
         const closeButton = modal.querySelector('.close-modal');
 
-        // Удаляем старые обработчики
         const newApplyButton = applyButton.cloneNode(true);
         const newClearButton = clearButton.cloneNode(true);
         const newCloseButton = closeButton.cloneNode(true);
@@ -1762,7 +1637,6 @@ generateUniqueId(minimumID = 0) {
         clearButton.parentNode.replaceChild(newClearButton, clearButton);
         closeButton.parentNode.replaceChild(newCloseButton, closeButton);
 
-        // Добавляем новые обработчики
         newApplyButton.addEventListener('click', () => {
             const operator = operatorSelect.value;
             const value = document.getElementById('events-filter-value').value;
@@ -1787,7 +1661,6 @@ generateUniqueId(minimumID = 0) {
             modal.classList.remove('active');
         });
 
-        // Добавляем обработчик клавиши Escape
         const handleEscape = (e) => {
             if (e.key === 'Escape') {
                 modal.classList.remove('active');
@@ -1796,7 +1669,6 @@ generateUniqueId(minimumID = 0) {
         };
         document.addEventListener('keydown', handleEscape);
 
-        // Показываем модальное окно
         modal.classList.add('active');
     }
 
@@ -1819,7 +1691,6 @@ generateUniqueId(minimumID = 0) {
         const currentEventId = document.getElementById('event-id').value;
         if (!currentEventId) return null;
         
-        // Get event data from form
         return {
             id: currentEventId,
             name: document.getElementById('event-unique-name').value,
@@ -1876,8 +1747,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function createRequirementEditor() {
     const modal = document.createElement('div');
     modal.className = 'modal';
-    modal.innerHTML = `
-    `;
+    modal.innerHTML = ``;
     document.body.appendChild(modal);
     window.translator.updateModals(modal);
     return modal;
@@ -1895,21 +1765,17 @@ function createBonusEditor() {
     return modal;
 }
 
-// Обновляем обработчик добавления требований
 document.addEventListener('click', function(e) {
     if (e.target.matches('#add-requirement')) {
         const modal = createRequirementEditor();
-        // ... existing code ...
         window.translator.updateModals(modal);
         window.translator.updateAllTranslations();
     }
 });
 
-// Обновляем обработчик добавления бонусов
 document.addEventListener('click', function(e) {
     if (e.target.matches('#add-bonus')) {
         const modal = createBonusEditor();
-        // ... existing code ...
         window.translator.updateModals(modal);
     }
 });
@@ -1930,11 +1796,9 @@ function createCountrySelect(countries) {
 }
 
 document.addEventListener('DOMContentLoaded', () => { 
-    //if (window.innerWidth <= 768) {
-        document.querySelectorAll('.requirements-button').forEach(button => {
-            button.onclick = () => {
-                document.getElementById('event-requirements-jakor').scrollIntoView({ behavior: 'smooth' });
-            };
-        });
-    //};
+    document.querySelectorAll('.requirements-button').forEach(button => {
+        button.onclick = () => {
+            document.getElementById('event-requirements-jakor').scrollIntoView({ behavior: 'smooth' });
+        };
+    });
 });

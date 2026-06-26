@@ -33,7 +33,7 @@ const reqbonConfig = {
             hasDuration: false,
             value: 'number'
         },
-        add_cavalary: {
+        add_cavalry: {
             subType: false,
             hasDuration: false,
             value: 'number'
@@ -230,7 +230,47 @@ const reqbonConfig = {
     requirements: {
         building_exists: {
             subType: false,
-            value: 'string',
+            value: {
+                "buildings_extraction": [
+                    "sawmill",
+                    "iron_mine",
+                    "gold_mine",
+                    "uranium_mine",
+                    "oil_derrick"
+                ],
+                "buildings_economy": [
+                    "port",
+                    "machine_factory",
+                    "shipyard",
+                    "farm",
+                    "stable",
+                    "muzeum",
+                    "university",
+                    "science_center"
+                ],
+                "buildings_production": [
+                    "steel_plant",
+                    "mint",
+                    "weapon_factory",
+                    "chemical_weapon_factory",
+                    "training_camp",
+                    "nuclear_weapon_factory",
+                    "heavy_water_plant",
+                    "uranium_reactor"
+                ],
+                "buildings_defense": [
+                    "defense_line",
+                    "fortress",
+                    "hospital",
+                    "bridgehead"
+                ],
+                "buildings_consequences": [
+                    "megarefrigerator",
+                    "underground_detonator",
+                    "atmospheric_detonator",
+                    "atmospheric_filter"
+                ]
+            },
             action: ['equal', 'not_equal']
         },
         controls_capital: {
@@ -442,7 +482,7 @@ const bonusCategories = {
     ],
     military: [
         'defense', 'attack', 'army_losses', 'add_infantry', 'add_shock_infantry',
-        'add_artillery', 'add_tank', 'add_cavalary', 'add_cruiser', 'add_battleship', 'add_submarine'
+        'add_artillery', 'add_tank', 'add_cavalry', 'add_cruiser', 'add_battleship', 'add_submarine'
     ],
     population_and_culture: [
         'add_random_culture_population', 'add_culture_population', 'discontent'
