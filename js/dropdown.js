@@ -51,7 +51,7 @@ function createCustomDropdown(container, options = [], config = {}) {
         }
         filtered.forEach((opt, idx) => {
             const el = document.createElement('div');
-            el.className = 'custom-dd__option';
+            el.className = opt.disabled ? 'custom-dd__option custom-dd__option-disabled' : 'custom-dd__option';
             el.setAttribute('role', 'option');
             el.dataset.index = idx;
             el.dataset.value = opt.value;

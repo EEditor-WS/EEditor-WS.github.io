@@ -56,7 +56,7 @@ function createCustomDropdown(container, options = [], config = {}, isContainer 
             el.dataset.index = idx;
             el.dataset.value = opt.value;
             el.setAttribute('aria-selected', opt.value === selectedValue ? 'true' : 'false');
-            const checkmark = (opt.disabled === true) ? '' : `<span class="custom-dd__check" aria-hidden="true"></span>`;
+            const checkmark = (opt.disabled === true) ? '' : `<span class="custom-dd__check disabled" aria-hidden="true"></span>`;
             const image = opt.img ? `<img src="${opt.img}${opt.img.endsWith('.svg') ? '' : '.png'}" alt="" class="custom-dd__option-img"/>` : '';
             el.innerHTML = `${image}<span class="custom-dd__text">${opt.label}</span>${checkmark}`;
             list.appendChild(el);

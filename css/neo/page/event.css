@@ -57,3 +57,13 @@ p.eventReqEvent {
     justify-content: space-between;
     align-items: center;
 }
+
+.custom-dd__option-disabled {
+    text-align: center;
+    font-weight: 600;
+
+    span {
+        width: 100%;
+        text-align: center;
+    }
+}
