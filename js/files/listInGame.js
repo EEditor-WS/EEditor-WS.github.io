@@ -1,4 +1,3 @@
-// Усовершенствованная версия вашего кода
 const content = document.getElementById('filesList');
 
 async function displayMaps() {
@@ -14,53 +13,50 @@ async function displayMaps() {
     content.innerHTML = '';
 
     Object.keys(filesInFolder).forEach(mapName => {
-        // Получаем данные сценариев для этой карты
-        let scenarios = filesInFolder[mapName];
+        const mapData = filesInFolder[mapName];
+        const versions = mapData.versions || [];
+        const scenarios = mapData.scenarios || [];
+        const isOther = mapName.toLowerCase() === 'other';
 
-        // --- Проверка и приведение к массиву ---
-        if (!Array.isArray(scenarios)) {
-            console.warn(`Для карты "${mapName}" данные не являются массивом:`, scenarios);
-            // Попытка привести к массиву
-            if (typeof scenarios === 'string') {
-                scenarios = [scenarios]; // если одиночная строка
-            } else if (scenarios && typeof scenarios === 'object' && Array.isArray(scenarios.scenarios)) {
-                scenarios = scenarios.scenarios; // если объект с полем scenarios
-            } else if (scenarios && typeof scenarios === 'object' && !Array.isArray(scenarios)) {
-                // Если это объект, но не массив, возможно, ключи — это имена сценариев?
-                // Попробуем взять значения объекта
-                const values = Object.values(scenarios);
-                if (values.length && values.every(v => typeof v === 'string')) {
-                    scenarios = values;
-                } else {
-                    console.error(`Не удалось преобразовать данные для карты "${mapName}"`, scenarios);
-                    return; // пропускаем карту
-                }
-            } else {
-                console.error(`Неизвестный формат данных для карты "${mapName}", пропускаем`);
-                return;
-            }
+        console.log(`Карта: ${mapName}, Версий: ${versions.length}, Сценариев: ${scenarios.length}`);
+
+        // === Формирование пути к картинке ===
+        let mapImgPath = '';
+        let mapId = '';
+        let mapIdArray = [];
+        
+        if (!isOther) {
+            const parts = mapName.split(/[\\/]/); // Поддержка и \, и /
+            const lastPart = parts[parts.length - 1];
+            mapIdArray = lastPart.split('_');
+            mapId = mapIdArray.slice(0, 2).join('_');
+            mapImgPath = `${libLink}lib/${mapIdArray.slice(0, 2).join('/')}/${mapIdArray.join('_')}`;
         }
 
-        const parts = mapName.split('\\')
-        const mapIdArray = parts[parts.length - 1].split('_')
-        const mapId = mapIdArray.slice(0, 2).join('_')
-        const mapImgPath = `${libLink}lib/${mapIdArray.slice(0, 2).join('/')}/${mapIdArray.join('_')}`
+        const mapDataSync = getMapDataSync(mapId);
 
-        const mapData = getMapDataSync(mapId)
-        console.log(mapData)
-        console.log(mapId)
-
-        // Создаём карточку карты
+        // === Создаём карточку карты ===
         const mapEl = document.createElement('div');
-        mapEl.className = 'map-card';
+        mapEl.className = 'map-card' + (isOther ? ' map-card-other' : '');
 
-        const mapBg = document.createElement('img')
-        mapBg.className = 'map-card-bg'
-        mapBg.src = mapImgPath + '.webp'
-        mapBg.onerror = (e) => {
-            e.target.onerror = null;
-            e.target.src = mapImgPath + '_' + (mapData.versions ? mapData.versions[mapData.versions.length - 1][0] : mapIdArray[2]) + '_!.webp';
-        };
+        // Фоновая картинка
+        const mapBg = document.createElement('img');
+        mapBg.className = 'map-card-bg';
+        
+        if (isOther) {
+            mapBg.src = '/img/ui/folder.svg'; // Заглушка для "other"
+            mapBg.alt = 'Прочие сценарии';
+        } else {
+            mapBg.src = mapImgPath + '.webp';
+            mapBg.onerror = (e) => {
+                e.target.onerror = null;
+                // Fallback на последнюю версию из mapData.versions
+                const fallbackVersion = versions.length > 0 
+                    ? versions[versions.length - 1][0] 
+                    : (mapIdArray[2] || '');
+                e.target.src = mapImgPath + '_' + fallbackVersion + '_!.webp';
+            };
+        }
 
         // Заголовок
         const headerEl = document.createElement('div');
@@ -71,13 +67,44 @@ async function displayMaps() {
 
         const mapH = document.createElement('h2');
         mapH.className = 'map-title';
-        mapH.textContent = mapData ? mapData.title : mapId;
+        if (isOther) {
+            mapH.textContent = 'Прочие сценарии';
+        } else {
+            mapH.textContent = mapDataSync ? mapDataSync.title : mapId;
+        }
         titleWrapper.appendChild(mapH);
 
         const badge = document.createElement('span');
         badge.className = 'map-badge';
-        badge.textContent = `${scenarios.length} сценариев`;
+        badge.textContent = `${scenarios.length} сцен.`;
         titleWrapper.appendChild(badge);
+
+        // === Селектор версий (если их больше 1) ===
+        let selectedVersion = 'all';
+        
+        if (versions.length > 1) {
+            const versionSelect = document.createElement('select');
+            versionSelect.className = 'map-version-select';
+            
+            const allOption = document.createElement('option');
+            allOption.value = 'all';
+            allOption.textContent = 'Все версии';
+            versionSelect.appendChild(allOption);
+            
+            versions.forEach(([versionId, versionPath]) => {
+                const option = document.createElement('option');
+                option.value = versionId;
+                option.textContent = versionId;
+                versionSelect.appendChild(option);
+            });
+            
+            versionSelect.addEventListener('change', (e) => {
+                selectedVersion = e.target.value;
+                filterScenarios();
+            });
+            
+            titleWrapper.appendChild(versionSelect);
+        }
 
         const toggleBtn = document.createElement('button');
         toggleBtn.className = 'map-toggle-btn';
@@ -89,90 +116,151 @@ async function displayMaps() {
         arrowImg.loading = 'lazy';
         toggleBtn.appendChild(arrowImg);
 
-        headerEl.appendChild(mapBg)
+        headerEl.appendChild(mapBg);
         headerEl.appendChild(titleWrapper);
         headerEl.appendChild(toggleBtn);
 
-        // Контейнер для сценариев
+        // === Контейнер для сценариев ===
         const scenariosContainer = document.createElement('div');
         scenariosContainer.className = 'scenarios-container';
 
-        // Добавляем сценарии
-        scenarios.forEach(scenario => {
-            const scenEl = document.createElement('div');
-            scenEl.className = 'scenario-item';
-
-            const scenName = document.createElement('span');
-            scenName.className = 'scenario-name';
-            scenName.textContent = scenario;
-
-            const actionsWrapper = document.createElement('div');
-            actionsWrapper.className = 'scenario-actions';
-
-            // Редактировать
-            const editBtn = document.createElement('button');
-            editBtn.className = 'scenario-btn edit-btn';
-            editBtn.title = 'Редактировать'; // Подсказка при наведении
-
-            const editIcon = document.createElement('img');
-            editIcon.src = '/img/ui/edit2.svg'; // или edit.png, смотря какое расширение
-            editIcon.alt = 'Редактировать';
-            editBtn.appendChild(editIcon);
-
-            editBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                console.log(`Редактировать сценарий: "${scenario}" (карта: ${mapName})`);
-                // Ваша логика
-            });
-
-            // Посмотреть
-            const viewBtn = document.createElement('button');
-            viewBtn.className = 'scenario-btn view-btn';
-            viewBtn.title = 'Посмотреть';
-
-            const viewIcon = document.createElement('img');
-            viewIcon.src = '/img/ui/file/open.svg'; // или view.png
-            viewIcon.alt = 'Посмотреть';
-            viewBtn.appendChild(viewIcon);
-
-            viewBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                console.log(`Просмотр сценария: "${scenario}" (карта: ${mapName})`);
-                // Ваша логика
-            });
-
-            // Удалить
-            const deleteBtn = document.createElement('button');
-            deleteBtn.className = 'scenario-btn delete-btn';
-            deleteBtn.title = 'Удалить';
-
-            const deleteIcon = document.createElement('img');
-            deleteIcon.src = '/img/ui/file/trash.svg'; // или delete.png
-            deleteIcon.alt = 'Удалить';
-            deleteBtn.appendChild(deleteIcon);
-
-            deleteBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                if (confirm(`Удалить сценарий "${scenario}"?`)) {
-                    console.log(`Удалён сценарий: "${scenario}" (карта: ${mapName})`);
-                    // Ваша логика
+        // Функция фильтрации сценариев по версии
+        function filterScenarios() {
+            const scenarioItems = scenariosContainer.querySelectorAll('.scenario-item');
+            scenarioItems.forEach(item => {
+                const scenarioVersion = item.dataset.version;
+                if (selectedVersion === 'all' || scenarioVersion === selectedVersion) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
                 }
             });
+        }
 
-            actionsWrapper.appendChild(editBtn);
-            actionsWrapper.appendChild(viewBtn);
-            actionsWrapper.appendChild(deleteBtn);
+        // === Обработка пустых карт ===
+        if (scenarios.length === 0) {
+            const emptyMsg = document.createElement('div');
+            emptyMsg.className = 'scenarios-empty';
+            emptyMsg.textContent = 'Нет сценариев для этой карты';
+            scenariosContainer.appendChild(emptyMsg);
+        } else {
+            // === Добавляем сценарии ===
+            scenarios.forEach(scenario => {
+                const scenEl = document.createElement('div');
+                scenEl.className = 'scenario-item';
+                scenEl.dataset.version = scenario.mapversion || ''; // Для фильтрации
 
-            scenEl.appendChild(scenName);
-            scenEl.appendChild(actionsWrapper);
-            scenariosContainer.appendChild(scenEl);
-        });
+                const scenInfo = document.createElement('div');
+                scenInfo.className = 'scenario-info';
 
-        // Логика сворачивания
+                // Извлекаем имя файла из пути (на случай, если там есть слэши)
+                const filePathParts = scenario.file.split(/[\\/]/);
+                const fileName = filePathParts[filePathParts.length - 1];
+
+                const scenName = document.createElement('span');
+                scenName.className = 'scenario-name';
+                scenName.textContent = scenario.name || fileName;
+                scenInfo.appendChild(scenName);
+
+                if (scenario.file !== null && scenario.file !== undefined) {
+                    const scenFile = document.createElement('span');
+                    scenFile.className = 'scenario-file';
+                    scenFile.textContent = `(${scenario.file})`;
+                    scenInfo.appendChild(scenFile);
+                }
+
+                // Год (проверяем !== null, чтобы не пропустить year: 0)
+                if (scenario.year !== null && scenario.year !== undefined) {
+                    const scenYear = document.createElement('span');
+                    scenYear.className = 'scenario-year';
+                    scenYear.textContent = `Year: ${scenario.year}`;
+                    scenInfo.appendChild(scenYear);
+                }
+
+                // Описание
+                if (scenario.description) {
+                    const scenDesc = document.createElement('div');
+                    scenDesc.className = 'scenario-description';
+                    scenDesc.textContent = scenario.description;
+                    scenInfo.appendChild(scenDesc);
+                }
+
+                // Версия карты (если есть)
+                if (scenario.mapversion) {
+                    const scenVersion = document.createElement('span');
+                    scenVersion.className = 'scenario-version';
+                    scenVersion.textContent = `v: ${scenario.mapversion}`;
+                    scenInfo.appendChild(scenVersion);
+                }
+
+                const actionsWrapper = document.createElement('div');
+                actionsWrapper.className = 'scenario-actions';
+
+                // Редактировать
+                const editBtn = document.createElement('button');
+                editBtn.className = 'scenario-btn edit-btn';
+                editBtn.title = 'Редактировать';
+
+                const editIcon = document.createElement('img');
+                editIcon.src = '/img/ui/edit2.svg';
+                editIcon.alt = 'Редактировать';
+                editBtn.appendChild(editIcon);
+
+                editBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    console.log(`Редактировать сценарий: "${scenario.file}" (карта: ${mapName}, версия: ${scenario.mapversion})`);
+                    // Ваша логика: window.fileSystem.WriteFileAsync(scenario.file + '.json', ...)
+                });
+
+                // Посмотреть
+                const viewBtn = document.createElement('button');
+                viewBtn.className = 'scenario-btn view-btn';
+                viewBtn.title = 'Посмотреть';
+
+                const viewIcon = document.createElement('img');
+                viewIcon.src = '/img/ui/file/open.svg';
+                viewIcon.alt = 'Посмотреть';
+                viewBtn.appendChild(viewIcon);
+
+                viewBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    console.log(`Просмотр сценария: "${scenario.file}" (карта: ${mapName}, версия: ${scenario.mapversion})`);
+                    // Ваша логика: загрузка сценария в редактор
+                });
+
+                // Удалить
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'scenario-btn delete-btn';
+                deleteBtn.title = 'Удалить';
+
+                const deleteIcon = document.createElement('img');
+                deleteIcon.src = '/img/ui/file/trash.svg';
+                deleteIcon.alt = 'Удалить';
+                deleteBtn.appendChild(deleteIcon);
+
+                deleteBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (confirm(`Удалить сценарий "${scenario.name || fileName}"?`)) {
+                        console.log(`Удалён сценарий: "${scenario.file}" (карта: ${mapName}, версия: ${scenario.mapversion})`);
+                        // Ваша логика: window.fileSystem.DeleteFileAsync(scenario.file + '.json')
+                    }
+                });
+
+                actionsWrapper.appendChild(editBtn);
+                actionsWrapper.appendChild(viewBtn);
+                actionsWrapper.appendChild(deleteBtn);
+
+                scenEl.appendChild(scenInfo);
+                scenEl.appendChild(actionsWrapper);
+                scenariosContainer.appendChild(scenEl);
+            });
+        }
+
+        // === Логика сворачивания ===
         let isCollapsed = false;
         function toggleScenarios() {
             isCollapsed = !isCollapsed;
-            mapEl.classList.toggle('active')
+            mapEl.classList.toggle('active');
             toggleBtn.classList.toggle('collapsed', isCollapsed);
             toggleBtn.setAttribute('aria-label', isCollapsed ? 'Развернуть' : 'Свернуть');
         }
@@ -183,7 +271,7 @@ async function displayMaps() {
         });
 
         headerEl.addEventListener('click', (e) => {
-            if (e.target.closest('.map-toggle-btn')) return;
+            if (e.target.closest('.map-toggle-btn') || e.target.closest('.map-version-select')) return;
             toggleScenarios();
         });
 

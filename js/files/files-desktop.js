@@ -57,7 +57,7 @@ async function loadGroupedMaps() {
         const groupedMaps = JSON.parse(jsonString);
         
         console.log(groupedMaps);
-        
+
         return groupedMaps;
     } catch (error) {
         console.error("Ошибка при получении списка карт:", error);

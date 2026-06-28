@@ -80,7 +80,6 @@ body {
     /*min-height: 100dvh;*/
     font-family: 'onesans', 'Inter', sans-serif !important;
     min-height: 100dvh;
-    overflow-y: hidden;
 }
 
 html {

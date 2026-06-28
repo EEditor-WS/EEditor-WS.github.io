@@ -26,6 +26,9 @@ body {
     display: inline-flex;
     flex-direction: column;
 
+    position: sticky;
+    top: 10px;
+
     section {
         display: inline-flex;
         flex-direction: column;
