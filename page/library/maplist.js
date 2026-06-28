@@ -114,10 +114,12 @@ function generateDetailsLinkMap(mapId) {
 
 // Функция для генерации HTML карточки карты
 function generateMapCard(map) {
+    if (map.hidden === true) return('')
     // const detailsLink = generateDetailsLinkMap(map.id.join('_'));
     const detailsLink = `${window.location.protocol}\/\/${window.location.host}\/library.html?category=scenarios&map=${map.id[0]}_${map.id[1]}`
     const lastVersion = map.versions? '_' + map.versions[map.versions.length - 1][0] : ''
     const imagePath = `${libLink}lib/${map.id.slice(0, 2).join('/')}/${map.id.join('_')}${lastVersion}_!.webp`;
+    const imagePathNew = `${libLink}lib/${map.id.slice(0, 2).join('/')}/${map.id.join('_')}.webp`;
     const awardsHTML = ''; // Can be implemented later if needed
     const status = map.status || 'completed';
     const statusLabel = status.charAt(0).toUpperCase() + status.slice(1);
@@ -149,7 +151,7 @@ function generateMapCard(map) {
                 <div class="download-up">
                     <div class="download-image-container">
                         <a href="${detailsLink}">
-                            <img src="${imagePath}" class="download-goto-page" style="/*width: 250px; height: 156px; object-fit: cover; border-radius: var(--br) 15px 0 0;*/">
+                            <img src="${imagePath}" onerror="this.onerror=null; this.src='${imagePathNew}'" class="download-goto-page" style="/*width: 250px; height: 156px; object-fit: cover; border-radius: var(--br) 15px 0 0;*/">
                         </a>
                         <div class="download-awards">
                             ${awardsHTML}

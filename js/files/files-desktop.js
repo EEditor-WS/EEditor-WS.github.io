@@ -57,13 +57,6 @@ async function loadGroupedMaps() {
         const groupedMaps = JSON.parse(jsonString);
         
         console.log(groupedMaps);
-        /* Пример вывода:
-        {
-            "jalhund_europe_vg": ["jalhund_europe_vg_interwar", "jalhund_europe_vg_ww1"],
-            "eenot_asia_v1": ["eenot_asia_v1_modern"],
-            "eenot_asia_v2": ["eenot_asia_v2_tno", "eenot_asia_v2_ww2"]
-        }
-        */
         
         return groupedMaps;
     } catch (error) {
@@ -88,4 +81,4 @@ async function example() {
     }
 }*/
 
-getMapAndJsonFiles()
+// getMapAndJsonFiles()

@@ -1,0 +1,87 @@
+#filesList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds);
+}
+
+.map-header {
+    padding: var(--ds);
+    border-radius: var(--br);
+    background-color: var(--bg-sec);
+    position: relative;
+    overflow: hidden;
+
+    .map-card-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        
+        z-index: -10;
+        object-fit: cover;
+        object-position: center;
+        
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.map-toggle-btn {
+    position: absolute;
+    bottom: var(--ds);
+    right: var(--ds);
+    border: none;
+    background: none;
+    transform: rotate(0deg);
+    transition: transform 0.3s ease-out;
+
+    &.collapsed {
+        transform: rotate(180deg);
+    }
+}
+
+.map-card {
+    display: grid;
+    grid-template-rows: auto 0fr; 
+    transition: grid-template-rows 0.3s ease;
+    overflow: hidden;
+    position: relative;
+
+    &.active {
+        grid-template-rows: auto 1fr;
+
+        .scenarios-container {
+            margin-top: var(--dss);
+        }
+    }
+}
+
+.scenarios-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds);
+    overflow-y: hidden;
+    transition: padding 0.3s ease;
+
+    padding: 0;
+}
+
+.scenario-item {
+    padding: var(--ds);
+    background: var(--bg-sec);
+    border-radius: var(--br);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .scenario-actions {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        gap: var(--dss);
+
+        button {
+            border: none;
+        }
+    }
+}
