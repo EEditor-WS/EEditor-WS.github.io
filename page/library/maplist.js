@@ -162,7 +162,7 @@ function generateMapCard(map) {
                     </div>
                 </div>
                 <div class="download-center">
-                    <a href="${detailsLink}" class="download-title download-goto-page" target="_blank">${map.title}</a>
+                    <a href="${detailsLink}" class="download-title download-goto-page">${map.title}</a>
                     <div class="download-row-big">
                         <div class="download-row">
                             <img src="././img/library/autor.svg" class="download-info-ico" />

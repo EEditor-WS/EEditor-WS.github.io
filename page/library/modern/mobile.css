@@ -12,4 +12,22 @@
     .action-button.back {
         width: 36px;
     }
+
+    .nav-header {
+        flex-direction: row;
+        padding-top: var(--ds);
+
+        .navbtn:not(#back-to-reforms) {
+            width: 100%;
+        }
+    }
+
+    .download-card.map-card {
+        width: 100%;
+    }
+    
+    .header-scenario .nav-icons {
+        align-items: stretch;
+        flex-direction: column;
+    }
 }

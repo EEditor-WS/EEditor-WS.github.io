@@ -208,7 +208,7 @@ function discordMarkdownToHtml(input, skipEscapeHtml = false) {
         const processedText = processInlineFormatting(text, false);
         const safeUrl = escapeHtml(url);
         const idx = linkPlaceholders.length;
-        linkPlaceholders.push(`<a href="${safeUrl}" target="_blank" rel="noopener noreferrer">${processedText}</a>`);
+        linkPlaceholders.push(`<a href="${safeUrl}" rel="noopener noreferrer">${processedText}</a>`);
         return `\u0000LINK${idx}\u0000`;
       });
     }
