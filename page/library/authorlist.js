@@ -354,5 +354,55 @@ const authorsData = {
         name: "@Тапнер",
         link: "https://discord.com/users/800349940114522133",
         color: "#3B83BD"
+    },
+    berg: {
+        name: "@berg",
+        link: "https://discord.com/users/731562528953598042",
+        color: "#3B83BD"
+    },
+    vatrushka: {
+        name: "@ватрушка",
+        link: "https://discord.com/users/728538560503742545",
+        color: "#3B83BD"
+    },
+    sunflower: {
+        name: "@Sunflower",
+        link: "https://discord.com/users/934014814882250753",
+        color: "#3B83BD"
+    },
+    seasalt: {
+        name: "@МорскаяСоль",
+        link: "https://discord.com/users/893992031754543126",
+        color: "#3B83BD"
+    },
+    quebyn: {
+        name: "@quebyn",
+        link: "https://discord.com/users/",
+        color: "#3B83BD"
+    },
+    waffle: {
+        name: "@Waffle",
+        link: "https://discord.com/users/740176051233226764",
+        color: "#3B83BD"
+    },
+    timka3310: {
+        name: "@timka3310",
+        link: "https://discord.com/users/669210458695401473",
+        color: "#3B83BD"
+    },
+    ando: {
+        name: "@Ando",
+        link: "https://discord.com/users/1303395726050725958",
+        color: "#3B83BD"
+    },
+    lobsterk: {
+        name: "@Lobster K",
+        link: "https://discord.com/users/884085665527123989",
+        color: "#3B83BD"
+    },
+    zakharov: {
+        name: "@Матвей Захаров",
+        link: "https://discord.com/users/1222612224632160470",
+        color: "#3B83BD"
     }
 }
