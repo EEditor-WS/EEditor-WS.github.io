@@ -165,7 +165,7 @@ function generateMapCard(map) {
                     <a href="${detailsLink}" class="download-title download-goto-page">${map.title}</a>
                     <div class="download-row-big">
                         <div class="download-row">
-                            <img src="././img/library/autor.svg" class="download-info-ico" />
+                            <img src="/img/library/autor.svg" class="download-info-ico" />
                             <div class="authors" style="display:flex; flex-direction:column">
                                 ${
                                     Array.isArray(map?.author) // 1. Проверяем, что это именно массив
@@ -189,17 +189,17 @@ function generateMapCard(map) {
                         </div>
                         <div class="download-row">
                             <p>${map.provinces}</p>
-                            <img src="././img/library/world.svg" class="download-info-ico" />
+                            <img src="/img/library/world.svg" class="download-info-ico" />
                         </div>
                     </div>
                     <div class="download-row-big">
                         <div class="download-row">
-                            <img src="././img/library/mass.svg" class="download-info-ico" />
+                            <img src="/img/library/mass.svg" class="download-info-ico" />
                             <p>${mapLoads[map.load]}</p>
                         </div>
                         <div class="download-row">
                             <p>${mapTypes[map.type] || map.type}</p>
-                            <img src="././img/library/world.svg" class="download-info-ico" />
+                            <img src="/img/library/world.svg" class="download-info-ico" />
                         </div>
                     </div>
                     <div class="download-row-big">
@@ -218,13 +218,13 @@ function generateMapCard(map) {
                 </div>
                 <div class="download-row-big" style="min-height: 90px; position: relative;">
                     <div class="download-row" style="max-width: calc(100% - 45px)">
-                            <img src="././img/library/calendar.svg" class="download-info-ico" />
+                            <img src="/img/library/calendar.svg" class="download-info-ico" />
                         <p title="Last Update">${new Date(map.lastUpdate).toLocaleDateString()}</p>
                     </div>
                     <div style="display:flex;flex-direction:column;align-items:bottom;border-radius:var(--br);overflow:hidden;position:absolute;right:0;bottom:0;">
                         ${noRights}
                         <button class="download-download-button" onclick="downloadMapMap('${map.id.join('_')}${lastVersion}')" style="background-color: #44944A; border-radius: 0; width: 45px; height: 45px; border: none; cursor: pointer;">
-                            <img src="././img/library/download.svg" class="download-info-ico" />
+                            <img src="/img/library/download.svg" class="download-info-ico" />
                         </button>
                     </div>
                 </div>
