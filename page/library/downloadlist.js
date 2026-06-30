@@ -262,7 +262,7 @@ function generateScenarioCard(scenario) {
                     <a href="${detailsLink}" class="download-title download-goto-page">${scenario.title}</a>
                     <div class="download-row-big">
                         <div class="download-row">
-                            <img src="././img/library/autor.svg" class="download-info-ico" />
+                            <img src="/img/library/autor.svg" class="download-info-ico" />
                             <div class="authors" style="display:flex; flex-direction:column">
                             ${
                                 scenario.author
@@ -277,17 +277,17 @@ function generateScenarioCard(scenario) {
                         </div>
                         <div class="download-row">
                             <p>${scenario.year}</p>
-                            <img src="././img/library/calendar.svg" class="download-info-ico" />
+                            <img src="/img/library/calendar.svg" class="download-info-ico" />
                         </div>
                     </div>
                     <div class="download-row-big">
                         <div class="download-row">
-                            <img src="././img/library/flag.svg" class="download-info-ico" />
+                            <img src="/img/library/flag.svg" class="download-info-ico" />
                             <p>${scenario.languages.join(", ")}</p>
                         </div>
                         <div class="download-row">
                             <a href="#" style="color: #6e8699">${scenario.type}</a>
-                            <img src="././img/library/gamemode.svg" class="download-info-ico" />
+                            <img src="/img/library/gamemode.svg" class="download-info-ico" />
                         </div>
                     </div>
                     <div class="download-row-big">
@@ -295,7 +295,7 @@ function generateScenarioCard(scenario) {
                         </div>
                         <div class="download-row">
                             <a href="?category=scenarios&period=${scenario.period}" style="color: #6e8699">${scenario.period}</a>
-                            <img src="././img/library/calendar.svg" class="download-info-ico" />
+                            <img src="/img/library/calendar.svg" class="download-info-ico" />
                         </div>
                     </div>
                 </div>
@@ -303,13 +303,13 @@ function generateScenarioCard(scenario) {
             <div class="download-down">
                 <div class="download-row-big" style="min-height: 90px; position: relative;">
                     <div class="download-row" style="max-width: calc(100% - 45px)">
-                        <img src="././img/library/world.svg" class="download-info-ico" />
+                        <img src="/img/library/world.svg" class="download-info-ico" />
                         <p>${mapData ? mapData.title + ' ' + scenario.id[2] : scenario.map.name + ' ' + scenario.id[2]}</p>
                     </div>
                     <div style="display:flex;flex-direction:column;align-items:bottom;border-radius:var(--br);overflow:hidden;position:absolute;right:0;bottom:0;">
                         ${noRights}
                         <button class="download-download-button" onclick="libDownloadScenario('${scenarioPath}', '${scenario.id.join('_')}')" style="background-color: #44944A; border-radius: 0; width: 45px; height: 45px; border: none; cursor: pointer;">
-                            <img src="././img/library/download.svg" class="download-info-ico" />
+                            <img src="/img/library/download.svg" class="download-info-ico" />
                         </button>
                     </div>
                 </div>

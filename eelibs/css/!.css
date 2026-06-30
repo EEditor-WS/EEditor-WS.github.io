@@ -65,7 +65,7 @@ option {
 
 @font-face {
     font-family: 'onesans';
-    src: url(././fonts/oneuisans.ttf);
+    src: url(/fonts/oneuisans.ttf);
     font-weight: normal;
     font-style: normal;
 }
@@ -162,11 +162,11 @@ video {
 }
 
 input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, textarea:focus {
-    background-image: url(././img/ui/text.svg);
+    background-image: url(/img/ui/text.svg);
 }
 
 input[type="number"]:focus {
-    background-image: url(././img/ui/number.svg);
+    background-image: url(/img/ui/number.svg);
 }
 
 input[type="range"] {

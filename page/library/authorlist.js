@@ -65,7 +65,8 @@ const authorsData = {
     atharva: {
         name: "@atharva04303",
         link: "https://discord.com/users/1306545186146353193",
-        color: "#3B83BD"
+        color: "#3B83BD",
+        rights: true
     },
     bluepum: {
         name: "@blue_pum_67269",
@@ -94,7 +95,8 @@ const authorsData = {
     jaba: {
         name: "@jaba4275",
         link: "https://discord.com/users/921793805915668520",
-        color: "#3B83BD"
+        color: "#3B83BD",
+        rights: true
     },
     parkourcat: {
         name: "@parkourfox",
@@ -202,7 +204,8 @@ const authorsData = {
     mat: {
         name: "@Mat971345",
         link: "https://discord.com/users/946593397169324094",
-        color: "#3B83BD"
+        color: "#3B83BD",
+        rights: true
     },
     preferablynothing: {
         name: "@PreferablyNothing",
@@ -230,7 +233,7 @@ const authorsData = {
         link: "https://discord.com/users/1098662845647945808",
         color: "#3B83BD"
     },
-    manstein: {
+    thehardenginerr: {
         name: "@theHardEngineer",
         link: "https://discord.com/users/1088785354699575366",
         color: "#3B83BD"
@@ -238,7 +241,8 @@ const authorsData = {
     hamod: {
         name: "@Hamod_2032",
         link: "https://discord.com/users/1347239235530391552",
-        color: "#3B83BD"
+        color: "#3B83BD",
+        rights: true
     },
     nghe: {
         name: "@nghe_",
@@ -278,7 +282,8 @@ const authorsData = {
     stanczyk: {
         name: "@stanczyk",
         link: "https://discord.com/users/1416759554271875182",
-        color: "#3B83BD"
+        color: "#3B83BD",
+        rights: true
     },
     titanium: {
         name: "@thetitaniumguyithink ✝",
@@ -339,5 +344,15 @@ const authorsData = {
         name: "@Shell",
         link: "https://discord.com/users/456226577798135808",
         color: "#FF83BD"
+    },
+    strorew: {
+        name: "@Strorew",
+        link: "https://discord.com/users/857178749271146507",
+        color: "#3B83BD"
+    },
+    tapner: {
+        name: "@Тапнер",
+        link: "https://discord.com/users/800349940114522133",
+        color: "#3B83BD"
     }
 }
