@@ -5,7 +5,7 @@ async function loadJsonMaps() {
     if (mapsData) return mapsData;           // уже загружено
     if (loadingPromise) return loadingPromise; // уже в процессе
     loadingPromise = (async () => {
-        const url = `${libLink}maps.json`;
+        const url = `${libLink}warnamentMaps.json`;
         const response = await fetch(url, { cache: 'reload' });
         if (!response.ok) throw new Error(`Ошибка: ${response.status}`);
         mapsData = await response.json();

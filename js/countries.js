@@ -947,7 +947,7 @@ class CountryManager {
             this.pushToUndoStack();
 
             // Сохраняем имя страны для уведомления
-            const countryName = this.jsonData.lands[targetId].name;
+            const countryName = this.jsonData.lands[province.owner]?.name || 'Unknown';
 
             // Удаляем страну
             delete this.jsonData.lands[targetId];
@@ -1282,11 +1282,11 @@ class CountryManager {
                 </div>
                 <div class="info-actions">
                     <button class="action-button save-params requirements-editor-button primary">
-                        <img src="img/ui/save.svg">
+                        <img src="/img/ui/save.svg">
                         <span>${window.translator.translate('save')}</span>
                     </button>
                     <button class="requirements-editor-button secondary">
-                        <img src="img/ui/block.svg">
+                        <img src="/img/ui/block.svg">
                         <span>${window.translator.translate('cancel')}</span>
                     </button>
                 </div>
@@ -1636,51 +1636,76 @@ class CountryManager {
         }
     }
 
-    removeInvalidOwners() {
-        if (!this.jsonData?.provinces || !this.jsonData?.lands) return;
+removeInvalidOwners() {
+    const landsAll = Object.keys(window.countryManager.jsonData.lands)
+    Object.values(window.countryManager.jsonData.lands).forEach(land => {
+        Object.keys(land.enemies).forEach(enemy => {
+            if (!landsAll.includes(enemy)) delete land.enemies[enemy]
+        })
+        Object.keys(land.vassals).forEach(enemy => {
+            if (!landsAll.includes(enemy)) delete land.vassals[enemy]
+        })
+        Object.keys(land.pacts).forEach(enemy => {
+            if (!landsAll.includes(enemy)) delete land.pacts[enemy]
+        })
+        Object.keys(land.allies).forEach(enemy => {
+            if (!landsAll.includes(enemy)) delete land.allies[enemy]
+        })
+        Object.keys(land.sanctions).forEach(enemy => {
+            if (!landsAll.includes(enemy)) delete land.sanctions[enemy]
+        })
+        Object.keys(land.guaranteed_by).forEach(enemy => {
+            if (!landsAll.includes(enemy)) delete land.guaranteed_by[enemy]
+        })
+        Object.keys(land.guaranteed).forEach(enemy => {
+            if (!landsAll.includes(enemy)) delete land.guaranteed[enemy]
+        })
+    })
 
-        this.pushToUndoStack();
+    if (!this.jsonData?.provinces || !this.jsonData?.lands) return;
 
-        let replacedCount = 0;
-        let addedCount = 0;
-        const validOwners = new Set(Object.keys(this.jsonData.lands));
+    let replacedCount = 0;
+    let addedCount = 0;
+    const validOwners = new Set(Object.keys(this.jsonData.lands));
+    const DEFAULT_OWNER = 'undeveloped_land';
 
-        // Проходим по всем провинциям
-        this.jsonData.provinces.forEach(province => {
-            if (province.owner && !validOwners.has(province.owner)) {
-                // Заменяем недействительного владельца
-                province.owner = 'undeveloped_land';
-                replacedCount++;
-            } else if (!province.owner && !province.is_water) {
-                // Добавляем владельца для сухопутных провинций без владельца
-                province.owner = 'undeveloped_land';
-                addedCount++;
-            }
-        });
+    // 1. Проходим по провинциям и собираем изменения
+    this.jsonData.provinces.forEach(province => {
+        const hasOwner = !!province.owner;
+        const isValidOwner = hasOwner && validOwners.has(province.owner);
 
-        if (replacedCount > 0 || addedCount > 0) {
-            // Обновляем JSON и интерфейс
-            this.updateJsonAndUI();
-            
-            // Показываем сообщение о результате
-            if (this.fileInfo) {
-                let message = [];
-                if (replacedCount > 0) {
-                    message.push(`заменено ${replacedCount} несуществующих владельцев`);
-                }
-                if (addedCount > 0) {
-                    message.push(`добавлен владелец для ${addedCount} провинций`);
-                }
-                this.fileInfo.textContent = `Результат: ${message.join(', ')}`;
-                showSuccess(window.translator.translate('ready'), window.translator.translate('non-existent owners are replaced '));
-            }
-        } else {
-            if (this.fileInfo) {
-                this.fileInfo.textContent = 'Изменений не требуется';
-                showInfo(window.translator.translate('ready'), window.translator.translate('no need'));
-            }
+        if (hasOwner && !isValidOwner) {
+            province.owner = DEFAULT_OWNER;
+            replacedCount++;
+        } else if (!hasOwner && !province.is_water) {
+            province.owner = DEFAULT_OWNER;
+            addedCount++;
         }
+    });
+
+    // 2. Если изменений нет, сразу выходим и не засоряем Undo Stack
+    if (replacedCount === 0 && addedCount === 0) {
+        if (this.fileInfo) {
+            this.fileInfo.textContent = 'Изменений не требуется';
+            showInfo(window.translator.translate('ready'), window.translator.translate('no need'));
+        }
+        return;
     }
+
+    // 3. Если изменения есть — сохраняем состояние ДЛЯ ОТМЕНЫ и обновляем UI
+    this.pushToUndoStack(); // Теперь вызывается вовремя!
+    this.updateJsonAndUI();
+
+    // 4. Вывод уведомлений
+    if (this.fileInfo) {
+        const messages = [];
+        if (replacedCount > 0) messages.push(`заменено ${replacedCount} несуществующих владельцев`);
+        if (addedCount > 0) messages.push(`добавлен владелец для ${addedCount} провинций`);
+
+        this.fileInfo.textContent = `Результат: ${messages.join(', ')}`;
+        showSuccess(window.translator.translate('ready'), window.translator.translate('non-existent owners are replaced '));
+    }
+}
 
     updateAllCountryDropdowns() {
         // Обновляем все модальные окна выбора страны

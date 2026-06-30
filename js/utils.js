@@ -297,7 +297,7 @@ function convertObjectToReadableDOM(obj, id) {
         const morebtn = document.createElement('button')
         morebtn.className = 'eventsReqsMoreBtn'
         const morebtnIco = document.createElement('img')
-        morebtnIco.src = 'img/ui/arrow/down.svg'
+        morebtnIco.src = '/img/ui/arrow/down.svg'
         morebtn.appendChild(morebtnIco)
 
         morebtn.addEventListener('click', () => {

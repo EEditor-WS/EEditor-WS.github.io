@@ -15,7 +15,7 @@
 
     .nav-header {
         flex-direction: row;
-        padding-top: var(--ds);
+        padding: var(--ds) var(--dss);
 
         .navbtn:not(#back-to-reforms) {
             width: 100%;

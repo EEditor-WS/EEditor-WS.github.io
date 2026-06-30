@@ -2,7 +2,7 @@ let scenariosData;
 
 async function loadJsonScenarios() {
   try {
-    const url = `${libLink}scenarios.json`
+    const url = `${libLink}warnamentScenarios.json`
     
     // Запрашиваем файл по сети
     const response = await fetch(url, {

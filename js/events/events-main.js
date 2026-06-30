@@ -97,17 +97,17 @@ class EventManager {
         if (imageSelect && imagePreview) {
             imageSelect.addEventListener('change', () => {
                 const selectedImage = imageSelect.value;
-                imagePreview.src = `event/img/${selectedImage}.png`;
+                imagePreview.src = `/event/img/${selectedImage}.png`;
             });
-            imagePreview.src = `event/img/${imageSelect.value}.png`;
+            imagePreview.src = `/event/img/${imageSelect.value}.png`;
         }
 
         if (iconSelect && iconPreview) {
             iconSelect.addEventListener('change', () => {
                 const selectedIcon = iconSelect.value;
-                iconPreview.src = `event/ico/${selectedIcon}.png`;
+                iconPreview.src = `/event/ico/${selectedIcon}.png`;
             });
-            iconPreview.src = `event/ico/${iconSelect.value}.png`;
+            iconPreview.src = `/event/ico/${iconSelect.value}.png`;
         }
     }
 
@@ -205,7 +205,7 @@ class EventManager {
             });
 
             const idCell = document.createElement('td');
-            idCell.innerHTML = `<div style="display: inline-flex"><img loading="lazy" class="list-icon" src="event/ico/${event.ico || 'broken'}.png" alt="${event.ico || 'broken'}"><span style:"margin-left: 5px"> ${event.id}</span></div>`;
+            idCell.innerHTML = `<div style="display: inline-flex"><img loading="lazy" class="list-icon" src="/event/ico/${event.ico || 'broken'}.png" alt="${event.ico || 'broken'}"><span style:"margin-left: 5px"> ${event.id}</span></div>`;
             idCell.id = `event-row-${event.id}`;
 
             const groupCell = document.createElement('td');
@@ -653,14 +653,14 @@ class EventManager {
     updateImagePreview(imageName) {
         const preview = document.getElementById('event-image-preview');
         if (preview) {
-            preview.src = imageName ? `event/img/${imageName}.png` : '';
+            preview.src = imageName ? `/event/img/${imageName}.png` : '';
         }
     }
 
     updateIconPreview(iconName) {
         const preview = document.getElementById('event-icon-preview');
         if (preview) {
-            preview.src = iconName ? `event/ico/${iconName}.png` : '';
+            preview.src = iconName ? `/event/ico/${iconName}.png` : '';
         }
     }
 

@@ -18,7 +18,7 @@ function createCustomDropdown(container, options = [], config = {}, isContainer 
     root.innerHTML = `
         <div class="custom-dd__control" tabindex="-1">
             <span class="custom-dd__label custom-dd__placeholder">${placeholder}</span>
-            <img src="img/ui/arrow/down.svg" alt="">
+            <img src="/img/ui/arrow/down.svg" alt="">
         </div>
         <div class="custom-dd__menu" hidden>
             ${searchable ? '<input type="text" class="custom-dd__search" placeholder="Поиск..."/>' : ''}
@@ -57,7 +57,7 @@ function createCustomDropdown(container, options = [], config = {}, isContainer 
             el.dataset.value = opt.value;
             el.setAttribute('aria-selected', opt.value === selectedValue ? 'true' : 'false');
             const checkmark = (opt.disabled === true) ? '' : `<span class="custom-dd__check disabled" aria-hidden="true"></span>`;
-            const image = opt.img ? `<img src="${opt.img}${opt.img.endsWith('.svg') ? '' : '.png'}" alt="" class="custom-dd__option-img"/>` : '';
+            const image = opt.img ? `<img src="/${opt.img}${opt.img.endsWith('.svg') ? '' : '.png'}" alt="" class="custom-dd__option-img"/>` : '';
             el.innerHTML = `${image}<span class="custom-dd__text">${opt.label}</span>${checkmark}`;
             list.appendChild(el);
         });
@@ -216,7 +216,7 @@ function createCustomDropdown(container, options = [], config = {}, isContainer 
 /* --------------- Пример использования --------------- */
 /*let flags = [
     { value: '', label: '--- None ---' },
-    { value: 'haiti', label: 'haiti', img: 'img/banners/haiti' },
+    { value: 'haiti', label: 'haiti', img: '/img/banners/haiti' },
 ];
 flags.sort((a, b) => a.label.localeCompare(b.label));*/
 
