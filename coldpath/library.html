@@ -10,7 +10,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>EEditor WS | Library</title>
+        <title>Library CP | EEditor WS</title>
         <!--link rel="icon" type="image/x-icon" href="/img/ico/ico.svg"-->
         <link rel="icon" type="image/x-icon" href="/img/library/icon.svg">
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,6 +29,7 @@
         <link rel="stylesheet" href="/page/library/modern/main.css">
         <link rel="stylesheet" href="/page/library/modern/headers.css">
         <link rel="stylesheet" href="/page/library/modern/mobile.css">
+        <link rel="stylesheet" href="/coldpath/css/cp-main.css">
         
         <script>
             let libLink;
@@ -39,14 +40,14 @@
             }
         </script>
         <script src="/page/library/authorlist.js"></script>
-        <script src="/page/library/scenariolist.js"></script>
-        <script src="/page/library/maplist.js"></script>
-        <script>
+        <!--script src="/coldpath/data/scenariolist.js"></script-->
+        <script src="/coldpath/data/maplist.js"></script>
+        <!--script>
             document.addEventListener('DOMContentLoaded', function() {
                 useUrlParams()
                 //applyUrlParams();
             });
-        </script>
+        </script-->
         <!-- Google tag (gtag.js) -->
             <script async src="https://www.googletagmanager.com/gtag/js?id=G-9HFX1FVLMV"></script>
             <script>
@@ -72,9 +73,9 @@
             <a href="/index.html" id="back-to-reforms" class="navbtn" style="padding: 0;">
                 <img src="/img/ui/back.svg">
             </a>
-            <button class="navbtn" data-page="main" data-translate="main">Главная</button>
-            <button class="navbtn active" data-page="scenarios" data-translate="scenarios">Сценарии</button>
-            <button class="navbtn" data-page="maps" data-translate="maps">Карты</button>
+            <!--button class="navbtn" data-page="main" data-translate="main">Главная</button>
+            <button class="navbtn" data-page="scenarios" data-translate="scenarios">Сценарии</button-->
+            <button class="navbtn active" data-page="maps" data-translate="maps">Карты</button>
             <div class="nav-actions">
                 <div class="nav-icons">
                     <button id="settings-button" class="icon-action-button settings" title="Настройки">
@@ -162,7 +163,7 @@
             </div>
         </nav>
 
-        <div id="main" class="page list active">
+        <div id="main" class="page list">
             <div class="main-container">
                 <div class="lib-modern-down">
                     <div class="lib-modern-group">
@@ -195,458 +196,38 @@
                     <h1 data-translate="scenarios">Сценарии</h1>
                     <div class="header-actions">
                         <div class="tooltip-container">
-                            <button id="filters" class="icon-action-button filters" title="Filters" onclick="libShowFilters()">
+                            <!--button id="filters" class="icon-action-button filters" title="Filters" onclick="libShowFilters()">
                                 <svg viewBox="0 0 24 24" width="14" height="14">
                                     <path d="M3 4h18l-7 8v8l-4-2v-6z" fill="none" stroke="currentColor" stroke-width="2"></path>
                                 </svg>
                             </button>
-                            <div class="tooltip tooltip-positioned">Filters</div>
-                        </div>
-                    </div>
-                </div>
-                <div id="filterHeader">
-                    <h1 id="filterHeaderTitle"></h1>
-                    <div id="filterHeaderData"></div>
-                    <div id="filterHeaderBtns">
-                        <button id="filterHeaderLinkBtn" class="icon-action-button"><img src="/img/ui/link.svg"></button>
-                        <button id="filterHeaderResetBtn" class="icon-action-button"><img src="/img/ui/cross.svg"></button>
-                    </div>
-                    <div id="filterHeaderDownload">
-                        <div id="downloadMapBtn">
-                            <button id="downloadMapLastBtn">
-                                <img src="/img/ui/file/download.svg">
-                                Download Map
-                            </button>
-                            <button id="downloadMapVersionsBtn">
-                                <img src="/img/ui/arrow/down.svg">
-                            </button>
-                        </div>
-                        <div id="downloadMapVersions">
+                            <div class="tooltip tooltip-positioned">Filters</div-->
                         </div>
                     </div>
                 </div>
                 <div class="lib-down">
-                    <div class="lib-filters" id="lib-filters">
-                        <div class="lib-filters-header">
-                            <h3>Фильтры</h3>
-                            <button class="collapse-filters" onclick="libShowFilters()" style="width: 25px; font-size: 25px">×</button>
-                        </div>
-                        
-                        <div class="lib-filters-content">
-                            <!-- Search box -->
-                            <div class="filter-group">
-                                <input type="text" id="lib-search" class="lib-search" placeholder="Поиск..." oninput="libApplyFilters()">
-                            </div>
-
-                            <!-- New filter groups -->
-                            <div class="filter-group">
-                                <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
-                                    <label>Основные параметры</label>
-                                    <button class="collapse-filter-group" type="button">▼</button>
-                                </div>
-                                <div class="filter-group-content collapsed">
-                                    <div class="mainform">
-                                        <input type="text" id="lib-full-id-filter" style="display: none">
-                                        <div class="form-element">
-                                            <label>Автор</label>
-                                            <select id="lib-autor-filter" onchange="libApplyFilters()" title="Filter by author">
-                                                <option value="">Все авторы</option>
-                                                <option value="@eenot">ЕЕнот</option>
-                                                <option value="@theman_the_myth_the_legend">HIM</option>
-                                                <option value="@helvetic_brutalisation">Helvetic Brutalisation</option>
-                                                <option value="@pelo3918">Pelo</option>
-                                                <option value="@totoska">Totoska</option>
-                                                <option value="@deleted_user">Estebanf259</option>
-                                                <option value="@zachary.bachary">Zachary</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-element">
-                                            <label>Карта</label>
-                                            <select id="lib-map-filter" onchange="libApplyFilters()" title="Filter by map">
-                                                <option value="">Все карты</option>
-                                                <option value="eenot_world">World by ЕЕнот</option>
-                                                <option value="jalhund_europe">Standart Europe</option>
-                                                <option value="bluepum_enaatme">Europe+ by Bluepum</option>
-                                                <option value="shahz0d_world">World Plus</option>
-                                                <option value="zachary_eurasia">Eurasia by Zachary</option>
-                                                <option value="zachary_world">World by Zachary</option>
-                                                <option value="estebanf259_world-redux">World Map Redux</option>
-                                                <option value="eenot_arstotzka">Arstotzka World Map</option>
-                                                <option value="estebanf259_euromagnus">EuroMagnus by Estebanf259</option>
-                                                <option value="parkourcat_euro4">Euro4 Standart</option>
-                                                <option value="enotochel_pvp">PvP map by Енотий</option>
-                                                <option value="zachary_usa">USA by Zachary</option>
-                                                <option value="zachary_world-3ga">World Map (3 billion years ago)</option>
-                                                <option value="zachary_world-am">World Map Accoding to Americans</option>
-                                                <option value="eenot_moldavia">Moldavia</option>
-                                                <option value="pelo_greece">Aegean Sea</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!--div class="filter-group">
-                            <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
-                                <label>Наполнение</label>
-                                <button class="collapse-filter-group" type="button">▼</button>
-                            </div>
-                            <div class="filter-group-content collapsed">
-                            
-                                <div class="filter-group">
-                                    <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
-                                        <label>Экономика</label>
-                                        <button class="collapse-filter-group" type="button">▼</button>
-                                    </div>
-                                    <div class="filter-group-content collapsed">
-                                        <div class="checkbox-list">
-                                            <label><input type="checkbox" value="none" name="economy" onchange="libApplyFilters()"> Нету</label>
-                                            <label><input type="checkbox" value="partially" name="economy" onchange="libApplyFilters()"> Частично</label>
-                                            <label><input type="checkbox" value="developing" name="economy" onchange="libApplyFilters()"> В разработке</label>
-                                            <label><input type="checkbox" value="yes" name="economy" onchange="libApplyFilters()"> Есть</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="filter-group">
-                                    <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
-                                        <label>Население</label>
-                                        <button class="collapse-filter-group" type="button">▼</button>
-                                    </div>
-                                    <div class="filter-group-content collapsed">
-                                        <div class="checkbox-list">
-                                            <label><input type="checkbox" value="none" name="population" onchange="libApplyFilters()"> Нету</label>
-                                            <label><input type="checkbox" value="partially" name="population" onchange="libApplyFilters()"> Частично</label>
-                                            <label><input type="checkbox" value="developing" name="population" onchange="libApplyFilters()"> В разработке</label>
-                                            <label><input type="checkbox" value="yes" name="population" onchange="libApplyFilters()"> Есть</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="filter-group">
-                                    <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
-                                        <label>Ресурсы</label>
-                                        <button class="collapse-filter-group" type="button">▼</button>
-                                    </div>
-                                    <div class="filter-group-content collapsed">
-                                        <div class="checkbox-list">
-                                            <label><input type="checkbox" value="none" name="resources" onchange="libApplyFilters()"> Нету</label>
-                                            <label><input type="checkbox" value="partially" name="resources" onchange="libApplyFilters()"> Частично</label>
-                                            <label><input type="checkbox" value="developing" name="resources" onchange="libApplyFilters()"> В разработке</label>
-                                            <label><input type="checkbox" value="yes" name="resources" onchange="libApplyFilters()"> Есть</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="filter-group">
-                                    <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
-                                        <label>Дипломатия</label>
-                                        <button class="collapse-filter-group" type="button">▼</button>
-                                    </div>
-                                    <div class="filter-group-content collapsed">
-                                        <div class="checkbox-list">
-                                            <label><input type="checkbox" value="none" name="diplomacy" onchange="libApplyFilters()"> Нету</label>
-                                            <label><input type="checkbox" value="partially" name="diplomacy" onchange="libApplyFilters()"> Частично</label>
-                                            <label><input type="checkbox" value="developing" name="diplomacy" onchange="libApplyFilters()"> В разработке</label>
-                                            <label><input type="checkbox" value="yes" name="diplomacy" onchange="libApplyFilters()"> Есть</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="filter-group">
-                                    <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
-                                        <label>Восстания</label>
-                                        <button class="collapse-filter-group" type="button">▼</button>
-                                    </div>
-                                    <div class="filter-group-content collapsed">
-                                        <div class="checkbox-list">
-                                            <label><input type="checkbox" value="none" name="rebellions" onchange="libApplyFilters()"> Нету</label>
-                                            <label><input type="checkbox" value="partially" name="rebellions" onchange="libApplyFilters()"> Частично</label>
-                                            <label><input type="checkbox" value="developing" name="rebellions" onchange="libApplyFilters()"> В разработке</label>
-                                            <label><input type="checkbox" value="yes" name="rebellions" onchange="libApplyFilters()"> Есть</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="filter-group">
-                                    <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
-                                        <label>Реформы</label>
-                                        <button class="collapse-filter-group" type="button">▼</button>
-                                    </div>
-                                    <div class="filter-group-content collapsed">
-                                        <div class="checkbox-list">
-                                            <label><input type="checkbox" value="none" name="reforms" onchange="libApplyFilters()"> Нету</label>
-                                            <label><input type="checkbox" value="partially" name="reforms" onchange="libApplyFilters()"> Частично</label>
-                                            <label><input type="checkbox" value="developing" name="reforms" onchange="libApplyFilters()"> В разработке</label>
-                                            <label><input type="checkbox" value="yes" name="reforms" onchange="libApplyFilters()"> Есть</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="filter-group">
-                                    <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
-                                        <label>События</label>
-                                        <button class="collapse-filter-group" type="button">▼</button>
-                                    </div>
-                                    <div class="filter-group-content collapsed">
-                                        <div class="checkbox-list">
-                                            <label><input type="checkbox" value="none" name="events" onchange="libApplyFilters()"> Нету</label>
-                                            <label><input type="checkbox" value="partially" name="events" onchange="libApplyFilters()"> Частично</label>
-                                            <label><input type="checkbox" value="developing" name="events" onchange="libApplyFilters()"> В разработке</label>
-                                            <label><input type="checkbox" value="yes" name="events" onchange="libApplyFilters()"> Есть</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div-->
-
-                            <div class="filter-group">
-                                <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
-                                    <label>Статус</label>
-                                    <button class="collapse-filter-group" type="button">▼</button>
-                                </div>
-                                <div class="filter-group-content collapsed">
-                                    <div class="checkbox-list">
-                                        <label><input type="checkbox" value="completed" name="status" onchange="libApplyFilters()"> Завершён</label>
-                                        <label><input type="checkbox" value="early_access" name="status" onchange="libApplyFilters()"> Ранний доступ</label>
-                                        <label><input type="checkbox" value="in_development" name="status" onchange="libApplyFilters()"> В разработке</label>
-                                        <label><input type="checkbox" value="beta" name="status" onchange="libApplyFilters()"> Бета</label>
-                                        <label><input type="checkbox" value="alpha" name="status" onchange="libApplyFilters()"> Альфа</label>
-                                        <label><input type="checkbox" value="experimental" name="status" onchange="libApplyFilters()"> Эксперементальный</label>
-                                        <label><input type="checkbox" value="frozen" name="status" onchange="libApplyFilters()"> Заморожен</label>
-                                        <label><input type="checkbox" value="archived" name="status" onchange="libApplyFilters()"> Архивный</label>
-                                        <label><input type="checkbox" value="discontinued" name="status" onchange="libApplyFilters()"> Заброшен</label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Type filter -->
-                            <div class="filter-group">
-                                <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
-                                    <label>Тип сценария</label>
-                                    <button class="collapse-filter-group" type="button">▼</button>
-                                </div>
-                                <div class="filter-group-content collapsed">
-                                    <select id="lib-type-filter" onchange="libApplyFilters()" title="Filter by type">
-                                        <option value="">Все типы</option>
-                                        <option value="sandbox">Песочница</option>
-                                        <option value="historical">Исторический</option>
-                                        <option value="lore">Сюжетный</option>
-                                        <option value="battle">Одиночный бой</option>
-                                        <option value="command-battle">Коммандный бой</option>
-                                        <option value="generals">Генералы</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!-- Time period filter -->
-                            <div class="filter-group">
-                                <div class="filter-group-header collapsed" onclick="libToggleFilterGroup(this)">
-                                    <label>Эпоха</label>
-                                    <button class="collapse-filter-group" type="button">▼</button>
-                                </div>
-                                <div class="filter-group-content collapsed">
-                                    <div class="checkbox-list">
-                                        <label><input type="checkbox" value="ancient" onchange="libApplyFilters()"> Довоенный</label>
-                                        <label><input type="checkbox" value="ww1" onchange="libApplyFilters()"> WWI</label>
-                                        <label><input type="checkbox" value="interwar" onchange="libApplyFilters()"> Интербеллум</label>
-                                        <label><input type="checkbox" value="ww2" onchange="libApplyFilters()"> WW2</label>
-                                        <label><input type="checkbox" value="cw" onchange="libApplyFilters()"> CW</label>
-                                        <label><input type="checkbox" value="modern" onchange="libApplyFilters()"> Современность</label>
-                                        <label><input type="checkbox" value="alternative" onchange="libApplyFilters()"> Альтернативный</label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="filter-group">
-                                <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
-                                    <label>Язык</label>
-                                    <button class="collapse-filter-group" type="button">▼</button>
-                                </div>
-                                <div class="filter-group-content collapsed">
-                                    <select id="lib-language-filter" class="main-page-input" onchange="libApplyFilters()" title="Filter by language">
-                                        <option value="">Все</option>
-                                        <option value="en">English</option>
-                                        <option value="ru">Русский</option>
-                                        <option value="uk">Українська</option>
-                                        <option value="mo">Молдовеняскэ</option>
-                                        <option value="be">Беларуская</option>
-                                        <option value="kk">Қазақша</option>
-                                        <option value="de">Deutsch</option>
-                                        <option value="fr">Français</option>
-                                        <option value="es">Español</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!--div class="filter-group">
-                                <div class="filter-group-header collapsed" onclick="libToggleFilterGroup(this)">
-                                    <label>Количество Провинций</label>
-                                    <button class="collapse-filter-group" type="button">▼</button>
-                                </div>
-                                <div class="filter-group-content collapsed">
-                                    <div class="checkbox-list">
-                                        <label><input type="checkbox" value="0" onchange="libApplyFilters()"> 100-</label>
-                                        <label><input type="checkbox" value="100" onchange="libApplyFilters()"> 100+</label>
-                                        <label><input type="checkbox" value="500" onchange="libApplyFilters()"> 500+</label>
-                                        <label><input type="checkbox" value="750" onchange="libApplyFilters()"> 750+</label>
-                                        <label><input type="checkbox" value="1000" onchange="libApplyFilters()"> 1000+</label>
-                                        <label><input type="checkbox" value="1250" onchange="libApplyFilters()"> 1250+</label>
-                                        <label><input type="checkbox" value="1500" onchange="libApplyFilters()"> 1500+</label>
-                                        <label><input type="checkbox" value="2000" onchange="libApplyFilters()"> 2000+</label>
-                                        <label><input type="checkbox" value="2500" onchange="libApplyFilters()"> 2500+</label>
-                                        <label><input type="checkbox" value="3000" onchange="libApplyFilters()"> 3000+</label>
-                                        <label><input type="checkbox" value="4000" onchange="libApplyFilters()"> 4000+</label>
-                                    </div>
-                                </div>
-                            </div-->
-
-                            <!-- Clear filters button -->
-                            <button class="clear-filters-btn" onclick="libClearFilters()">Сбросить фильтры</button>
-                        </div>
-                    </div>
                     <div class="download-cards" id="download-cards">
                         <!-- Cards will be loaded dynamically -->
                     </div>
                 </div>
             </div>
         </div>
-        <div id="maps" class="page list">
+        
+        <div id="maps" class="page list active">
                 <div class="download-container">
                     <div class="lib-header">
                         <h1 data-translate="maps">Maps</h1>
                         <div class="header-actions">
                             <div class="tooltip-container">
-                                <button id="map-filters" class="icon-action-button filters" title="Filters" onclick="libShowMapFilters()">
+                                <!--button id="map-filters" class="icon-action-button filters" title="Filters" onclick="libShowMapFilters()">
                                     <svg viewBox="0 0 24 24" width="14" height="14">
                                         <path d="M3 4h18l-7 8v8l-4-2v-6z" fill="none" stroke="currentColor" stroke-width="2"></path>
                                     </svg>
-                                </button>
+                                </button-->
                             </div>
                         </div>
                     </div>
                     <div class="lib-down">
-                        <div class="lib-filters" id="map-lib-filters">
-                            <div class="lib-filters-header">
-                                <h3 data-translate="filters">Filters</h3>
-                                <button class="collapse-filters" onclick="libShowMapFilters()">×</button>
-                            </div>
-                            
-                            <div class="lib-filters-content">
-                                <!-- Search box -->
-                                <div class="filter-group">
-                                    <input type="text" id="map-lib-search" class="lib-search" placeholder="Search..." oninput="applyMapFilters()">
-                                </div>
-
-                                <!-- Basic filters -->
-                                <div class="filter-group">
-                                    <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
-                                        <label data-translate="main_params">Main Parameters</label>
-                                        <button class="collapse-filter-group" type="button">▼</button>
-                                    </div>
-                                    <div class="filter-group-content collapsed">
-                                        <div class="mainform">
-                                            <div class="form-element">
-                                                <label data-translate="author">Author</label>
-                                                <select id="map-lib-author-filter" onchange="applyMapFilters()" title="Filter maps by author">
-                                                    <option value="">All authors</option>
-                                                    <option value="@eenot">ЕЕнот</option>
-                                                    <option value="@jalhund">Jalhund</option>
-                                                    <option value="@bluepum">Bluepum</option>
-                                                    <option value="@zachary.bachary">Zachary</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-element">
-                                                <label data-translate="type">Type</label>
-                                                <select id="map-lib-type-filter" onchange="applyMapFilters()" title="Filter maps by type">
-                                                    <option value="">All types</option>
-                                                    <option value="world">World</option>
-                                                    <option value="continent">Continent</option>
-                                                    <option value="region">Region</option>
-                                                    <option value="country">Country</option>
-                                                    <option value="oblast">Oblast</option>
-                                                    <option value="district">Disctrict</option>
-                                                    <option value="city">City</option>
-                                                    <option value="custom">Custom</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-element">
-                                                <label data-translate="load">Load</label>
-                                                <select id="map-lib-load-filter" onchange="applyMapFilters()" title="Filter maps by load">
-                                                    <option value="">All loads</option>
-                                                    <option value="ultralight">Ultra Light</option>
-                                                    <option value="mobile">Mobile</option>
-                                                    <option value="normal">Normal</option>
-                                                    <option value="heavy">Heavy</option>
-                                                    <option value="superheavy">Super Heavy</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Regions filter -->
-                                <div class="filter-group">
-                                    <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
-                                        <label data-translate="regions">Regions</label>
-                                        <button class="collapse-filter-group" type="button">▼</button>
-                                    </div>
-                                    <div class="filter-group-content collapsed">
-                                        <div class="checkbox-list">
-                                            <label><input type="checkbox" value="world" name="regions" onchange="applyMapFilters()"> World</label>
-                                            <label><input type="checkbox" value="europe" name="regions" onchange="applyMapFilters()"> Europe</label>
-                                            <label><input type="checkbox" value="north_africa" name="regions" onchange="applyMapFilters()"> North Africa</label>
-                                            <label><input type="checkbox" value="middle_east" name="regions" onchange="applyMapFilters()"> Middle East</label>
-                                            <label><input type="checkbox" value="asia" name="regions" onchange="applyMapFilters()"> Asia</label>
-                                            <label><input type="checkbox" value="americas" name="regions" onchange="applyMapFilters()"> Americas</label>
-                                            <label><input type="checkbox" value="africa" name="regions" onchange="applyMapFilters()"> Africa</label>
-                                            <label><input type="checkbox" value="oceania" name="regions" onchange="applyMapFilters()"> Oceania</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Features filter -->
-                                <div class="filter-group">
-                                    <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
-                                        <label data-translate="features">Features</label>
-                                        <button class="collapse-filter-group" type="button">▼</button>
-                                    </div>
-                                    <div class="filter-group-content collapsed">
-                                        <div class="checkbox-list">
-                                            <label><input type="checkbox" value="water_provinces" name="features" onchange="applyMapFilters()"> Water Provinces</label>
-                                            <label><input type="checkbox" value="islands" name="features" onchange="applyMapFilters()"> Islands</label>
-                                            <label><input type="checkbox" value="straits" name="features" onchange="applyMapFilters()"> Straits</label>
-                                            <label><input type="checkbox" value="rivers" name="features" onchange="applyMapFilters()"> Rivers</label>
-                                            <label><input type="checkbox" value="terrain" name="features" onchange="applyMapFilters()"> Terrain</label>
-                                            <label><input type="checkbox" value="resources" name="features" onchange="applyMapFilters()"> Resources</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Provinces filter -->
-                                <div class="filter-group">
-                                    <div class="filter-group-header" onclick="libToggleFilterGroup(this)">
-                                        <label data-translate="provinces">Provinces</label>
-                                        <button class="collapse-filter-group" type="button">▼</button>
-                                    </div>
-                                    <div class="filter-group-content collapsed">
-                                        <div class="checkbox-list">
-                                            <label><input type="checkbox" value="0" name="provinces" onchange="applyMapFilters()"> 100-</label>
-                                            <label><input type="checkbox" value="100" name="provinces" onchange="applyMapFilters()"> 100+</label>
-                                            <label><input type="checkbox" value="500" name="provinces" onchange="applyMapFilters()"> 500+</label>
-                                            <label><input type="checkbox" value="1000" name="provinces" onchange="applyMapFilters()"> 1000+</label>
-                                            <label><input type="checkbox" value="2000" name="provinces" onchange="applyMapFilters()"> 2000+</label>
-                                            <label><input type="checkbox" value="3000" name="provinces" onchange="applyMapFilters()"> 3000+</label>
-                                            <label><input type="checkbox" value="4000" name="provinces" onchange="applyMapFilters()"> 4000+</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Clear filters button -->
-                                <button class="clear-filters-btn" onclick="clearMapFilters()" data-translate="reset_filters">Reset filters</button>
-                            </div>
-                        </div>
                         <div id="map-cards" class="download-cards">
                             <!-- Cards will be loaded dynamically -->
                         </div>
@@ -809,8 +390,7 @@
         <script src="/eelibs/import.js" type="module"></script>
         <script src="/page/library/modern/pages.js"></script>
         <script src="/js/fetch.js"></script>
-        <script src="/page/library/modern/openPage.js"></script>
-        <script src="/page/library/modern/filters.js"></script>
+        <!--script src="/page/library/modern/openPage.js"></script-->
         <script src="/js/library.js"></script>
         <script src="/js/data/language.js"></script>
         <script src="/js/translator.js"></script>

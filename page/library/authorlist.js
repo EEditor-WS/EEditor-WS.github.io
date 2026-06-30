@@ -1,3 +1,14 @@
+function truncateAuthorName(name, maxLength = 10) {
+    try {
+        if (name == null) return '';
+        if (name.length <= maxLength) return name;
+        return name.substring(0, maxLength) + '...';
+    } catch (error) {
+        console.error('Error truncating author name:', error, name);
+        return ' '; // Fallback to original name if error occurs
+    }
+}
+
 const authorsData = {
     eenot: {
         name: "@eenot",
@@ -308,5 +319,25 @@ const authorsData = {
         name: "@Hitaroko",
         link: "https://discord.com/users/611870107970568214",
         color: "#3B83BD"
+    },
+    aresrussian: {
+        name: "@AresRussian",
+        link: "https://discord.com/users/700262353274667069",
+        color: "#3B83BD"
+    },
+    swissmapp: {
+        name: "@Swissmapp",
+        link: "https://discord.com/users/810045615730982912",
+        color: "#3B83BD"
+    },
+    likot: {
+        name: "@Likot",
+        link: "https://discord.com/users/791646861568114699",
+        color: "#3B83BD"
+    },
+    shell: {
+        name: "@Shell",
+        link: "https://discord.com/users/456226577798135808",
+        color: "#FF83BD"
     }
 }

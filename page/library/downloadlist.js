@@ -29,7 +29,68 @@ const awardScores = {
 
 console.log('Library downloadlist.js loaded');
 
-// Award score values задаються в другом файле.
+// File download helper
+async function downloadFile(url, fileName) {
+    // Определяем, запущено ли приложение в нативной обёртке WebView2
+    const isNative = !!(
+        window.chrome &&
+        window.chrome.webview &&
+        window.chrome.webview.hostObjects &&
+        window.chrome.webview.hostObjects.fileSystem
+    );
+
+    if (isNative) {
+        try {
+            // 1. Загружаем файл
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            // 2. Читаем как текст и парсим JSON (ожидаем, что скачиваем JSON)
+            const text = await response.text();
+            const data = JSON.parse(text);
+
+            // 3. Сохраняем через нативный метод writeJsonFile
+            const success = await writeJsonFile(fileName, data);
+            if (!success) {
+                throw new Error('Ошибка записи файла через writeJsonFile');
+            }
+
+            console.log(`Файл "${fileName}" успешно сохранён в корневую папку.`);
+            window.notification.success(window.translator.translate('downloaded'), `Файл "${fileName}" успешно сохранён в корневую папку.`)
+        } catch (error) {
+            console.error('Ошибка при скачивании в нативной обёртке:', error);
+            window.notification.error('error', 'Ошибка при скачивании в нативной обёртке:' + error)
+            throw error; // пробрасываем дальше для обработки вызывающим кодом
+        }
+    } else {
+        // --- Браузерный режим (стандартное скачивание) ---
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const contentType = response.headers.get('content-type') || 'application/octet-stream';
+        const blob = await response.blob();
+        const enhancedBlob = new Blob([blob], { type: contentType });
+
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(enhancedBlob);
+        link.download = fileName;
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        URL.revokeObjectURL(link.href);
+
+        // Небольшая задержка для завершения скачивания
+        await new Promise(resolve => setTimeout(resolve, 100));
+    }
+}
+
+
 
 // Functions for generating paths from composite ID
 function generateMapId(id, separator, length) {
@@ -116,18 +177,6 @@ function getSortedScenarios() {
             score: calculateScenarioScore(scenario)
         }))
         .sort((a, b) => b.score - a.score);
-}
-
-// Helper function to truncate author name
-function truncateAuthorName(name, maxLength = 10) {
-    try {
-        if (name == null) return '';
-        if (name.length <= maxLength) return name;
-        return name.substring(0, maxLength) + '...';
-    } catch (error) {
-        console.error('Error truncating author name:', error, name);
-        return ' '; // Fallback to original name if error occurs
-    }
 }
 
 // Store downloaded maps
@@ -377,67 +426,6 @@ async function confirmDownloadMap() {
         showErrorMapModal(currentMapDownload.mapId);
     } finally {
         closeDownloadMapModal();
-    }
-}
-
-// File download helper
-async function downloadFile(url, fileName) {
-    // Определяем, запущено ли приложение в нативной обёртке WebView2
-    const isNative = !!(
-        window.chrome &&
-        window.chrome.webview &&
-        window.chrome.webview.hostObjects &&
-        window.chrome.webview.hostObjects.fileSystem
-    );
-
-    if (isNative) {
-        try {
-            // 1. Загружаем файл
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            // 2. Читаем как текст и парсим JSON (ожидаем, что скачиваем JSON)
-            const text = await response.text();
-            const data = JSON.parse(text);
-
-            // 3. Сохраняем через нативный метод writeJsonFile
-            const success = await writeJsonFile(fileName, data);
-            if (!success) {
-                throw new Error('Ошибка записи файла через writeJsonFile');
-            }
-
-            console.log(`Файл "${fileName}" успешно сохранён в корневую папку.`);
-            window.notification.success(window.translator.translate('downloaded'), `Файл "${fileName}" успешно сохранён в корневую папку.`)
-        } catch (error) {
-            console.error('Ошибка при скачивании в нативной обёртке:', error);
-            window.notification.error('error', 'Ошибка при скачивании в нативной обёртке:' + error)
-            throw error; // пробрасываем дальше для обработки вызывающим кодом
-        }
-    } else {
-        // --- Браузерный режим (стандартное скачивание) ---
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const contentType = response.headers.get('content-type') || 'application/octet-stream';
-        const blob = await response.blob();
-        const enhancedBlob = new Blob([blob], { type: contentType });
-
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(enhancedBlob);
-        link.download = fileName;
-
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-
-        URL.revokeObjectURL(link.href);
-
-        // Небольшая задержка для завершения скачивания
-        await new Promise(resolve => setTimeout(resolve, 100));
     }
 }
 

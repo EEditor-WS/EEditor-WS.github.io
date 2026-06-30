@@ -36,7 +36,6 @@
 .download-card {
     background-color: var(--bg-pri);
     width: 100%;
-    width: 1fr;
 
     &.map-card {
         width: calc(100% - 2 * var(--ds));
