@@ -656,10 +656,7 @@ class CountryManager {
             document.getElementById('country-color-g').value = g;
             document.getElementById('country-color-b').value = b;
             
-            const preview = document.getElementById('country-color-preview');
-            if (preview) {
-                preview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-            }
+            this.updateCountryColorPreview()
             this.saveChanges();
         });
 
@@ -722,7 +719,7 @@ class CountryManager {
     }
 
     initColorHandlers() {
-        const colorInputs = ['country-color-r', 'country-color-g', 'country-color-b'].map(id => 
+        const colorInputs = ['country-color-r', 'country-color-g', 'country-color-b', 'country-color-hex'].map(id => 
             document.getElementById(id)
         );
 
@@ -730,10 +727,7 @@ class CountryManager {
             if (!input) return;
             input.addEventListener('input', () => {
                 const [r, g, b] = colorInputs.map(input => Math.round(parseFloat(input.value) || 0));
-                const preview = document.getElementById('country-color-preview');
-                if (preview) {
-                    preview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-                }
+                updateCountryColorPreview(input.id)
                 this.saveChanges();
             });
         });
@@ -2054,10 +2048,42 @@ removeInvalidOwners() {
         } : null;
     }
 
-    updateCountryColorPreview() {
-        const r = document.getElementById('country-color-r').value;
-        const g = document.getElementById('country-color-g').value;
-        const b = document.getElementById('country-color-b').value;
+    updateCountryColorPreview(whatChanged) {
+        let r, g, b;
+        
+        const rInput = document.getElementById('country-color-r')
+        const gInput = document.getElementById('country-color-g')
+        const bInput = document.getElementById('country-color-b')
+        const hexInput = document.getElementById('country-color-hex')
+
+        if (whatChanged === 'country-color-hex') {
+            let hex = document.getElementById('country-color-hex').value
+
+            hex = hex.replace(/^#/, '')
+            if (hex.length === 3) {
+                hex = hex.split('').map(char => char + char).join('');
+            }
+
+            r = parseInt(hex.substring(0, 2), 16);
+            g = parseInt(hex.substring(2, 4), 16);
+            b = parseInt(hex.substring(4, 6), 16);
+
+            rInput.value = r
+            gInput.value = g
+            bInput.value = b
+        } else {
+            r = rInput.value
+            g = gInput.value
+            b = bInput.value
+
+            const toHex = (component) => {
+                const validComponent = Math.max(0, Math.min(255, component));
+                const hex = validComponent.toString(16);
+                return hex.length === 1 ? '0' + hex : hex;
+            };
+
+            hexInput.value = '#' + toHex(r) + toHex(g) + toHex(b);
+        }
         const preview = document.getElementById('country-color-preview');
         if (preview) {
             preview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;

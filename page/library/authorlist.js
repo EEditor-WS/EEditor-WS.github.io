@@ -404,5 +404,65 @@ const authorsData = {
         name: "@Матвей Захаров",
         link: "https://discord.com/users/1222612224632160470",
         color: "#3B83BD"
+    },
+    deleted: {
+        name: "undefined",
+        link: "https://discord.com/users/456226577798135808",
+        color: "#FF83BD"
+    },
+    neojid: {
+        name: "@NeoJid",
+        link: "https://discord.com/users/945007670115573871",
+        color: "#3B83BD"
+    },
+    hinginmarat: {
+        name: "@hinginmarat",
+        link: "https://discord.com/users/1075765010019655762",
+        color: "#3B83BD"
+    },
+    topkatop: {
+        name: "@topkatop",
+        link: "https://discord.com/users/",
+        color: "#3B83BD"
+    },
+    ra: {
+        name: "@ra",
+        link: "https://discord.com/users/898142075898433546",
+        color: "#3B83BD"
+    },
+    nagibatorchikc: {
+        name: "@Nagidatorchick",
+        link: "https://discord.com/users/1177261124249456774",
+        color: "#3B83BD"
+    },
+    rokforr: {
+        name: "@Rokforr",
+        link: "https://discord.com/users/783508883254935563",
+        color: "#3B83BD"
+    },
+    mir4ik: {
+        name: "@mir4ik",
+        link: "https://discord.com/users/",
+        color: "#FF83BD"
+    },
+    elrond: {
+        name: "@Elrond",
+        link: "https://discord.com/users/",
+        color: "#FF83BD"
+    },
+    kent52: {
+        name: "@kent52",
+        link: "https://discord.com/users/1225289148269596672",
+        color: "#3B83BD"
+    },
+    maximov: {
+        name: "@Maximov",
+        link: "https://discord.com/users/1102997665014358107",
+        color: "#3B83BD"
+    },
+    mrgutentag: {
+        name: "@mrgutentag",
+        link: "https://discord.com/users/",
+        color: "#FF83BD"
     }
 }

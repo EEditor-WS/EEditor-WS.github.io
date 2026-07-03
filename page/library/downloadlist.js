@@ -42,7 +42,7 @@ async function downloadFile(url, fileName) {
     if (isNative) {
         try {
             // 1. Загружаем файл
-            const response = await fetch(url);
+            /*const response = await fetch(url);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -55,7 +55,9 @@ async function downloadFile(url, fileName) {
             const success = await writeJsonFile(fileName, data);
             if (!success) {
                 throw new Error('Ошибка записи файла через writeJsonFile');
-            }
+            }*/
+           
+            await DownloadFileAsync(url, fileName)
 
             console.log(`Файл "${fileName}" успешно сохранён в корневую папку.`);
             window.notification.success(window.translator.translate('downloaded'), `Файл "${fileName}" успешно сохранён в корневую папку.`)

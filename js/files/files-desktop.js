@@ -48,6 +48,18 @@ async function writeJsonFile(relativePath, data) {
     }
 }
 
+async function DownloadFileAsync(url, relativePath) {
+    try {
+        const content = JSON.stringify(data, null, 2);
+        const success = await chrome.webview.hostObjects.fileSystem.DownloadFileAsync(url, relativePath);
+        console.log(success ? "Файл записан" : "Ошибка записи");
+        return success;
+    } catch (error) {
+        console.error("Ошибка при записи файла:", error);
+        return false;
+    }
+}
+
 async function loadGroupedMaps() {
     try {
         // Вызываем метод C# через WebView2 Host Object
