@@ -727,7 +727,7 @@ class CountryManager {
             if (!input) return;
             input.addEventListener('input', () => {
                 const [r, g, b] = colorInputs.map(input => Math.round(parseFloat(input.value) || 0));
-                updateCountryColorPreview(input.id)
+                this.updateCountryColorPreview(input.id)
                 this.saveChanges();
             });
         });
