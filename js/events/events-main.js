@@ -210,8 +210,9 @@ class EventManager {
 
             const groupCell = document.createElement('td');
             groupCell.className = 'groupsInCell';
-            let groups = event.group.split(',')
-            if (groups.length == 1 && groups[0] == '') groups = []
+            const groups = event.group
+                ? event.group.split(/\s*,\s*/).map(name => name.trim()).filter(Boolean)
+                : [];
             groups.forEach(name => {
                 const span = document.createElement('span');
                 span.textContent = name;
