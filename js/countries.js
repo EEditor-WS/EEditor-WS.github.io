@@ -1431,33 +1431,9 @@ class CountryManager {
             } else {
                 delete country.capital;
             }
-            //country.eenot = 'raccoon';
             
             country.defeated = document.getElementById('country-defeated').value === 'true';
-            // from old versions // country.political = document.getElementById('country-political').value;
             let polit = document.getElementById('country-political').value;
-            /*if (polit === 'communism') {
-                country.branch = 'branch3';
-                country.opened_institutions = ["institution1"];
-            } else if (polit === 'monarchy') {
-                country.branch = 'branch2';
-                country.opened_institutions = ["institution1"];
-            } else if (polit === 'theocracy') {
-                country.branch = 'branch1';
-                country.opened_institutions = ["institution1"];
-            } else if (polit === 'fascism') {
-                country.branch = 'branch6';
-                country.opened_institutions = ["institution1"];
-            } else if (polit === 'trade_republic') {
-                country.branch = 'branch5';
-                country.opened_institutions = ["institution1"];
-            } else if (polit === 'democracy') {
-                country.branch = 'branch4';
-                country.opened_institutions = ["institution1"];
-            } else {
-                delete country.branch;
-                delete country.opened_institutions;
-            };*/
             if (polit != '') {
                 country.branch = polit;
                 country.opened_institutions = ["institution1"];
@@ -1540,7 +1516,7 @@ class CountryManager {
     updateJsonAndUI() {
         if (!this.jsonData || !this.previewContent) return;
 
-        this.previewContent.value = JSON.stringify(this.jsonData, null, 4);
+        this.previewContent.value = JSON.stringify(this.jsonData);
         
         const nameHeader = document.getElementById('country-name-header');
         if (nameHeader) {

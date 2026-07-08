@@ -16,8 +16,10 @@
     <link rel="icon" type="image/x-icon" href="/img/ico/ico.svg">
     <script src="/eelibs/import.js" type="module"></script>
     <script src="/js/data/lands_data.js"></script>
+    <script src="/js/data/staticData.js"></script>
     <script src="/js/base.js"></script>
     <script src="/js/dropdown.js"></script>
+    <script src="/js/dropdownAuto.js"></script>
     <script src="/js/notification.js"></script>
     <script src="/js/translate/table.js"></script>
     <script src="/js/translate/translate.js"></script>
@@ -47,6 +49,7 @@
     <script src="/js/test/ads.js"></script>
     <script src="/js/scenario-utils.js"></script>
     <script src="/js/scenario-inputs.js"></script>
+    <script src="/js/provinceEdit.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-peer@9.11.1/simplepeer.min.js"></script>
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     <script src="/page/library/modern/unique.js"></script>
@@ -143,6 +146,10 @@
                 <button class="navbtn" data-page="events">
                     <img class="button-icon" src="/img/ui/calendar.svg">
                     <span class="button-text">События</span>
+                </button>
+                <button class="navbtn" data-page="province-edit" id="provincesEditorNav">
+                    <img class="button-icon" src="/img/ui/code.svg">
+                    <span class="button-text" data-translate="province">Провинция</span>
                 </button>
                 <button class="navbtn" data-page="" id="openedPage">
                     <img class="button-icon" src="/img/ui/code.svg">
@@ -301,6 +308,9 @@
                         <div class="file-preview" id="file-preview">
                             <div class="preview-header">
                                 <span id="preview-filename" data-translate="file_preview"></span>
+                                <button id="preview-format" class="icon-action-button more" title="Format preview" onclick="document.getElementById('preview-content').value = JSON.stringify(JSON.parse(document.getElementById('preview-content').value), null, 4)">
+                                    <img src="/img/ui/code.svg" />
+                                </button>
                                 <button id="preview-actions-button" class="icon-action-button more" title="Показать/Скрыть" onclick="const dropdown = document.getElementById('preview-content'); dropdown.classList.toggle('active');">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <circle cx="12" cy="12" r="1"></circle>
@@ -1498,6 +1508,18 @@
                     </div>
                 </div>
             </main>
+        </div>
+        <div id="province-edit" class="page pprovince-edit">
+            <div id="provinceEditorId">
+                <h2>Enter province ID <button id="provinceEditorHowToGetId">?</button></h2>
+                <div>
+                    <input type="number" id="provinceEditorIdInput" placeholder="province ID">
+                    <input type="text" id="provinceEditorUuid" placeholder="uui" readonly="true">
+                </div>
+            </div>
+            <div id="provinceContainer">
+
+            </div>
         </div>
         
         <!-- Модальное окно для выбора страны -->

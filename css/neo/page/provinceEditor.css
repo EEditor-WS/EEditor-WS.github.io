@@ -1,0 +1,184 @@
+#province-edit {
+    flex-direction: column;
+}
+
+#provinceEditorId {
+
+    h2 {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        gap: var(--ds);
+
+        #provinceEditorHowToGetId {
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            margin: auto 0;
+            font-size: large;
+        }
+    }
+}
+
+#provinceContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(clamp(300px, 100% / 4, 100%), 1fr));
+    gap: var(--ds);
+}
+
+.provinceEditorSection {
+
+    input, select, textarea {
+        width: calc(100% - 2 * var(--dss));
+        padding: var(--dss);
+    }
+}
+
+.provinceEditorCheckboxes {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    span {
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center;
+        gap: var(--dss);
+    }
+
+    input {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+/* Базовая стилизация indeterminate состояния */
+.provinceEditorCheckboxes input[type="checkbox"]:indeterminate {
+    background-color: #995e5e;
+    border-color: #b45252;
+    display: flex;
+    align-items: center;
+}
+
+/* Для WebKit-браузеров (Chrome, Safari) */
+.provinceEditorCheckboxes input[type="checkbox"]:indeterminate::before {
+    content: '×';
+    text-align: center;
+    display: block;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    line-height: 16px;
+}
+
+
+.provinceEditorExistsLabel {
+    width: unset;
+    display: inline-block;
+    margin-bottom: 4px;
+    cursor: pointer;
+    user-select: none;
+    font-weight: 500;
+}
+
+.provinceEditorExistsLabel input[type="checkbox"] {
+    width: unset;
+    margin-right: 6px;
+    cursor: pointer;
+}
+
+.provinceEditorSection.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+    filter: grayscale(50%);
+}
+
+.provinceEditorHeader {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ds);
+
+    input {
+        width: 25px;
+    }
+}
+
+
+
+.provinceEditorList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.provinceEditorListContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.provinceEditorListRow {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.provinceEditorListRow select,
+.provinceEditorListRow input[type="number"] {
+    padding: 4px 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.3);
+    color: inherit;
+    font-size: 13px;
+}
+
+.provinceEditorListRow select {
+    min-width: 120px;
+}
+
+.provinceEditorListRow input[type="number"] {
+    width: 100px;
+}
+
+.provinceEditorListRow input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.provinceEditorListAddBtn {
+    padding: 6px 12px;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    align-self: flex-start;
+}
+
+.provinceEditorListAddBtn:hover {
+    background: #45a049;
+}
+
+.provinceEditorListRemoveBtn {
+    padding: 4px 8px;
+    background: #f44336;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+    margin-left: auto;
+}
+
+.provinceEditorListRemoveBtn:hover {
+    background: #da190b;
+}

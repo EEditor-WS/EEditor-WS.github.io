@@ -28,12 +28,18 @@
 }
 
 .custom-dd__label {
-    display: inline-block;
+    display: inline-flex;
     white-space: nowrap;
+    align-items: center;
+    gap: var(--dss);
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 70%;
     font-weight: 400;
+}
+
+.custom-dd__label-img {
+    height: 20px;
 }
 
 .custom-dd__placeholder {
@@ -50,16 +56,14 @@
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 0;
-    margin-top: 8px;
+    /* bottom и margin-top задаются через JS */
     background: var(--bg-input-great);
     border-radius: 10px;
     box-shadow: var(--shadow);
     border: 1px solid var(--bc);
-    /*max-height: 220px;*/
     max-height: 500px;
-    overflow: scroll;
-    z-index: 1000;
+    overflow: auto;
+    z-index: 100000;
     padding: 6px;
 }
 

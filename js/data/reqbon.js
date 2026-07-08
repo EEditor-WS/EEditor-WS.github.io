@@ -230,47 +230,7 @@ const reqbonConfig = {
     requirements: {
         building_exists: {
             subType: false,
-            value: {
-                "buildings_extraction": [
-                    "sawmill",
-                    "iron_mine",
-                    "gold_mine",
-                    "uranium_mine",
-                    "oil_derrick"
-                ],
-                "buildings_economy": [
-                    "port",
-                    "machine_factory",
-                    "shipyard",
-                    "farm",
-                    "stable",
-                    "muzeum",
-                    "university",
-                    "science_center"
-                ],
-                "buildings_production": [
-                    "steel_plant",
-                    "mint",
-                    "weapon_factory",
-                    "chemical_weapon_factory",
-                    "training_camp",
-                    "nuclear_weapon_factory",
-                    "heavy_water_plant",
-                    "uranium_reactor"
-                ],
-                "buildings_defense": [
-                    "defense_line",
-                    "fortress",
-                    "hospital",
-                    "bridgehead"
-                ],
-                "buildings_consequences": [
-                    "megarefrigerator",
-                    "underground_detonator",
-                    "atmospheric_detonator",
-                    "atmospheric_filter"
-                ]
-            },
+            value: window.buildings,
             action: ['equal', 'not_equal']
         },
         controls_capital: {
@@ -587,33 +547,6 @@ window.requirementsManager = {
     }
 };
 
-// Функция для создания селекта со странами
-function createCountrySelect(selectedValue = '') {
-    const select = document.createElement('select');
-    select.className = 'main-page-input';
-    
-    // Добавляем специальные опции
-    select.innerHTML = `
-        <option value="any" ${selectedValue === 'any' ? 'selected' : ''}>${window.translator?.translate('any') || 'any'}</option>
-        <option value="this" ${selectedValue === 'this' ? 'selected' : ''}>${window.translator?.translate('this') || 'this'}</option>
-    `;
-    
-    // Получаем список стран и сортируем по имени
-    const countries = Object.entries(window.eventManager?.jsonData?.lands || {})
-        .map(([id, country]) => ({
-            id,
-            name: country.name || id
-        }))
-        .sort((a, b) => a.name.toString().toUpperCase().localeCompare(b.name.toString().toUpperCase()));
-    
-    // Добавляем страны в select
-    select.innerHTML += countries.map(country => 
-        `<option value="${country.id}" ${selectedValue === country.id ? 'selected' : ''}>${country.name}</option>`
-    ).join('');
-    
-    return select;
-}
-
 // Обновляем функцию создания поля значения
 function updateValueField(type, currentValue = '') {
     const valueContainer = document.getElementById('requirement-value');
@@ -625,9 +558,6 @@ function updateValueField(type, currentValue = '') {
     if (!config) return;
     
     if (config.value === 'country') {
-        const select = createCountrySelect(currentValue);
-        select.id = 'requirement-value';
-        valueContainer.appendChild(select);
     }
     // Остальная логика для других типов...
 }

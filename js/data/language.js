@@ -1037,7 +1037,7 @@ const translations = {
         "docs_countries_edit": "Редактирование существующих",
         "docs_countries_relations": "Настройка отношений между странами",
         "docs_countries_territories": "Управление территориями",
-        "(copy)": " (копия)",
+        "(copy)": "(копия)",
 
         // События
         "docs_events_title": "События",

@@ -5,8 +5,6 @@
     - config: { placeholder, searchable(boolean) }
 */
 function createCustomDropdown(container, options = [], config = {}) {
-    if (!container) return null;
-
     const { placeholder = "Выберите...", searchable = true } = config;
 
     const root = document.createElement('div');
@@ -26,7 +24,7 @@ function createCustomDropdown(container, options = [], config = {}) {
         </div>
     `;
 
-    container.appendChild(root);
+    if (container) container.appendChild(root);
 
     const control = root.querySelector('.custom-dd__control');
     const menu = root.querySelector('.custom-dd__menu');
@@ -39,7 +37,64 @@ function createCustomDropdown(container, options = [], config = {}) {
     let selectedValue = null;
     let highlighted = -1;
     let typingInSearch = false;
+    let currentDirection = 'down'; // 'up' или 'down'
 
+    // ========== ПОЗИЦИОНИРОВАНИЕ МЕНЮ ==========
+    function positionMenu() {
+        const controlRect = control.getBoundingClientRect();
+        const menuHeight = menu.scrollHeight; // реальная высота с содержимым (с учётом max-height)
+        const gap = 8; // отступ между контролом и меню
+
+        const spaceDown = window.innerHeight - controlRect.bottom;
+        const spaceUp = controlRect.top;
+
+        // Сбрасываем старые отступы
+        menu.style.marginTop = '0';
+        menu.style.marginBottom = '0';
+        menu.style.top = 'auto';
+        menu.style.bottom = 'auto';
+
+        if (spaceDown >= menuHeight + gap) {
+            // Вниз помещается
+            menu.style.top = '100%';
+            menu.style.marginTop = gap + 'px';
+            currentDirection = 'down';
+        } else if (spaceUp >= menuHeight + gap) {
+            // Вверх помещается
+            menu.style.bottom = '100%';
+            menu.style.marginBottom = gap + 'px';
+            currentDirection = 'up';
+        } else {
+            // Нигде не хватает — открываем вниз, но урезаем высоту до доступного места
+            menu.style.top = '100%';
+            menu.style.marginTop = gap + 'px';
+            const available = Math.max(spaceDown - gap, 100);
+            menu.style.maxHeight = available + 'px';
+            currentDirection = 'down';
+        }
+    }
+
+    // Перепозиционирование при ресайзе / скролле (если открыто)
+    function repositionIfOpen() {
+        if (open) {
+            positionMenu();
+        }
+    }
+
+    // Обработчики с debounce для производительности
+    let resizeTimer;
+    function handleResize() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(repositionIfOpen, 100);
+    }
+
+    let scrollTimer;
+    function handleScroll() {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(repositionIfOpen, 100);
+    }
+
+    // ========== ОСТАЛЬНЫЕ ФУНКЦИИ ==========
     function renderList() {
         list.innerHTML = '';
         if (filtered.length === 0) {
@@ -75,12 +130,16 @@ function createCustomDropdown(container, options = [], config = {}) {
     function openMenu() {
         open = true;
         root.classList.add('custom-dd--open');
+        // Показываем меню, чтобы измерить его реальную высоту
+        menu.hidden = false;
+        // Позиционируем
+        positionMenu();
+        // Убеждаемся, что оно не скрыто после позиционирования
         menu.hidden = false;
         root.setAttribute('aria-expanded', 'true');
 
         typingInSearch = false;
 
-        // выделяем выбранный элемент или первый
         if (selectedValue !== null) {
             const idx = filtered.findIndex(o => o.value === selectedValue);
             highlighted = idx >= 0 ? idx : (filtered.length ? 0 : -1);
@@ -89,6 +148,10 @@ function createCustomDropdown(container, options = [], config = {}) {
         }
 
         updateHighlight();
+
+        // Подписываемся на события изменения размера/скролла
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('scroll', handleScroll, true);
     }
 
     function closeMenu() {
@@ -97,6 +160,10 @@ function createCustomDropdown(container, options = [], config = {}) {
         menu.hidden = true;
         root.setAttribute('aria-expanded', 'false');
         typingInSearch = false;
+        // Сбрасываем максимальную высоту, если мы её меняли
+        menu.style.maxHeight = '';
+        window.removeEventListener('resize', handleResize);
+        window.removeEventListener('scroll', handleScroll, true);
     }
 
     function toggleMenu() {
@@ -109,9 +176,10 @@ function createCustomDropdown(container, options = [], config = {}) {
         if (!qq) filtered = options.slice();
         else filtered = options.filter(o => o.label.toLowerCase().includes(qq) || String(o.value).toLowerCase().includes(qq));
 
-        // после фильтрации выделяем первую видимую опцию
         highlighted = filtered.length ? 0 : -1;
         renderList();
+        // После фильтрации меню может изменить высоту – перепозиционируем, если открыто
+        if (open) positionMenu();
     }
 
     function selectValue(val) {
@@ -119,7 +187,19 @@ function createCustomDropdown(container, options = [], config = {}) {
         if (!opt) return;
         selectedValue = opt.value;
         label.classList.remove('custom-dd__placeholder');
-        label.textContent = opt.label;
+
+        label.innerHTML = '';
+        if (opt.img) {
+            const img = document.createElement('img');
+            img.src = opt.img + '.png';
+            img.alt = '';
+            img.className = 'custom-dd__label-img';
+            label.appendChild(img);
+        }
+        const textSpan = document.createElement('span');
+        textSpan.textContent = opt.label;
+        label.appendChild(textSpan);
+
         root.dispatchEvent(new CustomEvent('change', { detail: { value: selectedValue, option: opt } }));
         renderList();
         closeMenu();
@@ -131,24 +211,24 @@ function createCustomDropdown(container, options = [], config = {}) {
         updateHighlight();
     }
 
+    // ========== ПУБЛИЧНЫЕ МЕТОДЫ ==========
     root.setOptions = (newOptions) => {
         if (!Array.isArray(newOptions)) return;
         options = newOptions.slice();
         filtered = options.slice();
         if (searchInput && searchInput.value) filterBy(searchInput.value);
         else renderList();
+        if (open) positionMenu();
     };
 
+    // ========== ИНИЦИАЛИЗАЦИЯ ==========
     renderList();
 
-    // desktop mouse only: prevent scroll
     control.addEventListener('pointerdown', (e) => { if (e.pointerType === 'mouse') e.preventDefault(); }, { passive: false });
     control.addEventListener('click', (e) => { e.stopPropagation(); toggleMenu(); });
 
-    // клавиши для управления
-    root.tabIndex = 0; // теперь root может принимать фокус
+    root.tabIndex = 0;
 
-    // основной обработчик клавиш
     root.addEventListener('keydown', (e) => {
         if (!open) {
             if (['ArrowDown','ArrowUp','Enter',' '].includes(e.key)) {
@@ -187,7 +267,6 @@ function createCustomDropdown(container, options = [], config = {}) {
         updateHighlight();
     });
 
-    // тоже на searchInput, чтобы Enter и Esc работали
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
             filterBy(e.target.value);
@@ -285,9 +364,9 @@ flags.sort((a, b) => a.label.localeCompare(b.label));
 document.addEventListener('DOMContentLoaded', () => {
     const cFlag = createCustomDropdown(document.getElementById('flagdiv'), flags, { placeholder: 'Flag', searchable: true });
     cFlag.setValue('');
-    window.customDropFlag = cFlag; // for debugging
+    window.customDropFlag = cFlag;
 
     const cReqType = createCustomDropdown(document.getElementById('reqTypeDiv'),  [], { placeholder: 'Type', searchable: true });
     cReqType.setValue('');
-    window.cReqType = cReqType; // for debugging
+    window.cReqType = cReqType;
 });
