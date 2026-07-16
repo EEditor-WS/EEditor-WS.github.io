@@ -12,6 +12,7 @@ let scenarioMap;
    2. ИНИЦИАЛИЗАЦИЯ И ИЗВЛЕЧЕНИЕ ДАННЫХ ИЗ URL
    ========================================================================== */
 document.addEventListener('DOMContentLoaded', async () => {
+    await loadJsonScenarios() // в будущем переписать логику загрузки всех scenarios/maps/authorsData
     // Проверяем, что глобальный массив данных о сценариях доступен
     if (typeof scenariosData === 'undefined' || !Array.isArray(scenariosData)) {
         console.error('Ошибка: Массив scenariosData не найден или объявлен некорректно.');
@@ -45,6 +46,26 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!foundScenario) {
         console.error(`Сценарий с ID "${cleanScenarioId}" не найден в базе данных scenariosData.`);
         return;
+    }
+
+    function showLoading() {
+        document.getElementById('loading-spinner').style.display = 'block';
+        // Скрываем основной контент, пока не загрузится
+        document.querySelector('#content-library-scenario')?.classList.add('hidden');
+    }
+
+    function hideLoading() {
+        document.getElementById('loading-spinner').style.display = 'none';
+        document.querySelector('#content-library-scenario')?.classList.remove('hidden');
+    }
+
+    function showError(message) {
+        hideLoading();
+        const desc = document.getElementById('description');
+        desc.innerHTML = `<div style="color:red; padding:20px; border:1px solid red; border-radius:5px;">
+            <strong>Ошибка загрузки:</strong> ${message}<br>
+            <button onclick="location.reload()">Попробовать снова</button>
+        </div>`;
     }
 
     /* ==========================================================================
@@ -156,20 +177,42 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const baseFileName = rawScenarioId.replace(/\.json$/i, '');
 
-    fetch(`${libLink}lib/${foundScenario.id.slice(0, 2).join('/')}/${baseFileName}${langSuffix}.json`)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+    try {
+        showLoading();
+
+        const userLangs = (navigator.languages || [navigator.language || 'EN']).map(lang => lang.slice(0, 2).toUpperCase());
+        let langSuffix = '';
+        if (foundScenario.languages && foundScenario.languages.length > 1) {
+            const matchedLang = userLangs.find(lang => foundScenario.languages.includes(lang));
+            langSuffix = matchedLang ? `-${matchedLang.toLowerCase()}` : `-${foundScenario.languages[0].toLowerCase()}`;
         }
-        return response.json(); 
-    })
-    .then(data => {
-        scenarioConent = data;
-        setOtherParams(); // Запуск отрисовки после успешного получения контента
-    })
-    .catch(error => {
-        console.error('Ошибка Fetch при получении файла сценария:', error);
-    });
+
+        const baseFileName = rawScenarioId.replace(/\.json$/i, '');
+        const url = `${libLink}lib/${foundScenario.id.slice(0, 2).join('/')}/${baseFileName}${langSuffix}.json`;
+
+        // Добавляем таймаут для fetch (например, 15 секунд)
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 15000);
+
+        const response = await fetch(url, { signal: controller.signal });
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+
+        scenarioConent = await response.json();
+        hideLoading();
+        setOtherParams(); // отрисовка
+
+    } catch (error) {
+        console.error('Ошибка загрузки сценария:', error);
+        let userMessage = 'Не удалось загрузить данные сценария.';
+        if (error.name === 'AbortError') {
+            userMessage = 'Превышено время ожидания ответа от сервера.';
+        }
+        showError(userMessage);
+    }
 });
 
 /* ==========================================================================

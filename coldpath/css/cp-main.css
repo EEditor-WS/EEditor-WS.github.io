@@ -3,7 +3,7 @@
 }
 
 #map-cards.download-cards {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
 }
 
 .download-down-date {
@@ -14,5 +14,27 @@
 
     p {
         margin: 0;
+    }
+}
+
+.download-up {
+
+    a {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+    }
+
+    .download-goto-page {
+        max-height: 156px;
+        height: 100%;
+        transition: max-height 0.2s ease-in-out;
+    }
+
+    &:hover {
+
+        .download-goto-page {
+            max-height: 2500px;
+        }
     }
 }

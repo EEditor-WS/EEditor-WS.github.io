@@ -135,8 +135,8 @@ function generateMapCardColdPath(map) {
                     </div>
                     <div class="download-row-big">
                         <div class="download-row">
-                            <img src="/img/library/calendar.svg" class="download-info-ico" />
-                            <p>${mapTypes[map.updateDate] || map.publishDate}</p>
+                            <!--img src="/img/library/calendar.svg" class="download-info-ico" />
+                            <p>${mapTypes[map.updateDate] || map.publishDate}</p-->
                         </div>
                         <div class="download-row">
                             <p>${mapTypes[map.type] || map.type}</p>

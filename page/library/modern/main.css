@@ -29,13 +29,14 @@
 .download-cards {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: var(--ds);
 }
 
 .download-card {
     background-color: var(--bg-pri);
     width: 100%;
+    min-width: 270px;
 
     &.map-card {
         width: calc(100% - 2 * var(--ds));

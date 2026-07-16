@@ -172,7 +172,6 @@ function calculateScenarioScore(scenario) {
 
 // Sort scenarios by score
 function getSortedScenarios() {
-//    return scenariosData
     return window.libFilters.filterScenarios()
         .map(scenario => ({
             ...scenario,
