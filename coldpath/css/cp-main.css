@@ -28,7 +28,7 @@
     .download-goto-page {
         max-height: 156px;
         height: 100%;
-        transition: max-height 0.2s ease-in-out;
+        transition: max-height 0.75s ease-in-out;
     }
 
     &:hover {

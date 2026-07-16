@@ -129,7 +129,7 @@ function generateMapCardColdPath(map) {
                             </div>
                         </div>
                         <div class="download-row">
-                            <p>${map.provinces}</p>
+                            <p>${map.provinces > 0 ? map.provinces : ''}</p>
                             <img src="/img/library/world.svg" class="download-info-ico" />
                         </div>
                     </div>

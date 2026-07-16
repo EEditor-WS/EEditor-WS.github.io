@@ -464,5 +464,10 @@ const authorsData = {
         name: "@mrgutentag",
         link: "https://discord.com/users/",
         color: "#FF83BD"
+    },
+    catpath: {
+        name: "@zeloniy_",
+        link: "https://discord.com/users/1262291258341330997",
+        color: "#3B83BD"
     }
 }
