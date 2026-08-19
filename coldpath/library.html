@@ -30,6 +30,7 @@
         <link rel="stylesheet" href="/page/library/modern/headers.css">
         <link rel="stylesheet" href="/page/library/modern/mobile.css">
         <link rel="stylesheet" href="/coldpath/css/cp-main.css">
+        <link rel="stylesheet" href="/coldpath/css/cp-filters.css">
         
         <script>
             let libLink;
@@ -39,6 +40,17 @@
                 libLink = 'https://raw.githubusercontent.com/eenot-eenot/eeditor-ws-data/refs/heads/main/';
             }
         </script>
+        <script src="/js/files/files-desktop.js"></script>
+        <script src="/eelibs/import.js" type="module"></script>
+        <script src="/page/library/modern/pages.js"></script>
+        <script src="/js/fetch.js"></script>
+        <!--script src="/page/library/modern/openPage.js"></script-->
+        <script src="/js/library.js"></script>
+        <script src="/js/data/language.js"></script>
+        <script src="/js/translator.js"></script>
+        <script src="/js/auth.js"></script>
+        <script src="/js/head.js"></script>
+        
         <script src="/page/library/authorlist.js"></script>
         <!--script src="/coldpath/data/scenariolist.js"></script-->
         <script src="/coldpath/data/maplist.js"></script>
@@ -219,11 +231,11 @@
                         <h1 data-translate="maps">Maps</h1>
                         <div class="header-actions">
                             <div class="tooltip-container">
-                                <!--button id="map-filters" class="icon-action-button filters" title="Filters" onclick="libShowMapFilters()">
+                                <button id="map-filters" class="icon-action-button filters" title="Filters" onclick="document.getElementById('map-filters-container').classList.toggle('active')">
                                     <svg viewBox="0 0 24 24" width="14" height="14">
                                         <path d="M3 4h18l-7 8v8l-4-2v-6z" fill="none" stroke="currentColor" stroke-width="2"></path>
                                     </svg>
-                                </button-->
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -385,18 +397,8 @@
                 </div>
             </div>
         </div>
-        
-        <script src="/js/files/files-desktop.js"></script>
-        <script src="/eelibs/import.js" type="module"></script>
-        <script src="/page/library/modern/pages.js"></script>
-        <script src="/js/fetch.js"></script>
-        <!--script src="/page/library/modern/openPage.js"></script-->
-        <script src="/js/library.js"></script>
-        <script src="/js/data/language.js"></script>
-        <script src="/js/translator.js"></script>
+
         <!--script src="/js/upload.js"></script-->
-        <script src="/js/auth.js"></script>
-        <script src="/js/head.js"></script>
         <script src="/page/library/modern/showMap.js"></script>
         <script src="/page/library/downloadlist.js"></script>
         <script src="/page/library/modern/cardgenerator.js"></script>

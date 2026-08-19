@@ -1,0 +1,46 @@
+.lib-down {
+    flex-direction: column;
+}
+
+#map-filters-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ds);
+    background: rgb(245, 245, 245);
+    border-radius: var(--br);
+    width: calc(100% - 2 * var(--ds));
+    overflow-y: hidden;
+    transition: max-height 0.2s, padding 0.5s;
+
+    &.active {
+        max-height: 350px;
+        margin-bottom: var(--ds);
+        padding: var(--ds);
+    }
+    &:not(.active) {
+        max-height: 0;
+        padding: 0 var(--ds);
+        margin-bottom: 0;
+    }
+}
+
+#provincesDiv {
+    display: flex; 
+    align-items: center; 
+    gap: var(--ds); 
+    flex: 1; 
+    min-width: 300px;
+    color: black;
+
+    #filter-provinces-min {
+        width: 100%;
+        min-width: 100px;
+        padding: var(--ds);
+        border: 1px solid #ccc;
+        background: #fff;
+        color: #333;
+        border-radius: var(--br);
+        outline: none;
+        margin: 0;
+    }
+}

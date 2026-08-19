@@ -129,7 +129,7 @@ function generateMapCardColdPath(map) {
                             </div>
                         </div>
                         <div class="download-row">
-                            <p>${map.provinces > 0 ? map.provinces : ''}</p>
+                            <p>${mapTypes[map.type] || map.type}</p>
                             <img src="/img/library/world.svg" class="download-info-ico" />
                         </div>
                     </div>
@@ -139,7 +139,7 @@ function generateMapCardColdPath(map) {
                             <p>${mapTypes[map.updateDate] || map.publishDate}</p-->
                         </div>
                         <div class="download-row">
-                            <p>${mapTypes[map.type] || map.type}</p>
+                            <p>${map.provinces > 0 ? map.provinces : ''}</p>
                             <img src="/img/library/world.svg" class="download-info-ico" />
                         </div>
                     </div>
@@ -170,18 +170,18 @@ function generateMapCardColdPath(map) {
 }
 
 // Функция для отображения карт с фильтрацией
-function displayMaps(filters = {}) {
+function displayMaps() {
     const container = document.getElementById('map-cards');
     if (!container) {
         console.error('Map cards container not found');
         return;
     }
-
-    // Сортируем карты
-    mapsData.sort((a, b) => b.hiddenScore - a.hiddenScore);
-
-    // Отображаем карты
-    container.innerHTML = mapsData.map(generateMapCardColdPath).join('');
+    
+    // Инициализируем фильтры (создаем UI и навешиваем обработчики)
+    initMapFilters();
+    
+    // Применяем фильтры (изначально покажут все не скрытые карты)
+    applyFilters();
 }
 
 // Функция для загрузки карты
@@ -201,21 +201,202 @@ async function downloadMapColdPath(mapId) {
     }
 }
 
+function applyFilters() {
+    if (!mapsData) return;
+
+    const nameFilter = document.getElementById('filter-name')?.value.toLowerCase().trim() || '';
+    const authorFilter = document.getElementById('filter-author')?.value || '';
+    const regionFilter = document.getElementById('filter-region')?.value.toLowerCase().trim() || '';
+    const typeFilter = document.getElementById('filter-type')?.value || '';
+    const provincesMin = parseInt(document.getElementById('filter-provinces-min')?.value) || 0;
+
+    const filteredMaps = mapsData.filter(map => {
+        if (map.hidden === true) return false;
+
+        // 1. Фильтр по названию (id)
+        if (nameFilter && !map.id.toLowerCase().includes(nameFilter)) {
+            return false;
+        }
+
+        // 2. Фильтр по автору (поддерживает и строку, и массив авторов)
+        if (authorFilter) {
+            const mapAuthors = Array.isArray(map.author) ? map.author : [map.author];
+            const hasAuthor = mapAuthors.some(a => {
+                const authorInfo = authorsData?.[a];
+                const authorName = authorInfo ? authorInfo.name : a;
+                return a === authorFilter || authorName === authorFilter;
+            });
+            if (!hasAuthor) return false;
+        }
+
+        // 3. Фильтр по части света (region)
+        if (regionFilter) {
+            const mapRegion = Array.isArray(map.region) ? map.region.join(' ') : (map.region || '');
+            if (!mapRegion.toLowerCase().includes(regionFilter)) {
+                return false;
+            }
+        }
+
+        // 4. Фильтр по типу
+        if (typeFilter && map.type !== typeFilter) {
+            return false;
+        }
+
+        // 5. Фильтр по количеству провинций
+        if ((map.provinces || 0) < provincesMin) {
+            return false;
+        }
+
+        return true;
+    });
+
+    // Сортируем отфильтрованные карты
+    filteredMaps.sort((a, b) => b.hiddenScore - a.hiddenScore);
+
+    // Отображаем карты
+    const container = document.getElementById('map-cards');
+    if (container) {
+        if (filteredMaps.length === 0) {
+            container.innerHTML = '<p style="text-align: center; width: 100%; padding: 20px; color: #666;">Карты не найдены</p>';
+        } else {
+            container.innerHTML = filteredMaps.map(generateMapCardColdPath).join('');
+        }
+    }
+}
+
+function initMapFilters() {
+    const container = document.getElementById('map-cards');
+    if (!container) return;
+
+    // Проверяем, не созданы ли уже фильтры
+    if (document.getElementById('map-filters-container')) return;
+
+    const filterContainer = document.createElement('div');
+    filterContainer.id = 'map-filters-container';
+    filterContainer.className = 'map-filters';
+    
+    filterContainer.innerHTML = `
+        <input type="text" id="filter-name" placeholder="${window.translator.translate('search')}" style="flex: 2; min-width: 200px; padding: 10px; border: 1px solid #ccc; background: #fff; color: #333; border-radius: 6px; outline: none;">
+        
+        <select id="filter-author" style="flex: 1; min-width: 150px; padding: 10px; border: 1px solid #ccc; background: #fff; color: #333; border-radius: 6px; outline: none;">
+            <option value="">${window.translator.translate('author')}</option>
+        </select>
+        
+        <select id="filter-region" style="flex: 1; min-width: 150px; padding: 10px; border: 1px solid #ccc; background: #fff; color: #333; border-radius: 6px; outline: none;">
+            <option value="">${window.translator.translate('region')}</option>
+        </select>
+        
+        <select id="filter-type" style="flex: 1; min-width: 150px; padding: 10px; border: 1px solid #ccc; background: #fff; color: #333; border-radius: 6px; outline: none;">
+            <option value="">${window.translator.translate('type')}</option>
+        </select>
+        
+        <div id="provincesDiv">
+            <label style="white-space: nowrap; color: #333;">Провинций от:</label>
+            <input type="number" id="filter-provinces-min" placeholder="0" min="0">
+        </div>
+        
+        <button id="reset-filters" style="padding: 10px 20px; background-color: #945d44ff; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">${window.translator.translate('reset')}</button>
+    `;
+
+    // Вставляем панель фильтров прямо перед контейнером карт
+    container.parentNode.insertBefore(filterContainer, container);
+
+    // Собираем уникальные значения для выпадающих списков
+    const authors = new Set();
+    const regions = new Set();
+    const types = new Set();
+
+    mapsData.forEach(map => {
+        if (Array.isArray(map.author)) {
+            map.author.forEach(a => authors.add(a));
+        } else if (map.author) {
+            authors.add(map.author);
+        }
+        if (map.region) {
+            if (Array.isArray(map.region)) {
+                map.region.forEach(r => regions.add(r));
+            } else {
+                regions.add(map.region);
+            }
+        }
+        /*if (map.type) {
+            types.add(map.type);
+        }*/
+    });
+
+    types.add('world')
+    types.add('continent')
+    types.add('region')
+    types.add('country')
+    types.add('oblast')
+    types.add('city')
+    types.add('other')
+
+
+    // Заполняем select авторов
+    const authorSelect = document.getElementById('filter-author');
+    authors.forEach(authorId => {
+        const authorInfo = authorsData?.[authorId];
+        const displayName = authorInfo ? authorInfo.name : authorId;
+        const option = document.createElement('option');
+        option.value = authorId;
+        option.textContent = displayName;
+        authorSelect.appendChild(option);
+    });
+
+    // Заполняем select регионов
+    const regionSelect = document.getElementById('filter-region');
+    regions.forEach(region => {
+        const option = document.createElement('option');
+        option.value = region;
+        option.textContent = region;
+        regionSelect.appendChild(option);
+    });
+
+    // Заполняем select типов
+    const typeSelect = document.getElementById('filter-type');
+    types.forEach(type => {
+        const option = document.createElement('option');
+        option.value = type;
+        option.textContent = mapTypes[type] || type;
+        typeSelect.appendChild(option);
+    });
+
+    // Навешиваем обработчики событий для мгновенной реакции на изменения
+    document.getElementById('filter-name').addEventListener('input', applyFilters);
+    authorSelect.addEventListener('change', applyFilters);
+    regionSelect.addEventListener('change', applyFilters);
+    typeSelect.addEventListener('change', applyFilters);
+    document.getElementById('filter-provinces-min').addEventListener('input', applyFilters);
+    
+    document.getElementById('reset-filters').addEventListener('click', () => {
+        document.getElementById('filter-name').value = '';
+        authorSelect.value = '';
+        regionSelect.value = '';
+        typeSelect.value = '';
+        document.getElementById('filter-provinces-min').value = '';
+        applyFilters();
+    });
+}
+
 // Инициализация при загрузке страницы
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     try {
         // Создаем контейнер для карт, если его нет
         const mapsDiv = document.querySelector('#maps .download-container');
-        if (!mapsDiv.querySelector('#map-cards')) {
+        if (mapsDiv && !mapsDiv.querySelector('#map-cards')) {
             const cardsContainer = document.createElement('div');
             cardsContainer.id = 'map-cards';
             cardsContainer.className = 'download-cards';
             mapsDiv.appendChild(cardsContainer);
         }
 
-        // Отображаем карты
+        // Ждем завершения загрузки JSON, чтобы избежать гонки данных (race condition)
+        await loadJsonMaps();
+        
+        // Отображаем карты с уже работающими фильтрами
         displayMaps();
     } catch(e) {
-        
+        console.error('Error initializing maps:', e);
     }
 });
