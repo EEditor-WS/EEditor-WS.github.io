@@ -399,4 +399,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch(e) {
         console.error('Error initializing maps:', e);
     }
-});
+}); 
