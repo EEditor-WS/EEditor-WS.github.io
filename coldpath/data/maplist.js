@@ -210,15 +210,25 @@ function applyFilters() {
     const typeFilter = document.getElementById('filter-type')?.value || '';
     const provincesMin = parseInt(document.getElementById('filter-provinces-min')?.value) || 0;
 
+    // === ОБНОВЛЕНИЕ URL БЕЗ ПЕРЕЗАГРУЗКИ ===
+    const params = new URLSearchParams();
+    if (nameFilter) params.set('search', nameFilter);
+    if (authorFilter) params.set('author', authorFilter);
+    if (regionFilter) params.set('region', regionFilter);
+    if (typeFilter) params.set('type', typeFilter);
+    if (provincesMin > 0) params.set('provinces', provincesMin);
+
+    const newUrl = `${window.location.pathname}${params.toString() ? '?' + params.toString() : ''}`;
+    window.history.replaceState({}, '', newUrl);
+    // =======================================
+
     const filteredMaps = mapsData.filter(map => {
         if (map.hidden === true) return false;
 
-        // 1. Фильтр по названию (id)
         if (nameFilter && !map.id.toLowerCase().includes(nameFilter)) {
             return false;
         }
 
-        // 2. Фильтр по автору (поддерживает и строку, и массив авторов)
         if (authorFilter) {
             const mapAuthors = Array.isArray(map.author) ? map.author : [map.author];
             const hasAuthor = mapAuthors.some(a => {
@@ -229,7 +239,6 @@ function applyFilters() {
             if (!hasAuthor) return false;
         }
 
-        // 3. Фильтр по части света (region)
         if (regionFilter) {
             const mapRegion = Array.isArray(map.region) ? map.region.join(' ') : (map.region || '');
             if (!mapRegion.toLowerCase().includes(regionFilter)) {
@@ -237,12 +246,10 @@ function applyFilters() {
             }
         }
 
-        // 4. Фильтр по типу
         if (typeFilter && map.type !== typeFilter) {
             return false;
         }
 
-        // 5. Фильтр по количеству провинций
         if ((map.provinces || 0) < provincesMin) {
             return false;
         }
@@ -250,10 +257,8 @@ function applyFilters() {
         return true;
     });
 
-    // Сортируем отфильтрованные карты
     filteredMaps.sort((a, b) => b.hiddenScore - a.hiddenScore);
 
-    // Отображаем карты
     const container = document.getElementById('map-cards');
     if (container) {
         if (filteredMaps.length === 0) {
@@ -377,6 +382,30 @@ function initMapFilters() {
         document.getElementById('filter-provinces-min').value = '';
         applyFilters();
     });
+    
+    // задание параметров из ссылки 
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    if (urlParams.has('search')) {
+        const el = document.getElementById('filter-name');
+        if (el) el.value = urlParams.get('search');
+    }
+    if (urlParams.has('author')) {
+        const el = document.getElementById('filter-author');
+        if (el) el.value = urlParams.get('author');
+    }
+    if (urlParams.has('region')) {
+        const el = document.getElementById('filter-region');
+        if (el) el.value = urlParams.get('region');
+    }
+    if (urlParams.has('type')) {
+        const el = document.getElementById('filter-type');
+        if (el) el.value = urlParams.get('type');
+    }
+    if (urlParams.has('provinces')) {
+        const el = document.getElementById('filter-provinces-min');
+        if (el) el.value = urlParams.get('provinces');
+    }
 }
 
 // Инициализация при загрузке страницы
@@ -399,4 +428,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch(e) {
         console.error('Error initializing maps:', e);
     }
-}); 
+});
